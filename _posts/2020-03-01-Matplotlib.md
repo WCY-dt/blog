@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "python-Matplotlib"
+title:  "【python】Matplotlib"
 date:   2020-03-01 00:00:00 +0800
 categories: toturial
 tags: python matplotlib
