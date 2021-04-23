@@ -25,10 +25,10 @@ paginate: 6
 github_profile: "https://github.com/wcy-dt"
 user: "晨阳同学"
 user_email: "Error, keyboard not found - press F1 to continue."
-contact_url: "https://goo.gl/tVljbV"
-google_tracking_id: "UA-96359860-1"
-google_site_verification: "UA-96359860-1"
-disqus_shortname: "wcy-dt-github-io"
+# contact_url: "https://goo.gl/tVljbV"
+# google_tracking_id: "UA-96359860-1"
+# google_site_verification: "UA-96359860-1"
+# disqus_shortname: "wcy-dt-github-io"
 
 # Build settings
 markdown: kramdown
