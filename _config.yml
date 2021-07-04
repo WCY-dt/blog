@@ -20,7 +20,7 @@ baseurl: ""
 url: "https://wcy-dt.github.io"
 permalink: /:title
 repository: wcy-dt/wcy-dt.github.io
-paginate: 6
+paginate: 10
 # MatJek specific configurations
 github_profile: "https://github.com/wcy-dt"
 user: "晨阳同学"
