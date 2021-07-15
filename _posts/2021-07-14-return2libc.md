@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【SEED Labs】Return-to-libc Attack & ROP"
+title:  "【SEED Labs】Return-to-libc Attack and ROP"
 date:   2021-07-14 00:00:00 +0800
 categories: 实验
 tags: SEEDLab 安全
