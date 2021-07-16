@@ -4,4 +4,39 @@
   {{ content }}
 </div>
 
+<script>
+  window.Papercups = {
+    config: {
+      accountId: "a7cf4c71-c198-4835-8e66-c0de2847211e",
+      title: "和我聊天！",
+      subtitle: "随便说什么都可以 😊",
+      primaryColor: "#00537e",
+      greeting: "你好🦆！",
+      awayMessage: "啊...抱歉...我在睡觉",
+      newMessagePlaceholder: "说点什么...",
+      showAgentAvailability: false,
+      agentAvailableText: "We're online right now!",
+      agentUnavailableText: "We're away at the moment.",
+      requireEmailUpfront: false,
+      iconVariant: "filled",
+      baseUrl: "https://app.papercups.io",
+      // Optionally include data about your customer here to identify them
+      // customer: {
+      //   name: __CUSTOMER__.name,
+      //   email: __CUSTOMER__.email,
+      //   external_id: __CUSTOMER__.id,
+      //   metadata: {
+      //     plan: "premium"
+      //   }
+      // }
+    },
+  };
+  </script>
+  <script
+  type="text/javascript"
+  async
+  defer
+  src="https://app.papercups.io/widget.js"
+  ></script>
+
 {% include footer.html %}
