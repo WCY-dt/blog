@@ -41,6 +41,17 @@ js: ["post.js"]
     {{ content }}
   </div>
 </div>
+<br>
+<div style="border-bottom:1.5px solid rgb(119, 119, 119)"><h1>COMMENT</h1></div>
+<br>
+<div id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="f1c3fcff-ab0c-443c-bf8a-0f13cfacf3f1"
+  data-page-id="{{ PAGE_ID }}"
+  data-page-url="{{ PAGE_URL }}"
+  data-page-title="{{ PAGE_TITLE }}"
+></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 {% if site.disqus_shortname and page.comments %}
 <div id="disqus_thread"></div>
 <script>
