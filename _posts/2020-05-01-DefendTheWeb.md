@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【HackGame】DefendTheWeb"
+title:  "【HackGame】DefendTheWeb <img src='https://img.shields.io/badge/-原创-019733?style=flat'> <img src='https://img.shields.io/badge/-未完待续-blue?style=flat'>"
 date:   2020-05-01 00:00:00 +0800
 categories: security
 tags: game

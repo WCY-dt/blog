@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "C++ Templates 读书笔记"
+title:  "C++ Templates 读书笔记 <img src='https://img.shields.io/badge/-原创-019733?style=flat'> <img src='https://img.shields.io/badge/-未完待续-blue?style=flat'>"
 date:   2021-05-09 00:00:00 +0800
 categories: book
 tags: 笔记

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【数据结构】最小生成树"
+title:  "【数据结构】最小生成树 <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
 date:   2020-05-15 00:00:00 +0800
 categories: A&DS
 tags: 数据结构 算法 最小生成树 kruskal prim

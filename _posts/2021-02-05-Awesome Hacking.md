@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "awesome hacking"
+title:  "awesome hacking <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'>"
 date:   2020-02-05 00:00:00 +0800
 categories: security
 tags: 安全

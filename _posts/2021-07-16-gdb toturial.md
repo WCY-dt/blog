@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "GDB touturial: a walkthrough with examples"
+title:  "GDB touturial: a walkthrough with examples <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'> <img src='https://img.shields.io/badge/-翻译-blueviolet?style=flat'>"
 date:   2021-07-16 00:00:00 +0800
 categories: toturial
 tags: gdb C++ C
-comments: 1
+comments: true
 mathjax: true
 ---
 

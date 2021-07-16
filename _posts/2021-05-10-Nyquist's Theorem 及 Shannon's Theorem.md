@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Nyquist's Theorem and Shannon's Theorem"
+title:  "Nyquist's Theorem and Shannon's Theorem <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'>"
 date:   2021-05-10 00:00:00 +0800
 categories: Log
 tags: 网络 奎奈斯特 香农

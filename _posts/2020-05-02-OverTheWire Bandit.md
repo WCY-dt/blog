@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【HackGame】OverTheWireBandit"
+title:  "【HackGame】OverTheWireBandit <img src='https://img.shields.io/badge/-原创-019733?style=flat'> <img src='https://img.shields.io/badge/-未完待续-blue?style=flat'>"
 date:   2020-05-02 00:00:00 +0800
 categories: security
 tags: game

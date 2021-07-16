@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "win10 keyboard shortcut"
+title:  "win10 keyboard shortcut <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
 date:   2020-08-01 00:00:00 +0800
 categories: archieve
 tags: windows

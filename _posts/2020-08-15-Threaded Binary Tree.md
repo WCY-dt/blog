@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【数据结构】Threaded Binary Tree"
+title:  "【数据结构】Threaded Binary Tree <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
 date:   2020-08-15 00:00:00 +0800
 categories: A&DS
 tags: 数据结构 算法 BinaryTree 线索化二叉树
