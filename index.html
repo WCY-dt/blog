@@ -10,7 +10,7 @@ css: ["index.css"]
         <span id="post-title" class="card-title">{{post.title}}</span>
         <p id="post-date">
           <i class="material-icons">date_range</i>
-          {{post.date | date: "%d/%m/%Y"}}
+          {{post.date | date: "%Y/%m/%d"}}
         </p>
         <p id="post-content">{{post.excerpt | remove: '<p>' | remove: '</p>'}}</p>
       </div>

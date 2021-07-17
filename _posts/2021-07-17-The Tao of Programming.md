@@ -8,6 +8,8 @@ comments: 1
 mathjax: true
 ---
 
+Geoffrey James
+
 ### BOOK 1
 
 ## The Silent Void
