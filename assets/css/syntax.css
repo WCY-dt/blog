@@ -1,164 +1,65 @@
 .highlight table td { padding: 5px; }
+
 .highlight table pre { margin: 0; }
-.highlight {
-  color: #faf6e4;
-  background-color: #122b3b;
-}
-.highlight .gl {
-  color: #dee5e7;
-  background-color: #4e5d62;
-}
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #6c8b9f;
-  font-style: italic;
-}
-.highlight .cp {
-  color: #b2fd6d;
-  font-weight: bold;
-  font-style: italic;
-}
-.highlight .err {
-  color: #fefeec;
-  background-color: #cc0000;
-}
-.highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
-}
-.highlight .k, .highlight .kd, .highlight .kv {
-  color: #f6dd62;
-  font-weight: bold;
-}
-.highlight .o, .highlight .ow {
-  color: #4df4ff;
-}
-.highlight .p, .highlight .pi {
-  color: #4df4ff;
-}
-.highlight .gd {
-  color: #cc0000;
-}
-.highlight .gi {
-  color: #b2fd6d;
-}
-.highlight .ge {
-  font-style: italic;
-}
-.highlight .gs {
-  font-weight: bold;
-}
-.highlight .gt {
-  color: #dee5e7;
-  background-color: #4e5d62;
-}
-.highlight .kc {
-  color: #f696db;
-  font-weight: bold;
-}
-.highlight .kn {
-  color: #ffb000;
-  font-weight: bold;
-}
-.highlight .kp {
-  color: #ffb000;
-  font-weight: bold;
-}
-.highlight .kr {
-  color: #ffb000;
-  font-weight: bold;
-}
-.highlight .gh {
-  color: #ffb000;
-  font-weight: bold;
-}
-.highlight .gu {
-  color: #ffb000;
-  font-weight: bold;
-}
-.highlight .kt {
-  color: #b2fd6d;
-  font-weight: bold;
-}
-.highlight .no {
-  color: #b2fd6d;
-  font-weight: bold;
-}
-.highlight .nc {
-  color: #b2fd6d;
-  font-weight: bold;
-}
-.highlight .nd {
-  color: #b2fd6d;
-  font-weight: bold;
-}
-.highlight .nn {
-  color: #b2fd6d;
-  font-weight: bold;
-}
-.highlight .bp {
-  color: #b2fd6d;
-  font-weight: bold;
-}
-.highlight .ne {
-  color: #b2fd6d;
-  font-weight: bold;
-}
-.highlight .nl {
-  color: #ffb000;
-  font-weight: bold;
-}
-.highlight .nt {
-  color: #ffb000;
-  font-weight: bold;
-}
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #f696db;
-  font-weight: bold;
-}
-.highlight .ld {
-  color: #f696db;
-  font-weight: bold;
-}
-.highlight .ss {
-  color: #f696db;
-  font-weight: bold;
-}
-.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
-  color: #fff0a6;
-  font-weight: bold;
-}
-.highlight .se {
-  color: #4df4ff;
-  font-weight: bold;
-}
-.highlight .sc {
-  color: #4df4ff;
-  font-weight: bold;
-}
-.highlight .si {
-  color: #4df4ff;
-  font-weight: bold;
-}
-.highlight .nb {
-  font-weight: bold;
-}
-.highlight .ni {
-  color: #999999;
-  font-weight: bold;
-}
-.highlight .w {
-  color: #BBBBBB;
-}
-.highlight .nf {
-  color: #a8e1fe;
-}
-.highlight .py {
-  color: #a8e1fe;
-}
-.highlight .na {
-  color: #a8e1fe;
-}
-.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
-  color: #a8e1fe;
-  font-weight: bold;
-}
+
+.highlight,.gist-highlight{background-color: rgb(250, 250, 250);font-family: 'Courier New', Courier, monospace}
+
+.highlight .hll,.gist-highlight .hll{background-color:#ffc;font-family:'Courier New', Courier, monospace}
+.highlight .c, .gist-highlight .c{color:#408080;font-family:'Courier New', Courier, monospace}
+.highlight .err,.gist-highlight .err{border:1px solid #f00;font-family:'Courier New', Courier, monospace}
+.highlight .k, .gist-highlight .k{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .o, .gist-highlight .o{color:#666;font-family:'Courier New', Courier, monospace}
+.highlight .cm,.gist-highlight .cm{color:#408080;font-family:'Courier New', Courier, monospace}
+.highlight .cp,.gist-highlight .cp{color:#bc7a00;font-family:'Courier New', Courier, monospace}
+.highlight .c1,.gist-highlight .c1{color:#408080;font-family:'Courier New', Courier, monospace}
+.highlight .cs,.gist-highlight .cs{color:#408080;font-family:'Courier New', Courier, monospace}
+.highlight .gd,.gist-highlight .gd{color:#a00000;font-family:'Courier New', Courier, monospace}
+.highlight .gr,.gist-highlight .gr{color:#f00;font-family:'Courier New', Courier, monospace}
+.highlight .gh,.gist-highlight .gh{color:#000080;font-family:'Courier New', Courier, monospace}
+.highlight .gi,.gist-highlight .gi{color:#00a000;font-family:'Courier New', Courier, monospace}
+.highlight .go,.gist-highlight .go{color:#808080;font-family:'Courier New', Courier, monospace}
+.highlight .gp,.gist-highlight .gp{color:#000080;font-family:'Courier New', Courier, monospace}
+.highlight .gu,.gist-highlight .gu{color:#800080;font-family:'Courier New', Courier, monospace}
+.highlight .gt,.gist-highlight .gt{color:#0040d0;font-family:'Courier New', Courier, monospace}
+.highlight .kc,.gist-highlight .kc{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .kd,.gist-highlight .kd{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .kn,.gist-highlight .kn{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .kp,.gist-highlight .kp{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .kr,.gist-highlight .kr{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .kt,.gist-highlight .kt{color:#b00040;font-family:'Courier New', Courier, monospace}
+.highlight .m, .gist-highlight .m{color:#666;font-family:'Courier New', Courier, monospace}
+.highlight .s, .gist-highlight .s{color:#ba2121;font-family:'Courier New', Courier, monospace}
+.highlight .na,.gist-highlight .na{color:#7d9029;font-family:'Courier New', Courier, monospace}
+.highlight .nb,.gist-highlight .nb{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .nc,.gist-highlight .nc{color:#00f;font-family:'Courier New', Courier, monospace}
+.highlight .no,.gist-highlight .no{color:#800;font-family:'Courier New', Courier, monospace}
+.highlight .nd,.gist-highlight .nd{color:#a2f;font-family:'Courier New', Courier, monospace}
+.highlight .ni,.gist-highlight .ni{color:#999;font-family:'Courier New', Courier, monospace}
+.highlight .ne,.gist-highlight .ne{color:#d2413a;font-family:'Courier New', Courier, monospace}
+.highlight .nf,.gist-highlight .nf{color:#00f;font-family:'Courier New', Courier, monospace}
+.highlight .nl,.gist-highlight .nl{color:#a0a000;font-family:'Courier New', Courier, monospace}
+.highlight .nn,.gist-highlight .nn{color:#00f;font-family:'Courier New', Courier, monospace}
+.highlight .nt,.gist-highlight .nt{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .nv,.gist-highlight .nv{color:#19177c;font-family:'Courier New', Courier, monospace}
+.highlight .ow,.gist-highlight .ow{color:#a2f;font-family:'Courier New', Courier, monospace}
+.highlight .w, .gist-highlight .w{color:#bbb;font-family:'Courier New', Courier, monospace}
+.highlight .mf,.gist-highlight .mf{color:#666;font-family:'Courier New', Courier, monospace}
+.highlight .mh,.gist-highlight .mh{color:#666;font-family:'Courier New', Courier, monospace}
+.highlight .mi,.gist-highlight .mi{color:#666;font-family:'Courier New', Courier, monospace}
+.highlight .mo,.gist-highlight .mo{color:#666;font-family:'Courier New', Courier, monospace}
+.highlight .sb,.gist-highlight .sb{color:#ba2121;font-family:'Courier New', Courier, monospace}
+.highlight .sc,.gist-highlight .sc{color:#ba2121;font-family:'Courier New', Courier, monospace}
+.highlight .sd,.gist-highlight .sd{color:#ba2121;font-family:'Courier New', Courier, monospace}
+.highlight .s2,.gist-highlight .s2{color:#ba2121;font-family:'Courier New', Courier, monospace}
+.highlight .se,.gist-highlight .se{color:#b62;font-family:'Courier New', Courier, monospace}
+.highlight .sh,.gist-highlight .sh{color:#ba2121;font-family:'Courier New', Courier, monospace}
+.highlight .si,.gist-highlight .si{color:#b68;font-family:'Courier New', Courier, monospace}
+.highlight .sx,.gist-highlight .sx{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .sr,.gist-highlight .sr{color:#b68;font-family:'Courier New', Courier, monospace}
+.highlight .s1,.gist-highlight .s1{color:#ba2121;font-family:'Courier New', Courier, monospace}
+.highlight .ss,.gist-highlight .ss{color:#19177c;font-family:'Courier New', Courier, monospace}
+.highlight .bp,.gist-highlight .bp{color:#008000;font-family:'Courier New', Courier, monospace}
+.highlight .vc,.gist-highlight .vc{color:#19177c;font-family:'Courier New', Courier, monospace}
+.highlight .vg,.gist-highlight .vg{color:#19177c;font-family:'Courier New', Courier, monospace}
+.highlight .vi,.gist-highlight .vi{color:#19177c;font-family:'Courier New', Courier, monospace}
+.highlight .il,.gist-highlight .il{color:#666;font-family:'Courier New', Courier, monospace}

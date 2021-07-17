@@ -55,6 +55,16 @@ js: ["post.js"]
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
   })();
+  (function($){
+    setInterval(() => {
+      $.each($('iframe'), (arr,x) => {
+        let src = $(x).attr('src');
+        if (src && src.match(/(ads-iframe)|(disqusads)/gi)) {
+          $(x).remove();
+        }
+      });
+    }, 300);
+  })(jQuery);
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 {% endif %}

@@ -47,18 +47,22 @@
   </head>
   <body>
     <header>
+      <div class="container">
+        <a href="#" data-activates="slide-out" class="button-collapse top-nav full hide-on-large-only">
+          <i class="material-icons" color="#3AA17E">menu</i>
+        </a>
+      </div>
       <nav class="top-nav teal">
         <div class="nav-wrapper">
           <div class="container">
-            <a class="page-title" href="{{site.baseurl}}/">{{site.title}}</a>
+            <div class="page-title">
+              <font color="white" size="6">
+              {{site.title}}
+              </font>
+            </div>
           </div>
         </div>
       </nav>
-      <div class="container">
-        <a href="#" data-activates="slide-out" class="button-collapse top-nav full hide-on-large-only">
-          <i class="material-icons">menu</i>
-        </a>
-      </div>
       <ul id="slide-out" class="side-nav fixed">
         <li>
           <div class="userView">
