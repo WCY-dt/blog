@@ -36,6 +36,8 @@ auto result = find(begin(arr), end(arr), val);
 
 ## 函数传递
 
+上面的 `find` 传入的是一个值，也有算法可以传入一个函数。
+
 通常，`sort` 的用法为：
 
 ```cpp
@@ -44,7 +46,7 @@ sort(vec.begin(), vec.end())
 
 这里比较的时候用的是小于号。
 
-如果我们要将字符串按照长短排序，则可以：
+如果我们要将字符串按照长短排序，则可以传入一个函数：
 
 ```cpp
 bool cmp(const string &str1, const string &str2)
@@ -54,6 +56,8 @@ bool cmp(const string &str1, const string &str2)
 elimDups(vec); // 按字典序重排并去重
 stable_sort(vec.begin(), vec.end(), cmp);
 ```
+
+## lambda
 
 
 
