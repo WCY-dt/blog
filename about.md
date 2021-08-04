@@ -14,7 +14,7 @@ js: ["morphext.min.js", "about.js"]
 
 <p align="center"><img src="https://media.giphy.com/media/mGcNjsfWAjY5AEZNw6/giphy.gif" width="50" /></p>
 
-<h3 align="center"> 👦THIS IS ME!👦</h3>
+<h4 align="center"> 👦THIS IS ME!👦</h4>
 
 <img align="right" width="50%" src="https://github-readme-stats.vercel.app/api?username=wcy-dt&show_icons=true&hide_border=true" />
 
@@ -26,17 +26,21 @@ js: ["morphext.min.js", "about.js"]
 - 🌱 Recently I am learning: ![Django](https://img.shields.io/badge/-Django-092E20?style=flat&logo=Django&logoColor=ffffff) ![ue](https://img.shields.io/badge/-Unreal%20Engine-313131?style=flat&logo=Unreal%20Engine&logoColor=ffffff)
 
 <br/>
-
-<h3 align="center"> ✨HOW TO CONTACT WITH ME✨</h3>
-
-<p align="center"><a href="mailto:dt_chenyang@163.com"><img src="https://img.shields.io/badge/-dt_chenyang@163-EA4335?style=flat-square&logo=gmail&logoColor=white" /></a> <a href="https://twitter.com/Chenyan32433045/"><img src="https://img.shields.io/badge/-chenyang-1DA1F2?style=flat-square&logo=Twitter&logoColor=white&link=https://twitter.com/moshfiqrony/"/></a> <a href="https://www.zhihu.com/people/wu-chang-yu-99-22"><img src="https://img.shields.io/badge/-嘤嘤怪-0084FF?style=flat-square&logo=zhihu&logoColor=white"/></a> <a href="https://github.com/WCY-dt"/><img src="https://img.shields.io/badge/-WCYdt-181717?style=flat-square&logo=github"/></p>
-
+<br/>
 <br/>
 
-<h3 align="center"> 📈MY CONTRIBUTIONS📈</h3>
+<h4 align="center"> ✨HOW TO CONTACT WITH ME✨</h4>
+
+<p align="center"><a href="mailto:dt_chenyang@163.com"><img src="https://img.shields.io/badge/-dt_chenyang@163-EA4335?style=flat-square&logo=gmail&logoColor=white" /></a> <a href="https://twitter.com/Chenyan32433045/"><img src="https://img.shields.io/badge/-chenyang-1DA1F2?style=flat-square&logo=Twitter&logoColor=white&link=https://twitter.com/moshfiqrony/"/></a> <a href="https://www.zhihu.com/people/wu-chang-yu-99-22"><img src="https://img.shields.io/badge/-嘤嘤怪-0084FF?style=flat-square&logo=zhihu&logoColor=white"/></a> <a href="https://github.com/WCY-dt"/><img src="https://img.shields.io/badge/-WCYdt-181717?style=flat-square&logo=github"/></a></p>
+
+<br/>
+<br/>
+<br/>
+
+<h4 align="center"> 📈MY CONTRIBUTIONS📈</h4>
 
 <p align="center"><img  width="45%" src="http://github-readme-streak-stats.herokuapp.com?user=wcy-dt&dates=00000072&border=00000000&stroke=0000000F" /></p>
 
 <p align="center"><img  width="60%" src="https://activity-graph.herokuapp.com/graph?username=wcy-dt&hide_border=true&bg_color=white&hide_title=true&line=007ACC&point=181717&color=181717" /></p>
 
-<p align="center"><img width="500" height="334" src="https://wakatime.com/share/@chenyang/19f80a4b-1fd5-4a9a-9160-1b7804ed1361.svg" /></p>
+<p align="center"><svg width="500" height="334" src="https://wakatime.com/share/@chenyang/19f80a4b-1fd5-4a9a-9160-1b7804ed1361.svg"  ></svg></p>
