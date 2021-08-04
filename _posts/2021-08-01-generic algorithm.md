@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "【C++】泛型 <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
+title:  "【C++】泛型"
 date:   2021-08-01 00:00:00 +0800
 categories: toturial
 tags: C++ 泛型
 comments: 1
 mathjax: true
+copyrights: 原创
 ---
 
 本文主要介绍C++泛型。

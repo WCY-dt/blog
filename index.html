@@ -11,17 +11,97 @@ css: ["index.css"]
         div {
           color: black
         }
+        .chipgreen {
+          background: linear-gradient(#019733, #007c29);
+          color: #ffffff;
+          border-radius: 4px;
+          margin-right: 3px;
+          font-size: 12px;
+          vertical-align: middle;
+          display: inline-block;
+          font-weight: normal;
+          padding: 2px 6px 2px 6px;
+          line-height: 16px;
+          margin-bottom: 4px
+        }
+        .chipred {
+          background: linear-gradient(#C9284D, #af2142);
+          color: #ffffff;
+          border-radius: 4px;
+          margin-right: 3px;
+          font-size: 12px;
+          vertical-align: middle;
+          display: inline-block;
+          font-weight: normal;
+          padding: 2px 6px 2px 6px;
+          line-height: 16px;
+          margin-bottom: 4px
+        }
+        .chippurple {
+          background: linear-gradient(blueviolet, rgb(115, 34, 190));
+          color: #ffffff;
+          border-radius: 4px;
+          margin-right: 3px;
+          font-size: 12px;
+          vertical-align: middle;
+          display: inline-block;
+          font-weight: normal;
+          padding: 2px 6px 2px 6px;
+          line-height: 16px;
+          margin-bottom: 4px
+        }
+        .chipblue {
+          background: linear-gradient(rgb(59, 79, 189), rgb(69, 91, 218));
+          color: #ffffff;
+          border-radius: 4px;
+          margin-right: 3px;
+          font-size: 12px;
+          vertical-align: middle;
+          display: inline-block;
+          font-weight: normal;
+          padding: 2px 6px 2px 6px;
+          line-height: 16px;
+          margin-bottom: 4px
+        }
+        .chipyellow {
+          background: linear-gradient(#F7DF1E, #d4bf1a);
+          color: black;
+          border-radius: 4px;
+          margin-right: 3px;
+          font-size: 12px;
+          vertical-align: middle;
+          display: inline-block;
+          font-weight: normal;
+          padding: 2px 6px 2px 6px;
+          line-height: 16px;
+          margin-bottom: 4px
+        }
       </style>
       <div class="col s12">
         <div class="card hoverable">
           <div class="card-content">
-            <span id="post-title" class="card-title">{{post.title}}</span>
+            <span id="post-title" class="card-title">
+              {{post.title}}
+              {% assign cops = post.copyrights | split: " " %}
+              {% for cop in cops %}
+              {% if cop == "原创" %}
+              <div class="chipgreen">{{cop}}</div>
+              {% elsif cop == "转载" %}
+              <div class="chipred">{{cop}}</div>
+              {% elsif cop == "翻译" %}
+              <div class="chippurple">{{cop}}</div>
+              {% elsif cop == "未完待续" %}
+              <div class="chipblue">{{cop}}</div>
+              {% elsif cop == "公告" %}
+              <div class="chipyellow">{{cop}}</div>
+              {% endif %}
+              {% endfor %}
+            </span>
             <p id="post-date">
               <i class="material-icons">date_range</i>
               {{post.date | date: "%Y/%m/%d"}}
             </p>
-            <p id="post-content">{{post.excerpt | remove: '
-            <p>' | remove: '</p>'}}</p>
+            <p id="post-content">{{post.excerpt | remove: '<p>' | remove: '</p>'}}</p>
           </div>
         </div>
       </div>
@@ -38,14 +118,16 @@ css: ["index.css"]
           <a href="{{site.baseurl}}/page{{paginator.previous_page}}">
             {% endif %}
             {% else %}
-            <a href="#!">
+            <a href="">
               {% endif %}
               <i class="material-icons">chevron_left</i>
             </a>
+          </a>
+        </a>
       </li>
       {% if paginator.page == 1 %}
       <li class="active teal">
-        <a href="#!">1</a>
+        <a href="">1</a>
         {% else %}
       <li class="waves-effect">
         <a href="{{site.baseurl}}/">1</a>
@@ -53,7 +135,7 @@ css: ["index.css"]
       </li>
       {% for count in (2..paginator.total_pages) %}
       {% if count == paginator.page %}
-      <li class="active teal"><a href="#!">{{count}}</a></li>
+      <li class="active teal"><a href="">{{count}}</a></li>
       {% else %}
       <li class="waves-effect"><a href="{{site.baseurl}}/page{{count}}">{{count}}</a></li>
       {% endif %}
@@ -62,7 +144,7 @@ css: ["index.css"]
         {% if paginator.next_page %}
         <a href="{{site.baseurl}}/page{{paginator.next_page}}">
           {% else %}
-          <a href="#!">
+          <a href="">
             {% endif %}
             <i class="material-icons">chevron_right</i>
           </a>

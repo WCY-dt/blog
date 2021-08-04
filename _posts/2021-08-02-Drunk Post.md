@@ -1,11 +1,13 @@
 ---
 layout: post
-title:  "Drunk Post: Things I've learned as a Sr Engineer <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'> <img src='https://img.shields.io/badge/-翻译-blueviolet?style=flat'> <img src='https://img.shields.io/badge/-推荐-F7DF1E?style=flat'>"
+title:  "Drunk Post: Things I've learned as a Sr Engineer"
 date:   2021-08-02 00:00:00 +0800
 categories: archieve
 tags: 职业建议
 comments: 1
 mathjax: true
+copyrights: 转载 翻译
+recommend: true
 ---
 
 本文摘自 [Drunk Post: Things I've learned as a Sr Engineer](https://www.reddit.com/r/ExperiencedDevs/comments/nmodyl/drunk_post_things_ive_learned_as_a_sr_engineer/)

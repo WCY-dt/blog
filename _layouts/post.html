@@ -33,10 +33,9 @@ js: ["post.js"]
         </td>
         <td>
           <i class="material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="版权">star</i>
-          {% for copyright in page.copyright %}
-          {% capture test %}{{copyright | slice: 0}}{% endcapture %}
-          {% capture testup %}{{copyright | slice: 0 | upcase}}{% endcapture %}
-          <div class="chip">{{copyright}}</div>
+          {% assign cops = page.copyrights | split: " " %}
+          {% for cop in cops %}
+          <div class="chip">{{cop}}</div>
           {% endfor %}
         </td>
     </table>

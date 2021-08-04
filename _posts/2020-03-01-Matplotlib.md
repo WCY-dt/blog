@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "【python】Matplotlib <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'>"
+title:  "【python】Matplotlib"
 date:   2020-03-01 00:00:00 +0800
 categories: toturial
 tags: python matplotlib
 comments: 1
 mathjax: true
+copyright: 转载
 ---
 
 <mark>Matplotlib</mark> 能够创建多数类型的图表，如条形图，散点图，条形图，饼图，堆叠图，3D 图和地图图表。
