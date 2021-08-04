@@ -5,66 +5,46 @@ js: ["post.js"]
 ---
 <div id="post-info">
   <h3>{{page.title}}</h3>
-  <ul class="collapsible hoverable" data-collapsible="accordion">
-    <li>
-      <div class="collapsible-header">
-        <span>
-          <i class="material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="Date">date_range</i>
-          {{page.date | date: "%Y/%m/%d"}}
-          <i id="indicate" class="right material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="Show extra info">info</i>
-        </span>
-      </div>
-      <div class="collapsible-body">
-        <span>
-          <i class="material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="Categories">sort</i>
+  <div class="collapsible-header">
+    <table border="0">
+        <td align="center">
+          <p><i class="material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="发表日期" align="center">date_range</i>
+          <div class="chip">{{page.date | date: "%y/%m/%d"}}</div></p>
+        </td>
+        <td>
+          <i class="material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="分类">sort</i>
           {% for cat in page.categories %}
           {% capture test %}{{cat | slice: 0}}{% endcapture %}
           {% capture testup %}{{cat | slice: 0 | upcase}}{% endcapture %}
-          <a href="{{site.baseurl}}/categories#{{cat | slugify}}{% if test == testup %}_cap{% endif %}" target="_blank"><div class="chip">{{cat}}</div></a>
+          <a href="{{site.baseurl}}/categories#{{cat | slugify}}{% if test == testup %}_cap{% endif %}" target="_blank">
+            <div class="chip">{{cat}}</div>
+          </a>
           {% endfor %}
-        </span>
-        <span>
-          <i class="material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="Tags">label</i>
+        </td>
+        <td>
+          <i class="material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="标签">label</i>
           {% for tag in page.tags %}
           {% capture test %}{{tag | slice: 0}}{% endcapture %}
           {% capture testup %}{{tag | slice: 0 | upcase}}{% endcapture %}
-          <a href="{{site.baseurl}}/tags#{{tag | slugify}}{% if test == testup %}_cap{% endif %}" target="_blank"><div class="chip">{{tag}}</div></a>
+          <a href="{{site.baseurl}}/tags#{{tag | slugify}}{% if test == testup %}_cap{% endif %}" target="_blank">
+            <div class="chip">{{tag}}</div>
+          </a>
           {% endfor %}
-        </span>
-      </div>
-    </li>
-  </ul>
+        </td>
+        <td>
+          <i class="material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="版权">star</i>
+          {% for copyright in page.copyright %}
+          {% capture test %}{{copyright | slice: 0}}{% endcapture %}
+          {% capture testup %}{{copyright | slice: 0 | upcase}}{% endcapture %}
+          <div class="chip">{{copyright}}</div>
+          {% endfor %}
+        </td>
+    </table>
+  </div>
 </div>
-<div class="divider"></div>
+<!--<div class="divider"></div>-->
 <div class="row">
   <div class="col s12">
     {{ content }}
   </div>
 </div>
-
-{% if site.disqus_shortname and page.comments %}
-<div id="disqus_thread"></div>
-<script>
-  var disqus_config = function () {
-    this.page.url = "{{site.url}}{{site.baseurl}}{{page.url}}";
-    this.page.identifier = "{{page.id}}";
-  };
-  (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = '//{{site.disqus_shortname}}.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-  (function($){
-    setInterval(() => {
-      $.each($('iframe'), (arr,x) => {
-        let src = $(x).attr('src');
-        if (src && src.match(/(ads-iframe)|(disqusads)/gi)) {
-          $(x).remove();
-        }
-      });
-    }, 300);
-  })(jQuery);
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-{% endif %}

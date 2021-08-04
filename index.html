@@ -2,26 +2,31 @@
 layout: page
 css: ["index.css"]
 ---
+<!-- row is in index.sass -->
 <div class="row">
   {% for post in paginator.posts %}
-  <a href="{{post.url | prepend: site.baseurl}}"><font color="black">
-    <style>
-      div{
-        color:black
-      }
-    </style>
-  <div class="col s12">
-    <div class="card hoverable">
-      <div class="card-content">
-        <span id="post-title" class="card-title">{{post.title}}</span>
-        <p id="post-date">
-          <i class="material-icons">date_range</i>
-          {{post.date | date: "%Y/%m/%d"}}
-        </p>
-        <p id="post-content">{{post.excerpt | remove: '<p>' | remove: '</p>'}}</p>
+  <a href="{{post.url | prepend: site.baseurl}}">
+    <font color="black">
+      <style>
+        div {
+          color: black
+        }
+      </style>
+      <div class="col s12">
+        <div class="card hoverable">
+          <div class="card-content">
+            <span id="post-title" class="card-title">{{post.title}}</span>
+            <p id="post-date">
+              <i class="material-icons">date_range</i>
+              {{post.date | date: "%Y/%m/%d"}}
+            </p>
+            <p id="post-content">{{post.excerpt | remove: '
+            <p>' | remove: '</p>'}}</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div></font></a>
+    </font>
+  </a>
   {% endfor %}
   <div class="col s12 center-align">
     <ul class="pagination">
@@ -29,22 +34,22 @@ css: ["index.css"]
         {% if paginator.previous_page %}
         {% if paginator.previous_page == 1 %}
         <a href="{{site.baseurl}}/">
-        {% else %}
-        <a href="{{site.baseurl}}/page{{paginator.previous_page}}">
-        {% endif %}
-        {% else %}
-        <a href="#!">
-        {% endif %}
-          <i class="material-icons">chevron_left</i>
-        </a>
+          {% else %}
+          <a href="{{site.baseurl}}/page{{paginator.previous_page}}">
+            {% endif %}
+            {% else %}
+            <a href="#!">
+              {% endif %}
+              <i class="material-icons">chevron_left</i>
+            </a>
       </li>
       {% if paginator.page == 1 %}
       <li class="active teal">
         <a href="#!">1</a>
-      {% else %}
+        {% else %}
       <li class="waves-effect">
         <a href="{{site.baseurl}}/">1</a>
-      {% endif %}
+        {% endif %}
       </li>
       {% for count in (2..paginator.total_pages) %}
       {% if count == paginator.page %}
@@ -56,11 +61,11 @@ css: ["index.css"]
       <li class="{% unless paginator.next_page %}disabled{% else %}waves-effect{% endunless %}">
         {% if paginator.next_page %}
         <a href="{{site.baseurl}}/page{{paginator.next_page}}">
-        {% else %}
-        <a href="#!">
-        {% endif %}
-          <i class="material-icons">chevron_right</i>
-        </a>
+          {% else %}
+          <a href="#!">
+            {% endif %}
+            <i class="material-icons">chevron_right</i>
+          </a>
       </li>
     </ul>
   </div>
