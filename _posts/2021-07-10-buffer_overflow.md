@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "【SEED Labs】Buffer-Overflow Attack <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
+title:  "【SEED Labs】Buffer-Overflow Attack"
 date:   2021-07-10 00:00:00 +0800
 categories: 实验
 tags: SEEDLab 安全
 comments: 1
 mathjax: true
+copyrights: 原创
 ---
 
 本文为 [SEED Labs 2.0 - Buffer-Overflow Attack Lab (Server Version)](https://seedsecuritylabs.org/Labs_20.04/Software/Buffer_Overflow_Server/) 的实验记录。

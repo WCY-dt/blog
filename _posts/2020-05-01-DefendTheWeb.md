@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "【HackGame】DefendTheWeb <img src='https://img.shields.io/badge/-原创-019733?style=flat'> <img src='https://img.shields.io/badge/-未完待续-blue?style=flat'>"
+title:  "【HackGame】DefendTheWeb"
 date:   2020-05-01 00:00:00 +0800
 categories: security
 tags: game
 comments: 1
 mathjax: true
+copyrights: 原创 未完待续
 ---
 
 ![](https://pic3.zhimg.com/v2-0017ac4e4fc513fce5f9fb7480c78bcf_1200x500.jpg)

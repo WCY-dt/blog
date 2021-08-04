@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "wireshark实战——获取qq位置 <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
+title:  "wireshark实战——获取qq位置"
 date:   2020-06-05 00:00:00 +0800
 categories: security
 tags: wireshark ip
 comments: 1
 mathjax: true
+copyrights: 原创
 ---
 
 虽然网上已经有了很多获取IP的qq插件，但是其原理大致都是相同的，但是插件的安全性往往较差。本文介绍如何利用[wireshark](https://www.wireshark.org/download.html)获取好友IP

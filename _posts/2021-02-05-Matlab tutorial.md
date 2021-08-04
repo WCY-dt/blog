@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "Matlab <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'>"
+title:  "Matlab"
 date:   2021-02-05 00:00:00 +0800
 categories: toturial
 tags: matlab
 comments: 1
 mathjax: true
+copyrights: 转载
 ---
 
 本文介绍<mark>Matlab</mark>的基础使用。

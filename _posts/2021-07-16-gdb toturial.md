@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "GDB touturial: a walkthrough with examples <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'> <img src='https://img.shields.io/badge/-翻译-blueviolet?style=flat'>"
+title:  "GDB touturial: a walkthrough with examples"
 date:   2021-07-16 00:00:00 +0800
 categories: toturial
 tags: gdb C++ C
 comments: true
 mathjax: true
+copyrights: 转载 翻译
 ---
 
 本文参考自[umd](https://www.cs.umd.edu/~srhuang/teaching/cmsc212/gdb-tutorial-handout.pdf)。可以配合[online manual](http://sourceware.org/gdb/current/onlinedocs/gdb_toc.html)学习。

@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "Nyquist's Theorem and Shannon's Theorem <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'>"
+title:  "Nyquist's Theorem and Shannon's Theorem"
 date:   2021-05-10 00:00:00 +0800
 categories: Log
 tags: 网络 奎奈斯特 香农
 comments: 1
 mathjax: true
+copyrights: 转载
 ---
 
 <mark>奈奎斯特定理</mark>（Nyquist's Theorem）和<mark>香农定理</mark>（Shannon's Theorem）是网络传输中的两个基本定理。要搞清楚这两个定理，我们要先弄懂一些术语定义：<mark>波特率</mark>（baud rate）、<mark>比特率</mark>（bit rate）、<mark>带宽</mark>（bandwidth）、<mark>容量</mark>（capacity）、<mark>信噪比</mark>等。

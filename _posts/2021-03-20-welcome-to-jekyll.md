@@ -1,10 +1,11 @@
 ---
 layout: post
-title:  "我又回来了! <img src='https://img.shields.io/badge/-公告-red?style=flat'>"
+title:  "我又回来了!"
 date:   2021-03-20 00:00:00 +0800
 categories: 碎碎念
 tags: 更新说明
 comments: 1
+copyrights: 公告
 ---
 
 &emsp;&emsp;折腾来折腾去，我的博客再次迎来了重大更新。

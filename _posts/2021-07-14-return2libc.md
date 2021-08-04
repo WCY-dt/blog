@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "【SEED Labs】Return-to-libc Attack and ROP <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
+title:  "【SEED Labs】Return-to-libc Attack and ROP"
 date:   2021-07-14 00:00:00 +0800
 categories: 实验
 tags: SEEDLab 安全
 comments: 1
 mathjax: true
+copyrights: 原创
 ---
 
 本文为 [SEED Labs 2.0 - Return-to-libc Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Software/Return_to_Libc/) 的实验记录。

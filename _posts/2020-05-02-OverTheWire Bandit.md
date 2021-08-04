@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "【HackGame】OverTheWireBandit <img src='https://img.shields.io/badge/-原创-019733?style=flat'> <img src='https://img.shields.io/badge/-未完待续-blue?style=flat'>"
+title:  "【HackGame】OverTheWireBandit"
 date:   2020-05-02 00:00:00 +0800
 categories: security
 tags: game
 comments: 1
 mathjax: true
+copyrights: 原创 未完待续
 ---
 
 OverTheWire:Bandit是一个学习linux命令的WarGame，通过闯关的模式，不断的学习新的命令，对于学习安全和Linux的朋友是一个很好的练习游戏。这个游戏目前有34关，从Level0—Level34。游戏形式是通过ssh连接游戏服务器，通过各种命令行读取下一关的游戏服务器密钥，然后连接下一关的服务器继续读取，直到通关。

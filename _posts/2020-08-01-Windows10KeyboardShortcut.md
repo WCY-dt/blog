@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "win10 keyboard shortcut <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
+title:  "win10 keyboard shortcut"
 date:   2020-08-01 00:00:00 +0800
 categories: archieve
 tags: windows
 comments: 1
 mathjax: true
+copyrights: 原创
 ---
 
 本文整理了**500+**个Windows10的快捷键，堪称全网最全！

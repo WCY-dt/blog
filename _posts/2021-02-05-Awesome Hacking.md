@@ -1,18 +1,15 @@
 ---
 layout: post
-title:  "awesome hacking <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'>"
+title:  "awesome hacking"
 date:   2020-02-05 00:00:00 +0800
 categories: security
 tags: 安全
 comments: 1
 mathjax: true
+copyrights: 转载
 ---
 
 A collection of awesome lists for hackers, pentesters & security researchers.
-
-<!-- more -->
-
-![](https://img.shields.io/badge/reproduced-GitHub-blue) ![](https://img.shields.io/badge/license-GPL 3.0-orange) ![](https://img.shields.io/badge/article quality-A-green)
 
 # Awesome Repositories
 

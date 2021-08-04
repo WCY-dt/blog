@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "Packet Travelling <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'>"
+title:  "Packet Travelling"
 date:   2021-07-20 00:00:00 +0800
 categories: toturial
 tags: 网络
 comments: true
 mathjax: true
+copyrights: 转载
 ---
 
 本文转载自[Practical Networking .net](https://www.practicalnetworking.net/series/packet-traveling/packet-traveling/)。

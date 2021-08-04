@@ -1,11 +1,13 @@
 ---
 layout: post
-title:  "The Tao of Programming <img src='https://img.shields.io/badge/-转载-C9284D?style=flat'> <img src='https://img.shields.io/badge/-推荐-F7DF1E?style=flat'>"
+title:  "The Tao of Programming"
 date:   2021-07-21 00:00:00 +0800
 categories: archieve
 tags: 娱乐
 comments: 1
 mathjax: true
+copyrights: 转载
+recommend: true
 ---
 
 Geoffrey James

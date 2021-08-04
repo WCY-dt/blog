@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "【数据结构】Threaded Binary Tree <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
+title:  "【数据结构】Threaded Binary Tree"
 date:   2020-08-15 00:00:00 +0800
 categories: A&DS
 tags: 数据结构 算法 BinaryTree 线索化二叉树
 comments: 1
 mathjax: true
+copyrights: 原创
 ---
 
 本文为数据结构系列第八篇，主要介绍<mark>线索化二叉树</mark>。

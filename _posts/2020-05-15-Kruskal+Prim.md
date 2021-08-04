@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "【数据结构】最小生成树 <img src='https://img.shields.io/badge/-原创-019733?style=flat'>"
+title:  "【数据结构】最小生成树"
 date:   2020-05-15 00:00:00 +0800
 categories: A&DS
 tags: 数据结构 算法 最小生成树 kruskal prim
 comments: 1
 mathjax: true
+copyrights: 原创
 ---
 
 本文为数据结构系列第五篇，主要介绍<mark>kruskal</mark>和<mark>prim</mark>。
