@@ -1,0 +1,114 @@
+li {
+    list-style-type: none;
+}
+
+table {
+    table-layout: fixed;
+    text-align: center;
+}
+
+table tr th {
+    width: 98px;
+    height: 75px;
+}
+
+.tablecellout {
+    padding: 6px 6px 6px 6px;
+}
+
+.tablecellout:hover {
+    padding: 4px 8px 8px 4px;
+}
+
+.tablecell {
+    height: 100%;
+    border-radius: 10px;
+    padding-top: 6px;
+    margin-bottom: 3px;
+    margin-left: 2px;
+    margin-top: 2px;
+    vertical-align: top;
+    box-shadow: 4px 4px 3px #acacac;
+}
+
+.tablecellout:hover + .tablecell {
+    box-shadow: 12px 12px 6px #acacac;
+}
+
+.class1 {
+    background-image: linear-gradient(#ffcb52,#ff7b02);
+}
+.class2 {
+    background-image: linear-gradient(#c165dd,#5c27fe);
+}
+.class3 {
+    background-image: linear-gradient(#13eba3,#05d34a);
+}
+.class4 {
+    background-image: linear-gradient(#55b3f1,#1153fc);
+}
+.class5 {
+    background-image: linear-gradient(#e9b335,#e4448c);
+}
+.class6 {
+    background-image: linear-gradient(#00e099,#00dad2);
+}
+.class7 {
+    background-image: linear-gradient(#07cfcc,#8c56db);
+}
+.class8 {
+    background-image: linear-gradient(#e2c506,#e4740c);
+}
+.class9 {
+    background-image: linear-gradient(#da4867,#e900c2);
+}
+.class10 {
+    background-image: linear-gradient(#bfeb47,#4bce30);
+}
+
+.celllistcourse {
+    border-radius: 8px;
+    margin-bottom: 3px;
+    margin-left: 1.6px;
+    vertical-align: top;
+    padding-left: 4px;
+    color: black;
+    border: 0px;
+    padding: 8px 8px 8px 8px;
+    background-color: rgba(255,255,255,30);
+    text-align: center;
+}
+
+.celllist {
+    padding-left: 4px;
+    color: white;
+    padding-bottom: 12px;
+    margin-bottom: 0px;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+}
+
+.week{
+    height: 28px;
+    background-color: rgb(211, 211, 211);
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    font-family: 微软雅黑;
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    line-height: 26px;
+}
+
+.Num{
+    width: 30px;
+    margin-top: 1px;
+    background-color: #fff;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    font-family: 微软雅黑;
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+  }

@@ -1,3 +1,56 @@
+<html>
+
+<head>
+    <!-- 标题 -->
+    <title>
+        {% if page.title %}
+        {{ page.title | escape }}
+        {% else %}
+        {{ site.title | escape }}
+        {% endif %}
+    </title>
+
+    <!-- 切换标题 -->
+    <script>
+        var title;  // 用于临时存放原来的title内容
+        window.onblur = function () {
+            title = document.title;
+            document.title = "呜呜呜快回来QAQ";
+        };
+        window.onfocus = function () {
+            if (title) {
+                document.title = title;
+            }
+        }
+    </script>
+
+    <!-- 加载css -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{site.baseurl}}/assets/res/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{site.baseurl}}/assets/css/main.css">
+
+    {% for css in layout.css %}
+    {% if css contains "//" %}
+    <link rel="stylesheet" href="{{css}}">
+    {% else %}
+    <link rel="stylesheet" href="{{site.baseurl}}/assets/css/{{css}}">
+    {% endif %}
+    {% endfor %}
+
+    {% for css in page.css %}
+    {% if css contains "//" %}
+    <link rel="stylesheet" href="{{css}}">
+    {% else %}
+    <link rel="stylesheet" href="{{site.baseurl}}/assets/css/{{css}}">
+    {% endif %}
+    {% endfor %}
+
+    <link rel="stylesheet" href="{{site.baseurl}}/assets/css/syntax.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{site.baseurl}}/feed.xml">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{site.baseurl}}/sitemap.xml">
+</head>
+
 <script>
     (function () {
         if ('{{ page.password }}') {
@@ -9,232 +62,35 @@
     })();
 </script>
 
-<h4 style="text-align:center">课程表</h4>
-<br />
-<table width="100%">
-    <tr>
-        <th class="week"></th>
-        <th class="week">一</th>
-        <th class="week">二</th>
-        <th class="week">三</th>
-        <th class="week">四</th>
-        <th class="week">五</th>
-        <th class="week">六</th>
-        <th class="week">七</th>
-    </tr>
+<section class="hero-1 position-relative align-items-center justify-content-center d-flex"
+    style="background-image: url(https://images.pexels.com/photos/426444/pexels-photo-426444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);"
+    id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-white mt-xl-5">Homepage.</h1>
+                <h4 class="font-weight-normal text-white">We Set the Dark on Fire.</h4>
+                <div class="hero-line my-5"></div>
+                <p class="text-white-70">
+                    It will light the way for a new generation of rebels and lovers.
+                </p>
+                <a href="#Links" class="btn btn-primary mt-4">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <tr>
-        <th class="Num">1</th>
-        <th rowspan="2" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class1">
-                    <li class="celllistcourse">形势<br />与政策<br />(5)</li>
-                </th>
-            </table>
-        </th>
-        <th class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class2">
-                    <li class="celllistcourse">体育V</li>
-                    <li class="celllist">胡济群</li>
-                </th>
-            </table>
-        </th>
-        <th></th>
-        <th rowspan="2" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class3">
-                    <li class="celllistcourse">编译方法<br />(双语)</li>
-                    <li class="celllist">翟玉庆<br />J8-301</li>
-                </th>
-            </table>
-        </th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">2</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">3</th>
-        <th></th>
-        <th rowspan="2" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class4">
-                    <li class="celllistcourse">复变函数</li>
-                    <li class="celllist">程全新<br />J6-103</li>
-                </th>
-            </table>
-        </th>
-        <th></th>
-        <th rowspan="3" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class5">
-                    <li class="celllistcourse">模式识别</li>
-                    <li class="celllist">秦中元<br />J7-20C</li>
-                </th>
-            </table>
-        </th>
-        <th rowspan="3" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class6">
-                    <li class="celllistcourse">计算机<br />网络安全<br />(双语)</li>
-                    <li class="celllist">许昱玮<br />J6-303</li>
-                </th>
-            </table>
-        </th>
-        <th rowspan="2" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class5">
-                    <li class="celllistcourse">模式识别</li>
-                    <li class="celllist">秦中元<br />J7-20C</li>
-                </th>
-            </table>
-        </th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">4</th>
-        <th></th>
-        <th rowspan="2" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class7">
-                    <li class="celllistcourse">算法分析<br />与设计<br />(全英)</li>
-                    <li class="celllist">陶军<br />J3-204</li>
-                </th>
-            </table>
-        </th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">5</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">6</th>
-        <th rowspan="2" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class7">
-                    <li class="celllistcourse">算法分析<br />与设计<br />(全英)</li>
-                    <li class="celllist">陶军<br />J3-204</li>
-                </th>
-            </table>
-        </th>
-        <th rowspan="3" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class3">
-                    <li class="celllistcourse">编译方法<br />(双语)</li>
-                    <li class="celllist">翟玉庆<br />J8-301</li>
-                </th>
-            </table>
-        </th>
-        <th></th>
-        <th></th>
-        <th rowspan="3" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class8">
-                    <li class="celllistcourse">二进制<br />代码分析<br/>(双语研讨)</li>
-                    <li class="celllist">凌振<br />J3-101</li>
-                </th>
-            </table>
-        </th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">7</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">8</th>
-        <th rowspan="3" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class9">
-                    <li class="celllistcourse">通信原理</li>
-                    <li class="celllist">李古月<br />J2-105</li>
-                </th>
-            </table>
-        </th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">9</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">10</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">11</th>
-        <th></th>
-        <th></th>
-        <th rowspan="3" class="tablecellout">
-            <table height="100%">
-                <th class="tablecell class10">
-                    <li class="celllistcourse">最优化<br/>理论<br/>与技术<br/>(研讨)</li>
-                    <li class="celllist">李古月<br />J2-105</li>
-                </th>
-            </table>
-        </th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">12</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <th class="Num">13</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-</table>
+<!-- creative works start -->
+<section class="section2" id="Links">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h2 class="mb-0 title">Links<span class="title-border ml-4 pl-3"></span></h2>
+            </div>
+            <ul class="col container-filter categories-filter list-unstyled mt-4 pt-2" id="filter">
+                <li class="list-inline-item cat-list mr-sm-4 mr-2"><a href="{{site.baseurl}}/courselist">Course List</a>
+                </li>
+            </ul>
+        </div><!-- end row -->
+    </div>
+</section><!-- creative works end -->

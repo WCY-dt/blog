@@ -90,15 +90,15 @@ css: ["index.css"]
               {% assign cops = post.copyrights | split: " " %}
               {% for cop in cops %}
               {% if cop == "原创" %}
-              <div class="chipgreen">{{cop}}</div>
+              <div class="chipgreen tooltipped" data-position="left" data-delay="30" data-tooltip="采用 CC-BY-NC-SA 协议哦">{{cop}}</div>
               {% elsif cop == "转载" %}
-              <div class="chipred">{{cop}}</div>
+              <div class="chipred tooltipped" data-position="left" data-delay="30" data-tooltip="读书人的事，怎么能叫偷呢？">{{cop}}</div>
               {% elsif cop == "翻译" %}
-              <div class="chippurple">{{cop}}</div>
+              <div class="chippurple tooltipped" data-position="left" data-delay="30" data-tooltip="半吊子英语翻译作品">{{cop}}</div>
               {% elsif cop == "未完待续" %}
-              <div class="chipblue">{{cop}}</div>
+              <div class="chipblue tooltipped" data-position="left" data-delay="30" data-tooltip="未完待续：指大概率不会写完了">{{cop}}</div>
               {% elsif cop == "公告" %}
-              <div class="chipyellow">{{cop}}</div>
+              <div class="chipyellow tooltipped" data-position="left" data-delay="30" data-tooltip="注意啦！注意啦！">{{cop}}</div>
               {% endif %}
               {% endfor %}
             </span>
@@ -110,7 +110,7 @@ css: ["index.css"]
                 display: inline;
               }
             </style>
-            <span class="material-icons">star</span>
+            <span class="material-icons tooltipped" data-position="left" data-delay="30" data-tooltip="推荐">star</span>
             {% endif %}
             <p id="post-date">
               <i class="material-icons">date_range</i>
