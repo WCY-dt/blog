@@ -11,6 +11,7 @@ css: ["index.css"]
         div {
           color: black
         }
+
         .chipgreen {
           background: linear-gradient(#019733, #007c29);
           color: #ffffff;
@@ -24,6 +25,7 @@ css: ["index.css"]
           line-height: 16px;
           margin-bottom: 4px
         }
+
         .chipred {
           background: linear-gradient(#C9284D, #af2142);
           color: #ffffff;
@@ -37,6 +39,7 @@ css: ["index.css"]
           line-height: 16px;
           margin-bottom: 4px
         }
+
         .chippurple {
           background: linear-gradient(blueviolet, rgb(115, 34, 190));
           color: #ffffff;
@@ -50,6 +53,7 @@ css: ["index.css"]
           line-height: 16px;
           margin-bottom: 4px
         }
+
         .chipblue {
           background: linear-gradient(rgb(69, 91, 218), rgb(56, 74, 177));
           color: #ffffff;
@@ -63,6 +67,7 @@ css: ["index.css"]
           line-height: 16px;
           margin-bottom: 4px
         }
+
         .chipyellow {
           background: linear-gradient(#F7DF1E, #d4bf1a);
           color: black;
@@ -97,11 +102,22 @@ css: ["index.css"]
               {% endif %}
               {% endfor %}
             </span>
+            {% if post.recommend %}
+            <style>
+              style+.material-icons {
+                color: #F7DF1E;
+                float: right;
+                display: inline;
+              }
+            </style>
+            <span class="material-icons">star</span>
+            {% endif %}
             <p id="post-date">
               <i class="material-icons">date_range</i>
               {{post.date | date: "%Y/%m/%d"}}
             </p>
-            <p id="post-content">{{post.excerpt | remove: '<p>' | remove: '</p>'}}</p>
+            <p id="post-content">{{post.excerpt | remove: '
+            <p>' | remove: '</p>'}}</p>
           </div>
         </div>
       </div>
