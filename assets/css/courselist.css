@@ -9,7 +9,13 @@ table {
 
 table tr th {
     width: 98px;
-    height: 75px;
+    height: 85px;
+}
+
+.coursetable {
+    border-radius: 12px;
+    box-shadow: 4px 4px 3px #acacac inset;
+    padding: 10px 10px 10px 10px;
 }
 
 .tablecellout {
@@ -17,7 +23,7 @@ table tr th {
 }
 
 .tablecellout:hover {
-    padding: 4px 8px 8px 4px;
+    padding: 3px 3px 3px 3px;
 }
 
 .tablecell {
@@ -31,39 +37,52 @@ table tr th {
     box-shadow: 4px 4px 3px #acacac;
 }
 
-.tablecellout:hover + .tablecell {
-    box-shadow: 12px 12px 6px #acacac;
+.tablecellout:hover > .tablecell {
+    box-shadow: 12px 12px 8px #acacac;
 }
 
 .class1 {
-    background-image: linear-gradient(#ffcb52,#ff7b02);
+    background-image: linear-gradient(#ffcb52, #ff7b02);
 }
+
 .class2 {
-    background-image: linear-gradient(#c165dd,#5c27fe);
+    background-image: linear-gradient(#c165dd, #5c27fe);
 }
+
 .class3 {
-    background-image: linear-gradient(#13eba3,#05d34a);
+    background-image: linear-gradient(#13eba3, #05d34a);
 }
+
 .class4 {
-    background-image: linear-gradient(#55b3f1,#1153fc);
+    background-image: linear-gradient(#55b3f1, #1153fc);
 }
+
 .class5 {
-    background-image: linear-gradient(#e9b335,#e4448c);
+    background-image: linear-gradient(#e9b335, #e4448c);
 }
+
 .class6 {
-    background-image: linear-gradient(#00e099,#00dad2);
+    background-image: linear-gradient(#00e099, #00dad2);
 }
+
 .class7 {
-    background-image: linear-gradient(#07cfcc,#8c56db);
+    background-image: linear-gradient(#07cfcc, #8c56db);
 }
+
 .class8 {
-    background-image: linear-gradient(#e2c506,#e4740c);
+    background-image: linear-gradient(#e2c506, #e4740c);
 }
+
 .class9 {
-    background-image: linear-gradient(#da4867,#e900c2);
+    background-image: linear-gradient(#da4867, #e900c2);
 }
+
 .class10 {
-    background-image: linear-gradient(#bfeb47,#4bce30);
+    background-image: linear-gradient(#bfeb47, #4bce30);
+}
+
+.classinactive {
+    background-image: linear-gradient(#a0a0a0, #6d6d6d);
 }
 
 .celllistcourse {
@@ -75,23 +94,35 @@ table tr th {
     color: black;
     border: 0px;
     padding: 8px 8px 8px 8px;
-    background-color: rgba(255,255,255,30);
+    background-color: rgba(255, 255, 255, 30);
+    text-align: center;
+}
+
+.celllistcourseinactive {
+    border-radius: 8px;
+    margin-bottom: 3px;
+    margin-left: 1.6px;
+    vertical-align: top;
+    padding-left: 4px;
+    color: #8d8d8d;
+    border: 0px;
+    padding: 8px 8px 8px 8px;
+    background-color: rgba(255, 255, 255, 30);
     text-align: center;
 }
 
 .celllist {
     padding-left: 4px;
     color: white;
-    padding-bottom: 12px;
     margin-bottom: 0px;
     font-weight: 500;
     font-size: 16px;
     text-align: center;
 }
 
-.week{
+.week {
     height: 28px;
-    background-color: rgb(211, 211, 211);
+    background-color: rgb(189, 231, 255);
     filter: alpha(opacity=60);
     opacity: 0.6;
     font-family: 微软雅黑;
@@ -99,16 +130,94 @@ table tr th {
     color: #333;
     text-align: center;
     line-height: 26px;
+    border-radius: 11px;
+    box-shadow: 4px 4px 3px #acacac;
+    margin-bottom: 15px;
 }
 
-.Num{
-    width: 30px;
+.week:hover {
+    animation: rotate3 .8s infinite;
+    -webkit-animation: rotate3 .8s infinite;
+    animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotate3 {
+    from {
+        -webkit-transform: rotateX(0deg);
+    }
+    to {
+        -webkit-transform: rotateX(360deg);
+    }
+}
+
+@keyframes rotate3 {
+    from {
+        -webkit-transform: rotateX(0deg);
+    }
+    to {
+        -webkit-transform: rotateX(360deg);
+    }
+}
+
+.Num {
+    width: 45px;
     margin-top: 1px;
-    background-color: #fff;
     filter: alpha(opacity=60);
     opacity: 0.6;
     font-family: 微软雅黑;
     font-size: 20px;
     color: #333;
     text-align: center;
-  }
+}
+.aligncenter {
+    text-align: center;
+}
+
+.ro1 {
+    animation: rotate1 .4s forwards;
+    -webkit-animation: rotate1 .4s forwards;
+    animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes rotate1 {
+    from {
+        -webkit-transform: rotateY(0deg);
+    }
+    to {
+        -webkit-transform: rotateY(90deg);
+    }
+}
+
+@keyframes rotate1 {
+    from {
+        -webkit-transform: rotateY(0deg);
+    }
+    to {
+        -webkit-transform: rotateY(90deg);
+    }
+}
+
+.ro2 {
+    animation: rotate2 .4s forwards;
+    -webkit-animation: rotate2 .4s forwards;
+    /*animation-delay: .4s;*/
+    animation-timing-function: ease-out;
+}
+
+@-webkit-keyframes rotate2 {
+    from {
+        -webkit-transform: rotateY(270deg);
+    }
+    to {
+        -webkit-transform: rotateY(360deg);
+    }
+}
+
+@keyframes rotate2 {
+    from {
+        -webkit-transform: rotateY(270deg);
+    }
+    to {
+        -webkit-transform: rotateY(360deg);
+    }
+}
