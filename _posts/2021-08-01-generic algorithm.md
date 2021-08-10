@@ -21,7 +21,7 @@ auto result = find(vec.cbegin(), vec.cend(), val);
 
 这里，`find` 的前两个参数表示查找范围，最后一个表示要查找的内容。`find` 先访问第一个元素，比较该元素与查找的值，。如果相等，就返回位置，如果不等，就继续查找下一个位置。
 
-与此同时，`find` 也可以查找普通数组：
+`find` 还可以查找普通数组：
 
 ```cpp
 auto result = find(begin(arr), end(arr), val);
@@ -39,7 +39,7 @@ auto result = find(begin(arr), end(arr), val);
 
 上面的 `find` 传入的是一个值，也有算法可以传入一个函数。
 
-通常，`sort` 的用法为：
+比如，通常，`sort` 的用法为：
 
 ```cpp
 sort(vec.begin(), vec.end())
@@ -60,89 +60,91 @@ stable_sort(vec.begin(), vec.end(), cmp);
 
 ## lambda
 
-
-
-# 标准库泛型算法
-
-## 只读算法
-
-上面的 `find` 就是只读的，另一个例子是用来求和的 `accumulate` 函数：
+lambda 被用来向算法传递可调用对象。其格式为
 
 ```cpp
-auto sum = accumulate(vec.cbegin(), vec.end(), 0);
+[捕获列表](参数列表) -> 返回类型 { 函数体 }
 ```
 
-最后一个参数是和的初值，它也指定了返回值的类型。
-
-因此，如果要对 string 做加法，可以用
+参数列表和返回类型是可选的。对于返回类型，如果没有指定，那么在函数体内 return 有多个时，编译器会自动推导为 void，产生错误。最简单的 lambda 如下所示：
 
 ```cpp
-string sum = accumulate(vec.cbegin(), vec.end(), string(""));
+auto foo = [] { return 0; }
 ```
 
-而由于 `const char*`  上没有加法，所以下面的语句是错误的
+我们可以像正常函数一样调用 lambda：
 
 ```cpp
-// 错误
-string sum = accumulate(vec.cbegin(), vec.end(), "");
+cout << foo() << endl;
 ```
 
-常用的只读算法还有 `equal`，判断两个容器是否相等：
+捕获列表用来捕获当前域内的局部非 static 变量。比如，我们写一个在一组 vector 中找出所有大小 >=sz 的：
 
 ```cpp
-equal(roster1.cbegin(), roster1.cend(), roster2.cbegin())
+void bigger(vector<string> &words, vector<string>::size_type sz){
+    auto wc = find_if(words.begin(), words.end(),
+                      [sz](const string &a) { return a.size() >= sz; });
+}
 ```
 
-这里的 roster1 和 roster2 可以是不同的类型，但第二个序列应当不比第一个短。
-
-## 写容器元素算法
-
-例如 `fill` ，用一个元素填充容器：
+我们刚刚捕获的是一个简单的数值，但如果需要捕获一共指针或者迭代器，那么就需要引用捕获。引用捕获在需要捕获的对象前加 `&`。比如我们的函数捕获 ostream 并输出：
 
 ```cpp
-fill(vec.cbegin(), vec.end() + vec.size()/2, 10)
+void output(vector<string> &words, ostream &os = cout, char c = ' '){
+   for_each(words.begin(), words.end(),
+                      [&os, c](const string &s) { os << s << c });
+}
 ```
 
-上面的语句向前一半写入了 10。应当保证容器的范围比要写入的范围大。
-
-再如 `copy` ，将一个容器拷贝进另一个容器：
+我们也可以使用隐式捕获，编译器会自动推断列表。其中，`=` 表示值捕获，`&` 表示引用捕获。例如上面的程序可以改写为：
 
 ```cpp
-auto ret = copy(begin(a1), end(a1), a2);
+void output(vector<string> &words, ostream &os = cout, char c = ' '){
+   for_each(words.begin(), words.end(),
+                      [&, =](const string &s) { os << s << c });
+}
 ```
 
-以及 `replace`，将某个元素替换为别的元素：
+对于值捕获，如果需要修改该变量，需要加上 `mutable` 关键字：
 
 ```cpp
-replace(vec.begin(), vec.end(), 0, 42);
+auto foo = [n]() mutable { return ++n; }
 ```
 
-或者 `replace_copy`，边拷贝边替换：
+而对于引用捕获，只要不是 const 即可修改。
+
+## 参数绑定
+
+lambda 相比于函数的好处是，可以调用局部变量。而如果一定要使用函数，可以考虑参数绑定。`bind` 函数提供了这样的功能，其格式为：
 
 ```cpp
-replace_copy(ilst.cbegin(), ilst.cend(), back_insert(ivec), 0, 42);
+auto 新可调用对象 = bind(可调用对象, 参数列表)
 ```
 
-## 重排容器元素算法
-
-我们经常使用的排序函数 `sort` 就是泛型。
+比如我们有 check_size 函数：
 
 ```cpp
-sort(vec.begin(), vec.end())
+bool check_size(const string &s, string::size_type sz){
+    return s.size() >= sz;
+}
 ```
 
-去重的 `unique`：
+我们希望把它用在上面提到的 find_if 函数中，则可以：
 
 ```cpp
-unique(vec.begin(), vec.end())
+auto wc = find_if(words.begin(), words.end(),
+                  bind(check_size, _1, sz));
 ```
 
-`unique` 返回的指针指向最后一个不重复的元素。
-
-用来删除元素的 `erase` 也是经典的泛型：
+上面我们用到了 `_1`，这是个占位符。它需要 using 声明：
 
 ```cpp
-erase(unique(vec.begin(), vec.end()), vec.end())
+using std::placeholders::_1;
 ```
 
-上面的语句是把去重后空出来的地方给删除，防止发生错误。
+如果要用到多个，则可以直接：
+
+```cpp
+using namespace std::placeholders;
+```
+
