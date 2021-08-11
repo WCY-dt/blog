@@ -1,4 +1,4 @@
-<h4 style="text-align:center;font-weight: bold;">课程表 - 第一周</h4>
+<h4 style="text-align:center;font-weight: bold;">课程表 - 第二周</h4>
 <br />
 <div width="100%" class="coursetable" >
     <table width="100%" class="week" height="28px">
@@ -59,8 +59,8 @@
             <th></th>
             <th rowspan="2" class="tablecellout">
                 <table height="100%">
-                    <th class="tablecell classinactive">
-                        <li class="celllistcourseinactive">复变函数</li>
+                    <th class="tablecell class4">
+                        <li class="celllistcourse">复变函数</li>
                         <li class="celllist">程全新<br />J6-103</li>
                     </th>
                 </table>
@@ -84,9 +84,9 @@
             </th>
             <th rowspan="2" class="tablecellout" id="comejs">
                 <table height="100%">
-                    <th class="tablecell class5">
-                        <li class="celllistcourse">模式识别</li>
-                        <li class="celllist">秦中元<br />J7-20C</li>
+                    <th class="tablecell class9">
+                        <li class="celllistcourse">通信原理</li>
+                        <li class="celllist">李古月<br />J2-105</li>
                     </th>
                 </table>
             </th>
@@ -98,8 +98,8 @@
             <th></th>
             <th rowspan="2" class="tablecellout">
                 <table height="100%">
-                    <th class="tablecell classinactive">
-                        <li class="celllistcourseinactive">算法分析<br />与设计<br />(全英)</li>
+                    <th class="tablecell class7">
+                        <li class="celllistcourse">算法分析<br />与设计<br />(全英)</li>
                         <li class="celllist">陶军<br />J3-204</li>
                     </th>
                 </table>
@@ -119,16 +119,16 @@
             <th class="Num">6</th>
             <th rowspan="2" class="tablecellout">
                 <table height="100%">
-                    <th class="tablecell classinactive">
-                        <li class="celllistcourseinactive">算法分析<br />与设计<br />(全英)</li>
+                    <th class="tablecell class7">
+                        <li class="celllistcourse">算法分析<br />与设计<br />(全英)</li>
                         <li class="celllist">陶军<br />J3-204</li>
                     </th>
                 </table>
             </th>
             <th rowspan="3" class="tablecellout">
                 <table height="100%">
-                    <th class="tablecell classinactive">
-                        <li class="celllistcourseinactive">编译方法<br />(双语)</li>
+                    <th class="tablecell class3">
+                        <li class="celllistcourse">编译方法<br />(双语)</li>
                         <li class="celllist">翟玉庆<br />J8-301</li>
                     </th>
                 </table>
@@ -159,8 +159,8 @@
             <th class="Num">8</th>
             <th rowspan="3" class="tablecellout">
                 <table height="100%">
-                    <th class="tablecell classinactive">
-                        <li class="celllistcourseinactive">通信原理</li>
+                    <th class="tablecell class9">
+                        <li class="celllistcourse">通信原理</li>
                         <li class="celllist">李古月<br />J2-105</li>
                     </th>
                 </table>
@@ -197,8 +197,8 @@
             <th></th>
             <th rowspan="3" class="tablecellout">
                 <table height="100%">
-                    <th class="tablecell classinactive">
-                        <li class="celllistcourseinactive">最优化<br />理论<br />与技术<br />(研讨)</li>
+                    <th class="tablecell class10">
+                        <li class="celllistcourse">最优化<br />理论<br />与技术<br />(研讨)</li>
                         <li class="celllist">李古月<br />J2-105</li>
                     </th>
                 </table>
@@ -237,21 +237,21 @@
     let courseTable = document.querySelector("coursetable");
     document.querySelector("#comejs").onclick = function () {
         if (courseName.innerHTML === "模式识别") {
-            let courseCss = document.querySelector("#comejs .class5");
-            courseCss.setAttribute("class", "ro1 tablecell class5");
+            let courseCss = document.querySelector("#comejs .classinacctive");
+            courseCss.setAttribute("class", "ro1 tablecell classinacctive");
             setTimeout(function () {
                 courseName.innerHTML = "通信原理";
                 courseInfo.innerHTML = "李古月<br/>J2-105";
-                courseCss.setAttribute("class", "ro2 tablecell classinactive");
+                courseCss.setAttribute("class", "ro2 tablecell class5");
             }, 400);
         }
         else {
-            let courseCss = document.querySelector("#comejs .classinactive");
-            courseCss.setAttribute("class", "ro1 tablecell classinactive");
+            let courseCss = document.querySelector("#comejs .class5");
+            courseCss.setAttribute("class", "ro1 tablecell class5");
             setTimeout(function () {
                 courseName.innerHTML = "模式识别";
                 courseInfo.innerHTML = "秦中元<br />J7-20C";
-                courseCss.setAttribute("class", "ro2 tablecell class5");
+                courseCss.setAttribute("class", "ro2 tablecell classinacctive");
             }, 400);
         }
     }
