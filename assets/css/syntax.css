@@ -47,7 +47,7 @@ code.has-numbering {
 
 .highlight .hll,.gist-highlight .hll{background-color:#ffc;}
 .highlight .c, .gist-highlight .c{color:#408080;}
-.highlight .err,.gist-highlight .err{border:1px solid #f00;}
+/*.highlight .err,.gist-highlight .err{border:1px solid #f00;}*/
 .highlight .k, .gist-highlight .k{color:#008000;}
 .highlight .o, .gist-highlight .o{color:#666;}
 .highlight .cm,.gist-highlight .cm{color:#408080;}
