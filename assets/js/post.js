@@ -6,6 +6,12 @@ $(document).ready(function(){
   });
 });
 
+$(function(){
+  $('.row h1,h2,h3,h4,h5,h6').each(function(){
+    $(this).attr("id",$(this).text());
+  });
+});
+
 let hone = document.querySelectorAll(".row h1,h2,h3,h4,h5,h6");
 for (let h of hone) {
   let cont=h.innerHTML;

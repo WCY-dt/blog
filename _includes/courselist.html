@@ -25,8 +25,8 @@
             </th>
             <th class="tablecellout">
                 <table height="100%">
-                    <th class="tablecell classinactive">
-                        <li class="celllistcourseinactive">体育V</li>
+                    <th class="tablecell class2">
+                        <li class="celllistcourse">体育V</li>
                         <li class="celllist">胡济群</li>
                     </th>
                 </table>
@@ -84,9 +84,9 @@
             </th>
             <th rowspan="2" class="tablecellout" id="comejs">
                 <table height="100%">
-                    <th class="tablecell class9">
-                        <li class="celllistcourse">通信原理</li>
-                        <li class="celllist">李古月<br />J2-105</li>
+                    <th class="tablecell class5">
+                        <li class="celllistcourse">模式识别</li>
+                        <li class="celllist">秦中元<br />J7-20C</li>
                     </th>
                 </table>
             </th>
@@ -242,12 +242,12 @@
             setTimeout(function () {
                 courseName.innerHTML = "通信原理";
                 courseInfo.innerHTML = "李古月<br/>J2-105";
-                courseCss.setAttribute("class", "ro2 tablecell class5");
+                courseCss.setAttribute("class", "ro2 tablecell classinacctive");
             }, 400);
         }
         else {
-            let courseCss = document.querySelector("#comejs .class5");
-            courseCss.setAttribute("class", "ro1 tablecell class5");
+            let courseCss = document.querySelector("#comejs .classinacctive");
+            courseCss.setAttribute("class", "ro1 tablecell classinacctive");
             setTimeout(function () {
                 courseName.innerHTML = "模式识别";
                 courseInfo.innerHTML = "秦中元<br />J7-20C";
