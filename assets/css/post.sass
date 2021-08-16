@@ -49,14 +49,60 @@ main
     max-width: 100%
     justify-content: center
     align-self: center
+
+  .row
+    table
+      border: thin solid black
+
+      tr:nth-child(2n)
+        background-color: #fafafa
+      
+      tbody tr:hover
+        background-color: #eeeeee
   
-  .row td
-    border: 1px solid black
+    th
+      text-align: center
+      background-color: #dbdbdb
   
-  .row th
-    border: 1px solid black
-    text-align: center
-    background-color: #dbdbdb
+  td, th
+    padding: 5px 5px
+
+  .copybutton
+    user-select: none
+    float: right
+    border: solid 1px #3AA17E
+    color: #3AA17E
+    border-radius: 3px
+    display: inline-block
+    margin: 0px 3px auto auto
+    height: 25px
+    vertical-align: middle
+    line-height: 20px
+  
+    a
+      text-decoration: none
+      color: #3AA17E
+
+    .material-icons
+      user-select: none
+      transform: scale(0.6)
+      vertical-align: middle
+  
+    p
+      user-select: none
+      font-size: 10px
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei UI,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif
+      padding-right: 4px
+      vertical-align: middle
+      display: inline
+  
+  .copybutton:hover
+    background-color: #3AA17E
+    border: none
+
+    a
+      color: white
+
 
 #post-info
   a
@@ -120,3 +166,10 @@ main
     .chip
       margin-right: 1px
       font-size: 12px
+  
+  main .copybutton p
+    display: none
+
+@media only screen and (max-width: 1040px)
+  main .copybutton
+    display: none
