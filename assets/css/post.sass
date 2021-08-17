@@ -17,11 +17,11 @@ main
 
       pre
         padding: 5px 0px 5px 0px
-  
+
   h1
     font-size: 34px
     font-weight: bold
-  
+
   h1::before
     content: "# "
     color: #00537E
@@ -34,11 +34,10 @@ main
     font-weight: bold
     font-family: system-ui,-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei UI,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif
 
-
   h2
     font-size: 29px
     font-weight: bold
-  
+
   h3
     font-size: 24px
     font-weight: bold
@@ -56,14 +55,14 @@ main
 
       tr:nth-child(2n)
         background-color: #fafafa
-      
+
       tbody tr:hover
         background-color: #eeeeee
-  
+
     th
       text-align: center
       background-color: #dbdbdb
-  
+
   td, th
     padding: 5px 5px
 
@@ -78,7 +77,7 @@ main
     height: 25px
     vertical-align: middle
     line-height: 20px
-  
+
     a
       text-decoration: none
       color: #3AA17E
@@ -87,7 +86,7 @@ main
       user-select: none
       transform: scale(0.6)
       vertical-align: middle
-  
+
     p
       user-select: none
       font-size: 10px
@@ -95,14 +94,13 @@ main
       padding-right: 4px
       vertical-align: middle
       display: inline
-  
+
   .copybutton:hover
     background-color: #3AA17E
     border: none
 
     a
       color: white
-
 
 #post-info
   a
@@ -152,7 +150,7 @@ main
   #post-info
     table
       table-layout: automatic
-    
+
     td
       word-wrap: normal
 
@@ -166,10 +164,167 @@ main
     .chip
       margin-right: 1px
       font-size: 12px
-  
+
   main .copybutton p
     display: none
 
 @media only screen and (max-width: 1040px)
   main .copybutton
     display: none
+
+.cf
+  border: solid 1px black
+  border-radius: 5px
+  padding: 10px 10px 10px 10px
+  margin: 10px 0px
+
+  tit
+    display: block
+    font-size: 150%
+    font-family: helvetica neue, Helvetica, Arial, sans-serif
+    margin-bottom: .5em
+    margin: 0
+    padding: 0
+    text-align: center
+    line-height: 1.5em
+    -webkit-text-size-adjust: 100%
+    word-wrap: break-word
+
+    a
+      text-decoration: none
+      color: black
+
+  lim
+    display: block
+    margin: 0
+    padding: 0
+    margin-bottom: 1em
+    margin-top: .5em
+    text-align: center
+    font-family: helvetica neue, Helvetica, Arial, sans-serif
+    line-height: 1.5em
+    font-size: 1em
+    -webkit-text-size-adjust: 100%
+    word-wrap: break-word
+    background-color: #dbdbdb
+
+  pro
+    display: block
+    font-size: 1em
+    line-height: 1.4em
+    margin: 0 0 1em!important
+    padding: 0
+    display: block
+    margin-block-start: 1em
+    margin-block-end: 1em
+    margin-inline-start: 0px
+    margin-inline-end: 0px
+    margin: .5em
+    font-family: helvetica neue, Helvetica, Arial, sans-serif
+    -webkit-text-size-adjust: 100%
+    word-wrap: break-word
+
+  in
+    display: block
+    font-size: 1em
+    line-height: 1.4em
+    margin: 0 0 1em!important
+    padding: 0
+    display: block
+    margin-block-start: 1em
+    margin-block-end: 1em
+    margin-inline-start: 0px
+    margin-inline-end: 0px
+    margin: .5em
+    font-family: helvetica neue, Helvetica, Arial, sans-serif
+    -webkit-text-size-adjust: 100%
+    word-wrap: break-word
+
+  out
+    display: block
+    font-size: 1em
+    line-height: 1.4em
+    margin: 0 0 1em!important
+    padding: 0
+    display: block
+    margin-block-start: 1em
+    margin-block-end: 1em
+    margin-inline-start: 0px
+    margin-inline-end: 0px
+    margin: .5em
+    font-family: helvetica neue, Helvetica, Arial, sans-serif
+    -webkit-text-size-adjust: 100%
+    word-wrap: break-word
+
+  in::before
+    display: block
+    content: "INPUT "
+    font-weight: bold
+    line-height: 1.6em
+  
+  out::before
+    display: block
+    content: "OUTPUT "
+    font-weight: bold
+    line-height: 1.6em
+
+  sample
+
+    num
+      font-weight: bold
+      display: block
+      line-height: 1.6em
+    
+    num::before
+      display: inline
+      content: "EXAMPLE "
+      font-weight: bold
+      line-height: 1.6em
+    
+    in
+      width: 49%
+      display: inline-block
+      font-family: monospace
+      border: 1px solid black
+      padding: 5px 5px 5px 5px
+      font-family: helvetica neue, Helvetica, Arial, sans-serif
+      line-height: 1.4em
+      font-size: 1em
+      margin-bottom: 10px
+    
+    in::before
+      content: "input"
+      display: block
+      background-color: #dbdbdb
+      text-align: center
+      font-weight: bold
+      margin-bottom: 3px
+    
+    out
+      width: 49%
+      float: right
+      display: inline-block
+      font-family: monospace
+      border: 1px solid black
+      padding: 5px 5px 5px 5px
+      font-family: helvetica neue, Helvetica, Arial, sans-serif
+      line-height: 1.4em
+      font-size: 1em
+      margin-bottom: 10px
+
+    out::before
+      content: "output"
+      display: block
+      background-color: #dbdbdb
+      text-align: center
+      font-weight: bold
+      margin-bottom: 3px
+    
+    note
+      display: block
+      color: #7a7a7a
+      margin-bottom: 10px
+
+    note::before
+      display: inline-block
+      content: "* "
