@@ -6,7 +6,7 @@ categories: toturial
 tags: gdb C++ C
 comments: true
 mathjax: true
-copyrights: 转载 翻译
+copyrights: 原创
 ---
 
 本文参考自[umd](https://www.cs.umd.edu/~srhuang/teaching/cmsc212/gdb-tutorial-handout.pdf)。可以配合[online manual](http://sourceware.org/gdb/current/onlinedocs/gdb_toc.html)学习。
