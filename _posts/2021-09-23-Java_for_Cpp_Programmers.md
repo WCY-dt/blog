@@ -10,7 +10,7 @@ copyrights: 原创
 recommend: true
 ---
 
-Java 可以理解为 `C++--`，即比 C 多了不少东西，同时比 C++ 少了一些东西。
+Java 可以理解为 `C++--`，即以 C 为基础的扩展，但又比 C++ 少了一些东西。
 
 # 运行第一个 Java 程序
 
@@ -155,10 +155,166 @@ Java 和 C++ 最大的差别是什么？我们从以下几个方面来理解：
 
 # Java 类
 
+## 继承和抽象
 
+Java 只支持单继承。继承的关键字为 `extends`。可以使用 `super` 指向自己的超类（父类）。如果重写了超类的某个方法，通常加上注释 `Override`。这个注释是给编译器参考的，对程序本身没有影响。下面是一个具体的例子。
+
+```java
+class Account {
+    protected double balance;
+    public Account(double balance) { // 构造函数
+        this.balance = balance;
+    }
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+        }
+    }
+}
+
+public class CheckingAccount extends Account {
+    public CheckingAccount(double balance) {
+        super(balance); // 使用超类的构造函数
+    }
+    @Override	// 注释
+    public void withdraw(double amount) {
+        balance -= amount;
+    }
+}
+```
+
+抽象关键字为 `abstract`，用法与 C++ 基本相同。
+
+`interface` 是 `public abstract` 的方法。它的作用是实现多继承的效果。如果一个类被定义为 interface，那么别的类可以使用 `implements` 关键字继承这个类。例如
+
+```java
+public interface depart { // 接口1
+    public abstract void depart();
+}
+
+public interface arrive { // 接口2
+    public abstract void arrive();
+}
+
+public class plane implements depart,arrive {
+    @Override
+    public void depart() {
+        System.out.println("起飞");
+    }
+    @Override
+    public void arrive() {
+        System.out.println("降落");
+    }
+}
+```
+
+## 匿名类
+
+如果一个类需要同时定义与实现，并且只使用一次，则可以用匿名类。
+
+```java
+interface HelloWorld {
+    public void greet();
+}
+
+public static void sayHello() { 
+    // 非匿名类
+    class EnglishGreeting implements HelloWorld {
+        public void greet() {
+            System.out.println("Hello world!");
+        }
+    }
+    HelloWorld englishGreeting = new EnglishGreeting();
+    englishGreeting.greet();
+    // 匿名类
+    HelloWorld spanishGreeting = new HelloWorld() {
+        public void greet() {
+            System.out.println("Hola, mundo!");
+        }
+    };
+    spanishGreeting.greet();
+} 
+```
+
+# 输入输出
+
+读入可以直接使用 argv 读入，也可以从命令行读入。
+
+```java
+Console c = System.console();
+String login = c.readLine("Enter your login: ");
+```
+
+输出只能是字符串。非字符串会自动使用 `tostring()` 方法转换成字符串。输出有两个方法，`print()` 为普通输出，`println()` 输出后会加一个换行。
+
+```java
+public class Root {
+    public static void main(String[] args) {
+        i = 5;
+        r = Math.sqrt(i);
+        System.out.println("The square root of " + i + " is " + r + ".");
+        // output: The square root of 5 is 2.23606797749979.
+    }
+}
+```
+
+当然这种输出更接近 python。还有一种格式化的输出，更加类似于 C++
+
+```java
+public class Root {
+    public static void main(String[] args) {
+        int i = 5;
+        double r = Math.sqrt(i);
+        System.out.format("The square root of %d is %f.%n", i, r);
+    }
+}
+```
+
+# Collections
+
+Collections 类似于 C++ 的 STL，使用前需要
+
+```java
+import java.util.*
+```
+
+下面是一个使用实例
+
+```java
+public class FindDups {
+    public static void main(String[] args) {
+        Set<String> s = new HashSet<String>();
+        for (String a : args) {
+            s.add(a);
+        }
+        System.out.println(s.size() + " distinct words: " + s);
+    }
+}
+```
+
+上面的 Set 和 HashSet 有类似于继承的关系。常用的有：
+
+- `Set<T>` ：`HashSet`，`TreeSet`，`LinkedHashSet`
+  - 常用方法：`size`，`isEmpty`，`add`，`remove`，`contains`，`addAll`，`removeAll`
+- `List<T>` ：`LinkedList`，`ArrayList`
+  - 常用方法：`size`，`isEmpty`，`add`，`remove`，`get`，`set`
+- `Map<K, V>`：`HashMap`，`TreeMap`，`LinkedHashMap`
+  - 常用方法：`size`，`isEmpty`，`put`，`putIfAbsent`，`get`，`getOrDefault`，`remove(K)`，`remove(K, V)`，`replace(K, newV)`，`replace(K, oldV, newV)`
+- `Queue<T>`：`PriorityQueue`
+  - 常用方法：`size`，`add`，`peek`，`poll`
+
+在传参时，我们只知道使用了 `Set` 或者 `List` 等，却不知道这些数据结构里的数据是什么类型。因此我们需要使用 wildcards，即一个问号。通常有如下三种用法：
+
+```java
+public void method(List<?> list); // 用于同时取出和放入元素
+public void method(List<? extends Number> list) // 用于取出元素
+public void method(List<? super Number> list) // 用于放入元素
+```
 
 # 参考资料
 
-1. [https://www.seas.upenn.edu/~cis1xx/resources/JavaForCppProgrammers/j-javac-cpp-ltr.pdf](https://www.seas.upenn.edu/~cis1xx/resources/JavaForCppProgrammers/j-javac-cpp-ltr.pdf)
-2. [http://niwatori.io/2019/11/18/java-for-cpp-programmers/](http://niwatori.io/2019/11/18/java-for-cpp-programmers/)
+1. [https://docs.oracle.com/en/java/javase/17/docs/api/index.html](https://docs.oracle.com/en/java/javase/17/docs/api/index.html)
+2. [https://www.seas.upenn.edu/~cis1xx/resources/JavaForCppProgrammers/j-javac-cpp-ltr.pdf](https://www.seas.upenn.edu/~cis1xx/resources/JavaForCppProgrammers/j-javac-cpp-ltr.pdf)
+3. [https://docs.oracle.com/javase/tutorial/collections/](https://docs.oracle.com/javase/tutorial/collections/)
+4. [http://niwatori.io/2019/11/18/java-for-cpp-programmers/](http://niwatori.io/2019/11/18/java-for-cpp-programmers/)
 
