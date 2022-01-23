@@ -11,7 +11,7 @@ copyrights: 原创 未完待续
 
 ![](https://pic3.zhimg.com/v2-0017ac4e4fc513fce5f9fb7480c78bcf_1200x500.jpg)
 
-本文介绍了[DefendTheWeb](https://defendtheweb.net/)的部分通关方法（目前更新到Intro9，剩下的如果大家做出来了欢迎发在评论区）
+本文介绍了[DefendTheWeb](https://defendtheweb.net/)的部分通关方法
 
 # Intro1
 
@@ -25,7 +25,7 @@ copyrights: 原创 未完待续
 <!-- username: deathdog, password: a2e3369fe0 -->
 ```
 
-所以程序员把账号密码写在了注释里（估计现实中不会有这么傻的程序员）。
+所以程序员把账号密码写在了注释里。
 
 # Intro 2
 
@@ -33,7 +33,6 @@ copyrights: 原创 未完待续
 
 ```
 Username is evil_kitten
-
 Password is 6ac0bb7f83
 ```
 
@@ -152,7 +151,7 @@ visualmaster
 01001100 01110000 00111001 01000101 01001101 00110010 00110111 01000111 01010010 
 ```
 
-把这些2进制数字转成16进制
+把这些2进制数字转成 ascii 字符，得到用户名为 burnblaze 及密码。
 
 # Intro 9
 
@@ -168,4 +167,158 @@ visualmaster
 
 `email1`里面需要输入跟`email2`里面一样的地址，所以把`email2`的`value`改成了自己的邮箱，然后再在页面上输入我自己的邮箱
 
-**未完待续……**
+没想到它就直接给了账号密码。
+
+# Intro 12
+
+给了一串东西，一眼 md5。
+
+随便找个在线站点解密一下即可。
+
+# 24 bit
+
+进去让你下载一个 txt。下载下来，打开后发现乱码。
+
+查看二进制文件，发现文件是以 `42 4D` 开头的。显然，这是一个 bmp 文件。于是，更改后缀名，打开文件，得到答案：用户名为 paint，密码为 rules。
+
+# World of Peacecraft / Realistic
+
+这一关属实无聊，密码明文写在 email 的回收站里。
+
+# Secure agent
+
+涉及到了 get 方法中的 User-Agent 字段。我们需要将其修改为 secure_user_agent。
+
+这里我用 burp suite 修改的。
+
+```
+GET /playground/secure-agent HTTP/1.1
+Host: defendtheweb.net
+User-Agent: secure_user_agent
+```
+
+# Crypt 1 / Crypt
+
+文字反过来了。
+
+```
+Hello, welcome to the crypt levels on hackthis. These levels are all about decryption and logic, you will need to employ a lot of brain power. To complete this level enter this pass: woocrypt
+```
+
+# Beach
+
+图片下载下来折腾了好久，一直以为是什么高深的隐写方法。
+
+最后发现答案在属性中。
+
+```
+用户名：james
+密码：chocolate
+```
+
+# Intro 3 / Javascript
+
+检查网页源码。注意到里面有这样两句：
+
+```html
+<script>var correct = 'f39a24a537';</script>
+```
+
+```html
+if(document.getElementById('password').value == correct)
+```
+
+# Squashed image / Stego
+
+查看图片二进制文件，在最后看到了
+
+```
+secret.txtuser: adminpass: safe
+```
+
+# Library Gateway / Realistic
+
+注意到有
+
+```javascript
+URL= "members/" + username + " " + password + ".htm";
+```
+
+所以我们直接访问 https://defendtheweb.net/extras/playground/real/2/members/
+
+这里面能看到一个 librarian sweetlittlebooks.htm。这便是用户名和密码。
+
+# HTTP method / Intro
+
+没搞出来
+
+# Crypt 2 / Crypt
+
+一眼凯撒密码，偏移为 4
+
+```
+Welcome back, this level is not as easy as the last but still not too challenging. So go ahead and enter this pass: shiftthatletter
+```
+
+# Sid / Intro
+
+控制台输入
+
+```javascript
+console.log(document.cookie);
+```
+
+得到了
+
+```
+i3_access=false;
+```
+
+我们修改它
+
+```javascript
+document.cookie="i3_access=true";
+```
+
+# Intro 10 / Javascript
+
+和上面有一题几乎一模一样。
+
+```html
+<script type='text/javascript'>document['thecode'] = '\x30\x64\x34\x62\x36\x38\x37\x32\x35\x36'</script>
+```
+
+然后转换成 ascii 即可。
+
+# SQLi 1 / SQLi
+
+最简单的 sql 绕过，直接用户名输入 `' OR 1=1;#`
+
+# Crypt 3 / Crypt
+
+这个字符格式不标准，我们先处理一下。
+
+```morse
+.... .. --..-- / - .... .- -. -.- ... / - --- / ... .- -- ..- . .-.. / -- --- .-. ... . / - .... . / - .-. .- -. ... -- .. ... ... .. --- -. / --- ..-. / - . .-.. . --. .-. .- .--. .... .. -.-. / .. -. ..-. --- .-. -- .- - .. --- -. / .-- .- ... / ... - .- -. -.. .- .-. -.. .. --.. . -.. .-.-.- / .... . / ..- ... . -.. / -.. --- - ... / .- -. -.. / -.. .- ... .... . ... / - --- / -.-. .-. . .- - . / .- / ... - .- -. -.. .- .-. -.. / .-- .- -.-- / --- ..-. / -.-. --- -- -- ..- -. .. -.-. .- - .. --- -. --..-- / .... . / .... .- ... / .... . .-.. .--. . -.. / -.-- --- ..- / - --- -.. .- -.-- / - --- / --. . - / - .... . / .--. .- ... ... ---... / - .... .- -. -.- -.-- --- ..- ... .. .-.
+```
+
+翻译得到
+
+```
+HI, THANKS TO SAMUEL MORSE THE TRANSMISSION OF TELEGRAPHIC INFORMATION WAS STANDARDIZED. HE USED DOTS AND DASHES TO CREATE A STANDARD WAY OF COMMUNICATION, HE HAS HELPED YOU TODAY TO GET THE PASS: THANKYOUSIR
+```
+
+# Intro 11 / Javascript
+
+观察页面 url，发现我们在 input。因此访问 output 看看。
+
+果然找到了密码。
+
+# Recon
+
+获取 ip 可以直接 ping，或者更正规的方法是 nslookup。
+
+运营商使用 whois 查询。
+
+B6-key 在请求头中。
+
