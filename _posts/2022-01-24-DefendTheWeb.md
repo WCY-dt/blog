@@ -250,7 +250,15 @@ URL= "members/" + username + " " + password + ".htm";
 
 # HTTP method / Intro
 
-没搞出来
+加一个输入框和提交按钮
+
+```html
+<form method="POST">
+    <input type="password" name="password" id="password" value="509f5eccb5">
+    <input type="hidden" name="token" id="token" value="42a34d1d825e6533b7d2be0b474734ce4947114dcf81e4291bbf48d716c695fc" maxlength="" placeholder="" class="u-full-width">
+    <input type="submit" value="Submit">
+</form>
+```
 
 # Crypt 2 / Crypt
 
@@ -316,11 +324,15 @@ HI, THANKS TO SAMUEL MORSE THE TRANSMISSION OF TELEGRAPHIC INFORMATION WAS STAND
 
 # Recon
 
-获取 ip 可以直接 ping，或者更正规的方法是 nslookup。
-
-运营商使用 whois 查询。
+ip 和运营商可以用 whois 查询，这里提供一个比较好的：https://digital.com/best-web-hosting/who-is/#search=defendtheweb.net
 
 B6-key 在请求头中。
+
+IP：`3.10.42.19`
+
+server：`Amazon.com`
+
+B6-Key：`goobles`
 
 # Crypt 4 / Crypt
 
