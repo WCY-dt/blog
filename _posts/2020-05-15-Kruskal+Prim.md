@@ -9,7 +9,7 @@ mathjax: true
 copyrights: 原创
 ---
 
-本文为数据结构系列第五篇，主要介绍<mark>kruskal</mark>和<mark>prim</mark>。
+本文为数据结构系列第五篇，主要介绍 kruskal 和 prim 。
 
 # Kruskal
 

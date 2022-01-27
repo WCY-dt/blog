@@ -9,7 +9,7 @@ mathjax: true
 copyrights: 转载
 ---
 
-<mark>Matplotlib</mark> 能够创建多数类型的图表，如条形图，散点图，条形图，饼图，堆叠图，3D 图和地图图表。
+ Matplotlib 能够创建多数类型的图表，如条形图，散点图，条形图，饼图，堆叠图，3D 图和地图图表。
 
 首先，为了实际使用 Matplotlib，我们需要安装它。
 

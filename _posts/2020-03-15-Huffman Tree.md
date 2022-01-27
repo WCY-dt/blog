@@ -9,7 +9,7 @@ mathjax: true
 copyrights: 原创
 ---
 
-本文为数据结构系列第三篇，主要介绍<mark>Huffman</mark>。
+本文为数据结构系列第三篇，主要介绍 Huffman 。
 
 # 哈夫曼树
 

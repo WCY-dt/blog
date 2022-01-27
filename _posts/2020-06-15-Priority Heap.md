@@ -9,7 +9,7 @@ mathjax: true
 copyrights: 原创
 ---
 
-本文为数据结构系列第六篇，主要介绍<mark>Priority Heap</mark>。
+本文为数据结构系列第六篇，主要介绍 Priority Heap 。
 
 # 大根堆和小根堆
 

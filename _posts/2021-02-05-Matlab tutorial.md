@@ -9,7 +9,7 @@ mathjax: true
 copyrights: 转载
 ---
 
-本文介绍<mark>Matlab</mark>的基础使用。
+本文介绍 Matlab 的基础使用。
 
 # 桌面基础知识
 

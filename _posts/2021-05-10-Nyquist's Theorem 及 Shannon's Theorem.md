@@ -9,7 +9,7 @@ mathjax: true
 copyrights: 转载
 ---
 
-<mark>奈奎斯特定理</mark>（Nyquist's Theorem）和<mark>香农定理</mark>（Shannon's Theorem）是网络传输中的两个基本定理。要搞清楚这两个定理，我们要先弄懂一些术语定义：<mark>波特率</mark>（baud rate）、<mark>比特率</mark>（bit rate）、<mark>带宽</mark>（bandwidth）、<mark>容量</mark>（capacity）、<mark>信噪比</mark>等。
+奈奎斯特定理（Nyquist's Theorem）和香农定理（Shannon's Theorem）是网络传输中的两个基本定理。要搞清楚这两个定理，我们要先弄懂一些术语定义：波特率（baud rate）、比特率（bit rate）、带宽（bandwidth）、容量（capacity）、信噪比等。
 
 # 波特率
 
