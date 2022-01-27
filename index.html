@@ -5,6 +5,19 @@ css: ["index.css"]
 <html lang="en">
 
 <head>
+  <script>
+    var title;  // 用于临时存放原来的title内容
+    window.onblur = function () {
+      title = document.title;
+      document.title = "呜呜呜快回来QAQ";
+    };
+    window.onfocus = function () {
+      if (title) {
+        document.title = title;
+      }
+    }
+  </script>
+
   <!-- 数学公式 -->
   <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
     type="text/javascript"></script>
@@ -26,7 +39,9 @@ css: ["index.css"]
   
   <link rel="icon" href="{{site.baseurl}}/assets/res/头像.svg" type="image/x-icon">
   <link rel="shortcut icon" href="{{site.baseurl}}/assets/res/头像.svg" type="image/x-icon">
-  
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{site.baseurl}}/feed.xml">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="{{site.baseurl}}/sitemap.xml">
+
   <script async="" src="{{site.baseurl}}/assets/js/analytics.js"></script>
   <script async="" src="{{site.baseurl}}/assets/js/materialize.min.js"></script>
   <script src="{{site.baseurl}}/assets/js/index1.js"></script>
@@ -34,6 +49,7 @@ css: ["index.css"]
   
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
   <link rel="stylesheet" href="{{site.baseurl}}/assets/css/index.css">
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/css/syntax.css">
   
   <!-- google icon -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
