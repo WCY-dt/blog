@@ -18,17 +18,23 @@ css: ["index.css"]
     </script>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
   <title>晨阳的博客</title>
+  
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
   <meta name="description" content="Chenyang's Blog">
+  
   <link rel="icon" href="{{site.baseurl}}/assets/res/头像.svg" type="image/x-icon">
   <link rel="shortcut icon" href="{{site.baseurl}}/assets/res/头像.svg" type="image/x-icon">
+  
   <script async="" src="{{site.baseurl}}/assets/js/analytics.js"></script>
   <script async="" src="{{site.baseurl}}/assets/js/materialize.min.js"></script>
   <script src="{{site.baseurl}}/assets/js/index1.js"></script>
   <script src="{{site.baseurl}}/assets/js/index2.js" type="module"></script>
+  
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
   <link rel="stylesheet" href="{{site.baseurl}}/assets/css/index.css">
+  
   <!-- google icon -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -148,7 +154,7 @@ css: ["index.css"]
       {% assign iter=0 %}
       {% for post in paginator.posts %}
       {% if iter == 0 %}
-      <div class="BackgroundDark ZIndex30 BorderSolid BorderRadius5 BorderWidth3 DisplayFlex GreenStyle FlexDirectionColumn FlexItem Padding32 PaddingBottom0">
+      <div class="Width380 BackgroundDark ZIndex30 BorderSolid BorderRadius5 BorderWidth3 DisplayFlex GreenStyle FlexDirectionColumn FlexItem Padding32 PaddingBottom0">
         <p class="Fontsize2 MarginBottom16 NoSelect">{{post.title}}</p>
         <div class="AlignItemsCenter DisplayFlex FloatLeft Margin-8 MarginY0 JustifyContentFlexStart MarginBottom16">
           <div class="FlexItem">
@@ -168,7 +174,7 @@ css: ["index.css"]
       {% assign iter=1 %}
       
       {% elsif iter == 1 %}
-      <div class="BackgroundDark ZIndex30 BorderSolid BorderRadius5 BorderWidth3 DisplayFlex OrangeStyle FlexDirectionColumn FlexItem Padding32 PaddingBottom0">
+      <div class="Width380 BackgroundDark ZIndex30 BorderSolid BorderRadius5 BorderWidth3 DisplayFlex OrangeStyle FlexDirectionColumn FlexItem Padding32 PaddingBottom0">
         <p class="Fontsize2 MarginBottom16 NoSelect">{{post.title}}</p>
         <div class="AlignItemsCenter DisplayFlex FloatLeft Margin-8 MarginY0 JustifyContentFlexStart MarginBottom16">
           <div class="FlexItem">
@@ -188,7 +194,7 @@ css: ["index.css"]
       {% assign iter=2 %}
 
       {% else %}
-      <div class="BackgroundDark ZIndex30 BorderSolid BorderRadius5 BorderWidth3 DisplayFlex BlueStyle FlexDirectionColumn FlexItem Padding32 PaddingBottom0">
+      <div class="Width380 BackgroundDark ZIndex30 BorderSolid BorderRadius5 BorderWidth3 DisplayFlex BlueStyle FlexDirectionColumn FlexItem Padding32 PaddingBottom0">
         <p class="Fontsize2 MarginBottom16 NoSelect">{{post.title}}</p>
         <div class="AlignItemsCenter DisplayFlex FloatLeft Margin-8 MarginY0 JustifyContentFlexStart MarginBottom16">
           <div class="FlexItem">
@@ -271,7 +277,7 @@ css: ["index.css"]
     <div class="BreadcrumsFirstItem NoSelect">
       <img aria-hidden="true" class="SvgIcon MarginTop2" width="18" height="18"
         src="{{site.baseurl}}/assets/res/头像.svg" />
-      {{"now" | date: "%Y"}} {{site.title}}. All rights reserved. Powered by jekyll.
+      &nbsp;{{"now" | date: "%Y"}} {{site.title}}. All rights reserved. Powered by jekyll.
     </div>
   </nav>
 </foot>
