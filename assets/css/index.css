@@ -17724,3 +17724,7 @@ body {
 .s-table tr:nth-child(odd) td {
     background-color: var(--primary-theme-color)
 }
+
+.clustrmaps-map-control {
+    display: none !important
+}
