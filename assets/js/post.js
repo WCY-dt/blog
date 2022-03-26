@@ -17,7 +17,7 @@ for (let h of hone) {
   let cont = h.innerHTML;
   h.innerHTML = "<a href='#" + cont + "'>" + cont + "</a>";
   let ahref = h.querySelector("a");
-  ahref.style.cssText = "text-decoration:none;color:black;";
+  ahref.style.cssText = "text-decoration:none;";
 }
 
 $(function () {
@@ -87,7 +87,8 @@ $(function () {
       "language-bash": "Bash",
       "language-plaintext": "Plain Text",
       "language-py": "Python",
-      "language-python": "Python"
+      "language-python": "Python",
+      "language-unknown": ""
     };
 
     var displayLangText = "";
