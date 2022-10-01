@@ -1,46 +1,119 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# 1. Site Settings
+title               : Chenyang's blog
+owner               : "Chenyang"
+url                : "https://wcy-dt.github.io"
+baseurl            : "/"
+permalink           : /:title/
+description         : "订阅RSS喵！订阅RSS谢谢喵！"
+markdown            : kramdown
+statement           : "Designed by Chenyang, All Rights Reserved"
+bgtext              : "ABCFGHKLMNPQRSVWXYZabcdefghijklmnopqrstuvwxyz@#$%&*+-;/[]<>~" # texts randomly displayed in background
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: 晨阳同学的博客
-description: > # this means to ignore newlines until "baseurl:"
-  My home online.
-baseurl: ""
-url: "https://wcy-dt.github.io"
-permalink: /:title
-repository: wcy-dt/wcy-dt.github.io
-paginate: 14
-# MatJek specific configurations
-github_profile: "https://github.com/wcy-dt"
-user: "晨阳同学"
-user_email: "Error, keyboard not found - press F1 to continue."
-# contact_url: "https://goo.gl/tVljbV"
-# google_tracking_id: "UA-96359860-1"
-# google_site_verification: "UA-96359860-1"
-# disqus_shortname: "wcy-dt-github-io"
+# 2. Your Collections
+# You can specify the order shown in Archive window. 
+# Keep it null if you want to show items in alphabetic order.
+collection_order    : 
+  [
+    "security",
+    "math",
+    "notes",
+    "signal",
+    "language",
+    "miscellaneous",
+    "temp",
+  ]
+collections:
+  security:
+    output          : true
+    permalink       : /:collection/:title/
+    sort_by         : date
+    alias           : "Security"
+  math:   
+    output          : true
+    permalink       : /:collection/:title/
+    sort_by         : date
+    alias           : "Mathematics"
+  notes:
+    output          : true
+    permalink       : /:collection/:title/
+    sort_by         : date
+    alias           : "Notes"
+  signal:
+    output          : true
+    permalink       : /:collection/:title/
+    sort_by         : date
+    alias           : "Signal"
+  language:
+    output          : true
+    permalink       : /:collection/:title/
+    sort_by         : date
+    alias           : "Language"
+  miscellaneous:
+    output          : true
+    permalink       : /:collection/:title/
+    sort_by         : date
+    alias           : "Miscellaneous"
 
-# Build settings
-markdown: kramdown
-gems:
-  - jekyll-feed
-  - jekyll-paginate
-  - jekyll-seo-tag
-  - jekyll-sitemap
-exclude:
-  - Gemfile
-  - Gemfile.lock
+# 3. Comment settings（disqus.com）
+# disqus_username     : akiritsu
+
+# 4. Default page settings (WILL BE overwriten by front-matters of a page)
+defaults:
+  -    
+    scope:
+      path          : ""  # an empty string here means all files in the project
+    values:
+      layout              : "post"      # which layout to use by default
+      publish             : true        # whether to show by default      
+      btn_text            : true        # whether show button text by default
+      collection_list     : true        # whether show archive button by default
+      home_btn            : true        # whether show home by default
+      maximize            : false        # whether show maximize button by default
+      encrypted_text      : false       # whether use encrytion function by default
+      toc                 : true        # whether show table of content by default
+      toc_level           : 3           # the toc depth by default
+      author              : "Chenyang" # author name by default
+      show_date           : false        # whether show date message by default
+      category            :             # category by default
+      post_list           : true       # whether show list of post by default      
+      comment             : false
+      footer              : true        # whether show footer by default
+
+# 5. Social Media Accounts
+email               : "mailto:dtchenyang@gmail.com" 
+linkedin            : 
+github              : "wcy-dt" 
+gitlab              : 
+website             : "https://wcy-dt.github.com"
+twitter             : "Chenyan32433045"
+facebook            : 
+instagram           : 
+youtube             : 
+steam               : 
+weibo               :
+rss                 : "feed.xml"
+      
+# 6. Where things are
+source              : .
+destination         : ./_site
+collections_dir     : collections
+plugins_dir         : src/_plugins # takes an array of strings and loads plugins in that order
+layouts_dir         : src/_layouts
+data_dir            : src/_data
+includes_dir        : src/_includes
 sass:
-  style: compressed
-future: true
-plugins: [jekyll-paginate]
+  sass_dir          : src/_sass
+
+# 7. Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  
+gems: [jekyll-mermaid]
+
+# 8. Others
+# Cross-Origin Resource Sharing header
+webrick:
+  headers:
+    Access-Control-Allow-Origin: "*"
