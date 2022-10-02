@@ -42,7 +42,7 @@ passward: bandit0
 
 其中`du`命令是用来查看令也是查看使用空间的，但是与`df`命令不同的是Linux `du`命令是查看当前指定文件或目录(会递归显示子目录)占用磁盘空间大小，还是和`df`命令有一些区别的
 
-```cmd
+```shell
 bandit0@bandit:~$ ls
 readme
 bandit0@bandit:~$ cat readme
@@ -61,7 +61,7 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 
 ls发现文件名是`-`，但是这个在linux中有特殊意义导致直接`cat`不好用
 
-```cmd
+```shell
 bandit1@bandit:~$ ls
 -
 bandit1@bandit:~$ pwd
@@ -82,7 +82,7 @@ CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 
 文件名有空格的读取
 
-```cmd
+```shell
 bandit2@bandit:~$ cat spaces\ in\ this\ filename
 UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 ```
@@ -99,7 +99,7 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
 密钥写在一个隐藏文件里面，通过`ls -a`参数可以找到隐藏文件
 
-```cmd
+```shell
 bandit3@bandit:~$ ls
 inhere
 bandit3@bandit:~$ cd inhere/
@@ -123,7 +123,7 @@ pIwrPrtPN36QITSp3EQaw936yaFoFgAB
 
 文件说在人类能读懂的文件里面，可以看到当前目录有9个文件，通过file命令可以用于辨识文件类型。
 
-```cmd
+```shell
 bandit4@bandit:~$ ls
 inhere
 bandit4@bandit:~$ cd inhere/
@@ -161,7 +161,7 @@ bandit4@bandit:~/inhere$
 
 一看有这么多文件夹
 
-```cmd
+```shell
 bandit5@bandit:~$ ls
 inhere
 bandit5@bandit:~$ cd inhere/
@@ -174,7 +174,7 @@ maybehere01  maybehere05  maybehere09  maybehere13  maybehere17
 
 根据特征我们可以用`find` 命令，找到一个符合条件的文件
 
-```cmd
+```shell
 bandit5@bandit:~/inhere$ find . -type f -size 1033c
 ./maybehere07/.file2
 bandit5@bandit:~/inhere$ cat ./maybehere07/.file2
@@ -214,7 +214,7 @@ DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 
 又是找文件，那么依然可以使用`find`命令，只不过参数稍稍的改变
 
-```cmd
+```shell
 bandit6@bandit:~$ find / -size 33c -user bandit7 -group bandit6 2>/dev/null
 /var/lib/dpkg/info/bandit7.password
 bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
@@ -233,7 +233,7 @@ HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 
 根据提示`data.txt`中在密钥在`millionth`中，可以通过`grep`命令查看
 
-```cmd
+```shell
 bandit7@bandit:~$ ls
 data.txt
 bandit7@bandit:~$ cat data.txt |grep millionth
@@ -250,14 +250,14 @@ millionth       cvX2JJa4CFALtqS87jk27qwqGhBM9plV
 
 这题是要找到出现一次的那个行，肯定用`uniq`命令了，但是使用之前需要用`sort`命令对文本进行排序，因为`uniq`命令是通过判断上下两行是否一样来判断的，所以用`sort`排序一下然后在`uniq`就能找到唯一出现的那一行了
 
-```cmd
+```shell
 sort data.txt|uniq -u
 sort data.txt|uniq -c
 ```
 
 这题找到两种解法，一个是直接`-u`获取，还有就是`-c`列出出现的次数，然后从中找到是1的那一行即可
 
-```cmd
+```shell
 bandit8@bandit:~$ sort data.txt |uniq -u
 UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
 ```
@@ -272,7 +272,7 @@ UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
 
 直接使用`cat`命令是很多很杂乱的东西，可以通过`string`命令查看文件中的字符串，根据提示信息可得下一关密钥以若干个`=`开头，可以找到下一关的密钥`truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk`
 
-```cmd
+```shell
 bandit9@bandit:~$ ls
 data.txt
 bandit9@bandit:~$ strings data.txt
@@ -298,7 +298,7 @@ epg~
 
 题目提示密钥信息用了`base64`解码，我们解码即可
 
-```cmd
+```shell
 bandit10@bandit:~$ base64 -d data.txt
 The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 ```
@@ -319,7 +319,7 @@ The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 
 `Rot13`是一种特殊的凯撒密码转换，根据题目所说的字母的的顺序旋转了13个位置，就相当去26个字母的前13个位置与后13个位置调换了。那么我们就是用tr命令进行调换
 
-```cmd
+```shell
 bandit11@bandit:~$ cat data.txt
 Gur cnffjbeq vf 5Gr8L4qetPEsPk8htqjhRK8XSP6x2RHh
 bandit11@bandit:~$ cat data.txt |tr 'a-zA-Z' 'n-za-mN-ZA-M'
@@ -336,7 +336,7 @@ The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 
 这是一道比较麻烦的题目，需要我们解压很多层。
 
-```cmd
+```shell
 bandit12@bandit:~$ ls
 data.txt
 bandit12@bandit:~$ file data.txt
@@ -347,7 +347,7 @@ bandit12@bandit:~$ xxd -r data.txt > data.bin
 
 可以看到这本来是一个文本类型的文件，尝试用`xxd`转成`bin`提示权限不够，我们先复制一遍。
 
-```cmd
+```shell
 bandit12@bandit:~$ mkdir /tmp/c1911
 bandit12@bandit:~$ cp data.txt /tmp/c1911
 bandit12@bandit:~$
@@ -361,7 +361,7 @@ data.bin: gzip compressed data, was "data2.bin", last modified: Tue Oct 16 12:00
 
 复制完是`gzip`格式，改文件名，解压。
 
-```cmd
+```shell
 bandit12@bandit:/tmp/c1911$ mv data.bin data.gz
 bandit12@bandit:/tmp/c1911$ gzip -d data.gz
 bandit12@bandit:/tmp/c1911$ ls
@@ -372,7 +372,7 @@ data: bzip2 compressed data, block size = 900k
 
 还有一层`bzip2`, 继续解压
 
-```cmd
+```shell
 bandit12@bandit:/tmp/c1911$ mv data data.bz2
 bandit12@bandit:/tmp/c1911$ bunzip2 -d data.bz2
 bandit12@bandit:/tmp/c1911$ file data
@@ -381,7 +381,7 @@ data: gzip compressed data, was "data4.bin", last modified: Tue Oct 16 12:00:23 
 
 还有没有解压的文件，继续搞搞吧！！！一直一直查看文件类型，重命名，解压。直到第八层压缩
 
-```cmd
+```shell
 bandit12@bandit:/tmp/c1911$ mv data data.gz
 bandit12@bandit:/tmp/c1911$ gzip -d data.gz
 bandit12@bandit:/tmp/c1911$ file data
@@ -425,7 +425,7 @@ The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 
 这一关告诉我们下一关的密码存放在`/etc`目录下，且只有`bandit14`用户可读，我们当前目录下只有一个私钥文件，可以考虑用私钥文件去连接`bandit14`, 用`bandit14` 读取用户文件。
 
-```cmd
+```shell
 bandit13@bandit:~$ ls
 sshkey.private
 bandit13@bandit:~$ ssh -i sshkey.private bandit14@127.0.0.1
@@ -449,7 +449,7 @@ bandit14@bandit:~$ cat /etc/bandit_pass/bandit14
 
 这关说只要把本关的密钥提交即可得到反馈，看来我直接从`bandit13 ssh`连接到的`bandit14 `可以说并不是算过了这一关，还是要拿到这一关的密钥信息才能进行下一关，这也是这个游戏设计的一个巧妙之处吧。
 
-```cmd
+```shell
 bandit14@bandit:~$ telnet localhost 30000
 Trying 127.0.0.1...
 Connected to localhost.
@@ -473,7 +473,7 @@ bandit14@bandit:~$
 
 这题说是要通过`ssl`发送本关密码才可以的获得下一关的密钥信息。需要用到`openssl`。
 
-```cmd
+```shell
 bandit15@bandit:~$ openssl s_client -connect localhost  -port 30001
 CONNECTED(00000003)
 depth=0 CN = localhost
@@ -560,7 +560,7 @@ closed
 
 这一题说开放的端口在`31000`和`32000`中间的某一个开放了`ssl`服务的端口上，肯定要使用到端口扫描程序，这里我们就使用`nmap`, 扫描一个端口范围，找到我们应该使用的端口号
 
-```cmd
+```shell
 bandit16@bandit:~$ nmap -sV localhost -p 31000-32000
 
 Starting Nmap 7.40 ( https://nmap.org ) at 2019-01-04 05:27 CET
@@ -595,7 +595,7 @@ Nmap done: 1 IP address (1 host up) scanned in 88.39 seconds
 
 可以看到`31518`端口和`31790`端口开放了`ssl`服务，我们继续连接这个端口发送本关密钥。发现`31518`端口会将我们发送的内容直接返回，`31790`才是返回密码的正确端口。
 
-```cmd
+```shell
 bandit16@bandit:~$ openssl s_client -connect localhost -port 31790
 CONNECTED(00000003)
 depth=0 CN = localhost
@@ -699,14 +699,14 @@ closed
 
 返回的是一段`ssh`私钥，不难猜想这是下一关连接的私钥信息，先存起来再说，直接在当前目录写发现没有权限，这样我们就需要写道`/tmp`目录下了
 
-```cmd
+```shell
 bandit16@bandit:~$ mkdir /tmp/ssh_conn
 bandit16@bandit:~$ vim /tmp/ssh_conn/rsa.priv
 ```
 
 用这个私钥去连接第17关。
 
-```cmd
+```shell
 bandit16@bandit:~$ ssh -i /tmp/ssh_conn/rsa.priv bandit17@localhost
 Could not create directory '/home/bandit16/.ssh'.
 The authenticity of host 'localhost (127.0.0.1)' can't be established.
@@ -727,7 +727,7 @@ bandit17@localhost's password:
 
 提示权限太开放了，把权限改`600`再试。
 
-```cmd
+```shell
 bandit16@bandit:/tmp/ssh_conn$ ssh -i rsa.priv bandit17@localhost
 Could not create directory '/home/bandit16/.ssh'.
 The authenticity of host 'localhost (127.0.0.1)' can't be established.
@@ -749,7 +749,7 @@ xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn
 
 `diff` 比较两个文件的不同, 然后`passwd.new`不同行行号密码对应的密码为`bandit18`
 
-```cmd
+```shell
 bandit17@bandit:~$ ls
 passwords.new  passwords.old
 bandit17@bandit:~$ diff passwords.old passwords.new
@@ -771,7 +771,7 @@ bandit17@bandit:~$ diff passwords.old passwords.new
 
 用上面的密码，一上来就告诉我byebye,然后自动logout了，搞得我一脸懵逼，题目说是`.bashrc`文件自动登出的。那我们不分配伪终端就可以了，意思是说禁止分配伪终端。当用ssh或telnet等登录系统时，系统分配给我们的终端就是伪终端。如果`ssh`使用此选项登录系统时，由于禁用，将无法获得终端；但仍能够获得`shell`，只不过看起来像在本地，也没有很多应有的环境变量，例如命令提示符，`PS1`等。当使用命令`ps -ef|grep [b]ash`时看到`root 22082 22080 0 11:51 ? 00:00:00 -bash`显示终端那里是一个问号。
 
-```cmd
+```shell
 bandit17@bandit:~$ ssh bandit18@localhost -T
   Enjoy your stay!
   
@@ -789,7 +789,7 @@ IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
 
 先看看家目录下的文件的权限
 
-```cmd
+```shell
 bandit19@bandit:~$ ls -l
 total 8
 -rwsr-x--- 1 bandit20 bandit19 7296 Oct 16 14:00 bandit20-do
@@ -799,7 +799,7 @@ total 8
 
 通过文件名是想我们用`bandit20`这个用户执行这个命令读取密码，通过id 命令查看到`bandit20`用户的uid为`11020`，运行这个文件`–help` 命令查看用法可得用法，最后读取密码
 
-```cmd
+```shell
 bandit19@bandit:~$ ./bandit20-do --help
 Usage: env [OPTION]... [-] [NAME=VALUE]... [COMMAND [ARG]...]
 Set each NAME to VALUE in the environment and run COMMAND.
@@ -838,7 +838,7 @@ GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 
 这题说是开放一个监听的端口，然后`suconnect` 文件访问这个端口如果得到和这关相同的密码就会返回下一关的密码，我们就用`nc`将本关的密码反馈给连接端口命令如下
 
-```cmd
+```shell
 \bandit20@bandit:~$ nc -lv <  /etc/bandit_pass/bandit20 &
 [6] 11816
 bandit20@bandit:~$ listening on [any] 34957 ...
@@ -863,7 +863,7 @@ gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
 
 先按照提示看看当前目录下有什么，可以看到这是一个执行了一个脚本，然后打开这个脚本看看这是一个定时将22关密码写到`/tmp`目录下的一个脚本，我们读取这个临时文件就知道了下一关的密码。
 
-```cmd
+```shell
 bandit21@bandit:~$ cd /etc/cron.d
 bandit21@bandit:/etc/cron.d$ ls
 cronjob_bandit22  cronjob_bandit23  cronjob_bandit24
@@ -891,7 +891,7 @@ Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
 
 先来看看这关所说的定时脚本是什么，如下
 
-```cmd
+```shell
 bandit22@bandit:~$ cd /etc/cron.d
 bandit22@bandit:/etc/cron.d$ ls
 cronjob_bandit22  cronjob_bandit23  cronjob_bandit24
@@ -911,7 +911,7 @@ cat /etc/bandit_pass/$myname > /tmp/$mytarget
 
 实现的功能是取当前用户名，然后计算 I am user $当前用户名 的`md5`值，将`bandit22`密码的复制到`tmp`目录下的对应的`md5`值的文件中,读取
 
-```cmd
+```shell
 bandit22@bandit:/etc/cron.d$ /bin/bash /usr/bin/cronjob_bandit23.sh
 Copying passwordfile /etc/bandit_pass/bandit22 to /tmp/8169b67bd894ddbb4412f91573b38db3
 bandit22@bandit:/etc/cron.d$ cat /tmp/8169b67bd894ddbb4412f91573b38db3
@@ -920,7 +920,7 @@ Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
 
 读取这个文件，这是本关密码啊，依次类推，I am user bandit23的`hash`值就是下一关密码。
 
-```cmd
+```shell
 bandit22@bandit:~$ echo I am user bandit23| md5sum
 8ca319486bfbbc3663ea0fbe81326349  -
 
@@ -940,7 +940,7 @@ jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
 
 老办法，还是先看看这个定时脚本写了什么
 
-```cmd
+```shell
 bandit23@bandit:~$ cat /etc/cron.d/cronjob_bandit24
 @reboot bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
 * * * * * bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
@@ -972,7 +972,7 @@ done
 
 写入
 
-```cmd
+```shell
 cat /etc/bandit_pass/bandit24 > /tmp/bandit24pass
 ：wq保存退出
 
@@ -985,7 +985,7 @@ bandit23@bandit:/var/spool/bandit24$
 这时候在`/var/spool/bandit24`目录下不一定能看见你写的脚本，就像前面的定时任务脚本里面写的，执行完脚本这个就任务就删除了，所以没看到也不要奇怪。
 这个时候说明我们的脚本已经执行了，可以去`/tmp`目录查看我们的密码了
 
-```cmd
+```shell
 bandit23@bandit:/var/spool/bandit24$ cat /tmp/bandit24pass
 UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
 ```
@@ -1048,7 +1048,7 @@ The password of user bandit25 is uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
 
 登录上去可以看到家目录上面有一个`bandit26.sshkey`, 可以像之前一样用这个私钥文件去连接远程的主机, `ssh -i bandit26.sshkey bandit26@localhost`, 发现连接直接被远程关闭了，加上`-T` 参数也没有用，题目也提示说这个用的是其他`shell`, 查看其某用户用的什么`shell `可以查看`/etc/passwd`。
 
-```cmd
+```shell
 bandit25@bandit:~$ cat /etc/passwd|grep bandit26
 bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtext
 ```
@@ -1065,7 +1065,7 @@ passwd文件的格式为:
 
 那bandit26用户用到的shell就是`/usr/bin/showtext`
 
-```cmd
+```shell
 bandit25@bandit:~$ cat /usr/bin/showtext
 #!/bin/sh
 
@@ -1079,7 +1079,7 @@ exit 0
 
 在`more `命令执行之前可以执行命令即可，把会话的终端缩小，然后用文件连接bandit26，这样可以出发自动`more`, 在`more`命令还没有结束的时候按<kbd>v</kbd>进入`vim`编辑模式。再就是用`vim`特有的`:e file`，`vim`模式下的`e`命令可以导入文件到编辑器内，我们知道密码的所在，因此就可以用`e`命令来导入密码文件
 
-```cmd
+```shell
 ：e  /etc/bandit_pass/bandit26
 ```
 
@@ -1101,21 +1101,21 @@ exit 0
 
 vim模式下
 
-```cmd
+```shell
 :set shell=/bin/sh
 :sh
 ```
 
 然后设置完成上去就可以登录了。`ls`一下
 
-```cmd
+```shell
 bandit26@bandit:~$ ls
 bandit27-do  text.txt
 ```
 
 有个`bandit27-do`文件，执行这个文件读取bandit27就可以了。
 
-```cmd
+```shell
 bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27
 3ba3118a22e93127a4ed485be72ef5ea
 ```
@@ -1131,7 +1131,7 @@ bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27
 
 这题是主要是克隆项目的命令，直接在当前目录是新建不了新文件的，所以我们在临时目录下创建目录即可，具体步骤如下，发现这个项目的里面的`README`就是存储的的密钥
 
-```cmd
+```shell
 bandit27@bandit:~$ git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
 fatal: could not create work tree dir 'repo': Permission denied
 bandit27@bandit:~$ mkdir /tmp/conn
@@ -1170,7 +1170,7 @@ The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
 
 克隆项目的过程和之前一样
 
-```cmd
+```shell
 bandit28@bandit:/tmp/conn28/repo$ cat README.md
 # Bandit Notes
 Some notes for level29 of bandit.
@@ -1183,7 +1183,7 @@ Some notes for level29 of bandit.
 
 题目告诉我们这次的密码是写在某个文件里面了,`git log`查看提交历史，然后对应版本提交id, 查找区别，得出密码。
 
-```cmd
+```shell
 bandit28@bandit:/tmp/conn28/repo$ git log
 commit 073c27c130e6ee407e12faad1dd3848a110c4f95
 Author: Morla Porla <morla@overthewire.org>
@@ -1226,7 +1226,7 @@ index 3f7cee8..5c6457b 100644
 
 `git show`命令，`git log`命令还有`git diff`命令查看`git` 提交历史，利用`git branch -a` 命令可以查询分支，发现总共有四个分支。
 
-```cmd
+```shell
 bandit29@bandit:/tmp/conn29/repo$ git branch -a
 * master
   remotes/origin/HEAD -> origin/master
@@ -1237,7 +1237,7 @@ bandit29@bandit:/tmp/conn29/repo$ git branch -a
 
 `git checkout` 可以切换分支，当切换到`dev`查看`gitlog` 可以发现，最新的版本里面有个`data needed for development`
 
-```cmd
+```shell
 bandit29@bandit:/tmp/conn29/repo$ git checkout dev
 Switched to branch 'dev'
 Your branch is up-to-date with 'origin/dev'.
@@ -1269,7 +1269,7 @@ Date:   Tue Oct 16 14:00:41 2018 +0200
 
 然后在这个版本里面的`README`发现密码
 
-```cmd
+```shell
 bandit29@bandit:/tmp/conn29/repo$ cat README.md
 # Bandit Notes
 Some notes for bandit30 of bandit.
@@ -1291,7 +1291,7 @@ Some notes for bandit30 of bandit.
 
 `git show-ref`可以现实本地存储库的所有可用的引用以及关联的提交ID
 
-```cmd
+```shell
 bandit30@bandit:/tmp/conn30/repo$ git show-ref
 3aa4c239f729b07deb99a52f125893e162daac9e refs/heads/master
 3aa4c239f729b07deb99a52f125893e162daac9e refs/remotes/origin/HEAD
@@ -1312,7 +1312,7 @@ bandit30@bandit:/tmp/conn30/repo$ git show f171
 
 这题是让我们提交到远程仓库
 
-```cmd
+```shell
 bandit31@bandit:/tmp/conn31/repo$ cat README.md
 This time your task is to push a file to the remote repository.
 
@@ -1322,7 +1322,7 @@ Details:
     Branch: master
 ```
 
-```cmd
+```shell
 bandit31@bandit:/tmp/conn31/repo$ vim key.txt
 bandit31@bandit:/tmp/conn31/repo$ ls
 key.txt  README.md
@@ -1344,7 +1344,7 @@ Changes to be committed:
         new file:   key.txt
 ```
 
-```cmd
+```shell
 bandit31@bandit:/tmp/conn31/repo$ git status
 On branch master
 Your branch is up-to-date with 'origin/master'.
@@ -1407,7 +1407,7 @@ bandit31@bandit:/tmp/conn31/repo$
 
 `$0`可以进入正常终端
 
-```cmd
+```shell
 WELCOME TO THE UPPERCASE SHELL
 >> $0
 $ ls

@@ -4,7 +4,7 @@ owner               : "Chenyang"
 url                 : "https://wcy-dt.github.io"
 baseurl             : "/"
 permalink           : /:title/
-description         : "订阅RSS喵！订阅RSS谢谢喵！"
+description         : "Security. Programming. Mathematicas. Signal processing."
 markdown            : kramdown
 kramdown:
   input: GFM
