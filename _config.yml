@@ -1,7 +1,7 @@
 # 1. Site Settings
 title               : Chenyang's blog
 owner               : "Chenyang"
-url                 : "http://127.0.0.1:4000"
+url                 : "https://wcy-dt.github.io"
 baseurl             : "/"
 permalink           : /:title/
 description         : "订阅RSS喵！订阅RSS谢谢喵！"
