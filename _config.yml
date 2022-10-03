@@ -9,7 +9,7 @@ markdown            : kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-statement           : "Designed by Chenyang, All Rights Reserved"
+statement           : "Designed by Chenyang, All Rights Reserved."
 bgtext              : "ABCFGHKLMNPQRSVWXYZabcdefghijklmnopqrstuvwxyz@#$%&*+-;/[]<>~" # texts randomly displayed in background
 
 # 2. Your Collections
@@ -74,7 +74,7 @@ defaults:
       maximize            : false        # whether show maximize button by default
       encrypted_text      : false       # whether use encrytion function by default
       toc                 : true        # whether show table of content by default
-      toc_level           : 3           # the toc depth by default
+      toc_level           : 1           # the toc depth by default
       author              : "Chenyang" # author name by default
       show_date           : false        # whether show date message by default
       category            :             # category by default

@@ -2,12 +2,37 @@
 // list of tokens: https://github.com/rouge-ruby/rouge/wiki/List-of-tokens
 
 .highlight {
+  position: relative;
   overflow: hidden;
   word-wrap: break-word;
   color: $code-primary;
   font-family: $font-monospace;
   font-size: $font-smaller;
   padding: 5px 5px 7px 5px;
+
+  .copy_btn {
+    position: absolute;
+    top: 14px;
+    right: 6.5px;
+    z-index: 1;
+    //background: $code-primary;
+    font-size: $font-smaller;
+    background: $code-primary;
+    color: $code-background;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    p {
+      display: inline-block;
+      padding-left: 4px;
+    }
+
+    &:hover {
+      background: $color-secondary;
+    }
+  }
+
   .w /* specially highlighted whitespace */ {
     color: rgba($code-background, 0.6);
   }
@@ -208,7 +233,7 @@
   background-color: $code-background;  
   overflow-x: auto;
   @include thin_scrollbar; 
-    width: 99%;
+  //  width: 99%;
   }
 .highlight .hll {
     background-color: $code-background;

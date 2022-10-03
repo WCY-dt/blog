@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>{{ page.title }}</title>
+<html lang="en">
   {% include head.html %}
   <body class="page">
     {% include background.html %}
@@ -20,4 +23,6 @@
   </body>
   <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml" title="{{ site.title }}">
   <script async src="{{site.url}}{{site.baseurl}}/src/assets/js/init-mermaid.js"></script>
+  <script async src="{{site.url}}{{site.baseurl}}/src/assets/js/init-code.js"></script>
+  <script async src="{{site.url}}{{site.baseurl}}/src/assets/js/zoom-image.js"></script>
 </html>

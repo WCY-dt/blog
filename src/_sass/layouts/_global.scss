@@ -1,3 +1,8 @@
+*::selection {
+  background: $color-primary;
+  color: $color-bg;
+}
+
 .page {
   height: 100%;
   width: 100%;
@@ -80,5 +85,26 @@
   }
   .page .container .div_article #main_atcl {
     padding: 0px 5px 5px 5px ;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: #3B781E99;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  
+  .img {
+    position: fixed;
+    vertical-align: middle;
+    width: 100%;
+    max-width: none;
+    overflow: auto;
   }
 }
