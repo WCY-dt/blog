@@ -11,6 +11,7 @@ kramdown:
   syntax_highlighter: rouge
 statement           : "Designed by Chenyang, All Rights Reserved."
 bgtext              : "ABCFGHKLMNPQRSVWXYZabcdefghijklmnopqrstuvwxyz@#$%&*+-;/[]<>~" # texts randomly displayed in background
+google_analytics    : G-R3YPEPV2W9
 
 # 2. Your Collections
 # You can specify the order shown in Archive window. 

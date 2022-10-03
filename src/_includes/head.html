@@ -36,6 +36,10 @@
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.11.5/mermaid.min.js"></script>
 
     <script src="{{site.url}}{{site.baseurl}}/src/assets/js/jquery-3.6.1.min.js"></script>
+
+    {% if jekyll.environment == 'production' and site.google_analytics %}
+        {% include google_analytics.html %}
+    {% endif %}
     
     {% seo %}
 </head>
