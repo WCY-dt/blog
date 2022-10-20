@@ -57,6 +57,7 @@ function toggle_maximize() {
     }
 }
 
+/*
 // Decrypt secret message -> header.html -> #asc_btn
 function apply_token() {
     // perform decryption
@@ -91,5 +92,4 @@ function apply_token() {
         document.getElementById("acs_btn").style.display = "none";
     }
 }
-
-
+*/

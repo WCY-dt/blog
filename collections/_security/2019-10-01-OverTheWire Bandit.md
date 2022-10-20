@@ -27,10 +27,11 @@ OverTheWire:Bandit是一个学习linux命令的WarGame，通过闯关的模式�
 
 这一关主要是让你选择一个合适ssh工具开始远程，这一关的用户名和密码均为`bandit0`
 
+```shell
+$ ssh -p 2220 bandit0@bandit.labs.overthewire.org
 ```
-login as: bandit0
-passward: bandit0
-```
+
+然后输入密码即可。
 
 # Level 0–>Level 1
 
@@ -46,10 +47,10 @@ passward: bandit0
 bandit0@bandit:~$ ls
 readme
 bandit0@bandit:~$ cat readme
-boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
 ```
 
-得到下一关用户名`bandit1`，密码为`boJ9jbbUNNfktd78OOpsqOltutMc3MY1`，之后用户名依次类推，不做赘述
+得到下一关用户名`bandit1`，密码为`NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL`，之后用户名依次类推，不做赘述
 
 # Level 1 - Level 2
 
@@ -59,18 +60,16 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 > **Commands you may need to solve this level**
 > `ls, cd, cat, file, du, find`
 
-ls发现文件名是`-`，但是这个在linux中有特殊意义导致直接`cat`不好用
+ls发现文件名是`-`，但是这个在linux中表示参数，无法直接 `cat -`，故直接输入绝对路径读取
 
 ```shell
 bandit1@bandit:~$ ls
 -
-bandit1@bandit:~$ pwd
-/home/bandit1
-bandit1@bandit:~$ cat /home/bandit1/-
-CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+bandit1@bandit:~$ cat ~/-
+rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
 ```
 
-直接输入绝对路径读取
+或者也可以重定向标准输入 `cat < -`
 
 # Level 2 - Level 3
 
@@ -83,11 +82,11 @@ CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 文件名有空格的读取
 
 ```shell
-bandit2@bandit:~$ cat spaces\ in\ this\ filename
-UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+bandit2@bandit:~$ cat "spaces in this filename"
+aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
 ```
 
-用`cat`命令，然后按<kbd>Tab</kbd>键补齐，自动将空格转义，实现了密钥读取，或者给文件名加上双引号也可以读取。
+或者在空格前使用反斜杠也可以。
 
 # Level 3 → Level 4
 
@@ -102,15 +101,12 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 ```shell
 bandit3@bandit:~$ ls
 inhere
-bandit3@bandit:~$ cd inhere/
+bandit3@bandit:~$ cd inhere
 bandit3@bandit:~/inhere$ ls
-bandit3@bandit:~/inhere$ ls -la
-total 12
-drwxr-xr-x 2 root    root    4096 Oct 16 14:00 .
-drwxr-xr-x 3 root    root    4096 Oct 16 14:00 ..
--rw-r----- 1 bandit4 bandit3   33 Oct 16 14:00 .hidden
+bandit3@bandit:~/inhere$ ls -a
+.  ..  .hidden
 bandit3@bandit:~/inhere$ cat .hidden
-pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
 ```
 
 # Level 4 → Level 5
@@ -126,12 +122,11 @@ pIwrPrtPN36QITSp3EQaw936yaFoFgAB
 ```shell
 bandit4@bandit:~$ ls
 inhere
-bandit4@bandit:~$ cd inhere/
-bandit4@bandit:~/inhere$ ls -a
-.   -file00  -file02  -file04  -file06  -file08
-..  -file01  -file03  -file05  -file07  -file09
+bandit4@bandit:~$ cd inhere
+bandit4@bandit:~/inhere$ ls
+-file00  -file01  -file02  -file03  -file04  -file05  -file06  -file07  -file08  -file09
 bandit4@bandit:~/inhere$ file ./*
-./-file00: data
+./-file00: OpenPGP Public Key
 ./-file01: data
 ./-file02: data
 ./-file03: data
@@ -142,8 +137,7 @@ bandit4@bandit:~/inhere$ file ./*
 ./-file08: data
 ./-file09: data
 bandit4@bandit:~/inhere$ cat ./-file07
-koReBOKuIDDepwhWk7jZC0RTdopnAYKh
-bandit4@bandit:~/inhere$
+lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
 ```
 
 # Level 5 → Level 6
@@ -164,12 +158,11 @@ bandit4@bandit:~/inhere$
 ```shell
 bandit5@bandit:~$ ls
 inhere
-bandit5@bandit:~$ cd inhere/
-bandit5@bandit:~/inhere$ ls -a
-.            maybehere02  maybehere06  maybehere10  maybehere14  maybehere18
-..           maybehere03  maybehere07  maybehere11  maybehere15  maybehere19
-maybehere00  maybehere04  maybehere08  maybehere12  maybehere16
-maybehere01  maybehere05  maybehere09  maybehere13  maybehere17
+bandit5@bandit:~$ cd inhere
+bandit5@bandit:~/inhere$ ls
+maybehere00  maybehere03  maybehere06  maybehere09  maybehere12  maybehere15  maybehere18
+maybehere01  maybehere04  maybehere07  maybehere10  maybehere13  maybehere16  maybehere19
+maybehere02  maybehere05  maybehere08  maybehere11  maybehere14  maybehere17
 ```
 
 根据特征我们可以用`find` 命令，找到一个符合条件的文件
@@ -178,26 +171,8 @@ maybehere01  maybehere05  maybehere09  maybehere13  maybehere17
 bandit5@bandit:~/inhere$ find . -type f -size 1033c
 ./maybehere07/.file2
 bandit5@bandit:~/inhere$ cat ./maybehere07/.file2
-DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
 ```
-
-附find参数解析
-`-size n[cwbkMG]` : 档案大小 为 n 个由后缀决定的数据块。其中后缀含义为：
-
-- `b`: 代表 512 位元组的区块（如果用户没有指定后缀，则默认为 b）
-- `c`: 表示字节数
-- `k`: 表示 kilo bytes （1024字节）
-- `w`: 字 （2字节）
-- `M`:兆字节（1048576字节）
-- `G`: 千兆字节 （1073741824字节）
-- `-type c` : 档案类型是 c 。
-- `d`: 目录
-- `c`: 字型装置档案
-- `b`: 区块装置档案
-- `p`: 具名贮列
-- `f`: 一般档案
-- `l`: 符号连结
-- `s`: socket
 
 # Level 6 → Level 7
 
@@ -218,7 +193,7 @@ DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 bandit6@bandit:~$ find / -size 33c -user bandit7 -group bandit6 2>/dev/null
 /var/lib/dpkg/info/bandit7.password
 bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
-HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
 ```
 
 后面的`2>/dev/null`因为`find`命令在根目录下查找会经常有很多权限的报错信息，所有在linux中通常用这种方式将错误信息重定向到“黑洞中”
@@ -236,8 +211,8 @@ HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 ```shell
 bandit7@bandit:~$ ls
 data.txt
-bandit7@bandit:~$ cat data.txt |grep millionth
-millionth       cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+bandit7@bandit:~$ cat data.txt | grep millionth
+millionth       TESKZC0XvTetK0S9xNwm25STk5iWrBvP
 ```
 
 # Level 8 → Level 9
@@ -250,16 +225,11 @@ millionth       cvX2JJa4CFALtqS87jk27qwqGhBM9plV
 
 这题是要找到出现一次的那个行，肯定用`uniq`命令了，但是使用之前需要用`sort`命令对文本进行排序，因为`uniq`命令是通过判断上下两行是否一样来判断的，所以用`sort`排序一下然后在`uniq`就能找到唯一出现的那一行了
 
-```shell
-sort data.txt|uniq -u
-sort data.txt|uniq -c
-```
-
 这题找到两种解法，一个是直接`-u`获取，还有就是`-c`列出出现的次数，然后从中找到是1的那一行即可
 
 ```shell
 bandit8@bandit:~$ sort data.txt |uniq -u
-UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+EN632PlfYiZbn3PhVK3XOGSlNInNE00t
 ```
 
 # Level 9 → Level 10
@@ -270,22 +240,14 @@ UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
 > **Commands you may need to solve this level**
 > `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd`
 
-直接使用`cat`命令是很多很杂乱的东西，可以通过`string`命令查看文件中的字符串，根据提示信息可得下一关密钥以若干个`=`开头，可以找到下一关的密钥`truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk`
+直接使用`cat`命令是很多很杂乱的东西，可以通过`string`命令查看文件中的字符串，根据提示信息可得下一关密钥以若干个`=`开头，可以使用正则来匹配
 
 ```shell
 bandit9@bandit:~$ ls
 data.txt
-bandit9@bandit:~$ strings data.txt
-.MBB
-`B6ha
-t8lHX u
-========== password
-NHGu
-5xhH
-========== truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
-W.uO7
-i$2w
-epg~
+bandit9@bandit:~$ strings data.txt | sed -n '/^==/p'
+========== the
+========== G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
 ```
 
 # Level 10 → Level 11
@@ -299,8 +261,10 @@ epg~
 题目提示密钥信息用了`base64`解码，我们解码即可
 
 ```shell
+bandit10@bandit:~$ ls
+data.txt
 bandit10@bandit:~$ base64 -d data.txt
-The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+The password is 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
 ```
 
 # Level 11 → Level 12
@@ -320,10 +284,10 @@ The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 `Rot13`是一种特殊的凯撒密码转换，根据题目所说的字母的的顺序旋转了13个位置，就相当去26个字母的前13个位置与后13个位置调换了。那么我们就是用tr命令进行调换
 
 ```shell
-bandit11@bandit:~$ cat data.txt
-Gur cnffjbeq vf 5Gr8L4qetPEsPk8htqjhRK8XSP6x2RHh
-bandit11@bandit:~$ cat data.txt |tr 'a-zA-Z' 'n-za-mN-ZA-M'
-The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+bandit11@bandit:~$ ls
+data.txt
+bandit11@bandit:~$ cat data.txt | tr 'a-zA-Z' 'n-za-mN-ZA-M'
+The password is JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
 ```
 
 # Level 12 → Level 13
@@ -334,85 +298,73 @@ The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 > **Commands you may need to solve this level**
 > `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd, mkdir, cp, mv`
 
-这是一道比较麻烦的题目，需要我们解压很多层。
+这是一道比较麻烦的题目，需要我们解压很多层。由于权限问题，我们先复制一遍。
 
 ```shell
 bandit12@bandit:~$ ls
 data.txt
-bandit12@bandit:~$ file data.txt
-data.txt: ASCII text
 bandit12@bandit:~$ xxd -r data.txt > data.bin
 -bash: data.bin: Permission denied
-```
-
-可以看到这本来是一个文本类型的文件，尝试用`xxd`转成`bin`提示权限不够，我们先复制一遍。
-
-```shell
-bandit12@bandit:~$ mkdir /tmp/c1911
-bandit12@bandit:~$ cp data.txt /tmp/c1911
-bandit12@bandit:~$
-bandit12@bandit:~$ cd /tmp/c1911
-bandit12@bandit:/tmp/c1911$ ls
+bandit12@bandit:~$ mkdir /tmp/chenyang12
+bandit12@bandit:~$ cp data.txt /tmp/chenyang12
+bandit12@bandit:~$ cd /tmp/chenyang12
+bandit12@bandit:/tmp/chenyang12$ ls
 data.txt
-bandit12@bandit:/tmp/c1911$ xxd  -r data.txt > data.bin
-bandit12@bandit:/tmp/c1911$ file data.bin
-data.bin: gzip compressed data, was "data2.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/chenyang12$ file data.txt
+data.txt: ASCII text
 ```
 
-复制完是`gzip`格式，改文件名，解压。
+可以看出，文件为 16 进制，我们需要先转换一下
 
 ```shell
-bandit12@bandit:/tmp/c1911$ mv data.bin data.gz
-bandit12@bandit:/tmp/c1911$ gzip -d data.gz
-bandit12@bandit:/tmp/c1911$ ls
-data  data.txt
-bandit12@bandit:/tmp/c1911$ file data
+bandit12@bandit:/tmp/chenyang12$ xxd -r data.txt data
+bandit12@bandit:/tmp/chenyang12$ file data
+data: gzip compressed data, was "data2.bin", last modified: Thu Sep  1 06:30:09 2022, max compression, from Unix, original size modulo 2^32 575
+```
+
+解压
+
+```shell
+bandit12@bandit:/tmp/chenyang12$ mv data data.gz
+bandit12@bandit:/tmp/chenyang12$ gzip -d data.gz
+bandit12@bandit:/tmp/chenyang12$ file data
 data: bzip2 compressed data, block size = 900k
 ```
 
 还有一层`bzip2`, 继续解压
 
 ```shell
-bandit12@bandit:/tmp/c1911$ mv data data.bz2
-bandit12@bandit:/tmp/c1911$ bunzip2 -d data.bz2
-bandit12@bandit:/tmp/c1911$ file data
-data: gzip compressed data, was "data4.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/chenyang12$ mv data data.bz2
+bandit12@bandit:/tmp/chenyang12$ bunzip2 -d data.bz2
+bandit12@bandit:/tmp/chenyang12$ file data
+data: gzip compressed data, was "data4.bin", last modified: Thu Sep  1 06:30:09 2022, max compression, from Unix, original size modulo 2^32 20480
 ```
 
 还有没有解压的文件，继续搞搞吧！！！一直一直查看文件类型，重命名，解压。直到第八层压缩
 
 ```shell
-bandit12@bandit:/tmp/c1911$ mv data data.gz
-bandit12@bandit:/tmp/c1911$ gzip -d data.gz
-bandit12@bandit:/tmp/c1911$ file data
+bandit12@bandit:/tmp/chenyang12$ mv data data.gz && gzip -d data.gz && file data
 data: POSIX tar archive (GNU)
-bandit12@bandit:/tmp/c1911$ mv data data.tar
-bandit12@bandit:/tmp/c1911$ tar xvf data.tar
+bandit12@bandit:/tmp/chenyang12$ mv data data.tar && tar xvf data.tar
 data5.bin
-bandit12@bandit:/tmp/c1911$ file data5.bin
+bandit12@bandit:/tmp/chenyang12$ file data5.bin
 data5.bin: POSIX tar archive (GNU)
-bandit12@bandit:/tmp/c1911$ mv data5.bin data5.tar
-bandit12@bandit:/tmp/c1911$ tar xvf data5.tar
+bandit12@bandit:/tmp/chenyang12$ mv data5.bin data5.tar && tar xvf data5.tar
 data6.bin
-bandit12@bandit:/tmp/c1911$ file data6
-data6: cannot open `data6' (No such file or directory)
-bandit12@bandit:/tmp/c1911$ file data6.bin
+bandit12@bandit:/tmp/chenyang12$ file data6.bin
 data6.bin: bzip2 compressed data, block size = 900k
-bandit12@bandit:/tmp/c1911$ bunzip2 -d data6.bin
-bunzip2: Can't guess original name for data6.bin -- using data6.bin.out
-bandit12@bandit:/tmp/c1911$ file data6.bin.out
-data6.bin.out: POSIX tar archive (GNU)
-bandit12@bandit:/tmp/c1911$ mv data6.bin.out data.tar
-bandit12@bandit:/tmp/c1911$ tar xvf data.tar
+bandit12@bandit:/tmp/chenyang12$ mv data6.bin data && bunzip2 -d data
+bunzip2: Can't guess original name for data -- using data.out
+bandit12@bandit:/tmp/chenyang12$ file data.out
+data.out: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/chenyang12$ mv data.out data.tar && tar xvf data.tar
 data8.bin
-bandit12@bandit:/tmp/c1911$ file data8.bin
-data8.bin: gzip compressed data, was "data9.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
-bandit12@bandit:/tmp/c1911$ mv data8.bin data8.gz
-bandit12@bandit:/tmp/c1911$ gzip -d data8.gz
-bandit12@bandit:/tmp/c1911$ ls
-data5.tar  data8  data.tar  data.txt
-bandit12@bandit:/tmp/c1911$ cat data8
-The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+bandit12@bandit:/tmp/chenyang12$ file data8.bin
+data8.bin: gzip compressed data, was "data9.bin", last modified: Thu Sep  1 06:30:09 2022, max compression, from Unix, original size modulo 2^32 49
+bandit12@bandit:/tmp/chenyang12$ mv data8.bin data.gz && gzip -d data.gz && file data
+data: ASCII text
+bandit12@bandit:/tmp/chenyang12$ cat data
+The password is wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
 ```
 
 # Level 13 → Level 14
@@ -426,17 +378,13 @@ The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 这一关告诉我们下一关的密码存放在`/etc`目录下，且只有`bandit14`用户可读，我们当前目录下只有一个私钥文件，可以考虑用私钥文件去连接`bandit14`, 用`bandit14` 读取用户文件。
 
 ```shell
+bandit13@bandit:~$ cat /etc/bandit_pass/bandit14
+cat: /etc/bandit_pass/bandit14: Permission denied
 bandit13@bandit:~$ ls
 sshkey.private
-bandit13@bandit:~$ ssh -i sshkey.private bandit14@127.0.0.1
-Could not create directory '/home/bandit13/.ssh'.
-The authenticity of host '127.0.0.1 (127.0.0.1)' can't be established.
-ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
-Are you sure you want to continue connecting (yes/no)? yes
-
-
+bandit13@bandit:~$ ssh -i sshkey.private -p 2220 bandit14@localhost
 bandit14@bandit:~$ cat /etc/bandit_pass/bandit14
-4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
 ```
 
 # Level 14 → Level 15
@@ -447,16 +395,16 @@ bandit14@bandit:~$ cat /etc/bandit_pass/bandit14
 > **Commands you may need to solve this level**
 > `ssh, telnet, nc, openssl, s_client, nmap`
 
-这关说只要把本关的密钥提交即可得到反馈，看来我直接从`bandit13 ssh`连接到的`bandit14 `可以说并不是算过了这一关，还是要拿到这一关的密钥信息才能进行下一关，这也是这个游戏设计的一个巧妙之处吧。
+这关说只要把本关的密钥提交即可得到反馈
 
 ```shell
 bandit14@bandit:~$ telnet localhost 30000
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
-4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
 Correct!
-BfMYroe26WYalil77FoDi9qh59eK5xNr
+jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
 
 Connection closed by foreign host.
 bandit14@bandit:~$
@@ -474,80 +422,15 @@ bandit14@bandit:~$
 这题说是要通过`ssl`发送本关密码才可以的获得下一关的密钥信息。需要用到`openssl`。
 
 ```shell
-bandit15@bandit:~$ openssl s_client -connect localhost  -port 30001
-CONNECTED(00000003)
-depth=0 CN = localhost
-verify error:num=18:self signed certificate
-verify return:1
-depth=0 CN = localhost
-verify return:1
----
-Certificate chain
- 0 s:/CN=localhost
-   i:/CN=localhost
----
-Server certificate
------BEGIN CERTIFICATE-----
-MIICBjCCAW+gAwIBAgIESUpi7DANBgkqhkiG9w0BAQUFADAUMRIwEAYDVQQDDAls
-b2NhbGhvc3QwHhcNMTgxMjExMTAwMTQyWhcNMTkxMjExMTAwMTQyWjAUMRIwEAYD
-VQQDDAlsb2NhbGhvc3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMTezWZz
-cd9EgMAz0HkacYFj/cRYHpakzE4SPuflAE+rn0rXNihs8Ium69kaQv+EkTAriLAT
-qI2FlHT3qP1BsPPn7XGzhGJLHELpKThVJ3dcc7iC8mP5JMEr3Ysd64atu+7EU0iG
-+bL56omnhjGWAwR57l/WP2N/ftaxwGVI3SqdAgMBAAGjZTBjMBQGA1UdEQQNMAuC
-CWxvY2FsaG9zdDBLBglghkgBhvhCAQ0EPhY8QXV0b21hdGljYWxseSBnZW5lcmF0
-ZWQgYnkgTmNhdC4gU2VlIGh0dHBzOi8vbm1hcC5vcmcvbmNhdC8uMA0GCSqGSIb3
-DQEBBQUAA4GBAAO24zz8pAGH+VRu/zcztoxyu03edRTe2ofL20DXXkLaMychnux6
-1V928fMcG938ErbjVmx6Bq5x0vL/EGL4A1tOa2jmnJcG5vgoeewzlTNcE+s/B2AO
-1CKhVi94nLmsRRYpwrrgghN6YtU5akCQjYEeINfjpS4rbYoTUn/x0k1Z
------END CERTIFICATE-----
-subject=/CN=localhost
-issuer=/CN=localhost
----
-No client certificate CA names sent
-Peer signing digest: SHA512
-Server Temp Key: X25519, 253 bits
----
-SSL handshake has read 1019 bytes and written 269 bytes
-Verification error: self signed certificate
----
-New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
-Server public key is 1024 bit
-Secure Renegotiation IS supported
-Compression: NONE
-Expansion: NONE
-No ALPN negotiated
-SSL-Session:
-    Protocol  : TLSv1.2
-    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
-    Session-ID: F76B1E6D4649F3CE8772262DFA926F6BF02E5DD581FE1AB59421003DA6BBD961
-    Session-ID-ctx:
-    Master-Key: E14BDEB9B5ACB1BAA7AC3BDA67C819E8125EBEB32E33BE5D14FEAE160B67DCF346A442B4F5C58BF2356248E7E50C51D8
-    PSK identity: None
-    PSK identity hint: None
-    SRP username: None
-    TLS session ticket lifetime hint: 7200 (seconds)
-    TLS session ticket:
-    0000 - 64 68 30 37 ad 56 84 7c-c1 99 6e d2 02 05 fa fe   dh07.V.|..n.....
-    0010 - af ec 8d 76 60 4d db 77-2c bd 5e b8 1c 9b 5c a6   ...v`M.w,.^...\.
-    0020 - eb 2e 05 8d c7 3d bd bf-1d ae 9c e1 c3 3f 97 7d   .....=.......?.}
-    0030 - d1 83 43 ff d1 a9 e9 23-ee b2 6e 6e b1 cb 91 4a   ..C....#..nn...J
-    0040 - cf 29 af b3 8a 2a 24 fa-69 87 fa 31 03 11 9a 81   .)...*$.i..1....
-    0050 - db 82 c3 5f 58 47 54 53-b1 71 26 5b 96 c2 5c 9f   ..._XGTS.q&[..\.
-    0060 - 72 be 5f 55 f4 cd 1f ee-74 76 53 6c fb da f3 e3   r._U....tvSl....
-    0070 - aa b4 c1 85 3b a0 64 d6-ef 2e 79 ce 9a 68 46 03   ....;.d...y..hF.
-    0080 - bb 91 c3 f8 77 88 f3 44-c0 5f 01 b6 e0 19 d9 09   ....w..D._......
-    0090 - ff 76 e9 eb 67 32 04 ee-83 0c b5 41 14 3c b6 7f   .v..g2.....A.<..
-
-    Start Time: 1546574414
-    Timeout   : 7200 (sec)
-    Verify return code: 18 (self signed certificate)
-    Extended master secret: yes
----
-BfMYroe26WYalil77FoDi9qh59eK5xNr
+bandit15@bandit:~$ openssl s_client -connect localhost -port 30001
+......
+read R BLOCK
+jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
 Correct!
-cluFn7wTiGryunymYOu4RcffSxQluehd
+JQttfApK4SeyHwDlI9SXGR50qclOAil1
 
 closed
+bandit15@bandit:~$
 ```
 
 # Level 16 → Level 17
@@ -562,110 +445,33 @@ closed
 
 ```shell
 bandit16@bandit:~$ nmap -sV localhost -p 31000-32000
-
-Starting Nmap 7.40 ( https://nmap.org ) at 2019-01-04 05:27 CET
+Starting Nmap 7.80 ( https://nmap.org ) at 2022-10-04 16:05 UTC
 Nmap scan report for localhost (127.0.0.1)
-Host is up (0.00022s latency).
-Not shown: 999 closed ports
+Host is up (0.00011s latency).
+Not shown: 996 closed ports
 PORT      STATE SERVICE     VERSION
+31046/tcp open  echo
 31518/tcp open  ssl/echo
+31691/tcp open  echo
 31790/tcp open  ssl/unknown
-1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
-SF-Port31790-TCP:V=7.40%T=SSL%I=7%D=1/4%Time=5C2EE0B3%P=x86_64-pc-linux-gn
-SF:u%r(GenericLines,31,"Wrong!\x20Please\x20enter\x20the\x20correct\x20cur
-SF:rent\x20password\n")%r(GetRequest,31,"Wrong!\x20Please\x20enter\x20the\
-SF:x20correct\x20current\x20password\n")%r(HTTPOptions,31,"Wrong!\x20Pleas
-SF:e\x20enter\x20the\x20correct\x20current\x20password\n")%r(RTSPRequest,3
-SF:1,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x20password\n
-SF:")%r(Help,31,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x2
-SF:0password\n")%r(SSLSessionReq,31,"Wrong!\x20Please\x20enter\x20the\x20c
-SF:orrect\x20current\x20password\n")%r(TLSSessionReq,31,"Wrong!\x20Please\
-SF:x20enter\x20the\x20correct\x20current\x20password\n")%r(Kerberos,31,"Wr
-SF:ong!\x20Please\x20enter\x20the\x20correct\x20current\x20password\n")%r(
-SF:FourOhFourRequest,31,"Wrong!\x20Please\x20enter\x20the\x20correct\x20cu
-SF:rrent\x20password\n")%r(LPDString,31,"Wrong!\x20Please\x20enter\x20the\
-SF:x20correct\x20current\x20password\n")%r(LDAPSearchReq,31,"Wrong!\x20Ple
-SF:ase\x20enter\x20the\x20correct\x20current\x20password\n")%r(SIPOptions,
-SF:31,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x20password\
-SF:n");
-
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 88.39 seconds
+31960/tcp open  echo
+......
+Nmap done: 1 IP address (1 host up) scanned in 98.34 seconds
 ```
 
 可以看到`31518`端口和`31790`端口开放了`ssl`服务，我们继续连接这个端口发送本关密钥。发现`31518`端口会将我们发送的内容直接返回，`31790`才是返回密码的正确端口。
 
 ```shell
+bandit16@bandit:~$ openssl s_client -connect localhost -port 31518
+......
+read R BLOCK
+JQttfApK4SeyHwDlI9SXGR50qclOAil1
+JQttfApK4SeyHwDlI9SXGR50qclOAil1
+^C
 bandit16@bandit:~$ openssl s_client -connect localhost -port 31790
-CONNECTED(00000003)
-depth=0 CN = localhost
-verify error:num=18:self signed certificate
-verify return:1
-depth=0 CN = localhost
-verify return:1
----
-Certificate chain
- 0 s:/CN=localhost
-   i:/CN=localhost
----
-Server certificate
------BEGIN CERTIFICATE-----
-MIICBjCCAW+gAwIBAgIENT6X8jANBgkqhkiG9w0BAQUFADAUMRIwEAYDVQQDDAls
-b2NhbGhvc3QwHhcNMTgxMjExMTAwMTQyWhcNMTkxMjExMTAwMTQyWjAUMRIwEAYD
-VQQDDAlsb2NhbGhvc3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAJuYYSnx
-pA49LOi31RUGpW+JNJvStNuBSiMx17bhMuNlijN+b19LuSV1mWOAmo+zzIsBq5Yv
-CbvXfCKrjJnxEGuP+XtPmC3trplmej2jlRa/sRmKDIuV74Ze0GjzO25TY6a5XW+J
-lC0fqLCH/YsculqmLp8atEYYSaduS5vrz8ILAgMBAAGjZTBjMBQGA1UdEQQNMAuC
-CWxvY2FsaG9zdDBLBglghkgBhvhCAQ0EPhY8QXV0b21hdGljYWxseSBnZW5lcmF0
-ZWQgYnkgTmNhdC4gU2VlIGh0dHBzOi8vbm1hcC5vcmcvbmNhdC8uMA0GCSqGSIb3
-DQEBBQUAA4GBAACqyQVna9ckIFWR3EzUKXl7JgkCN0BK9Wy2rqzgPiplvuhjd4lC
-mlIDeEy7VnZoOEXj+YX4OIhnajkXi6XfIpBYP+/RPo27n5PgBT3ywJkWwVKWgaPa
-BFH7qSw6FBJZkiN5i25FSYXdg4/JT+/C6SZxDy5YGKLFoA3dEGCZ8hh7
------END CERTIFICATE-----
-subject=/CN=localhost
-issuer=/CN=localhost
----
-No client certificate CA names sent
-Peer signing digest: SHA512
-Server Temp Key: X25519, 253 bits
----
-SSL handshake has read 1019 bytes and written 269 bytes
-Verification error: self signed certificate
----
-New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
-Server public key is 1024 bit
-Secure Renegotiation IS supported
-Compression: NONE
-Expansion: NONE
-No ALPN negotiated
-SSL-Session:
-    Protocol  : TLSv1.2
-    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
-    Session-ID: FC46E2669B162F04B5C370807C1B9E92FCEA3B123059C3E4701A30C1E749B661
-    Session-ID-ctx:
-    Master-Key: 54B4F5C34BE5CE0F33249917300889499881A634B2D13715698130E69E07A1F92B55E3AE86074A7ED3E0DAE14264F3DD
-    PSK identity: None
-    PSK identity hint: None
-    SRP username: None
-    TLS session ticket lifetime hint: 7200 (seconds)
-    TLS session ticket:
-    0000 - 2e 71 2f 27 00 eb 72 19-5f 50 c2 d0 8e 8e 6f 16   .q/'..r._P....o.
-    0010 - f3 18 94 00 14 11 41 35-a2 b9 c9 d9 d1 a3 87 cb   ......A5........
-    0020 - d1 d5 9c 82 4e 31 5a e2-ec 49 a3 1e 37 eb 8d fe   ....N1Z..I..7...
-    0030 - c9 ce cc c0 72 26 b8 42-70 86 71 5e 0a d6 35 77   ....r&.Bp.q^..5w
-    0040 - 3d 49 07 54 d7 e7 17 d1-b6 20 0d 9c 62 bf 7c db   =I.T..... ..b.|.
-    0050 - d3 a5 de bf 89 33 f4 c3-21 b1 88 7b dc 3b e4 11   .....3..!..{.;..
-    0060 - fe 0a 43 d0 62 c2 b2 7c-94 62 cf 98 a3 b3 64 5e   ..C.b..|.b....d^
-    0070 - 70 c1 9f fe 6d 2f 2d 40-36 6c f6 79 72 cb 30 d0   p...m/-@6l.yr.0.
-    0080 - 89 e8 f9 83 5b 7d 65 0d-b2 ed 17 68 ad ae 6b 68   ....[}e....h..kh
-    0090 - ad 5f ce 31 7f b3 ec e0-36 c9 f0 e6 de 0c 24 9a   ._.1....6.....$.
-
-    Start Time: 1546576890
-    Timeout   : 7200 (sec)
-    Verify return code: 18 (self signed certificate)
-    Extended master secret: yes
----
-cluFn7wTiGryunymYOu4RcffSxQluehd
+......
+read R BLOCK
+JQttfApK4SeyHwDlI9SXGR50qclOAil1
 Correct!
 -----BEGIN RSA PRIVATE KEY-----
 MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
@@ -694,48 +500,59 @@ YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
 dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
 vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
 -----END RSA PRIVATE KEY-----
+
 closed
+bandit16@bandit:~$
 ```
 
 返回的是一段`ssh`私钥，不难猜想这是下一关连接的私钥信息，先存起来再说，直接在当前目录写发现没有权限，这样我们就需要写道`/tmp`目录下了
 
 ```shell
-bandit16@bandit:~$ mkdir /tmp/ssh_conn
-bandit16@bandit:~$ vim /tmp/ssh_conn/rsa.priv
+bandit16@bandit:~$ mkdir /tmp/chenyang16
+bandit16@bandit:~$ cd /tmp/chenyang16
+bandit16@bandit:/tmp/chenyang16$ echo -e "-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ\nimZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ\nJa6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu\nDSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW\nJGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX\nx0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD\nKHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl\nJ9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd\nd8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC\nYNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A\nvLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama\n+TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT\n8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx\nSatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd\nHCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt\nSghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A\nR57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi\nTtiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg\nR8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu\nL8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni\nblh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU\nYOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM\n77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b\ndxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3\nvBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=\n-----END RSA PRIVATE KEY-----" >> sshkey.private
 ```
 
 用这个私钥去连接第17关。
 
 ```shell
-bandit16@bandit:~$ ssh -i /tmp/ssh_conn/rsa.priv bandit17@localhost
-Could not create directory '/home/bandit16/.ssh'.
-The authenticity of host 'localhost (127.0.0.1)' can't be established.
-ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
-Are you sure you want to continue connecting (yes/no)? yes
+bandit16@bandit:/tmp/chenyang16$ ssh -i sshkey.private -p 2220 bandit17@localhost
+The authenticity of host '[localhost]:2220 ([127.0.0.1]:2220)' can't be established.
+ED25519 key fingerprint is SHA256:C2ihUBV7ihnV1wUXRb4RrEcLfXC5CXlhmAAM/urerLY.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Could not create directory '/home/bandit16/.ssh' (Permission denied).
 Failed to add the host to the list of known hosts (/home/bandit16/.ssh/known_hosts).
-This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+!!! You are trying to log into this SSH server on port 2220 on localhost.
+!!! Please log out and log in again instead.
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-Permissions 0644 for '/tmp/ssh_conn/rsa.priv' are too open.
+Permissions 0664 for 'sshkey.private' are too open.
 It is required that your private key files are NOT accessible by others.
 This private key will be ignored.
-Load key "/tmp/ssh_conn/rsa.priv": bad permissions
-bandit17@localhost's password:
+Load key "sshkey.private": bad permissions
+bandit17@localhost: Permission denied (publickey).
 ```
 
 提示权限太开放了，把权限改`600`再试。
 
 ```shell
-bandit16@bandit:/tmp/ssh_conn$ ssh -i rsa.priv bandit17@localhost
-Could not create directory '/home/bandit16/.ssh'.
-The authenticity of host 'localhost (127.0.0.1)' can't be established.
-ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
-Are you sure you want to continue connecting (yes/no)? yes
-
+bandit16@bandit:/tmp/chenyang16$ chmod 600 sshkey.private
+bandit16@bandit:/tmp/chenyang16$ ssh -i sshkey.private -p 2220 bandit17@localhost
 bandit17@bandit:~$ cat /etc/bandit_pass/bandit17
-xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn
+VwOSWtCA7lRKkTfbr2IDh6awj9RNZM5e
 ```
 
 # Level 17 → Level 18
@@ -754,12 +571,12 @@ bandit17@bandit:~$ ls
 passwords.new  passwords.old
 bandit17@bandit:~$ diff passwords.old passwords.new
 42c42
-< hlbSBPAWJmL6WFDb06gpTx1pPButblOA
+< 09wUIyMU4YhOzl1Lzxoz0voIBzZ2TUAf
 ---
-> kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+> hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
 ```
 
-得到密钥`kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd`
+得到密钥`hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg`
 
 # Level 18 → Level 19
 
@@ -769,14 +586,14 @@ bandit17@bandit:~$ diff passwords.old passwords.new
 > **Commands you may need to solve this level**
 > `ssh, ls, cat`
 
-用上面的密码，一上来就告诉我byebye,然后自动logout了，搞得我一脸懵逼，题目说是`.bashrc`文件自动登出的。那我们不分配伪终端就可以了，意思是说禁止分配伪终端。当用ssh或telnet等登录系统时，系统分配给我们的终端就是伪终端。如果`ssh`使用此选项登录系统时，由于禁用，将无法获得终端；但仍能够获得`shell`，只不过看起来像在本地，也没有很多应有的环境变量，例如命令提示符，`PS1`等。当使用命令`ps -ef|grep [b]ash`时看到`root 22082 22080 0 11:51 ? 00:00:00 -bash`显示终端那里是一个问号。
+用上面的密码，一上来就告诉我byebye,然后自动logout了，搞得我一脸懵逼，题目说是`.bashrc`文件自动登出的。那我们不分配伪终端就可以了，意思是说禁止分配伪终端。当用ssh或telnet等登录系统时，系统分配给我们的终端就是伪终端。如果`ssh`使用此选项登录系统时，由于禁用，将无法获得终端；但仍能够获得`shell`，只不过看起来像在本地，也没有很多应有的环境变量，例如命令提示符，`PS1`等。
 
 ```shell
-bandit17@bandit:~$ ssh bandit18@localhost -T
-  Enjoy your stay!
-  
+$ ssh -p 2220 bandit18@bandit.labs.overthewire.org -T
+ls
+readme
 cat readme
-IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+awhqfNnAbc1naukrpqDYcF95h7HoMTrC
 ```
 
 读取readme,得到19关的密码。
@@ -790,9 +607,14 @@ IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
 先看看家目录下的文件的权限
 
 ```shell
-bandit19@bandit:~$ ls -l
-total 8
--rwsr-x--- 1 bandit20 bandit19 7296 Oct 16 14:00 bandit20-do
+bandit19@bandit:~$ ll
+total 36
+drwxr-xr-x  2 root     root      4096 Sep  1 06:30 ./
+drwxr-xr-x 49 root     root      4096 Sep  1 06:30 ../
+-rwsr-x---  1 bandit20 bandit19 14872 Sep  1 06:30 bandit20-do*
+-rw-r--r--  1 root     root       220 Jan  6  2022 .bash_logout
+-rw-r--r--  1 root     root      3771 Jan  6  2022 .bashrc
+-rw-r--r--  1 root     root       807 Jan  6  2022 .profile
 ```
 
 属主的权限为`rws`, `s`是特殊权限位，允许一般用户用root权限执行这个文件。
@@ -800,6 +622,8 @@ total 8
 通过文件名是想我们用`bandit20`这个用户执行这个命令读取密码，通过id 命令查看到`bandit20`用户的uid为`11020`，运行这个文件`–help` 命令查看用法可得用法，最后读取密码
 
 ```shell
+bandit19@bandit:~$ id bandit20
+uid=11020(bandit20) gid=11020(bandit20) groups=11020(bandit20)
 bandit19@bandit:~$ ./bandit20-do --help
 Usage: env [OPTION]... [-] [NAME=VALUE]... [COMMAND [ARG]...]
 Set each NAME to VALUE in the environment and run COMMAND.
@@ -808,21 +632,28 @@ Mandatory arguments to long options are mandatory for short options too.
   -i, --ignore-environment  start with an empty environment
   -0, --null           end each output line with NUL, not newline
   -u, --unset=NAME     remove variable from the environment
+  -C, --chdir=DIR      change working directory to DIR
+  -S, --split-string=S  process and split S into separate arguments;
+                        used to pass multiple arguments on shebang lines
+      --block-signal[=SIG]    block delivery of SIG signal(s) to COMMAND
+      --default-signal[=SIG]  reset handling of SIG signal(s) to the default
+      --ignore-signal[=SIG]   set handling of SIG signals(s) to do nothing
+      --list-signal-handling  list non default signal handling to stderr
+  -v, --debug          print verbose information for each processing step
       --help     display this help and exit
       --version  output version information and exit
 
 A mere - implies -i.  If no COMMAND, print the resulting environment.
 
-GNU coreutils online help: <http://www.gnu.org/software/coreutils/>
-Full documentation at: <http://www.gnu.org/software/coreutils/env>
+SIG may be a signal name like 'PIPE', or a signal number like '13'.
+Without SIG, all known signals are included.  Multiple signals can be
+comma-separated.
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation <https://www.gnu.org/software/coreutils/env>
 or available locally via: info '(coreutils) env invocation'
-bandit19@bandit:~$ ./bandit20-do NAME=11020 cat /etc/bandit_pass/bandit
-bandit0   bandit12  bandit16  bandit2   bandit23  bandit27  bandit30  bandit4   bandit8
-bandit1   bandit13  bandit17  bandit20  bandit24  bandit28  bandit31  bandit5   bandit9
-bandit10  bandit14  bandit18  bandit21  bandit25  bandit29  bandit32  bandit6
-bandit11  bandit15  bandit19  bandit22  bandit26  bandit3   bandit33  bandit7
 bandit19@bandit:~$ ./bandit20-do NAME=11020 cat /etc/bandit_pass/bandit20
-GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+VxCazJaVykI6W36BkBU0mJTCM8rR95XT
 ```
 
 # Level 20 → Level 21
@@ -839,16 +670,15 @@ GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 这题说是开放一个监听的端口，然后`suconnect` 文件访问这个端口如果得到和这关相同的密码就会返回下一关的密码，我们就用`nc`将本关的密码反馈给连接端口命令如下
 
 ```shell
-\bandit20@bandit:~$ nc -lv <  /etc/bandit_pass/bandit20 &
-[6] 11816
-bandit20@bandit:~$ listening on [any] 34957 ...
-
-bandit20@bandit:~$ ./suconnect 34957
-connect to [127.0.0.1] from localhost [127.0.0.1] 46028
-Read: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+bandit20@bandit:~$ ls
+suconnect
+bandit20@bandit:~$ nc -l -p 2333 < /etc/bandit_pass/bandit20 &
+[1] 703090
+bandit20@bandit:~$ ./suconnect 2333
+Read: VxCazJaVykI6W36BkBU0mJTCM8rR95XT
 Password matches, sending next password
-gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
-[6]   Done                    nc -lv < /etc/bandit_pass/bandit20
+NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
+[1]+  Done                    nc -l -p 2333 < /etc/bandit_pass/bandit20
 ```
 
 成功返回下一关的密码
@@ -866,18 +696,17 @@ gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
 ```shell
 bandit21@bandit:~$ cd /etc/cron.d
 bandit21@bandit:/etc/cron.d$ ls
-cronjob_bandit22  cronjob_bandit23  cronjob_bandit24
+cronjob_bandit15_root  cronjob_bandit22  cronjob_bandit24       e2scrub_all  sysstat
+cronjob_bandit17_root  cronjob_bandit23  cronjob_bandit25_root  otw-tmp-dir
 bandit21@bandit:/etc/cron.d$ cat cronjob_bandit22
 @reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
 * * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
-
 bandit21@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit22.sh
 #!/bin/bash
 chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
 cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
-
 bandit21@bandit:/etc/cron.d$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
-Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
 ```
 
 # Level 22 → Level 23
@@ -894,7 +723,8 @@ Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
 ```shell
 bandit22@bandit:~$ cd /etc/cron.d
 bandit22@bandit:/etc/cron.d$ ls
-cronjob_bandit22  cronjob_bandit23  cronjob_bandit24
+cronjob_bandit15_root  cronjob_bandit22  cronjob_bandit24       e2scrub_all  sysstat
+cronjob_bandit17_root  cronjob_bandit23  cronjob_bandit25_root  otw-tmp-dir
 bandit22@bandit:/etc/cron.d$ cat cronjob_bandit23
 @reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
 * * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
@@ -915,17 +745,16 @@ cat /etc/bandit_pass/$myname > /tmp/$mytarget
 bandit22@bandit:/etc/cron.d$ /bin/bash /usr/bin/cronjob_bandit23.sh
 Copying passwordfile /etc/bandit_pass/bandit22 to /tmp/8169b67bd894ddbb4412f91573b38db3
 bandit22@bandit:/etc/cron.d$ cat /tmp/8169b67bd894ddbb4412f91573b38db3
-Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
 ```
 
 读取这个文件，这是本关密码啊，依次类推，I am user bandit23的`hash`值就是下一关密码。
 
 ```shell
-bandit22@bandit:~$ echo I am user bandit23| md5sum
-8ca319486bfbbc3663ea0fbe81326349  -
-
-bandit22@bandit:~$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
-jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
+bandit22@bandit:/etc/cron.d$ echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+8ca319486bfbbc3663ea0fbe81326349
+bandit22@bandit:/etc/cron.d$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
 ```
 
 # Level 23 → Level 24
@@ -941,22 +770,29 @@ jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
 老办法，还是先看看这个定时脚本写了什么
 
 ```shell
-bandit23@bandit:~$ cat /etc/cron.d/cronjob_bandit24
+bandit23@bandit:~$ cd /etc/cron.d
+bandit23@bandit:/etc/cron.d$ ls
+cronjob_bandit15_root  cronjob_bandit22  cronjob_bandit24       e2scrub_all  sysstat
+cronjob_bandit17_root  cronjob_bandit23  cronjob_bandit25_root  otw-tmp-dir
+bandit23@bandit:/etc/cron.d$ cat cronjob_bandit24
 @reboot bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
 * * * * * bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
-bandit23@bandit:~$ cat /usr/bin/cronjob_bandit24.sh
+bandit23@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit24.sh
 #!/bin/bash
 
 myname=$(whoami)
 
-cd /var/spool/$myname
-echo "Executing and deleting all scripts in /var/spool/$myname:"
+cd /var/spool/$myname/foo
+echo "Executing and deleting all scripts in /var/spool/$myname/foo:"
 for i in * .*;
 do
     if [ "$i" != "." -a "$i" != ".." ];
     then
         echo "Handling $i"
-        timeout -s 9 60 ./$i
+        owner="$(stat --format "%U" ./$i)"
+        if [ "${owner}" = "bandit23" ]; then
+            timeout -s 9 60 ./$i
+        fi
         rm -f ./$i
     fi
 done
@@ -968,25 +804,26 @@ done
 
 创建一个放在改目录下的脚本就可以执行了
 
-`vim getpass.sh`进入`vim`编辑模式输入脚本
-
-写入
-
 ```shell
-cat /etc/bandit_pass/bandit24 > /tmp/bandit24pass
-：wq保存退出
+bandit23@bandit:/etc/cron.d$ mkdir /tmp/chenyang23
+bandit23@bandit:/etc/cron.d$ cd /tmp/chenyang23
+bandit23@bandit:/tmp/chenyang23$ touch chenyang23.sh
+bandit23@bandit:/tmp/chenyang23$ chmod 777 chenyang23.sh
+bandit23@bandit:/tmp/chenyang23$ vim chenyang23.sh
+bandit23@bandit:/tmp/chenyang23$ cat chenyang23.sh
+#!/bin/bash
 
-bandit23@bandit:/var/spool/bandit24$ vim getpass
-bandit23@bandit:/var/spool/bandit24$ chmod 777 getpass
-
-bandit23@bandit:/var/spool/bandit24$
+cat /etc/bandit_pass/bandit24 > /tmp/chenyang23/password
+bandit23@bandit:/tmp/chenyang23$ touch password
+bandit23@bandit:/tmp/chenyang23$ chmod 666 password
+bandit23@bandit:/tmp/chenyang23$ cp chenyang23.sh /var/spool/bandit24/
 ```
 
 这时候在`/var/spool/bandit24`目录下不一定能看见你写的脚本，就像前面的定时任务脚本里面写的，执行完脚本这个就任务就删除了，所以没看到也不要奇怪。
-这个时候说明我们的脚本已经执行了，可以去`/tmp`目录查看我们的密码了
+这个时候说明我们的脚本已经执行了，可以去查看我们的密码了
 
 ```shell
-bandit23@bandit:/var/spool/bandit24$ cat /tmp/bandit24pass
+bandit23@bandit:/tmp/chenyang23$ cat password
 UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
 ```
 
