@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "【SEED Labs】ICMP Redirect Attack"
-date:   2020-10-02 00:00:00 +0800
+date:   2022-10-02 00:00:00 +0800
 categories: 实验
 tags: SEEDLab 安全
 comments: 1
