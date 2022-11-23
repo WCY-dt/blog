@@ -1,0 +1,287 @@
+:root {
+    --blog-yellow: #F7DF1E;
+    --cursor-default: url(../img/cur1.svg);
+    --cursor-pointer: url(../img/cur2.svg);
+}
+
+@font-face {
+    font-family: 'Permanent Marker';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/Permanent.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.light {
+    --blog-black: #000000;
+    --blog-white: #FFFFFF;
+}
+
+.dark {
+    --blog-black: #FFFFFF;
+    --blog-white: #000000;
+}
+
+html {
+    cursor: var(--cursor-default), default;
+}
+
+body {
+    color: var(--blog-black);
+    font-size: 1em;
+    font-family: Permanent Marker, serif;
+    overflow: hidden;
+}
+
+.blogmenu {
+    position: fixed;
+    top: 2vh;
+    left: 0;
+    width: 100vw;
+    height: 10vh;
+    font-size: 4vh;
+    vertical-align: middle;
+    padding-left: 2vh;
+}
+
+.blogmenu-item {
+    color: var(--blog-black);
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    height: 6vh;
+    margin: 0;
+    padding: 0.5vh;
+    border: 0;
+    cursor: var(--cursor-pointer), pointer;
+}
+
+
+
+.blogmenu-now {
+    color: var(--blog-yellow);
+}
+
+.blogcontent {
+    position: absolute;
+    top: 12vh;
+    left: 0;
+    width: 96vw;
+    /*16*/
+    height: 76vh;
+    /*19*/
+    font-size: 2.5vh;
+    margin: 2vw;
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent-text {
+    margin: 1vh;
+    padding: 0;
+    border: 0;
+}
+
+.blogcontent1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(32vw - 2vw - 2vw);
+    height: calc(38vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-black);
+    border-radius: 2vw;
+    /* make items in center */
+    display: flex;
+    flex-direction: line;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent2 {
+    position: absolute;
+    top: 0;
+    left: 32vw;
+    width: calc(16vw - 2vw - 2vw);
+    height: calc(38vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-black);
+    border-radius: 2vw;
+    background-image: url(../img/book.jpg);
+    background-size: cover;
+    background-position: center;
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent3 {
+    position: absolute;
+    top: 38vh;
+    left: 0;
+    width: calc(16vw - 2vw - 2vw);
+    height: calc(38vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-yellow);
+    border-radius: 2vw;
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent4 {
+    position: absolute;
+    top: 38vh;
+    left: 16vw;
+    width: calc(32vw - 2vw - 2vw);
+    height: calc(19vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-yellow);
+    border-radius: 2vw;
+    background-color: var(--blog-yellow);
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent5 {
+    background-color: var(--blog-black);
+    position: absolute;
+    top: 57vh;
+    left: 16vw;
+    width: calc(16vw - 2vw - 2vw);
+    height: calc(19vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-black);
+    border-radius: 2vw;
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent6 {
+    position: absolute;
+    top: 57vh;
+    left: 32vw;
+    width: calc(32vw - 2vw - 2vw);
+    height: calc(19vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-yellow);
+    border-radius: 2vw;
+    background-color: var(--blog-black);
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent7 {
+    position: absolute;
+    top: 0vh;
+    left: 48vw;
+    width: calc(16vw - 2vw - 2vw);
+    height: calc(57vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-black);
+    border-radius: 2vw;
+    background-color: var(--blog-black);
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent8 {
+    position: absolute;
+    top: 0vh;
+    left: 64vw;
+    width: calc(32vw - 2vw - 2vw);
+    height: calc(76vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-black);
+    border-radius: 2vw;
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent9 {
+    position: absolute;
+    top: 19vh;
+    left: 64vw;
+    width: calc(32vw - 2vw - 2vw);
+    height: calc(38vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-black);
+    border-radius: 2vw;
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blogcontent10 {
+    position: absolute;
+    top: 57vh;
+    left: 80vw;
+    width: calc(16vw - 2vw - 2vw);
+    height: calc(19vh - 2vh - 2vw);
+    font-size: 2.5vh;
+    margin: 1vh 1vw;
+    border: 1vw solid var(--blog-black);
+    border-radius: 2vw;
+    /* make items in center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.blogcopyright {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 5vh;
+    font-size: 2vh;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 1vh;
+}
+
+.blogcopyright a {
+    color: var(--blog-black);
+    cursor: var(--cursor-pointer), pointer;
+}
+
+.noselect {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}

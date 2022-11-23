@@ -1,0 +1,60 @@
+---
+#
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chenyang's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <script type="text/javascript" src="/assets/js/jquery-3.6.1.slim.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.11.5/mermaid.min.js"></script>
+    <script src="/assets/js/post.js"></script>
+</head>
+
+<body class="light">
+    <!-- header -->
+    <section>
+        <div class="menu noselect">
+            <embed class="item" src="/assets/img/icon.svg" type="image/svg+xml" />
+            <a href="/index.html" id="menu-home-p"><div class="item" id="menu-home">Home</div></a>
+            <a href="/about.html" id="menu-about-p"><div class="item" id="menu-about">About</div></a>
+            <a href="/index.html#archives" id="menu-archive-p"><div class="item" id="menu-archives">Archives</div></a>
+            <a href="/feed.xml" id="menu-rss-p"><div class="item" id="menu-rss">RSS</div></a>
+        </div>
+    </section>
+
+    <main>
+        <section class="post-content">
+            <div class="title">{{ page.title }}</div>
+            {{ content }}
+        </section>
+
+        <section class="comments">
+            <p>Comments under maintenance.</p>
+        </section>
+
+        <footer>
+            <div class="copyright noselect">
+                Copyright © 2022 All rights reserved. Designed by
+                <a href="https://github.com/WCY-dt/">Chenyang</a>.
+            </div>
+        </footer>
+    </main>
+
+    <div class="toc noselect">
+        <div class="toc-title">Table of Contents</div>
+        <div class="toc-content"></div>
+    </div>
+</body>
+
+</html>

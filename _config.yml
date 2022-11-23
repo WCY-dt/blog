@@ -10,7 +10,6 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 statement           : "Designed by Chenyang, All Rights Reserved."
-bgtext              : "ABCFGHKLMNPQRSVWXYZabcdefghijklmnopqrstuvwxyz@#$%&*+-;/[]<>~" # texts randomly displayed in background
 google_analytics    : G-R3YPEPV2W9
 
 # 2. Your Collections
@@ -24,7 +23,6 @@ collection_order    :
     "signal",
     "language",
     "miscellaneous",
-    "temp",
   ]
 collections:
   security:
@@ -51,14 +49,12 @@ collections:
     output          : true
     permalink       : /:collection/:title/
     sort_by         : date
-    alias           : "Language"
+    alias           : "Languages"
   miscellaneous:
     output          : true
     permalink       : /:collection/:title/
     sort_by         : date
     alias           : "Miscellaneous"
-  temp:
-    output          : false
 
 # 3. Comment settings（disqus.com）
 # disqus_username     : akiritsu
@@ -69,46 +65,16 @@ defaults:
     scope:
       path          : ""  # an empty string here means all files in the project
     values:
-      layout              : "post"      # which layout to use by default
-      publish             : true        # whether to show by default      
-      btn_text            : true        # whether show button text by default
-      collection_list     : true        # whether show archive button by default
-      home_btn            : true        # whether show home by default
-      maximize            : false        # whether show maximize button by default
-      encrypted_text      : false       # whether use encrytion function by default
-      toc                 : true        # whether show table of content by default
-      toc_level           : 3           # the toc depth by default
-      author              : "Chenyang" # author name by default
-      show_date           : false        # whether show date message by default
-      category            :             # category by default
-      post_list           : true       # whether show list of post by default      
+      layout              : "post"      # which layout to use by default    
       comment             : false
-      footer              : true        # whether show footer by default
 
 # 5. Social Media Accounts
-email               : "mailto:dtchenyang@gmail.com" 
-linkedin            : 
-github              : "wcy-dt" 
-gitlab              : 
-website             : 
-twitter             : "ch3nyang"
-facebook            : 
-instagram           : 
-youtube             : 
-steam               : 
-weibo               :
 rss                 : "feed.xml"
       
 # 6. Where things are
 source              : .
 destination         : ./_site
-collections_dir     : collections
-plugins_dir         : src/_plugins # takes an array of strings and loads plugins in that order
-layouts_dir         : src/_layouts
-data_dir            : src/_data
-includes_dir        : src/_includes
-sass:
-  sass_dir          : src/_sass
+collections_dir     : ./_collections
 
 # 7. Plugins
 plugins:

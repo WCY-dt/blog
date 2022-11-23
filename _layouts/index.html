@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Chenyang's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="./assets/css/index.css">
+
+    <script type="text/javascript" src="./assets/js/jquery-3.6.1.slim.min.js"></script>
+    <script src="./assets/js/index.js"></script>
+  </head>
+
+  <body class="light">
+    <!-- index -->
+    <section>
+      <div class="index-title noselect">
+        <div class="line1">
+          <div class="ele1">chenyang</div>
+          <div class="ele2">'s</div>
+        </div>
+        <div class="line2">blog</div>
+      </div>
+      <div class="index-click" onclick="notion()"></div>
+      <div class="index-pic noselect">
+        <div class="notion1">Scroll down, please!</div>
+        <embed class="notion2" src="./assets/img/notion.svg" type="image/svg+xml"/>
+        <embed class="pic1" src="./assets/img/head.svg" type="image/svg+xml"/>
+        <embed class="pic2" src="./assets/img/body.svg" type="image/svg+xml"/>
+      </div>
+    </section>
+
+    <!-- header -->
+    <section>
+      <div class="menu noselect">
+        <embed class="item" src="./assets/img/icon.svg" type="image/svg+xml"/>
+        <a href="./index.html" id="menu-home-p"><div class="item selected" id="menu-home">Home</div></a>
+        <a href="./about.html" id="menu-about-p"><div class="item" id="menu-about">About</div></a>
+        <a href="javascript:location='./index.html#archives';location.reload();" id="menu-archive-p"><div class="item" id="menu-archives">Archives</div></a>
+        <a href="./feed.xml" id="menu-rss-p"><div class="item" id="menu-rss">RSS</div></a>
+      </div>
+    </section>
+
+    <!-- category -->
+    <section>
+      <div class="category" id="archives">
+        <!-- category menu list -->
+        <div class="list noselect">
+          <div class="item" onclick="select(this)">
+            <div class="cover-for-embed"></div>
+            <embed src="./assets/img/分类图标-security.svg" type="image/svg+xml"/>
+            <div class="text">Security</div>
+          </div>
+          <div class="item" onclick="select(this)">
+            <div class="cover-for-embed"></div>
+            <embed src="./assets/img/分类图标-mathematics.svg" type="image/svg+xml"/>
+            <div class="text">Mathematics</div>
+          </div>
+          <div class="item" onmousedown="select(this)">
+            <div class="cover-for-embed"></div>
+            <embed src="./assets/img/分类图标-signal.svg" type="image/svg+xml"/>
+            <div class="text">Signal</div>
+          </div>
+          <div class="item" onclick="select(this)">
+            <div class="cover-for-embed"></div>
+            <embed src="./assets/img/分类图标-notes.svg" type="image/svg+xml"/>
+            <div class="text">Notes</div>
+          </div>
+          <div class="item" onclick="select(this)">
+            <div class="cover-for-embed"></div>
+            <embed src="./assets/img/分类图标-languages.svg" type="image/svg+xml"/>
+            <div class="text">Languages</div>
+          </div>
+          <div class="item" onclick="select(this)">
+            <div class="cover-for-embed"></div>
+            <embed src="./assets/img/分类图标-miscellaneous.svg" type="image/svg+xml"/>
+            <div class="text">Miscellaneous</div>
+          </div>
+        </div>
+        <!-- recent post -->
+        <div class="recent">
+          <div class="title noselect">Recommended</div>
+          <div class="content">
+            <div class="text">
+              <div>
+                Nothing here yet.
+              </div>
+            </div>
+            <div class="read-more noselect">
+              <a href="">
+                <div class="cover-for-embed"></div>
+                Read more<embed src="./assets/img/rightarrow.svg" type="image/svg+xml"/>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- category archive -->
+        <div class="archive">
+          <div class="title noselect">Posts</div>
+          <div class="content">
+            <div class="text">
+              <div>
+                Nothing here yet.
+              </div>
+            </div>
+            <div class="pagination">
+              <div class="previous noselect">
+                <div>
+                  <div class="cover-for-embed"></div>
+                  <embed src="./assets/img/previous.svg" type="image/svg+xml"/>Previous
+                </div>
+              </div>
+              <div class="page noselect">
+                <div>
+                  1
+                </div>
+              </div>
+              <div class="next noselect">
+                <div>
+                  <div class="cover-for-embed"></div>
+                  Next<embed src="./assets/img/next.svg" type="image/svg+xml"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- copyright -->
+    <footer>
+      <div class="copyright noselect">
+        Copyright © 2022 All rights reserved. Designed by
+        <a href="https://github.com/WCY-dt/">Chenyang</a>.
+      </div>
+    </footer>
+
+    <section class="generate">
+      {% for collection in site.collections %}
+        <div class='{{ collection.alias }}'>
+          {% for post in collection.docs %}
+            <a href='{{ post.url }}' class='post'>
+              <div>{{ post.title }}</div>
+              <p>{{ post.date | date: "%Y-%m-%d" }}</p>
+            </a>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </section>
+  </body>
+
+</html>
