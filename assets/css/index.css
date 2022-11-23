@@ -351,13 +351,55 @@ body {
     border-radius: 0.4em 0.4em 0 0;
 
     background-color: var(--blog-white);
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    overflow-y: scroll;
 }
 
-.category .recent .content .text div {
-    font-family: 'Times New Roman', '微软雅黑';
-    font-size: 1.5em;
+.category .recent .content .text::-webkit-scrollbar {
+    width: 0.6em;
+    background-color: transparent;
+}
 
-    padding: 0 0.4em;
+.category .recent .content .text::-webkit-scrollbar-track {
+    display: none;
+}
+
+.category .recent .content .text::-webkit-scrollbar-thumb {
+    background-color: var(--blog-lightyellow);
+    border-radius: 0.3em;
+}
+
+.category .recent .content .text .item {
+    font-family: 'Times New Roman', '微软雅黑';
+
+    padding: 0.4em;
+    height: auto;
+    border-radius: 0.2em;
+
+    background-color: var(--blog-lightyellow);
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: start;
+}
+
+.category .recent .content .text .item .info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 0.2em solid var(--blog-yellow);
+
+    margin-bottom: 0.4em;
 }
 
 .category .recent .content .read-more {

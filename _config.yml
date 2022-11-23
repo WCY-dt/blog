@@ -6,8 +6,9 @@ baseurl             : "/"
 permalink           : /:title/
 description         : "Security. Programming. Mathematicas. Signal processing."
 markdown            : kramdown
+permalink           : /404.html
 kramdown:
-  input: GFM
+  input             : GFM
   syntax_highlighter: rouge
 statement           : "Designed by Chenyang, All Rights Reserved."
 google_analytics    : G-R3YPEPV2W9
@@ -23,6 +24,7 @@ collection_order    :
     "signal",
     "language",
     "miscellaneous",
+    "notices",
   ]
 collections:
   security:
@@ -55,6 +57,11 @@ collections:
     permalink       : /:collection/:title/
     sort_by         : date
     alias           : "Miscellaneous"
+  notices:
+    output          : true
+    permalink       : /:collection/:title/
+    sort_by         : date
+    alias           : "Notices"
 
 # 3. Comment settings（disqus.com）
 # disqus_username     : akiritsu
@@ -65,8 +72,8 @@ defaults:
     scope:
       path          : ""  # an empty string here means all files in the project
     values:
-      layout              : "post"      # which layout to use by default    
-      comment             : false
+      layout        : "post"      # which layout to use by default    
+      comment       : false
 
 # 5. Social Media Accounts
 rss                 : "feed.xml"

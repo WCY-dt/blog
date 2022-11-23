@@ -1,0 +1,190 @@
+:root {
+    --blog-yellow: #F7DF1E;
+
+    --cursor-default: url(../img/cur1.svg);
+    --cursor-pointer: url(../img/cur2.svg);
+}
+
+@font-face {
+    font-family: 'Permanent Marker';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/Permanent.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Permanent Marker';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/zhongshan.woff2) format('woff2');
+    unicode-range: U+4E00-9FCB;
+}
+
+@font-face {
+    font-family: 'Jetbrains Mono';
+    src: url(../fonts/JetBrainsMono.woff2) format('woff2');
+}
+
+.light {
+    --blog-black: #000000;
+    --blog-white: #FFFFFF;
+    --blog-lightyellow: #FCF2A5;
+    --blog-gradient-lightyellow-white: linear-gradient(90deg, #FCF2A5 0%, #FFFFFF 50%);
+    --blog-gradient-lightyellow-white-re: linear-gradient(-90deg, #FCF2A5 0%, #FFFFFF 50%);
+    --blog-grey: #aaaaaa;
+}
+
+.dark {
+    --blog-black: #FFFFFF;
+    --blog-white: #000000;
+    --blog-lightyellow: #3E3808;
+    --blog-gradient-lightyellow-white: linear-gradient(90deg, #3E3808 0%, #000000 50%);
+}
+
+html {
+    cursor: var(--cursor-default), default;
+}
+
+body {
+    color: var(--blog-black);
+    background-color: var(--blog-white);
+    font-size: 1em;
+    font-family: Permanent Marker, 微软雅黑;
+    overflow-x: hidden;
+
+    display: relative;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 10vh;
+    font-size: calc(min(4vh, 5.5vw));
+    vertical-align: middle;
+    padding-left: 2vh;
+
+    background-image: linear-gradient(var(--blog-white) 80%, transparent 100%);
+
+    z-index: 100;
+}
+
+.menu .item {
+    color: var(--blog-black);
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    height: 1.5em;
+    margin: 0;
+    padding: 0.5vh;
+    border: 0;
+    cursor: var(--cursor-pointer), pointer;
+
+    position: relative;
+}
+
+.menu .item:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0%;
+    width: 0;
+    height: 1vh;
+    border-radius: 0.5vh;
+    background: var(--blog-yellow);
+    transition: all 0.15s ease;
+
+    cursor: var(--cursor-pointer), pointer;
+}
+
+.menu .item:hover:after {
+    left: 0%;
+    width: 100%;
+}
+
+.menu .selected {
+    color: var(--blog-yellow);
+}
+
+main {
+    margin-top: 10vh;
+    width: 100vw;
+    height: 85vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.notfound p {
+    position: fixed;
+    left: calc(50vw - 45vw);
+    top: calc(50vh - 0.5em);
+
+    width: 90vw;
+    text-align: center;
+
+    font-family: 'Times New Roman', '微软雅黑';
+    font-size: 32em;
+
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.notfound .item {
+    height: 25em;
+    position: fixed;
+    left: calc(50vw - 12.5em);
+    top: calc(50vh - 12.5em);
+}
+
+.copyright {
+    text-align: center;
+
+    width: 100vw;
+    align-self: center;
+
+    height: 5vh;
+    font-size: 2vh;
+    text-align: center;
+    padding-top: 1vh;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.copyright a {
+    color: var(--blog-black);
+    cursor: var(--cursor-pointer), pointer;
+}
+
+.generate {
+    display: none;
+}
+
+.cover-for-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    padding: 0;
+    margin: 0;
+    border: 0;
+
+    z-index: 99;
+}
+
+.noselect {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
