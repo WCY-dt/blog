@@ -15,9 +15,7 @@ OverTheWire:Bandit是一个学习linux命令的WarGame，通过闯关的模式�
 
 首先，打开[网站](https://overthewire.org/wargames/bandit/)
 
-为了完成任务，我们需要选择一个合适的工具，Linux为最佳，但如果你在Windows下，我推荐MobaXterm
-
-下载并打开MobaXterm，依次点击`sessions`(会话夹)，`new session`(新建会话)，`SSH`，远程主机一栏填写`176.9.9.172`(可以通过Ping该网站得到)，端口填写`2220`，点击确定即可进入
+为了完成任务，我们需要 Linux 环境来执行命令。
 
 # Level 0
 
