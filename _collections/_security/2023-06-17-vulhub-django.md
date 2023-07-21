@@ -33,18 +33,18 @@ https://vulhub.org/#/environments/django/CVE-2017-12794/
 其输出提示的具体实现为 https://github.com/django/django/blob/293608a2e0c7968538597200b72c9b5e9df4184a/django/views/templates/technical_500.html：
 
 ```html
-{% for frame in frames %}
-  {% ifchanged frame.exc_cause %}
-    {% if frame.exc_cause %}
+{ % for frame in frames % }
+  { % ifchanged frame.exc_cause % }
+    { % if frame.exc_cause % }
     <li><h3>
-    {% if frame.exc_cause_explicit %}
-      The above exception ({{ frame.exc_cause }}) was the direct cause of the following exception:
-    {% else %}
-      During handling of the above exception ({{ frame.exc_cause }}), another exception occurred:
-    {% endif %}
+    { % if frame.exc_cause_explicit % }
+      The above exception ({ { frame.exc_cause } }) was the direct cause of the following exception:
+    { % else % }
+      During handling of the above exception ({ { frame.exc_cause } }), another exception occurred:
+    { % endif % }
     </h3></li>
-    {% endif %}
-  {% endifchanged %}
+    { % endif % }
+  { % endifchanged % }
 ```
 
 而处理异常的函数为 https://github.com/django/django/blob/6e55e1d88a5c4453e25f0caf7ffb68973de5c0ba/django/db/utils.py：
