@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "【奇技淫巧】最小的 Hello World"
-date:   2022-04-20 00:00:00 +0800
+date:   2023-04-20 00:00:00 +0800
 categories: miscellaneous
 tags: C
 comments: 1
@@ -260,7 +260,7 @@ ENTRY(nomainhere)
 SECTIONS
 {
   . = 0x8048000 + SIZEOF_HEADERS;
-  tiny : { *(.text) *(.data) *(.rodata*) }
+  tiny : { *(.text) *(.data) }
   /DISCARD/ : { *(*) }
 }
 ```
@@ -432,9 +432,7 @@ $ wc -c hello_world
 
 ## 更多魔法
 
-兜兜转转这么多，我们还忘了一件事情：那段实现功能的汇编代码也是可以优化的！
-
-一些 `mov` 数字的指令可以更换为 `push` 和 `pop`，这样会更省空间：
+兜兜转转这么多，我们还忘了一件事情：那段实现功能的汇编代码也是可以优化的：
 
 ```assembly
 ; hello_world.asm
@@ -469,18 +467,12 @@ $ wc -c hello_world
   
   _start:
     ; write "Hello World!" to stdout
-	push 1
-	pop rax          ; system call for write
-	mov rdi, rax     ; file descriptor for stdout
-	mov esi, hello   ; pointer to string to write
-	push 13
-	pop rdx          ; length of string to write
-	syscall          ; invoke the system call
-	; exit with status code 0
-	push 231
-	pop rax          ; system call number for _exit
-	xor edi, edi     ; exit status code (0)
-	syscall          ; invoke the system call
+	mov al, 1
+    mov dl, 13
+    mov esi, hello
+    syscall
+    mov al, 231
+    syscall
 
   hello: db "Hello World!", 10 ; 10 is the ASCII code for newline
 
@@ -492,13 +484,13 @@ $ wc -c hello_world
 ```shell
 $ nasm -f bin hello_world.asm
 $ wc -c hello_world
-151 hello_world
+140 hello_world
 ```
 
 至此，我已经没有更多魔法可以施展了。
 
 # 总结
 
-本文参考了 http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html 和 https://cjting.me/2020/12/10/tiny-x64-helloworld/。前者将一个什么也不干的 32 位 elf 优化到了 45 字节，后者将一个 64 位可以输出 “Hello World!” 的程序优化到了 170 字节，而我在此基础上进一步提升到了 151 字节。
+本文参考了 http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html 和 https://cjting.me/2020/12/10/tiny-x64-helloworld/。前者将一个什么也不干的 32 位 elf 优化到了 45 字节，后者将一个 64 位可以输出 “Hello World!” 的程序优化到了 170 字节，而我在此基础上进一步提升到了 140 字节。
 
 由于我能力有限，64 位的程序只能优化到这里了；但对于 32 位的程序来讲，由于其 elf 文件的结构和长度，理论上还可以进一步压缩。但我懒得安装 32 位的 Linux 环境，所以到此为止。
