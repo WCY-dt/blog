@@ -554,206 +554,214 @@ ssl_server.c
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define OK 0
-#define ERR 1
-
-#define MAXBUF 1024
+#define CHK_SSL(err, s_ok)           \
+    if ((err) < 1) {                 \
+        ERR_print_errors_fp(stderr); \
+        exit(2);                     \
+    } else {                         \
+        printf(s_ok);                \
+    }
+#define CHK_ERR(err, s_err, s_ok) \
+    if ((err) == -1) {            \
+        perror(s_err);            \
+        exit(1);                  \
+    } else {                      \
+        printf(s_ok);             \
+    }
 
 /**
- * @brief SSL证书验证回调函数，打印X.509证书信息。
+ * @brief 设置TLS服务器并返回SSL句柄。
  *
- * @param ssl SSL连接对象
- * @return 成功返回OK（0），失败返回ERR（1）
+ * 该函数初始化SSL库并加载SSL算法，然后创建一个SSL上下文（Context），
+ * 并设置SSL上下文的验证模式和CA证书路径，加载服务器证书和私钥，并验证私钥与证书是否匹配。
+ *
+ * @param[in] certFileName 服务器证书文件名
+ * @param[in] keyFileName 服务器私钥文件名
+ * @param[in] CAFileName CA证书文件名
+ * @return 成功创建的SSL句柄
  */
-int ShowCerts(SSL* ssl) {
-    X509* cert;
-    char* line;
-
-    cert = SSL_get_peer_certificate(ssl);  // 获取证书并返回X509操作句柄
-    if (SSL_get_verify_result(ssl) == X509_V_OK) {
-        printf("收到client X509证书\n");
-    } else {
-        printf("未收到client X509证书\n");
-        return ERR;
-    }
-    if (cert != NULL) {
-        printf("client数字证书信息:\n");
-        line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
-        printf("证书: %s\n", line);
-        free(line);
-        line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
-        printf("颁发者: %s\n\n", line);
-        free(line);
-        X509_free(cert);
-        printf("对client证书验证通过!!!\n");
-    } else {
-        printf("无证书信息,对client证书验证失败!!!\n");
-        return ERR;
-    }
-    return OK;
-}
-
-int main(int argc, char** argv) {
-    int sockfd, new_fd;
-    socklen_t len;
-    struct sockaddr_in my_addr, their_addr;
-    unsigned int myport, lisnum;
-    char send_buf[MAXBUF + 1];
-    char recv_buf[MAXBUF + 1];
-    SSL_CTX* ctx;
-
-    /* 检查命令行参数是否正确 */
-    if (argc != 6) {
-        printf("usage: %s ser_port lis_num ser_crt ser_key ca_crt\n", argv[0]);
-        return -1;
-    }
-
-    /* 解析命令行参数 */
-    myport = (argv[1]) ? atoi(argv[1]) : 7838; // port端口号，默认 7838
-    lisnum = (argv[2]) ? atoi(argv[2]) : 2; // 监听数量，默认 2
-
-    /*********************第一步：OPENSSL初始化*********************/
-
+SSL* setupTLSServer(const char* certFileName, 
+                    const char* keyFileName, 
+                    const char* CAFileName) {
     /* 初始化SSL库和加载SSL算法 */
     SSL_library_init();            // SSL 库初始化
     OpenSSL_add_all_algorithms();  // 载入所有 SSL 算法
     SSL_load_error_strings();      // 载入所有 SSL 错误消息
 
     /* 创建SSL上下文 */
-    ctx = SSL_CTX_new(SSLv23_server_method());  // 以兼容方式产生一个 SSL_CTX
-    if (ctx == NULL) {
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
+    SSL_METHOD* meth = (SSL_METHOD*)SSLv23_server_method();
+    SSL_CTX* ctx = SSL_CTX_new(meth);
 
     /* 设置SSL上下文验证模式和CA证书路径 */
-    // SSL_VERIFY_PEER 要求对证书进行认证，没有证书也会放行
-    // SSL_VERIFY_FAIL_IF_NO_PEER_CERT 要求客户端需要提供证书，但验证发现单独使用没有证书也会放行
     SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, NULL);
-    if (SSL_CTX_load_verify_locations(ctx, argv[5], NULL) <= 0) {  // 设置信任根证书
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
+    SSL_CTX_load_verify_locations(ctx, CAFileName, NULL);
 
     /* 加载服务器证书和私钥 */
-    if (SSL_CTX_use_certificate_file(ctx, argv[3], SSL_FILETYPE_PEM) <= 0) { // 加载证书
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
-    if (SSL_CTX_use_PrivateKey_file(ctx, argv[4], SSL_FILETYPE_PEM) <= 0) { // 加载私钥
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
+    SSL_CTX_use_certificate_file(ctx, certFileName, SSL_FILETYPE_PEM);
+    SSL_CTX_use_PrivateKey_file(ctx, keyFileName, SSL_FILETYPE_PEM);
 
     /* 验证私钥是否与证书匹配 */
     if (!SSL_CTX_check_private_key(ctx)) {
         ERR_print_errors_fp(stdout);
         exit(1);
     }
-    
-    /*******************第二步：普通socket建立连接*******************/
+
+    SSL* ssl = SSL_new(ctx);
+
+    return ssl;
+}
+
+/**
+ * @brief 设置TCP服务器并返回监听socket。
+ *
+ * 该函数创建一个TCP socket，并绑定到指定的端口上，然后开始监听连接请求。
+ *
+ * @param[in] server_port 服务器端口号
+ * @param[in] conn_num 允许的最大连接数
+ * @return 成功创建的监听socket
+ */
+int setupTCPServer(unsigned int server_port, unsigned int conn_num) {
+    struct sockaddr_in server_addr;
+    int sock_fd, err, tr = 1;
 
     /* 创建 socket */
-    if ((sockfd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
-        perror("socket");
-        exit(1);
-    } else {
-        printf("socket created success!\n");
-    }
+    sock_fd = socket(PF_INET, SOCK_STREAM, 0);
+    err = setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR, &tr, sizeof(int));
+    CHK_ERR(err, "[ERR] setsockopt 失败", "[INFO] 成功建立 socket\n");
 
     /* 绑定 socket 到指定端口 */
-    bzero(&my_addr, sizeof(my_addr));
-    my_addr.sin_family = PF_INET;
-    my_addr.sin_port = htons(myport);
-    my_addr.sin_addr.s_addr = INADDR_ANY;
+    memset(&server_addr, '\0', sizeof(server_addr));
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_addr.s_addr = INADDR_ANY;
+    server_addr.sin_port = htons(server_port);
 
-    if (bind(sockfd, (struct sockaddr*)&my_addr, sizeof(struct sockaddr)) == -1) {
-        perror("bind");
-        exit(1);
-    } else {
-        printf("binded success!\n");
-    }
+    err = bind(sock_fd, (struct sockaddr*)&server_addr, sizeof(server_addr));
+    CHK_ERR(err, "[ERR] bind 失败", "[INFO] 成功绑定\n");
 
     /* 监听 socket，等待客户端连接 */
-    if (listen(sockfd, lisnum) == -1) {
-        perror("listen");
-        exit(1);
-    } else {
-        printf("begin listen,waitting for client connect...\n");
-    }
+    err = listen(sock_fd, conn_num);
+    CHK_ERR(err, "[ERR] listen 失败", "[INFO] 开始监听，等待客户端连接...\n");
+    return sock_fd;
+}
 
-    SSL* ssl;
-    len = sizeof(struct sockaddr);
-
-    /* 接受客户端连接，并建立 SSL 连接 */
-    if ((new_fd = accept(sockfd, (struct sockaddr*)&their_addr, &len)) == -1) {
-        perror("accept");
-        exit(errno);
-    } else
-        printf("server: got connection from %s, port %d, socket %d\n",
-               inet_ntoa(their_addr.sin_addr), ntohs(their_addr.sin_port),
-               new_fd);
-
-    /******第三步：将普通 socket 与 SSL 绑定，在 SSL 层建立连接******/
-
-    /* 创建SSL对象，将其与新的连接关联 */
-    ssl = SSL_new(ctx);       // 基于 ctx 产生一个新的 SSL
-    SSL_set_fd(ssl, new_fd);  // 将连接用户的 socket 加入到 SSL
-
-    /* SSL握手，建立加密通信 */
-    if (SSL_accept(ssl) == -1) {
-        perror("accept");
-        printf("SSL 连接失败!\n");
-        close(new_fd);
-        goto end;
-    }
-
-    /****************第四步：验证client客户端的证书****************/
-
-    /* 验证客户端的证书 */
-    if (ShowCerts(ssl) == ERR)
-        goto end;
-
-    /****************第五步：https进行收发数据****************/
-
-    /* 通过SSL连接与客户端进行通信 */
+/**
+ * @brief 处理客户端请求。
+ *
+ * 该函数接收客户端发送的消息，然后回复客户端，并通过收到的特定指令退出循环。
+ *
+ * @param[in] ssl SSL句柄
+ * @param[in] sock 客户端socket
+ */
+void processRequest(SSL *ssl, int sock) {
+    char recv_buf[1024];
+    char send_buf[1024];
+    int len;
     while (1) {
-
         /* SSL_read接收客户端的消息 */
-        printf("等待客户端发送过来的消息：\n");
-        len = SSL_read(ssl, recv_buf, MAXBUF);
-        if (len > 0) {
-            printf("接收client消息成功:'%s'，共%d个字节的数据\n", recv_buf, len);
-        } else {
-            printf("消息接收失败！错误代码是%d，错误信息是'%s'\n", errno, strerror(errno));
-            break;
-        }
-        memset(recv_buf, 0, sizeof(recv_buf));  // 清空接收缓存区
+        memset(recv_buf, '\0', sizeof(recv_buf));
+        printf("[INFO] 等待客户端发送过来的消息...\n");
+        len = SSL_read(ssl, recv_buf, sizeof(recv_buf) - 1);
+        printf("[INFO] 接收消息成功：'%s'，共 %d 个字节的数据\n", recv_buf, len);
 
         /* SSL_write发消息给客户端 */
-        printf("请输入要发送给客户端的内容：\n");
+        memset(send_buf, 0, sizeof(send_buf));
+        printf("[INPUT] 请输入要发送给客户端的内容：");
         scanf("%s", send_buf);
         if (!strncmp(send_buf, "+++", 3)) {
-            break;  // 收到+++表示退出
+            SSL_shutdown(ssl);
+            SSL_free(ssl);
+            break;
         }
         len = SSL_write(ssl, send_buf, strlen(send_buf));
-        if (len <= 0) {
-            printf("消息'%s'发送失败！错误代码是%d，错误信息是'%s'\n", send_buf, errno, strerror(errno));
-            break;
-        } else {
-            printf("消息'%s'发送成功，共发送了%d个字节！\n", send_buf, len);
-        }
-        memset(send_buf, 0, sizeof(send_buf));  // 清空接收缓存区
+        printf("[INFO] 发送消息成功：'%s'，共 %d 个字节的数据\n", send_buf, len);
+    }
+}
+
+/**
+ * @brief 打印客户端证书信息。
+ *
+ * 该函数从SSL句柄中获取客户端证书并打印其信息，验证客户端证书是否通过验证。
+ *
+ * @param[in] ssl SSL句柄
+ */
+void printCerts(SSL* ssl) {
+    char* str;
+
+    X509* cert = SSL_get_peer_certificate(ssl);  // 获取证书并返回X509操作句柄
+    if (SSL_get_verify_result(ssl) == X509_V_OK) {
+        printf("[INFO] 收到client X509证书\n");
+    } else {
+        printf("[ERR] 未收到client X509证书\n");
+        return;
     }
 
-    /****************第六步：关闭连接及资源清理****************/
-end:
-    /* 关闭 SSL 连接和 socket，释放 SSL 上下文 */
-    SSL_shutdown(ssl);  // 关闭 SSL 连接
-    SSL_free(ssl);      // 释放 SSL
-    close(new_fd);      // 关闭 socket
-    close(sockfd);      // 关闭监听的 socket
-    SSL_CTX_free(ctx);  // 释放 CTX
+    if (cert != NULL) {
+        printf(
+            "[INFO] 客户端证书信息:\n"
+            "       证书: %s\n"
+            "       颁发者: %s\n"
+            "       客户端证书验证通过\n",
+            X509_NAME_oneline(X509_get_subject_name(cert), 0, 0),
+            X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0)
+        );
+        X509_free(cert);
+    } else {
+        printf("[ERR] 无证书信息，客户端证书验证失败\n");
+    }
+}
+
+/**
+ * @brief 主函数，用于启动TLS服务器。
+ *
+ * 该函数从命令行参数解析服务器端口号、连接数、客户端证书文件名、客户端私钥文件名和CA证书文件名，
+ * 然后调用 setupTLSServer 函数创建并配置TLS服务器，创建TCP socket并开始监听连接请求。
+ * 当接收到客户端连接时，创建子进程处理客户端请求，验证客户端证书，接收客户端消息并回复，
+ * 直到客户端发送特定指令退出。
+ *
+ * @param[in] argc 命令行参数个数，包括执行程序名本身
+ * @param[in] argv 命令行参数列表，是一个指向指针数组的指针，其中每个指针指向一个字符串，
+ *                依次为：执行程序名、服务器端口、连接数、客户端证书文件、客户端私钥文件、CA证书文件
+ * @return 返回0表示程序运行成功，其他值表示程序运行出错
+ */
+int main(int argc, char** argv) {
+    if (argc != 6) {
+        printf("[ERR] 命令行应为 %s 服务器端口 连接数 客户端证书文件 客户端私钥文件 CA证书文件\n", argv[0]);
+        return -1;
+    }
+
+    /* 解析命令行参数 */
+    unsigned int server_port = atoi(argv[1]);
+    unsigned int conn_num = atoi(argv[2]);
+    char *certFileName = argv[3];
+    char *keyFimeName = argv[4];
+    char *CAFileName = argv[5];
+
+    SSL* ssl = setupTLSServer(certFileName, keyFimeName, CAFileName);
+
+    struct sockaddr_in client_addr;
+    socklen_t client_len = sizeof(struct sockaddr);
+
+    int sock_fd = setupTCPServer(server_port, conn_num);
+
+    while (1) {
+        int sock = accept(sock_fd, (struct sockaddr*)&client_addr, &client_len);
+        printf("\n[INFO] 收到来自 %s，端口 %d，socket %d 的连接\n", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port), sock);
+
+        if (fork() == 0) {
+            close(sock_fd);
+
+            SSL_set_fd(ssl, sock);
+            int err = SSL_accept(ssl);
+            CHK_SSL(err, "[INFO] SSL 连接已建立\n");
+            printCerts(ssl);
+
+            processRequest(ssl, sock);
+            close(sock);
+            return 0;
+        } else {
+            close(sock);
+        }
+    }
     return 0;
 }
 ```
@@ -777,91 +785,51 @@ ssl_client.c
 #include <sys/socket.h>
 #include <unistd.h>
 
-#define OK 0
-#define ERR 1
-
-#define MAXBUF 1024
+#define CHK_SSL(err, s_ok)           \
+    if ((err) < 1) {                 \
+        ERR_print_errors_fp(stderr); \
+        exit(2);                     \
+    } else {                         \
+        printf(s_ok);                \
+    }
+#define CHK_ERR(err, s_err, s_ok) \
+    if ((err) == -1) {            \
+        perror(s_err);            \
+        exit(1);                  \
+    } else {                      \
+        printf(s_ok);             \
+    }
 
 /**
- * @brief SSL证书验证回调函数，打印X.509证书信息。
+ * @brief 设置TLS服务器并返回SSL句柄。
  *
- * @param ssl SSL连接对象
- * @return 成功返回OK（0），失败返回ERR（1）
+ * 该函数初始化SSL库并加载SSL算法，然后创建一个SSL上下文（Context），
+ * 并设置SSL上下文的验证模式和CA证书路径，加载服务器证书和私钥，并验证私钥与证书是否匹配。
+ *
+ * @param[in] certFileName 服务器证书文件名
+ * @param[in] keyFileName 服务器私钥文件名
+ * @param[in] CAFileName CA证书文件名
+ * @return 成功创建的SSL句柄
  */
-int ShowCerts(SSL* ssl) {
-    X509* cert;
-    char* line;
-
-    cert = SSL_get_peer_certificate(ssl);  // 获取证书并返回X509操作句柄
-    if (SSL_get_verify_result(ssl) == X509_V_OK) {
-        printf("收到server X509证书\n");
-    } else {
-        printf("未收到server X509证书\n");
-        return ERR;
-    }
-    if (cert != NULL) {
-        printf("server数字证书信息:\n");
-        line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
-        printf("证书: %s\n", line);
-        free(line);
-        line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
-        printf("颁发者: %s\n\n", line);
-        free(line);
-        X509_free(cert);
-        printf("对server证书验证通过!!!\n");
-    } else {
-        printf("无证书信息,对server证书验证失败!!!\n");
-        return ERR;
-    }
-    return OK;
-}
-
-int main(int argc, char** argv) {
-    int sockfd, len;
-    struct sockaddr_in dest;
-    char send_buffer[MAXBUF + 1];
-    char recv_buffer[MAXBUF + 1];
-    SSL_CTX* ctx;
-    SSL* ssl;
-
-    /* 检查命令行参数是否正确 */
-    if (argc != 6) {
-        printf("usage: %s ser_ip ser_port cli_crt cli_key ca_crt\n", argv[0]);
-        return -1;
-    }
-
-    /*********************第一步：OPENSSL初始化*********************/
+SSL* setupTLSClient(const char* certFileName,
+                    const char* keyFileName,
+                    const char* CAFileName) {
     /* 初始化SSL库和加载SSL算法 */
     SSL_library_init();            // SSL 库初始化
     OpenSSL_add_all_algorithms();  // 载入所有 SSL 算法
     SSL_load_error_strings();      // 载入所有 SSL 错误消息
 
     /* 创建SSL上下文 */
-    ctx = SSL_CTX_new(SSLv23_client_method());  // 以兼容方式产生一个 SSL_CTX
-    if (ctx == NULL) {
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
+    SSL_METHOD* meth = (SSL_METHOD*)SSLv23_client_method();
+    SSL_CTX* ctx = SSL_CTX_new(meth);
 
     /* 设置SSL上下文验证模式和CA证书路径 */
-    // SSL_VERIFY_PEER 要求对证书进行认证，没有证书也会放行
-    // SSL_VERIFY_FAIL_IF_NO_PEER_CERT 要求客户端需要提供证书，但验证发现单独使用没有证书也会放行
     SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, NULL);
-    if (SSL_CTX_load_verify_locations(ctx, argv[5], NULL) <= 0) {  // 设置信任根证书
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
+    SSL_CTX_load_verify_locations(ctx, CAFileName, NULL);
 
-    /* 加载服务器证书和私钥 */
-    if (SSL_CTX_use_certificate_file(ctx, argv[3], SSL_FILETYPE_PEM) <= 0) {  // 加载证书
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
-    /* 载入用户私钥 */
-    if (SSL_CTX_use_PrivateKey_file(ctx, argv[4], SSL_FILETYPE_PEM) <= 0) {  // 加载私钥
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
+    /* 加载用户证书和私钥 */
+    SSL_CTX_use_certificate_file(ctx, certFileName, SSL_FILETYPE_PEM);
+    SSL_CTX_use_PrivateKey_file(ctx, keyFileName, SSL_FILETYPE_PEM);
 
     /* 验证私钥是否与证书匹配 */
     if (!SSL_CTX_check_private_key(ctx)) {
@@ -869,95 +837,280 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    /*******************第二步：普通socket建立连接*******************/
+    SSL* ssl = SSL_new(ctx);
+
+    return ssl;
+}
+
+/**
+ * @brief 设置TCP服务器并返回监听socket。
+ *
+ * 该函数创建一个TCP socket，并绑定到指定的端口上，然后开始监听连接请求。
+ *
+ * @param[in] server_port 服务器端口号
+ * @param[in] server_ip 服务器 IP 地址
+ * @return 成功创建的监听socket
+ */
+int setupTCPClient(unsigned int server_port, char *server_ip) {
+    struct sockaddr_in server_addr;
+    int sock_fd, err, tr = 1;
 
     /* 创建 socket */
-    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        perror("Socket");
-        exit(errno);
-    } else {
-        printf("socket created success!\n");
-    }
+    sock_fd = socket(PF_INET, SOCK_STREAM, 0);
 
     /* 绑定 socket 到指定端口 */
-    bzero(&dest, sizeof(dest));
-    dest.sin_family = AF_INET;
-    dest.sin_port = htons(atoi(argv[2]));
-    if (inet_aton(argv[1], (struct in_addr*)&dest.sin_addr.s_addr) == 0) {
-        perror(argv[1]);
-        exit(errno);
-    }
-    printf("address created success!\n");
+    memset(&server_addr, '\0', sizeof(server_addr));
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(server_port);
+    err = inet_aton(server_ip, (struct in_addr*)&server_addr.sin_addr.s_addr);
 
-    /* 连接服务器 */
-    if (connect(sockfd, (struct sockaddr*)&dest, sizeof(dest)) != 0) {
-        perror("Connect ");
-        exit(errno);
-    } else {
-        printf("server connected  success!\n");
-    }
+    err = connect(sock_fd, (struct sockaddr*)&server_addr, sizeof(server_addr));
 
-    /******第三步：将普通 socket 与 SSL 绑定，在 SSL 层建立连接******/
+    return sock_fd;
+}
 
-    /* 创建SSL对象，将其与新的连接关联 */
-    ssl = SSL_new(ctx);       // 基于 ctx 产生一个新的 SSL
-    SSL_set_fd(ssl, sockfd);  // 将连接用户的 socket 加入到 SSL
-
-    /* SSL握手，建立加密通信 */
-    if (SSL_connect(ssl) == -1) {
-        ERR_print_errors_fp(stderr);
-        printf("SSL 连接失败!\n");
-        goto end;
-    } else {
-        printf("Connected with %s encryption\n", SSL_get_cipher(ssl));
-        /****************第四步：验证server服务端的证书****************/
-
-        /* 验证服务端的证书 */
-        if (ShowCerts(ssl) == ERR)
-            goto end;
-    }
-
-    /****************第五步：https进行收发数据****************/
-
-    /* 通过SSL连接与服务端进行通信 */
+/**
+ * @brief 处理服务器请求。
+ *
+ * 该函数给服务器发送消息，然后接收服务器的回复，并通过收到的特定指令退出循环。
+ *
+ * @param[in] ssl SSL句柄
+ * @param[in] sock 服务器socket
+ */
+void processRequest(SSL* ssl, int sock) {
+    char recv_buf[1024];
+    char send_buf[1024];
+    int len;
     while (1) {
-        
-        /* SSL_write发消息给服务端 */
-        printf("请输入要发送给服务器的内容：\n");
-        scanf("%s", send_buffer);
-        if (!strncmp(send_buffer, "+++", 3))
-            break;  // 收到+++表示退出
-
-        len = SSL_write(ssl, send_buffer, strlen(send_buffer));
-        if (len < 0)
-            printf("消息'%s'发送失败！错误代码是%d，错误信息是'%s'\n", send_buffer, errno, strerror(errno));
-        else
-            printf("消息'%s'发送成功，共发送了%d个字节！\n", send_buffer, len);
-        memset(send_buffer, 0, sizeof(send_buffer));  // 清空接收缓存区
-
-        /* SSL_read接收服务端的消息 */
-        len = SSL_read(ssl, recv_buffer, MAXBUF);
-        if (len > 0)
-            printf("接收消息成功:'%s'，共%d个字节的数据\n", recv_buffer, len);
-        else {
-            printf("消息接收失败！错误代码是%d，错误信息是'%s'\n", errno, strerror(errno));
+        /* SSL_write发消息给服务器 */
+        memset(send_buf, 0, sizeof(send_buf));
+        printf("[INPUT] 请输入要发送给服务器的内容：");
+        scanf("%s", send_buf);
+        if (!strncmp(send_buf, "+++", 3)) {
+            SSL_shutdown(ssl);
+            SSL_free(ssl);
             break;
         }
-        memset(recv_buffer, 0, sizeof(recv_buffer));  // 清空接收缓存区
+        len = SSL_write(ssl, send_buf, strlen(send_buf));
+        printf("[INFO] 发送消息成功：'%s'，共 %d 个字节的数据\n", send_buf, len);
+
+        /* SSL_read接收服务器的消息 */
+        memset(recv_buf, '\0', sizeof(recv_buf));
+        printf("[INFO] 等待服务器发送过来的消息...\n");
+        len = SSL_read(ssl, recv_buf, sizeof(recv_buf) - 1);
+        printf("[INFO] 接收消息成功：'%s'，共 %d 个字节的数据\n", recv_buf, len);
+    }
+}
+
+int main(int argc, char** argv) {
+    if (argc != 6) {
+        printf("[ERR] 命令行应为 %s 服务器端口 连接数 客户端证书文件 客户端私钥文件 CA证书文件\n", argv[0]);
+        return -1;
     }
 
-    /****************第六步：关闭连接及资源清理****************/
-end:
-    /* 关闭 SSL 连接和 socket，释放 SSL 上下文 */
+    /* 解析命令行参数 */
+    char* server_ip = argv[1];
+    unsigned int server_port = atoi(argv[2]);
+    char* certFileName = argv[3];
+    char* keyFimeName = argv[4];
+    char* CAFileName = argv[5];
+
+    SSL* ssl = setupTLSClient(certFileName, keyFimeName, CAFileName);
+
+    int sock_fd = setupTCPClient(server_port, server_ip);
+
+    SSL_set_fd(ssl, sock_fd);
+    int err = SSL_connect(ssl);
+    CHK_SSL(err, "[INFO] SSL 连接已建立\n");
+
+    char send_buf[1024];
+    char recv_buf[1024];
+
+    processRequest(ssl, sock_fd);
+
     SSL_shutdown(ssl);  // 关闭 SSL 连接
     SSL_free(ssl);      // 释放 SSL
-    close(sockfd);      // 关闭监听的 socket
-    SSL_CTX_free(ctx);  // 释放 CTX
+    close(sock_fd);     // 关闭监听的 socket
     return 0;
 }
 ```
 
 运行即可。
+
+# Misc
+
+## Stunnel
+
+Stunnel 是一个基于 SSL 加密封装器，它能够将明文在传输过程中进行加密。Stunnel 最常见的用途之一就是对 POP 或 IMAP 邮件服务器与电子邮件客户端之间的通信进行加密。这两种协议要求用户使用用户名和密码进行身份验证。在大多数情况下，这些用户名密码与用户在本地或通过 SSH 远程登录时使用的相同。如果不使用 Stunnel 来加密这些数据，容易被中间人窃取。
+
+Stunnel 通常作为预编译软件包随同发行版一起提供。如果没有，可以在[网站](ftp://stunnel.mirt.net/stunnel/)上下载，然后执行以下命令安装：
+
+```shell
+tar xzf stunnel-4.XX.tar.gz
+cd stunnel-4.XX
+./configure
+make
+make install
+```
+
+使用 Stunnel 前，我们首先需要一个证书。如果从源代码编译，那么会自动创建 `stunnel.pem`。一些预编译的二进制软件包可能会在安装过程中生成，也可能要求用户自行生成。生成证书最简单的方法是使用 Stunnel 源代码中提供的脚本。如果是从压缩包编译的，只需多执行命令：
+
+```shell
+cd tools
+make stunnel.pem
+```
+
+### 存在支持 SSL 的客户端的情况
+
+例如大多数电子邮件客户端都支持 POP3、IMAP 和 SMTP 的 SSL 加密，大多数互联网客户端（如 Web 浏览器）也支持 HTTPS 加密等。
+
+安装 Stunnel 并且生成了证书后，需要一个配置文件。下面是一个示例，可以用于加密 POP3 和 IMAP 通信：
+
+```conf
+# 适用于加密 POP3/IMAP 的 stunnel 示例配置文件
+
+# 证书的完整路径
+cert = /usr/local/etc/stunnel/stunnel.pem
+
+# 将进程锁定到 chroot 监狱
+chroot = /usr/local/var/run/stunnel/
+# 在监狱中创建 PID 文件
+pid = /stunnel.pid
+
+# 修改进程 UID 和 GID 以保证安全
+setuid = nobody
+setgid = nobody
+
+# 设置 POP3/IMAP 服务
+
+[pop3s]
+accept  = 995
+connect = 110
+
+[imaps]
+accept  = 993
+connect = 143
+```
+
+使用该配置，任何进入 995 端口（POP3s）的加密连接都会被解密并转发到本地 110 端口的服务（POP3）。当本地 POP3 服务做出响应时，Stunnel 会再次对其进行加密，并通过 995 端口传输回去。对于 993 端口的 IMAPs 同样适用相同的处理方式。
+
+Stunnel 默认作为一个守护进程服务运行。因此，要按照这个配置启动它，我们可以执行命令：
+
+```shell
+stunnel stunnel-secure-email.conf
+```
+
+其中，`stunnel-secure-email.conf` 是上述的配置文件。
+
+我们可以设置 Stunnel 在系统启动时自动启动，方法是将相应的命令添加到 `rc.local` 文件中，该文件通常位于 `/etc/rc.d/` 目录下。这个文件是系统启动时执行的最后一个文件，并且通常被系统管理员用于自己的初始化设置。在将命令放入该脚本时，需要使用完整的路径，如：
+
+```
+/path/to/stunnel /path/to/the/configuration-file
+```
+
+### 服务器和客户端均不支持 SSL 的情况
+
+例如 CVS、MySQL 等。
+
+在上面的 POP3 和 IMAP 示例中，我们只为服务器提供 SSL 加密，因为客户端已经内置了此功能。然而，标准的 MySQL 服务器和客户端都没有 SSL 功能，但我们仍然可以使用 Stunnel 来提供这一功能。
+
+这涉及在服务器和客户端机器上都使用 Stunnel 守护进程。服务器端的配置与我们上面用于 POP3/IMAP 的配置类似。默认的 MySQL 端口是 3306，由于没有保留端口用于安全的 MySQL 连接，我们将使用 3307：
+
+```conf
+# 适用于加密 MySQL 的 stunnel 示例配置文件（服务器）
+
+# 证书的完整路径
+cert = /usr/local/etc/stunnel/stunnel.pem
+
+# 将进程锁定到 chroot 监狱
+chroot = /usr/local/var/run/stunnel/
+# 在监狱中创建 PID 文件
+pid = /stunnel.pid
+
+# 修改进程 UID 和 GID 以保证安全
+setuid = nobody
+setgid = nobody
+
+# 设置 MySQL 服务
+[mysqls]
+accept = 3307
+connect = 3306
+```
+然后在服务器上启动 Stunnel 守护进程：
+
+```shell
+stunnel stunnel-mysql-server.conf
+```
+
+
+我们还需要在客户端机器上设置一个 Stunnel 守护进程，并使用以下配置：
+
+```conf
+# 适用于加密 MySQL 的 stunnel 示例配置文件（客户端）
+
+# 证书的完整路径
+cert = /usr/local/etc/stunnel/stunnel.pem
+
+# 将进程锁定到 chroot 监狱
+chroot = /usr/local/var/run/stunnel/
+# 在监狱中创建 PID 文件
+pid = /stunnel.pid
+
+# 修改进程 UID 和 GID 以保证安全
+setuid = nobody
+setgid = nobody
+
+# 启用客户端模式
+client = yes
+
+# 配置我们的安全MySQL客户端
+
+# 设置 MySQL 服务
+accept = 3306
+connect = 1.2.3.4:3307
+```
+
+`client = yes` 启用了“客户端模式”，让 Stunnel 知道远程服务使用 SSL。现在本地 Stunnel 守护进程将监听本地 MySQL 端口（3306），对连接进行加密，并将其转发到 MySQL 服务器机器（比如 1.2.3.4）上的另一个监听在 3307 端口上的 Stunnel。远程 Stunnel 将解密传输并转发到同一机器上监听在 3306 端口的 MySQL 服务器。所有响应将通过同一加密通道发送回。
+
+在客户端上使用以下命令启动 Stunnel：
+
+```shell
+stunnel stunnel-mysql-client.conf
+```
+
+然后，通过连接到本地 Stunnel 守护进程（监听 MySQL 的 3306 端口）来通过加密通道连接到远程 MySQL 服务器：
+
+```shell
+mysql -h 127.0.0.1 -u username -p
+```
+
+Stunnel 在权限方面可能有些不好处理，特别是在使用 chroot 监狱并将 UID 和 GID 降为 nobody 时（某些系统可能需要 nogroup 来 setgid）。请确保 chroot 的目录对 nobody 和 nogroup 可写。
+
+Stunnel 默认在后台运行，并且不显示任何错误消息。可以通过搜索 ps 命令的输出来检查该进程是否正在运行：
+
+```shell
+ps -ef | grep stunnel nobody 21769 1 0 09:12 ? 00:00:00 /usr/local/sbin/stunnel ./stunnel-mysql-server.conf
+```
+
+也可以通过在配置文件中添加以下命令（在服务配置之前）来指示 Stunnel 在前台运行：
+
+```conf
+foreground = yes
+```
+
+可以通过在配置文件中添加以下命令来启用 Stunnel 的日志记录功能：
+
+```shell
+debug = 7
+output = /tmp/stunnel.log
+```
+
+如果在前台运行进行测试，则可能更喜欢将日志消息发送到标准输出：
+
+```shell
+debug = 7
+output = /dev/stdout
+```
 
 # 参考资料
 
@@ -965,3 +1118,4 @@ end:
 - https://stackoverflow.com/questions/16235526/openssl-verify-error-20-at-0-depth-lookupunable-to-get-local-issuer-certifica
 - https://blog.csdn.net/wu10188/article/details/124970453?spm=1001.2014.3001.5506
 - https://www.cnblogs.com/lsdb/p/9391979.html
+- https://linuxgazette.net/107/odonovan.html
