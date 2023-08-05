@@ -1170,7 +1170,7 @@ debug = 7
 output = /dev/stdout
 ```
 
-# 和 socket 编程互动
+### 和 socket 编程互动
 
 首先编写配置文件 `stunnel.cnf`，使其作为客户端：
 
