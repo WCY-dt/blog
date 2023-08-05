@@ -23,38 +23,32 @@
 
 <body class="light">
     <!-- header -->
-    <section>
-        <div class="menu noselect">
-            <embed class="item" src="/assets/img/icon.svg" type="image/svg+xml" />
-            <a href="/index.html" id="menu-home-p"><div class="item" id="menu-home">Home</div></a>
-            <a href="/about.html" id="menu-about-p"><div class="item" id="menu-about">About</div></a>
-            <a href="/index.html#archives" id="menu-archive-p"><div class="item" id="menu-archives">Archives</div></a>
-            <a href="/feed.xml" id="menu-rss-p"><div class="item" id="menu-rss">RSS</div></a>
-        </div>
+    <section class="menu noselect">
+        <embed class="menu-item" src="/assets/img/icon.svg" type="image/svg+xml" />
+        <a href="/index.html" id="menu-home-p"><div class="menu-item" id="menu-home">Home</div></a>
+        <a href="/about.html" id="menu-about-p"><div class="menu-item" id="menu-about">About</div></a>
+        <a href="/index.html#archives" id="menu-archive-p"><div class="menu-item" id="menu-archives">Archives</div></a>
+        <a href="/feed.xml" id="menu-rss-p"><div class="menu-item" id="menu-rss">RSS</div></a>
     </section>
 
     <main>
-        <section class="post-content">
-            <div class="title">{{ page.title }}</div>
-            {{ content }}
-        </section>
-
-        <section class="comments">
-            <p>Comments under maintenance.</p>
-        </section>
-
-        <footer>
-            <div class="copyright noselect">
+        <div class="post">
+            <section class="post-context">
+                <div class="post-title">{{ page.title }}</div>
+                <div class="post-content">{{ content }}</div>
+            </section>
+        
+            <footer class="noselect">
                 Copyright © 2022 All rights reserved. Designed by
                 <a href="https://github.com/WCY-dt/">Chenyang</a>.
-            </div>
-        </footer>
+            </footer>
+        </div>
     </main>
-
-    <div class="toc noselect">
-        <div class="toc-title">Table of Contents</div>
-        <div class="toc-content"></div>
-    </div>
 </body>
+
+<div class="toc noselect">
+    <div class="toc-title">Table of Contents</div>
+    <div class="toc-content"></div>
+</div>
 
 </html>

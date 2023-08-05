@@ -460,7 +460,7 @@ openssl verify -verbose -partial_chain -CAfile AAA.pem -untrusted inter.pem seu.
 seu.pem: OK
 ```
 
-其中，`-CAfile` 提供了自签名的根CA证书。
+其中，`-CAfile` 提供了自签名的根CA证书。                                  
 
 > **踩坑**
 >
@@ -472,7 +472,40 @@ seu.pem: OK
 
 # TLS
 
-传输层安全协议（TLS）就是标准化后的SSL。
+传输层安全协议（TLS）就是标准化后的SSL。TLS 位于传输层和应用层之间，其本身由两层组成。
+
+- 底层为记录层，每条记录包含一个头部、一个载荷、一个可选的 MAC、一个填充；
+- 上层有 5 中消息协议，包括握手协议、警报协议、更改密码规范协议、心跳协议、应用协议。
+
+## TLS 握手
+
+在客户端和服务器进行完 TCP 三次握手后，便可以进行 TLS 握手。TLS 握手主要有以下几步：
+
+- Client Hello：客户端想要连接时，会向服务器发送一串消息。消息表明自己支持哪些密码套件、以及一串客户端随机数（Client Random）；
+- Server Hello：服务器收到请求后，会选择一个客户端和服务器均支持的密码套件发送给客户端，同时还会发送一串服务器随机数（Server Random）；
+- Certificate：服务器之后会将自己的公钥证书发送给客户端用于验证身份；
+- Server Hello Done：服务器发送消息表明已经完成协商；
+- Client Key Exchange：客户端生成一个随机的预主密钥（Pre Master Secret），使用服务器公钥加密后发送给服务器；
+- 客户端和服务器各自使用前文的预主密钥、客户端随机数、服务器随机数生成会话密钥；
+- Change Cipher Spec：客户端向服务器发送更改密码规范消息，服务器也向客户端发送同样的消息；
+- Finished：客户端向服务器发送加密完成消息。消息包含一个哈希值和 MAC 值，由服务器验证是否正确。服务器也向客户端发送同样的消息。
+
+在实际过程中，一些消息会合并为一个数据包。最终的消息流应当为：
+
+- Client Hello
+- Server Hello, Certificate, Server Hello Done
+- Client Key Exchange, Change Cipher Spec, Finished
+- New Session Ticket, Change Cipher Spec, Finished
+
+在上面的过程中，服务器发送的公钥被用来加密随机数，证书则被用来防止中间人攻击。
+
+在客户端发送预主密钥后，客户端和服务器均需要生成会话密钥。其流程如下：
+
+- 客户端随机数、服务器随机数、预主密钥三者产生 48 字节的主密钥（Master Key）；
+- 客户端随机数、服务器随机数、主密钥三者根据密码算法生成会话密钥；
+- 会话密钥被分为 4 份，分别是 client_write_MAC_key, server_write_MAC_key, client_write_key, server_write_key。
+
+前面多次提到了 MAC，这是发送方为整段消息使用 MAC_key 计算的验证参数，会接在消息后，作为消息一起被加密发送。接收者收到消息后，会验证消息。
 
 > 这块高兴起来再写。。。
 
@@ -532,7 +565,26 @@ source /etc/profile
 
 ## SSL 通信程序
 
-按照前文所述，为 server 和 client 签发证书。然后编写相互通信的程序：
+按照前文所述，为 server 和 client 分别签发证书。
+
+TLS 通信过程如下：
+
+<img src="E:/blog/src/assets/img/security/ssl1.png" alt="ssl1" style="zoom: 15%;" />
+
+- 首先需要建立 TLS 上下文：加载加密算法、加载私钥、决定 TLS 版本、决定是否验证证书。
+  - 如果使用了 1.1.0 前的版本，需要使用 `SSL_library_init()` 执行初始化。如果内存充足，可以加载错误字符串 `SSL_load_error_strings()` 方便排错；
+  - 使用 `SSL_CTX_set_verify()` 指定如何验证证书。通常客户端会要求服务器必须有证书，反之则不一定。被需要证书的一方应当在此步使用 `SSL_CTX_use_certificate_file()` 和 `SSL_CTX_use_PrivateKey_file()` 加载证书和私钥。如果是被中间 CA 签名的证书，则应使用 `SSL_CTX_use_certificate_chain_file()` 加载证书信任链；
+  - 根据设置好的上下文，使用 `SSL_new()` 创建 SSL 层实例。
+- 然后建立 TCP 连接：
+  - 使用 `socket()` 创建一个 TCP 的 socket；
+  - 将包含目标地址的 server_addr 结构通过 `bind()` 填充进 socket 中；
+  - 客户端通过 `connect()` 执行三次握手。服务器端通过 `accept()` 接受 TCP 握手。
+- 在进行 TLS 握手：
+  - 使用 `SSL_set_fd()` 把刚刚建立的 SSL 层绑定到 TCP 连接上；
+  - 客户端调用 `SSL_connect()` 启动 TLS 握手协议。服务器端调用 `SSL_accept()` 接受 TLS 握手。
+- 此时，客户端和服务器端之间相当于建立了两个单向管道。发送方通过 `SSL_write()` 将数据写入，接受方通过 `SSL_read()` 读取。如果管道中没有信息，则 `SSL_read()` 会被阻塞。
+
+然后编写相互通信的程序：
 
 ssl_server.c
 
@@ -936,6 +988,8 @@ int main(int argc, char** argv) {
 ```
 
 运行即可。
+
+需要注意的是，编译时要加上 `-lssl` 和 `-lcrypto` 来调用 OpenSSL 的 SSL 和 Crypto 库。
 
 # Misc
 
