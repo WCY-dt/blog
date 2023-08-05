@@ -155,7 +155,7 @@ Certificate:
 
   OpenSSL会要求你输入CA的一些基本信息。
 
-  > 当然，也可以直接使用配置文件。比如，我们创建 `conf/generateCA.conf`：
+  > 当然，也可以直接使用配置文件。比如，我们创建 `conf/generateCA.cnf`：
   >
   > ```conf
   > [ req ]
@@ -336,7 +336,7 @@ Certificate:
 
   > **踩坑**
   >
-  > `dir` 处必须要填写完整路径，而不是项目的相对路径。
+  > `dir` 处必须要填写完整路径，而不是项目的相对路径。在 Linux 下甚至不能用 `~` 路径。
   
   CA根据收到的内容验证完毕后，会签发证书：
   
@@ -508,8 +508,6 @@ seu.pem: OK
 - 会话密钥被分为 4 份，分别是 client_write_MAC_key, server_write_MAC_key, client_write_key, server_write_key。    
 
 前面多次提到了 MAC，这是发送方为整段消息使用 MAC_key 计算的验证参数，会接在消息后，作为消息一起被加密发送。接收者收到消息后，会验证消息。
-
-> 这块高兴起来再写。。。
 
 ## 安装指定版本 OpenSSL
 
@@ -1050,6 +1048,10 @@ connect = 143
 
 使用该配置，任何进入 995 端口（POP3s）的加密连接都会被解密并转发到本地 110 端口的服务（POP3）。当本地 POP3 服务做出响应时，Stunnel 会再次对其进行加密，并通过 995 端口传输回去。对于 993 端口的 IMAPs 同样适用相同的处理方式。
 
+> **踩坑**
+>
+> 使用 chroot 时，对应的文件夹需要自己提前建立好。
+
 Stunnel 默认作为一个守护进程服务运行。因此，要按照这个配置启动它，我们可以执行命令：
 
 ```shell
@@ -1167,6 +1169,100 @@ output = /tmp/stunnel.log
 debug = 7
 output = /dev/stdout
 ```
+
+# 和 socket 编程互动
+
+首先编写配置文件 `stunnel.cnf`，使其作为客户端：
+
+```cnf
+debug = 7
+output = stunnel.log # 完整路径
+syslog = yes
+verify = 0
+
+sslversion = TLSv1
+
+pid = stunnel.pid # 完整路径
+
+[stunnel]
+client = yes
+accept = 12345
+
+connect = 127.0.0.1:443
+
+
+CApath = ~ # 完整路径
+CAfile = testCA_cert.pem
+# 客户端模式不需要提供证书
+# cert   = client/client.crt # 完整路径
+# key    = client/client.key # 完整路径
+```
+
+然后启动 stunnel：
+
+```shell
+stunnel4 conf/stunnel.cnf
+```
+
+可以看一下是否在监听：
+
+```shell
+netstat -tlnp
+```
+
+能看到 `0.0.0.0:12345` 即可。然后用 OpenSSL 连接一下试试：
+
+```shell
+sudo openssl s_server -cert server/server_cert.pem -accept 443 -key server/server_key.pem
+```
+
+可以看到
+
+```
+Using default temp DH parameters
+ACCEPT
+```
+
+> 要想关闭 stunnel，可以先 `ps aux | grep stunnel` 查看 PID，然后 `sudo kill` 掉。
+
+然后我们改一下配置文件使 stunnel 作为服务器：
+
+```cnf
+debug = 7
+output = stunnel.log # 完整路径
+syslog = yes
+verify = 0
+
+sslversion = TLSv1
+
+pid = stunnel.pid # 完整路径
+
+[stunnel]
+client = no
+accept = 12345
+
+connect = 127.0.0.1:443
+
+CApath = ~ # 完整路径
+CAfile = testCA_cert.pem
+cert   = client/client_cert.pem # 完整路径
+key    = client/client_key.pem # 完整路径
+```
+
+启动 stunnel 后，运行我们之前的 ssl_client：
+
+```shell
+gcc code/ssl_client.c -o code/ssl_client -lssl -lcrypto && sudo code/ssl_client 127.0.0.1 12345 client/client_cert.pem client/client_key.pem testCA_cert.pem
+```
+
+得到
+
+```
+[INFO] SSL 连接已建立
+[INPUT] 请输入要发送给服务器的内容：
+```
+
+表明链接建立成功。
 
 # 参考资料
 
