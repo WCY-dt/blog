@@ -199,7 +199,9 @@ main {
 
     position: absolute;
     left: -2.5em;
-    top: 2.5em;
+    top: 2.83em;
+
+    line-height: 1.2em;
 }
 
 .post-content h2 {
@@ -217,7 +219,6 @@ main {
 .post-content h3:hover::before {
     content: 'h3';
     left: -2.7em;
-    top: 2.3em;
 }
 
 .post-content h4,
@@ -228,13 +229,11 @@ main {
 .post-content h4:hover::before {
     content: 'h4';
     left: -3em;
-    top: 2.1em;
 }
 
 .post-content h5:hover::before {
     content: 'h5';
     left: -3.1em;
-    top: 2em;
 }
 
 /* 图片 */
@@ -257,7 +256,7 @@ main {
 .post-content p:has(img):hover {
     transition: all 0.5s ease;
     transition-delay: 1.5s;
-    transform: scale(1.5);
+    transform: scale(1.4) translate(-11.5vw, 0);
     box-shadow: 0 0 2em rgba(0, 0, 0, 0.5);
     z-index: 100;
 }
@@ -298,6 +297,8 @@ main {
     padding: 1em;
     position: relative;
     display: block;
+
+    line-height: 1.6em;
 
     background-color: #ffffffaa;
 }
@@ -380,7 +381,7 @@ main {
 .post-content p:has(>table):hover {
     transition: all 0.5s ease;
     transition-delay: 1.5s;
-    transform: scale(1.5);
+    transform: scale(1.4) translate(-11.5vw, 0);
     box-shadow: 0 0 2em rgba(0, 0, 0, 0.5);
     z-index: 100;
 }

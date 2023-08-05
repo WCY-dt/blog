@@ -21,7 +21,9 @@ copyrights: 原创
 - Bob使用Alice的公钥去加密一个会话密钥 $K$，并将加密后的会话密钥密钥发回给Alice
 - 这个加密后的会话密钥只有Alice可以用她的私钥解开
 
-尽管这个过程可以防止攻击者直接窃取到会话密钥，但依然无法防止中间人攻击（MITM Attack）。假设Mallory是一个大黑阔：
+尽管这个过程可以防止攻击者直接窃取到会话密钥，但依然无法防止中间人攻击（MITM Attack），如图所示。假设Mallory是一个大黑阔：
+
+<img src="/src/assets/img/security/ssl2.png" alt="ssl2" />
 
 - Alice的公钥发送出去后，被Mallory截获
 - Mallory使用扣留了Alice的公钥，并把自己的公钥发给了Bob
@@ -503,7 +505,7 @@ seu.pem: OK
 
 - 客户端随机数、服务器随机数、预主密钥三者产生 48 字节的主密钥（Master Key）；
 - 客户端随机数、服务器随机数、主密钥三者根据密码算法生成会话密钥；
-- 会话密钥被分为 4 份，分别是 client_write_MAC_key, server_write_MAC_key, client_write_key, server_write_key。
+- 会话密钥被分为 4 份，分别是 client_write_MAC_key, server_write_MAC_key, client_write_key, server_write_key。    
 
 前面多次提到了 MAC，这是发送方为整段消息使用 MAC_key 计算的验证参数，会接在消息后，作为消息一起被加密发送。接收者收到消息后，会验证消息。
 
@@ -569,7 +571,7 @@ source /etc/profile
 
 TLS 通信过程如下：
 
-<img src="E:/blog/src/assets/img/security/ssl1.png" alt="ssl1" style="zoom: 15%;" />
+<img src="/src/assets/img/security/ssl1.png" alt="ssl1" />
 
 - 首先需要建立 TLS 上下文：加载加密算法、加载私钥、决定 TLS 版本、决定是否验证证书。
   - 如果使用了 1.1.0 前的版本，需要使用 `SSL_library_init()` 执行初始化。如果内存充足，可以加载错误字符串 `SSL_load_error_strings()` 方便排错；
