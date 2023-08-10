@@ -567,6 +567,88 @@ source /etc/profile
 
 按照前文所述，为 server 和 client 分别签发证书。
 
+```shell
+mkdir CA
+cd CA
+mkdir newcerts
+touch serial index.txt
+echo 1000 > serial
+touch generateCA.cnf
+code generateCA.cnf
+```
+
+内容为
+
+```cnf
+[ req ]
+default_keyfile = testCA_key.pem
+default_md = md5
+prompt = no
+distinguished_name = ca_distinguished_name
+x509_extensions = ca_extensions
+
+[ ca_distinguished_name ]
+organizationName = ch3nyang
+commonName = cyCA
+emailAddress = ca@ch3nyang.top
+
+[ ca_extensions ]
+basicConstraints = CA:true
+```
+
+然后
+
+```shell
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -out testCA_cert.pem -config generateCA.cnf
+touch testCA.cnf
+code testCA.cnf
+```
+
+内容为
+
+```cnf
+[ ca ]
+default_ca      = testCA
+  
+[ testCA ]
+dir            	= CA # 完整路径
+database       	= $dir/index.txt
+new_certs_dir  	= $dir/newcerts
+  
+certificate    	= $dir/testCA_cert.pem
+serial         	= $dir/serial
+private_key    	= $dir/testCA_key.pem
+RANDFILE       	= $dir/.rand
+  
+default_days    = 365
+default_crl_days= 30
+default_md      = sha256
+unique_subject  = no
+policy          = policy_any
+  
+[ policy_any ]
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = optional
+emailAddress            = optional
+```
+
+然后
+
+```shell
+openssl genrsa -aes128 -out server_key.pem 2048
+openssl req -new -key server_key.pem -out server.csr -sha256
+openssl ca -in server.csr -out server_cert.pem -md sha256 -config testCA.cnf
+openssl genrsa -aes128 -out client_key.pem 2048
+openssl req -new -key client_key.pem -out client.csr -sha256
+openssl ca -in client.csr -out client_cert.pem -md sha256 -config testCA.cnf
+```
+
+证书密钥生成完毕。
+
 TLS 通信过程如下：
 
 <img src="/src/assets/img/security/ssl1.png" alt="ssl1" />
@@ -590,7 +672,7 @@ ssl_server.c
 
 ```c
 /*
-执行命令：gcc code/ssl_server.c -o code/ssl_server -lssl -lcrypto && code/ssl_server 7838 1 server/server.crt server/server.key myCA_cert.crt
+执行命令：gcc ssl_server.c -o ssl_server -lssl -lcrypto && sudo ./ssl_server 7838 1 CA/server_cert.pem CA/server_key.pem CA/testCA_cert.pem
 */
 
 #include <arpa/inet.h>
@@ -822,7 +904,7 @@ ssl_client.c
 
 ```c
 /*
-执行命令：gcc code/ssl_client.c -o code/ssl_client -lssl -lcrypto && code/ssl_client 127.0.0.1 7838 client/client.crt client/client.key myCA_cert.crt
+执行命令：gcc ssl_client.c -o ssl_client -lssl -lcrypto && sudo ./ssl_client 7838 1 CA/client_cert.pem CA/client_key.pem CA/testCA_cert.pem
 */
 
 #include <arpa/inet.h>
@@ -1172,97 +1254,84 @@ output = /dev/stdout
 
 ### 和 socket 编程互动
 
-首先编写配置文件 `stunnel.cnf`，使其作为客户端：
+首先还是使用前文的 `ssl_server.c` 及生成的客户端、服务器端证书密钥。
+
+stunnel 配置文件如下：
 
 ```cnf
-debug = 7
-output = stunnel.log # 完整路径
-syslog = yes
-verify = 0
+pid = /home/ch3nyang/Work/firefox-stunnel/tmp/stunnel.pid # 完整路径
+output = /home/ch3nyang/Work/firefox-stunnel/tmp/stunnel.log # 完整路径
 
-sslversion = TLSv1
-
-pid = stunnel.pid # 完整路径
-
-[stunnel]
+[my_proxy]
 client = yes
-accept = 12345
-
-connect = 127.0.0.1:443
-
-
-CApath = ~ # 完整路径
-CAfile = testCA_cert.pem
-# 客户端模式不需要提供证书
-# cert   = client/client.crt # 完整路径
-# key    = client/client.key # 完整路径
+# 本地代理监听地址
+accept = 127.0.0.1:8888
+# 您的服务器IP和端口
+connect = 0.0.0.0:4433
+# 客户端证书路径
+cert = /home/ch3nyang/Work/firefox-stunnel/CA/client_cert.pem # 完整路径
+# 客户端证书私钥路径
+key = /home/ch3nyang/Work/firefox-stunnel/CA/client_key.pem # 完整路径
 ```
 
-然后启动 stunnel：
+下面配置浏览器。首先将自己生成的 CA 证书添加到浏览器里去，然后设置代理，使得去往 `127.0.0.1:4433` 的流量全部发到 `127.0.0.1:8888`。
+
+启动服务器，使其监听 4433 端口：
 
 ```shell
-stunnel4 conf/stunnel.cnf
+gcc ssl_server.c -o ssl_server -lssl -lcrypto && sudo ./ssl_server 4433 1 CA/server_cert.pem CA/server_key.pem CA/testCA_cert.pem
 ```
 
-可以看一下是否在监听：
+如果此时关闭浏览器代理并访问 `127.0.0.1:4433`，服务器报错：
+
+```
+[INFO] 成功建立 socket
+[INFO] 成功绑定
+[INFO] 开始监听，等待客户端连接...
+
+[INFO] 收到来自 127.0.0.1，端口 57588，socket 4 的连接
+140667032327552:error:1408F09C:SSL routines:ssl3_get_record:http request:../ssl/record/ssl3_record.c:321:
+```
+
+然后我们开启代理，并启动stunnel：
 
 ```shell
-netstat -tlnp
+stunnel /home/ch3nyang/Work/firefox-stunnel/stunnel.cnf
 ```
 
-能看到 `0.0.0.0:12345` 即可。然后用 OpenSSL 连接一下试试：
-
-```shell
-sudo openssl s_server -cert server/server_cert.pem -accept 443 -key server/server_key.pem
-```
-
-可以看到
+再次访问 `127.0.0.1:4433`，得到
 
 ```
-Using default temp DH parameters
-ACCEPT
-```
+[INFO] 成功建立 socket
+[INFO] 成功绑定
+[INFO] 开始监听，等待客户端连接...
 
-> 要想关闭 stunnel，可以先 `ps aux | grep stunnel` 查看 PID，然后 `sudo kill` 掉。
-
-然后我们改一下配置文件使 stunnel 作为服务器：
-
-```cnf
-debug = 7
-output = stunnel.log # 完整路径
-syslog = yes
-verify = 0
-
-sslversion = TLSv1
-
-pid = stunnel.pid # 完整路径
-
-[stunnel]
-client = no
-accept = 12345
-
-connect = 127.0.0.1:443
-
-CApath = ~ # 完整路径
-CAfile = testCA_cert.pem
-cert   = client/client_cert.pem # 完整路径
-key    = client/client_key.pem # 完整路径
-```
-
-启动 stunnel 后，运行我们之前的 ssl_client：
-
-```shell
-gcc code/ssl_client.c -o code/ssl_client -lssl -lcrypto && sudo code/ssl_client 127.0.0.1 12345 client/client_cert.pem client/client_key.pem testCA_cert.pem
-```
-
-得到
-
-```
+[INFO] 收到来自 127.0.0.1，端口 57688，socket 4 的连接
 [INFO] SSL 连接已建立
-[INPUT] 请输入要发送给服务器的内容：
+[INFO] 收到client X509证书
+[INFO] 客户端证书信息:
+       证书: /C=CN/O=ch3nyang client/CN=*/emailAddress=client@ch3nyang.top
+       颁发者: /O=ch3nyang/CN=cyCA/emailAddress=ca@ch3nyang.top
+       客户端证书验证通过
+[INFO] 等待客户端发送过来的消息...
+[INFO] 接收消息成功：'GET http://127.0.0.1:4433/ HTTP/1.1
+Host: 127.0.0.1:4433
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+
+'，共 510 个字节的数据
+[INPUT] 请输入要发送给客户端的内容：
 ```
 
-表明链接建立成功。
+表明链接建立成功，并且流量均经过 stunnel 转发。
 
 # 参考资料
 
