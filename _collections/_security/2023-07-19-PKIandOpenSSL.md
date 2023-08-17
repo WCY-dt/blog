@@ -1333,6 +1333,21 @@ Sec-Fetch-User: ?1
 
 表明链接建立成功，并且流量均经过 stunnel 转发。
 
+> **如果要使用指定的 OpenSSL 版本呢？**
+>
+> 对于服务器端程序，加上 `-I/path/to/openssl/include -L/path/to/openssl/lib` 指定头文件搜索路径即可。但是——stunnel 要想指定 OpenSSL 版本，需要从源码开始 make。因此，为了方便起见，我们直接替换系统的 OpenSSL 版本。
+>
+> - 首先备份并替换链接库：
+>
+>   ```shell
+>   sudo cp -r /usr/lib/x86_64-linux-gnu/libssl.so* ~/Backup/openssl
+>   sudo cp -r /usr/lib/x86_64-linux-gnu/libcrypto.so* ~/Backup/openssl
+>   sudo cp /usr/local/openssl/lib/libssl.so* /usr/lib/x86_64-linux-gnu
+>   sudo cp /usr/local/openssl/lib/libcrypto.so* /usr/lib/x86_64-linux-gnu
+>   ```
+>
+> - 然后照常编译运行程序即可。
+
 # 参考资料
 
 - 《Computer Security: A Hands-on Approach》Chapter 18 & 19
