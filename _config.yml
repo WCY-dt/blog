@@ -10,9 +10,11 @@ powered_by: true
 baseurl: ""
 # the base hostname & protocol for your site,
 # e.g. http://example.com
-url: "" 
+url: ""
+favicon: "favicon.ico"
 # your google analytics tracking id
 google_analytics: G-DBLJVQ0KB7
+google_adsense: true
 
 ############# 主题设置 #############
 theme_config:

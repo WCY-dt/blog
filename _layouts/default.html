@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: 'zh-cn' }}">
+<html lang="{{ page.lang | default: 'en' }}">
 
 <head>
     <meta charset="utf-8" />
@@ -16,6 +16,11 @@
 
         gtag('config', '{{ site.google_analytics }}');
     </script>
+
+    <!-- Google Adsense -->
+    {%- if site.google_adsense -%}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6985493945601109" crossorigin="anonymous"></script>
+    {%- endif -%}
 
     <title>
         {%- if page.title -%}
@@ -52,6 +57,9 @@
 </body>
 
 <footer>
+    <!-- 性能优化 -->
+    <script src="{{ '/assets/js/optimize.js' | relative_url }}"></script>
+
     <!-- 颜色模式切换 -->
     <script src="{{ '/assets/js/color_theme_switch.js' | relative_url }}"></script>
 

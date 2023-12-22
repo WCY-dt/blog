@@ -16,52 +16,21 @@ $color-block-dark: rgba(255, 255, 255, 0.1);
     .page-content>main,
     .page-content>footer,
     .page-content .nav a,
-    .more,
-    .page-content footer a,
-    .post-list-item a,
-    .post_content a {
+    .page-content footer a {
         color: $color-words-and-lines-dark;
         background-color: $color-background-dark;
     }
 
     .page-content .nav a:hover,
-    .more:hover,
-    .page-content footer a:hover,
-    .post_content a:hover {
+    .page-content footer a:hover {
         color: $color-background-dark;
         background-color: $color-words-and-lines-dark;
-    }
-
-    // FIXME: 无法覆盖 .post-list-item:hover .title 的样式
-    .post-list-item:hover {
-        background-color: $color-block-dark;
     }
 
     .page-content>header,
     .page-content>main,
     .page-content>footer {
         border-color: $color-words-and-lines-dark;
-    }
-
-    blockquote {
-        border-left-color: $color-words-and-lines-dark;
-    }
-
-    table {
-        border-color: $color-words-and-lines-dark;
-
-        thead {
-            background-color: $color-block-dark;
-            border-bottom-color: $color-words-and-lines-dark;
-        }
-
-        tbody tr td {
-            text-align: center;
-        }
-    }
-
-    pre:has(code) {
-        background-color: $color-block-dark;
     }
 }
 body[color_theme="dark"] {
@@ -255,86 +224,6 @@ button {
     }
 }
 
-// 设置文章列表
-.post-list-item {
-    display: grid;
-    grid-template-columns: auto 1fr 6fr;
-    grid-template-rows: 1fr;
-    place-content: center;
-    grid-gap: 10px;
-
-    margin: 5px 0;
-
-    line-height: 30px;
-
-    .time {
-        grid-column: 1;
-        grid-row: 1;
-
-        align-self: center;
-    }
-    .category {
-        grid-column: 2;
-        grid-row: 1;
-
-        padding-left: 10px;
-    }
-    .title {
-        grid-column: 3;
-        grid-row: 1;
-
-        text-decoration: underline;
-        color: $color-words-and-lines-light;
-        font-weight: bold;
-    }
-
-    @media screen and (max-width: 750px) {
-        grid-template-columns: auto 1fr;
-        grid-template-rows: auto auto;
-
-        grid-gap: 5px;
-        
-        margin: 10px 0;
-
-        .time {
-            grid-column: 1;
-            grid-row: 2;
-
-            font-size: 0.8em;
-
-            opacity: 60%;
-        }
-        .category {
-            grid-column: 2;
-            grid-row: 2;
-
-            font-size: 0.8em;
-
-            opacity: 60%;
-        }
-        .title {
-            grid-column: 1 / 3;
-            grid-row: 1;
-        }
-    }
-}
-.post-list-item:hover {
-    background-color: $color-block-light;
-}
-
-.more {
-    display: inline-block;
-
-    text-decoration: underline;
-    color: $color-words-and-lines-light;
-
-    margin: 10px 0;
-}
-.more:hover {
-    color: $color-background-light;
-    background-color: $color-words-and-lines-light;
-}
-
 // 设置 footer
 .page-content > footer {
     text-align: center;
@@ -348,90 +237,5 @@ button {
     a:hover {
         color: $color-background-light;
         background-color: $color-words-and-lines-light;
-    }
-}
-
-.post_content {
-    font-family: 'Times New Roman', ' 微软雅黑', ' Arial';
-    line-height: 1.5em;
-
-    word-wrap: break-word;
-    word-break: break-all;
-
-    .title {
-        font-size: 1.4em;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .date {
-        opacity: 60%;
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 1.4em;
-        font-weight: bold;
-
-        ::before {
-            content: '·';
-        }
-    }
-    h2 {
-        font-size: 1.2em;
-        font-weight: bold;
-    }
-    h3 {
-        font-size: 1.1em;
-        font-weight: bold;
-    }
-    h4, h5 {
-        font-weight: bold;
-    }
-
-    a {
-        text-decoration: underline;
-        color: $color-words-and-lines-light;
-    }
-    a:hover {
-        color: $color-background-light;
-        background-color: $color-words-and-lines-light;
-    }
-
-    p:has(img) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    img {
-        max-width: 80%;
-    }
-
-    blockquote {
-        border-left: 1px solid $color-words-and-lines-light;
-
-        padding-left: 10px;
-    }
-
-    table {
-        border: 1px solid $color-words-and-lines-light;
-        width: 100%;
-        margin: 0 auto;
-
-        thead {
-            background-color: $color-block-light;
-            border-bottom: 1px solid $color-words-and-lines-light;
-        }
-        tbody tr td {
-            text-align: center;
-        }
-    }
-
-    pre:has(code) {
-        background-color: $color-block-light;
-    }
-    code, code * {
-        font-family: 'Courier New', Courier, monospace, '微软雅黑';
-        white-space: pre-wrap;
     }
 }
