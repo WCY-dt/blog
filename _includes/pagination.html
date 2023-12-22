@@ -23,11 +23,11 @@
                     <span class="material-symbols-outlined">
                         sell
                     </span>{{- post.categories -}}</span>
-                <a href="{{ post.url | prepend: site.baseurl | relative_url }}" class="title">{{ post.title | downcase }}</a>
+                <a href="{{ post.url | relative_url }}" class="title">{{ post.title | downcase }}</a>
             </div>
         {%- endfor -%}
         {%- if site.post_list.show_more and limit_exceeded -%}
-            <a href="{{ site.post_list.show_more_url | prepend: site.baseurl | relative_url }}" class="more no-select">
+            <a href="{{ site.post_list.show_more_url | relative_url }}" class="more no-select">
                 <span class="material-symbols-outlined">
                     read_more
                 </span>{{ site.post_list.show_more_text | default: "Show more..." }}
@@ -46,7 +46,7 @@
                         sell
                     </span>{{- post.categories -}}</span>
                 </span>
-                <a href="{{ post.url | prepend: site.baseurl | relative_url }}" class="title">{{ post.title | downcase }}</a>
+                <a href="{{ post.url | relative_url }}" class="title">{{ post.title | downcase }}</a>
             </div>
         {%- endfor -%}
     {%-endif-%}
