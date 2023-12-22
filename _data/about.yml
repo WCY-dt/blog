@@ -1,0 +1,28 @@
+name: Ch3nyang
+description: >-
+  Hi there! I'm Ch3nyang, hailing from Southeast University, China, currently pursuing a Master's degree in Cybersecurity. I have a passion for programming, enjoy writing, and love to share. I hope you enjoy my blog!
+github: WCY-dt
+contact:
+  - link: mailto:dtchenyang@gmail.com
+    name: "dtchenyang@gmail.com"
+    icon: gmail
+  - link: https://twitter.com/ch3nyang
+    name: ch3nyang
+    icon: X
+# color can be found at https://simpleicons.org/
+skill:
+  - name: C++
+    icon: CPlusPlus
+  - name: Python
+    icon: Python
+  - name: Rust
+    icon: Rust
+  - name: JavaScript
+    icon: JavaScript
+  - name: C
+    icon: C
+learn:
+  - name: Go
+    icon: Go
+  - name: UE5
+    icon: UnrealEngine

@@ -1,0 +1,142 @@
+$color-words-and-lines-light: rgb(50, 50, 50);
+$color-background-light: white;
+$color-block-light: rgba(0, 0, 0, 0.02);
+
+$color-words-and-lines-dark: rgb(200, 200, 200);
+$color-background-dark: black;
+$color-block-dark: rgba(255, 255, 255, 0.1);
+
+@mixin dark-appearance {
+    color: $color-words-and-lines-dark;
+    background-color: $color-background-dark;
+
+    .project_content>.content .item,
+    .project_content>.content .item .tech .tech_item {
+        border-color: $color-words-and-lines-dark;
+    }
+
+    .project_content>.content .item .title,
+    .project_content>.content .item .link a:hover {
+        color: $color-background-dark;
+        background-color: $color-words-and-lines-dark;
+    }
+
+    .project_content>.content .item .link a {
+        color: $color-words-and-lines-dark;
+    }
+}
+body[color_theme="dark"] {
+    @include dark-appearance;
+}
+
+.project_content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    place-content: center;
+    grid-gap: 10px;
+
+    .title {
+        grid-column: 1;
+        grid-row: 1;
+
+        text-align: center;
+
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    .content {
+        grid-column: 1;
+        grid-row: 2;
+    }
+}
+
+.project_content > .content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: masonry;
+    grid-gap: 10px;
+
+    margin-bottom: 15px;
+
+    .item {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 3fr auto auto;
+        grid-gap: 5px;
+
+        border: 1px solid $color-words-and-lines-light;
+        padding: 10px;
+    }
+
+    @media screen and (max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: 700px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.project_content>.content .item {
+    .title {
+        grid-column: 1;
+        grid-row: 1;
+
+        margin: 0;
+
+        text-align: left;
+
+        font-size: 1.2em;
+        font-weight: bold;
+
+        color: $color-background-light;
+        background-color: $color-words-and-lines-light;
+    }
+    .description {
+        grid-column: 1;
+        grid-row: 2;
+
+        margin: 0;
+
+        font-size: 0.8em;
+
+        opacity: 80%;
+    }
+    .tech {
+        grid-column: 1;
+        grid-row: 3;
+
+        margin: 0;
+
+        .tech_item {
+            display: inline-block;
+
+            font-size: 0.8em;
+
+            padding: 2px 5px;
+            border: 1px solid $color-words-and-lines-light;
+        }
+    }
+    .link {
+        grid-column: 1;
+        grid-row: 4;
+
+        margin: 0;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+        gap: 10px;
+        
+        a {
+            text-decoration: underline;
+
+            color: $color-words-and-lines-light;
+        }
+        a:hover {
+            color: $color-background-light;
+            background-color: $color-words-and-lines-light;
+        }
+    }
+}

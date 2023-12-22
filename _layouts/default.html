@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'zh-cn' }}">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="baseurl" content="{{ site.baseurl }}">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', '{{ site.google_analytics }}');
+    </script>
+
+    <title>
+        {%- if page.title -%}
+            {{ page.title }}
+        {%- else -%}
+            {{ site.title }}
+        {%- endif -%}
+    </title>
+
+    {%-feed_meta-%}
+    
+    <!-- Google Icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ site.favicon | relative_url }}" />
+
+    <!-- 主样式表 -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | prepend: site.baseurl | relative_url }}" />
+</head>
+
+<body color_theme="{{ site.theme_config.color_theme | default: 'light' }}">
+    <div class="page-content" aria-label="Content">
+        <header class="no-select">
+            {%-include header.html-%}
+        </header>
+        <main>
+            {{ content }}
+        </main>
+        <footer class="no-select">
+            {%-include footer.html-%}
+        </footer>
+    </div>
+    <p class="wider_screen_message">Warning: Use a wider screen!</p>
+</body>
+
+<footer>
+    <!-- 颜色模式切换 -->
+    <script src="{{ '/assets/js/color_theme_switch.js' | prepend: site.baseurl | relative_url }}"></script>
+
+    <!-- 代码复制 -->
+    <script src="{{ '/assets/js/copy_code.js' | prepend: site.baseurl | relative_url }}"></script>
+
+    <!-- 数学公式 -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</footer>
+
+</html>

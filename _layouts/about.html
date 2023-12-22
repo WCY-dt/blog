@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+<div class="about_content no-select">
+    <h1 class="title">{{ page.title }}</h1>
+
+    <div class="content">
+        <img src="{{ '/assets/images/about.jpg' | prepend: site.baseurl | relative_url }}" alt="About" class="image">
+        <p class="description">
+            {{ site.data.about.description }}
+        </p>
+        <div class="github">
+            <p class="name">GITHUB</p>
+            <div class="detail">
+                <a href="https://github.com/{{ site.data.about.github }}" class="item">
+                    <img src="https://img.shields.io/github/followers/{{ site.data.about.github }}?style=for-the-badge&logo=github&color=000000" />
+                </a>
+                <a href="https://github.com/{{ site.data.about.github }}" class="item">
+                    <img src="https://img.shields.io/github/stars/{{ site.data.about.github }}?style=for-the-badge&logo=github&color=000000" />
+                </a>
+            </div>
+        </div>
+        <div class="contact">
+            <p class="name">CONTACT</p>
+            <div class="detail">
+                {% for contact in site.data.about.contact %}
+                    <a href="{{ contact.link }}" class="item">
+                        <img src="https://img.shields.io/badge/-{{ contact.name }}-000000?style=for-the-badge&logo={{ contact.icon }}" />
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="skill">
+            <p class="name">SKILLS</p>
+            <div class="detail">
+                {% for skill in site.data.about.skill %}
+                    <img src="https://img.shields.io/badge/-{{ skill.name }}-000000?style=for-the-badge&logo={{ skill.icon }}" alt="{{ skill.name }}" class="item" />
+                {% endfor %}
+            </div>
+        </div>
+        <div class="learn">
+            <p class="name">LEARNING</p>
+            <div class="detail">
+                {% for learn in site.data.about.learn %}
+                    <img src="https://img.shields.io/badge/-{{ learn.name }}-000000?style=for-the-badge&logo={{ learn.icon }}" alt="{{ learn.name }}" class="item" />
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

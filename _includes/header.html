@@ -1,0 +1,21 @@
+<h1 class="title">{{ site.title }}</h1>
+<nav class="nav">
+    {% for item in site.navy %}
+        <a href="{{ item.url | prepend: site.baseurl | relative_url }}" class="item">
+            <span class="material-symbols-outlined">
+                {{ item.icon }}
+            </span><p>{{ item.title }}</p>
+        </a>
+    {% endfor %}
+</nav>
+<button class="theme" id="theme-toggle" onclick="change_color_theme()">
+    {% if site.theme_config.color_theme=="light" %}
+        <span class="material-symbols-outlined">
+            light_mode
+        </span>
+    {% elsif site.theme_config.color_theme=="dark" %}
+        <span class="material-symbols-outlined">
+            dark_mode
+        </span>
+    {% endif %}
+</button>

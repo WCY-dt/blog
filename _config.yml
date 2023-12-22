@@ -1,0 +1,55 @@
+############# 基本设置 #############
+title: Ch3nyang's Blog
+author:
+  name: Ch3nyang
+  link: https://github.com/WCY-dt
+# display powered by jekyll and ch3nyang-theme
+# in footer
+powered_by: true
+# the subpath of your site, e.g. /blog
+baseurl: ""
+# the base hostname & protocol for your site,
+# e.g. http://example.com
+url: "" 
+# your google analytics tracking id
+google_analytics: G-DBLJVQ0KB7
+
+############# 主题设置 #############
+theme_config:
+  date_format: "%Y-%m"
+  color_theme: light # light / dark
+# icons are from https://fonts.google.com/icons
+navy:
+  - title: home
+    url: /
+    icon: home
+  - title: about
+    url: /about
+    icon: person
+  - title: archive
+    url: /archive
+    icon: archive
+  - title: project
+    url: /project
+    icon: hive
+  - title: rss
+    url: feed.xml
+    icon: rss_feed
+post_list:
+  # how many posts to show in home page
+  limit: 10
+  show_more: true
+  show_more_text: MORE IN ARCHIVE...
+  show_more_url: /archive
+
+############# 其它设置 #############
+# Please do not modify the following settings
+# unless you know what you are doing.
+permalink: /:title/
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
