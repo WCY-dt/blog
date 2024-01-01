@@ -43,6 +43,8 @@ post_list:
   show_more: true
   show_more_text: MORE IN ARCHIVE...
   show_more_url: /archive
+project:
+  show_icon: true
 
 ############# 其它设置 #############
 # Please do not modify the following settings

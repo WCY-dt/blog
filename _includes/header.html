@@ -1,7 +1,7 @@
 <h1 class="title">{{ site.title }}</h1>
 <nav class="nav">
     {% for item in site.navy %}
-        <a href="{{ item.url | relative_url }}" class="item">
+        <a href="{{ item.url | relative_url }}">
             <span class="material-symbols-outlined">
                 {{ item.icon }}
             </span><p>{{ item.title }}</p>

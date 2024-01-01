@@ -26,7 +26,8 @@ layout: default
             <div class="detail">
                 {% for contact in site.data.about.contact %}
                     <a href="{{ contact.link }}" class="item">
-                        <img src="https://img.shields.io/badge/-{{ contact.name }}-000000?style=for-the-badge&logo={{ contact.icon }}" />
+                        <img src="https://api.iconify.design/logos:{{ contact.icon }}.svg" class="iconify" />
+                        <span>{{ contact.name }}</span>
                     </a>
                 {% endfor %}
             </div>
@@ -35,7 +36,10 @@ layout: default
             <p class="name">SKILLS</p>
             <div class="detail">
                 {% for skill in site.data.about.skill %}
-                    <img src="https://img.shields.io/badge/-{{ skill.name }}-000000?style=for-the-badge&logo={{ skill.icon }}" alt="{{ skill.name }}" class="item" />
+                    <div class="item">
+                        <img src="https://api.iconify.design/vscode-icons:file-type-{{ skill.icon }}.svg" class="iconify"/>
+                        <span>{{ skill.name }}</span>
+                    </div>
                 {% endfor %}
             </div>
         </div>
@@ -43,7 +47,10 @@ layout: default
             <p class="name">LEARNING</p>
             <div class="detail">
                 {% for learn in site.data.about.learn %}
-                    <img src="https://img.shields.io/badge/-{{ learn.name }}-000000?style=for-the-badge&logo={{ learn.icon }}" alt="{{ learn.name }}" class="item" />
+                    <div class="item">
+                        <img src="https://api.iconify.design/vscode-icons:file-type-{{ learn.icon }}.svg" class="iconify" />
+                        <span>{{ learn.name }}</span>
+                    </div>
                 {% endfor %}
             </div>
         </div>

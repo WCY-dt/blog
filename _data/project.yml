@@ -1,7 +1,7 @@
 projects:
   - name: ch3nyang-theme
     repo: https://github.com/WCY-dt/ch3nyang-theme
-    demo: https://blog.ch3nyang.top/ch3nyang-theme
+    demo: https://ch3nyang.top/ch3nyang-theme
     description: >-
       A jekyll theme with a simple interface but rich functions. Used for my own blog.
-    tech: [HTML, SCSS, JavaScript, Liquid]
+    tech: [Liquid, SCSS, JS]

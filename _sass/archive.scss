@@ -1,38 +1,3 @@
-// 预先定义一些颜色
-$color-words-and-lines-light: rgb(50, 50, 50);
-$color-background-light: white;
-$color-block-light: rgba(0, 0, 0, 0.02);
-
-$color-words-and-lines-dark: rgb(200, 200, 200);
-$color-background-dark: black;
-$color-block-dark: rgba(255, 255, 255, 0.1);
-
-@mixin dark-appearance {
-    color: $color-words-and-lines-dark;
-    background-color: $color-background-dark;
-
-    .more,
-    .post-list-item a {
-        color: $color-words-and-lines-dark;
-        background-color: $color-background-dark;
-    }
-
-    .more:hover {
-        color: $color-background-dark;
-        background-color: $color-words-and-lines-dark;
-    }
-
-    // FIXME: 无法覆盖 .post-list-item:hover .title 的样式
-    .post-list-item:hover {
-        background-color: $color-block-dark;
-    }
-}
-
-body[color_theme="dark"] {
-    @include dark-appearance;
-}
-
-// 设置文章列表
 .post-list-item {
     display: grid;
     grid-template-columns: auto 1fr 6fr;
@@ -63,7 +28,6 @@ body[color_theme="dark"] {
         grid-row: 1;
 
         text-decoration: underline;
-        color: $color-words-and-lines-light;
         font-weight: bold;
     }
 
@@ -100,20 +64,10 @@ body[color_theme="dark"] {
     }
 }
 
-.post-list-item:hover {
-    background-color: $color-block-light;
-}
-
 .more {
     display: inline-block;
 
     text-decoration: underline;
-    color: $color-words-and-lines-light;
 
     margin: 10px 0;
-}
-
-.more:hover {
-    color: $color-background-light;
-    background-color: $color-words-and-lines-light;
 }

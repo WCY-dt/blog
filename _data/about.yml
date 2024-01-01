@@ -5,24 +5,24 @@ github: WCY-dt
 contact:
   - link: mailto:dtchenyang@gmail.com
     name: "dtchenyang@gmail.com"
-    icon: gmail
+    icon: google-gmail
   - link: https://twitter.com/ch3nyang
     name: ch3nyang
-    icon: X
+    icon: twitter
 # color can be found at https://simpleicons.org/
 skill:
   - name: C++
-    icon: CPlusPlus
+    icon: cpp
   - name: Python
-    icon: Python
+    icon: python
   - name: Rust
-    icon: Rust
+    icon: rust
   - name: JavaScript
-    icon: JavaScript
+    icon: js
   - name: C
-    icon: C
+    icon: c
 learn:
   - name: Go
-    icon: Go
-  - name: UE5
-    icon: UnrealEngine
+    icon: go
+  - name: Haskell
+    icon: haskell

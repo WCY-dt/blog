@@ -1,0 +1,25 @@
+* button {
+    cursor: pointer;
+}
+
+* .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+
+    img {
+        pointer-events: none;
+    }
+}
+
+* .material-symbols-outlined {
+    vertical-align: -0.2em;
+    padding-right: 2px;
+}
+
+* .iconify {
+    vertical-align: -0.1em;
+    padding-right: 2px;
+}

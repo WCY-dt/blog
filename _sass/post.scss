@@ -1,52 +1,3 @@
-// 预先定义一些颜色
-$color-words-and-lines-light: rgb(50, 50, 50);
-$color-background-light: white;
-$color-block-light: rgba(0, 0, 0, 0.02);
-
-$color-words-and-lines-dark: rgb(200, 200, 200);
-$color-background-dark: black;
-$color-block-dark: rgba(255, 255, 255, 0.1);
-
-@mixin dark-appearance {
-    color: $color-words-and-lines-dark;
-    background-color: $color-background-dark;
-
-    .post_content a {
-        color: $color-words-and-lines-dark;
-        background-color: $color-background-dark;
-    }
-
-    .post_content a:hover {
-        color: $color-background-dark;
-        background-color: $color-words-and-lines-dark;
-    }
-
-    blockquote {
-        border-left-color: $color-words-and-lines-dark;
-    }
-
-    table {
-        border-color: $color-words-and-lines-dark;
-
-        thead {
-            background-color: $color-block-dark;
-            border-bottom-color: $color-words-and-lines-dark;
-        }
-
-        tbody tr td {
-            text-align: center;
-        }
-    }
-
-    pre:has(code) {
-        background-color: $color-block-dark;
-    }
-}
-
-body[color_theme="dark"] {
-    @include dark-appearance;
-}
-
 .post_content {
     font-family: 'Times New Roman', ' 微软雅黑', ' Arial';
     line-height: 1.5em;
@@ -68,10 +19,6 @@ body[color_theme="dark"] {
     h1 {
         font-size: 1.4em;
         font-weight: bold;
-
-        ::before {
-            content: '·';
-        }
     }
 
     h2 {
@@ -87,16 +34,6 @@ body[color_theme="dark"] {
     h4,
     h5 {
         font-weight: bold;
-    }
-
-    a {
-        text-decoration: underline;
-        color: $color-words-and-lines-light;
-    }
-
-    a:hover {
-        color: $color-background-light;
-        background-color: $color-words-and-lines-light;
     }
 
     p:has(img) {
@@ -115,28 +52,23 @@ body[color_theme="dark"] {
     }
 
     blockquote {
-        border-left: 1px solid $color-words-and-lines-light;
+        border-left: 1px solid $color-words-and-lines;
 
         padding-left: 10px;
     }
 
     table {
-        border: 1px solid $color-words-and-lines-light;
+        border: 1px solid $color-words-and-lines;
         width: 100%;
         margin: 0 auto;
 
         thead {
-            background-color: $color-block-light;
-            border-bottom: 1px solid $color-words-and-lines-light;
+            border-bottom: 1px solid $color-words-and-lines;
         }
 
         tbody tr td {
             text-align: center;
         }
-    }
-
-    pre:has(code) {
-        background-color: $color-block-light;
     }
 
     code,

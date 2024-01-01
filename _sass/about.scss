@@ -1,20 +1,3 @@
-$color-words-and-lines-light: rgb(50, 50, 50);
-$color-background-light: white;
-$color-block-light: rgba(0, 0, 0, 0.02);
-
-$color-words-and-lines-dark: rgb(200, 200, 200);
-$color-background-dark: black;
-$color-block-dark: rgba(255, 255, 255, 0.1);
-
-@mixin dark-appearance {
-    color: $color-words-and-lines-dark;
-    background-color: $color-background-dark;
-}
-
-body[color_theme="dark"] {
-    @include dark-appearance;
-}
-
 .about_content {
     display: grid;
     grid-template-columns: 1fr;
@@ -40,7 +23,7 @@ body[color_theme="dark"] {
     }
 }
 
-.about_content > .content {
+.about_content>.content {
     display: grid;
     grid-template-columns: 200px 1fr;
     grid-template-rows: auto 1fr 1fr 1fr 1fr;
@@ -50,9 +33,9 @@ body[color_theme="dark"] {
         grid-column: 1;
         grid-row: 1 / 5;
 
-        // 限制图片大小
         max-width: 100%;
     }
+
     .description {
         grid-column: 2;
         grid-row: 1;
@@ -63,27 +46,36 @@ body[color_theme="dark"] {
         font-size: 1.2em;
         line-height: 1.5em;
     }
+
     .github {
         grid-column: 2;
         grid-row: 2;
     }
+
     .contact {
         grid-column: 2;
         grid-row: 3;
     }
+
     .skill {
         grid-column: 2;
         grid-row: 4;
     }
+
     .learn {
         grid-column: 2;
         grid-row: 5;
     }
 
-    .github, .contact, .skill, .learn {
+    .github,
+    .contact,
+    .skill,
+    .learn {
         display: grid;
         grid-template-columns: 120px 1fr;
         grid-template-rows: auto;
+
+        height: 1.2em;
 
         .name {
             grid-column: 1;
@@ -94,15 +86,49 @@ body[color_theme="dark"] {
             font-weight: bold;
 
             align-self: center;
+
+            height: 1.2em;
         }
+
         .detail {
             grid-column: 2;
             grid-row: 1;
 
+            height: 1.2em;
+
             align-self: center;
 
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 10px;
+
             a {
-                text-decoration: none;
+                max-height: 1.2em;
+
+                img {
+                    max-height: 1.2em;
+                }
+            }
+        }
+    }
+
+    .contact,
+    .skill,
+    .learn {
+        .detail .item {
+            padding: 2px 5px;
+            border: 1px solid $color-words-and-lines;
+
+            text-decoration: none;
+            color: $color-words-and-lines;
+
+            display: inline-block;
+
+            font-size: 0.8em;
+
+            img {
+                max-width: 1em;
             }
         }
     }
@@ -120,22 +146,27 @@ body[color_theme="dark"] {
 
             margin: 0 auto;
         }
+
         .description {
             grid-column: 1;
             grid-row: 2;
         }
+
         .github {
             grid-column: 1;
             grid-row: 3;
         }
+
         .contact {
             grid-column: 1;
             grid-row: 4;
         }
+
         .skill {
             grid-column: 1;
             grid-row: 5;
         }
+
         .learn {
             grid-column: 1;
             grid-row: 6;
@@ -143,17 +174,21 @@ body[color_theme="dark"] {
     }
 
     @media screen and (max-width: 500px) {
-        .github, .contact, .skill, .learn {
+
+        .github,
+        .contact,
+        .skill,
+        .learn {
             grid-template-columns: auto;
             grid-template-rows: auto;
-    
+
             .name {
                 grid-column: 1;
                 grid-row: 1;
 
                 margin-bottom: 5px;
             }
-    
+
             .detail {
                 grid-column: 1;
                 grid-row: 2;

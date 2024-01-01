@@ -1,0 +1,111 @@
+$color-words-and-lines: null;
+$color-background: null;
+$color-block: null;
+$color-words-and-lines-hover: null;
+$color-background-hover: null;
+
+@mixin light-appearance {
+    $color-words-and-lines: rgb(50, 50, 50);
+    $color-background: rgb(255, 255, 255);
+    $color-block: rgba(0, 0, 0, 0.02);
+    $color-words-and-lines-hover: rgb(255, 255, 255);
+    $color-background-hover: rgb(50, 50, 50);
+
+    color: $color-words-and-lines;
+    background-color: $color-background;
+
+    * {
+        a:-webkit-any-link {
+            color: $color-words-and-lines;
+            cursor: pointer;
+        }
+
+        a:not(.title):hover {
+            color: $color-words-and-lines-hover;
+            background-color: $color-background-hover;
+        }
+
+        button {
+            color: $color-words-and-lines;
+            background-color: $color-background;
+        }
+
+        header,
+        main,
+        footer {
+            border-color: $color-words-and-lines;
+        }
+
+        .project_content>.content .item .title {
+            color: $color-words-and-lines-hover;
+            background-color: $color-background-hover;
+        }
+
+        .post_content {
+            table thead {
+                background-color: $color-block;
+            }
+
+            pre:has(code) {
+                background-color: $color-block;
+            }
+        }
+
+        .post-list-item:hover {
+            background-color: $color-block;
+        }
+    }
+}
+
+@mixin dark-appearance {
+    $color-words-and-lines: rgb(200, 200, 200);
+    $color-background: rgb(0, 0, 0);
+    $color-block: rgba(255, 255, 255, 0.1);
+    $color-words-and-lines-hover: rgb(0, 0, 0);
+    $color-background-hover: rgb(200, 200, 200);
+
+    color: $color-words-and-lines;
+    background-color: $color-background;
+
+    * {
+        a:-webkit-any-link {
+            color: $color-words-and-lines;
+            cursor: pointer;
+        }
+
+        a:not(.title):hover {
+            color: $color-words-and-lines-hover;
+            background-color: $color-background-hover;
+        }
+
+        button {
+            color: $color-words-and-lines;
+            background-color: $color-background;
+        }
+
+        header,
+        main,
+        footer {
+            border-color: $color-words-and-lines;
+        }
+
+        .project_content>.content .item .title {
+            color: $color-words-and-lines-hover;
+            background-color: $color-background-hover;
+        }
+
+        .post_content {
+            table thead {
+                background-color: $color-block;
+            }
+
+            pre:has(code) {
+                background-color: $color-block;
+            }
+        }
+
+        .post-list-item:hover {
+            background-color: $color-block;
+        }
+    }
+}

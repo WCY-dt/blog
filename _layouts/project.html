@@ -12,7 +12,11 @@ layout: default
                 <p class="description">{{ project.description }}</p>
                 <p class="tech">
                     {% for tech in project.tech %}
-                        <span class="tech_item">{{ tech }}</span>
+                        <span class="tech_item">
+                            {% if site.project.show_icon %}
+                                <img src="https://api.iconify.design/vscode-icons:file-type-{{ tech | downcase }}.svg" class="iconify"/>
+                            {% endif %}{{ tech }}
+                        </span>
                     {% endfor %}
                 </p>
                 <div class="link">

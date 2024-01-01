@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="baseurl" content="{{ site.baseurl }}">
 
@@ -16,11 +15,6 @@
 
         gtag('config', '{{ site.google_analytics }}');
     </script>
-
-    <!-- Google Adsense -->
-    {%- if site.google_adsense -%}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6985493945601109" crossorigin="anonymous"></script>
-    {%- endif -%}
 
     <title>
         {%- if page.title -%}
