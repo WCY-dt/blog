@@ -1,0 +1,13 @@
+name: Update github profile with latest blog posts
+on:
+  page_build:
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT }}
+          repository: WCY-dt/WCY-dt
+          event-type: blog-page-updated
