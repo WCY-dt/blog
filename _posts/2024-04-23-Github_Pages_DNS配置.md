@@ -49,7 +49,7 @@ copyrights: 原创
    (http.host eq "blog.ch3nyang.top")
    ```
 
-   选择目的地址为 Static 的 `https://ch3nyang.top`，代码为 301，同时选中 Preserve query string。
+   选择目的地址为 Dynamic 的 `concat("https://ch3nyang.top",http.request.uri.path)`，代码为 302，同时选中 Preserve query string。[^3]
 
    然后添加一条 DNS 记录：
 
@@ -75,3 +75,4 @@ copyrights: 原创
 
 [^1]: [https://www.9kr.cc/archives/181/](https://www.9kr.cc/archives/181/)
 [^2]: [使用 Cloudflare 的 Page Rules 进行 URL 转发和域名重定向教程](https://www.okaa.io/index.php/2023/09/02/%E4%BD%BF%E7%94%A8-cloudflare-%E7%9A%84-page-rules-%E8%BF%9B%E8%A1%8C-url-%E8%BD%AC%E5%8F%91%E5%92%8C%E5%9F%9F%E5%90%8D%E9%87%8D%E5%AE%9A%E5%90%91%E6%95%99%E7%A8%8B/)
+[^3]: [Definitive Guide on Cloudflare Redirects](https://epsilonsynapse.com/tech-salvation/definitive-guide-on-cloudflare-redirects/)
