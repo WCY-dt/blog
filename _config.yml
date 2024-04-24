@@ -7,7 +7,7 @@ author:
 # in footer
 powered_by: true
 # the subpath of your site, e.g. /blog
-baseurl: ""
+baseurl: "/"
 # the base hostname & protocol for your site,
 # e.g. http://example.com
 url: ""
@@ -34,6 +34,9 @@ navy:
   - title: project
     url: /project
     icon: hive
+  - title: mindclip
+    url: https://mind.ch3nyang.top/
+    icon: collections_bookmark
   - title: rss
     url: feed.xml
     icon: rss_feed
@@ -49,7 +52,7 @@ project:
 ############# 其它设置 #############
 # Please do not modify the following settings
 # unless you know what you are doing.
-permalink: /:title/
+permalink: /post/:title/
 markdown: kramdown
 highlighter: rouge
 kramdown:
