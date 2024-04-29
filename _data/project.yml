@@ -11,4 +11,4 @@ projects:
     demo: https://mind.ch3nyang.top/
     description: >-
       Short notes for websites, documents and inspiration.
-    tech: [ReactJS]
+    tech: [ReactJS, TypeScript, JS, Serverless, SQLite]
