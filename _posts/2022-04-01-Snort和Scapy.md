@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【安全】Snort和Scapy"
+title:  "Snort和Scapy"
 date:   2022-04-01 00:00:00 +0800
 categories: 安全
 tags: snort scapy python
@@ -11,15 +11,15 @@ copyrights: 原创
 
 本文将简单描述如何使用 scapy 来测试 snort 规则。
 
-# 安装
+## 安装
 
 snort 和 scapy 都可以直接 `sudo apt install`，不再赘述。
 
-# snort 配置
+## snort 配置
 
 snort 默认安装在 `/etc/snort` 下。目录结构如下：
 
-```
+```plaintext
 /etc/snort
   ├─ attribute_table.dtd
   ├─ file_magic.conf
@@ -76,13 +76,13 @@ include $TEST_RULE_PATH/test.rules
 现在，我们来启动 snort。首先查看自己的网卡名称：
 
 ```shell
-$  ifconfig
+ifconfig
 ```
 
 然后启动 snort：
 
 ```shell
-$ sudo snort -A console -i ens33 -u snort -g snort -c /etc/snort/snort.conf
+sudo snort -A console -i ens33 -u snort -g snort -c /etc/snort/snort.conf
 ```
 
 `-A console` 表明将所有的输出直接输出到控制台，方便我们测试时查看。`-i ens33` 表明我们使用的 interface，这里的 `ens33` 需要替换为你刚刚看到的网卡名称。
@@ -91,11 +91,11 @@ $ sudo snort -A console -i ens33 -u snort -g snort -c /etc/snort/snort.conf
 
 <img src="./../assets/post/images/pO7D5wughzPZY6y.png" alt="image-20220319175153985" style="zoom:50%;" />
 
-# rules 编写
+## rules 编写
 
 通常来说，每行一条 rules。rules 由以下几个部分组成：
 
-```
+```plaintext
 rules
   ├─ Header
   │    ├─ RuleType
@@ -156,16 +156,16 @@ rev:5; metadata:created_at 2010_07_30, updated_at 2019_10_07;)
 
 现在，回过来看我们之前定义的规则：
 
-```
+```snort
 alert tcp any any -> any 8080 (flags: A; msg: "TEST ALERT"; content: "I am IDS Homework I"; nocase; offset: 100; depth: 100; sid: 1000001; rev: 1;)
 ```
 
 其含义为：侦测 tcp 报文，报文满足目的端口为 8080、是 ACK 报文，内容含有 `I am IDS Homework I`，不区分大小写，内容在第 100 至 200 byte 之间。如果侦测到，则警报 `TEST ALERT`。
 
-# scapy 使用
+## scapy 使用
 
 ```shell
-$ sudo scapy
+sudo scapy
 ```
 
 即可开始使用 scapy。
@@ -249,7 +249,7 @@ Sent 1 packets.
 
 此时，snort 处会显示
 
-```
+```plaintext
 [**] [1:1000001:1] TEST ALERT [**] [Priority: 0] {TCP} 192.168.18.128:20 -> 192.168.220.129:8080
 ```
 

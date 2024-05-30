@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】Virtual Private Network (VPN)"
+title:  "Virtual Private Network (VPN)"
 date:   2022-10-08 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab vpn
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,32 +11,32 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - Virtual Private Network (VPN) Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/VPN/) 的实验记录。
 
-# 0. 实验目标
+## 0. 实验目标
 
 本实验要求完成 VPN 的实现。其应当支持 TUN 建立、隧道加密、服务器认证、客户端登录、多用户等功能。
 
 本实验的实验手册使用多虚拟机与 C 语言完成，而我们希望直接**使用 docker 和 Python**。我们一步到位完成了所有程序的编写，下面描述我们的具体步骤。
 
-# 1. 生成证书
+## 1. 生成证书
 
 创建 CA
 
 ```shell
-$ mkdir demoCA
-$ cd demoCA
-$ mkdir certs crl newcerts
-$ touch index.txt serial
-$ echo 1000 > serial
-$ cd ..
-$ cp /usr/lib/ssl/openssl.cnf myCA_openssl.cnf
-$ openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -keyout ca.key -out ca.crt -subj "/CN=www.modelCA.com/O=Model CA LTD./C=US/ST=New York/L=Syracuse" -passout pass:dees
+mkdir demoCA
+cd demoCA
+mkdir certs crl newcerts
+touch index.txt serial
+echo 1000 > serial
+cd ..
+cp /usr/lib/ssl/openssl.cnf myCA_openssl.cnf
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -keyout ca.key -out ca.crt -subj "/CN=www.modelCA.com/O=Model CA LTD./C=US/ST=New York/L=Syracuse" -passout pass:dees
 ```
 
 创建并签发服务器使用的证书。
 
 ```shell
-$ openssl req -newkey rsa:2048 -sha256 -keyout vpn.key -out vpn.csr -subj "/CN=vpnlabserver.com/O=Model CA LTD./C=US/ST=New York/L=Syracuse" -passout pass:dees
-$ openssl ca -config myCA_openssl.cnf -policy policy_anything -md sha256 -days 3650 -in vpn.csr -out vpn.crt -batch -cert ca.crt -keyfile ca.key
+openssl req -newkey rsa:2048 -sha256 -keyout vpn.key -out vpn.csr -subj "/CN=vpnlabserver.com/O=Model CA LTD./C=US/ST=New York/L=Syracuse" -passout pass:dees
+openssl ca -config myCA_openssl.cnf -policy policy_anything -md sha256 -days 3650 -in vpn.csr -out vpn.crt -batch -cert ca.crt -keyfile ca.key
 ```
 
 `vpn.crt` 和 `vpn.key`，放入 server-certs 文件夹中。
@@ -49,7 +49,7 @@ eaa14a05
 $ ln -s ca.crt eaa14a05.0
 ```
 
-# 2. 设置 Docker
+## 2. 设置 Docker
 
 编写 `docker-compose.yml`
 
@@ -196,11 +196,11 @@ networks:
 设置完成后，我们启动 docker
 
 ```shell
-$ dcbuild
-$ dcup
+dcbuild
+dcup
 ```
 
-# 3. 编写程序
+## 3. 编写程序
 
 编写 VPN 服务器和中间人攻击服务器使用的 `vpnserver.py`
 
@@ -487,11 +487,11 @@ while True:
 
 `vpnserver2.py`、`vpnserver3.py` 同理，只需要修改对应的 IP 地址即可。
 
-以上程序实现了 **TUN 建立、隧道加密、服务器认证、客户端登录、多用户（无多进程）**的功能。<mark>程序的每一行都有详细的注释</mark>，在此不再赘述各个功能是如何实现的。
+以上程序实现了 **TUN 建立、隧道加密、服务器认证、客户端登录、多用户（无多进程）**的功能。程序的每一行都有详细的注释，在此不再赘述各个功能是如何实现的.
 
 到目前为止，所有准备工作均已经完成，文件夹内结构如下所示：
 
-```
+```plaintext
 .
 ├── docker-compose.yml
 └── volumes
@@ -512,10 +512,10 @@ while True:
     └── vpnserver.py
 ```
 
-# 4. 测试
+## 4. 测试
 
 相关命令几乎全是简单的 `ping` 和 `telnet`，此处不再赘述。
 
-# 5. 总结
+## 5. 总结
 
 本实验较为简单。

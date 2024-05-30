@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】Packet Sniffing and Spoofing"
+title:  "Packet Sniffing and Spoofing"
 date:   2022-10-03 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab network
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,7 +11,7 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - Packet Sniffing and Spoofing Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/Sniffing_Spoofing/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 数据包嗅探和欺骗是网络安全中的两个重要概念；它们是网络通信中的两大威胁。能够理解这两种威胁对于理解网络中的安全措施至关重要。有许多数据包嗅探和欺骗工具，例如 Wireshark、Tcpdump、Netwox、Scapy 等。其中一些工具被安全专家以及攻击者广泛使用。本实验的目标有两个：学习使用这些工具并了解这些工具背后的技术。我们将编写简单的嗅探器和欺骗程序，并深入了解这些程序的技术方面。本实验涵盖以下主题：
 
@@ -20,15 +20,15 @@ copyrights: 原创
 - 使用原始套接字和 Scapy 进行数据包欺骗
 - 使用 Scapy 处理数据包
 
-# Lab Task Set 1: Using Scapy to Sniff and Spoof Packets
+## Lab Task Set 1: Using Scapy to Sniff and Spoof Packets
 
-## Task 1.1: Sniffing Packets
+### Task 1.1: Sniffing Packets
 
 启动 docker：
 
 ```shell
-$ dcbuild
-$ dcup
+dcbuild
+dcup
 ```
 
 首先查看网卡端口：
@@ -62,7 +62,7 @@ pkt = sniff(iface='br-9fee8832d7a6', filter='icmp', prn=print_pkt)
 
 其中，`br-9fee8832d7a6` 就是上面获取到的名称。
 
-### Task 1.1A
+#### Task 1.1A
 
 在 attacker 中赋予程序执行权限并运行：
 
@@ -91,7 +91,7 @@ PermissionError: [Errno 1] Operation not permitted
 
 这是由于宿主机没有访问网桥的权限。
 
-### Task 1.1B
+#### Task 1.1B
 
 > Capture only the ICMP packet
 
@@ -312,7 +312,7 @@ attacker 上看到：
            load      = '~\xed\xf9b\x00\x00\x00\x00B\xc2\x0c\x00\x00\x00\x00\x00\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f !"#$%&\'()*+,-./01234567'
 ```
 
-## Task 1.2: Spoofing ICMP Packets
+### Task 1.2: Spoofing ICMP Packets
 
 编写 `spoofer.py`：
 
@@ -332,7 +332,7 @@ send(p)
 然后复制进 host：
 
 ```shell
-$ docker cp spoofer.py 1a6d18536d74:/codes/spoofer.py
+docker cp spoofer.py 1a6d18536d74:/codes/spoofer.py
 ```
 
 这里，`1a6d18536d74` 为 host docker 的 ID。
@@ -388,7 +388,7 @@ attacker 主机接收到：
         seq       = 0x0
 ```
 
-## Task 1.3: Traceroute
+### Task 1.3: Traceroute
 
 编写 `tracerouter.py`：
 
@@ -439,44 +439,44 @@ while ip.ttl <= MAX_TTL:
 ```shell
 # tracer.py 1.2.3.4
 dst IP: 1.2.3.4
-1	10.9.0.1
-2	10.0.2.1
-3	10.208.64.1
-4	10.80.128.141
-5	10.80.128.149
-6	10.80.3.10
-7	153.3.60.1
-8	122.96.66.73
-9	===PACKET LOST===
-10	===PACKET LOST===
-11	===PACKET LOST===
-12	===PACKET LOST===
-13	===PACKET LOST===
-14	===PACKET LOST===
+1  10.9.0.1
+2  10.0.2.1
+3  10.208.64.1
+4  10.80.128.141
+5  10.80.128.149
+6  10.80.3.10
+7  153.3.60.1
+8  122.96.66.73
+9  ===PACKET LOST===
+10 ===PACKET LOST===
+11 ===PACKET LOST===
+12 ===PACKET LOST===
+13 ===PACKET LOST===
+14 ===PACKET LOST===
 Unable to reach 1.2.3.4! Stop.
 # tracer.py 8.8.8.8
 dst IP: 8.8.8.8
-1	10.9.0.1
-2	10.0.2.1
-3	10.208.64.1
-4	10.80.128.141
-5	10.80.128.149
-6	10.80.3.10
-7	153.3.60.1
-8	221.6.2.137
-9	221.6.9.129
-10	219.158.8.114
-11	219.158.98.94
-12	219.158.16.242
-13	72.14.213.114
-14	108.170.241.97
-15	108.170.233.19
-16	8.8.8.8
+1  10.9.0.1
+2  10.0.2.1
+3  10.208.64.1
+4  10.80.128.141
+5  10.80.128.149
+6  10.80.3.10
+7  153.3.60.1
+8  221.6.2.137
+9  221.6.9.129
+10 219.158.8.114
+11 219.158.98.94
+12 219.158.16.242
+13 72.14.213.114
+14 108.170.241.97
+15 108.170.233.19
+16 8.8.8.8
 ```
 
 可以看出，我们能够实现 traceroute 的功能。`8.8.8.8` 在 16 跳后到达。而 `1.2.3.4` 是不存在的地址，经过 8 跳后到达 `122.96.66.73`，此后就收不到回复了。
 
-## Task 1.4: Sniffing and-then Spoofing
+### Task 1.4: Sniffing and-then Spoofing
 
 编写 `sniff_spoof.py`：
 
@@ -544,6 +544,6 @@ rtt min/avg/max/mdev = 23.712/90.615/219.692/91.291 ms
 
 而 `8.8.8.8` 实际存在，其服务器会发送回复，而攻击者主机也会发送回复。这两个回复重复了，所以会有 `UDP` 标志。
 
-# 实验总结
+## 实验总结
 
 本实验较为简单，依葫芦画瓢即可。通过实验，我们了解了嗅探和欺骗的工作原理，学会了使用 pcap 库和 Scapy 进行数据包嗅探、使用原始套接字和 Scapy 进行数据包欺骗及使用 Scapy 处理数据包。

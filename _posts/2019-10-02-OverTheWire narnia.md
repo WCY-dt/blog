@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【HackGame】OverTheWireCrypton"
+title:  "OverTheWireCrypton"
 date:   2019-10-02 00:00:00 +0800
 categories: 安全
 tags: game
@@ -9,7 +9,7 @@ mathjax: true
 copyrights: 原创 未完待续
 ---
 
-https://overthewire.org/wargames/narnia/
+[https://overthewire.org/wargames/narnia/](https://overthewire.org/wargames/narnia/)
 
 每关使用 ssh 连接
 
@@ -17,7 +17,7 @@ https://overthewire.org/wargames/narnia/
 ssh -p 2226 narnia0@narnia.labs.overthewire.org
 ```
 
-# Level 0–>Level 1
+## Level 0–>Level 1
 
 ```c
 #include <stdio.h>
@@ -73,4 +73,3 @@ val: 0xdeadbeef
 $ cat /etc/narnia_pass/narnia1
 eaa6AjYMBB
 ```
-

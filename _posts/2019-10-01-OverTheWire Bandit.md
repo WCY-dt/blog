@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【HackGame】OverTheWireBandit"
+title:  "OverTheWireBandit"
 date:   2019-10-01 00:00:00 +0800
 categories: 安全
 tags: game
@@ -11,29 +11,29 @@ copyrights: 原创 未完待续
 
 OverTheWire:Bandit是一个学习linux命令的WarGame，通过闯关的模式，不断的学习新的命令，对于学习安全和Linux的朋友是一个很好的练习游戏。这个游戏目前有34关，从Level0—Level34。游戏形式是通过ssh连接游戏服务器，通过各种命令行读取下一关的游戏服务器密钥，然后连接下一关的服务器继续读取，直到通关。
 
-# 准备
+## 准备
 
 首先，打开[网站](https://overthewire.org/wargames/bandit/)
 
 为了完成任务，我们需要 Linux 环境来执行命令。
 
-# Level 0
+## Level 0
 
-**Level Goal**
+**Level Goal**:
 
 > The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.
 
 这一关主要是让你选择一个合适ssh工具开始远程，这一关的用户名和密码均为`bandit0`
 
 ```shell
-$ ssh -p 2220 bandit0@bandit.labs.overthewire.org
+ssh -p 2220 bandit0@bandit.labs.overthewire.org
 ```
 
 然后输入密码即可。
 
-# Level 0–>Level 1
+## Level 0–>Level 1
 
-**Level Goal**
+**Level Goal**:
 
 > he password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
 > Commands you may need to solve this level
@@ -50,9 +50,9 @@ NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
 
 得到下一关用户名`bandit1`，密码为`NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL`，之后用户名依次类推，不做赘述
 
-# Level 1 - Level 2
+## Level 1 - Level 2
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in a file called - located in the home directory
 > **Commands you may need to solve this level**
@@ -69,9 +69,9 @@ rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
 
 或者也可以重定向标准输入 `cat < -`
 
-# Level 2 - Level 3
+## Level 2 - Level 3
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in a file called spaces in this filename located in the home directory
 > **Commands you may need to solve this level**
@@ -86,9 +86,9 @@ aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
 
 或者在空格前使用反斜杠也可以。
 
-# Level 3 → Level 4
+## Level 3 → Level 4
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in a hidden file in the inhere directory.
 > **Commands you may need to solve this level**
@@ -107,9 +107,9 @@ bandit3@bandit:~/inhere$ cat .hidden
 2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
 ```
 
-# Level 4 → Level 5
+## Level 4 → Level 5
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
 > **Commands you may need to solve this level**
@@ -138,9 +138,9 @@ bandit4@bandit:~/inhere$ cat ./-file07
 lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
 ```
 
-# Level 5 → Level 6
+## Level 5 → Level 6
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
 >
@@ -172,9 +172,9 @@ bandit5@bandit:~/inhere$ cat ./maybehere07/.file2
 P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
 ```
 
-# Level 6 → Level 7
+## Level 6 → Level 7
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored somewhere on the server and has all of the following properties:
 >
@@ -196,9 +196,9 @@ z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
 
 后面的`2>/dev/null`因为`find`命令在根目录下查找会经常有很多权限的报错信息，所有在linux中通常用这种方式将错误信息重定向到“黑洞中”
 
-# Level 7 → Level 8
+## Level 7 → Level 8
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in the file data.txt next to the word millionth
 > **Commands you may need to solve this level**
@@ -213,9 +213,9 @@ bandit7@bandit:~$ cat data.txt | grep millionth
 millionth       TESKZC0XvTetK0S9xNwm25STk5iWrBvP
 ```
 
-# Level 8 → Level 9
+## Level 8 → Level 9
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
 > **Commands you may need to solve this level**
@@ -230,9 +230,9 @@ bandit8@bandit:~$ sort data.txt |uniq -u
 EN632PlfYiZbn3PhVK3XOGSlNInNE00t
 ```
 
-# Level 9 → Level 10
+## Level 9 → Level 10
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in the file data.txt in one of the few human-readable strings, beginning with several ‘=’ characters.
 > **Commands you may need to solve this level**
@@ -248,9 +248,9 @@ bandit9@bandit:~$ strings data.txt | sed -n '/^==/p'
 ========== G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
 ```
 
-# Level 10 → Level 11
+## Level 10 → Level 11
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in the file data.txt, which contains base64 encoded data
 > **Commands you may need to solve this level**
@@ -265,9 +265,9 @@ bandit10@bandit:~$ base64 -d data.txt
 The password is 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
 ```
 
-# Level 11 → Level 12
+## Level 11 → Level 12
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
 > **Commands you may need to solve this level**
@@ -288,9 +288,9 @@ bandit11@bandit:~$ cat data.txt | tr 'a-zA-Z' 'n-za-mN-ZA-M'
 The password is JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
 ```
 
-# Level 12 → Level 13
+## Level 12 → Level 13
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
 > **Commands you may need to solve this level**
@@ -365,9 +365,9 @@ bandit12@bandit:/tmp/chenyang12$ cat data
 The password is wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
 ```
 
-# Level 13 → Level 14
+## Level 13 → Level 14
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on
 > **Commands you may need to solve this level**
@@ -385,9 +385,9 @@ bandit14@bandit:~$ cat /etc/bandit_pass/bandit14
 fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
 ```
 
-# Level 14 → Level 15
+## Level 14 → Level 15
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
 > **Commands you may need to solve this level**
@@ -408,9 +408,9 @@ Connection closed by foreign host.
 bandit14@bandit:~$
 ```
 
-# Level 15 → Level 16
+## Level 15 → Level 16
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.
 > *Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…*
@@ -431,9 +431,9 @@ closed
 bandit15@bandit:~$
 ```
 
-# Level 16 → Level 17
+## Level 16 → Level 17
 
-**Level Goal**
+**Level Goal**:
 
 > The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
 > **Commands you may need to solve this level**
@@ -553,9 +553,9 @@ bandit17@bandit:~$ cat /etc/bandit_pass/bandit17
 VwOSWtCA7lRKkTfbr2IDh6awj9RNZM5e
 ```
 
-# Level 17 → Level 18
+## Level 17 → Level 18
 
-**Level Goal**
+**Level Goal**:
 
 > There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
 > *NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19*
@@ -576,9 +576,9 @@ bandit17@bandit:~$ diff passwords.old passwords.new
 
 得到密钥`hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg`
 
-# Level 18 → Level 19
+## Level 18 → Level 19
 
-**Level Goal**
+**Level Goal**:
 
 > The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
 > **Commands you may need to solve this level**
@@ -596,9 +596,9 @@ awhqfNnAbc1naukrpqDYcF95h7HoMTrC
 
 读取readme,得到19关的密码。
 
-# Level 19 → Level 20
+## Level 19 → Level 20
 
-**Level Goal**
+**Level Goal**:
 
 > To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
 
@@ -654,9 +654,9 @@ bandit19@bandit:~$ ./bandit20-do NAME=11020 cat /etc/bandit_pass/bandit20
 VxCazJaVykI6W36BkBU0mJTCM8rR95XT
 ```
 
-# Level 20 → Level 21
+## Level 20 → Level 21
 
-**Level Goal**
+**Level Goal**:
 
 > There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
 > *NOTE: Try connecting to your own network daemon to see if it works as you think*
@@ -681,9 +681,9 @@ NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
 
 成功返回下一关的密码
 
-# Level 21 → Level 22
+## Level 21 → Level 22
 
-**Level Goal**
+**Level Goal**:
 
 > A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
 > **Commands you may need to solve this level**
@@ -707,9 +707,9 @@ bandit21@bandit:/etc/cron.d$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
 WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
 ```
 
-# Level 22 → Level 23
+## Level 22 → Level 23
 
-**Level Goal**
+**Level Goal**:
 
 > A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
 > *NOTE: Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.*
@@ -755,9 +755,9 @@ bandit22@bandit:/etc/cron.d$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
 QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
 ```
 
-# Level 23 → Level 24
+## Level 23 → Level 24
 
-**Level Goal**
+**Level Goal**:
 
 > A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
 > *NOTE: This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!*
@@ -827,9 +827,9 @@ UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
 
 下一关的密钥已经写好了
 
-# Level 24 → Level 25
+## Level 24 → Level 25
 
-**Level Goal**
+**Level Goal**:
 
 > A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
 
@@ -860,7 +860,7 @@ for i in range(1000):
 
 终端运行`python /tmp/conn.py`
 
-```
+```plaintext
 [+] Trying pincode: 0377
 Wrong! Please enter the correct pincode. Try again.
 
@@ -873,15 +873,15 @@ The password of user bandit25 is uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
 
 输出结果如上所示，前面其他猜解过程就不贴上来了。
 
-# Level 25 → Level 26
+## Level 25 → Level 26
 
-**Level Goal**
+**Level Goal**:
 
 > Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
 > **Commands you may need to solve this level**
 > `ssh, cat, more, vi, ls, id, pwd`
 
-登录上去可以看到家目录上面有一个`bandit26.sshkey`, 可以像之前一样用这个私钥文件去连接远程的主机, `ssh -i bandit26.sshkey bandit26@localhost`, 发现连接直接被远程关闭了，加上`-T` 参数也没有用，题目也提示说这个用的是其他`shell`, 查看其某用户用的什么`shell `可以查看`/etc/passwd`。
+登录上去可以看到家目录上面有一个`bandit26.sshkey`, 可以像之前一样用这个私钥文件去连接远程的主机, `ssh -i bandit26.sshkey bandit26@localhost`, 发现连接直接被远程关闭了，加上`-T` 参数也没有用，题目也提示说这个用的是其他`shell`, 查看其某用户用的什么`shell`可以查看`/etc/passwd`。
 
 ```shell
 bandit25@bandit:~$ cat /etc/passwd|grep bandit26
@@ -912,7 +912,7 @@ exit 0
 
 系统关闭连接的原因是这个`exit 0`, 在这个`exit` 之前执行我们想要的命令就可以达到我们想要的效果了。
 
-在`more `命令执行之前可以执行命令即可，把会话的终端缩小，然后用文件连接bandit26，这样可以出发自动`more`, 在`more`命令还没有结束的时候按<kbd>v</kbd>进入`vim`编辑模式。再就是用`vim`特有的`:e file`，`vim`模式下的`e`命令可以导入文件到编辑器内，我们知道密码的所在，因此就可以用`e`命令来导入密码文件
+在`more`命令执行之前可以执行命令即可，把会话的终端缩小，然后用文件连接bandit26，这样可以出发自动`more`, 在`more`命令还没有结束的时候按<kbd>v</kbd>进入`vim`编辑模式。再就是用`vim`特有的`:e file`，`vim`模式下的`e`命令可以导入文件到编辑器内，我们知道密码的所在，因此就可以用`e`命令来导入密码文件
 
 ```shell
 ：e  /etc/bandit_pass/bandit26
@@ -920,13 +920,13 @@ exit 0
 
 然后26关的密钥就被导入到终端可读取了，密钥为
 
-```
+```plaintext
 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
 ```
 
-# Level 26 → Level 27
+## Level 26 → Level 27
 
-**Level Goal**
+**Level Goal**:
 
 > Good job getting a shell! Now hurry and grab the password for bandit27!
 > **Commands you may need to solve this level**
@@ -955,9 +955,9 @@ bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27
 3ba3118a22e93127a4ed485be72ef5ea
 ```
 
-# Level 27 → Level 28
+## Level 27 → Level 28
 
-**Level Goal**
+**Level Goal**:
 
 > There is a git repository at `ssh://bandit27-git@localhost/home/bandit27-git/repo`. The password for the user bandit27-git is the same as for the user bandit27.
 > *Clone the repository and find the password for the next level.*
@@ -994,9 +994,9 @@ bandit27@bandit:/tmp/conn/repo$ cat README
 The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
 ```
 
-# Level 28 → Level 29
+## Level 28 → Level 29
 
-**Level Goal**
+**Level Goal**:
 
 > There is a git repository at `ssh://bandit28-git@localhost/home/bandit28-git/repo`. The password for the user bandit28-git is the same as for the user bandit28.
 > *Clone the repository and find the password for the next level.*
@@ -1007,7 +1007,7 @@ The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
 
 ```shell
 bandit28@bandit:/tmp/conn28/repo$ cat README.md
-# Bandit Notes
+## Bandit Notes
 Some notes for level29 of bandit.
 
 ## credentials
@@ -1050,9 +1050,9 @@ index 3f7cee8..5c6457b 100644
 +- password: xxxxxxxxxx
 ```
 
-# Level 29 → Level 30
+## Level 29 → Level 30
 
-**Level Goal**
+**Level Goal**:
 
 > There is a git repository at `ssh://bandit29-git@localhost/home/bandit29-git/repo`. The password for the user bandit29-git is the same as for the user bandit29.
 > *Clone the repository and find the password for the next level.*
@@ -1106,7 +1106,7 @@ Date:   Tue Oct 16 14:00:41 2018 +0200
 
 ```shell
 bandit29@bandit:/tmp/conn29/repo$ cat README.md
-# Bandit Notes
+## Bandit Notes
 Some notes for bandit30 of bandit.
 
 ## credentials
@@ -1115,9 +1115,9 @@ Some notes for bandit30 of bandit.
 - password: 5b90576bedb2cc04c86a9e924ce42faf
 ```
 
-# Level 30 → Level 31
+## Level 30 → Level 31
 
-**Level Goal**
+**Level Goal**:
 
 > There is a git repository at `ssh://bandit30-git@localhost/home/bandit30-git/repo`. The password for the user bandit30-git is the same as for the user bandit30.
 > *Clone the repository and find the password for the next level.*
@@ -1136,9 +1136,9 @@ bandit30@bandit:/tmp/conn30/repo$ git show f171
 47e603bb428404d265f59c42920d81e5
 ```
 
-# Level 31 → Level 32
+## Level 31 → Level 32
 
-**Level Goal**
+**Level Goal**:
 
 > There is a git repository at `ssh://bandit31-git@localhost/home/bandit31-git/repo`. The password for the user bandit31-git is the same as for the user bandit31.
 > *Clone the repository and find the password for the next level.*
@@ -1223,9 +1223,9 @@ bandit31@bandit:/tmp/conn31/repo$
 
 得到下一关的密钥`56a9bf19c63d650ce78e6ec0354ee45e`
 
-# Level 32 → Level 33
+## Level 32 → Level 33
 
-**Level Goal**
+**Level Goal**:
 
 > After all this git stuff its time for another escape. Good luck!
 > **Commands you may need to solve this level**
@@ -1233,7 +1233,7 @@ bandit31@bandit:/tmp/conn31/repo$
 
 连接的最后直接给了你一个大写的终端。
 
-```
+```plaintext
   For support, questions or comments, contact us through IRC on
   irc.overthewire.org #wargames.
 
@@ -1252,4 +1252,3 @@ bandit33
 $ cat /etc/bandit_pass/bandit33
 c9c3199ddf4121b10cf581a98d51caee
 ```
-

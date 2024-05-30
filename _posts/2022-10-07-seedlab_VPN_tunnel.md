@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】VPN Tunneling"
+title:  "VPN Tunneling"
 date:   2022-10-07 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab vpn
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,7 +11,7 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - VPN Tunneling Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/VPN_Tunnel/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 虚拟专用网络 (VPN) 是建立在公共网络（通常是 Internet）之上的专用网络。VPN 内的计算机可以安全地进行通信，就像它们在与外部物理隔离的真实专用网络上一样，即使它们的流量可能通过公共网络。VPN 使员工能够在旅行时安全地访问公司的内部网；它还允许公司将其私人网络扩展到全国和世界各地。本实验的目的是了解 VPN 的工作原理。我们专注于一种特定类型的 VPN（最常见的类型），它建立在传输层之上。我们将从头开始构建一个非常简单的 VPN，并使用该过程来说明 VPN 技术的每个部分是如何工作的。一个真正的 VPN 程序有两个基本部分，隧道和加密。本实验只关注隧道部分，了解隧道技术，所以本实验中的隧道没有加密。该实验涵盖以下主题：
 • 虚拟专用网络
@@ -19,13 +19,13 @@ copyrights: 原创
 • IP 隧道
 • 路由
 
-# Task 1: Network Setup
+## Task 1: Network Setup
 
 启动 docker：
 
 ```shell
-$ dcbuild
-$ dcup
+dcbuild
+dcup
 ```
 
 <img src="../assets/post/images/vpn2.png" alt="image-20220810231526966"  />
@@ -43,15 +43,15 @@ b48df35bbff5  server-router
 我们分别修改 shell，方便查看：
 
 ```shell
-$ export PS1="\w U$"
+export PS1="\w U$"
 ```
 
 ```shell
-$ export PS1="\w V$"
+export PS1="\w V$"
 ```
 
 ```shell
-$ export PS1="\w Server$"
+export PS1="\w Server$"
 ```
 
 > Host U can communicate with VPN Server
@@ -128,7 +128,7 @@ listening on eth1, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 `VPN-SERVER` 可以捕捉到两个网络中的数据包。
 
-# Task 2: Create and Configure TUN Interface
+## Task 2: Create and Configure TUN Interface
 
 程序如下：
 
@@ -159,7 +159,7 @@ while True:
    time.sleep(10)
 ```
 
-## Task 2.a: Name of the Interface
+### Task 2.a: Name of the Interface
 
 在 `HOST-U` 上运行该程序：
 
@@ -225,7 +225,7 @@ Interface Name: cheny0
 
 可以看到，端口名字被成功修改了。此时，如果运行 `ip address`，也会看到被修改后的端口。
 
-## Task 2.b: Set up the TUN Interface
+### Task 2.b: Set up the TUN Interface
 
 在程序死循环前加入：
 
@@ -268,7 +268,7 @@ U$ ip address
 
 可以观察到，`cheny0` 端口被添加了我们刚刚指定的 ip，并且 state 不再是 DOWN 了。
 
-## Task 2.c: Read from the TUN Interface
+### Task 2.c: Read from the TUN Interface
 
 使用如下代码取代原来程序中的死循环：
 
@@ -315,7 +315,7 @@ Interface Name: cheny0
 
 我们 ping 的是另一个网络，发现能够 ping 通，但并没有经过刚刚设置的 tun。
 
-## Task 2.d: Write to the TUN Interface
+### Task 2.d: Write to the TUN Interface
 
 > After getting a packet from the TUN interface, if this packet is an ICMP echo request packet, construct a corresponding echo reply packet and write it to the TUN interface. Please provide evidence to show that the code works as expected.
 
@@ -442,7 +442,7 @@ IP / ICMP 192.168.53.99 > 192.168.53.1 echo-request 0 / Raw
 
 可以看到，tun 接收到了报文，但没有返回正确的内容。
 
-# Task 3: Send the IP Packet to VPN Server Through a Tunnel
+## Task 3: Send the IP Packet to VPN Server Through a Tunnel
 
 编写 `tun_server.py`:
 
@@ -553,7 +553,7 @@ Server$ tun_server.py
 
 可以看到，`VPN-SERVER` 成功接收并且准备转发。
 
-# Task 4: Set Up the VPN Server
+## Task 4: Set Up the VPN Server
 
 修改 `tun_server.py`：
 
@@ -623,7 +623,7 @@ listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 可以看到，尽管目前没有返回功能，但报文已经正确的发给了 `HOST-V`。
 
-# Task 5: Handling Traffic in Both Directions
+## Task 5: Handling Traffic in Both Directions
 
 修改 `tun_server.py`：
 
@@ -789,14 +789,14 @@ applicable law.
 
 可以看到 ping 大致可以分为四个过程：
 
--  `HOST-U` 发送给 `VPN-SERVER`
+- `HOST-U` 发送给 `VPN-SERVER`
 - `VPN-SERVER` 发送 ping 请求给 `HOST-V`
--  `HOST-V` 回复 `VPN-SERVER` 的 ping 请求
+- `HOST-V` 回复 `VPN-SERVER` 的 ping 请求
 - `VPN-SERVER` 将回复发回给 `HOST-U`
 
 这四个过程都是通过 tun 传输的。
 
-# Task 6: Tunnel-Breaking Experiment
+## Task 6: Tunnel-Breaking Experiment
 
 和 task5 一样，我们从 `HOST-U` telnet 到 `HOST-V`。我们发现，是可以随意输入的。这时候，我们停掉 `tun_server.py`：
 
@@ -817,7 +817,7 @@ seed@5c79003a352f:~$ ???
 
 这是由于刚刚链接断掉了，但输入并发送的东西还都在缓冲区。再次建立链接后，缓冲区内的内容被发送。
 
-# Task 7: Routing Experiment on Host V
+## Task 7: Routing Experiment on Host V
 
 在 `HOST-V` 上查看 ip route：
 
@@ -856,15 +856,15 @@ PING 192.168.60.5 (192.168.60.5) 56(84) bytes of data.
 rtt min/avg/max/mdev = 57.842/57.842/57.842/0.000 ms
 ```
 
-# Task 8: VPN Between Private Networks
+## Task 8: VPN Between Private Networks
 
 <img src="../assets/post/images/vpn4.png" alt="image-20220818163717681"  />
 
 启动新的 docker：
 
 ```shell
-$ docker-compose -f docker-compose2.yml build
-$ docker-compose -f docker-compose2.yml up
+docker-compose -f docker-compose2.yml build
+docker-compose -f docker-compose2.yml up
 ```
 
 我们同样的修改 shell：
@@ -969,7 +969,7 @@ From tun ==> : 192.168.60.5 --> 192.168.50.5
 
 可以看出，流量是走的 tun。
 
-# Task 9: Experiment with the TAP Interface
+## Task 9: Experiment with the TAP Interface
 
 在之前的 `tun.py` 上稍作修改，编写 `tap.py`：
 
@@ -1059,7 +1059,7 @@ rtt min/avg/max/std-dev = 1.612/1.612/1.612/0.000 ms
 
 可以看到，我们收到了伪造的回复。
 
-# 实验总结
+## 实验总结
 
 本实验工作量较大，但难度不大，重点在于搞清是谁发给谁，走的什么路径。
 

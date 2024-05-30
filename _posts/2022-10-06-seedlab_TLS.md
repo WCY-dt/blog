@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】TLS"
+title:  "TLS"
 date:   2022-10-06 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab tls
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,7 +11,7 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - TLS Lab](https://seedsecuritylabs.org/Labs_20.04/Crypto/Crypto_TLS/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 现在越来越多的数据传输是通过互联网完成的。然而，当数据通过这种不受保护的公共网络传输时，它们可以被其他人读取甚至篡改。密码算法有很多种，即使是同一种算法，也有很多参数可以使用。为了实现互操作性，即允许不同的应用程序相互通信，这些应用程序需要遵循一个共同的标准。 TLS，Transport Layer Security，就是这样一个标准。如今，大多数 Web 服务器都使用 HTTPS，它建立在 TLS 之上。
 本实验的目的是了解 TLS 的工作原理以及如何在编程中使用 TLS。我们实现一对TLS客户端和服务器程序，并在此基础上进行一系列实验，从而了解TLS协议底层的安全原理。我们还将实施一个简单的 HTTPS 代理程序，以了解如果某些受信任的 CA 遭到破坏时的安全影响。实验室涵盖以下主题：
@@ -22,9 +22,9 @@ copyrights: 原创
 • 扩展的 X.509 证书
 • 中间人攻击
 
-# Task 1: TLS Client
+## Task 1: TLS Client
 
-## Task 1.a: TLS handshake
+### Task 1.a: TLS handshake
 
 编写代码 `handshake.py`：
 
@@ -113,13 +113,13 @@ After TLS handshake. Press any key to continue ...
 
 > What is the cipher used between the client and the server?
 
-```
+```plaintext
 === Cipher used: ('AES256-SHA', 'SSLv3', 256)
 ```
 
 > Please print out the server certificate in the program.
 
-```
+```plaintext
 {'OCSP': ('http://ocsp.digicert.cn',),
  'caIssuers': ('http://cacerts.digicert.cn/GeoTrustRSACNCAG2.crt',),
  'crlDistributionPoints': ('http://crl.digicert.cn/GeoTrustRSACNCAG2.crl',),
@@ -168,7 +168,7 @@ Wireshark 截图如下：
 
 编号 3-5 的部分为 TCP 的三次握手。编号 6-13 的部分为 TLS 握手。客户端首先发送 Client Hello 信息，服务器回复 Server Hello。客户端验证后，发送密钥交换及更改密码规范消息，服务器回复更改密码规范消息。至此，TLS 握手完成，进行后续结束工作。
 
-## Task 1.b: CA’s Certificate
+### Task 1.b: CA’s Certificate
 
 修改原程序中的：
 
@@ -193,7 +193,7 @@ ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verif
 
 我们在之前有看到：
 
-```
+```plaintext
 [{'issuer': ((('countryName', 'US'),),
              (('organizationName', 'DigiCert Inc'),),
              (('organizationalUnitName', 'www.digicert.com'),),
@@ -225,7 +225,7 @@ lrwxrwxrwx 1 root root   27 Aug 11 07:50 3513523f.0 -> DigiCert_Global_Root_CA.c
 然后我们连接上了 [www.seu.edu.cn](www.seu.edu.cn)：
 
 ```shell
-$ handshake.py www.seu.edu.cn
+handshake.py www.seu.edu.cn
 ```
 
 得到的结果与前文相同，此处不再重复粘贴。
@@ -279,7 +279,7 @@ $ handshake.py codeforces.com
 
 得到的结果与前文相同，此处不再重复粘贴。
 
-## Task 1.c: Experiment with the hostname check
+### Task 1.c: Experiment with the hostname check
 
 查看东南大学主页 ip：
 
@@ -295,11 +295,11 @@ $ dig www.seu.edu.cn
 ;; OPT PSEUDOSECTION:
 ; EDNS: version: 0, flags:; udp: 65494
 ;; QUESTION SECTION:
-;www.seu.edu.cn.			IN	A
+;www.seu.edu.cn.    IN  A
 
 ;; ANSWER SECTION:
-www.seu.edu.cn.		3600	IN	CNAME	widc142.seu.edu.cn.
-widc142.seu.edu.cn.	3599	IN	A	58.192.118.142
+www.seu.edu.cn.    3600  IN  CNAME  widc142.seu.edu.cn.
+widc142.seu.edu.cn.    3599  IN  A  58.192.118.142
 
 ;; Query time: 4 msec
 ;; SERVER: 127.0.0.53#53(127.0.0.53)
@@ -310,12 +310,12 @@ widc142.seu.edu.cn.	3599	IN	A	58.192.118.142
 修改 hosts：
 
 ```shell
-$ sudo vi /etc/hosts
+sudo vi /etc/hosts
 ```
 
 依据之前看到的 ip，在 hosts 中添加：
 
-```
+```hosts
 58.192.118.142 www.nju.edu.cn
 ```
 
@@ -375,7 +375,7 @@ After TLS handshake. Press any key to continue ...
 
 这里就直接验证通过了。由此可见域名检查的重要性。
 
-## Task 1.d: Sending and getting Data
+### Task 1.d: Sending and getting Data
 
 向上面的程序添加如下代码：
 
@@ -456,7 +456,7 @@ b'\x19\x0c\x18\x9e\x8a\xa0(>\x10#\n&T\x0c(\xfa\xcc\x01\xb3"(\xa8\x88\x08'
 
 可以看出，我们成功爬取到了图片。
 
-# Task 2: TLS Server
+## Task 2: TLS Server
 
 准备好 PKI 实验中得到的 `server.crt` 和 `server.key`，放入 server-certs 文件夹中。
 
@@ -468,7 +468,7 @@ dbb9c584
 $ ln -s ca.crt dbb9c584.0
 ```
 
-## Task 2.a. Implement a simple TLS server
+### Task 2.a. Implement a simple TLS server
 
 修改 `handshake.py`；
 
@@ -560,19 +560,19 @@ while True:
 将 `www.chenyang2022.com` 加入到 client 容器的 hosts 中：
 
 ```shell
-$ echo "10.9.0.43 www.chenyang2022.com" >> /etc/hosts
+echo "10.9.0.43 www.chenyang2022.com" >> /etc/hosts
 ```
 
 在 server 上运行：
 
 ```shell
-$ server.py
+server.py
 ```
 
 在 client 上运行：
 
 ```shell
-$ handshake.py www.chenyang2022.com
+handshake.py www.chenyang2022.com
 ```
 
 server 上得到：
@@ -634,7 +634,7 @@ ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verif
 
 可以看到，正常建立了 TCP 连接，但无法建立 LTS。
 
-## Task 2.b. Testing the server program using browsers
+### Task 2.b. Testing the server program using browsers
 
 由于我们在 PKI 实验中，已经在浏览器里添加了证书信任，故本次无需重复添加。
 
@@ -642,7 +642,7 @@ ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verif
 
 ![image-20220812001051996](../assets/post/images/tls2.png)
 
-## Task 2.c. Certificate with multiple names
+### Task 2.c. Certificate with multiple names
 
 编写 `server_openssl.cnf`
 
@@ -671,13 +671,13 @@ DNS.3 = *.chenyang2022.com
 这里，由于一些玄学的原因，我们不得不重新生成了 CA 并进行了相关操作，使得其 C、ST、L、O 均与上面的配置文件相同且不得为空。
 
 ```shell
-$ openssl req -newkey rsa:2048 -config ./server_openssl.cnf -batch -sha256 -keyout server.key -out server.csr
+openssl req -newkey rsa:2048 -config ./server_openssl.cnf -batch -sha256 -keyout server.key -out server.csr
 ```
 
 使用 CA 认证：
 
 ```shell
-$ openssl ca -md sha256 -days 3650 -config ./myopenssl.cnf -batch -in server.csr -out server.crt -cert ca.crt -keyfile ca.key
+openssl ca -md sha256 -days 3650 -config ./myopenssl.cnf -batch -in server.csr -out server.crt -cert ca.crt -keyfile ca.key
 ```
 
 我们尝试定义的几个域名，得到：
@@ -742,7 +742,7 @@ After TLS handshake. Press any key to continue ...
 
 可以看出，所有域名都成功了。
 
-# Task 3: A Simple HTTPS Proxy
+## Task 3: A Simple HTTPS Proxy
 
 编写 `proxy.py`：
 
@@ -843,7 +843,7 @@ Data Base Updated
 
 在 `/etc/hosts` 中添加：
 
-```
+```hosts
 10.9.0.143 codeforces.com
 ```
 
@@ -852,7 +852,7 @@ Data Base Updated
 然后启动：
 
 ```shell
-$ proxy.py
+proxy.py
 ```
 
 访问 [codeforces.com](codeforces.com) 可以看到：
@@ -888,7 +888,7 @@ sock_for_server
 
 报文具体的内容涉及个人隐私不放图了。经过简单过滤查找，我们发现 codeforces 的用户名和密码都是明文传输给服务器的，连哈希都没有做。
 
-# 实验总结
+## 实验总结
 
 本实验的遇到困难的地方在 task 2.c，要求证书与 CA 的 C、ST 等完全相同才能正常工作，否则会报错。经过查阅发现，这是签发策略导致的。策略通常有三种
 

@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】ARP Cache Poisoning"
+title:  "ARP Cache Poisoning"
 date:   2022-10-01 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab arp
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,7 +11,7 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - ARP Cache Poisoning Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/ARP_Attack/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 地址解析协议 (ARP) 是一种通信协议，用于在给定 IP 地址的情况下发现链路层地址，例如 MAC 地址。ARP 协议是一个非常简单的协议，它没有实施任何安全措施。ARP 缓存中毒攻击是针对 ARP 协议的常见攻击。使用这种攻击，攻击者可以欺骗受害者接受伪造的 IP 到 MAC 映射。这可能会导致受害者的数据包被重定向到具有伪造 MAC 地址的计算机，从而导致潜在的中间人攻击。本实验的目的是获得有关 ARP 缓存中毒攻击的第一手经验，并了解此类攻击可能造成的损害。我们将使用 ARP 攻击发起中间人攻击，攻击者可以拦截和修改两个受害者 A 和 B 之间的数据包。本实验的另一个目的是练习数据包嗅探和欺骗技能，因为这些是网络安全中必不可少的技能，它们是许多网络攻击和防御工具的构建块。我们将使用 Scapy 执行实验室任务。本实验涵盖以下主题：
 
@@ -20,13 +20,13 @@ copyrights: 原创
 - 中间人攻击
 - Scapy 编程
 
-# Task 1: ARP Cache Poisoning
+## Task 1: ARP Cache Poisoning
 
 我们启动 docker：
 
 ```shell
-$ dcbuild
-$ dcup
+dcbuild
+dcup
 ```
 
 启动对应的 shell 后，我们修改一下以便操作：
@@ -45,7 +45,7 @@ $ dcup
 
 ![image-20220822162531552](./assets/arp1.png)
 
-## Task 1.A using ARP request
+### Task 1.A using ARP request
 
 首先查看三台机器的 ip 和 mac：
 
@@ -131,7 +131,7 @@ B-10.9.0.6.net-10.9.0.0  ether   02:42:0a:09:00:69   C                     eth0
 
 说明我们的 arp 请求发送成功。
 
-## Task 1.B using ARP reply
+### Task 1.B using ARP reply
 
 修改程序：
 
@@ -227,7 +227,7 @@ A-10.9.0.5$ arp -n
 
 可见 reply 消息只能更新内容，却不能新建。
 
-## Task 1.C using ARP gratuitous message
+### Task 1.C using ARP gratuitous message
 
 修改程序：
 
@@ -323,11 +323,11 @@ A-10.9.0.5$ arp -n
 
 可见该情况和 reply 的结果是一样的。
 
-# Task 2: MITM Attack on Telnet using ARP Cache Poisoning
+## Task 2: MITM Attack on Telnet using ARP Cache Poisoning
 
 ![image-20220822164755158](./assets/arp7.png)
 
-## Step 1 Launch the ARP cache poisoning attack
+### Step 1 Launch the ARP cache poisoning attack
 
 修改程序：
 
@@ -402,7 +402,7 @@ Address                  HWtype  HWaddress           Flags Mask            Iface
 10.9.0.5                 ether   02:42:0a:09:00:69   C                     eth0
 ```
 
-## Step 2 Testing
+### Step 2 Testing
 
 首先关闭转发：
 
@@ -441,7 +441,7 @@ PING 10.9.0.5 (10.9.0.5) 56(84) bytes of data.
 
 发现 ping 不通。
 
-## Step 3 Turn on IP forwarding
+### Step 3 Turn on IP forwarding
 
 首先开启转发：
 
@@ -484,7 +484,7 @@ rtt min/avg/max/mdev = 0.076/0.076/0.076/0.000 ms
 
 发现 ping 得通。
 
-## Step 4 Launch the MITM attack
+### Step 4 Launch the MITM attack
 
 保持 ip 转发开启，先运行：
 
@@ -596,7 +596,7 @@ s ==> Z
 
 攻击成功。
 
-# Task 3: MITM Attack on Netcat using ARP Cache Poisoning
+## Task 3: MITM Attack on Netcat using ARP Cache Poisoning
 
 保持 `arp.py` 运行，然后 `B` 开启端口监听：
 
@@ -681,6 +681,6 @@ b'Chenyang\n' ==> b'Yangchen\n'
 
 可以看到，只要输入我的名字，就会被替换掉。
 
-# 实验总结
+## 实验总结
 
 本实验内容较为简单，需要注意的是每一个任务中源 mac、源 ip、目的 mac、目的 ip 以及 op 不要搞错了。

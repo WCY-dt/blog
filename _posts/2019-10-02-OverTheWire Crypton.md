@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【HackGame】OverTheWireCrypton"
+title:  "OverTheWireCrypton"
 date:   2019-10-02 00:00:00 +0800
 categories: 安全
 tags: game
@@ -9,13 +9,13 @@ mathjax: true
 copyrights: 原创 未完待续
 ---
 
-https://overthewire.org/wargames/krypton/krypton0.html
+[https://overthewire.org/wargames/krypton/krypton0.html](https://overthewire.org/wargames/krypton/krypton0.html)
 
-# Level 0–>Level 1
+## Level 0–>Level 1
 
 > Welcome to Krypton! The first level is easy. The following string encodes the password using Base64:
 >
-> ```
+> ```plaintext
 > S1JZUFRPTklTR1JFQVQ=
 > ```
 >
@@ -31,10 +31,10 @@ KRYPTONISGREAT
 然后连接下一关：
 
 ```shell
-$ ssh -p 2231 krypton1@krypton.labs.overthewire.org
+ssh -p 2231 krypton1@krypton.labs.overthewire.org
 ```
 
-# Level 1->Level 2
+## Level 1->Level 2
 
 > The password for level 2 is in the file ‘krypton2’. It is ‘encrypted’ using a simple rotation. It is also in non-standard ciphertext format. When using alpha characters for cipher text it is normal to group the letters into 5 letter clusters, regardless of word boundaries. This helps obfuscate any patterns. This file has kept the plain text word boundaries and carried them to the cipher text. Enjoy!
 
@@ -82,7 +82,7 @@ krypton1@bandit:/krypton/krypton1$ cat krypton2 | tr "[a-zA-Z]" "[n-za-mN-ZA-M]"
 LEVEL TWO PASSWORD ROTTEN
 ```
 
-# Level 2->Level 3
+## Level 2->Level 3
 
 > ROT13 is a simple substitution cipher.
 >
@@ -90,7 +90,7 @@ LEVEL TWO PASSWORD ROTTEN
 >
 > This level contains an old form of cipher called a ‘Caesar Cipher’. A Caesar cipher shifts the alphabet by a set number. For example:
 >
-> ```
+> ```plaintext
 > plain:  a b c d e f g h i j k ...
 > cipher: G H I J K L M N O P Q ...
 > ```
@@ -109,16 +109,16 @@ LEVEL TWO PASSWORD ROTTEN
 >
 > Here is an example:
 >
-> ```
-> krypton2@melinda:~$ mktemp -d
+> ```shell
+> $ mktemp -d
 > /tmp/tmp.Wf2OnCpCDQ
-> krypton2@melinda:~$ cd /tmp/tmp.Wf2OnCpCDQ
-> krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ ln -s /krypton/krypton2/keyfile.dat
-> krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ ls
+> $ cd /tmp/tmp.Wf2OnCpCDQ
+> $ ln -s /krypton/krypton2/keyfile.dat
+> $ ls
 > keyfile.dat
-> krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ chmod 777 .
-> krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ /krypton/krypton2/encrypt /etc/issue
-> krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ ls
+> $ chmod 777 .
+> $ /krypton/krypton2/encrypt /etc/issue
+> $ ls
 > ciphertext  keyfile.dat
 > ```
 
@@ -154,7 +154,7 @@ krypton2@bandit:/tmp/tmp.BBw9y442so$ echo 'OMQEMDUEQMEK' | tr '[A-Z]' '[MNOPQRST
 CAESARISEASY
 ```
 
-# Level 3->Level 4
+## Level 3->Level 4
 
 > Well done. You’ve moved past an easy substitution cipher.
 >
@@ -164,7 +164,7 @@ CAESARISEASY
 >
 > You know the following important details:
 >
-> - The message plaintexts are in American English (*** very important) - They were produced from the same key (*** even better!)
+> - The message plaintexts are in American English (***very important***) - They were produced from the same key (***even better!***)
 >
 > Enjoy.
 
@@ -191,7 +191,7 @@ WELLD ONETH ELEVE LFOUR PASSW ORDIS BRUTE
 
 WELL DONE THE LEVEL FOUR PASSWORD IS BRUTE
 
-# Level 4->Level 5
+## Level 4->Level 5
 
 > Good job!
 >
@@ -203,14 +203,14 @@ WELL DONE THE LEVEL FOUR PASSWORD IS BRUTE
 >
 > If we use the key(K) ‘GOLD’, and P = PROCEED MEETING AS AGREED, then “add” P to K, we get C. When adding, if we exceed 25, then we roll to 0 (modulo 26).
 >
-> ```
+> ```plaintext
 > P P R O C E E D M E E T I N G A S A G R E E D\
 > K G O L D G O L D G O L D G O L D G O L D G O\
 > ```
 >
 > becomes:
 >
-> ```
+> ```plaintext
 > P 15 17 14 2 4 4 3 12 4 4 19 8 13 6 0 18 0 6 17 4 4 3\
 > K 6 14 11 3 6 14 11 3 6 14 11 3 6 14 11 3 6 14 11 3 6 14\
 > C 21 5 25 5 10 18 14 15 10 18 4 11 19 20 11 21 6 20 2 8 10 17\
@@ -218,7 +218,7 @@ WELL DONE THE LEVEL FOUR PASSWORD IS BRUTE
 >
 > So, we get a ciphertext of:
 >
-> ```
+> ```plaintext
 > VFZFK SOPKS ELTUL VGUCH KR
 > ```
 >

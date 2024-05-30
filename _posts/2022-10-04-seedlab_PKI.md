@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】PKI"
+title:  "PKI"
 date:   2022-10-04 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab pki
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,7 +11,7 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - PKI Lab](https://seedsecuritylabs.org/Labs_20.04/Crypto/Crypto_PKI/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 如今，公钥密码学已经成为了安全通信的基础。但是当通信的一方将其公钥发送给另一方时，它会受到中间人攻击。问题在于无法验证公钥的所有权——即给定公钥及其声称的所有者信息。我们如何确保公钥确实由声称的所有者拥有？公钥基础设施 (PKI) 是解决此问题的实用方案。本实验的学习目标是了解 PKI 的工作原理、PKI 如何用于保护 Web 以及 PKI 如何击败中间人攻击。此外，我们能够了解公钥基础设施中的信任根，以及如果根信任被破坏会出现什么问题。本实验涵盖以下主题：
 • 公钥加密、公钥基础设施 (PKI)
@@ -19,31 +19,31 @@ copyrights: 原创
 • Apache、HTTP 和 HTTPS
 • 中间人攻击
 
-# Task 1: Becoming a Certificate Authority
+## Task 1: Becoming a Certificate Authority
 
 首先修改 hosts：
 
 ```shell
-$ sudo vi /etc/hosts
+sudo vi /etc/hosts
 ```
 
 添加：
 
-```
+```hosts
 10.9.0.80 www.chenyang2022.com
 ```
 
 然后，我们创建一个 CA：
 
 ```shell
-$ mkdir demoCA
-$ cd demoCA
-$ mkdir certs crl newcerts
-$ touch index.txt serial
-$ echo 1000 > serial
-$ cd ..
-$ cp /usr/lib/ssl/openssl.cnf myCA_openssl.cnf
-$ openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -keyout ca.key -out ca.crt -subj "/CN=www.modelCA.com/O=Model CA LTD./C=US" -passout pass:dees
+mkdir demoCA
+cd demoCA
+mkdir certs crl newcerts
+touch index.txt serial
+echo 1000 > serial
+cd ..
+cp /usr/lib/ssl/openssl.cnf myCA_openssl.cnf
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -keyout ca.key -out ca.crt -subj "/CN=www.modelCA.com/O=Model CA LTD./C=US" -passout pass:dees
 ```
 
 可以看一看刚刚操作的效果：
@@ -73,8 +73,8 @@ modulus:
 
 将 `myCA_openssl.cnf` 文件中的
 
-```
-# unique_subject	= no
+```cnf
+# unique_subject    = no
 # copy_extensions   = copy
 ```
 
@@ -82,13 +82,13 @@ modulus:
 
 > What part of the certificate indicates this is a CA’s certificate?
 
-```
+```plaintext
 CA:TRUE
 ```
 
 > What part of the certificate indicates this is a self-signed certificate?
 
-```
+```plaintext
 Issuer: CN = www.modelCA.com, O = Model CA LTD., C = US
 Subject: CN = www.modelCA.com, O = Model CA LTD., C = US
 ```
@@ -99,7 +99,7 @@ Subject 和 Issuer 相同，说明这是自签名 CA。
 
 在 CA 的私钥文件中，$n$ 为
 
-```
+```plaintext
 modulus:
     00:c1:89:79:8c:3b:28:db:ab:a4:f0:d1:0b:83:e2:
     b1:10:06:df:a9:2d:e8:4b:30:17:2e:d2:84:1b:79:
@@ -140,7 +140,7 @@ modulus:
 
 $p$ 和 $q$ 分别为
 
-```
+```plaintext
 prime1:
     00:e0:c1:03:60:63:87:56:b1:89:e3:62:91:57:ac:
     5f:57:c1:02:f1:af:c9:05:99:26:c9:2a:bb:30:c9:
@@ -183,7 +183,7 @@ prime2:
 
 $e$ 和 $d$ 分别为
 
-```
+```plaintext
 publicExponent: 65537 (0x10001)
 privateExponent:
     00:b3:da:f6:42:03:98:6c:cc:8e:73:dd:51:3e:37:
@@ -225,18 +225,18 @@ privateExponent:
 
 而在公钥文件中，只有 $n$ 和 $e$。
 
-# Task 2: Generating a Certificate Request for Your Web Server
+## Task 2: Generating a Certificate Request for Your Web Server
 
 我们首先按照要求，为自己的域名生成证书：
 
 ```shell
-$ openssl req -newkey rsa:2048 -sha256 -keyout server.key -out server.csr -subj "/CN=www.chenyang2022.com/O=Chenyang2022 Inc./C=US" -passout pass:dees
+openssl req -newkey rsa:2048 -sha256 -keyout server.key -out server.csr -subj "/CN=www.chenyang2022.com/O=Chenyang2022 Inc./C=US" -passout pass:dees
 ```
 
 我们也可以再加一些域名：
 
 ```shell
-$ openssl req -newkey rsa:2048 -sha256 -keyout server.key -out server.csr -subj "/CN=www.chenyang2022.com/O=Chenyang2022 Inc./C=US" -passout pass:dees -addext "subjectAltName = DNS:www.chenyang2022.com, DNS:www.chenyang2022A.com, DNS:www.chenyang2022B.com"
+openssl req -newkey rsa:2048 -sha256 -keyout server.key -out server.csr -subj "/CN=www.chenyang2022.com/O=Chenyang2022 Inc./C=US" -passout pass:dees -addext "subjectAltName = DNS:www.chenyang2022.com, DNS:www.chenyang2022A.com, DNS:www.chenyang2022B.com"
 ```
 
 我们查看一下效果：
@@ -266,7 +266,7 @@ modulus:
 ......
 ```
 
-# Task 3: Generating a Certificate for your server
+## Task 3: Generating a Certificate for your server
 
 我们使用 `ca` 为自己的证书签名：
 
@@ -339,7 +339,7 @@ Certificate:
 ......
 ```
 
-# Task 4: Deploying Certificate in an Apache-Based HTTPS Website
+## Task 4: Deploying Certificate in an Apache-Based HTTPS Website
 
 首先前往 docker 文件夹，在 `image_www` 中创建 `chenyang2022_apache_ssl.conf`，内容如下：
 
@@ -379,8 +379,8 @@ CMD  tail -f /dev/null
 启动 docker：
 
 ```shell
-$ dcbuild
-$ dcup
+dcbuild
+dcup
 ```
 
 然后新建 terminal，进入 shell：
@@ -406,17 +406,17 @@ root@d26128523dc7:/# service apache2 start
 
 我们刚刚导入的 CA 证书使得我们自己的服务器受信任了。
 
-# Task 5: Launching a Man-In-The-Middle Attack
+## Task 5: Launching a Man-In-The-Middle Attack
 
 我们试着劫持东南大学主页。修改 hosts：
 
 ```shell
-$ sudo vi /etc/hosts
+sudo vi /etc/hosts
 ```
 
 添加：
 
-```
+```hosts
 10.9.0.80 www.seu.edu.cn
 ```
 
@@ -426,13 +426,13 @@ $ sudo vi /etc/hosts
 
 我们访问到了自己搭建的服务器，但是证书不被信任。
 
-# Task 6: Launching a Man-In-The-Middle Attack with a Compromised CA
+## Task 6: Launching a Man-In-The-Middle Attack with a Compromised CA
 
 相似的，我们给东南大学主页生成假的证书：
 
 ```shell
-$ openssl req -newkey rsa:2048 -sha256 -keyout university.key -out university.csr -subj "/CN=www.seu.edu.cn/O=Southeast University/C=US" -passout pass:dees
-$ openssl ca -config myCA_openssl.cnf -policy policy_anything -md sha256 -days 3650 -in university.csr -out university.crt -batch -cert ca.crt -keyfile ca.key
+openssl req -newkey rsa:2048 -sha256 -keyout university.key -out university.csr -subj "/CN=www.seu.edu.cn/O=Southeast University/C=US" -passout pass:dees
+openssl ca -config myCA_openssl.cnf -policy policy_anything -md sha256 -days 3650 -in university.csr -out university.crt -batch -cert ca.crt -keyfile ca.key
 ```
 
 前往 docker 文件夹，在 `image_www` 中创建 `seu_apache_ssl.conf`，内容如下：
@@ -475,8 +475,8 @@ CMD  tail -f /dev/null
 启动 docker：
 
 ```shell
-$ dcbuild
-$ dcup
+dcbuild
+dcup
 ```
 
 然后新建 terminal，进入 shell：
@@ -496,7 +496,7 @@ root@a74ea8a4321e:/# service apache2 start
 
 东南大学主页被定向到了我们自己的服务器，并且证书没有被浏览器怀疑。也就是说，我们成功对东南大学主页实现了中间人攻击。
 
-# 实验总结
+## 实验总结
 
 本次实验操作难度较低，依葫芦画瓢即可。
 

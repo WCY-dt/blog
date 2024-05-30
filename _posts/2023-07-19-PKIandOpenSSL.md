@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【安全】PKI和OpenSSL"
+title:  "PKI和OpenSSL"
 date:   2023-07-19 00:00:00 +0800
-categories: 安全
-tags: 安全
+categories: 密码
+tags: pki openssl
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,9 +11,9 @@ copyrights: 原创
 
 本文讨论了 PKI 和 OpenSSL 的相关内容。别急，这个也还没写完……
 
-# PKI
+## PKI
 
-## 中间人攻击
+### 中间人攻击
 
 假设Alice和Bob需要通信，那么他们必然需要交换密钥：
 
@@ -48,7 +48,7 @@ copyrights: 原创
 - 认证机构（CA），也就是上文的公安局。其一半由一些可信的公司充当
 - 数字证书，该证书需要由CA签名后才有效
 
-## 公钥证书
+### 公钥证书
 
 通常，公钥证书的形式是由X.509标准制定的。我们使用OpenSSL获取东南大学网站的证书：
 
@@ -58,7 +58,7 @@ openssl s_client -showcerts -connect www.seu.edu.cn:443 </dev/null
 
 上面的命令中，`openssl s_client` 表示开启一个客户端，`-showcerts` 选项则表示打印出所有接收到的证书。运行结果很长，不粘贴了。其中形如
 
-```
+```plaintext
 -----BEGIN CERTIFICATE-----
 MIIG8TCCBVmgAwIBAgIRALh982dHm8KpFIkWi8LAflIwDQYJKoZIhvcNAQEMBQAw
 省略
@@ -82,7 +82,7 @@ openssl x509 -in seu.pem -text -noout
 
 得到结果如下：
 
-```
+```plaintext
 Certificate:
     Data:
         Version: 3 (0x2)
@@ -121,7 +121,7 @@ Certificate:
 - `Subject Public Key Info` 为公钥。这里由于为RSA加密，故列出来模和指数
 - `X509v3 extensions` 为证书的一些扩展信息
 
-## CA
+### CA
 
 根据我们前文的讨论，CA主要由两个作用：
 
@@ -133,7 +133,7 @@ Certificate:
 
 我们使用OpenSSL模拟整个认证的过程：
 
-### 成为CA
+#### 成为CA
 
 - 部署CA
 
@@ -149,7 +149,7 @@ Certificate:
 
 - 为 `myCA` 生成公私钥对和证书
 
-  ```shell 
+  ```shell
   openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -keyout myCA_key.pem -out myCA_cert.pem
   ```
 
@@ -188,7 +188,7 @@ Certificate:
   openssl x509 -in myCA_cert.pem -text -noout
   ```
 
-### 从CA获取证书
+#### 从CA获取证书
 
 假设一个银行想从我们刚刚创建的CA处获取证书。
 
@@ -208,7 +208,7 @@ Certificate:
 
   输出为：
 
-  ```
+  ```plaintext
   Private-Key: (2048 bit, 2 primes)
   modulus:
       00:c2:75:f4:01:48:a6:c6:ef:e7:bb:b7:97:00:4b:
@@ -265,7 +265,7 @@ Certificate:
 
   输出为
 
-  ```
+  ```plaintext
   Certificate Request:
       Data:
           Version: 1 (0x0)
@@ -302,19 +302,19 @@ Certificate:
 
   内容为：
 
-  ```
+  ```cnf
   [ ca ]
   default_ca      = myCA
   
   [ myCA ]
-  dir            	= /myCA
-  database       	= $dir/index.txt
-  new_certs_dir  	= $dir/newcerts
+  dir            = /myCA
+  database       = $dir/index.txt
+  new_certs_dir  = $dir/newcerts
   
-  certificate    	= $dir/myCA_cert.pem
-  serial         	= $dir/serial
-  private_key    	= $dir/myCA_key.pem
-  RANDFILE       	= $dir/.rand
+  certificate    = $dir/myCA_cert.pem
+  serial         = $dir/serial
+  private_key    = $dir/myCA_key.pem
+  RANDFILE       = $dir/.rand
   
   default_days    = 365
   default_crl_days= 30
@@ -344,7 +344,7 @@ Certificate:
   openssl ca -in certs/bank.csr -out certs/bank_cert.pem -md sha256 -config conf/myCA.cnf
   ```
 
-### 部署证书
+#### 部署证书
 
 - 未添加CA公钥的情形
 
@@ -371,7 +371,7 @@ Certificate:
 
   得到结果
 
-  ```
+  ```plaintext
   CONNECTED(00000003)
   depth=0 C = CN, O = Ch3nyang Bank, CN = ch3nyang.bank/, emailAddress = bank@ch3nyang.top
   verify error:num=20:unable to get local issuer certificate
@@ -395,7 +395,7 @@ Certificate:
 
   得到结果
 
-  ```
+  ```plaintext
   CONNECTED(00000003)
   depth=1 O = ch3nyang, CN = cyCA, emailAddress = ch3nyang@ch3nyang.top
   verify return:1
@@ -408,13 +408,13 @@ Certificate:
 
   对于浏览器访问，需要手动把 `myCA` 添加到信任证书里。
 
-## 根和中间CA
+#### 根和中间CA
 
 顾名思义，根CA就是所有CA的老祖宗，它为下游的中间CA签发证书，并一级一级地传递下去。
 
 为了验证根CA，需要获得根CA的公钥。但这个公钥既不能发送给用户（会产生中间人攻击），也不能让其它CA做担保（那它就不是根CA了）。因此，根本没法验证公钥是否真的属于根CA。因此，根CA的公钥通常直接预装在操作系统、浏览器等中，利用这些软件为根CA做担保。
 
-### 信任链
+#### 信任链
 
 我们依然查看东南大学的证书：
 
@@ -424,7 +424,7 @@ openssl s_client -showcerts -connect www.seu.edu.cn:443 </dev/null
 
 得到结果
 
-```
+```plaintext
 省略
 Certificate chain
  0 s:C = CN, ST = \E6\B1\9F\E8\8B\8F\E7\9C\81, O = \E4\B8\9C\E5\8D\97\E5\A4\A7\E5\AD\A6, CN = *.seu.edu.cn
@@ -462,24 +462,24 @@ openssl verify -verbose -partial_chain -CAfile AAA.pem -untrusted inter.pem seu.
 seu.pem: OK
 ```
 
-其中，`-CAfile` 提供了自签名的根CA证书。                                  
+其中，`-CAfile` 提供了自签名的根CA证书。
 
 > **踩坑**
 >
 > 当有多个中间CA时，需要把它们的证书合成一个文件，且靠近根CA的放在前面。
 
-### 制作中间CA
+#### 制作中间CA
 
 制作中间CA与之前的签名基本相同，只需要在签名时加上 `-extensions v3_ca` 即可。
 
-# TLS
+## TLS
 
 传输层安全协议（TLS）就是标准化后的SSL。TLS 位于传输层和应用层之间，其本身由两层组成。
 
 - 底层为记录层，每条记录包含一个头部、一个载荷、一个可选的 MAC、一个填充；
 - 上层有 5 中消息协议，包括握手协议、警报协议、更改密码规范协议、心跳协议、应用协议。
 
-## TLS 握手
+### TLS 握手
 
 在客户端和服务器进行完 TCP 三次握手后，便可以进行 TLS 握手。TLS 握手主要有以下几步：
 
@@ -505,11 +505,11 @@ seu.pem: OK
 
 - 客户端随机数、服务器随机数、预主密钥三者产生 48 字节的主密钥（Master Key）；
 - 客户端随机数、服务器随机数、主密钥三者根据密码算法生成会话密钥；
-- 会话密钥被分为 4 份，分别是 client_write_MAC_key, server_write_MAC_key, client_write_key, server_write_key。    
+- 会话密钥被分为 4 份，分别是 client_write_MAC_key, server_write_MAC_key, client_write_key, server_write_key。
 
 前面多次提到了 MAC，这是发送方为整段消息使用 MAC_key 计算的验证参数，会接在消息后，作为消息一起被加密发送。接收者收到消息后，会验证消息。
 
-## 安装指定版本 OpenSSL
+### 安装指定版本 OpenSSL
 
 如果只是想简单跑一下程序，那就
 
@@ -571,7 +571,7 @@ source /etc/profile
 
 注意此时在任意路径使用openssl指令运行的是卸载后残留的旧版可执行程序，不过其调用的库文件却是你刚刚安装的的版本；只有在你使用绝对路径指定刚刚安装路径下 `/usr/local/openssl/bin` 的 openssl 可执行程序，才是真正使用你刚刚安装的版本；你可把 `/usr/local/openssl/bin` 下的两个文件，覆盖到 `/bin` 目录下，那么你就可以在任意路径直接使用 openssl 运行你安装的版本，不过有一定风险，系统自带是因为系统需要使用它做一些事情，你直接覆盖由于版本问题可能会有风险。
 
-## SSL 通信程序
+### SSL 通信程序
 
 按照前文所述，为 server 和 client 分别签发证书。
 
@@ -619,14 +619,14 @@ code testCA.cnf
 default_ca      = testCA
   
 [ testCA ]
-dir            	= CA # 完整路径
-database       	= $dir/index.txt
-new_certs_dir  	= $dir/newcerts
+dir            = CA # 完整路径
+database       = $dir/index.txt
+new_certs_dir  = $dir/newcerts
   
-certificate    	= $dir/testCA_cert.pem
-serial         	= $dir/serial
-private_key    	= $dir/testCA_key.pem
-RANDFILE       	= $dir/.rand
+certificate    = $dir/testCA_cert.pem
+serial         = $dir/serial
+private_key    = $dir/testCA_key.pem
+RANDFILE       = $dir/.rand
   
 default_days    = 365
 default_crl_days= 30
@@ -1115,9 +1115,9 @@ int main(int argc, char** argv) {
 
 需要注意的是，编译时要加上 `-lssl` 和 `-lcrypto` 来调用 OpenSSL 的 SSL 和 Crypto 库。
 
-# Misc
+## Misc
 
-## Stunnel
+### Stunnel
 
 Stunnel 是一个基于 SSL 加密封装器，它能够将明文在传输过程中进行加密。Stunnel 最常见的用途之一就是对 POP 或 IMAP 邮件服务器与电子邮件客户端之间的通信进行加密。这两种协议要求用户使用用户名和密码进行身份验证。在大多数情况下，这些用户名密码与用户在本地或通过 SSH 远程登录时使用的相同。如果不使用 Stunnel 来加密这些数据，容易被中间人窃取。
 
@@ -1138,7 +1138,7 @@ cd tools
 make stunnel.pem
 ```
 
-### 存在支持 SSL 的客户端的情况
+#### 存在支持 SSL 的客户端的情况
 
 例如大多数电子邮件客户端都支持 POP3、IMAP 和 SMTP 的 SSL 加密，大多数互联网客户端（如 Web 浏览器）也支持 HTTPS 加密等。
 
@@ -1186,11 +1186,11 @@ stunnel stunnel-secure-email.conf
 
 我们可以设置 Stunnel 在系统启动时自动启动，方法是将相应的命令添加到 `rc.local` 文件中，该文件通常位于 `/etc/rc.d/` 目录下。这个文件是系统启动时执行的最后一个文件，并且通常被系统管理员用于自己的初始化设置。在将命令放入该脚本时，需要使用完整的路径，如：
 
-```
+```plaintext
 /path/to/stunnel /path/to/the/configuration-file
 ```
 
-### 服务器和客户端均不支持 SSL 的情况
+#### 服务器和客户端均不支持 SSL 的情况
 
 例如 CVS、MySQL 等。
 
@@ -1218,12 +1218,12 @@ setgid = nobody
 accept = 3307
 connect = 3306
 ```
+
 然后在服务器上启动 Stunnel 守护进程：
 
 ```shell
 stunnel stunnel-mysql-server.conf
 ```
-
 
 我们还需要在客户端机器上设置一个 Stunnel 守护进程，并使用以下配置：
 
@@ -1294,7 +1294,7 @@ debug = 7
 output = /dev/stdout
 ```
 
-### 和 socket 编程互动
+#### 和 socket 编程互动
 
 首先还是使用前文的 `ssl_server.c` 及生成的客户端、服务器端证书密钥。
 
@@ -1326,7 +1326,7 @@ gcc ssl_server.c -o ssl_server -lssl -lcrypto && sudo ./ssl_server 4433 1 CA/ser
 
 如果此时关闭浏览器代理并访问 `127.0.0.1:4433`，服务器报错：
 
-```
+```plaintext
 [INFO] 成功建立 socket
 [INFO] 成功绑定
 [INFO] 开始监听，等待客户端连接...
@@ -1343,7 +1343,7 @@ stunnel /home/ch3nyang/Work/firefox-stunnel/stunnel.cnf
 
 再次访问 `127.0.0.1:4433`，得到
 
-```
+```plaintext
 [INFO] 成功建立 socket
 [INFO] 成功绑定
 [INFO] 开始监听，等待客户端连接...
@@ -1390,10 +1390,10 @@ Sec-Fetch-User: ?1
 >
 > - 然后照常编译运行程序即可。
 
-# 参考资料
+## 参考资料
 
 - 《Computer Security: A Hands-on Approach》Chapter 18 & 19
-- https://stackoverflow.com/questions/16235526/openssl-verify-error-20-at-0-depth-lookupunable-to-get-local-issuer-certifica
-- https://blog.csdn.net/wu10188/article/details/124970453?spm=1001.2014.3001.5506
-- https://www.cnblogs.com/lsdb/p/9391979.html
-- https://linuxgazette.net/107/odonovan.html
+- [https://stackoverflow.com/questions/16235526/openssl-verify-error-20-at-0-depth-lookupunable-to-get-local-issuer-certifica](https://stackoverflow.com/questions/16235526/openssl-verify-error-20-at-0-depth-lookupunable-to-get-local-issuer-certifica)
+- [https://blog.csdn.net/wu10188/article/details/124970453?spm=1001.2014.3001.5506](https://blog.csdn.net/wu10188/article/details/124970453?spm=1001.2014.3001.5506)
+- [https://www.cnblogs.com/lsdb/p/9391979.html](https://www.cnblogs.com/lsdb/p/9391979.html)
+- [https://linuxgazette.net/107/odonovan.html](https://linuxgazette.net/107/odonovan.html)

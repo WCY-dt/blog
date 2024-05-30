@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】CSRF"
+title:  "CSRF"
 date:   2020-08-01 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab csrf
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,24 +11,24 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - Cross-Site Request Forgery Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Web/Web_CSRF_Elgg/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 在客户机和服务器之间进行请求-响应时，两种最常被用到的方法是 GET 和 POST。
 
 - **GET** - 从指定的资源请求数据
 - **POST** - 向指定的资源提交要被处理的数据
 
-# Task 1: Observing HTTP Request
+## Task 1: Observing HTTP Request
 
 修改 `/etc/hosts`
 
 ```bash
-$ sudo vim /etc/hosts
+sudo vim /etc/hosts
 ```
 
 更改为
 
-```
+```hosts
 10.9.0.5 www.seed-server.com
 10.9.0.5 www.example32.com
 10.9.0.105 www.attacker32.com
@@ -37,8 +37,8 @@ $ sudo vim /etc/hosts
 然后启动 docker
 
 ```bash
-$ dcbuild
-$ dcup
+dcbuild
+dcup
 ```
 
 访问 [www.seed-server.com](www.seed-server.com)。
@@ -49,7 +49,7 @@ $ dcup
 
 这个内容很简单，不再赘述。
 
-# Task 2: CSRF Attack using GET Request
+## Task 2: CSRF Attack using GET Request
 
 我们需要加 Alice 为好友。登录 Samy 账号，点进 Alice 主页，点击 Add friend
 
@@ -73,19 +73,19 @@ $ dcup
 
 ![image-20210715160431258](./../assets/post/images/dWDPyeB4MrKubaE.png)
 
-# Task 3: CSRF Attack using POST Request
+## Task 3: CSRF Attack using POST Request
 
 我们需要修改 Alice 的 profile。登录 Samy 账号，我们先试着修改自己的 profile。保存后看到发出了如下请求：
 
 ![image-20210715171840579](./../assets/post/images/MIREvuG2Ba8ezrU.png)
 
-可以看到修改 profile 方法为 POST，url 为 http://www.seed-server.com/action/profile/edit
+可以看到修改 profile 方法为 POST，url 为 [http://www.seed-server.com/action/profile/edit](http://www.seed-server.com/action/profile/edit)
 
 我们要整一个网页来执行我们的 javasrcipt，编辑 editprofile.html
 
 <img src="./../assets/post/images/OY28LVvoy7Jcgbm.png" alt="image-20210715171231906" style="zoom:50%;" />
 
-然后修改 profile 如下所示，并添加 www.attacker32.com/editprofile.html 的链接。
+然后修改 profile 如下所示，并添加 [www.attacker32.com/editprofile.html](www.attacker32.com/editprofile.html) 的链接。
 
 ![image-20210715171056003](./../assets/post/images/qznoMPZ9xg5pjeE.png)
 
@@ -110,7 +110,7 @@ $ dcup
 
 不可以。注意到，我们修稿 profile 是需要用户的 user id 的，显然大家的 user id 各不相同。
 
-# Task 4: Enabling Elgg’s Countermeasure
+## Task 4: Enabling Elgg’s Countermeasure
 
 进入 `image_www/elgg` 文件夹，编辑 Csrf.php。注释掉第 69 行的 return。
 
@@ -122,7 +122,7 @@ $ dcup
 
 可以看到，由于验证 cookie，Alice 的 profile 不再可以改变。且因为请求失败就会刷新网页，刷新后再次请求，这个网页在疯狂地循环刷新。
 
-# Task 5: Experimenting with the SameSite Cookie Method
+## Task 5: Experimenting with the SameSite Cookie Method
 
 访问 [www.example32.com](www.example32.com)。然后点击各个按钮。
 
@@ -142,6 +142,6 @@ SameSite cookies 的作用就是限制第三方 cookie，减少安全风险。�
 
 这样除了导航到目标网址的 GET 请求外，将不会发送 cookie。
 
-# 实验总结
+## 实验总结
 
 实验原理简单，操作也很简单，没有难度。

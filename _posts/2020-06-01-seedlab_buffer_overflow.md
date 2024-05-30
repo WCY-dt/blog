@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】Buffer-Overflow Attack"
+title:  "Buffer-Overflow Attack"
 date:   2020-06-01 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab buffer-overflow
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,11 +11,11 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - Buffer-Overflow Attack Lab (Server Version)](https://seedsecuritylabs.org/Labs_20.04/Software/Buffer_Overflow_Server/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 <img src="./../assets/post/images/djlbpsxPeMQ2KWf.png" alt="image-20210711030215002" style="zoom: 20%;" />
 
-# Task1: Get Familiar with the Shellcode
+## Task1: Get Familiar with the Shellcode
 
 进入 shellcode 文件夹。
 
@@ -31,38 +31,38 @@ copyrights: 原创
 然后我们新建 tmpfile 文件并运行 shellcode，过程和结果如下
 
 ```bash
-$ touch tmpfile
-$ ./shellcode_32.py
-$ ./shellcode_64.py
-$ make
-$ a32.out
-$ a64.out
+touch tmpfile
+./shellcode_32.py
+./shellcode_64.py
+make
+a32.out
+a64.out
 ```
 
 <img src="./../assets/post/images/1tZYLEbCuplWNIS.png" alt="image-20210710214006697" style="zoom:50%;" />
 
 执行完后，tmpfile 也被删除了。
 
-# Task 2: Level-1 Attack
+## Task 2: Level-1 Attack
 
 首先关闭 address randomization countermeasure
 
 ```bash
-$ sudo sysctl -w kernel.randomize_va_space=0
+sudo sysctl -w kernel.randomize_va_space=0
 ```
 
 进入 server-code 文件夹下，执行命令
 
 ```bash
-$ make
-$ make install
+make
+make install
 ```
 
 然后返回其根目录，执行命令启动 docker
 
 ```bash
-$ dcbuild
-$ dcup
+dcbuild
+dcup
 ```
 
 进入 attack-code 文件夹，执行
@@ -91,8 +91,8 @@ server 显示
 然后执行
 
 ```bash
-$ ./exploit.py
-$ cat badfile | nc 10.9.0.5 9090
+./exploit.py
+cat badfile | nc 10.9.0.5 9090
 ```
 
 得到了结果
@@ -111,21 +111,21 @@ $ cat badfile | nc 10.9.0.5 9090
 启动新 terminal ，执行监听
 
 ```bash
-$ nc -lnv 9090
+nc -lnv 9090
 ```
 
 在原来的 terminal 中再次执行
 
 ```bash
-$ ./exploit.py
-$ cat badfile | nc 10.9.0.5 9090
+./exploit.py
+cat badfile | nc 10.9.0.5 9090
 ```
 
 可以看到获得了权限
 
 <img src="./../assets/post/images/U92VtaTJSliGMED.png" alt="image-20210710231948031" style="zoom:50%;" />
 
-# Task 3: Level-2 Attack
+## Task 3: Level-2 Attack
 
 本 task 重点在于处理不知道大小的 buffer。
 
@@ -152,15 +152,15 @@ $ echo hello | nc 10.9.0.6 9090
 然后执行
 
 ```bash
-$ ./exploit.py
-$ cat badfile | nc 10.9.0.6 9090
+./exploit.py
+cat badfile | nc 10.9.0.6 9090
 ```
 
 得到了结果
 
 <img src="./../assets/post/images/H9SXfP85rZDYuGV.png" alt="image-20210710234253743" style="zoom:50%;" />
 
-# Task 4: Level-3 Attack
+## Task 4: Level-3 Attack
 
 本 task 重点在于处理 64 位地址的 buffer。实验手册这样描述本实验遇到的问题：
 
@@ -199,15 +199,15 @@ $ echo hello | nc 10.9.0.7 9090
 然后执行
 
 ```bash
-$ ./exploit.py
-$ cat badfile | nc 10.9.0.7 9090
+./exploit.py
+cat badfile | nc 10.9.0.7 9090
 ```
 
 得到了结果
 
 <img src="./../assets/post/images/c1MzSBlUNIJWsLH.png" alt="image-20210711001656850" style="zoom:50%;" />
 
-# Task 5: Level-4 Attack
+## Task 5: Level-4 Attack
 
 本 task 重点在于执行 return-to-libc 攻击。
 
@@ -232,20 +232,20 @@ $ echo hello | nc 10.9.0.7 9090
 然后执行
 
 ```bash
-$ ./exploit.py
-$ cat badfile | nc 10.9.0.8 9090
+./exploit.py
+cat badfile | nc 10.9.0.8 9090
 ```
 
 得到了结果
 
 <img src="./../assets/post/images/4gDQqSNBbR1LkZJ.png" alt="image-20210711013308222" style="zoom:50%;" />
 
-# Task 6: Experimenting with the Address Randomization
+## Task 6: Experimenting with the Address Randomization
 
 打开地址随机化
 
 ```bash
-$ sudo sysctl -w kernel.randomize_va_space=2
+sudo sysctl -w kernel.randomize_va_space=2
 ```
 
 各执行两次如下命令
@@ -266,19 +266,19 @@ $ echo hello | nc 10.9.0.7 9090
 使用 Task2 中 reverse shell 的 exploit.py 代码，执行命令
 
 ```bash
-$ ./exploit.py
-$ ./brute-force.sh
+./exploit.py
+./brute-force.sh
 ```
 
 ```bash
-$ nc -lnv 9090
+nc -lnv 9090
 ```
 
 在尝试 $52417$ 次后，成功获得权限
 
 <img src="./../assets/post/images/ciCjkt2rNG4xIOB.png" alt="image-20210711022543522" style="zoom:50%;" />
 
-# Tasks 7: Experimenting with Other Countermeasures
+## Tasks 7: Experimenting with Other Countermeasures
 
 进入 server-code 文件夹，去除 `-fno-stack-protector` 编译 stack.c，并将 badfile 作为输入
 
@@ -292,7 +292,6 @@ $ nc -lnv 9090
 
 可以看到，栈不再可执行。
 
-# 实验总结
+## 实验总结
 
 实验总体难度不大，只要把握住 buffer overflow 的原理，便可以很容易解决各种问题。Task2 为本实验的基础；Task3 做了一点微小的改动；Task4 难度较大，因为 64 位地址的最高两位永远是 $00$，导致 `strcpy` 会提前终止，需要思考如何处理这一问题；Task5 理解原理后比较容易；Task6 和 Task7 依葫芦画瓢即可，没有难度。
-

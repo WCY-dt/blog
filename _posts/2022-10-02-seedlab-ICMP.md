@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【SEED Labs】ICMP Redirect Attack"
+title:  "ICMP Redirect Attack"
 date:   2022-10-02 00:00:00 +0800
 categories: 实验
-tags: SEEDLab 安全
+tags: seedlab icmp
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -11,7 +11,7 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - ICMP Redirect Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/ICMP_Redirect/) 的实验记录。
 
-# 实验原理
+## 实验原理
 
 ICMP 重定向是路由器向 IP 数据包发送者发送的错误消息。 当路由器认为数据包被错误地路由时，使用重定向，并且它想通知发送者它应该为随后发送到同一目的地的数据包使用不同的路由器。攻击者可以使用 ICMP 重定向来更改受害者的路由。
 本实验的目的是对受害者发起 ICMP 重定向攻击，这样当受害者向 192.168.60.5 发送数据包时，它将使用恶意路由器容器（10.9.0.111）作为其路由器。由于恶意路由器被攻击者控制，攻击者可以截取数据包，进行修改，然后将修改后的数据包发送出去。这是中间人 (MITM) 攻击的一种形式。本实验涵盖以下主题：
@@ -20,15 +20,15 @@ ICMP 重定向是路由器向 IP 数据包发送者发送的错误消息。 当�
 - ICMP 重定向攻击
 - 路由
 
-# Task 1: Launching ICMP Redirect Attack
+## Task 1: Launching ICMP Redirect Attack
 
 ![image-20220825163913318](./assets/icmp1.png)
 
 启动 docker：
 
 ```shell
-$ dcbuild
-$ dcup
+dcbuild
+dcup
 ```
 
 首先修改 shell 以便查看：
@@ -241,7 +241,7 @@ victim-10.9.0.5$ mtr -n 192.168.60.5
 
 可以看到，也失败了。
 
-# Task 2: Launching the MITM Attack
+## Task 2: Launching the MITM Attack
 
 先把所有东西改回原样。
 
@@ -444,6 +444,6 @@ Sent 1 packets.
 
 可以看到，攻击成功。但是 malicious-server 却在疯狂地发送报文。这是因为它捕获到了自己发送的报文，发送完又捕获到了，陷入了死循环。
 
-# 实验总结
+## 实验总结
 
 本实验较为简单。

