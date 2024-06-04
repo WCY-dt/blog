@@ -2,9 +2,41 @@
 layout: default
 ---
 
-<div class="post_content">
+<div class="post">
+  <hgroup class="hgroup">
     <h1 class="title">{{ page.title }}</h1>
-    <!--<p class="date">{{- page.date | date: site.theme_config.date_format -}}</p>-->
-
+    <div class="info">
+      <p class="date">
+        <span class="material-symbols-outlined">
+          calendar_month
+        </span>
+        {{- page.date | date: site.theme_config.date_format -}}</p>
+      <div class="categories">
+        {%- if page.categories -%}
+          {%- for category in page.categories -%}
+            <a href="{{ '/categories/' | relative_url }}{{ category | slugify }}/">
+              <span class="material-symbols-outlined">
+                archive
+              </span>
+              {{ category }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      <div class="tags">
+        {%- if page.tags -%}
+          {%- for tag in page.tags -%}
+            <a href="{{ '/tags/' | relative_url }}{{ tag | slugify }}/">
+              <span class="material-symbols-outlined">
+                tag
+              </span>
+              {{ tag }}
+            </a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </hgroup>
+  <div class="content">
     {{ content }}
+  </div>
 </div>
