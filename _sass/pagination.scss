@@ -1,0 +1,91 @@
+main {
+    padding: 12rem 1rem 5.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: calc(100% - 2rem);
+    
+    .pagination {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem 1.5rem;
+        width: min(100%, 30rem);
+        transition: background-color 0.25s ease-in-out;
+
+        &:hover {
+            background-color: $bg-color;
+        }
+
+        .title {
+            color: $primary-color;
+            font-size: 1.5rem;
+            font-weight: 900;
+            font-family: $ui-font;
+            margin: 0;
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 1rem;
+            color: $tertiary-color;
+
+            .tag {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.25rem;
+            }
+        }
+
+        .material-symbols-outlined {
+            padding: 0;
+        }
+    }
+
+    hr {
+        width: min(100%, calc(30rem + 3rem));
+        margin: 0;
+        border: 1px solid $bg-color;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        .pagination {
+            width: min(100%, 40rem);
+        }
+    }
+}
+
+@media screen and (max-width: 550px) {
+    main {
+        .pagination {
+            align-items: center;
+            justify-content: center;
+            
+            .title {
+                text-align: center;
+            }
+            
+            .info {
+                .tag {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 425px) {
+    main {
+        padding: 16rem 1rem 5.75rem 1rem;
+    }
+}

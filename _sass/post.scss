@@ -1,79 +1,216 @@
-.post_content {
-    font-family: 'Times New Roman', ' 微软雅黑', ' Arial';
-    line-height: 1.5em;
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+    width: min(calc(100% - 2rem), 40rem);
+    padding: 1rem;
 
     word-wrap: break-word;
     word-break: break-all;
 
-    .title {
-        font-size: 1.4em;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .date {
-        opacity: 60%;
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 1.4em;
-        font-weight: bold;
-    }
-
-    h2 {
-        font-size: 1.2em;
-        font-weight: bold;
-    }
-
-    h3 {
-        font-size: 1.1em;
-        font-weight: bold;
-    }
-
-    h4,
-    h5 {
-        font-weight: bold;
-    }
-
-    p:has(img) {
+    .hgroup {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        gap: 0.5rem;
         align-items: center;
+        justify-content: center;
+
+        .title {
+            margin-bottom: 0;
+            font-size: 3rem;
+            font-weight: 900;
+            font-family: $ui-font;
+            color: $primary-color;
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 1rem;
+            color: $tertiary-color;
+
+            .categories, .tags {
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                gap: 0.25rem;
+            }
+            
+            .date, a {
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                gap: 0;
+            }
+
+            a {
+                color: $tertiary-color;
+                text-decoration: none;
+                transition: text-decoration 0.25s ease-in-out;
+            }
+        }
+
+        .material-symbols-outlined {
+            padding: 0;
+        }
     }
 
-    img {
-        max-width: 80%;
+    .content {
+        color: $black-color;
+        background-color: $white-color;
 
-        @media screen and (max-width: 750px) {
+        p, ul, ol, blockquote, table {
+            font-size: 1.2rem;
+            line-height: 2.5rem;
+        }
+
+        h1 {
+            display: none;
+        }
+
+        h2, h3, h4, h5, h6 {
+            font-family: $ui-font;
+        }
+    
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+    
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+    
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        h5, h6 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+    
+        p:has(img) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        a {
+            color: $primary-color;
+            text-decoration: none;
+            transition: text-decoration 0.25s ease-in-out;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        sup a:hover {
+            text-decoration: none;
+        }
+    
+        img {
             max-width: 100%;
-            min-width: 100%;
         }
-    }
+    
+        blockquote {
+            margin: 0;
+            border-left: 0.25rem solid $primary-color;
+            box-sizing: border-box;
+            background-color: $bg-light-color;
+            padding: 0.5rem 2rem;
 
-    blockquote {
-        border-left: 1px solid $color-words-and-lines;
+            pre:has(code) {
+                border: 0.05rem solid $primary-color;
+                box-sizing: border-box;
+            }
 
-        padding-left: 10px;
-    }
-
-    table {
-        border: 1px solid $color-words-and-lines;
-        width: 100%;
-        margin: 0 auto;
-
-        thead {
-            border-bottom: 1px solid $color-words-and-lines;
+            blockquote {
+                border: 0.05rem solid $primary-color;
+                border-left: 0.25rem solid $primary-color;
+            }
         }
 
-        tbody tr td {
-            text-align: center;
+        ul, ol {
+            padding-left: 1.5rem;
+            
+            li {
+                &::marker {
+                    color: $primary-color;
+                }
+            }
         }
-    }
+    
+        table {
+            border-collapse: collapse;
+            border: 0.05rem solid $primary-color;
+            box-sizing: border-box;
+            width: 100%;
 
-    code,
-    code * {
-        font-family: 'Courier New', Courier, monospace, '微软雅黑';
-        white-space: pre-wrap;
+            th, td {
+                padding: 0;
+            }
+    
+            thead {
+                background-color: $primary-color;
+                color: $white-color;
+            }
+    
+            tbody {
+                tr {
+                    transition: background-color 0.25s ease-in-out;
+
+                    &:nth-child(even) {
+                        background-color: $bg-light-color;
+                    }
+
+                    &:hover {
+                        background-color: $bg-color;
+                    }
+
+                    td {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    
+        code,
+        code * {
+            font-family: 'Courier New', Courier, monospace, '微软雅黑';
+            white-space: pre-wrap;
+        }
+
+        pre:has(code) {
+            background-color: $bg-light-color;
+            padding: 0.5rem;
+            line-height: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        p code {
+            font-weight: 700;
+        }
+
+        hr {
+            width: 100%;
+            border: 1px solid $bg-color;
+        }
+
+        .footnotes p {
+            margin: 0;
+
+            &, a {
+                color: $tertiary-color;
+            }
+
+            a {
+                text-decoration: underline;
+            }
+        }
     }
 }

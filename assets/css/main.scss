@@ -1,8 +1,9 @@
 ---
 ---
 
-@import "basic";
-@import "archive";
-@import "post";
-@import "project";
-@import "about";
+@import 'global';
+@import 'header';
+@import 'pagination';
+@import 'footer';
+@import 'post';
+@import 'syntax';

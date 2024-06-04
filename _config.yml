@@ -5,16 +5,13 @@ author:
   link: https://github.com/WCY-dt
 # display powered by jekyll and ch3nyang-theme
 # in footer
-powered_by: true
+powered_by: false
 # the subpath of your site, e.g. /blog
 baseurl: "/"
 # the base hostname & protocol for your site,
 # e.g. http://example.com
 url: "https://blog.ch3nyang.top"
-favicon: "favicon.ico"
-# your google analytics tracking id
-google_analytics: G-DBLJVQ0KB7
-google_adsense: true
+favicon: "favicon.svg"
 
 ############# 主题设置 #############
 theme_config:
@@ -26,13 +23,10 @@ navy:
     url: /
     icon: home
   - title: about
-    url: /about
+    url: https://ch3nyang.top
     icon: person
-  - title: archive
-    url: /archive
-    icon: archive
   - title: project
-    url: /project
+    url: https://ch3nyang.top/#project
     icon: hive
   - title: mindclip
     url: https://mind.ch3nyang.top/

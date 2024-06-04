@@ -1,3 +1,64 @@
+$primary-color: hsl(15, 100%, 50%);
+$secondary-color: hsl(18, 100%, 85%);
+$tertiary-color: hsl(10, 100%, 20%);
+$bg-color: hsl(20, 100%, 95%);
+$bg-light-color: hsl(20, 100%, 98%);
+$white-color: hsl(0, 0%, 100%);
+$black-color: hsl(0, 0%, 0%);
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+$ui-font: 'Orbitron', sans-serif;
+$text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif';
+
+@mixin header-scroll-animation {
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-timeline: scroll();
+    animation-range: 0 10rem;
+}
+
+:root {
+    font-size: 16px;
+    font-family: $text-font;
+}
+
+@media screen and (max-width: 1024px) {
+    :root {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+}
+
 * button {
     cursor: pointer;
 }
@@ -16,10 +77,8 @@
 
 * .material-symbols-outlined {
     vertical-align: -0.2em;
-    padding-right: 2px;
 }
 
 * .iconify {
     vertical-align: -0.1em;
-    padding-right: 2px;
 }

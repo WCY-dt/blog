@@ -4,17 +4,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ch3nyang's Blog">
+    <meta name="keywords" content="blog, cyber security,  developer, program">
+    <meta name="author" content="Ch3nyang">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="application-name" content="Ch3nyang's Blog">
+    <meta name="msapplication-TileColor" content="#ff5500">
+    
+    <meta property="og:title" content="Homepage of Ch3nyang">
+    <meta property="og:description" content="Portfolio of Ch3nyang">
+    <!--<meta property="og:image" content="./assets/img/ogimage.png">
+    <meta name="twitter:card" content="./assets/img/twittercard.png">-->
+    
+    <link rel="icon" type="image/svg+xml" href="{{ site.favicon | relative_url }}">
+    <!--<link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">-->
+
     <meta name="baseurl" content="{{ site.baseurl }}">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', '{{ site.google_analytics }}');
-    </script>
 
     <title>
         {%- if page.title -%}
@@ -29,40 +35,27 @@
     <!-- Google Icons -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{ site.favicon | relative_url }}" />
 
     <!-- 主样式表 -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
 </head>
 
 <body color_theme="{{ site.theme_config.color_theme | default: 'light' }}">
-    <div class="page-content" aria-label="Content">
-        <header class="no-select">
-            {%-include header.html-%}
-        </header>
-        <main>
-            {{ content }}
-        </main>
-        <footer class="no-select">
-            {%-include footer.html-%}
-        </footer>
-    </div>
-    <p class="wider_screen_message">Warning: Use a wider screen!</p>
-</body>
-
-<footer>
-    <!-- 性能优化 -->
-    <script src="{{ '/assets/js/optimize.js' | relative_url }}"></script>
-
-    <!-- 颜色模式切换 -->
-    <script src="{{ '/assets/js/color_theme_switch.js' | relative_url }}"></script>
-
+    <header class="no-select">
+        {%-include header.html-%}
+    </header>
+    <main>
+        {{ content }}
+    </main>
+    <footer class="no-select">
+        {%-include footer.html-%}
+    </footer>
+    
     <!-- 代码复制 -->
     <script src="{{ '/assets/js/copy_code.js' | relative_url }}"></script>
-
+    
     <!-- 数学公式 -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</footer>
-
+</body>
 </html>

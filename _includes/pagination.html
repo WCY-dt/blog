@@ -11,6 +11,7 @@
 {%-endif-%}
 
 {%- if posts.size > 0 -%}
+<!--
     {%-if type=="home"-%}
         {%- for post in posts limit: site.post_list.limit -%}
             <div class="post-list-item no-select">
@@ -34,20 +35,35 @@
             </a>
         {%- endif -%}
     {%-else-%}
-        {%- for post in posts -%}
-            <div class="post-list-item no-select">
-                <span class="time">
+-->
+    {%- for post in posts -%}
+        <a class="pagination no-select" href="{{ post.url | relative_url }}">
+            <p class="title">{{ post.title | downcase }}</p>
+            <div class="info">
+                <div class="time">
                     <span class="material-symbols-outlined">
                         calendar_month
                     </span>{{- post.date | date: site.theme_config.date_format -}}
-                </span>
-                <span class="category">
+                </div>
+                <div class="category">
                     <span class="material-symbols-outlined">
-                        sell
+                        archive
                     </span>{{- post.categories -}}</span>
-                </span>
-                <a href="{{ post.url | relative_url }}" class="title">{{ post.title | downcase }}</a>
-            </div>
-        {%- endfor -%}
+                </div>
+                <div class="tag">
+                    {% for tag in post.tags %}
+                        <span class="material-symbols-outlined">
+                            tag
+                        </span>{{ tag }}
+                    {% endfor %}
+                </div>
+            </div> 
+        </a>
+        {%- unless forloop.last -%}
+            <hr>
+        {%- endunless -%}
+    {%- endfor -%}
+<!--
     {%-endif-%}
+-->
 {%- endif -%}
