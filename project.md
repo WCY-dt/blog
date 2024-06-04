@@ -1,4 +1,0 @@
----
-layout: project
-title: project
----

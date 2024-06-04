@@ -36,33 +36,26 @@
 </head>
 
 <body color_theme="{{ site.theme_config.color_theme | default: 'light' }}">
-    <div class="page-content" aria-label="Content">
-        <header class="no-select">
-            {%-include header.html-%}
-        </header>
-        <main>
-            {{ content }}
-        </main>
-        <footer class="no-select">
-            {%-include footer.html-%}
-        </footer>
-    </div>
-    <p class="wider_screen_message">Warning: Use a wider screen!</p>
-</body>
-
-<footer>
+    <header class="no-select">
+        {%-include header.html-%}
+    </header>
+    <main>
+        {{ content }}
+    </main>
+    <footer class="no-select">
+        {%-include footer.html-%}
+    </footer>
     <!-- 性能优化 -->
     <script src="{{ '/assets/js/optimize.js' | relative_url }}"></script>
-
+    
     <!-- 颜色模式切换 -->
     <script src="{{ '/assets/js/color_theme_switch.js' | relative_url }}"></script>
-
+    
     <!-- 代码复制 -->
     <script src="{{ '/assets/js/copy_code.js' | relative_url }}"></script>
-
+    
     <!-- 数学公式 -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</footer>
-
+</body>
 </html>

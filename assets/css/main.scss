@@ -1,8 +1,18 @@
 ---
 ---
 
-@import "basic";
-@import "archive";
-@import "post";
-@import "project";
-@import "about";
+@import 'colors';
+@import 'global';
+@import 'header';
+@import 'pagination';
+@import 'footer';
+@import 'post';
+@import 'syntax';
+
+body[color_theme="light"] {
+    @include light-appearance;
+}
+
+body[color_theme="dark"] {
+    @include dark-appearance;
+}
