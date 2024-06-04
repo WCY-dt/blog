@@ -11,10 +11,7 @@ baseurl: "/"
 # the base hostname & protocol for your site,
 # e.g. http://example.com
 url: "https://blog.ch3nyang.top"
-favicon: "favicon.ico"
-# your google analytics tracking id
-google_analytics: G-DBLJVQ0KB7
-google_adsense: true
+favicon: "favicon.svg"
 
 ############# 主题设置 #############
 theme_config:

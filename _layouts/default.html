@@ -4,17 +4,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ch3nyang's Blog">
+    <meta name="keywords" content="blog, cyber security,  developer, program">
+    <meta name="author" content="Ch3nyang">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="application-name" content="Ch3nyang's Blog">
+    <meta name="msapplication-TileColor" content="#ff5500">
+    
+    <meta property="og:title" content="Homepage of Ch3nyang">
+    <meta property="og:description" content="Portfolio of Ch3nyang">
+    <!--<meta property="og:image" content="./assets/img/ogimage.png">
+    <meta name="twitter:card" content="./assets/img/twittercard.png">-->
+    
+    <link rel="icon" type="image/svg+xml" href="{{ site.favicon | relative_url }}">
+    <!--<link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">-->
+
     <meta name="baseurl" content="{{ site.baseurl }}">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', '{{ site.google_analytics }}');
-    </script>
 
     <title>
         {%- if page.title -%}
@@ -29,7 +35,6 @@
     <!-- Google Icons -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{ site.favicon | relative_url }}" />
 
     <!-- 主样式表 -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
