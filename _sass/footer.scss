@@ -31,6 +31,7 @@ footer {
 
         p {
             margin: 0;
+            text-align: center;
 
             a {
                 text-decoration: underline;
@@ -39,6 +40,18 @@ footer {
 
                 &:hover {
                     color: $primary-color;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    footer {
+        .footer {
+            @keyframes footer-scroll {
+                100% {
+                    padding: 0;
                 }
             }
         }

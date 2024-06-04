@@ -23,6 +23,30 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
     font-family: $text-font;
 }
 
+@media screen and (max-width: 1024px) {
+    :root {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
 body {
     width: 100%;
     min-height: 100vh;
@@ -53,10 +77,8 @@ body {
 
 * .material-symbols-outlined {
     vertical-align: -0.2em;
-    padding-right: 2px;
 }
 
 * .iconify {
     vertical-align: -0.1em;
-    padding-right: 2px;
 }
