@@ -191,7 +191,7 @@ networks:
 
 它们的 IP 和连接关系如下图所示
 
-![image-20220831164757749](./assets/vpn1.png)
+![vpn1](../../assets/post/images/vpn1.png)
 
 设置完成后，我们启动 docker
 

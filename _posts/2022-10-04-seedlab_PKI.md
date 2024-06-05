@@ -396,13 +396,13 @@ root@d26128523dc7:/# service apache2 start
 
 访问 [https://www.chenyang2022.com](https://www.chenyang2022.com) 可以看到：
 
-![image-20220809105346216](./assets/pki1.png)
+![pki1](../../assets/post/images/pki1.png)
 
 将 `ca.cert` 放入 `volumes` 文件夹，打开 [about:preferences#privacy](about:preferences#privacy)，在 `Authorities` 标签下将 `ca.cert` 导入，选择 `Trust this CA to identify web sites` 并确认。
 
 再次访问 [https://www.chenyang2022.com](https://www.chenyang2022.com) 可以看到：
 
-![image-20220809112435778](./assets/pki2.png)
+![pki2](../../assets/post/images/pki2.png)
 
 我们刚刚导入的 CA 证书使得我们自己的服务器受信任了。
 
@@ -422,7 +422,7 @@ sudo vi /etc/hosts
 
 访问 [https://www.seu.edu.cn](https://www.seu.edu.cn)，可以看到
 
-![image-20220809113831059](./assets/pki3.png)
+![pki3](../../assets/post/images/pki3.png)
 
 我们访问到了自己搭建的服务器，但是证书不被信任。
 
@@ -492,7 +492,7 @@ root@a74ea8a4321e:/# service apache2 start
 
 再次访问 [https://www.seu.edu.cn](https://www.seu.edu.cn)，可以看到：
 
-![image-20220809115549319](./assets/pki4.png)
+![pki4](../../assets/post/images/pki4.png)
 
 东南大学主页被定向到了我们自己的服务器，并且证书没有被浏览器怀疑。也就是说，我们成功对东南大学主页实现了中间人攻击。
 

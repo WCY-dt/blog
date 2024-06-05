@@ -13,7 +13,7 @@ copyrights: 原创
 
 ## 实验原理
 
-<img src="./../assets/post/images/djlbpsxPeMQ2KWf.png" alt="image-20210711030215002" style="zoom: 20%;" />
+<img src="../../assets/post/images/bufferoverflow1.png" alt="bufferoverflow1" style="zoom: 20%;" />
 
 ## Task1: Get Familiar with the Shellcode
 
@@ -26,7 +26,7 @@ copyrights: 原创
 
 需要注意的是，shell长度不能变。
 
-<img src="./../assets/post/images/iPfmZFc7YEeWpIM.png" alt="image-20210710213824818" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow1.png" alt="bufferflow1" style="zoom:50%;" />
 
 然后我们新建 tmpfile 文件并运行 shellcode，过程和结果如下
 
@@ -39,7 +39,7 @@ a32.out
 a64.out
 ```
 
-<img src="./../assets/post/images/1tZYLEbCuplWNIS.png" alt="image-20210710214006697" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow2.png" alt="bufferflow2" style="zoom:50%;" />
 
 执行完后，tmpfile 也被删除了。
 
@@ -74,11 +74,11 @@ $ echo hello | nc 10.9.0.5 9090
 
 server 显示
 
-<img src="./../assets/post/images/IfH5Ra8q2jFXxQC.png" alt="image-20210710215643858" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow3.png" alt="bufferflow3" style="zoom:50%;" />
 
 我们修改 exploit.py
 
-<img src="./../assets/post/images/DqTwEHIFm3vZNae.png" alt="image-20210710230024976" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow4.png" alt="bufferflow4" style="zoom:50%;" />
 
 其中，
 
@@ -97,7 +97,7 @@ cat badfile | nc 10.9.0.5 9090
 
 得到了结果
 
-<img src="./../assets/post/images/aPJqsFSwKoLlATy.png" alt="image-20210710231454913" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow5.png" alt="bufferflow5" style="zoom:50%;" />
 
 > **Reverse shell.** Please modify the command string in your shellcode, so you can get a reverse shell on the target
 > server. Please include screenshots and explanation in your lab report.
@@ -123,7 +123,7 @@ cat badfile | nc 10.9.0.5 9090
 
 可以看到获得了权限
 
-<img src="./../assets/post/images/U92VtaTJSliGMED.png" alt="image-20210710231948031" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow6.png" alt="bufferflow6" style="zoom:50%;" />
 
 ## Task 3: Level-2 Attack
 
@@ -138,11 +138,11 @@ $ echo hello | nc 10.9.0.6 9090
 ^C
 ```
 
-<img src="./../assets/post/images/DSCIGdHTmzhQowZ.png" alt="image-20210710234038425" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow7.png" alt="bufferflow7" style="zoom:50%;" />
 
 修改 exploit.py
 
-<img src="./../assets/post/images/MRPhdSKBXqZNrV5.png" alt="image-20210710234327830" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow8.png" alt="bufferflow8" style="zoom:50%;" />
 
 其中，
 
@@ -158,7 +158,7 @@ cat badfile | nc 10.9.0.6 9090
 
 得到了结果
 
-<img src="./../assets/post/images/H9SXfP85rZDYuGV.png" alt="image-20210710234253743" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow9.png" alt="bufferflow9" style="zoom:50%;" />
 
 ## Task 4: Level-3 Attack
 
@@ -181,11 +181,11 @@ $ echo hello | nc 10.9.0.7 9090
 ^C
 ```
 
-<img src="./../assets/post/images/st8DvkKJqBTPzL2.png" alt="image-20210710234636555" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow10.png" alt="bufferflow10" style="zoom:50%;" />
 
 修改 exploit.py
 
-<img src="./../assets/post/images/dik2L6c9tJ4FmlE.png" alt="image-20210711001052757" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow11.png" alt="bufferflow11" style="zoom:50%;" />
 
 其中，
 
@@ -205,7 +205,7 @@ cat badfile | nc 10.9.0.7 9090
 
 得到了结果
 
-<img src="./../assets/post/images/c1MzSBlUNIJWsLH.png" alt="image-20210711001656850" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow12.png" alt="bufferflow12" style="zoom:50%;" />
 
 ## Task 5: Level-4 Attack
 
@@ -218,11 +218,11 @@ $ echo hello | nc 10.9.0.7 9090
 ^C
 ```
 
-<img src="./../assets/post/images/2pEHn9KI5QLOWSb.png" alt="image-20210711012942394" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow13.png" alt="bufferflow13" style="zoom:50%;" />
 
 修改 exploit.py
 
-<img src="./../assets/post/images/KoctQvBDu3sWCyr.png" alt="image-20210711013043952" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow14.png" alt="bufferflow14" style="zoom:50%;" />
 
 其中，
 
@@ -238,7 +238,7 @@ cat badfile | nc 10.9.0.8 9090
 
 得到了结果
 
-<img src="./../assets/post/images/4gDQqSNBbR1LkZJ.png" alt="image-20210711013308222" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow15.png" alt="bufferflow15" style="zoom:50%;" />
 
 ## Task 6: Experimenting with the Address Randomization
 
@@ -259,7 +259,7 @@ $ echo hello | nc 10.9.0.7 9090
 
 得到结果
 
-<img src="./../assets/post/images/zcwL1Jas2qbiIlD.png" alt="image-20210711014055617" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow16.png" alt="bufferflow16" style="zoom:50%;" />
 
 可以看到，每次地址都不相同，导致攻击困难。
 
@@ -276,19 +276,19 @@ nc -lnv 9090
 
 在尝试 $52417$ 次后，成功获得权限
 
-<img src="./../assets/post/images/ciCjkt2rNG4xIOB.png" alt="image-20210711022543522" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow17.png" alt="bufferflow17" style="zoom:50%;" />
 
 ## Tasks 7: Experimenting with Other Countermeasures
 
 进入 server-code 文件夹，去除 `-fno-stack-protector` 编译 stack.c，并将 badfile 作为输入
 
-<img src="./../assets/post/images/MTQGHuytkw6argj.png" alt="image-20210711023842869" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow18.png" alt="bufferflow18" style="zoom:50%;" />
 
 可以看到检测到了 stack smashing。
 
 进入 shellcode 文件夹，去除 `-z execstack` 编译 call_shellcode.c 并运行
 
-<img src="./../assets/post/images/BRiFvYSnPQMs7gL.png" alt="image-20210711024605205" style="zoom:50%;" />
+<img src="../../assets/post/images/bufferflow19.png" alt="bufferflow19" style="zoom:50%;" />
 
 可以看到，栈不再可执行。
 

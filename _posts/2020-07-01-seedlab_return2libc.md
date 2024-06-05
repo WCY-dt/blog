@@ -13,7 +13,7 @@ copyrights: 原创
 
 ## 实验原理
 
-<img src="./../assets/post/images/Vzj3RKYhni9FEuo.png" alt="img" style="zoom: 67%;" />
+<img src="../../assets/post/images/return2libc1.png" alt="return2libc1" style="zoom: 67%;" />
 
 ## Task 1: Finding out the Addresses of libc Functions
 
@@ -44,13 +44,13 @@ gdb-peda$ quit
 
 得到结果
 
-<img src="./../assets/post/images/GePwFUSLofaqIcX.png" alt="image-20210713150033546" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc2.png" alt="return2libc2" style="zoom:50%;" />
 
 ## Task 2: Putting the shell string in the memory
 
 新建 MYSHELL 环境变量
 
-<img src="./../assets/post/images/Qj5dfxiZsLnaPY7.png" alt="image-20210713151640310" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc3.png" alt="return2libc3" style="zoom:50%;" />
 
 编写程序 `prtenv.c`
 
@@ -69,7 +69,7 @@ void main(){
 
 由于 prtenv 和 retlib 都是 6 个字母，所以会得到同样的结果，如下所示。
 
-<img src="./../assets/post/images/62c1hWbSXFRMeOo.png" alt="image-20210713152415930" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc4.png" alt="return2libc4" style="zoom:50%;" />
 
 ## Task 3: Launching the Attack
 
@@ -103,14 +103,14 @@ f.write(content)
 
 运行，攻击成功
 
-<img src="./../assets/post/images/dAs5V9c7vYnq42k.png" alt="image-20210713163255852" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc5.png" alt="return2libc5" style="zoom:50%;" />
 
 > **Attack variation 1:** Is the `exit()` function really necessary? Please try your attack without including
 > the address of this function in badfile. Run your attack again, report and explain your observations.
 
 根据 task 要求，我们将 exploit.py 中 exit 的部分注释掉，然后重新运行。
 
-<img src="./../assets/post/images/ChIZ95NXdQeomSA.png" alt="image-20210713164335438" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc6.png" alt="return2libc6" style="zoom:50%;" />
 
 发现可以正常提权，但退出时会崩溃。
 
@@ -121,11 +121,11 @@ f.write(content)
 
 根据 task 要求，我们先将编译后的二进制文件改名为 rrtlib，提权成功
 
-<img src="./../assets/post/images/FlWpG8SdL9EVO5U.png" alt="image-20210713164933154" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc7.png" alt="return2libc7" style="zoom:50%;" />
 
 在改为 newretlib，提权不成功
 
-<img src="./../assets/post/images/spX1zv8Yc4dN93Q.png" alt="image-20210713165133449" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc8.png" alt="return2libc8" style="zoom:50%;" />
 
 由此可见，这与程序名的长度有关。
 
@@ -139,11 +139,11 @@ sudo ln -sf /bin/dash /bin/sh
 
 为了使攻击更加方便，我们直接使用 ROP。首先获取所需要的 libc 函数地址
 
-<img src="./../assets/post/images/mFiaHNz8rPoGqUZ.png" alt="image-20210714042907866" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc9.png" alt="return2libc9" style="zoom:50%;" />
 
 然后 `disas bof` 获取 `bof()` 函数返回地址
 
-<img src="./../assets/post/images/S6yvmTG7nuCxLFX.png" alt="image-20210714043032853" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc10.png" alt="return2libc10" style="zoom:50%;" />
 
 同时我们还有 retlib 打印出的 `bof()` 函数 ebp 位置和 MYSHELL 地址，根据这些修改 exploit.py
 
@@ -219,7 +219,7 @@ with open("badfile", "wb") as f:
 
 运行程序，可以看到成功提权
 
-<img src="./../assets/post/images/wq9mP1fk34vJYNV.png" alt="image-20210714044535215" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc11.png" alt="return2libc11" style="zoom:50%;" />
 
 ## Task 5: Return-Oriented Programming
 
@@ -227,7 +227,7 @@ with open("badfile", "wb") as f:
 
 先获取 `foo()` 地址
 
-<img src="./../assets/post/images/N6RqhLve2fu47Qr.png" alt="image-20210714052533803" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc12.png" alt="return2libc12" style="zoom:50%;" />
 
 然后修改 exploit.py
 
@@ -306,7 +306,7 @@ with open("badfile", "wb") as f:
 
 运行程序，可以看到调用了 10 次 `foo()` ，并成功提权
 
-<img src="./../assets/post/images/kGs2PwHXYTzRQyu.png" alt="image-20210714052903073" style="zoom:50%;" />
+<img src="../../assets/post/images/return2libc13.png" alt="return2libc13" style="zoom:50%;" />
 
 ## 实验总结
 
