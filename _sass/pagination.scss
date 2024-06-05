@@ -34,8 +34,10 @@ main {
             display: flex;
             align-items: center;
             justify-content: start;
-            gap: 1rem;
+            gap: 0.25rem 1rem;
             color: $tertiary-color;
+            white-space: nowrap;
+            flex-wrap: wrap;
 
             .tag {
                 display: flex;
@@ -88,4 +90,15 @@ main {
     main {
         padding: 16rem 1rem 5.75rem 1rem;
     }
+}
+
+.pagination-count {
+    margin-top: 3rem;
+    width: 100%;
+    text-align: center;
+    color: $primary-color;
+    font-size: 0.8rem;
+    font-family: $ui-font;
+    font-weight: 900;
+    text-transform: uppercase;
 }

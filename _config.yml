@@ -62,3 +62,6 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-archives
+exclude:
+  - LICENSE.txt
+  - README.md
