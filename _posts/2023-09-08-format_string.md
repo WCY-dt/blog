@@ -32,15 +32,15 @@ printf("a has value %d, b has value %d, c has address: %08x\n", a, b, &c);
 
 程序会首先按照下图的方式把 `printf` 函数的参数压入栈中。当遇到第一个 `%d` 时，`printf` 函数内部的指针会向高地址移动，读取传入的参数：
 
-<img src="../assets/post/images/image-20230910134310163.png" alt="image-20230910134310163" style="zoom: 40%;" />
+<img src="../../assets/post/images/formatstring1.png" alt="formatstring1" style="zoom: 40%;" />
 
 遇到第二个 `%d` 后，会继续移动：
 
-<img src="../assets/post/images/image-20230910134705071.png" alt="image-20230910134705071" style="zoom:40%;" />
+<img src="../../assets/post/images/formatstring2.png" alt="formatstring2" style="zoom:40%;" />
 
 遇到 `%08x` 后，会继续移动：
 
-<img src="../assets/post/images/image-20230910134753874.png" alt="image-20230910134753874" style="zoom:40%;" />
+<img src="../../assets/post/images/formatstring3.png" alt="formatstring3" style="zoom:40%;" />
 
 至此，成功执行了这个函数。
 
@@ -52,7 +52,7 @@ printf("a has value %d, b has value %d, c has address: %08x\n", a, b);
 
 此时，在遇到前两个 `%d` 时，和之前是一样的。但当读取到 `%08x` 时，指针继续向高地址移动，这时指针指向的已经不是我的参数，而是栈中的其它字节了！
 
-<img src="../assets/post/images/image-20230910135026131.png" alt="image-20230910135026131" style="zoom:40%;" />
+<img src="../../assets/post/images/formatstring4.png" alt="formatstring4" style="zoom:40%;" />
 
 `printf` 可不会去检查我传入的参数够不够、指针指向的是什么东西，它只会直接输出。这就给了我们可乘之机！
 
@@ -94,7 +94,7 @@ printf("a has value %d, b has value %d, c has address: %08x\n", a, b);
 
   当输入 `\x11\x45\x14\x00 %x %x %x %x %s` 时，其内存栈如图所示：
 
-  <img src="../assets/post/images/image-20230910140005613.png" alt="image-20230910140005613" style="zoom:40%;" />
+  <img src="../../assets/post/images/formatstring5.png" alt="formatstring5" style="zoom:40%;" />
 
   由于 `printf` 输出的是 `user_input`，因此 `printf` 自己的内部指针会从 `user_input` 的地址 + 1 处开始读取。而 `user_input` 的具体内容存储在地址更高的地方，我们的 4 个 `%x` 使得指针移动过了无意义的部分，最终指向了我们自己输入的 `0x11451400`，而此时的 `%s` 会直接输出地址 `0x11451400` 中的内容。
   

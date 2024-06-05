@@ -22,7 +22,7 @@ ICMP 重定向是路由器向 IP 数据包发送者发送的错误消息。 当�
 
 ## Task 1: Launching ICMP Redirect Attack
 
-![image-20220825163913318](./assets/icmp1.png)
+![icmp1](../../assets/post/images/icmp1.png)
 
 启动 docker：
 
@@ -55,7 +55,7 @@ dcup
 victim-10.9.0.5$ mtr -n 192.168.60.5
 ```
 
-![image-20220825151220746](./assets/icmp2.png)
+![icmp2](../../assets/post/images/icmp2.png)
 
 这里的路由是正常的。
 
@@ -96,7 +96,7 @@ Sent 1 packets.
 victim-10.9.0.5$ mtr -n 192.168.60.5
 ```
 
-![image-20220825151609508](./assets/icmp3.png)
+![icmp3](../../assets/post/images/icmp3.png)
 
 > Question 1: Can you use ICMP redirect attacks to redirect to a remote machine? Namely, the IP address assigned to icmp.gw is a computer not on the local LAN. Please show your experiment result, and explain your observation.
 
@@ -143,7 +143,7 @@ Sent 1 packets.
 victim-10.9.0.5$ mtr -n 192.168.60.5
 ```
 
-![image-20220825153640781](./assets/icmp4.png)
+![icmp4](../../assets/post/images/icmp4.png)
 
 可以看出，此时没有变化。
 
@@ -192,7 +192,7 @@ Sent 1 packets.
 victim-10.9.0.5$ mtr -n 192.168.60.5
 ```
 
-![image-20220825154002098](./assets/icmp5.png)
+![icmp5](../../assets/post/images/icmp5.png)
 
 可以看出，此时没有变化。：
 
@@ -237,7 +237,7 @@ Sent 1 packets.
 victim-10.9.0.5$ mtr -n 192.168.60.5
 ```
 
-![image-20220825154620800](./assets/icmp6.png)
+![icmp6](../../assets/post/images/icmp6.png)
 
 可以看到，也失败了。
 

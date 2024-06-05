@@ -11,7 +11,7 @@ copyrights: 原创 未完待续
 
 本文介绍了[DefendTheWeb](https://defendtheweb.net/)的部分通关方法
 
-![defendtheweb icon](./../assets/post/images/v2-0017ac4e4fc513fce5f9fb7480c78bcf_1200x500.jpg)
+![defendtheweb icon](../../assets/post/images/defendtheweb1.jpg)
 
 ## Intro1
 
@@ -523,7 +523,7 @@ body{
 
 音频隐写，常规操作一通，在频谱看到了信息。
 
-<img src="./../assets/post/images/on4rsmyuZfQiAcV.png" alt="image-20220124113947223" style="zoom:50%;" />
+<img src="../../assets/post/images/defendtheweb2.png" alt="defendtheweb2" style="zoom:50%;" />
 
 这显然是某种密码，经过查找，发现是 mayan numbers
 
@@ -592,7 +592,7 @@ CA50-44C7-0BCD-17BF
 
 ida 打开后能看到明显的答案
 
-<img src="./../assets/post/images/TXKgCraWJN7UHzu.png" alt="image-20220124161406982" style="zoom:50%;" />
+<img src="../../assets/post/images/defendtheweb3.png" alt="defendtheweb3" style="zoom:50%;" />
 
 ## Captcha 2 / CAPTCHA
 
