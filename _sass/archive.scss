@@ -1,0 +1,41 @@
+.archive {
+    font-family: $ui-font;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+
+    .type {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 900;
+        line-height: 2rem;
+        text-transform: uppercase;
+        color: $secondary-color;
+    }
+
+    .title {
+        position: relative;
+        margin: 0;
+        font-size: 3rem;
+        font-weight: 900;
+        line-height: 3rem;
+        text-transform: uppercase;
+        color: $primary-color;
+
+        &::after {
+            content: '';
+            display: block;
+            width: 120%;
+            height: 1.5rem;
+            background-color: $secondary-color;
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+    }
+}

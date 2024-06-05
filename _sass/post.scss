@@ -45,9 +45,25 @@
             }
 
             a {
+                position: relative;
                 color: $tertiary-color;
                 text-decoration: none;
-                transition: text-decoration 0.25s ease-in-out;
+                transition: color 0.25s ease-in-out;
+
+                &:hover {
+                    &::after {
+                        content: '';
+                        display: block;
+                        width: 110%;
+                        height: 0.5rem;
+                        background-color: $bg-color;
+                        position: absolute;
+                        bottom: 0rem;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        z-index: -1;
+                    }
+                }
             }
         }
 

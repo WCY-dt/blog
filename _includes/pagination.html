@@ -1,41 +1,4 @@
-{%-if type=="category"-%}
-    {%-assign posts = site.categories[category]-%}
-{%-else-%}
-    {%-assign posts = site.posts-%}
-{%-endif-%}
-
-{%-if site.post_list.limit and type=="home" and posts.size > site.post_list.limit-%}
-    {%-assign limit_exceeded = true-%}
-{%-else-%}
-    {%-assign limit_exceeded = false-%}
-{%-endif-%}
-
 {%- if posts.size > 0 -%}
-<!--
-    {%-if type=="home"-%}
-        {%- for post in posts limit: site.post_list.limit -%}
-            <div class="post-list-item no-select">
-                <div class="time">
-                    <span class="material-symbols-outlined">
-                        calendar_month
-                    </span>{{- post.date | date: site.theme_config.date_format -}}
-                </div>
-                <span class="category">
-                    <span class="material-symbols-outlined">
-                        sell
-                    </span>{{- post.categories -}}</span>
-                <a href="{{ post.url | relative_url }}" class="title">{{ post.title | downcase }}</a>
-            </div>
-        {%- endfor -%}
-        {%- if site.post_list.show_more and limit_exceeded -%}
-            <a href="{{ site.post_list.show_more_url | relative_url }}" class="more no-select">
-                <span class="material-symbols-outlined">
-                    read_more
-                </span>{{ site.post_list.show_more_text | default: "Show more..." }}
-            </a>
-        {%- endif -%}
-    {%-else-%}
--->
     {%- for post in posts -%}
         <a class="pagination no-select" href="{{ post.url | relative_url }}">
             <p class="title">{{ post.title | downcase }}</p>
@@ -63,7 +26,4 @@
             <hr>
         {%- endunless -%}
     {%- endfor -%}
-<!--
-    {%-endif-%}
--->
 {%- endif -%}
