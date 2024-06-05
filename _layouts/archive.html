@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+<hgroup class="archive">
+  <h2 class="type">
+    {{ page.type }}
+  </h2>
+  <h3 class="title">
+    {% if page.date %}
+      {{ page.date | date: "%Y" }}
+    {% else %}
+      {{ page.title }}
+    {% endif %}
+  </h3>
+</hgroup>
+
+{% assign posts = page.posts %}
+{% include pagination.html %}

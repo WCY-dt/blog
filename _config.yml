@@ -51,6 +51,14 @@ markdown: kramdown
 highlighter: rouge
 kramdown:
   input: GFM
+jekyll-archives:
+  enabled: [categories, tags, year]
+  layouts: archive
+  permalinks:
+    tag: /tag/:name/
+    category: /category/:name/
+    year: /year/:year/
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-archives
