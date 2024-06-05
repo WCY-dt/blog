@@ -23,7 +23,7 @@ copyrights: 原创
 
 尽管这个过程可以防止攻击者直接窃取到会话密钥，但依然无法防止中间人攻击（MITM Attack），如图所示。假设Mallory是一个大黑阔：
 
-<img src="../../assets/post/images/ssl2.png" alt="ssl2" />
+<img src="/assets/post/images/ssl2.png" alt="ssl2" />
 
 - Alice的公钥发送出去后，被Mallory截获
 - Mallory使用扣留了Alice的公钥，并把自己的公钥发给了Bob
@@ -659,7 +659,7 @@ openssl ca -in client.csr -out client_cert.pem -md sha256 -config testCA.cnf
 
 TLS 通信过程如下：
 
-<img src="../../assets/post/images/ssl1.png" alt="ssl1" />
+<img src="/assets/post/images/ssl1.png" alt="ssl1" />
 
 - 首先需要建立 TLS 上下文：加载加密算法、加载私钥、决定 TLS 版本、决定是否验证证书。
   - 如果使用了 1.1.0 前的版本，需要使用 `SSL_library_init()` 执行初始化。如果内存充足，可以加载错误字符串 `SSL_load_error_strings()` 方便排错；

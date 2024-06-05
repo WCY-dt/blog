@@ -89,7 +89,7 @@ sudo snort -A console -i ens33 -u snort -g snort -c /etc/snort/snort.conf
 
 此时，snort 已经在正常嗅探了。
 
-<img src="../../assets/post/images/snort1.png" alt="snort1" style="zoom:50%;" />
+<img src="/assets/post/images/snort1.png" alt="snort1" style="zoom:50%;" />
 
 ## rules 编写
 
@@ -170,7 +170,7 @@ sudo scapy
 
 即可开始使用 scapy。
 
-<img src="../../assets/post/images/snort2.png" alt="snort2" style="zoom:50%;" />
+<img src="/assets/post/images/snort2.png" alt="snort2" style="zoom:50%;" />
 
 我们试着新建一个 IP 包：
 

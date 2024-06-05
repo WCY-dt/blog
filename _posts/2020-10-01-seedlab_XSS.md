@@ -25,11 +25,11 @@ copyrights: 原创
 </script>
 ```
 
-<img src="../../assets/post/images/xss1.png" alt="xss1" style="zoom:67%;" />
+<img src="/assets/post/images/xss1.png" alt="xss1" style="zoom:67%;" />
 
 保存后，看到已经生效
 
-<img src="../../assets/post/images/xss2.png" alt="xss2" style="zoom:67%;" />
+<img src="/assets/post/images/xss2.png" alt="xss2" style="zoom:67%;" />
 
 ## Task 2: Posting a Malicious Message to Display Cookies
 
@@ -41,11 +41,11 @@ copyrights: 原创
 </script>
 ```
 
-<img src="../../assets/post/images/xss3.png" alt="xss3" style="zoom:67%;" />
+<img src="/assets/post/images/xss3.png" alt="xss3" style="zoom:67%;" />
 
 保存后，看到已经生效
 
-<img src="../../assets/post/images/xss4.png" alt="xss4" style="zoom: 67%;" />
+<img src="/assets/post/images/xss4.png" alt="xss4" style="zoom: 67%;" />
 
 ## Task 3: Stealing Cookies from the Victim’s Machine
 
@@ -59,7 +59,7 @@ copyrights: 原创
 </script>
 ```
 
-<img src="../../assets/post/images/xss5.png" alt="xss5" style="zoom:67%;" />
+<img src="/assets/post/images/xss5.png" alt="xss5" style="zoom:67%;" />
 
 在端口上开启监听
 
@@ -69,7 +69,7 @@ nc -lknv 5555
 
 登录 Alice 账号，点进 Samy 的 profile，看到返回了 cookie
 
-<img src="../../assets/post/images/xss6.png" alt="xss6" style="zoom: 50%;" />
+<img src="/assets/post/images/xss6.png" alt="xss6" style="zoom: 50%;" />
 
 ## Task 4: Becoming the Victim’s Friend
 
@@ -93,11 +93,11 @@ nc -lknv 5555
 </script>
 ```
 
-<img src="../../assets/post/images/xss7.png" alt="xss7" style="zoom:67%;" />
+<img src="/assets/post/images/xss7.png" alt="xss7" style="zoom:67%;" />
 
 登录 Alice 账号，点进 Samy 的 profile，看到已经添加了好友
 
-<img src="../../assets/post/images/xss8.png" alt="xss8" style="zoom:67%;" />
+<img src="/assets/post/images/xss8.png" alt="xss8" style="zoom:67%;" />
 
 > **Question 1**: Explain the purpose of Lines 5 and 6, why are they are needed?
 
@@ -138,11 +138,11 @@ nc -lknv 5555
 </script>
 ```
 
-<img src="../../assets/post/images/xss9.png" alt="xss9" style="zoom:67%;" />
+<img src="/assets/post/images/xss9.png" alt="xss9" style="zoom:67%;" />
 
 登录 Alice 账号，查看 Samy 的 profile，看到自己的 profile 已经被修改了
 
-<img src="../../assets/post/images/xss10.png" alt="xss10" style="zoom:67%;" />
+<img src="/assets/post/images/xss10.png" alt="xss10" style="zoom:67%;" />
 
 > **Question 3**: Why do we need Line 14? Remove this line, and repeat your attack. Report and explain your observation.
 
@@ -192,25 +192,25 @@ nc -lknv 5555
 </script>
 ```
 
-<img src="../../assets/post/images/xss11.png" alt="xss11" style="zoom:67%;" />
+<img src="/assets/post/images/xss11.png" alt="xss11" style="zoom:67%;" />
 
 登录 Alice 账号，查看 Samy 的 profile，看到自己的 profile 已经被修改了
 
-<img src="../../assets/post/images/xss12.png" alt="xss12" style="zoom:67%;" />
+<img src="/assets/post/images/xss12.png" alt="xss12" style="zoom:67%;" />
 
 登录 Charlie 账号，查看 Alice 的 profile，看到自己的 profile 已经被修改了
 
-<img src="../../assets/post/images/xss13.png" alt="xss13" style="zoom:67%;" />
+<img src="/assets/post/images/xss13.png" alt="xss13" style="zoom:67%;" />
 
 ## Task 7: Defeating XSS Attacks Using CSP
 
 这个 Task 探究 CSP 防御 XSS 的作用。原始状态为
 
-<img src="../../assets/post/images/xss14.png" alt="xss14" style="zoom:67%;" />
+<img src="/assets/post/images/xss14.png" alt="xss14" style="zoom:67%;" />
 
-<img src="../../assets/post/images/xss15.png" alt="xss15" style="zoom:67%;" />
+<img src="/assets/post/images/xss15.png" alt="xss15" style="zoom:67%;" />
 
-<img src="../../assets/post/images/xss16.png" alt="xss16" style="zoom:67%;" />
+<img src="/assets/post/images/xss16.png" alt="xss16" style="zoom:67%;" />
 
 修改 apache_csp.conf
 
@@ -228,11 +228,11 @@ nc -lknv 5555
 </VirtualHost>
 ```
 
-<img src="../../assets/post/images/xss17.png" alt="xss17" style="zoom:50%;" />
+<img src="/assets/post/images/xss17.png" alt="xss17" style="zoom:50%;" />
 
 看到 [example32b.com](http://www.example32b.com) 的 4、5、6 变成了 OK
 
-<img src="../../assets/post/images/xss18.png" alt="xss18" style="zoom:67%;" />
+<img src="/assets/post/images/xss18.png" alt="xss18" style="zoom:67%;" />
 
 修改 phpindex.php
 
@@ -247,11 +247,11 @@ nc -lknv 5555
 <?php include 'index.html';?>
 ```
 
-<img src="../../assets/post/images/xss19.png" alt="xss19" style="zoom:50%;" />
+<img src="/assets/post/images/xss19.png" alt="xss19" style="zoom:50%;" />
 
 看到 [example32c.com](http://www.example32c.com) 的 1、2、4、5、6 变成了 OK
 
-<img src="../../assets/post/images/xss20.png" alt="xss20" style="zoom:67%;" />
+<img src="/assets/post/images/xss20.png" alt="xss20" style="zoom:67%;" />
 
 > Please explain why CSP can help prevent Cross-Site Scripting attacks.
 

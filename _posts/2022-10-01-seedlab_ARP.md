@@ -43,7 +43,7 @@ dcup
 # export PS1="\w M-10.9.0.105$ "
 ```
 
-![arp1](../../assets/post/images/arp1.png)
+![arp1](/assets/post/images/arp1.png)
 
 ### Task 1.A using ARP request
 
@@ -119,7 +119,7 @@ Sent 1 packets.
 
 通过 wireshark 抓包可以看到：
 
-![arp2](../../assets/post/images/arp2.png)
+![arp2](/assets/post/images/arp2.png)
 
 此时 `A` 中新增了 arp 记录：
 
@@ -187,7 +187,7 @@ Sent 1 packets.
 
 抓包得到：
 
-![arp3](../../assets/post/images/arp3.png)
+![arp3](/assets/post/images/arp3.png)
 
 此时 `A` 上的记录被更新：
 
@@ -217,7 +217,7 @@ Sent 1 packets.
 
 抓包得到：
 
-![arp4](../../assets/post/images/arp4.png)
+![arp4](/assets/post/images/arp4.png)
 
 此时 `A` 上的记录没有变化：
 
@@ -283,7 +283,7 @@ Sent 1 packets.
 
 抓包得到：
 
-![arp5](../../assets/post/images/arp5.png)
+![arp5](/assets/post/images/arp5.png)
 
 此时 `A` 上的记录被更新：
 
@@ -313,7 +313,7 @@ Sent 1 packets.
 
 抓包得到：
 
-![arp6](../../assets/post/images/arp6.png)
+![arp6](/assets/post/images/arp6.png)
 
 此时 `A` 上的记录没有变化：
 
@@ -325,7 +325,7 @@ A-10.9.0.5$ arp -n
 
 ## Task 2: MITM Attack on Telnet using ARP Cache Poisoning
 
-![arp7](../../assets/post/images/arp7.png)
+![arp7](/assets/post/images/arp7.png)
 
 ### Step 1 Launch the ARP cache poisoning attack
 

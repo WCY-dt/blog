@@ -164,7 +164,7 @@ $ ls /etc/ssl/certs
 
 Wireshark 截图如下：
 
-![tls1](../../assets/post/images/tls1.png)
+![tls1](/assets/post/images/tls1.png)
 
 编号 3-5 的部分为 TCP 的三次握手。编号 6-13 的部分为 TLS 握手。客户端首先发送 Client Hello 信息，服务器回复 Server Hello。客户端验证后，发送密钥交换及更改密码规范消息，服务器回复更改密码规范消息。至此，TLS 握手完成，进行后续结束工作。
 
@@ -857,7 +857,7 @@ proxy.py
 
 访问 [codeforces.com](codeforces.com) 可以看到：
 
-![tls3](../../assets/post/images/tls3.png)
+![tls3](/assets/post/images/tls3.png)
 
 ```shell
 $ proxy.py
@@ -880,11 +880,11 @@ sock_for_server
 
 接下来我们进行登录操作并抓包：
 
-![tls4](../../assets/post/images/tls4.png)
+![tls4](/assets/post/images/tls4.png)
 
 我们使用 wireshark 连接 proxy，并抓取到相关报文：
 
-![tls5](../../assets/post/images/tls5.png)
+![tls5](/assets/post/images/tls5.png)
 
 报文具体的内容涉及个人隐私不放图了。经过简单过滤查找，我们发现 codeforces 的用户名和密码都是明文传输给服务器的，连哈希都没有做。
 
