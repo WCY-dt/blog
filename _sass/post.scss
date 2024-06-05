@@ -6,7 +6,7 @@
     padding: 1rem;
 
     word-wrap: break-word;
-    word-break: break-all;
+    word-break: break-word;
 
     .hgroup {
         display: flex;
@@ -21,14 +21,18 @@
             font-weight: 900;
             font-family: $ui-font;
             color: $primary-color;
+            text-align: center;
+            word-break: keep-all;
         }
 
         .info {
             display: flex;
             align-items: center;
-            justify-content: start;
-            gap: 1rem;
+            justify-content: center;
+            gap: 0.25rem 1rem;
             color: $tertiary-color;
+            white-space: nowrap;
+            flex-wrap: wrap;
 
             .categories, .tags {
                 display: flex;
@@ -77,8 +81,8 @@
         background-color: $white-color;
 
         p, ul, ol, blockquote, table {
-            font-size: 1.2rem;
-            line-height: 2.5rem;
+            font-size: 1rem;
+            line-height: 2rem;
         }
 
         h1 {
@@ -204,8 +208,8 @@
         pre:has(code) {
             background-color: $bg-light-color;
             padding: 0.5rem;
-            line-height: 1.5rem;
-            font-size: 1.2rem;
+            line-height: 1.2rem;
+            font-size: 1rem;
         }
 
         p code {

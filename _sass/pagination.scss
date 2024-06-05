@@ -34,8 +34,10 @@ main {
             display: flex;
             align-items: center;
             justify-content: start;
-            gap: 1rem;
+            gap: 0.25rem 1rem;
             color: $tertiary-color;
+            white-space: nowrap;
+            flex-wrap: wrap;
 
             .tag {
                 display: flex;
