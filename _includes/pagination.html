@@ -27,3 +27,11 @@
         {%- endunless -%}
     {%- endfor -%}
 {%- endif -%}
+
+<p class="pagination-count no-select">
+    {%- if posts.size == 1 -%}
+        - find 1 post -
+    {%- else -%}
+        - find {{ posts.size }} posts -
+    {%- endif -%}
+</p>

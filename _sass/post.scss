@@ -11,7 +11,7 @@
     .hgroup {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 1rem;
         align-items: center;
         justify-content: center;
 
@@ -94,13 +94,41 @@
         }
     
         h2 {
+            position: relative;
             font-size: 2.5rem;
             font-weight: 900;
+            z-index: 1;
+
+            &::after {
+                content: '';
+                display: block;
+                width: 10rem;
+                height: 0.8rem;
+                background-color: $primary-color;
+                z-index: -1;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
         }
     
         h3 {
+            position: relative;
             font-size: 1.5rem;
             font-weight: 700;
+            z-index: 1;
+            
+            &::after {
+                content: '';
+                display: block;
+                width: 6rem;
+                height: 0.6rem;
+                background-color: $secondary-color;
+                z-index: -1;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
         }
     
         h4 {
@@ -206,10 +234,31 @@
         }
 
         pre:has(code) {
+            position: relative;
             background-color: $bg-light-color;
             padding: 0.5rem;
             line-height: 1.2rem;
             font-size: 1rem;
+
+            &::after {
+                content: 'Click to copy';
+                display: block;
+                width: -moz-fit-content;
+                width: fit-content;
+                color: $tertiary-color;
+                font-size: 0.8rem;
+                font-family: $ui-font;
+                font-weight: 700;
+                position: absolute;
+                top: -1.2rem;
+                right: 0rem;
+                opacity: 0;
+                transition: opacity 0.25s ease-in-out;
+            }
+
+            &:hover::after {
+                opacity: 1;
+            }
         }
 
         p code {

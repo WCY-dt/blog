@@ -91,3 +91,14 @@ main {
         padding: 16rem 1rem 5.75rem 1rem;
     }
 }
+
+.pagination-count {
+    margin-top: 3rem;
+    width: 100%;
+    text-align: center;
+    color: $primary-color;
+    font-size: 0.8rem;
+    font-family: $ui-font;
+    font-weight: 900;
+    text-transform: uppercase;
+}
