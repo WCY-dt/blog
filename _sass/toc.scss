@@ -1,0 +1,134 @@
+.toc {
+    position: fixed;
+    top: 15vh;
+    right: 0.5rem;
+    max-height: 50vh;
+    width: min(16rem, calc((100vw - min(100% - 2rem, 40rem)) / 2 - 2rem));
+    color: $tertiary-color;
+    box-sizing: border-box;
+    padding: 1rem;
+    font-size: 1rem;
+
+    button {
+        display: none;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul:not(.expand) {
+        display: none;
+    }
+
+    &>ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0 0.25rem 0 0;
+        width: 100%;
+        max-height: calc(50vh - 2rem);
+        box-sizing: border-box;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        &::-webkit-scrollbar {
+            opacity: 0;
+            width: 0.25rem;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        &:hover::-webkit-scrollbar {
+            opacity: 1;
+        }
+
+        &:hover::-webkit-scrollbar-thumb {
+            background-color: $secondary-color;
+        }
+
+        &:hover::-webkit-scrollbar-track {
+            background-color: $bg-light-color;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.25s ease-in-out;
+
+            &.active {
+                color: $primary-color;
+            }
+        }
+
+        &>li>a {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        li {
+            list-style-type: none;
+            margin: 0;
+            padding: 0.1rem 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0 0 0 1.5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1440px) and (min-width: 1024px) {
+    .toc {
+        font-size: 0.9rem;
+
+        &>li>a {
+            font-size: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .toc {
+        position: fixed;
+        top: auto;
+        bottom: 4.5rem;
+        right: 1rem;
+
+        button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: $primary-color;
+            color: $white-color;
+            z-index: 9999;
+        }
+
+        &>ul {
+            display: none;
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background-color: $bg-color;
+            width: 16rem;
+            padding: 1rem;
+            z-index: 9998;
+        }
+
+        @keyframes toc-scroll {
+            100% {
+                bottom: 2rem;
+            }
+        }
+
+        animation-name: toc-scroll;
+        @include header-scroll-animation;
+    }
+}
