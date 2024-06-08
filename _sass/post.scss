@@ -35,14 +35,16 @@
             white-space: nowrap;
             flex-wrap: wrap;
 
-            .categories, .tags {
+            .categories,
+            .tags {
                 display: flex;
                 align-items: center;
                 justify-content: start;
                 gap: 0.25rem;
             }
-            
-            .date, a {
+
+            .date,
+            a {
                 display: flex;
                 align-items: center;
                 justify-content: start;
@@ -81,7 +83,11 @@
         color: $black-color;
         background-color: $white-color;
 
-        p, ul, ol, blockquote, table {
+        p,
+        ul,
+        ol,
+        blockquote,
+        table {
             font-size: 1rem;
             line-height: 2rem;
         }
@@ -90,10 +96,14 @@
             display: none;
         }
 
-        h2, h3, h4, h5, h6 {
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: $ui-font;
         }
-    
+
         h2 {
             position: relative;
             font-size: 2.5rem;
@@ -112,13 +122,13 @@
                 left: 0;
             }
         }
-    
+
         h3 {
             position: relative;
             font-size: 1.5rem;
             font-weight: 700;
             z-index: 1;
-            
+
             &::after {
                 content: '';
                 display: block;
@@ -131,17 +141,18 @@
                 left: 0;
             }
         }
-    
+
         h4 {
             font-size: 1.25rem;
             font-weight: 700;
         }
 
-        h5, h6 {
+        h5,
+        h6 {
             font-size: 1.2rem;
             font-weight: 700;
         }
-    
+
         p:has(img) {
             display: flex;
             justify-content: center;
@@ -161,11 +172,11 @@
         sup a:hover {
             text-decoration: none;
         }
-    
+
         img {
             max-width: 100%;
         }
-    
+
         blockquote {
             margin: 0;
             border-left: 0.25rem solid $primary-color;
@@ -184,31 +195,33 @@
             }
         }
 
-        ul, ol {
+        ul,
+        ol {
             padding-left: 1.5rem;
-            
+
             li {
                 &::marker {
                     color: $primary-color;
                 }
             }
         }
-    
+
         table {
             border-collapse: collapse;
             border: 0.05rem solid $primary-color;
             box-sizing: border-box;
             width: 100%;
 
-            th, td {
+            th,
+            td {
                 padding: 0;
             }
-    
+
             thead {
                 background-color: $primary-color;
                 color: $white-color;
             }
-    
+
             tbody {
                 tr {
                     transition: background-color 0.25s ease-in-out;
@@ -227,7 +240,7 @@
                 }
             }
         }
-    
+
         code,
         code * {
             font-family: 'Courier New', Courier, monospace, '微软雅黑';
@@ -274,7 +287,8 @@
         .footnotes p {
             margin: 0;
 
-            &, a {
+            &,
+            a {
                 color: $tertiary-color;
             }
 
@@ -298,7 +312,7 @@
                 width: 1.5rem;
                 height: 1.5rem;
             }
-            
+
             p {
                 display: none;
             }
