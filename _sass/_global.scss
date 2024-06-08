@@ -18,6 +18,23 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
     animation-range: 0 10rem;
 }
 
+::selection {
+    color: $white-color;
+    background-color: $primary-color;
+}
+
+::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $primary-color;
+}
+
+::-webkit-scrollbar-track {
+    background-color: $bg-light-color;
+}
+
 :root {
     font-size: 16px;
     font-family: $text-font;

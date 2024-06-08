@@ -42,7 +42,7 @@ layout: default
   <div class="content">
     {{ content }}
   </div>
-  <div class="toc">
+  <div class="toc no-select">
     <button>
       <span class="material-symbols-outlined">
         toc
@@ -50,7 +50,7 @@ layout: default
     </button>
     {% include toc.html html=content %}
   </div>
-  <div class="post-footer">
+  <div class="post-footer no-select">
     {%- if page.copyrights contains "原创" -%}
       <div class="copyright">
         <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt="copyright cc">
