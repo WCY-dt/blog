@@ -28,6 +28,9 @@ function tocActive() {
 
     let activeItem = tocItems[headerLinksOffsetIndex];
 
+    if (!activeItem) {
+        return;
+    }
     activeItem.classList.add('active');
 
     toc.querySelectorAll('.expand').forEach(function (el) {
