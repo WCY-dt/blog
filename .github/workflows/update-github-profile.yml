@@ -1,6 +1,9 @@
 name: Update github profile with latest blog posts
 on:
-  page_build:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 jobs:
   dispatch:
     runs-on: ubuntu-latest
