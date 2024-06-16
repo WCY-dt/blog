@@ -46,6 +46,11 @@
                     border-right: 0.6rem solid transparent;
                     border-bottom: 0.6rem solid $primary-color;
                 }
+
+                &::selection, a::selection{
+                    color: $primary-color;
+                    background-color: $white-color;
+                }
             }
         }
     }
