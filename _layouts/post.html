@@ -51,47 +51,8 @@ layout: default
     {% include toc.html html=content %}
   </div>
   <div class="post-footer">
-    {%- if page.copyrights contains "原创" -%}
-      <div class="copyright">
-        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt="copyright cc" class="no-select">
-        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt="copyright by" class="no-select">
-        <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt="copyright nc" class="no-select">
-        <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt="copyright sa" class="no-select">
-        <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
-          <a
-            property="dct:title"
-            rel="cc:attributionURL"
-            href="{{ page.url | absolute_url }}">{{ page.title }}</a>
-          © {{ page.date | date: "%Y" }} by
-          <a
-            rel="cc:attributionURL dct:creator"
-            property="cc:attributionName"
-            href="{{ site.author.link }}">{{ site.author.name }}</a>
-          is licensed under
-          <a
-            href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
-            target="_blank"
-            rel="license noopener noreferrer">CC BY-NC-SA 4.0</a>
-        </p>
-      </div>
-    {%- endif -%}
-    {% include relate.html tags=page.tags categories=page.categories %}
-    <script 
-      src="https://giscus.app/client.js" 
-      data-repo="WCY-dt/blog" 
-      data-repo-id="MDEwOlJlcG9zaXRvcnkzNDkxMDc5OTU="
-      data-category="Comments" 
-      data-category-id="DIC_kwDOFM73G84CgH8k" 
-      data-mapping="title" 
-      data-strict="0"
-      data-reactions-enabled="1" 
-      data-emit-metadata="0" 
-      data-input-position="top"
-      data-theme="light"
-      data-lang="en" 
-      data-loading="lazy"
-      crossorigin="anonymous"
-      async>
-    </script>
+    {% include copyright.html %}
+    {% include relate.html %}
+    {% include comment.html %}
   </div>
 </div>

@@ -1,0 +1,530 @@
+---
+---
+
+$primary-color: hsl(15, 100%, 50%);
+$secondary-color: hsl(18, 100%, 85%);
+$tertiary-color: hsl(10, 100%, 20%);
+$bg-color: hsl(20, 100%, 95%);
+$bg-light-color: hsl(20, 100%, 98%);
+$white-color: hsl(0, 0%, 100%);
+$black-color: hsl(0, 0%, 0%);
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+$ui-font: 'Orbitron', sans-serif;
+$text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif';
+
+.gsc-main {
+    color: $tertiary-color;
+
+    &::selection {
+        color: $white-color;
+        background-color: $primary-color;
+    }
+
+    &::-webkit-scrollbar {
+        width: 0.25rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $primary-color;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $bg-light-color;
+    }
+
+    .gsc-reactions {
+        display: none;
+    }
+
+    * {
+        border-radius: 0 !important;
+    }
+
+    .gsc-comments {
+        gap: 0.5rem;
+        
+        .gsc-header {
+            .gsc-left-header {
+                em {
+                    display: none;
+                }
+            }
+
+            .gsc-right-header {
+                .BtnGroup-item:not(.BtnGroup-item--selected) {
+                    color: $tertiary-color;
+                    transition: all 0.25s ease-in-out;
+
+                    &:hover {
+                        background-color: $bg-color;
+                    }
+                }
+                .BtnGroup-item--selected {
+                    background-color: $tertiary-color;
+                    color: $white-color;
+                }
+            }
+        }
+
+        .gsc-comment-box {
+            border: none;
+            background-color: $bg-color;
+
+            .gsc-comment-box-tabs {
+                background-color: $secondary-color;
+                color: $tertiary-color;
+                border: none;
+
+                &>div.mx-2.mb-\[-1px\].mt-2 {
+                    margin-bottom: 0 !important;
+
+                    .color-text-primary {
+                        border: none;
+                        background-color: $bg-color;
+                        transition: all 0.25s ease-in-out;
+                    }
+
+                    .color-text-secondary {
+                        transition: all 0.25s ease-in-out;
+                        
+                        &:hover {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+
+            .gsc-comment-box-main {
+                .gsc-comment-box-write {
+                    border: none;
+                    background-color: $bg-light-color;
+
+                    .gsc-comment-box-textarea {
+                        border: none;
+                        border-bottom-style: dashed;
+                        border-bottom-width: 1px;
+                        border-bottom-color: $tertiary-color;
+                    }
+
+                    .gsc-comment-box-textarea-extras {
+                        border: none;
+
+                        a {
+                            color: $tertiary-color;
+                        }
+                    }
+                }
+
+                .gsc-comment-box-preview {
+                    border: none;
+                }
+            }
+
+            .gsc-comment-box-bottom {
+                &>button {
+                    color: $tertiary-color;
+                    transition: all 0.25s ease-in-out;
+
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+
+                .gsc-comment-box-buttons {
+                    button, a {
+                        border: none;
+                        color: $white-color;
+                        background-color: $primary-color;
+                        transition: all 0.25s ease-in-out;
+
+                        &:hover {
+                            background-color: $tertiary-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .gsc-timeline {
+            .gsc-comment {
+                background-color: $bg-light-color;
+
+                &>div {
+                    border: none;
+
+                    .gsc-comment-header {
+                        .gsc-comment-author {
+                            &>div {
+                                span {
+                                    border: none;
+                                    background-color: $bg-color;
+                                }
+                            }
+                        }
+                    }
+
+                    .gsc-comment-content {
+                        padding-top: 2rem;
+
+                        .zeroclipboard-container button {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            border: none;
+                            background-color: $tertiary-color;
+                            color: $white-color;
+                            transition: all 0.25s ease-in-out;
+
+                            &:hover {
+                                background-color: $primary-color;
+                            }
+                        }
+
+                        p,
+                        ul,
+                        ol,
+                        blockquote,
+                        table {
+                            font-size: 1rem;
+                            line-height: 2rem;
+                        }
+                        
+                        h1,
+                        h2,
+                        h3,
+                        h4,
+                        h5,
+                        h6 {
+                            border: none;
+                            font-family: $ui-font;
+                        }
+                    
+                        h1 {
+                            position: relative;
+                            font-size: 2.5rem;
+                            font-weight: 900;
+                            z-index: 1;
+                    
+                            &::after {
+                                content: '';
+                                display: block;
+                                width: 10rem;
+                                height: 0.8rem;
+                                background-color: $tertiary-color;
+                                z-index: -1;
+                                position: absolute;
+                                bottom: 0.3rem;
+                                left: 0;
+                                opacity: 0.6;
+                            }
+                        }
+                    
+                        h2 {
+                            position: relative;
+                            font-size: 1.5rem;
+                            font-weight: 700;
+                            z-index: 1;
+                    
+                            &::after {
+                                content: '';
+                                display: block;
+                                width: 6rem;
+                                height: 0.6rem;
+                                background-color: $tertiary-color;
+                                z-index: -1;
+                                position: absolute;
+                                bottom: 0.5rem;
+                                left: 0;
+                                opacity: 0.3;
+                            }
+                        }
+                    
+                        h3 {
+                            font-size: 1.25rem;
+                            font-weight: 700;
+                        }
+                    
+                        h4,
+                        h5,
+                        h6 {
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                        }
+                    
+                        p:has(img) {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    
+                        a {
+                            color: $tertiary-color;
+                            text-decoration: underline;
+                            transition: all 0.25s ease-in-out;
+                    
+                            &:hover {
+                                color: $primary-color;
+                            }
+                        }
+                    
+                        sup a:hover {
+                            text-decoration: none;
+                        }
+                    
+                        img {
+                            max-width: 100%;
+                        }
+                    
+                        blockquote {
+                            margin: 0;
+                            border-left: 0.25rem solid $tertiary-color;
+                            box-sizing: border-box;
+                            background-color: $bg-color;
+                            padding: 0.5rem 2rem;
+                    
+                            pre:has(code) {
+                                border: 0.05rem solid $tertiary-color;
+                                box-sizing: border-box;
+                            }
+                    
+                            blockquote {
+                                border: 0.05rem solid $tertiary-color;
+                                border-left: 0.25rem solid $tertiary-color;
+                            }
+                        }
+                    
+                        ul,
+                        ol {
+                            padding-left: 1.5rem;
+                    
+                            li {
+                                &::marker {
+                                    color: $tertiary-color;
+                                }
+                            }
+                        }
+                    
+                        table {
+                            border-collapse: collapse;
+                            border: 0.05rem solid $tertiary-color;
+                            box-sizing: border-box;
+                            width: 100%;
+                    
+                            th,
+                            td {
+                                padding: 0;
+                                border: none;
+                            }
+                    
+                            thead {
+                                background-color: $tertiary-color;
+                                color: $white-color;
+                            }
+                    
+                            tbody {
+                                tr {
+                                    transition: background-color 0.25s ease-in-out;
+                    
+                                    &:nth-child(even) {
+                                        background-color: $bg-light-color;
+                                    }
+
+                                    &:nth-child(odd) {
+                                        background-color: $bg-color;
+                                    }
+                    
+                                    &:hover {
+                                        background-color: $secondary-color;
+                                    }
+                    
+                                    td {
+                                        text-align: center;
+                                    }
+                                }
+                            }
+                        }
+                    
+                        code,
+                        code *,
+                        .highlight {
+                            font-family: 'Courier New', Courier, monospace, '微软雅黑';
+                            white-space: pre-wrap;
+                        }
+                    
+                        .notranslate, pre:has(code), div:has(.notranslate) {
+                            position: relative;
+                            background-color: $bg-color;
+                            padding: 0.5rem;
+                            line-height: 1.2rem;
+                            font-size: 1rem;
+
+                            &::-webkit-scrollbar {
+                                height: 0.25rem;
+                            }
+                        
+                            &::-webkit-scrollbar-thumb {
+                                background-color: $tertiary-color;
+                            }
+                        
+                            &::-webkit-scrollbar-track {
+                                background-color: $bg-light-color;
+                            }
+                        }
+                    
+                        p code {
+                            font-weight: 700;
+                        }
+                    
+                        hr {
+                            width: 100%;
+                            height: 0;
+                            border: 1px solid $secondary-color;
+                        }
+                    
+                        .footnotes p {
+                            margin: 0;
+                    
+                            &,
+                            a {
+                                color: $tertiary-color;
+                            }
+                    
+                            a {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+
+                    .gsc-comment-footer {
+                        .gsc-comment-reactions {
+                            .gsc-reactions-menu {
+                                .gsc-social-reaction-summary-item {
+                                    border: none;
+                                    background-color: $bg-color;
+                                    color: $tertiary-color;
+                                    transition: all 0.25s ease-in-out;
+
+                                    &:hover {
+                                        background-color: $tertiary-color;
+                                        color: $white-color;
+                                    }
+                                }
+
+                                .gsc-reactions-popover {
+                                    border: none;
+                                    background-color: $bg-color;
+
+                                    div.color-border-primary.my-2.border-t {
+                                        border: none;
+                                    }
+
+                                    div.m-2 {
+                                        button.has-reacted {
+                                            border: none;
+                                            background-color: $secondary-color;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .gsc-direct-reaction-buttons {
+                                button {
+                                    border: none;
+                                    color: $tertiary-color;
+                                    background-color: $bg-color;
+                                    transition: all 0.25s ease-in-out;
+
+                                    &:hover {
+                                        background-color: $tertiary-color;
+                                        color: $white-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .gsc-replies {
+                        border: none;
+                        background-color: $bg-color;
+
+                        .gsc-reply {
+                            margin-left: 1rem;
+                            border-left: 2px solid $tertiary-color;
+                        }
+
+                        .gsc-reply-author {
+                            &>div {
+                                span {
+                                    border: none;
+                                    background-color: $secondary-color;
+                                }
+                            }
+                        }
+
+                        .gsc-reply-footer {
+                            .gsc-reply-reactions {
+                                .gsc-reactions-menu {
+                                    .gsc-social-reaction-summary-item {
+                                        border: none;
+                                        background-color: $bg-color;
+                                        color: $tertiary-color;
+                                        transition: all 0.25s ease-in-out;
+
+                                        &:hover {
+                                            background-color: $tertiary-color;
+                                            color: $white-color;
+                                        }
+                                    }
+
+                                    .gsc-reactions-popover {
+                                        border: none;
+                                        background-color: $secondary-color;
+
+                                        div.color-border-primary.my-2.border-t {
+                                            border: none;
+                                        }
+
+                                        div.m-2 {
+                                            button.has-reacted {
+                                                border: none;
+                                                background-color: $bg-color;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .gsc-direct-reaction-buttons {
+                                    button {
+                                        border: none;
+                                        color: $tertiary-color;
+                                        background-color: $bg-color;
+                                        transition: all 0.25s ease-in-out;
+
+                                        &:hover {
+                                            background-color: $tertiary-color;
+                                            color: $white-color;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .gsc-reply-box {
+                        border: none;
+                        background-color: $bg-color;
+                        padding: 0.5rem;
+
+                        button {
+                            border: none;
+                            margin: 0 0.5rem;
+                            background-color: $bg-light-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
