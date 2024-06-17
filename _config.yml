@@ -62,6 +62,9 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-archives
+webrick:
+  headers:
+    Access-Control-Allow-Origin: "*"
 exclude:
   - LICENSE.txt
   - README.md

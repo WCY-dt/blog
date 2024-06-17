@@ -1,5 +1,8 @@
 function tocActive() {
     let toc = document.querySelector('.toc');
+    if (!toc) {
+        return;
+    }
     let tocItems = toc.querySelectorAll('a');
 
     let headerLinks = document.querySelectorAll('h2, h3, h4, h5, h6');
@@ -61,11 +64,8 @@ document.querySelectorAll('.toc a').forEach(anchor => {
         e.preventDefault();
 
         const target = document.querySelector(this.getAttribute('href'));
-        console.log(target);
         const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-        console.log(targetPosition);
         const scrollPosition = targetPosition - (window.innerHeight / 3);
-        console.log(scrollPosition);
 
         window.scroll({
             top: scrollPosition,
@@ -87,4 +87,6 @@ function toggleTOC() {
     }
 }
 tocButton = document.querySelector('.toc button');
-tocButton.addEventListener('click', toggleTOC);
+if (tocButton) {
+    tocButton.addEventListener('click', toggleTOC);
+}

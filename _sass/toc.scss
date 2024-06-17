@@ -97,6 +97,12 @@
     @include header-scroll-animation;
 }
 
+@media screen and (min-width: 1440px) {
+    .toc {
+        right: calc((100vw - 40rem) / 2 - 20rem);
+    }
+}
+
 @media screen and (max-width: 1440px) and (min-width: 1024px) {
     .toc {
         font-size: 0.9rem;
