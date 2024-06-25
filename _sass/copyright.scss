@@ -1,57 +1,58 @@
 .post .post-footer {
-    .copyright {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.25rem;
-        padding: 1rem 0;
+  .copyright {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 1rem 0;
 
-        img {
-            width: 1.5rem;
-            height: 1.5rem;
-        }
-
-        p {
-            display: none;
-        }
-
-        &:hover {
-            p {
-                display: block;
-                margin: 0;
-                position: absolute;
-                top: calc(100% + 0.6rem - 1rem);
-                left: 0;
-                width: 100%;
-                background-color: $primary-color;
-                color: $white-color;
-                padding: 0.5rem 0;
-                box-sizing: border-box;
-                line-height: 1.5rem;
-                text-align: center;
-
-                a {
-                    color: $white-color;
-                    text-decoration: underline;
-                }
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: -0.6rem;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    border-left: 0.6rem solid transparent;
-                    border-right: 0.6rem solid transparent;
-                    border-bottom: 0.6rem solid $primary-color;
-                }
-
-                &::selection, a::selection{
-                    color: $primary-color;
-                    background-color: $white-color;
-                }
-            }
-        }
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
     }
+
+    p {
+      display: none;
+    }
+
+    &:hover {
+      p {
+        display: block;
+        margin: 0;
+        position: absolute;
+        top: calc(100% + 0.6rem - 1rem);
+        left: 0;
+        width: 100%;
+        background-color: $primary-color;
+        color: $white-color;
+        padding: 0.5rem 0;
+        box-sizing: border-box;
+        line-height: 1.5rem;
+        text-align: center;
+
+        a {
+          color: $white-color;
+          text-decoration: underline;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: -0.6rem;
+          left: 50%;
+          transform: translateX(-50%);
+          border-left: 0.6rem solid transparent;
+          border-right: 0.6rem solid transparent;
+          border-bottom: 0.6rem solid $primary-color;
+        }
+
+        &::selection,
+        a::selection {
+          color: $primary-color;
+          background-color: $white-color;
+        }
+      }
+    }
+  }
 }

@@ -1,234 +1,234 @@
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    font-family: $ui-font;
-    width: 100%;
-    height: 6rem;
-    z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-family: $ui-font;
+  width: 100%;
+  height: 6rem;
+  z-index: 5;
 
-    @keyframes header-scroll {
-        100% {
-            height: 4rem;
-        }
+  @keyframes header-scroll {
+    100% {
+      height: 4rem;
+    }
+  }
+
+  animation-name: header-scroll;
+  @include header-scroll-animation;
+
+  .title {
+    padding: 0 3rem 0.5rem 0.5rem;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+    background-color: $primary-color;
+    color: $white-color;
+    height: calc(100% - 0.5rem);
+    text-transform: uppercase;
+    z-index: 8;
+
+    p {
+      margin: 0;
     }
 
-    animation-name: header-scroll;
+    @keyframes header-title-scroll {
+      100% {
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+      }
+    }
+
+    animation-name: header-title-scroll;
+    @include header-scroll-animation;
+  }
+
+  .menu {
+    margin: 0;
+    padding: 0 0 0 1rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: end;
+    justify-content: start;
+    gap: 1rem;
+    background-color: $bg-color;
+    color: $black-color;
+    height: 100%;
+
+    @keyframes header-menu-scroll {
+      100% {
+        gap: 1.2rem
+      }
+    }
+
+    animation-name: header-menu-scroll;
     @include header-scroll-animation;
 
-    .title {
-        padding: 0 3rem 0.5rem 0.5rem;
-        margin: 0;
-        font-size: 2rem;
-        font-weight: 900;
-        line-height: 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        justify-content: end;
-        background-color: $primary-color;
-        color: $white-color;
-        height: calc(100% - 0.5rem);
-        text-transform: uppercase;
-        z-index: 8;
+    a {
+      position: relative;
+      text-decoration: none;
+      color: $black-color;
+      height: calc(100% - 0.5rem);
+      padding: 0 0.5rem 1rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: end;
 
+      @keyframes header-menu-a-scroll {
+        100% {
+          padding: 0 0 1.0rem 2.3rem;
+        }
+      }
+
+      animation-name: header-menu-a-scroll;
+      @include header-scroll-animation;
+
+      &:hover {
         p {
-            margin: 0;
+          color: $primary-color;
+          text-decoration: underline;
+        }
+      }
+
+      span {
+        position: absolute;
+        left: 0;
+        bottom: 1.2rem;
+        font-size: 3rem;
+        color: $secondary-color;
+        transition: font-size 0.25s ease-in-out, opacity 0.25s ease-in-out;
+
+        @keyframes header-menu-icon-scroll {
+          100% {
+            bottom: 0.8rem;
+            font-size: 2.0rem;
+            color: $tertiary-color;
+          }
         }
 
-        @keyframes header-title-scroll {
-            100% {
-                font-size: 1.5rem;
-                line-height: 1.5rem;
-            }
-        }
-        
-        animation-name: header-title-scroll;
+        animation-name: header-menu-icon-scroll;
         @include header-scroll-animation;
-    }
+      }
 
-    .menu {
+      p {
         margin: 0;
-        padding: 0 0 0 1rem;
-        flex-grow: 1;
-        display: flex;
-        align-items: end;
-        justify-content: start;
-        gap: 1rem;
-        background-color: $bg-color;
-        color: $black-color;
-        height: 100%;
-
-        @keyframes header-menu-scroll {
-            100% {
-                gap: 1.2rem
-            }
-        }
-    
-        animation-name: header-menu-scroll;
-        @include header-scroll-animation;
-
-        a {
-            position: relative;
-            text-decoration: none;
-            color: $black-color;
-            height: calc(100% - 0.5rem);
-            padding: 0 0.5rem 1rem 1.8rem;
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            justify-content: end;
-
-            @keyframes header-menu-a-scroll {
-                100% {
-                    padding: 0 0 1.0rem 2.3rem;
-                }
-            }
-            
-            animation-name: header-menu-a-scroll;
-            @include header-scroll-animation;
-
-            &:hover {
-                p {
-                    color: $primary-color;
-                    text-decoration: underline;
-                }
-            }
-
-            span {
-                position: absolute;
-                left: 0;
-                bottom: 1.2rem;
-                font-size: 3rem;
-                color: $secondary-color;
-                transition: font-size 0.25s ease-in-out, opacity 0.25s ease-in-out;
-
-                @keyframes header-menu-icon-scroll {
-                    100% {
-                        bottom: 0.8rem;
-                        font-size: 2.0rem;
-                        color: $tertiary-color;
-                    }
-                }
-            
-                animation-name: header-menu-icon-scroll;
-                @include header-scroll-animation;
-            }
-
-            p {
-                margin: 0;
-                font-size: 1.5rem;
-                font-weight: 900;
-                line-height: 1.5rem;
-                text-transform: capitalize;
-                z-index: 10;
-                color: $tertiary-color;
-                transition: color 0.25s ease-in-out, text-decoration 0.25s ease-in-out;
-            }
-        }
+        font-size: 1.5rem;
+        font-weight: 900;
+        line-height: 1.5rem;
+        text-transform: capitalize;
+        z-index: 10;
+        color: $tertiary-color;
+        transition: color 0.25s ease-in-out, text-decoration 0.25s ease-in-out;
+      }
     }
+  }
 }
 
 @media screen and (max-width: 1024px) {
-    header {
-        flex-direction: column;
+  header {
+    flex-direction: column;
 
-        .title,
-        .menu {
-            width: 100%;
-        }
-    
-        .title {
-            padding: 0;
-            flex-direction: row;
-            gap: 1rem;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .menu {
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            transition: transform 0.25s ease-in-out;
-
-            a {
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                padding: 0;
-
-                span {
-                    position: inherit;
-                    font-size: 2.0rem;
-                    color: $tertiary-color;
-                    bottom: 0;
-                }
-            }
-
-            @keyframes mobile-header-menu-scroll {
-                100% {
-                    transform: translateY(-25rem);
-                }
-            }
-
-            animation-name: mobile-header-menu-scroll;
-            @include header-scroll-animation;
-        }
-
-        
-
-        @keyframes mobile-header-scroll {
-            100% {
-                height: 3rem;
-            }
-        }
-
-        animation-name: mobile-header-scroll;
-        @include header-scroll-animation;
+    .title,
+    .menu {
+      width: 100%;
     }
+
+    .title {
+      padding: 0;
+      flex-direction: row;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu {
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transition: transform 0.25s ease-in-out;
+
+      a {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+
+        span {
+          position: inherit;
+          font-size: 2.0rem;
+          color: $tertiary-color;
+          bottom: 0;
+        }
+      }
+
+      @keyframes mobile-header-menu-scroll {
+        100% {
+          transform: translateY(-25rem);
+        }
+      }
+
+      animation-name: mobile-header-menu-scroll;
+      @include header-scroll-animation;
+    }
+
+
+
+    @keyframes mobile-header-scroll {
+      100% {
+        height: 3rem;
+      }
+    }
+
+    animation-name: mobile-header-scroll;
+    @include header-scroll-animation;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    header {
-        .menu {
-            a {
-                span {
-                    display: none;
-                }
-            }
+  header {
+    .menu {
+      a {
+        span {
+          display: none;
         }
+      }
     }
+  }
 }
 
 @media screen and (max-width: 550px) {
-    header {
-        .menu {
-            gap: 0.75rem;
-        }
+  header {
+    .menu {
+      gap: 0.75rem;
     }
+  }
 }
 
 @media screen and (max-width: 425px) {
-    header {
-        height: 12rem;
+  header {
+    height: 12rem;
 
-        .menu {
-            padding: 0.5rem 0;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+    .menu {
+      padding: 0.5rem 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
+  }
 }
 
 @media screen and (min-width: 1440px) {
-    header {
-        .title {
-            padding: 0 3rem 0.5rem calc(50vw - 30rem);
-        }
+  header {
+    .title {
+      padding: 0 3rem 0.5rem calc(50vw - 30rem);
     }
+  }
 }

@@ -12,91 +12,91 @@ $ui-font: 'Orbitron', sans-serif;
 $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif';
 
 @mixin header-scroll-animation {
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-    animation-timeline: scroll();
-    animation-range: 0 10rem;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-timeline: scroll();
+  animation-range: 0 10rem;
 }
 
 ::selection {
-    color: $white-color;
-    background-color: $primary-color;
+  color: $white-color;
+  background-color: $primary-color;
 }
 
 ::-webkit-scrollbar {
-    width: 0.25rem;
+  width: 0.25rem;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: $primary-color;
+  background-color: $primary-color;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: $bg-light-color;
+  background-color: $bg-light-color;
 }
 
 :root {
-    font-size: 16px;
-    font-family: $text-font;
+  font-size: 16px;
+  font-family: $text-font;
 }
 
 @media screen and (max-width: 1024px) {
-    :root {
-        font-size: 14px;
-    }
+  :root {
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    :root {
-        font-size: 12px;
-    }
+  :root {
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 550px) {
-    :root {
-        font-size: 12px;
-    }
+  :root {
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 425px) {
-    :root {
-        font-size: 12px;
-    }
+  :root {
+    font-size: 12px;
+  }
 }
 
 body {
-    width: 100%;
-    min-height: 100vh;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    gap: 1rem;
-    scroll-behavior: smooth;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+  scroll-behavior: smooth;
 }
 
 * button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 * .no-select {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    -webkit-user-drag: none;
-    -moz-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
 
-    img {
-        pointer-events: none;
-    }
+  img {
+    pointer-events: none;
+  }
 }
 
 * .material-symbols-outlined {
-    vertical-align: -0.2em;
+  vertical-align: -0.2em;
 }
 
 * .iconify {
-    vertical-align: -0.1em;
+  vertical-align: -0.1em;
 }
