@@ -4,7 +4,7 @@ title:  "OverTheWireCrypton"
 date:   2019-10-02 00:00:00 +0800
 categories: 安全
 tags: game
-comments: 1
+comments: true
 mathjax: true
 copyrights: 原创 未完待续
 ---

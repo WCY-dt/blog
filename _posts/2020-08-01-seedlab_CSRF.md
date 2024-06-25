@@ -4,7 +4,7 @@ title:  "CSRF"
 date:   2020-08-01 00:00:00 +0800
 categories: 实验
 tags: seedlab csrf
-comments: 1
+comments: true
 mathjax: true
 copyrights: 原创
 ---

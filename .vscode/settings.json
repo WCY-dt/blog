@@ -1,36 +1,38 @@
 {
     "files.associations": {
         "*.html": "liquid",
-        "*.md": "markdown"
+        "*.md": "markdown",
     },
     "[liquid]": {
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
         "editor.autoIndent": "advanced",
-        "editor.detectIndentation": false
+        "editor.detectIndentation": false,
     },
     "[scss]": {
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
         "editor.autoIndent": "advanced",
-        "editor.detectIndentation": false
+        "editor.detectIndentation": false,
     },
     "[javascript]": {
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
         "editor.autoIndent": "advanced",
-        "editor.detectIndentation": false
+        "editor.detectIndentation": false,
     },
     "markdownlint.config": {
         "MD013": false, // Disable line length check
-        "MD033": false, // Disable inline HTML check
         "MD024": false, // Disable multiple headers with the same content check
+        "MD031": false, // Disable blanks around headers check
+        "MD032": false, // Disable lists should be surrounded by blank lines check
+        "MD033": false, // Disable inline HTML check
     },
     "files.exclude": {
         "**/_site": true, // Exclude Jekyll build folder from the file explorer
         "**/.sass-cache": true,
         "**/.jekyll-cache": true,
-        "**/.jekyll-metadata": true
+        "**/.jekyll-metadata": true,
     },
-    "liveServer.settings.root": "/_site" // Assuming '_site' is your Jekyll build directory
+    "liveServer.settings.root": "/_site", // Assuming '_site' is your Jekyll build directory
 }

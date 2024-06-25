@@ -4,7 +4,7 @@ title:  "最小的 Hello World"
 date:   2023-04-20 00:00:00 +0800
 categories: 汇编
 tags: assembly c
-comments: 1
+comments: true
 mathjax: true
 copyrights: 原创
 ---

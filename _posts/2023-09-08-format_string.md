@@ -4,7 +4,7 @@ title:  "格式化字符串漏洞"
 date:   2023-09-10 00:00:00 +0800
 categories: 安全
 tags: pwn format-string
-comments: 1
+comments: true
 mathjax: true
 copyrights: 原创
 ---

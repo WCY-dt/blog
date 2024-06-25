@@ -4,7 +4,7 @@ title:  "PKI和OpenSSL"
 date:   2023-07-19 00:00:00 +0800
 categories: 密码
 tags: pki openssl
-comments: 1
+comments: true
 mathjax: true
 copyrights: 原创
 ---

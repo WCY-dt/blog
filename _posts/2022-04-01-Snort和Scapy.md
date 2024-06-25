@@ -4,7 +4,7 @@ title:  "Snort和Scapy"
 date:   2022-04-01 00:00:00 +0800
 categories: 安全
 tags: snort scapy python
-comments: 1
+comments: true
 mathjax: true
 copyrights: 原创
 ---

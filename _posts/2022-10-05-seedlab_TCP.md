@@ -4,7 +4,7 @@ title:  "TCP Attacks"
 date:   2022-10-05 00:00:00 +0800
 categories: 实验
 tags: seedlab tcp
-comments: 1
+comments: true
 mathjax: true
 copyrights: 原创
 ---

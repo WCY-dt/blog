@@ -4,7 +4,7 @@ title:  "Buffer-Overflow Attack"
 date:   2020-06-01 00:00:00 +0800
 categories: 实验
 tags: seedlab buffer-overflow
-comments: 1
+comments: true
 mathjax: true
 copyrights: 原创
 ---
