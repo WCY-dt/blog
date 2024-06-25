@@ -1,37 +1,40 @@
 {%- if posts.size > 0 -%}
-    {%- for post in posts -%}
-        <a class="pagination no-select" href="{{ post.url | relative_url }}">
-            <p class="title">{{ post.title | downcase }}</p>
-            <div class="info">
-                <div class="time">
-                    <span class="material-symbols-outlined">
-                        calendar_month
-                    </span>{{- post.date | date: site.theme_config.date_format -}}
-                </div>
-                <div class="category">
-                    <span class="material-symbols-outlined">
-                        archive
-                    </span>{{- post.categories -}}</span>
-                </div>
-                <div class="tag">
-                    {% for tag in post.tags %}
-                        <span class="material-symbols-outlined">
-                            tag
-                        </span>{{ tag }}
-                    {% endfor %}
-                </div>
-            </div> 
-        </a>
-        {%- unless forloop.last -%}
-            <hr>
-        {%- endunless -%}
-    {%- endfor -%}
+  {%- for post in posts -%}
+    {%- if post.draft -%}
+      {%- continue -%}
+    {%- endif -%}
+    <a class="pagination no-select" href="{{ post.url | relative_url }}">
+      <p class="title">{{ post.title | downcase }}</p>
+      <div class="info">
+        <div class="time">
+          <span class="material-symbols-outlined">
+            calendar_month
+          </span>{{- post.date | date: site.theme_config.date_format -}}
+        </div>
+        <div class="category">
+          <span class="material-symbols-outlined">
+            archive
+          </span>{{- post.categories -}}</span>
+        </div>
+        <div class="tag">
+          {% for tag in post.tags %}
+            <span class="material-symbols-outlined">
+              tag
+            </span>{{ tag }}
+          {% endfor %}
+        </div>
+      </div> 
+    </a>
+    {%- unless forloop.last -%}
+      <hr>
+    {%- endunless -%}
+  {%- endfor -%}
 {%- endif -%}
 
 <p class="pagination-count no-select">
-    {%- if posts.size == 1 -%}
-        - find 1 post -
-    {%- else -%}
-        - find {{ posts.size }} posts -
-    {%- endif -%}
+  {%- if posts.size == 1 -%}
+    - find 1 post -
+  {%- else -%}
+    - find {{ posts.size }} posts -
+  {%- endif -%}
 </p>
