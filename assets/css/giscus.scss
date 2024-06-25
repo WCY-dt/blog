@@ -1,5 +1,5 @@
 ---
---- 
+---
 
 $primary-color: hsl(15, 100%, 50%);
 $secondary-color: hsl(18, 100%, 85%);
@@ -57,8 +57,10 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           color: $tertiary-color;
           transition: all 0.25s ease-in-out;
 
-          &:hover {
-            background-color: $bg-color;
+          @media (hover: hover) {
+            &:hover {
+              background-color: $bg-color;
+            }
           }
         }
 
@@ -90,8 +92,10 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           .color-text-secondary {
             transition: all 0.25s ease-in-out;
 
-            &:hover {
-              color: $primary-color;
+            @media (hover: hover) {
+              &:hover {
+                color: $primary-color;
+              }
             }
           }
         }
@@ -128,8 +132,10 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           color: $tertiary-color;
           transition: all 0.25s ease-in-out;
 
-          &:hover {
-            color: $primary-color;
+          @media (hover: hover) {
+            &:hover {
+              color: $primary-color;
+            }
           }
         }
 
@@ -142,8 +148,10 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             background-color: $primary-color;
             transition: all 0.25s ease-in-out;
 
-            &:hover {
-              background-color: $tertiary-color;
+            @media (hover: hover) {
+              &:hover {
+                background-color: $tertiary-color;
+              }
             }
           }
         }
@@ -180,8 +188,10 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               color: $white-color;
               transition: all 0.25s ease-in-out;
 
-              &:hover {
-                background-color: $primary-color;
+              @media (hover: hover) {
+                &:hover {
+                  background-color: $primary-color;
+                }
               }
             }
 
@@ -267,13 +277,17 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               text-decoration: underline;
               transition: all 0.25s ease-in-out;
 
-              &:hover {
-                color: $primary-color;
+              @media (hover: hover) {
+                &:hover {
+                  color: $primary-color;
+                }
               }
             }
 
-            sup a:hover {
-              text-decoration: none;
+            @media (hover: hover) {
+              sup a:hover {
+                text-decoration: none;
+              }
             }
 
             img {
@@ -338,8 +352,10 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                     background-color: $bg-color;
                   }
 
-                  &:hover {
-                    background-color: $secondary-color;
+                  @media (hover: hover) {
+                    &:hover {
+                      background-color: $secondary-color;
+                    }
                   }
 
                   td {
@@ -411,9 +427,11 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                   color: $tertiary-color;
                   transition: all 0.25s ease-in-out;
 
-                  &:hover {
-                    background-color: $tertiary-color;
-                    color: $white-color;
+                  @media (hover: hover) {
+                    &:hover {
+                      background-color: $tertiary-color;
+                      color: $white-color;
+                    }
                   }
                 }
 
@@ -441,9 +459,11 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                   background-color: $bg-color;
                   transition: all 0.25s ease-in-out;
 
-                  &:hover {
-                    background-color: $tertiary-color;
-                    color: $white-color;
+                  @media (hover: hover) {
+                    &:hover {
+                      background-color: $tertiary-color;
+                      color: $white-color;
+                    }
                   }
                 }
               }
@@ -477,9 +497,11 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                     color: $tertiary-color;
                     transition: all 0.25s ease-in-out;
 
-                    &:hover {
-                      background-color: $tertiary-color;
-                      color: $white-color;
+                    @media (hover: hover) {
+                      &:hover {
+                        background-color: $tertiary-color;
+                        color: $white-color;
+                      }
                     }
                   }
 
@@ -507,9 +529,11 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                     background-color: $bg-color;
                     transition: all 0.25s ease-in-out;
 
-                    &:hover {
-                      background-color: $tertiary-color;
-                      color: $white-color;
+                    @media (hover: hover) {
+                      &:hover {
+                        background-color: $tertiary-color;
+                        color: $white-color;
+                      }
                     }
                   }
                 }

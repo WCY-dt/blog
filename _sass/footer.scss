@@ -39,8 +39,10 @@ footer {
         color: $tertiary-color;
         transition: color 0.25s ease-in-out;
 
-        &:hover {
-          color: $primary-color;
+        @media (hover: hover) {
+          &:hover {
+            color: $primary-color;
+          }
         }
       }
     }

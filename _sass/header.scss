@@ -91,10 +91,12 @@ header {
       animation-name: header-menu-a-scroll;
       @include header-scroll-animation;
 
-      &:hover {
-        p {
-          color: $primary-color;
-          text-decoration: underline;
+      @media (hover: hover) {
+        &:hover {
+          p {
+            color: $primary-color;
+            text-decoration: underline;
+          }
         }
       }
 

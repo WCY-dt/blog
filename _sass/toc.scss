@@ -43,12 +43,14 @@
       transition: all 0.25s ease-in-out;
     }
 
-    &:hover::-webkit-scrollbar-thumb {
-      background-color: $secondary-color;
-    }
+    @media (hover: hover) {
+      &:hover::-webkit-scrollbar-thumb {
+        background-color: $secondary-color;
+      }
 
-    &:hover::-webkit-scrollbar-track {
-      background-color: $bg-light-color;
+      &:hover::-webkit-scrollbar-track {
+        background-color: $bg-light-color;
+      }
     }
 
     a {

@@ -18,8 +18,10 @@ main {
     width: min(100%, 30rem);
     transition: background-color 0.25s ease-in-out;
 
-    &:hover {
-      background-color: $bg-color;
+    @media (hover: hover) {
+      &:hover {
+        background-color: $bg-color;
+      }
     }
 
     .title {

@@ -55,12 +55,14 @@
             transition: all 0.25s ease-in-out;
           }
 
-          &:hover {
-            background-color: $primary-color;
-            color: $white-color;
+          @media (hover: hover) {
+            &:hover {
+              background-color: $primary-color;
+              color: $white-color;
 
-            .material-symbols-outlined {
-              opacity: 0;
+              .material-symbols-outlined {
+                opacity: 0;
+              }
             }
           }
         }
