@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ page.lang | default: 'en' }}">
-
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Ch3nyang's Blog">
     <meta name="keywords" content="blog, cyber security,  developer, program">
     <meta name="author" content="Ch3nyang">
@@ -14,14 +13,17 @@
 
     <meta property="og:title" content="Homepage of Ch3nyang">
     <meta property="og:description" content="Portfolio of Ch3nyang">
-      <!-- <meta property="og:image" content="./assets/img/ogimage.png">
-<meta name="twitter:card" content="./assets/img/twittercard.png"> -->
+    <!--
+      <meta property="og:image" content="./assets/img/ogimage.png">
+      <meta name="twitter:card" content="./assets/img/twittercard.png">
+    -->
 
     <link
       rel="icon"
       type="image/svg+xml"
-      href="{{ site.favicon | relative_url }}">
-      <!-- <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png"> -->
+      href="{{ site.favicon | relative_url }}"
+    >
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png"> -->
 
     <meta name="baseurl" content="{{ site.baseurl }}">
 
@@ -36,14 +38,17 @@
     {%- feed_meta -%}
 
     <!-- Baidu siteverify -->
-    <meta name="baidu-site-verification" content="codeva-dciGw99jsc" />
+    <meta name="baidu-site-verification" content="codeva-dciGw99jsc">
 
-      <!-- Google Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- Google Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    >
 
-      <!-- 主样式表 -->
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
-    <link rel="stylesheet" href="{{ '/assets/css/giscus.css' | relative_url }}" />
+    <!-- 主样式表 -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/giscus.css' | relative_url }}">
 
     <!-- 兼容性检测 -->
     <script src="{{ '/assets/js/compatibility_detect.js' | relative_url }}"></script>
@@ -67,10 +72,13 @@
     <script src="{{ '/assets/js/copy_code.js' | relative_url }}"></script>
 
     <!-- 数学公式 -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script
-      id="MathJax-script"
-      async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    {% if page.mathjax %}
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      ></script>
+    {% endif %}
   </body>
 </html>

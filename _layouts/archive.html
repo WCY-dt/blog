@@ -1,14 +1,13 @@
 ---
 layout: default
 ---
-
 <hgroup class="archive no-select">
   <h2 class="type">
     {{ page.type }}
   </h2>
   <h3 class="title">
     {% if page.date %}
-      {{ page.date | date: "%Y" }}
+      {{ page.date | date: '%Y' }}
     {% else %}
       {{ page.title }}
     {% endif %}

@@ -1,16 +1,13 @@
 ---
 layout: default
 ---
-
 <div class="post">
   <hgroup class="hgroup">
     <h1 class="title">{{ page.title }}</h1>
     <div class="info no-select">
       <div class="date">
         <a href="{{ '/year/' | relative_url }}{{ page.date | date: "%Y" }}/">
-          <span class="material-symbols-outlined">
-            calendar_month
-          </span>
+          <span class="material-symbols-outlined"> calendar_month </span>
           {{- page.date | date: site.theme_config.date_format -}}
         </a>
       </div>
@@ -18,10 +15,9 @@ layout: default
         {%- if page.categories -%}
           {%- for category in page.categories -%}
             <a href="{{ '/category/' | relative_url }}{{ category | slugify }}/">
-              <span class="material-symbols-outlined">
-                archive
-              </span>
-              {{ category }}</a>
+              <span class="material-symbols-outlined"> archive </span>
+              {{ category -}}
+            </a>
           {%- endfor -%}
         {%- endif -%}
       </div>
@@ -29,9 +25,7 @@ layout: default
         {%- if page.tags -%}
           {%- for tag in page.tags -%}
             <a href="{{ '/tag/' | relative_url }}{{ tag | slugify }}/">
-              <span class="material-symbols-outlined">
-                tag
-              </span>
+              <span class="material-symbols-outlined"> tag </span>
               {{ tag }}
             </a>
           {%- endfor -%}
@@ -44,9 +38,7 @@ layout: default
   </div>
   <div class="toc no-select">
     <button>
-      <span class="material-symbols-outlined">
-        toc
-      </span>
+      <span class="material-symbols-outlined"> toc </span>
     </button>
     {% include toc.html html=content %}
   </div>

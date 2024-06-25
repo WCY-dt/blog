@@ -3,20 +3,19 @@ title: Ch3nyang's Blog
 author:
   name: Ch3nyang
   link: https://github.com/WCY-dt
-# display powered by jekyll and ch3nyang-theme
-# in footer
+# display powered by jekyll in footer
 powered_by: false
-# the subpath of your site, e.g. /blog
+# the subpath of your site
 baseurl: "/"
-# the base hostname & protocol for your site,
-# e.g. http://example.com
+# the base hostname & protocol for your site
 url: "https://blog.ch3nyang.top"
 favicon: "favicon.svg"
+giscus:
+  data-repo: "WCY-dt/blog"
+  data-repo-id: "MDEwOlJlcG9zaXRvcnkzNDkxMDc5OTU="
+  data-category-id: "DIC_kwDOFM73G84CgH8k"
 
 ############# 主题设置 #############
-theme_config:
-  date_format: "%Y-%m"
-  color_theme: light # light / dark
 # icons are from https://fonts.google.com/icons
 navy:
   - title: home
@@ -34,19 +33,12 @@ navy:
   - title: rss
     url: feed.xml
     icon: rss_feed
-post_list:
-  # how many posts to show in home page
-  limit: 10
-  show_more: true
-  show_more_text: MORE IN ARCHIVE...
-  show_more_url: /archive
-project:
-  show_icon: true
 
 ############# 其它设置 #############
-# Please do not modify the following settings
-# unless you know what you are doing.
+# Please do not modify the following settings unless you know what you are doing.
 permalink: /post/:title/
+theme_config:
+  date_format: "%Y-%m"
 markdown: kramdown
 highlighter: rouge
 kramdown:

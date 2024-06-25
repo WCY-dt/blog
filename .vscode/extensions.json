@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "shopify.theme-check-vscode",     // Shopify Theme Check
+        "davidanson.vscode-markdownlint", // Markdown Lint
+        "ritwickdey.LiveServer",          // Live Server
+    ]
+}

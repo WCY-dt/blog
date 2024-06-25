@@ -78,7 +78,7 @@
         {% capture anchorAttributes %}{{ anchorAttributes }} class="{{ include.anchor_class | split: '.' | join: ' ' }}"{% endcapture %}
       {% endif %}
 
-      {% capture listItem %}<a{{ anchorAttributes }}>{{ anchorBody }}</a>{% endcapture %}
+      {% capture listItem %}<a {{ anchorAttributes }}>{{ anchorBody }}</a>{% endcapture %}
     {% elsif skipNoIDs == true %}
       {% continue %}
     {% else %}
@@ -99,7 +99,7 @@
       {% capture jekyll_toc %}{{ jekyll_toc }}</li>{% endcapture %}
     {% endif %}
 
-    {% capture jekyll_toc %}{{ jekyll_toc }}<li{{ listItemClass }}>{{ listItem }}{% endcapture %}
+    {% capture jekyll_toc %}{{ jekyll_toc }}<li {{ listItemClass }}>{{ listItem }}{% endcapture %}
 
     {% assign lastLevel = currLevel %}
     {% assign firstHeader = false %}

@@ -1,19 +1,22 @@
-<div class="comment no-select">
-  <h3>Comments</h3>
-  <script
-    src="https://giscus.app/client.js"
-    data-repo="WCY-dt/blog"
-    data-repo-id="MDEwOlJlcG9zaXRvcnkzNDkxMDc5OTU="
-    data-category="Comments"
-    data-category-id="DIC_kwDOFM73G84CgH8k"
-    data-mapping="title"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="{{ site.url }}/assets/css/giscus.css"
-    data-lang="en"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async></script>
-</div>
+{% if page.comments %}
+  <div class="comment no-select">
+    <h3>Comments</h3>
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="{{ site.giscus.data-repo }}"
+      data-repo-id="{{ site.giscus.data-repo-id }}"
+      data-category="Comments"
+      data-category-id="{{ site.giscus.data-category-id }}"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="{{ site.url }}/assets/css/giscus.css"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async
+    ></script>
+  </div>
+{% endif %}
