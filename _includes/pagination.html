@@ -31,10 +31,19 @@
   {%- endfor -%}
 {%- endif -%}
 
+{%- assign non_draft_posts_count = 0 -%}
+{%- for post in posts -%}
+  {%- unless post.draft -%}
+    {%- assign non_draft_posts_count = non_draft_posts_count | plus: 1 -%}
+  {%- endunless -%}
+{%- endfor -%}
+
 <p class="pagination-count no-select">
-  {%- if posts.size == 1 -%}
-    - find 1 post -
+  {%- if non_draft_posts_count == 0 -%}
+    - no public post -
+  {%- elsif non_draft_posts_count == 1 -%}
+    - find 1 public post -
   {%- else -%}
-    - find {{ posts.size }} posts -
+    - find {{ non_draft_posts_count }} public posts -
   {%- endif -%}
 </p>
