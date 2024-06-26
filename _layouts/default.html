@@ -65,11 +65,19 @@
       {%- include footer.html -%}
     </footer>
 
+    {%- include sidebar.html -%}
+
     <!-- toc -->
     <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
 
     <!-- 代码复制 -->
     <script src="{{ '/assets/js/copy_code.js' | relative_url }}"></script>
+
+    <!-- 搜索 -->
+    <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+
+    <!-- 回到顶部 -->
+    <script src="{{ '/assets/js/back_to_top.js' | relative_url }}"></script>
 
     <!-- 数学公式 -->
     {% if page.mathjax %}
