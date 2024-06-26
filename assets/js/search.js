@@ -33,7 +33,6 @@ searchInput.addEventListener('input', (event) => {
 });
 
 const searchContent = (searchText) => {
-  console.log('Searching for:', searchText);
   fetch('/search.json')
     .then(response => response.json())
     .then(data => {
@@ -63,9 +62,6 @@ const searchContent = (searchText) => {
 const renderSearchResults = (posts) => {
   searchResults.innerHTML = '';
   posts.forEach(post => {
-    console.log(post.url);
-    console.log(post.title);
-    console.log(post.content);
     searchResults.innerHTML += /*html*/ `
       <li>
         <a href="${post.url}">

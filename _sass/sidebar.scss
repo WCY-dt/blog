@@ -7,11 +7,37 @@
   align-items: end;
   justify-content: center;
   gap: 1rem;
+
+  #back-to-top-button {
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 2rem;
+    text-align: center;
+    background-color: $primary-color;
+    color: $bg-color;
+    cursor: pointer;
+    transition: background-color 0.25s ease-in-out;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: $tertiary-color;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1024px) {
   .sidebar {
     bottom: 5rem;
     right: 1.5rem;
+
+    #back-to-top-button {
+      width: 2.5rem;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      font-size: 1.5rem;
+    }
   }
 }

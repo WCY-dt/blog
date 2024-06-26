@@ -7,7 +7,7 @@
   box-sizing: border-box;
   padding: 1rem;
   font-size: 1rem;
-  z-index: 98;
+  z-index: 88;
 
   button {
     display: none;
@@ -121,17 +121,18 @@
     top: 0;
     right: 0;
     width: auto;
+    padding: 0;
 
     button {
-      position: absolute;
-      bottom: 0;
-      right: 0;
+      box-sizing: border-box;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       width: 2.5rem;
       height: 2.5rem;
+      line-height: 2.5rem;
+      font-size: 1.5rem;
       background-color: $primary-color;
       color: $white-color;
       z-index: 92;
