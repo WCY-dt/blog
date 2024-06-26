@@ -158,7 +158,7 @@
     {% if site.share contains 'wechat' %}
       <li>
         <a
-          href="https://www.douban.com/share/service?href={{ site.url | append: page.url | url_encode }}&name={{ page.title | url_encode }}"
+          href="https://open.weixin.qq.com/connect/qrconnect?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
           target="_blank"
           rel="noopener"
         >
