@@ -38,8 +38,10 @@
         text-decoration: none;
         transition: all 0.25s ease-in-out;
 
-        &:hover {
-          color: $primary-color;
+        @media (hover: hover) {
+          &:hover {
+            color: $primary-color;
+          }
         }
 
         i {
