@@ -146,7 +146,7 @@
       background-color: $bg-color;
       width: 16rem;
       padding: 1rem;
-      z-index: 90;
+      z-index: -1;
     }
 
     @keyframes toc-scroll {
