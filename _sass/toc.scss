@@ -7,7 +7,7 @@
   box-sizing: border-box;
   padding: 1rem;
   font-size: 1rem;
-  z-index: 9999;
+  z-index: 98;
 
   button {
     display: none;
@@ -117,10 +117,10 @@
 
 @media screen and (max-width: 1024px) {
   .toc {
-    position: fixed;
-    top: auto;
-    bottom: 4.5rem;
-    right: 1rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    width: auto;
 
     button {
       position: absolute;
@@ -134,7 +134,7 @@
       height: 2.5rem;
       background-color: $primary-color;
       color: $white-color;
-      z-index: 9999;
+      z-index: 92;
     }
 
     &>ul {
@@ -145,7 +145,7 @@
       background-color: $bg-color;
       width: 16rem;
       padding: 1rem;
-      z-index: 9998;
+      z-index: 90;
     }
 
     @keyframes toc-scroll {
