@@ -51,7 +51,7 @@ copyrights: 原创 // 如果设置为原创，文末会显示版权声明；否�
 draft:      true // 可省略，默认为 false。如果设置为 true，文章不会显示在主页上
 ```
 
-您可能还需要修改 [`.github`](./.github) 文件夹下的工作流程文件、网站图标 [favicon.svg](./favicon.svg) 以及 [CNAME](./CNAME)，以适应您的需求。
+您可能还需要修改 [`.github`](./.github) 文件夹下的工作流程文件、网站图标 [`favicon.svg`](./favicon.svg) 以及 [`CNAME`](./CNAME)，以适应您的需求。
 
 ## 开发路线
 
@@ -59,6 +59,8 @@ draft:      true // 可省略，默认为 false。如果设置为 true，文章�
 - [x] 文章分类
 - [x] 文章标签
 - [x] 代码高亮
+- [x] 代码复制
+- [ ] 代码行号
 - [x] RSS 订阅
 - [ ] SEO 优化
 - [x] 版权声明
@@ -67,7 +69,8 @@ draft:      true // 可省略，默认为 false。如果设置为 true，文章�
 - [x] 相关文章推荐
 - [x] 评论系统
 - [x] 文章目录
-- [ ] 文章分享
+- [x] 文章分享
+- [ ] 主题切换
 
 ## 版权声明
 

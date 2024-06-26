@@ -34,6 +34,24 @@ navy:
     url: feed.xml
     icon: rss_feed
 
+share:
+  - twitter
+  - facebook
+  - tiktok
+  - instagram
+  - linkedin
+  - reddit
+  - pinterest
+  - telegram
+  - whatsapp
+  - line
+  - discord
+  - snapchat
+  - weibo
+  - qq
+  - wechat
+  - email
+
 ############# 其它设置 #############
 # Please do not modify the following settings unless you know what you are doing.
 permalink: /post/:title/
