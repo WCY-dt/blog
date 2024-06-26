@@ -5,7 +5,6 @@
 本仓库为我的个人博客。博客使用了自己从头打造的 Jekyll 主题，主要存放一些技术性文章以及个人笔记。更新频率飘忽不定，尽量每个月更新至少一篇。
 
 - [main 分支](https://github.com/WCY-dt/blog/tree/main) 为页面发布分支。
-- [dev 分支](https://github.com/WCY-dt/blog/tree/dev) 为正在开发的功能，开发完成后会合并到 main 分支。
 - [stale 分支](https://github.com/WCY-dt/blog/tree/stale) 为过时的主题，不再维护。
 
 站点目前使用 GitHub Pages 托管，使用 Cloudflare 做 DNS 解析。
@@ -52,6 +51,8 @@ copyrights: 原创 // 如果设置为原创，文末会显示版权声明；否�
 draft:      true // 可省略，默认为 false。如果设置为 true，文章不会显示在主页上
 ```
 
+您可能还需要修改 [`.github`](./.github) 文件夹下的工作流程文件、网站图标 [favicon.svg](./favicon.svg) 以及 [CNAME](./CNAME)，以适应您的需求。
+
 ## 开发路线
 
 - [x] 个性主题
@@ -62,7 +63,7 @@ draft:      true // 可省略，默认为 false。如果设置为 true，文章�
 - [ ] SEO 优化
 - [x] 版权声明
 - [ ] 性能优化
-- [ ] 文章搜索
+- [x] 文章搜索
 - [x] 相关文章推荐
 - [x] 评论系统
 - [x] 文章目录
