@@ -37,20 +37,20 @@ navy:
 share:
   - twitter
   - facebook
-  - tiktok
-  - instagram
-  - linkedin
+# - tiktok
+# - instagram
+# - linkedin
   - reddit
-  - pinterest
-  - telegram
-  - whatsapp
-  - line
-  - discord
-  - snapchat
+# - pinterest
+# - telegram
+# - whatsapp
+# - line
+# - discord
+# - snapchat
   - weibo
-  - qq
+# - qq
   - wechat
-  - email
+# - email
 
 ############# 其它设置 #############
 # Please do not modify the following settings unless you know what you are doing.
@@ -72,6 +72,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-archives
+  - jekyll-loading-lazy
 webrick:
   headers:
     Access-Control-Allow-Origin: "*"
