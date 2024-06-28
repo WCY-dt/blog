@@ -52,24 +52,16 @@ function tocActive() {
     }
 
     activeItem.scrollIntoView({ behavior: 'smooth' });
-
-    // Re-apply tocActive when images finish loading
-    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        img.addEventListener('load', function () {
-            tocActive();
-            img.removeEventListener('load', arguments.callee);
-        });
-    });
-
-    if (window.MathJax) {
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        MathJax.Hub.Queue(tocActive);
-    }
 }
 
 window.addEventListener('scroll', tocActive);
 window.addEventListener('resize', tocActive);
 window.addEventListener('load', tocActive);
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('load', function () {
+        tocActive();
+    });
+});
 tocActive();
 
 document.querySelectorAll('.toc a').forEach(anchor => {
@@ -98,16 +90,25 @@ document.querySelectorAll('.toc a').forEach(anchor => {
             });
         }
 
-        scrollToTarget();
-
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('load', scrollToTarget);
+        const imagesBeforeTarget = Array.from(document.querySelectorAll('img')).filter(img => {
+            const imgPosition = img.getBoundingClientRect().top + window.scrollY;
+            return imgPosition < target.getBoundingClientRect().top + window.scrollY;
         });
 
-        if (window.MathJax) {
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-            MathJax.Hub.Queue(scrollToTarget);
-        }
+        const imagesWithListener = [];
+
+        imagesBeforeTarget.forEach(img => {
+            img.addEventListener('load', scrollToTarget);
+            imagesWithListener.push(img);
+        });
+
+        scrollToTarget();
+
+        setTimeout(() => {
+            imagesWithListener.forEach(img => {
+                img.removeEventListener('load', scrollToTarget);
+            });
+        }, 10000);
     });
 });
 
