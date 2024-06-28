@@ -1,10 +1,12 @@
 <div class="sidebar">
   <span class="material-symbols-outlined" id="back-to-top-button"> vertical_align_top </span>
+  <!-- back to top -->
+  <script src="{{ '/assets/js/back_to_top.js' | relative_url }}"></script>
   <div class="toc no-select">
     <button>
       <span class="material-symbols-outlined"> toc </span>
     </button>
-    {% include toc.html html=content %}
+    {% include toc.html html=content h_min=2 h_max=4 %}
   </div>
   {%- include search.html -%}
 </div>

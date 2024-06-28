@@ -99,28 +99,13 @@ layout: compress
 
     {%- include sidebar.html -%}
 
-    <!-- toc -->
-    {% if page.layout == 'post' %}
-      <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
-    {% endif %}
-
     <!-- 代码复制 -->
     {% if page.layout == 'post' %}
       <script src="{{ '/assets/js/copy_code.js' | relative_url }}"></script>
     {% endif %}
 
-    <!-- 搜索 -->
-    <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
-
-    <!-- 回到顶部 -->
-    <script src="{{ '/assets/js/back_to_top.js' | relative_url }}"></script>
-
     <!-- 数学公式 -->
     {% if page.mathjax %}
-      <script
-        async
-        src="https://polyfill.io/v3/polyfill.min.js?features=es6"
-      ></script>
       <script
         async
         id="MathJax-script"

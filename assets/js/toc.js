@@ -52,6 +52,19 @@ function tocActive() {
     }
 
     activeItem.scrollIntoView({ behavior: 'smooth' });
+
+    // Re-apply tocActive when images finish loading
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        img.addEventListener('load', function () {
+            tocActive();
+            img.removeEventListener('load', arguments.callee);
+        });
+    });
+
+    if (window.MathJax) {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        MathJax.Hub.Queue(tocActive);
+    }
 }
 
 window.addEventListener('scroll', tocActive);
@@ -63,14 +76,38 @@ document.querySelectorAll('.toc a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
 
-        const target = document.querySelector(this.getAttribute('href'));
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-        const scrollPosition = targetPosition - (window.innerHeight / 3);
+        function checkStartWithNumber(str) {
+            return str.replace(/#(\d)/g, '#§$1');
+        }
 
-        window.scroll({
-            top: scrollPosition,
-            behavior: 'smooth'
+        const hrefAttribute = this.getAttribute('href');
+        const escapedHref = checkStartWithNumber(decodeURIComponent(hrefAttribute));
+        const target = document.querySelector(escapedHref);
+        if (!target) {
+            console.error('Target not found:', escapedHref);
+            return;
+        }
+
+        function scrollToTarget() {
+            const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+            const scrollPosition = targetPosition - (window.innerHeight / 3);
+
+            window.scroll({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        scrollToTarget();
+
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('load', scrollToTarget);
         });
+
+        if (window.MathJax) {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            MathJax.Hub.Queue(scrollToTarget);
+        }
     });
 });
 
