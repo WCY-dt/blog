@@ -1,16 +1,14 @@
-.post .post-footer {
-  .comment {
-    h1 {
-      margin: 5rem 0 1rem 0;
-      font-size: 1.5rem;
-      font-weight: 900;
-      font-family: $ui-font;
-      color: $primary-color;
-      text-align: center;
-    }
+#comment-container {
+  h1 {
+    margin: 5rem 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: $ui-font;
+    color: $primary-color;
+    text-align: center;
+  }
 
-    .giscus {
-      margin: 0;
-    }
+  .giscus {
+    margin: 0;
   }
 }

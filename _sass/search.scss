@@ -8,7 +8,7 @@
   justify-content: center;
   z-index: 100;
 
-  span {
+  #search-button {
     display: block;
     width: 3rem;
     height: 3rem;
@@ -27,7 +27,7 @@
     }
   }
 
-  input {
+  #search-input {
     /* remove default styles */
     appearance: none;
     border: none;
@@ -126,14 +126,14 @@
 
 @media screen and (max-width: 1024px) {
   #search-container {
-    span {
+    #search-button {
       width: 2.5rem;
       height: 2.5rem;
       line-height: 2.5rem;
       font-size: 1.5rem;
     }
 
-    input {
+    #search-input {
       height: 2.5rem;
       font-size: 1.25rem;
     }

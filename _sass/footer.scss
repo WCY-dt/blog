@@ -9,7 +9,7 @@ footer {
   justify-content: center;
   z-index: 10;
 
-  .footer {
+  #footer-container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -51,7 +51,7 @@ footer {
 
 @media screen and (max-width: 1024px) {
   footer {
-    .footer {
+    #footer-container {
       @keyframes footer-scroll {
         100% {
           padding: 0;

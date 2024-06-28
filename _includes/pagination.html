@@ -3,18 +3,18 @@
     {%- if post.draft -%}
       {%- continue -%}
     {%- endif -%}
-    <a class="pagination no-select" href="{{ post.url | relative_url }}">
-      <p class="title">{{ post.title | downcase }}</p>
-      <div class="info">
-        <div class="time">
+    <a id="pagination-item-container" class="no-select" href="{{ post.url | relative_url }}">
+      <p id="pagination-item-title">{{ post.title | downcase }}</p>
+      <div id="pagination-item-info">
+        <div id="pagination-item-time">
           <span class="material-symbols-outlined"> calendar_month </span>
           {{- post.date | date: site.theme_config.date_format -}}
         </div>
-        <div class="category">
+        <div id="pagination-item-category">
           <span class="material-symbols-outlined"> archive </span>
           {{- post.categories -}}
         </div>
-        <div class="tag">
+        <div id="pagination-item-tag">
           {% for tag in post.tags %}
             <span class="material-symbols-outlined"> tag </span>{{ tag }}
           {% endfor %}
@@ -34,7 +34,7 @@
   {%- endunless -%}
 {%- endfor -%}
 
-<p class="pagination-count no-select">
+<p id="pagination-count" class="no-select">
   {%- if non_draft_posts_count == 0 -%}
     - no public post -
   {%- elsif non_draft_posts_count == 1 -%}

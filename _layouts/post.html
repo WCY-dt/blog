@@ -1,17 +1,17 @@
 ---
 layout: default
 ---
-<div class="post">
-  <hgroup class="hgroup">
-    <h1 class="title">{{ page.title }}</h1>
-    <div class="info no-select">
-      <div class="date">
+<div id="post-container">
+  <hgroup id="post-info-container">
+    <h1 id="post-title">{{ page.title }}</h1>
+    <div id="post-info" class="no-select">
+      <div id="post-date">
         <a href="{{ '/year/' | relative_url }}{{ page.date | date: "%Y" }}/">
           <span class="material-symbols-outlined"> calendar_month </span>
           {{- page.date | date: site.theme_config.date_format -}}
         </a>
       </div>
-      <div class="categories">
+      <div id="post-categories">
         {%- if page.categories -%}
           {%- for category in page.categories -%}
             <a href="{{ '/category/' | relative_url }}{{ category | slugify }}/">
@@ -21,7 +21,7 @@ layout: default
           {%- endfor -%}
         {%- endif -%}
       </div>
-      <div class="tags">
+      <div id="post-tags">
         {%- if page.tags -%}
           {%- for tag in page.tags -%}
             <a href="{{ '/tag/' | relative_url }}{{ tag | slugify }}/">
@@ -33,11 +33,11 @@ layout: default
       </div>
     </div>
   </hgroup>
-  <div class="content">
+  <div id="post-content-container">
     {{ content }}
   </div>
   <script src="{{ '/assets/js/modify_id.js' | relative_url }}"></script>
-  <div class="post-footer">
+  <div id="post-footer-container">
     {% include copyright.html %}
     {% include relate.html %}
     {% include comment.html %}

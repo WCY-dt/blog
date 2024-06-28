@@ -1,5 +1,5 @@
 function tocActive() {
-    let toc = document.querySelector('.toc');
+    let toc = document.querySelector('#toc-container');
     if (!toc) {
         return;
     }
@@ -64,7 +64,7 @@ document.querySelectorAll('img').forEach(img => {
 });
 tocActive();
 
-document.querySelectorAll('.toc a').forEach(anchor => {
+document.querySelectorAll('#toc-container a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
 
@@ -113,9 +113,9 @@ document.querySelectorAll('.toc a').forEach(anchor => {
 });
 
 function toggleTOC() {
-    let toc = document.querySelector('.toc');
+    let toc = document.querySelector('#toc-container');
     let tocul = toc.querySelector('&>ul');
-    let tocButton = document.querySelector('.toc button span');
+    let tocButton = document.querySelector('#toc-container button span');
     if (tocul.style.display === 'flex') {
         tocul.style.display = 'none';
         tocButton.innerHTML = 'toc';
@@ -124,7 +124,7 @@ function toggleTOC() {
         tocButton.innerHTML = 'close';
     }
 }
-tocButton = document.querySelector('.toc button');
+tocButton = document.querySelector('#toc-container button');
 if (tocButton) {
     tocButton.addEventListener('click', toggleTOC);
 }
