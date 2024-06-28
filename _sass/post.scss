@@ -84,6 +84,7 @@
   .content {
     color: $black-color;
     background-color: $white-color;
+    overflow-x: hidden;
 
     p,
     ul,
