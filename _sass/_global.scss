@@ -1,8 +1,8 @@
+$primary-dark-color: hsl(10, 100%, 20%);
 $primary-color: hsl(15, 100%, 50%);
-$secondary-color: hsl(18, 100%, 85%);
-$tertiary-color: hsl(10, 100%, 20%);
-$bg-color: hsl(20, 100%, 95%);
-$bg-light-color: hsl(20, 100%, 98%);
+$primary-semi-light-color: hsl(18, 100%, 85%);
+$primary-light-color: hsl(20, 100%, 95%);
+$primary-extra-light-color: hsl(20, 100%, 98%);
 $white-color: hsl(0, 0%, 100%);
 $black-color: hsl(0, 0%, 0%);
 
@@ -62,7 +62,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 }
 
 ::-webkit-scrollbar-track {
-  background-color: $bg-light-color;
+  background-color: $primary-extra-light-color;
 }
 
 :root {

@@ -58,7 +58,7 @@ header {
     align-items: end;
     justify-content: start;
     gap: 1rem;
-    background-color: $bg-color;
+    background-color: $primary-light-color;
     color: $black-color;
     height: 100%;
 
@@ -105,14 +105,14 @@ header {
         left: 0;
         bottom: 1.2rem;
         font-size: 3rem;
-        color: $secondary-color;
+        color: $primary-semi-light-color;
         transition: font-size 0.25s ease-in-out, opacity 0.25s ease-in-out;
 
         @keyframes header-menu-icon-scroll {
           100% {
             bottom: 0.8rem;
             font-size: 2.0rem;
-            color: $tertiary-color;
+            color: $primary-dark-color;
           }
         }
 
@@ -127,7 +127,7 @@ header {
         line-height: 1.5rem;
         text-transform: capitalize;
         z-index: 10;
-        color: $tertiary-color;
+        color: $primary-dark-color;
         transition: color 0.25s ease-in-out, text-decoration 0.25s ease-in-out;
       }
     }
@@ -166,7 +166,7 @@ header {
         span {
           position: inherit;
           font-size: 2.0rem;
-          color: $tertiary-color;
+          color: $primary-dark-color;
           bottom: 0;
         }
       }

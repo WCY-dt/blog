@@ -33,8 +33,8 @@
         padding: 1rem;
         font-size: 1.2rem;
         font-weight: 700;
-        background-color: $bg-color;
-        color: $tertiary-color;
+        background-color: $primary-light-color;
+        color: $primary-dark-color;
         text-decoration: none;
         box-sizing: border-box;
         transition: all 0.25s ease-in-out;
@@ -48,7 +48,7 @@
           bottom: 0;
           right: 0;
           font-size: 4rem;
-          color: $secondary-color;
+          color: $primary-semi-light-color;
           z-index: 0;
           opacity: 1;
           transition: all 0.25s ease-in-out;

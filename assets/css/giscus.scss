@@ -1,11 +1,11 @@
 ---
 ---
 
+$primary-dark-color: hsl(10, 100%, 20%);
 $primary-color: hsl(15, 100%, 50%);
-$secondary-color: hsl(18, 100%, 85%);
-$tertiary-color: hsl(10, 100%, 20%);
-$bg-color: hsl(20, 100%, 95%);
-$bg-light-color: hsl(20, 100%, 98%);
+$primary-semi-light-color: hsl(18, 100%, 85%);
+$primary-light-color: hsl(20, 100%, 95%);
+$primary-extra-light-color: hsl(20, 100%, 98%);
 $white-color: hsl(0, 0%, 100%);
 $black-color: hsl(0, 0%, 0%);
 
@@ -15,7 +15,7 @@ $ui-font: 'Orbitron', sans-serif;
 $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif';
 
 .gsc-main {
-  color: $tertiary-color;
+  color: $primary-dark-color;
 
   &::selection {
     color: $white-color;
@@ -31,7 +31,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
   }
 
   &::-webkit-scrollbar-track {
-    background-color: $bg-light-color;
+    background-color: $primary-extra-light-color;
   }
 
   .gsc-reactions {
@@ -54,18 +54,18 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
       .gsc-right-header {
         .BtnGroup-item:not(.BtnGroup-item--selected) {
-          color: $tertiary-color;
+          color: $primary-dark-color;
           transition: all 0.25s ease-in-out;
 
           @media (hover: hover) {
             &:hover {
-              background-color: $bg-color;
+              background-color: $primary-light-color;
             }
           }
         }
 
         .BtnGroup-item--selected {
-          background-color: $tertiary-color;
+          background-color: $primary-dark-color;
           color: $white-color;
         }
       }
@@ -73,11 +73,11 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
     .gsc-comment-box {
       border: none;
-      background-color: $bg-color;
+      background-color: $primary-light-color;
 
       .gsc-comment-box-tabs {
-        background-color: $secondary-color;
-        color: $tertiary-color;
+        background-color: $primary-semi-light-color;
+        color: $primary-dark-color;
         border: none;
 
         &>div.mx-2.mb-\[-1px\].mt-2 {
@@ -85,7 +85,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
           .color-text-primary {
             border: none;
-            background-color: $bg-color;
+            background-color: $primary-light-color;
             transition: all 0.25s ease-in-out;
           }
 
@@ -104,20 +104,20 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
       .gsc-comment-box-main {
         .gsc-comment-box-write {
           border: none;
-          background-color: $bg-light-color;
+          background-color: $primary-extra-light-color;
 
           .gsc-comment-box-textarea {
             border: none;
             border-bottom-style: dashed;
             border-bottom-width: 1px;
-            border-bottom-color: $tertiary-color;
+            border-bottom-color: $primary-dark-color;
           }
 
           .gsc-comment-box-textarea-extras {
             border: none;
 
             a {
-              color: $tertiary-color;
+              color: $primary-dark-color;
             }
           }
         }
@@ -129,7 +129,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
       .gsc-comment-box-bottom {
         &>button {
-          color: $tertiary-color;
+          color: $primary-dark-color;
           transition: all 0.25s ease-in-out;
 
           @media (hover: hover) {
@@ -150,7 +150,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
             @media (hover: hover) {
               &:hover {
-                background-color: $tertiary-color;
+                background-color: $primary-dark-color;
               }
             }
           }
@@ -160,7 +160,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
     .gsc-timeline {
       .gsc-comment {
-        background-color: $bg-light-color;
+        background-color: $primary-extra-light-color;
 
         &>div {
           border: none;
@@ -170,7 +170,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               &>div {
                 span {
                   border: none;
-                  background-color: $bg-color;
+                  background-color: $primary-light-color;
                 }
               }
             }
@@ -184,7 +184,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               top: 0;
               right: 0;
               border: none;
-              background-color: $tertiary-color;
+              background-color: $primary-dark-color;
               color: $white-color;
               transition: all 0.25s ease-in-out;
 
@@ -225,7 +225,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 display: block;
                 width: 10rem;
                 height: 0.8rem;
-                background-color: $tertiary-color;
+                background-color: $primary-dark-color;
                 z-index: -1;
                 position: absolute;
                 bottom: 0.3rem;
@@ -245,7 +245,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 display: block;
                 width: 6rem;
                 height: 0.6rem;
-                background-color: $tertiary-color;
+                background-color: $primary-dark-color;
                 z-index: -1;
                 position: absolute;
                 bottom: 0.5rem;
@@ -273,7 +273,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             }
 
             a {
-              color: $tertiary-color;
+              color: $primary-dark-color;
               text-decoration: underline;
               transition: all 0.25s ease-in-out;
 
@@ -296,19 +296,19 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
             blockquote {
               margin: 0;
-              border-left: 0.25rem solid $tertiary-color;
+              border-left: 0.25rem solid $primary-dark-color;
               box-sizing: border-box;
-              background-color: $bg-color;
+              background-color: $primary-light-color;
               padding: 0.5rem 2rem;
 
               pre:has(code) {
-                border: 0.05rem solid $tertiary-color;
+                border: 0.05rem solid $primary-dark-color;
                 box-sizing: border-box;
               }
 
               blockquote {
-                border: 0.05rem solid $tertiary-color;
-                border-left: 0.25rem solid $tertiary-color;
+                border: 0.05rem solid $primary-dark-color;
+                border-left: 0.25rem solid $primary-dark-color;
               }
             }
 
@@ -318,14 +318,14 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
               li {
                 &::marker {
-                  color: $tertiary-color;
+                  color: $primary-dark-color;
                 }
               }
             }
 
             table {
               border-collapse: collapse;
-              border: 0.05rem solid $tertiary-color;
+              border: 0.05rem solid $primary-dark-color;
               box-sizing: border-box;
               width: 100%;
 
@@ -336,7 +336,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               }
 
               thead {
-                background-color: $tertiary-color;
+                background-color: $primary-dark-color;
                 color: $white-color;
               }
 
@@ -345,16 +345,16 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                   transition: background-color 0.25s ease-in-out;
 
                   &:nth-child(even) {
-                    background-color: $bg-light-color;
+                    background-color: $primary-extra-light-color;
                   }
 
                   &:nth-child(odd) {
-                    background-color: $bg-color;
+                    background-color: $primary-light-color;
                   }
 
                   @media (hover: hover) {
                     &:hover {
-                      background-color: $secondary-color;
+                      background-color: $primary-semi-light-color;
                     }
                   }
 
@@ -376,7 +376,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             pre:has(code),
             div:has(.notranslate) {
               position: relative;
-              background-color: $bg-color;
+              background-color: $primary-light-color;
               padding: 0.5rem;
               line-height: 1.2rem;
               font-size: 1rem;
@@ -386,11 +386,11 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               }
 
               &::-webkit-scrollbar-thumb {
-                background-color: $tertiary-color;
+                background-color: $primary-dark-color;
               }
 
               &::-webkit-scrollbar-track {
-                background-color: $bg-light-color;
+                background-color: $primary-extra-light-color;
               }
             }
 
@@ -401,7 +401,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             hr {
               width: 100%;
               height: 0;
-              border: 1px solid $secondary-color;
+              border: 1px solid $primary-semi-light-color;
             }
 
             .footnotes p {
@@ -409,7 +409,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
               &,
               a {
-                color: $tertiary-color;
+                color: $primary-dark-color;
               }
 
               a {
@@ -423,13 +423,13 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               .gsc-reactions-menu {
                 .gsc-social-reaction-summary-item {
                   border: none;
-                  background-color: $bg-color;
-                  color: $tertiary-color;
+                  background-color: $primary-light-color;
+                  color: $primary-dark-color;
                   transition: all 0.25s ease-in-out;
 
                   @media (hover: hover) {
                     &:hover {
-                      background-color: $tertiary-color;
+                      background-color: $primary-dark-color;
                       color: $white-color;
                     }
                   }
@@ -437,7 +437,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
                 .gsc-reactions-popover {
                   border: none;
-                  background-color: $bg-color;
+                  background-color: $primary-light-color;
 
                   div.color-border-primary.my-2.border-t {
                     border: none;
@@ -446,7 +446,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                   div.m-2 {
                     button.has-reacted {
                       border: none;
-                      background-color: $secondary-color;
+                      background-color: $primary-semi-light-color;
                     }
                   }
                 }
@@ -455,13 +455,13 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               .gsc-direct-reaction-buttons {
                 button {
                   border: none;
-                  color: $tertiary-color;
-                  background-color: $bg-color;
+                  color: $primary-dark-color;
+                  background-color: $primary-light-color;
                   transition: all 0.25s ease-in-out;
 
                   @media (hover: hover) {
                     &:hover {
-                      background-color: $tertiary-color;
+                      background-color: $primary-dark-color;
                       color: $white-color;
                     }
                   }
@@ -472,18 +472,18 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
           .gsc-replies {
             border: none;
-            background-color: $bg-color;
+            background-color: $primary-light-color;
 
             .gsc-reply {
               margin-left: 1rem;
-              border-left: 2px solid $tertiary-color;
+              border-left: 2px solid $primary-dark-color;
             }
 
             .gsc-reply-author {
               &>div {
                 span {
                   border: none;
-                  background-color: $secondary-color;
+                  background-color: $primary-semi-light-color;
                 }
               }
             }
@@ -493,13 +493,13 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 .gsc-reactions-menu {
                   .gsc-social-reaction-summary-item {
                     border: none;
-                    background-color: $bg-color;
-                    color: $tertiary-color;
+                    background-color: $primary-light-color;
+                    color: $primary-dark-color;
                     transition: all 0.25s ease-in-out;
 
                     @media (hover: hover) {
                       &:hover {
-                        background-color: $tertiary-color;
+                        background-color: $primary-dark-color;
                         color: $white-color;
                       }
                     }
@@ -507,7 +507,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
                   .gsc-reactions-popover {
                     border: none;
-                    background-color: $secondary-color;
+                    background-color: $primary-semi-light-color;
 
                     div.color-border-primary.my-2.border-t {
                       border: none;
@@ -516,7 +516,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                     div.m-2 {
                       button.has-reacted {
                         border: none;
-                        background-color: $bg-color;
+                        background-color: $primary-light-color;
                       }
                     }
                   }
@@ -525,13 +525,13 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 .gsc-direct-reaction-buttons {
                   button {
                     border: none;
-                    color: $tertiary-color;
-                    background-color: $bg-color;
+                    color: $primary-dark-color;
+                    background-color: $primary-light-color;
                     transition: all 0.25s ease-in-out;
 
                     @media (hover: hover) {
                       &:hover {
-                        background-color: $tertiary-color;
+                        background-color: $primary-dark-color;
                         color: $white-color;
                       }
                     }
@@ -543,13 +543,13 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
           .gsc-reply-box {
             border: none;
-            background-color: $bg-color;
+            background-color: $primary-light-color;
             padding: 0.5rem;
 
             button {
               border: none;
               margin: 0 0.5rem;
-              background-color: $bg-light-color;
+              background-color: $primary-extra-light-color;
             }
           }
         }

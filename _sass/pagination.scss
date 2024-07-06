@@ -20,7 +20,7 @@ main {
 
     @media (hover: hover) {
       &:hover {
-        background-color: $bg-color;
+        background-color: $primary-light-color;
       }
     }
 
@@ -37,7 +37,7 @@ main {
       align-items: center;
       justify-content: start;
       gap: 0.25rem 1rem;
-      color: $tertiary-color;
+      color: $primary-dark-color;
       white-space: nowrap;
       flex-wrap: wrap;
 
@@ -57,7 +57,7 @@ main {
   hr {
     width: min(100%, calc(30rem + 3rem));
     margin: 0;
-    border: 1px solid $bg-color;
+    border: 1px solid $primary-light-color;
   }
 }
 

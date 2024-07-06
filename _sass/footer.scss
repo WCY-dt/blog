@@ -15,8 +15,8 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: end;
-    background-color: $bg-color;
-    color: $tertiary-color;
+    background-color: $primary-light-color;
+    color: $primary-dark-color;
     font-family: $ui-font;
     font-weight: 900;
     padding: 1.5rem 0 1rem 0;
@@ -36,7 +36,7 @@ footer {
 
       a {
         text-decoration: underline;
-        color: $tertiary-color;
+        color: $primary-dark-color;
         transition: color 0.25s ease-in-out;
 
         @media (hover: hover) {

@@ -16,13 +16,13 @@
     font-size: 2rem;
     text-align: center;
     background-color: $primary-color;
-    color: $bg-color;
+    color: $primary-light-color;
     cursor: pointer;
     transition: background-color 0.25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
-        background-color: $tertiary-color;
+        background-color: $primary-dark-color;
       }
     }
   }
