@@ -24,7 +24,7 @@
         top: calc(100% + 0.6rem - 1rem);
         left: 0;
         width: 100%;
-        background-color: $primary-color;
+        background-color: $primary-little-light-color;
         color: $white-color;
         padding: 0.5rem 0;
         box-sizing: border-box;
@@ -44,12 +44,12 @@
           transform: translateX(-50%);
           border-left: 0.6rem solid transparent;
           border-right: 0.6rem solid transparent;
-          border-bottom: 0.6rem solid $primary-color;
+          border-bottom: 0.6rem solid $primary-little-light-color;
         }
 
         &::selection,
         a::selection {
-          color: $primary-color;
+          color: $primary-little-light-color;
           background-color: $white-color;
         }
       }

@@ -15,14 +15,14 @@
     line-height: 3rem;
     font-size: 2rem;
     text-align: center;
-    background-color: $primary-color;
+    background-color: $primary-little-light-color;
     color: $primary-light-color;
     cursor: pointer;
     transition: background-color 0.25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
-        background-color: $primary-dark-color;
+        background-color: $primary-color;
       }
     }
   }
@@ -38,6 +38,7 @@
       height: 2.5rem;
       line-height: 2.5rem;
       font-size: 1.5rem;
+      background-color: $primary-color;
     }
   }
 }

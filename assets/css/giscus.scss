@@ -2,7 +2,9 @@
 ---
 
 $primary-dark-color: hsl(10, 100%, 20%);
+$primary-semi-dark-color: hsl(12, 100%, 35%);
 $primary-color: hsl(15, 100%, 50%);
+$primary-little-light-color: hsl(16, 100%, 65%);
 $primary-semi-light-color: hsl(18, 100%, 85%);
 $primary-light-color: hsl(20, 100%, 95%);
 $primary-extra-light-color: hsl(20, 100%, 98%);
@@ -47,6 +49,8 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
     .gsc-header {
       .gsc-left-header {
+        color: $primary-little-light-color;
+
         em {
           display: none;
         }
@@ -54,7 +58,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
       .gsc-right-header {
         .BtnGroup-item:not(.BtnGroup-item--selected) {
-          color: $primary-dark-color;
+          color: $primary-little-light-color;
           transition: all 0.25s ease-in-out;
 
           @media (hover: hover) {
@@ -65,7 +69,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
         }
 
         .BtnGroup-item--selected {
-          background-color: $primary-dark-color;
+          background-color: $primary-little-light-color;
           color: $white-color;
         }
       }
@@ -76,7 +80,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
       background-color: $primary-light-color;
 
       .gsc-comment-box-tabs {
-        background-color: $primary-semi-light-color;
+        background-color: $primary-little-light-color;
         color: $primary-dark-color;
         border: none;
 
@@ -90,14 +94,19 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           }
 
           .color-text-secondary {
+            color: $white-color;
             transition: all 0.25s ease-in-out;
 
             @media (hover: hover) {
               &:hover {
-                color: $primary-color;
+                color: $primary-extra-light-color;
               }
             }
           }
+        }
+
+        .gsc-comment-box-md-toolbar {
+          color: $white-color;
         }
       }
 
@@ -145,12 +154,12 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           a {
             border: none;
             color: $white-color;
-            background-color: $primary-color;
+            background-color: $primary-little-light-color;
             transition: all 0.25s ease-in-out;
 
             @media (hover: hover) {
               &:hover {
-                background-color: $primary-dark-color;
+                background-color: $primary-color;
               }
             }
           }

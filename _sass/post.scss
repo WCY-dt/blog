@@ -16,14 +16,25 @@
     justify-content: center;
 
     #post-title {
-      margin-bottom: 0;
+      margin-bottom: 0.5rem;
       max-width: 100%;
       font-size: 3rem;
+      line-height: 3rem;
       font-weight: 900;
       font-family: $ui-font;
       color: $primary-color;
       text-align: center;
       word-break: keep-all;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+
+      #post-series {
+        font-size: 2rem;
+        color: $primary-little-light-color;
+      }
     }
 
     #post-info {
@@ -286,7 +297,7 @@
       }
     }
 
-    p code {
+    p code, li code, ol code {
       font-weight: 700;
     }
 

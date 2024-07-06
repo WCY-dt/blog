@@ -1,5 +1,5 @@
 {% assign sorted_posts = site.posts | where: 'series', page.series | sort: 'series_index' %}
-<div id="series-container">
+<div id="series-container" class="no-select">
   <p id="series-description">
     There are {{ sorted_posts.size }} posts in series <span id="series-name">{{ page.series }}</span>.
   </p>

@@ -1,5 +1,7 @@
 $primary-dark-color: hsl(10, 100%, 20%);
+$primary-semi-dark-color: hsl(12, 100%, 35%);
 $primary-color: hsl(15, 100%, 50%);
+$primary-little-light-color: hsl(16, 100%, 65%);
 $primary-semi-light-color: hsl(18, 100%, 85%);
 $primary-light-color: hsl(20, 100%, 95%);
 $primary-extra-light-color: hsl(20, 100%, 98%);
@@ -50,7 +52,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
 ::selection {
   color: $white-color;
-  background-color: $primary-color;
+  background-color: $primary-little-light-color;
 }
 
 ::-webkit-scrollbar {

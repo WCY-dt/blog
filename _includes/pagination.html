@@ -4,12 +4,14 @@
       {%- continue -%}
     {%- endif -%}
     <a id="pagination-item-container" class="no-select" href="{{ post.url | relative_url }}">
-      <p id="pagination-item-title">
+      <span id="pagination-item-title">
         {% if post.series %}
-          {{ post.series }} | ({{ post.series_index }})
+          <div id="pagination-item-series">{{ post.series }} | ({{ post.series_index }})</div>
         {% endif %}
-        {{ post.title }}
-      </p>
+        <div id="pagination-item-title-text">
+          {{ post.title }}
+        </div>
+      </span>
       <div id="pagination-item-info">
         <div id="pagination-item-time">
           <span class="material-symbols-outlined"> calendar_month </span>

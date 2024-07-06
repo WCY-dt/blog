@@ -5,9 +5,11 @@ layout: default
   <hgroup id="post-info-container">
     <h1 id="post-title">
       {% if page.series %}
-        {{ page.series }} | ({{ page.series_index }})
+        <div id="post-series">{{ page.series }} | ({{ page.series_index }})</div>
       {% endif %}
-      {{ page.title }}
+      <div id="post-title-text">
+        {{ page.title }}
+      </div>
     </h1>
     <div id="post-info" class="no-select">
       <div id="post-date">

@@ -30,6 +30,12 @@ main {
       font-weight: 900;
       font-family: $ui-font;
       margin: 0;
+
+      #pagination-item-series {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $primary-little-light-color;
+      }
     }
 
     #pagination-item-info {
@@ -98,7 +104,7 @@ main {
   margin-top: 3rem;
   width: 100%;
   text-align: center;
-  color: $primary-color;
+  color: $primary-little-light-color;
   font-size: 0.8rem;
   font-family: $ui-font;
   font-weight: 900;
