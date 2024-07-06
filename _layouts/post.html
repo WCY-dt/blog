@@ -3,7 +3,12 @@ layout: default
 ---
 <div id="post-container">
   <hgroup id="post-info-container">
-    <h1 id="post-title">{{ page.title }}</h1>
+    <h1 id="post-title">
+      {% if page.series %}
+        {{ page.series }} | ({{ page.series_index }})
+      {% endif %}
+      {{ page.title }}
+    </h1>
     <div id="post-info" class="no-select">
       <div id="post-date">
         <a href="{{ '/year/' | relative_url }}{{ page.date | date: "%Y" }}/">
@@ -32,6 +37,9 @@ layout: default
         {%- endif -%}
       </div>
     </div>
+    {%- if page.series -%}
+      {% include series.html %}
+    {%- endif -%}
   </hgroup>
   <div id="post-content-container">
     {{ content }}

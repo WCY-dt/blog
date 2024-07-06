@@ -4,6 +4,8 @@ title:  "SQL injection"
 date:   2020-11-01 00:00:00 +0800
 categories: 实验
 tags: seedlab sql
+series: SEEDLabs
+series_index: 5
 comments: true
 mathjax: true
 copyrights: 原创

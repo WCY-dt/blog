@@ -4,6 +4,8 @@ title:  "VPN Tunneling"
 date:   2022-10-07 00:00:00 +0800
 categories: 实验
 tags: seedlab vpn
+series: SEEDLabs
+series_index: 13
 comments: true
 mathjax: true
 copyrights: 原创

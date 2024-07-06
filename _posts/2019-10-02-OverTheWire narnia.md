@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  "OverTheWireCrypton"
+title:  "Narnia"
 date:   2019-10-02 00:00:00 +0800
 categories: 安全
 tags: game
+series: OverTheWire
+series_index: 3
 comments: true
 mathjax: true
 copyrights: 原创 未完待续

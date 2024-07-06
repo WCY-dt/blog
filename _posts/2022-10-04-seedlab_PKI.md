@@ -4,6 +4,8 @@ title:  "PKI"
 date:   2022-10-04 00:00:00 +0800
 categories: 实验
 tags: seedlab pki
+series: SEEDLabs
+series_index: 10
 comments: true
 mathjax: true
 copyrights: 原创

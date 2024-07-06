@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  "OverTheWireBandit"
+title:  "Bandit"
 date:   2019-10-01 00:00:00 +0800
 categories: 安全
 tags: game
+series: OverTheWire
+series_index: 1
 comments: true
 mathjax: true
 copyrights: 原创 未完待续

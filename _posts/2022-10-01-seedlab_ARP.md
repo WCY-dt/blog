@@ -4,6 +4,8 @@ title:  "ARP Cache Poisoning"
 date:   2022-10-01 00:00:00 +0800
 categories: 实验
 tags: seedlab arp
+series: SEEDLabs
+series_index: 7
 comments: true
 mathjax: true
 copyrights: 原创

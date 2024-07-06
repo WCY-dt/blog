@@ -4,6 +4,8 @@ title:  "Packet Sniffing and Spoofing"
 date:   2022-10-03 00:00:00 +0800
 categories: 实验
 tags: seedlab network
+series: SEEDLabs
+series_index: 9
 comments: true
 mathjax: true
 copyrights: 原创

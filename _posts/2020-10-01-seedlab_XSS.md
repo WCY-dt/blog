@@ -4,6 +4,8 @@ title:  "XSS"
 date:   2020-10-01 00:00:00 +0800
 categories: 实验
 tags: seedlab xss
+series: SEEDLabs
+series_index: 4
 comments: true
 mathjax: true
 copyrights: 原创
