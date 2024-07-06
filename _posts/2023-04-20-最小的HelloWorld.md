@@ -145,7 +145,7 @@ $ wc -c hello_world
 
 C 代码显然还是太重型了。一切优化的尽头是汇编，所以我们使用汇编重写程序：
 
-```assembly
+```nasm
 ; hello_world.asm
   BITS 64                 ; change to 64-bit mode
   GLOBAL main
@@ -189,7 +189,7 @@ $ wc -c hello_world
 
 这是因为它会自动链接到 `crt` 库。我们的目标是不用这个库，定义自己的函数入口：
 
-```assembly
+```nasm
 ; hello_world.asm
   BITS 64                 ; change to 64-bit mode
   GLOBAL nomainhere
@@ -288,7 +288,7 @@ $ wc -c hello_world
 
 我们之前都直接用 nasm 和 ld 生成的 elf。但众所周知，elf 为了其鲁棒性，有一堆不太需要的内容。我们直接自定义其格式：
 
-```assembly
+```nasm
 ; hello_world.asm
   BITS 64
   org 0x400000
@@ -362,7 +362,7 @@ $ wc -c hello_world
 
 elf 文件格式规定，除了文件头之外，别的部分可以出现在任何地方——甚至可以重叠！嘿嘿，那我们就可以把 `phdr` 往前移一移了：
 
-```assembly
+```nasm
 ; hello_world.asm
   BITS 64
   org 0x400000
@@ -434,7 +434,7 @@ $ wc -c hello_world
 
 兜兜转转这么多，我们还忘了一件事情：那段实现功能的汇编代码也是可以优化的：
 
-```assembly
+```nasm
 ; hello_world.asm
   BITS 64
   org 0x400000

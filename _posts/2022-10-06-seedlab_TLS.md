@@ -646,7 +646,7 @@ ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verif
 
 编写 `server_openssl.cnf`
 
-```cnf
+```ini
 [ req ]
 prompt = no
 distinguished_name = req_distinguished_name

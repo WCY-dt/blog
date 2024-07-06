@@ -157,7 +157,7 @@ Certificate:
 
   > 当然，也可以直接使用配置文件。比如，我们创建 `conf/generateCA.cnf`：
   >
-  > ```conf
+  > ```ini
   > [ req ]
   > default_keyfile = myCA_key.pem
   > default_md = md5
@@ -302,7 +302,7 @@ Certificate:
 
   内容为：
 
-  ```cnf
+  ```ini
   [ ca ]
   default_ca      = myCA
   
@@ -587,7 +587,7 @@ code generateCA.cnf
 
 内容为
 
-```cnf
+```ini
 [ req ]
 default_keyfile = testCA_key.pem
 default_md = md5
@@ -614,7 +614,7 @@ code testCA.cnf
 
 内容为
 
-```cnf
+```ini
 [ ca ]
 default_ca      = testCA
   
@@ -1144,7 +1144,7 @@ make stunnel.pem
 
 安装 Stunnel 并且生成了证书后，需要一个配置文件。下面是一个示例，可以用于加密 POP3 和 IMAP 通信：
 
-```conf
+```ini
 # 适用于加密 POP3/IMAP 的 stunnel 示例配置文件
 
 # 证书的完整路径
@@ -1198,7 +1198,7 @@ stunnel stunnel-secure-email.conf
 
 这涉及在服务器和客户端机器上都使用 Stunnel 守护进程。服务器端的配置与我们上面用于 POP3/IMAP 的配置类似。默认的 MySQL 端口是 3306，由于没有保留端口用于安全的 MySQL 连接，我们将使用 3307：
 
-```conf
+```ini
 # 适用于加密 MySQL 的 stunnel 示例配置文件（服务器）
 
 # 证书的完整路径
@@ -1227,7 +1227,7 @@ stunnel stunnel-mysql-server.conf
 
 我们还需要在客户端机器上设置一个 Stunnel 守护进程，并使用以下配置：
 
-```conf
+```ini
 # 适用于加密 MySQL 的 stunnel 示例配置文件（客户端）
 
 # 证书的完整路径
@@ -1276,7 +1276,7 @@ ps -ef | grep stunnel nobody 21769 1 0 09:12 ? 00:00:00 /usr/local/sbin/stunnel 
 
 也可以通过在配置文件中添加以下命令（在服务配置之前）来指示 Stunnel 在前台运行：
 
-```conf
+```ini
 foreground = yes
 ```
 
@@ -1300,7 +1300,7 @@ output = /dev/stdout
 
 stunnel 配置文件如下：
 
-```cnf
+```ini
 pid = /home/ch3nyang/Work/firefox-stunnel/tmp/stunnel.pid # 完整路径
 output = /home/ch3nyang/Work/firefox-stunnel/tmp/stunnel.log # 完整路径
 

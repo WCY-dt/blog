@@ -58,7 +58,7 @@ permalink: /post/:title/
 theme_config:
   date_format: "%Y-%m"
 markdown: kramdown
-highlighter: rouge
+highlighter: rouge # Supported language: https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
 kramdown:
   input: GFM
 jekyll-archives:

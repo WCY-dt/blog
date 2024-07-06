@@ -73,7 +73,7 @@ modulus:
 
 将 `myCA_openssl.cnf` 文件中的
 
-```cnf
+```ini
 # unique_subject    = no
 # copy_extensions   = copy
 ```
