@@ -24,6 +24,8 @@
     "markdownlint.config": {
         "MD013": false, // Disable line length check
         "MD024": false, // Disable multiple headers with the same content check
+        "MD028": false, // Disable blank line inside blockquote check
+        "MD029": false, // Disable ordered list item prefix check
         "MD031": false, // Disable blanks around headers check
         "MD032": false, // Disable lists should be surrounded by blank lines check
         "MD033": false, // Disable inline HTML check
