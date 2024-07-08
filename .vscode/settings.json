@@ -22,8 +22,10 @@
         "editor.detectIndentation": false,
     },
     "markdownlint.config": {
+        "MD010": false, // Disable hard tabs check
         "MD013": false, // Disable line length check
         "MD024": false, // Disable multiple headers with the same content check
+        "MD026": false, // Disable Trailing punctuation in header check
         "MD028": false, // Disable blank line inside blockquote check
         "MD033": false, // Disable inline HTML check
     },
