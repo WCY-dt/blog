@@ -47,6 +47,19 @@ layout: compress
     <!-- Baidu siteverify -->
     <meta name="baidu-site-verification" content="codeva-dciGw99jsc">
 
+    <!-- Google Analytics -->
+    {%- if site.google_analytics -%}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics }}');
+      </script>
+    {%- endif -%}
+
     <!-- Font Awesome -->
     {%- if page.layout == 'post' -%}
       <link
