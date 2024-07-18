@@ -1,6 +1,6 @@
 #series-container {
   margin: 2rem 0 -2rem 0;
-  background-color: $primary-light-color;
+  background-color: var(--primary-light-color);
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 
   #series-description {
     font-weight: 700;
-    color: $primary-dark-color;
+    color: var(--primary-dark-color);
     margin: 0;
 
     #series-name {
@@ -33,12 +33,12 @@
     #series-item {
       a {
         text-decoration: none;
-        color: $primary-dark-color;
+        color: var(--primary-dark-color);
         transition: all 0.3s ease-in-out;
 
         @media (hover: hover) {
           &:hover {
-            color: $primary-color;
+            color: var(--primary-color);
           }
         }
       }

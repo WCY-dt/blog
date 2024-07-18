@@ -1,12 +1,17 @@
 <div id="sidebar-container" class="no-select">
-  <span id="back-to-top-button" class="material-symbols-outlined"> vertical_align_top </span>
   <!-- back to top -->
+  <span id="back-to-top-button" class="material-symbols-outlined"> vertical_align_top </span>
   <script src="{{ '/assets/js/back_to_top.js' | relative_url }}"></script>
+  <!-- theme switcher -->
+  <span id="theme-switcher" class="material-symbols-outlined">dark_mode</span>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+  <!-- toc -->
   <div id="toc-container" class="no-select">
     <button>
       <span class="material-symbols-outlined"> toc </span>
     </button>
     {% include toc.html html=content h_min=2 h_max=4 %}
   </div>
+  <!-- search -->
   {%- include search.html -%}
 </div>

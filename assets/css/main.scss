@@ -15,4 +15,9 @@
 @import 'sidebar';
 @import 'toc';
 @import 'search';
-@import 'syntax';
+[data-theme='light'] {
+  @import 'syntax_light';
+}
+[data-theme='dark'] {
+  @import 'syntax_dark';
+}

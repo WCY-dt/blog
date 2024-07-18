@@ -29,8 +29,8 @@ header {
     flex-direction: column;
     align-items: start;
     justify-content: end;
-    background-color: $primary-color;
-    color: $white-color;
+    background-color: var(--primary-color);
+    color: var(--white-color);
     height: calc(100% - 0.5rem);
     text-transform: uppercase;
     z-index: 8;
@@ -58,8 +58,8 @@ header {
     align-items: end;
     justify-content: start;
     gap: 1rem;
-    background-color: $primary-light-color;
-    color: $black-color;
+    background-color: var(--primary-light-color);
+    color: var(--black-color);
     height: 100%;
 
     @keyframes header-menu-scroll {
@@ -74,7 +74,7 @@ header {
     a {
       position: relative;
       text-decoration: none;
-      color: $black-color;
+      color: var(--black-color);
       height: calc(100% - 0.5rem);
       padding: 0 0.5rem 1rem 1.8rem;
       display: flex;
@@ -94,7 +94,7 @@ header {
       @media (hover: hover) {
         &:hover {
           p {
-            color: $primary-color;
+            color: var(--primary-color);
             text-decoration: underline;
           }
         }
@@ -105,14 +105,14 @@ header {
         left: 0;
         bottom: 1.2rem;
         font-size: 3rem;
-        color: $primary-semi-light-color;
+        color: var(--primary-semi-light-color);
         transition: font-size 0.25s ease-in-out, opacity 0.25s ease-in-out;
 
         @keyframes header-menu-icon-scroll {
           100% {
             bottom: 0.8rem;
             font-size: 2.0rem;
-            color: $primary-dark-color;
+            color: var(--primary-dark-color);
           }
         }
 
@@ -127,7 +127,7 @@ header {
         line-height: 1.5rem;
         text-transform: capitalize;
         z-index: 10;
-        color: $primary-dark-color;
+        color: var(--primary-dark-color);
         transition: color 0.25s ease-in-out, text-decoration 0.25s ease-in-out;
       }
     }
@@ -166,7 +166,7 @@ header {
         span {
           position: inherit;
           font-size: 2.0rem;
-          color: $primary-dark-color;
+          color: var(--primary-dark-color);
           bottom: 0;
         }
       }

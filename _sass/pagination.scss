@@ -20,12 +20,12 @@ main {
 
     @media (hover: hover) {
       &:hover {
-        background-color: $primary-light-color;
+        background-color: var(--primary-light-color);
       }
     }
 
     #pagination-item-title {
-      color: $primary-color;
+      color: var(--primary-color);
       font-size: 1.5rem;
       font-weight: 900;
       font-family: $ui-font;
@@ -34,7 +34,7 @@ main {
       #pagination-item-series {
         font-size: 1.25rem;
         font-weight: 700;
-        color: $primary-little-light-color;
+        color: var(--primary-little-light-color);
       }
     }
 
@@ -43,7 +43,7 @@ main {
       align-items: center;
       justify-content: start;
       gap: 0.25rem 1rem;
-      color: $primary-dark-color;
+      color: var(--primary-dark-color);
       white-space: nowrap;
       flex-wrap: wrap;
 
@@ -63,7 +63,7 @@ main {
   hr {
     width: min(100%, calc(30rem + 3rem));
     margin: 0;
-    border: 1px solid $primary-light-color;
+    border: 1px solid var(--primary-light-color);
   }
 }
 
@@ -104,7 +104,7 @@ main {
   margin-top: 3rem;
   width: 100%;
   text-align: center;
-  color: $primary-little-light-color;
+  color: var(--primary-little-light-color);
   font-size: 0.8rem;
   font-family: $ui-font;
   font-weight: 900;

@@ -1,12 +1,26 @@
-$primary-dark-color: hsl(10, 100%, 20%);
-$primary-semi-dark-color: hsl(12, 100%, 35%);
-$primary-color: hsl(15, 100%, 50%);
-$primary-little-light-color: hsl(16, 100%, 65%);
-$primary-semi-light-color: hsl(18, 100%, 85%);
-$primary-light-color: hsl(20, 100%, 95%);
-$primary-extra-light-color: hsl(20, 100%, 98%);
-$white-color: hsl(0, 0%, 100%);
-$black-color: hsl(0, 0%, 0%);
+html[data-theme="light"] {
+  --primary-dark-color: hsl(10, 100%, 20%);
+  --primary-semi-dark-color: hsl(12, 100%, 35%);
+  --primary-color: hsl(15, 100%, 50%);
+  --primary-little-light-color: hsl(16, 100%, 65%);
+  --primary-semi-light-color: hsl(18, 100%, 85%);
+  --primary-light-color: hsl(20, 100%, 95%);
+  --primary-extra-light-color: hsl(20, 100%, 98%);
+  --white-color: hsl(0, 0%, 100%);
+  --black-color: hsl(0, 0%, 0%);
+}
+
+html[data-theme="dark"] {
+  --primary-dark-color: hsl(0, 0%, 60%);
+  --primary-semi-dark-color: hsl(16, 100%, 65%);
+  --primary-color: hsl(15, 100%, 50%);
+  --primary-little-light-color: hsl(12, 100%, 35%);
+  --primary-semi-light-color: hsl(0, 0%, 20%);
+  --primary-light-color: hsl(0, 0%, 10%);
+  --primary-extra-light-color: hsl(0, 0%, 5%);
+  --white-color: hsl(0, 0%, 0%);
+  --black-color: hsl(0, 0%, 90%);
+}
 
 @font-face {
   font-family: 'Orbitron';
@@ -51,8 +65,8 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 }
 
 ::selection {
-  color: $white-color;
-  background-color: $primary-little-light-color;
+  color: var(--white-color);
+  background-color: var(--primary-little-light-color);
 }
 
 ::-webkit-scrollbar {
@@ -60,11 +74,11 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $primary-color;
+  background-color: var(--primary-color);
 }
 
 ::-webkit-scrollbar-track {
-  background-color: $primary-extra-light-color;
+  background-color: var(--primary-extra-light-color);
 }
 
 :root {
@@ -107,6 +121,7 @@ body {
   justify-content: start;
   gap: 1rem;
   scroll-behavior: smooth;
+  background-color: var(--white-color);
 }
 
 * button {

@@ -15,14 +15,14 @@
     line-height: 3rem;
     font-size: 2rem;
     text-align: center;
-    background-color: $primary-little-light-color;
-    color: $primary-light-color;
+    background-color: var(--primary-little-light-color);
+    color: var(--primary-light-color);
     cursor: pointer;
     transition: background-color 0.25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
-        background-color: $primary-color;
+        background-color: var(--primary-color);
       }
     }
   }
@@ -32,8 +32,8 @@
     appearance: none;
     border: none;
     outline: none;
-    background-color: $primary-light-color;
-    color: $primary-dark-color;
+    background-color: var(--primary-light-color);
+    color: var(--primary-dark-color);
     width: 0;
     height: 3rem;
     font-size: 1.2rem;
@@ -42,7 +42,7 @@
     transition: all 0.25s ease-in-out;
 
     &::placeholder {
-      color: $primary-semi-light-color;
+      color: var(--primary-semi-light-color);
     }
   }
 
@@ -62,7 +62,7 @@
       margin: 0;
       padding: 0;
       width: 100%;
-      background-color: $primary-extra-light-color;
+      background-color: var(--primary-extra-light-color);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -75,7 +75,7 @@
         transition: all 0.25s ease-in-out;
 
         &:not(:last-child) {
-          border-bottom: 1px solid $primary-semi-light-color;
+          border-bottom: 1px solid var(--primary-semi-light-color);
         }
 
         a {
@@ -94,7 +94,7 @@
           .search-title {
             font-size: 1.2rem;
             font-weight: 900;
-            color: $primary-color;
+            color: var(--primary-color);
             font-family: $ui-font;
           }
 
@@ -102,21 +102,21 @@
             margin: 0;
             font-size: 1rem;
             line-height: 1.5rem;
-            color: $primary-dark-color;
+            color: var(--primary-dark-color);
             font-family: $text-font;
           }
 
           em {
             font-style: normal;
             padding: 0 0.25rem;
-            background-color: $primary-dark-color;
-            color: $primary-extra-light-color;
+            background-color: var(--primary-dark-color);
+            color: var(--primary-extra-light-color);
           }
         }
 
         @media (hover: hover) {
           &:hover {
-            background-color: $primary-semi-light-color;
+            background-color: var(--primary-semi-light-color);
           }
         }
       }
@@ -131,7 +131,7 @@
       height: 2.5rem;
       line-height: 2.5rem;
       font-size: 1.5rem;
-      background-color: $primary-color;
+      background-color: var(--primary-color);
     }
 
     #search-input {

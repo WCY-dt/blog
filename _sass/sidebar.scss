@@ -8,21 +8,22 @@
   justify-content: center;
   gap: 1rem;
 
-  #back-to-top-button {
+  #back-to-top-button,
+  #theme-switcher {
     display: block;
     width: 3rem;
     height: 3rem;
     line-height: 3rem;
     font-size: 2rem;
     text-align: center;
-    background-color: $primary-little-light-color;
-    color: $primary-light-color;
+    background-color: var(--primary-little-light-color);
+    color: var(--primary-light-color);
     cursor: pointer;
     transition: background-color 0.25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
-        background-color: $primary-color;
+        background-color: var(--primary-color);
       }
     }
   }
@@ -33,12 +34,13 @@
     bottom: 5rem;
     right: 1.5rem;
 
-    #back-to-top-button {
+    #back-to-top-button,
+    #theme-switcher {
       width: 2.5rem;
       height: 2.5rem;
       line-height: 2.5rem;
       font-size: 1.5rem;
-      background-color: $primary-color;
+      background-color: var(--primary-color);
     }
   }
 }

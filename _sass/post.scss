@@ -22,7 +22,7 @@
       line-height: 3rem;
       font-weight: 900;
       font-family: $ui-font;
-      color: $primary-color;
+      color: var(--primary-color);
       text-align: center;
       word-break: keep-all;
       display: flex;
@@ -33,7 +33,7 @@
 
       #post-series {
         font-size: 2rem;
-        color: $primary-little-light-color;
+        color: var(--primary-little-light-color);
       }
     }
 
@@ -42,7 +42,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.25rem 1rem;
-      color: $primary-dark-color;
+      color: var(--primary-dark-color);
       white-space: nowrap;
       flex-wrap: wrap;
 
@@ -64,7 +64,7 @@
 
       a {
         position: relative;
-        color: $primary-dark-color;
+        color: var(--primary-dark-color);
         text-decoration: none;
         transition: color 0.25s ease-in-out;
 
@@ -75,7 +75,7 @@
               display: block;
               width: 110%;
               height: 0.5rem;
-              background-color: $primary-light-color;
+              background-color: var(--primary-light-color);
               position: absolute;
               bottom: 0rem;
               left: 50%;
@@ -93,8 +93,8 @@
   }
 
   #post-content-container {
-    color: $black-color;
-    background-color: $white-color;
+    color: var(--black-color);
+    background-color: var(--white-color);
     overflow-x: hidden;
 
     p,
@@ -129,7 +129,7 @@
         display: block;
         width: 10rem;
         height: 0.8rem;
-        background-color: $primary-color;
+        background-color: var(--primary-color);
         z-index: -1;
         position: absolute;
         bottom: 0;
@@ -148,7 +148,7 @@
         display: block;
         width: 6rem;
         height: 0.6rem;
-        background-color: $primary-semi-light-color;
+        background-color: var(--primary-semi-light-color);
         z-index: -1;
         position: absolute;
         bottom: 0;
@@ -174,7 +174,7 @@
     }
 
     a {
-      color: $primary-color;
+      color: var(--primary-color);
       text-decoration: none;
       transition: text-decoration 0.25s ease-in-out;
 
@@ -197,19 +197,19 @@
 
     blockquote {
       margin: 0;
-      border-left: 0.25rem solid $primary-color;
+      border-left: 0.25rem solid var(--primary-color);
       box-sizing: border-box;
-      background-color: $primary-extra-light-color;
+      background-color: var(--primary-extra-light-color);
       padding: 0.5rem 2rem;
 
       pre:has(code) {
-        border: 0.05rem solid $primary-color;
+        border: 0.05rem solid var(--primary-color);
         box-sizing: border-box;
       }
 
       blockquote {
-        border: 0.05rem solid $primary-color;
-        border-left: 0.25rem solid $primary-color;
+        border: 0.05rem solid var(--primary-color);
+        border-left: 0.25rem solid var(--primary-color);
       }
     }
 
@@ -219,14 +219,14 @@
 
       li {
         &::marker {
-          color: $primary-color;
+          color: var(--primary-color);
         }
       }
     }
 
     table {
       border-collapse: collapse;
-      border: 0.05rem solid $primary-color;
+      border: 0.05rem solid var(--primary-color);
       box-sizing: border-box;
       width: 100%;
 
@@ -236,8 +236,8 @@
       }
 
       thead {
-        background-color: $primary-color;
-        color: $white-color;
+        background-color: var(--primary-color);
+        color: var(--white-color);
       }
 
       tbody {
@@ -245,12 +245,12 @@
           transition: background-color 0.25s ease-in-out;
 
           &:nth-child(even) {
-            background-color: $primary-extra-light-color;
+            background-color: var(--primary-extra-light-color);
           }
 
           @media (hover: hover) {
             &:hover {
-              background-color: $primary-light-color;
+              background-color: var(--primary-light-color);
             }
           }
 
@@ -269,7 +269,7 @@
 
     pre:has(code) {
       position: relative;
-      background-color: $primary-extra-light-color;
+      background-color: var(--primary-extra-light-color);
       padding: 0.5rem;
       line-height: 1.2rem;
       font-size: 1rem;
@@ -279,7 +279,7 @@
         display: block;
         width: -moz-fit-content;
         width: fit-content;
-        color: $primary-dark-color;
+        color: var(--primary-dark-color);
         font-size: 0.8rem;
         font-family: $ui-font;
         font-weight: 700;
@@ -303,7 +303,7 @@
 
     hr {
       width: 100%;
-      border: 1px solid $primary-light-color;
+      border: 1px solid var(--primary-light-color);
     }
 
     .footnotes p {
@@ -311,7 +311,7 @@
 
       &,
       a {
-        color: $primary-dark-color;
+        color: var(--primary-dark-color);
       }
 
       a {

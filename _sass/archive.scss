@@ -13,7 +13,7 @@
     font-weight: 900;
     line-height: 2rem;
     text-transform: uppercase;
-    color: $primary-little-light-color;
+    color: var(--primary-little-light-color);
   }
 
   #archive-title {
@@ -23,14 +23,14 @@
     font-weight: 900;
     line-height: 3rem;
     text-transform: uppercase;
-    color: $primary-color;
+    color: var(--primary-color);
 
     &::after {
       content: '';
       display: block;
       width: 120%;
       height: 1.5rem;
-      background-color: $primary-semi-light-color;
+      background-color: var(--primary-semi-light-color);
       position: absolute;
       bottom: -0.5rem;
       left: 50%;
