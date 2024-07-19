@@ -128,5 +128,19 @@ layout: compress
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
       ></script>
     {% endif %}
+
+    <!-- mermaid.js -->
+    {% if page.mermaid %}
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+      <script async>
+        document.addEventListener('DOMContentLoaded', function () {
+          mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+          });
+          window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+        });
+      </script>
+    {% endif %}
   </body>
 </html>
