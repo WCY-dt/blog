@@ -19,7 +19,7 @@
 
 你可以自由地将本博客的主题用于你的博客。
 
-推荐使用 Visual Studio Code 编辑器，安装插件 [`Shopify Liquid`](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) 和 [`markdownlint`](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) 以获得更好的开发体验。
+推荐使用 Visual Studio Code 编辑器，安装插件 [`Shopify Liquid`](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode)、[`markdownlint`](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) 和 [`Live Server`](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) 以获得更好的开发体验。
 
 构建前先安装好 Ruby 和 Jekyll，然后安装依赖：
 
@@ -46,12 +46,15 @@ date:       2000-01-01 00:00:00 +0800
 categories: 游戏 // 只能有一个分类
 tags:       开放世界 RPG 原神 // 可以有多个标签，用空格分隔
 comments:   true // 如果设置为 true，文章会显示评论区；否则不显示
-mathjax:    true // 暂时未支持关闭该功能
+mathjax:    true // 可省略，默认为 false。如果设置为 true，会启用数学公式支持
+mermaid:    false // 可省略，默认为 false。如果设置为 true，会启用流程图支持
 copyrights: 原创 // 如果设置为原创，文末会显示版权声明；否则不显示
 draft:      true // 可省略，默认为 false。如果设置为 true，文章不会显示在主页上
 ```
 
 您可能还需要修改 [`.github`](./.github) 文件夹下的工作流程文件、网站图标 [`favicon.svg`](./favicon.svg) 以及 [`CNAME`](./CNAME)，以适应您的需求。
+
+你可以使用 [`_test`](./_test) 文件夹下的测试文章进行测试。
 
 ## 开发路线
 
@@ -61,7 +64,6 @@ draft:      true // 可省略，默认为 false。如果设置为 true，文章�
 - [x] 文章系列
 - [x] 代码高亮
 - [x] 代码复制
-- [ ] 代码行号
 - [x] RSS 订阅
 - [x] 响应式设计
 - [x] SEO 优化
@@ -73,6 +75,9 @@ draft:      true // 可省略，默认为 false。如果设置为 true，文章�
 - [x] 文章目录
 - [x] 文章分享
 - [x] 主题切换
+- [x] 公式支持
+- [x] 流程图支持
+- [ ] 更多功能...
 
 ## 版权声明
 
