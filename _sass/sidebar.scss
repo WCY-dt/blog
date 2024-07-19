@@ -9,6 +9,7 @@
   gap: 1rem;
 
   #back-to-top-button,
+  #menu-container-mobile,
   #theme-switcher {
     display: block;
     width: 3rem;
@@ -27,6 +28,14 @@
       }
     }
   }
+
+  #menu-container-mobile {
+    display: none;
+
+    menu {
+      display: none;
+    }
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -35,12 +44,63 @@
     right: 1.5rem;
 
     #back-to-top-button,
+    #menu-container-mobile,
     #theme-switcher {
       width: 2.5rem;
       height: 2.5rem;
       line-height: 2.5rem;
       font-size: 1.5rem;
       background-color: var(--primary-color);
+    }
+
+    #back-to-top-button {
+      z-index: -2;
+    }
+
+    #menu-container-mobile {
+      position: relative;
+      display: block;
+
+      #menu-container-mobile-button {
+        position: relative;
+        z-index: 91;
+      }
+
+      #menu-container-mobile-menu {
+        position: absolute;
+        bottom: 0;
+        right: 1.5rem;
+        background-color: var(--primary-light-color);
+        width: 14rem;
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.6rem;
+        z-index: -1;
+
+        a {
+          position: relative;
+          text-decoration: none;
+          color: var(--black-color);
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          gap: 0.5rem;
+
+          span {
+            color: var(--primary-semi-light-color);
+          }
+
+          p {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.5rem;
+            text-transform: capitalize;
+            z-index: 10;
+            color: var(--primary-dark-color);
+          }
+        }
+      }
     }
   }
 }

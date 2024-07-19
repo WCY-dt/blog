@@ -110,6 +110,10 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
   }
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   width: 100%;
   min-height: 100vh;
