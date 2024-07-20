@@ -26,7 +26,7 @@
     margin: 0;
     padding: 0 0.25rem 0 0;
     width: 100%;
-    max-height: calc(100vh - 25rem - 4.5rem - 2rem);
+    max-height: calc(100vh - 35rem);
     box-sizing: border-box;
     overflow-y: auto;
     display: flex;
@@ -81,7 +81,7 @@
 
     @keyframes toc-ul-scroll {
       100% {
-        max-height: calc(100vh - 20rem);
+        max-height: calc(100vh - 25rem);
       }
     }
 
