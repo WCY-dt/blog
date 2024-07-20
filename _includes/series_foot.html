@@ -1,0 +1,20 @@
+{% assign sorted_posts = site.posts | where: 'series', page.series | sort: 'series_index' %}
+<div id="series-foot-container" class="no-select">
+  <h1>Series {{ page.series }}</h1>
+  <div id="series-switcher">
+    {% if page.series_index > 1 %}
+      {% assign previous_index = page.series_index | minus: 2 %}
+      <a id="series-previous" href="{{ sorted_posts[previous_index].url | relative_url }}">
+        <span class="material-symbols-outlined"> arrow_back </span>
+        {{ sorted_posts[previous_index].title }}
+      </a>
+    {% endif %}
+    {% assign next_index = page.series_index %}
+    {% if page.series_index < sorted_posts.size %}
+      <a id="series-next" href="{{ sorted_posts[next_index].url | relative_url }}">
+        {{ sorted_posts[next_index].title }}
+        <span class="material-symbols-outlined"> arrow_forward </span>
+      </a>
+    {% endif %}
+  </div>
+</div>

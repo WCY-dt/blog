@@ -1,4 +1,4 @@
-#series-container {
+#series-head-container {
   margin: 2rem 0 -2rem 0;
   background-color: var(--primary-light-color);
   padding: 1rem;
@@ -24,24 +24,91 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-start;
-    justify-content: center;
+    display: grid;
+    gap: 0.5rem 1rem;
+    grid-template-columns: auto 1fr;
+    align-items: center;
 
-    #series-item {
-      a {
-        text-decoration: none;
-        color: var(--primary-dark-color);
-        transition: all 0.3s ease-in-out;
+    span {
+      text-align: right;
+      color: var(--primary-semi-light-color);
 
-        @media (hover: hover) {
-          &:hover {
-            color: var(--primary-color);
-          }
+      &.material-symbols-outlined {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary-dark-color);
+      transition: all 0.3s ease-in-out;
+
+      &.em {
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          color: var(--primary-color);
         }
       }
+    }
+  }
+}
+
+#series-foot-container {
+  h1 {
+    margin: 3rem 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: $ui-font;
+    color: var(--primary-color);
+    text-align: center;
+  }
+
+  #series-switcher {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+
+    #series-previous,
+    #series-next {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      background-color: var(--primary-light-color);
+      color: var(--primary-little-light-color);
+      text-decoration: none;
+      transition: all 0.25s ease-in-out;
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--primary-color);
+          color: var(--white-color);
+        }
+      }
+
+      span {
+        font-size: 3rem;
+        color: var(--primary-semi-light-color);
+      }
+    }
+
+    #series-previous {
+      justify-content: start;
+      text-align: left;
+    }
+
+    #series-next {
+      justify-content: end;
+      text-align: right;
     }
   }
 }

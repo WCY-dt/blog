@@ -40,7 +40,7 @@ layout: default
       </div>
     </div>
     {%- if page.series -%}
-      {% include series.html %}
+      {% include series_head.html %}
     {%- endif -%}
   </hgroup>
   <div id="post-content-container">
@@ -49,6 +49,9 @@ layout: default
   <script src="{{ '/assets/js/modify_id.js' | relative_url }}"></script>
   <div id="post-footer-container">
     {% include copyright.html %}
+    {%- if page.series -%}
+      {% include series_foot.html %}
+    {%- endif -%}
     {% include relate.html %}
     {% include comment.html %}
     {% include share.html %}
