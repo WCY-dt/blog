@@ -9,14 +9,26 @@ function setTheme(theme) {
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme) {
     setTheme(currentTheme);
+    if (typeof setCommentTheme === 'function') {
+        setCommentTheme(currentTheme);
+    }
 } else {
     setTheme('light');
+    if (typeof setCommentTheme === 'function') {
+        setCommentTheme('light');
+    }
 }
 
 themeSwitcher.addEventListener('click', () => {
     if (document.documentElement.getAttribute('data-theme') === 'light') {
         setTheme('dark');
+        if (typeof setCommentTheme === 'function') {
+            setCommentTheme('dark');
+        }
     } else {
         setTheme('light');
+        if (typeof setCommentTheme === 'function') {
+            setCommentTheme('light');
+        }
     }
 });

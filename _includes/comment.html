@@ -12,11 +12,24 @@
       data-reactions-enabled="1"
       data-emit-metadata="0"
       data-input-position="top"
-      data-theme="{{ site.url }}/assets/css/giscus.css"
+      data-theme="{{ site.url }}/assets/css/giscus_light.css"
       data-lang="en"
       data-loading="lazy"
       crossorigin="anonymous"
       async
     ></script>
   </div>
+  <script>
+    const commentScript = document.querySelector('#comment-container script');
+    function setCommentTheme(currentTheme) {
+      commentScript.setAttribute('data-theme', `{{ site.url }}/assets/css/giscus_${currentTheme}.css`);
+
+      const giscusFrame = document.querySelector('.giscus-frame');
+      if (giscusFrame) {
+        let giscusFrameSrc = giscusFrame.getAttribute('src');
+        giscusFrameSrc = giscusFrameSrc.replace(/giscus_(light|dark).css/, `giscus_${currentTheme}.css`);
+        giscusFrame.src = giscusFrameSrc;
+      }
+    }
+  </script>
 {% endif %}

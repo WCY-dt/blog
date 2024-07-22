@@ -86,14 +86,24 @@ layout: compress
     {% if page.layout == 'post' %}
       <link
         rel="preload"
-        href="{{ '/assets/css/giscus.css' | relative_url }}"
+        href="{{ '/assets/css/giscus_light.css' | relative_url }}"
+        as="style"
+        onload="this.onload=null;this.rel='stylesheet'"
+      >
+      <link
+        rel="preload"
+        href="{{ '/assets/css/giscus_dark.css' | relative_url }}"
         as="style"
         onload="this.onload=null;this.rel='stylesheet'"
       >
       <noscript>
         <link
           rel="stylesheet"
-          href="{{ '/assets/css/giscus.css' | relative_url }}"
+          href="{{ '/assets/css/giscus_light.css' | relative_url }}"
+        >
+        <link
+          rel="stylesheet"
+          href="{{ '/assets/css/giscus_dark.css' | relative_url }}"
         >
       </noscript>
     {% endif %}
