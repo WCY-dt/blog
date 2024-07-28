@@ -1,22 +1,28 @@
-############# 基本设置 #############
-title: Ch3nyang's Blog
+############# Basic Settings #############
+description: Blog about technology and study notes
+keywords:
+  - blog
+  - cyber security
+  - developer
+  - program
 author:
   name: Ch3nyang
   link: https://github.com/WCY-dt
 # display powered by jekyll in footer
 powered_by: false
 # the subpath of your site
-baseurl: "/"
+baseurl: /
 # the base hostname & protocol for your site
-url: "https://blog.ch3nyang.top"
-favicon: "favicon.svg"
+url: https://blog.ch3nyang.top
+# OPTIONAL settings: delete the following line if you don't need
 giscus:
-  data-repo: "WCY-dt/blog"
-  data-repo-id: "MDEwOlJlcG9zaXRvcnkzNDkxMDc5OTU="
-  data-category-id: "DIC_kwDOFM73G84CgH8k"
-google_analytics: "G-VFB9RYFE57"
+  data-repo: WCY-dt/blog
+  data-repo-id: MDEwOlJlcG9zaXRvcnkzNDkxMDc5OTU=
+  data-category-id: DIC_kwDOFM73G84CgH8k
+google_analytics: G-VFB9RYFE57
+baidu_site_verification: codeva-dciGw99jsc
 
-############# 主题设置 #############
+############# Theme Settings #############
 # icons are from https://fonts.google.com/icons
 navy:
   - title: home
@@ -53,7 +59,7 @@ share:
   - wechat
 # - email
 
-############# 其它设置 #############
+############# Other Settings #############
 # Please do not modify the following settings unless you know what you are doing.
 permalink: /post/:title/
 theme_config:
