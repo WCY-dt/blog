@@ -5,6 +5,9 @@
   {% assign related_posts = '' | split: '' %}
   {% assign recommendation_reason = '' | split: '' %}
   {% for post in site.posts %}
+    {%- if post.draft -%}
+      {%- continue -%}
+    {%- endif -%}
     {% if post.url != page.url %}
       {% assign common_tags = post.tags | where_exp: 'tag', 'page.tags contains tag' %}
       {% if common_tags.size > 0 %}
@@ -23,6 +26,9 @@
   {% assign related_posts_num = related_posts_num | minus: related_posts.size %}
   {% if related_posts_num > 0 %}
     {% for post in site.posts %}
+      {%- if post.draft -%}
+        {%- continue -%}
+      {%- endif -%}
       {% unless related_posts contains post or post.url == page.url %}
         {% assign common_categories = post.categories | where_exp: 'category', 'page.categories contains category' %}
         {% if common_categories.size > 0 %}
@@ -38,6 +44,9 @@
   {% endif %}
   {% if related_posts_num > 0 %}
     {% for post in site.posts %}
+      {%- if post.draft -%}
+        {%- continue -%}
+      {%- endif -%}
       {% unless related_posts contains post or post.url == page.url %}
         {% assign recommendation_reason = recommendation_reason | push: 'time' %}
         {% assign related_posts = related_posts | push: post %}
