@@ -13,9 +13,10 @@ if (currentTheme) {
         setCommentTheme(currentTheme);
     }
 } else {
-    setTheme('light');
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    setTheme(currentTheme);
     if (typeof setCommentTheme === 'function') {
-        setCommentTheme('light');
+        setCommentTheme(currentTheme);
     }
 }
 

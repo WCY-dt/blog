@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<hgroup id="archive-info-container" class="no-select">
+  <h1 id="archive-title">Tag</h1>
+</hgroup>
+
+<div id="tag-container">
+  {% assign sorted_tags = site.tags | sort %}
+  {% for tag in sorted_tags %}
+    <a id="tag-item-container" class="no-select" href="{{ tag | first | slugify }}">
+      <span id="tag-item-title">
+        {{ tag | first }}
+      </span>
+      <div id="tag-item-info">{{ tag | last | size }}</div>
+    </a>
+  {% endfor %}
+</div>
+
+<p id="tag-count" class="no-select">
+  {%- assign tags_count = 0 -%}
+  {%- for tag in site.tags -%}
+    {%- assign tags_count = tags_count | plus: 1 -%}
+  {%- endfor -%}
+  {%- if tags_count == 0 -%}
+    - no tag -
+  {%- elsif tags_count == 1 -%}
+    - find 1 tag -
+  {%- else -%}
+    - find {{ tags_count }} tags -
+  {%- endif -%}
+</p>

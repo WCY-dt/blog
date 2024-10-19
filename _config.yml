@@ -2,7 +2,6 @@
 title: Ch3nyang's Blog
 description: >-
   Blog about technology and study notes.
-  feedId:63462130930273280+userId:63448656358963200
 keywords:
   - blog
   - cyber security
@@ -26,20 +25,22 @@ google_analytics: G-VFB9RYFE57
 baidu_site_verification: codeva-dciGw99jsc
 
 ############# Theme Settings #############
+color_theme: dark # light or dark
+
 # icons are from https://fonts.google.com/icons
 navy:
-  - title: home
+  - title: post
     url: /
-    icon: home
+    icon: collections_bookmark
   - title: about
     url: https://ch3nyang.top
     icon: person
-  - title: project
-    url: https://ch3nyang.top/#project
-    icon: hive
-  - title: mindclip
-    url: https://mind.ch3nyang.top/
-    icon: collections_bookmark
+  - title: category
+    url: /category/
+    icon: category
+  - title: tag
+    url: /tag/
+    icon: local_offer
   - title: rss
     url: feed.xml
     icon: rss_feed
