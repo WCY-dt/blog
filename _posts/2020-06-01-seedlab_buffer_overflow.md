@@ -19,18 +19,18 @@ copyrights: 原创
 
 ## Task1: Get Familiar with the Shellcode
 
-进入 shellcode 文件夹。
+进入 `shellcode` 文件夹。
 
 > **Task.** Please modify the shellcode, so you can use it to delete a file. Please include your modified the
 > shellcode in the lab report, as well as your screenshots.
 
-根据 Task 的要求，我们对 shellcode_32.py 进行修改，使其能够删除文件。
+根据 Task 的要求，我们对 `shellcode_32.py` 进行修改，使其能够删除文件。
 
-需要注意的是，shell长度不能变。
+需要注意的是，shell 长度不能变。
 
 <img src="/assets/post/images/bufferflow1.png" alt="bufferflow1" style="zoom:50%;" />
 
-然后我们新建 tmpfile 文件并运行 shellcode，过程和结果如下
+然后我们新建 `tmpfile` 文件并运行 shellcode，过程和结果如下
 
 ```bash
 touch tmpfile
@@ -43,7 +43,7 @@ a64.out
 
 <img src="/assets/post/images/bufferflow2.png" alt="bufferflow2" style="zoom:50%;" />
 
-执行完后，tmpfile 也被删除了。
+执行完后，`tmpfile` 也被删除了。
 
 ## Task 2: Level-1 Attack
 
@@ -53,7 +53,7 @@ a64.out
 sudo sysctl -w kernel.randomize_va_space=0
 ```
 
-进入 server-code 文件夹下，执行命令
+进入 `server-code` 文件夹下，执行命令
 
 ```bash
 make
@@ -67,7 +67,7 @@ dcbuild
 dcup
 ```
 
-进入 attack-code 文件夹，执行
+进入 `attack-code` 文件夹，执行
 
 ```bash
 $ echo hello | nc 10.9.0.5 9090
@@ -84,11 +84,11 @@ server 显示
 
 其中，
 
-- shellcode 即为刚刚 shellcode_32.py 中的 shellcode
-- $\text{ret}=\text{ebp}+n$
+- shellcode 即为刚刚 `shellcode_32.py` 中的 shellcode
+- $$\text{ret}=\text{ebp}+n$$
   - ebp 就是刚刚 `echo hello` 中得到的 ebp，因为关闭了地址随机化，所以每次都一样
-  - $n$ 只要大于等于 $8$ 都可以
-- $\text{offset}=$`0xffffd438`$-$`0xffffd3c8`+4
+  - $$n$$ 只要大于等于 $$8$$ 都可以
+- $$\text{offset}=$$`0xffffd438`$$-$$`0xffffd3c8`$$+4$$
 
 然后执行
 
@@ -148,7 +148,7 @@ $ echo hello | nc 10.9.0.6 9090
 
 其中，
 
-- ret 应当大于等于 `0xffffd708`+308，但应当保证 shellcode 都在 payload 内
+- ret 应当大于等于 `0xffffd708`$$+308$$，但应当保证 shellcode 都在 payload 内
 - offset 为 100-300 之间的某个值
 
 然后执行
@@ -191,12 +191,10 @@ $ echo hello | nc 10.9.0.7 9090
 
 其中，
 
-- shellcode 即为 shellcode_64.py 中的 shellcode
-- start 设定为一个较小的值，可以直接取 $0$
-- $\text{ret}=\text{rbp}+n$
-  - ebp 就是刚刚 `echo hello` 中得到的 rbp，因为关闭了地址随机化，所以每次都一样
-  - $n\in[\text{buffer},\text{buffer}+\text{start}]$
-- $\text{offset}=$`0x00007fffffffe610`$-$`0x00007fffffffe540`+8
+- shellcode 即为 `shellcode_64.py` 中的 shellcode
+- start 设定为一个较小的值，可以直接取 $$0$$
+- ret 设定为 buffer 的地址
+- $$\text{offset}=$$`0x00007fffffffe610`$$-$$`0x00007fffffffe540`$$+8$$
 
 然后执行
 
@@ -228,8 +226,8 @@ $ echo hello | nc 10.9.0.7 9090
 
 其中，
 
-- ret 取一个较大的值，在 $1184$ 到 $1424$ 之间
-- $\text{offset}=$`0x00007fffffffe700`$-$`0x00007fffffffe6a0`+8
+- ret 取一个较大的值，在 $$1184$$ 到 $$1424$$ 之间
+- $$\text{offset}=$$`0x00007fffffffe700`$$-$$`0x00007fffffffe6a0`$$+8$$
 
 然后执行
 
@@ -265,7 +263,7 @@ $ echo hello | nc 10.9.0.7 9090
 
 可以看到，每次地址都不相同，导致攻击困难。
 
-使用 Task2 中 reverse shell 的 exploit.py 代码，执行命令
+使用 Task2 中 reverse shell 的 `exploit.py` 代码，执行命令
 
 ```bash
 ./exploit.py
@@ -276,19 +274,19 @@ $ echo hello | nc 10.9.0.7 9090
 nc -lnv 9090
 ```
 
-在尝试 $52417$ 次后，成功获得权限
+在尝试 $$52417$$ 次后，成功获得权限
 
 <img src="/assets/post/images/bufferflow17.png" alt="bufferflow17" style="zoom:50%;" />
 
 ## Tasks 7: Experimenting with Other Countermeasures
 
-进入 server-code 文件夹，去除 `-fno-stack-protector` 编译 stack.c，并将 badfile 作为输入
+进入 `server-code` 文件夹，去除 `-fno-stack-protector` 编译 `stack.c`，并将 `badfile` 作为输入
 
 <img src="/assets/post/images/bufferflow18.png" alt="bufferflow18" style="zoom:50%;" />
 
 可以看到检测到了 stack smashing。
 
-进入 shellcode 文件夹，去除 `-z execstack` 编译 call_shellcode.c 并运行
+进入 `shellcode` 文件夹，去除 `-z execstack` 编译 `call_shellcode.c` 并运行
 
 <img src="/assets/post/images/bufferflow19.png" alt="bufferflow19" style="zoom:50%;" />
 
@@ -296,4 +294,4 @@ nc -lnv 9090
 
 ## 实验总结
 
-实验总体难度不大，只要把握住 buffer overflow 的原理，便可以很容易解决各种问题。Task2 为本实验的基础；Task3 做了一点微小的改动；Task4 难度较大，因为 64 位地址的最高两位永远是 $00$，导致 `strcpy` 会提前终止，需要思考如何处理这一问题；Task5 理解原理后比较容易；Task6 和 Task7 依葫芦画瓢即可，没有难度。
+实验总体难度不大，只要把握住 buffer overflow 的原理，便可以很容易解决各种问题。Task2 为本实验的基础；Task3 做了一点微小的改动；Task4 难度较大，因为 64 位地址的最高两位永远是 $$00$$，导致 `strcpy` 会提前终止，需要思考如何处理这一问题；Task5 理解原理后比较容易；Task6 和 Task7 依葫芦画瓢即可，没有难度。
