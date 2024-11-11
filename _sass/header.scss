@@ -10,14 +10,16 @@ header {
   height: 6rem;
   z-index: 5;
 
-  @keyframes header-scroll {
-    100% {
-      height: 4rem;
+  @supports (animation-timeline: scroll()) {
+    @keyframes header-scroll {
+      100% {
+        height: 4rem;
+      }
     }
-  }
 
-  animation-name: header-scroll;
-  @include header-scroll-animation;
+    animation-name: header-scroll;
+    @include header-scroll-animation;
+  }
 
   #title-container {
     padding: 0 3rem 0.5rem 0.5rem;
@@ -39,15 +41,17 @@ header {
       margin: 0;
     }
 
-    @keyframes header-title-scroll {
-      100% {
-        font-size: 1.5rem;
-        line-height: 1.5rem;
+    @supports (animation-timeline: scroll()) {
+      @keyframes header-title-scroll {
+        100% {
+          font-size: 1.5rem;
+          line-height: 1.5rem;
+        }
       }
-    }
 
-    animation-name: header-title-scroll;
-    @include header-scroll-animation;
+      animation-name: header-title-scroll;
+      @include header-scroll-animation;
+    }
   }
 
   #menu-container {
@@ -62,14 +66,16 @@ header {
     color: var(--black-color);
     height: 100%;
 
-    @keyframes header-menu-scroll {
-      100% {
-        gap: 1.2rem
+    @supports (animation-timeline: scroll()) {
+      @keyframes header-menu-scroll {
+        100% {
+          gap: 1.2rem
+        }
       }
-    }
 
-    animation-name: header-menu-scroll;
-    @include header-scroll-animation;
+      animation-name: header-menu-scroll;
+      @include header-scroll-animation;
+    }
 
     a {
       position: relative;
@@ -82,14 +88,16 @@ header {
       align-items: start;
       justify-content: end;
 
-      @keyframes header-menu-a-scroll {
-        100% {
-          padding: 0 0 1.0rem 2.3rem;
+      @supports (animation-timeline: scroll()) {
+        @keyframes header-menu-a-scroll {
+          100% {
+            padding: 0 0 1.0rem 2.3rem;
+          }
         }
-      }
 
-      animation-name: header-menu-a-scroll;
-      @include header-scroll-animation;
+        animation-name: header-menu-a-scroll;
+        @include header-scroll-animation;
+      }
 
       @media (hover: hover) {
         &:hover {
@@ -108,16 +116,18 @@ header {
         color: var(--primary-semi-light-color);
         transition: font-size 0.25s ease-in-out, opacity 0.25s ease-in-out;
 
-        @keyframes header-menu-icon-scroll {
-          100% {
-            bottom: 0.8rem;
-            font-size: 2.0rem;
-            color: var(--primary-dark-color);
+        @supports (animation-timeline: scroll()) {
+          @keyframes header-menu-icon-scroll {
+            100% {
+              bottom: 0.8rem;
+              font-size: 2.0rem;
+              color: var(--primary-dark-color);
+            }
           }
-        }
 
-        animation-name: header-menu-icon-scroll;
-        @include header-scroll-animation;
+          animation-name: header-menu-icon-scroll;
+          @include header-scroll-animation;
+        }
       }
 
       p {
@@ -152,14 +162,16 @@ header {
       display: none;
     }
 
-    @keyframes mobile-header-scroll {
-      100% {
-        height: 3rem;
+    @supports (animation-timeline: scroll()) {
+      @keyframes mobile-header-scroll {
+        100% {
+          height: 3rem;
+        }
       }
-    }
 
-    animation-name: mobile-header-scroll;
-    @include header-scroll-animation;
+      animation-name: mobile-header-scroll;
+      @include header-scroll-animation;
+    }
   }
 }
 

@@ -79,24 +79,28 @@
       padding: 0 0 0 1.5rem;
     }
 
-    @keyframes toc-ul-scroll {
+    @supports (animation-timeline: scroll()) {
+      @keyframes toc-ul-scroll {
+        100% {
+          max-height: calc(100vh - 25rem);
+        }
+      }
+
+      animation-name: toc-ul-scroll;
+      @include header-scroll-animation;
+    }
+  }
+
+  @supports (animation-timeline: scroll()) {
+    @keyframes toc-scroll {
       100% {
-        max-height: calc(100vh - 25rem);
+        top: 5rem;
       }
     }
 
-    animation-name: toc-ul-scroll;
+    animation-name: toc-scroll;
     @include header-scroll-animation;
   }
-
-  @keyframes toc-scroll {
-    100% {
-      top: 5rem;
-    }
-  }
-
-  animation-name: toc-scroll;
-  @include header-scroll-animation;
 }
 
 @media screen and (min-width: 1440px) {
@@ -149,13 +153,15 @@
       z-index: -1;
     }
 
-    @keyframes toc-scroll {
-      100% {
-        bottom: 2rem;
+    @supports (animation-timeline: scroll()) {
+      @keyframes toc-scroll {
+        100% {
+          bottom: 2rem;
+        }
       }
-    }
 
-    animation-name: toc-scroll;
-    @include header-scroll-animation;
+      animation-name: toc-scroll;
+      @include header-scroll-animation;
+    }
   }
 }

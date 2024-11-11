@@ -21,14 +21,16 @@ footer {
     font-weight: 900;
     padding: 1.5rem 0 1rem 0;
 
-    @keyframes footer-scroll {
-      100% {
-        padding: 0.5rem 0 0.5rem 0;
+    @supports (animation-timeline: scroll()) {
+      @keyframes footer-scroll {
+        100% {
+          padding: 0.5rem 0 0.5rem 0;
+        }
       }
-    }
 
-    animation-name: footer-scroll;
-    @include header-scroll-animation;
+      animation-name: footer-scroll;
+      @include header-scroll-animation;
+    }
 
     p {
       margin: 0;
