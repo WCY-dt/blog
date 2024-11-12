@@ -10,6 +10,15 @@
 
   #back-to-top-button,
   #menu-container-mobile,
+  #theme-switcher,
+  #toc-container button,
+  #search-button {
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  }
+
+  #back-to-top-button,
+  #menu-container-mobile,
   #theme-switcher {
     display: block;
     width: 3rem;
