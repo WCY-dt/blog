@@ -1,6 +1,17 @@
 <div id="share-container" class="no-select">
   <h1>Share This Post</h1>
   <ul>
+    {% if site.share contains 'hackernews' %}
+      <li>
+        <a
+          href="https://news.ycombinator.com/submitlink?u={{ site.url | append: page.url | url_encode }}&t={{ page.title | url_encode }}"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fa-brands fa-hacker-news"></i>
+        </a>
+      </li>
+    {% endif %}
     {% if site.share contains 'twitter' %}
       <li>
         <a
@@ -23,58 +34,14 @@
         </a>
       </li>
     {% endif %}
-    {% if site.share contains 'tiktok' %}
-      <li>
-        <a
-          href="https://www.tiktok.com/share?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
-      </li>
-    {% endif %}
-    {% if site.share contains 'instagram' %}
-      <li>
-        <a
-          href="https://www.instagram.com/share?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-      </li>
-    {% endif %}
-    {% if site.share contains 'linkedin' %}
-      <li>
-        <a
-          href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
-      </li>
-    {% endif %}
     {% if site.share contains 'reddit' %}
       <li>
         <a
-          href="https://www.reddit.com/submit?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
+          href="https://www.reddit.com/r/programming/submit?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
           target="_blank"
           rel="noopener"
         >
           <i class="fa-brands fa-reddit"></i>
-        </a>
-      </li>
-    {% endif %}
-    {% if site.share contains 'pinterest' %}
-      <li>
-        <a
-          href="https://pinterest.com/pin/create/button/?url={{ site.url | append: page.url | url_encode }}&description={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-pinterest"></i>
         </a>
       </li>
     {% endif %}
@@ -89,50 +56,6 @@
         </a>
       </li>
     {% endif %}
-    {% if site.share contains 'whatsapp' %}
-      <li>
-        <a
-          href="https://api.whatsapp.com/send?text={{ page.title | url_encode }} {{ site.url | append: page.url | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-whatsapp"></i>
-        </a>
-      </li>
-    {% endif %}
-    {% if site.share contains 'line' %}
-      <li>
-        <a
-          href="https://social-plugins.line.me/lineit/share?url={{ site.url | append: page.url | url_encode }}&text={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-line"></i>
-        </a>
-      </li>
-    {% endif %}
-    {% if site.share contains 'discord' %}
-      <li>
-        <a
-          href="https://discord.com/channels/@me?text={{ page.title | url_encode }} {{ site.url | append: page.url | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-discord"></i>
-        </a>
-      </li>
-    {% endif %}
-    {% if site.share contains 'snapchat' %}
-      <li>
-        <a
-          href="https://www.snapchat.com/add/{{ site.url | append: page.url | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-snapchat"></i>
-        </a>
-      </li>
-    {% endif %}
     {% if site.share contains 'weibo' %}
       <li>
         <a
@@ -141,39 +64,6 @@
           rel="noopener"
         >
           <i class="fa-brands fa-weibo"></i>
-        </a>
-      </li>
-    {% endif %}
-    {% if site.share contains 'qq' %}
-      <li>
-        <a
-          href="http://connect.qq.com/widget/shareqq/index.html?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-qq"></i>
-        </a>
-      </li>
-    {% endif %}
-    {% if site.share contains 'wechat' %}
-      <li>
-        <a
-          href="https://open.weixin.qq.com/connect/qrconnect?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-weixin"></i>
-        </a>
-      </li>
-    {% endif %}
-    {% if site.share contains 'email' %}
-      <li>
-        <a
-          href="mailto:?subject={{ page.title | url_encode }}&body={{ site.url | append: page.url | url_encode }}"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-solid fa-envelope"></i>
         </a>
       </li>
     {% endif %}

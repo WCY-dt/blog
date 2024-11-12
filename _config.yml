@@ -7,6 +7,8 @@ keywords:
   - cyber security
   - developer
   - program
+  - study notes
+  - technology
 author:
   name: Ch3nyang
   link: https://github.com/WCY-dt
@@ -46,22 +48,12 @@ navy:
     icon: rss_feed
 
 share:
+  - hackernews
   - twitter
   - facebook
-# - tiktok
-# - instagram
-# - linkedin
   - reddit
-# - pinterest
-# - telegram
-# - whatsapp
-# - line
-# - discord
-# - snapchat
-  - weibo
-# - qq
-  - wechat
-# - email
+  - telegram
+# - weibo
 
 ############# Other Settings #############
 # Please do not modify the following settings unless you know what you are doing.

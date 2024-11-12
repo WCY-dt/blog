@@ -6,19 +6,43 @@ layout: compress
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ site.description }}">
-    <meta name="keywords" content="{{ site.keywords | join: ', ' }}">
+    {%- if page.layout == 'post' -%}
+      <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | append: '...' }}">
+      <meta name="keywords" content="{{ page.tags | join: ', ' }}">
+    {%- else -%}
+      <meta name="description" content="{{ site.description }}">
+      <meta name="keywords" content="{{ site.keywords | join: ', ' }}">
+    {%- endif -%}
     <meta name="author" content="{{ site.author.name }}">
     <meta name="robots" content="index, follow">
     <meta name="application-name" content="{{ site.author.name }}'s Blog">
-    <meta name="msapplication-TileColor" content="#ff4000">
+    <meta name="theme-color" content="#d74514">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-TileColor" content="#d74514">
 
-    <meta property="og:description" content="{{ site.description }}">
-    <!--
-      <meta property="og:image" content="./assets/img/ogimage.png">
-      <meta name="twitter:card" content="./assets/img/twittercard.png">
-    -->
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="{{ page.title | default: site.title }}">
+    {%- if page.layout == 'post' -%}
+      <meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | append: '...' }}">
+    {%- else -%}
+      <meta property="og:description" content="{{ site.description }}">
+    {%- endif -%}
+    <meta property="og:image" content="{{ site.url }}/assets/img/ogimage.png">
 
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ page.url | absolute_url }}">
+    <meta name="twitter:title" content="{{ page.title | default: site.title }}">
+    {%- if page.layout == 'post' -%}
+      <meta name="twitter:description" content="{{ page.excerpt | strip_html | strip_newlines | append: '...' }}">
+    {%- else -%}
+      <meta name="twitter:description" content="{{ site.description }}">
+    {%- endif -%}
+    <meta name="twitter:image" content="{{ site.url }}/assets/img/twittercard.png">
+
+    <!-- Favicon -->
     <link
       rel="icon"
       type="image/svg+xml"
