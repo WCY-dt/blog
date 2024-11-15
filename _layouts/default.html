@@ -23,7 +23,20 @@ layout: compress
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:title" content="{{ page.title | default: site.title }}">
+    <meta
+      property="og:title"
+      content="
+        {%- if page.title -%}
+          {%- if page.layout == 'post' -%}
+            {{ site.author.name | append: "'s blog" | escape }} | {{ page.title | escape }}
+          {%- else -%}
+            {{ page.title | escape }}
+          {%- endif -%}
+        {%- else -%}
+          {{ site.author.name | append: "'s blog" | escape }}
+        {%- endif -%}
+      "
+    >
     {%- if page.layout == 'post' -%}
       <meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | append: '...' }}">
     {%- else -%}
@@ -63,20 +76,6 @@ layout: compress
         {{ site.author.name | append: "'s blog" | escape }}
       {%- endif -%}
     </title>
-    <meta
-      property="og:title"
-      content="
-        {%- if page.title -%}
-          {%- if page.layout == 'post' -%}
-            {{ site.author.name | append: "'s blog" | escape }} | {{ page.title | escape }}
-          {%- else -%}
-            {{ page.title | escape }}
-          {%- endif -%}
-        {%- else -%}
-          {{ site.author.name | append: "'s blog" | escape }}
-        {%- endif -%}
-      "
-    >
 
     {%- feed_meta -%}
 
