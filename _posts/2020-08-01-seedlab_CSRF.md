@@ -47,7 +47,7 @@ dcup
 
 打开 Header live 插件，例如登陆时能看到如下请求。
 
-![csrf1](/assets/post/images/csrf1.png)
+![csrf1](/assets/post/images/csrf1.webp)
 
 这个内容很简单，不再赘述。
 
@@ -55,13 +55,13 @@ dcup
 
 我们需要加 Alice 为好友。登录 Samy 账号，点进 Alice 主页，点击 Add friend
 
-![csrf2](/assets/post/images/csrf2.png)
+![csrf2](/assets/post/images/csrf2.webp)
 
 可以看到加好友的方法为 GET， url 为 `http://www.seed-server.com/action/friends/add?friend=user id&cookie等`。这里 user id 就是 Alice 的 id。要想让 Alice 加自己，就需要知道自己的 id。
 
 去往 members 页面，<kbd>F12</kbd>查看列表，可以看到用户 id 都被直接明文存储了。
 
-![csrf3](/assets/post/images/csrf3.png)
+![csrf3](/assets/post/images/csrf3.webp)
 
 我们找到自己的 user id 为 59。这里按照手册，应当去修改 seedlabs 给我们的网页。但其实根本没有必要，我们只需要编辑个人资料，内容如下。
 
@@ -69,35 +69,35 @@ dcup
 <img src="http://www.seed-server.com/action/friends/add?friend=59">
 ```
 
-![csrf4](/assets/post/images/csrf4.png)
+![csrf4](/assets/post/images/csrf4.webp)
 
 `<img>`会自动发送 GET 请求。现在登录 Alice 的账号，点进 Samy 的个人资料，可以看到，已经自动加了好友。
 
-![csrf5](/assets/post/images/csrf5.png)
+![csrf5](/assets/post/images/csrf5.webp)
 
 ## Task 3: CSRF Attack using POST Request
 
 我们需要修改 Alice 的 profile。登录 Samy 账号，我们先试着修改自己的 profile。保存后看到发出了如下请求：
 
-![csrf6](/assets/post/images/csrf6.png)
+![csrf6](/assets/post/images/csrf6.webp)
 
 可以看到修改 profile 方法为 POST，url 为 [http://www.seed-server.com/action/profile/edit](http://www.seed-server.com/action/profile/edit)
 
 我们要整一个网页来执行我们的 javasrcipt，编辑 editprofile.html
 
-<img src="/assets/post/images/csrf7.png" alt="csrf7" style="zoom:50%;" />
+<img src="/assets/post/images/csrf7.webp" alt="csrf7" style="zoom:50%;" />
 
 然后修改 profile 如下所示，并添加 [www.attacker32.com/editprofile.html](www.attacker32.com/editprofile.html) 的链接。
 
-![csrf8](/assets/post/images/csrf8.png)
+![csrf8](/assets/post/images/csrf8.webp)
 
 登录 Alice 账号，假设她闲得慌，点了 Samy 主页的那个链接
 
-![csrf9](/assets/post/images/csrf9.png)
+![csrf9](/assets/post/images/csrf9.webp)
 
 可以看到，profile 就被自动改掉了。
 
-![csrf10](/assets/post/images/csrf10.png)
+![csrf10](/assets/post/images/csrf10.webp)
 
 > **Question 1:** The forged HTTP request needs Alice’s user id (guid) to work properly. If Boby targets
 > Alice specifically, before the attack, he can find ways to get Alice’s user id. Boby does not know
@@ -120,7 +120,7 @@ dcup
 
 登录 Alice 账号，点击 Samy 主页的链接
 
-![csrf11](/assets/post/images/csrf11.png)
+![csrf11](/assets/post/images/csrf11.webp)
 
 可以看到，由于验证 cookie，Alice 的 profile 不再可以改变。且因为请求失败就会刷新网页，刷新后再次请求，这个网页在疯狂地循环刷新。
 

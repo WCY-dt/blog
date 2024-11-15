@@ -30,7 +30,7 @@ dcbuild
 dcup
 ```
 
-<img src="/assets/post/images/vpn2.png" alt="vpn2"  />
+<img src="/assets/post/images/vpn2.webp" alt="vpn2"  />
 
 使用新的 terminal：
 
@@ -787,7 +787,7 @@ applicable law.
 
 我们使用 wireshark 对 `HOST-U`  ping  `HOST-V`  的过程抓包，可以看到：
 
-![vpn3](/assets/post/images/vpn3.png)
+![vpn3](/assets/post/images/vpn3.webp)
 
 可以看到 ping 大致可以分为四个过程：
 
@@ -860,7 +860,7 @@ rtt min/avg/max/mdev = 57.842/57.842/57.842/0.000 ms
 
 ## Task 8: VPN Between Private Networks
 
-<img src="/assets/post/images/vpn4.png" alt="vpn4"  />
+<img src="/assets/post/images/vpn4.webp" alt="vpn4"  />
 
 启动新的 docker：
 
@@ -967,7 +967,7 @@ From tun ==> : 192.168.60.5 --> 192.168.50.5
 
 与之前类似，我们使用 wireshark 抓包：
 
-![vpn5](/assets/post/images/vpn5.png)
+![vpn5](/assets/post/images/vpn5.webp)
 
 可以看出，流量是走的 tun。
 
