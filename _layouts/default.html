@@ -84,7 +84,7 @@ layout: compress
       <meta name="baidu-site-verification" content="{{ site.baidu_site_verification }}">
     {%- endif -%}
 
-    <!-- Google Analytics -->
+    <!-- Analytics -->
     {%- if site.google_analytics -%}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
       <script>
@@ -95,6 +95,9 @@ layout: compress
         gtag('js', new Date());
         gtag('config', '{{ site.google_analytics }}');
       </script>
+    {%- endif -%}
+    {%- if site.umami -%}
+      <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ site.umami }}"></script>
     {%- endif -%}
 
     <!-- Font Awesome -->
