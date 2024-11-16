@@ -101,7 +101,7 @@ with open("badfile", "wb") as f:
 f.write(content)
 ```
 
-其中，Y 的值为 `0xffffcd78`$-$`0xffffcd60`$+4$
+其中，Y 的值为 `0xffffcd78`$$-$$`0xffffcd60`$$+4$$
 
 运行，攻击成功
 

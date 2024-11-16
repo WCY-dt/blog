@@ -8,6 +8,8 @@
   word-wrap: break-word;
   word-break: break-word;
 
+  overflow: hidden;
+
   #post-info-container {
     display: flex;
     flex-direction: column;
@@ -95,7 +97,7 @@
   #post-content-container {
     color: var(--black-color);
     background-color: var(--white-color);
-    overflow-x: hidden;
+    overflow: hidden;
 
     p,
     ul,
@@ -116,6 +118,16 @@
     h5,
     h6 {
       font-family: $ui-font;
+
+      a {
+        color: var(--black-color);
+
+        @media (hover: hover) {
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
     }
 
     h2 {
