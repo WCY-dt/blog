@@ -100,18 +100,6 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
   }
 }
 
-@media screen and (max-width: 550px) {
-  :root {
-    font-size: 12px;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  :root {
-    font-size: 12px;
-  }
-}
-
 html {
   overflow-x: hidden;
 }
@@ -143,6 +131,17 @@ body {
 
   img {
     pointer-events: none;
+  }
+}
+
+@media print {
+  :root {
+    font-size: 12px;
+  }
+
+  * .no-print,
+  * .no-print * {
+    display: none !important;
   }
 }
 

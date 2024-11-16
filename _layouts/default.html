@@ -147,13 +147,13 @@ layout: compress
   </head>
 
   <body color_theme="{{ site.theme_config.color_theme | default: 'light' }}">
-    <header class="no-select">
+    <header class="no-select no-print">
       {%- include header.html -%}
     </header>
     <main>
       {{ content }}
     </main>
-    <footer class="no-select">
+    <footer class="no-select no-print">
       {%- include footer.html -%}
     </footer>
 

@@ -1,4 +1,4 @@
-<div id="sidebar-container" class="no-select">
+<div id="sidebar-container" class="no-select no-print">
   <!-- back to top -->
   <span id="back-to-top-button" class="material-symbols-outlined"> vertical_align_top </span>
   <script src="{{ '/assets/js/back_to_top.js' | relative_url }}"></script>
@@ -22,7 +22,7 @@
   <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
   <!-- toc -->
   {% if page.layout == 'post' %}
-    <div id="toc-container" class="no-select">
+    <div id="toc-container" class="no-select no-print">
       <button>
         <span class="material-symbols-outlined">toc</span>
       </button>

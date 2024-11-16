@@ -19,12 +19,12 @@
       margin-bottom: 0.5rem;
       max-width: 100%;
       font-size: 3rem;
-      line-height: 3rem;
+      line-height: 3.5rem;
       font-weight: 900;
       font-family: $ui-font;
       color: var(--primary-color);
       text-align: center;
-      word-break: keep-all;
+      word-break: break-word;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -322,5 +322,12 @@
 
   #post-footer-container {
     width: 100%;
+  }
+}
+
+@media print {
+  #post-container {
+    width: 90%;
+    padding: 0;
   }
 }

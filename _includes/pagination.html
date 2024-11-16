@@ -3,7 +3,7 @@
     {%- if post.draft -%}
       {%- continue -%}
     {%- endif -%}
-    <a id="pagination-item-container" class="no-select" href="{{ post.url | relative_url }}">
+    <a id="pagination-item-container" class="no-select no-print" href="{{ post.url | relative_url }}">
       <span id="pagination-item-title">
         {% if post.series %}
           <div id="pagination-item-series">{{ post.series }} | ({{ post.series_index }})</div>
@@ -41,7 +41,7 @@
   {%- endunless -%}
 {%- endfor -%}
 
-<p id="pagination-count" class="no-select">
+<p id="pagination-count" class="no-select no-print">
   {%- if non_draft_posts_count == 0 -%}
     - no public post -
   {%- elsif non_draft_posts_count == 1 -%}

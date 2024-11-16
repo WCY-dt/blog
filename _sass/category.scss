@@ -1,12 +1,4 @@
 main {
-  padding: 12rem 1rem 3.75rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  width: calc(100% - 2rem);
-
   #category-item-container {
     text-decoration: none;
     display: flex;
@@ -64,21 +56,4 @@ main {
     margin: 0;
     border: 1px solid var(--primary-light-color);
   }
-}
-
-@media screen and (max-width: 425px) {
-  main {
-    padding: 16rem 1rem 5.75rem 1rem;
-  }
-}
-
-#category-count {
-  margin-top: 3rem;
-  width: 100%;
-  text-align: center;
-  color: var(--primary-little-light-color);
-  font-size: 0.8rem;
-  font-family: $ui-font;
-  font-weight: 900;
-  text-transform: uppercase;
 }
