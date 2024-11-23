@@ -57,15 +57,6 @@ html[data-theme="dark"] {
 $ui-font: 'Orbitron', sans-serif;
 $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif';
 
-@mixin header-scroll-animation {
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-  @supports (animation-timeline: scroll()) {
-    animation-timeline: scroll();
-    animation-range: 0 6rem;
-  }
-}
-
 ::selection {
   color: var(--white-color);
   background-color: var(--primary-little-light-color);

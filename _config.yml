@@ -31,6 +31,7 @@ baidu_site_verification: codeva-dciGw99jsc
 color_theme: dark # light or dark
 
 # icons are from https://fonts.google.com/icons
+# Modify this may cause unexpected errors from includes/header.html
 navy:
   - title: post
     url: /

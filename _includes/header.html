@@ -4,7 +4,15 @@
 </a>
 <menu id="menu-container">
   {% for item in site.navy %}
-    <a href="{{ item.url | relative_url }}">
+    {% if page.url == (item.url | relative_url) %}
+      <a href="{{ item.url | relative_url }}" class="active">
+    {% elsif page.layout == 'post' and item.title == 'post' %}
+      <a href="{{ item.url | relative_url }}" class="active">
+    {% elsif page.layout == 'archive' and item.title == 'post' %}
+      <a href="{{ item.url | relative_url }}" class="active">
+    {% else %}
+      <a href="{{ item.url | relative_url }}">
+    {% endif %}
       <span class="material-symbols-outlined">
         {{ item.icon }}
       </span>

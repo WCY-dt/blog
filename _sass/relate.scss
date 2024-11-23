@@ -50,7 +50,6 @@
           font-size: 4rem;
           color: var(--primary-semi-light-color);
           z-index: 0;
-          opacity: 1;
           transition: all 0.25s ease-in-out;
         }
 
@@ -60,7 +59,10 @@
             color: var(--white-color);
 
             .material-symbols-outlined {
-              opacity: 0;
+              bottom: 0.25rem;
+              right: 0.25rem;
+              color: var(--primary-semi-dark-color);
+              font-size: 3rem;
             }
           }
         }

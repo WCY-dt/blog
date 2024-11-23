@@ -1,7 +1,7 @@
 #sidebar-container {
   position: fixed;
   bottom: 6rem;
-  right: max(2rem, calc((100vw - min(100% - 2rem, 40rem)) / 2 - 16rem));
+  right: max(2rem, calc((100vw - min(100% - 2rem, 40rem)) / 2 - 7rem));
   display: flex;
   flex-direction: column;
   align-items: end;

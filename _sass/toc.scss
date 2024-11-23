@@ -1,8 +1,9 @@
 #toc-container {
   position: fixed;
   top: 15rem;
-  right: 0.5rem;
-  width: min(16rem, calc((100vw - min(100% - 2rem, 40rem)) / 2 - 2rem));
+  right: max(2rem, calc((100vw - min(100% - 2rem, 40rem)) / 2 - 3rem));
+  transform: translateX(100%);
+  max-width: min(12rem, calc((100vw - min(100% - 2rem, 40rem)) / 2 - 3rem));
   color: var(--primary-dark-color);
   box-sizing: border-box;
   padding: 1rem;
@@ -78,28 +79,6 @@
       margin: 0;
       padding: 0 0 0 1.5rem;
     }
-
-    @supports (animation-timeline: scroll()) {
-      @keyframes toc-ul-scroll {
-        100% {
-          max-height: calc(100vh - 25rem);
-        }
-      }
-
-      animation-name: toc-ul-scroll;
-      @include header-scroll-animation;
-    }
-  }
-
-  @supports (animation-timeline: scroll()) {
-    @keyframes toc-scroll {
-      100% {
-        top: 5rem;
-      }
-    }
-
-    animation-name: toc-scroll;
-    @include header-scroll-animation;
   }
 }
 
@@ -126,6 +105,7 @@
     right: 0;
     width: auto;
     padding: 0;
+    transform: none;
 
     button {
       box-sizing: border-box;
@@ -151,17 +131,6 @@
       width: 16rem;
       padding: 1rem;
       z-index: -1;
-    }
-
-    @supports (animation-timeline: scroll()) {
-      @keyframes toc-scroll {
-        100% {
-          bottom: 2rem;
-        }
-      }
-
-      animation-name: toc-scroll;
-      @include header-scroll-animation;
     }
   }
 }

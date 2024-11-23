@@ -10,17 +10,6 @@ header {
   height: 6rem;
   z-index: 5;
 
-  @supports (animation-timeline: scroll()) {
-    @keyframes header-scroll {
-      100% {
-        height: 4rem;
-      }
-    }
-
-    animation-name: header-scroll;
-    @include header-scroll-animation;
-  }
-
   #title-container {
     padding: 0 3rem 0.5rem 0.5rem;
     margin: 0;
@@ -41,94 +30,39 @@ header {
     p {
       margin: 0;
     }
-
-    @supports (animation-timeline: scroll()) {
-      @keyframes header-title-scroll {
-        100% {
-          font-size: 1.5rem;
-          line-height: 1.5rem;
-        }
-      }
-
-      animation-name: header-title-scroll;
-      @include header-scroll-animation;
-    }
   }
 
   #menu-container {
     margin: 0;
-    padding: 0 0 0 1rem;
+    padding: 0;
     flex-grow: 1;
     display: flex;
     align-items: end;
     justify-content: start;
-    gap: 1rem;
+    gap: 0;
     background-color: var(--primary-light-color);
     color: var(--black-color);
     height: 100%;
-
-    @supports (animation-timeline: scroll()) {
-      @keyframes header-menu-scroll {
-        100% {
-          gap: 1.2rem
-        }
-      }
-
-      animation-name: header-menu-scroll;
-      @include header-scroll-animation;
-    }
 
     a {
       position: relative;
       text-decoration: none;
       color: var(--black-color);
       height: calc(100% - 0.5rem);
-      padding: 0 0.5rem 1rem 1.8rem;
+      padding: 0 0.8rem 1rem 2.6rem;
       display: flex;
       flex-direction: column;
       align-items: start;
       justify-content: end;
-
-      @supports (animation-timeline: scroll()) {
-        @keyframes header-menu-a-scroll {
-          100% {
-            padding: 0 0 1.0rem 2.3rem;
-          }
-        }
-
-        animation-name: header-menu-a-scroll;
-        @include header-scroll-animation;
-      }
-
-      @media (hover: hover) {
-        &:hover {
-          p {
-            color: var(--primary-color);
-            text-decoration: underline;
-          }
-        }
-      }
+      transition: all 0.25s ease-in-out;
 
       span {
         position: absolute;
-        left: 0;
+        left: 0.8rem;
         bottom: 1.2rem;
         font-size: 3rem;
         color: var(--primary-semi-light-color);
-        transition: font-size 0.25s ease-in-out, opacity 0.25s ease-in-out;
-
-        @supports (animation-timeline: scroll()) {
-          @keyframes header-menu-icon-scroll {
-            100% {
-              bottom: 0.8rem;
-              font-size: 2.0rem;
-              color: var(--primary-dark-color);
-            }
-          }
-
-          animation-name: header-menu-icon-scroll;
-          @include header-scroll-animation;
-        }
+        transition: all 0.25s ease-in-out;
       }
 
       p {
@@ -139,7 +73,33 @@ header {
         text-transform: capitalize;
         z-index: 10;
         color: var(--primary-dark-color);
-        transition: color 0.25s ease-in-out, text-decoration 0.25s ease-in-out;
+        transition: all 0.25s ease-in-out;
+      }
+
+      &.active {
+        padding: 0.25rem 1.7rem 0.75rem 1.7rem;
+        background-color: var(--primary-semi-light-color);
+      
+        span {
+          color: var(--primary-little-light-color);
+          font-size: 2.5rem;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+      }
+    }
+
+    @media (hover: hover) {
+      a:hover {
+        padding: 0.25rem 1.7rem 0.75rem 1.7rem;
+        background-color: var(--primary-semi-light-color);
+
+        span {
+          color: var(--primary-little-light-color);
+          font-size: 2.5rem;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
       }
     }
   }
@@ -161,17 +121,6 @@ header {
 
     #menu-container {
       display: none;
-    }
-
-    @supports (animation-timeline: scroll()) {
-      @keyframes mobile-header-scroll {
-        100% {
-          height: 3rem;
-        }
-      }
-
-      animation-name: mobile-header-scroll;
-      @include header-scroll-animation;
     }
   }
 }
