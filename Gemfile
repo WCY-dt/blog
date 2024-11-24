@@ -3,7 +3,6 @@ source 'https://gems.ruby-china.com/'
 gem "jekyll", "~> 4.3.2"
 
 group :jekyll_plugins do
-  gem 'jekyll-feed', '~> 0.17.0'
   gem "jekyll-sitemap"
   gem "jekyll-archives"
   gem 'jekyll-loading-lazy'

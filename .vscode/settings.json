@@ -21,6 +21,12 @@
         "editor.autoIndent": "advanced",
         "editor.detectIndentation": false,
     },
+    "[xml]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.autoIndent": "advanced",
+        "editor.detectIndentation": false,
+    },
     "markdownlint.config": {
         "MD010": false, // Disable hard tabs check
         "MD013": false, // Disable line length check

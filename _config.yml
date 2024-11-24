@@ -12,6 +12,9 @@ keywords:
 author:
   name: Ch3nyang
   link: https://github.com/WCY-dt
+  email: mail@ch3nyang.top
+lang: zh-CN
+timezone: Asia/Shanghai
 # display powered by jekyll in footer
 powered_by: false
 # the subpath of your site
@@ -74,7 +77,6 @@ jekyll-archives:
     category: /category/:name/
     year: /year/:year/
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
   - jekyll-archives
   - jekyll-loading-lazy
