@@ -29,7 +29,7 @@
         <email>{{ site.author.email }}</email>
       </author>
       <summary type="html">
-        <![CDATA[ {{ post.content | strip_html | truncatewords: 50 }} ]]>
+        <![CDATA[ {{ post.content | strip_html | truncatewords: 200 }} ]]>
       </summary>
       {% for category in post.categories %}
         <category term="{{ category }}" />
