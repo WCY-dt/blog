@@ -95,7 +95,7 @@
             font-size: 1.2rem;
             font-weight: 900;
             color: var(--primary-color);
-            font-family: $ui-font;
+            font-family: var(--ui-font);
           }
 
           .search-content {
@@ -103,7 +103,7 @@
             font-size: 1rem;
             line-height: 1.5rem;
             color: var(--primary-dark-color);
-            font-family: $text-font;
+            font-family: var(--text-font);
           }
 
           em {

@@ -1,21 +1,13 @@
 source 'https://gems.ruby-china.com/'
 
-gem "jekyll", "~> 4.3.2"
+gem 'jekyll', '~> 4.3', '>= 4.3.4'
 
 group :jekyll_plugins do
-  gem "jekyll-sitemap"
-  gem "jekyll-archives"
-  gem 'jekyll-loading-lazy'
-  gem "rouge"
+  gem 'jekyll-archives', '~> 2.2', '>= 2.2.1'
+  gem 'jekyll-loading-lazy', '~> 0.1.1'
 end
 
-platforms :mingw, :x64_mingw, :mswin, :jruby do
-  gem "tzinfo", ">= 1", "< 3"
-  gem "tzinfo-data"
-end
+gem 'tzinfo', '~> 2.0', '>= 2.0.6'
+gem 'tzinfo-data', '~> 1.2024', '>= 1.2024.2'
 
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-
-gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
-
-gem "logger"
+gem 'wdm', '~> 0.2.0' if Gem.win_platform?

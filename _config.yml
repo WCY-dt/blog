@@ -77,7 +77,6 @@ jekyll-archives:
     category: /category/:name/
     year: /year/:year/
 plugins:
-  - jekyll-sitemap
   - jekyll-archives
   - jekyll-loading-lazy
 webrick:

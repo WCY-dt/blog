@@ -23,7 +23,7 @@
       font-size: 3rem;
       line-height: 3.5rem;
       font-weight: 900;
-      font-family: $ui-font;
+      font-family: var(--ui-font);
       color: var(--primary-color);
       text-align: center;
       word-break: break-word;
@@ -117,7 +117,7 @@
     h4,
     h5,
     h6 {
-      font-family: $ui-font;
+      font-family: var(--ui-font);
 
       a {
         color: var(--black-color);
@@ -293,7 +293,7 @@
         width: fit-content;
         color: var(--primary-dark-color);
         font-size: 0.8rem;
-        font-family: $ui-font;
+        font-family: var(--ui-font);
         font-weight: 700;
         position: absolute;
         top: -1.2rem;
@@ -342,4 +342,24 @@
     width: 90%;
     padding: 0;
   }
+}
+
+/* Lightbox overlay */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+
+/* Lightbox image */
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }

@@ -5,7 +5,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: start;
-  font-family: $ui-font;
+  font-family: var(--ui-font);
   width: 100%;
   height: 6rem;
   z-index: 5;
