@@ -18,7 +18,7 @@ timezone: Asia/Shanghai
 # display powered by jekyll in footer
 powered_by: false
 # the subpath of your site
-baseurl: /
+baseurl: 
 # the base hostname & protocol for your site
 url: https://blog.ch3nyang.top
 # OPTIONAL settings: delete the following line if you don't need
