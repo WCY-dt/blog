@@ -71,7 +71,7 @@ kramdown:
   input: GFM
 jekyll-archives:
   enabled: [categories, tags, year]
-  layouts: archive
+  layout: archive
   permalinks:
     tag: /tag/:name/
     category: /category/:name/
