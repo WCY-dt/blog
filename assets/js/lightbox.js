@@ -1,6 +1,6 @@
 let images = document.querySelector('#post-content-container').querySelectorAll('img');
 
-const ZoomSpeed = 0.002;
+const ZoomSpeed = 0.001;
 const ZoomMax = 4;
 const ZoomMin = 0.1;
 
@@ -32,7 +32,7 @@ images.forEach((image) => {
 
         // Scroll to zoom
         let zoom = 1;
-        lightbox_img.addEventListener('wheel', (e) => {
+        overlay.addEventListener('wheel', (e) => {
             e.preventDefault();
             zoom += e.deltaY * -ZoomSpeed;
             zoom = Math.min(Math.max(ZoomMin, zoom), ZoomMax);
@@ -41,7 +41,7 @@ images.forEach((image) => {
 
         // Pinch to zoom
         let lastDistance = 0;
-        lightbox_img.addEventListener('touchstart', (e) => {
+        overlay.addEventListener('touchstart', (e) => {
             if (e.touches.length === 2) {
                 lastDistance = Math.hypot(
                     e.touches[0].clientX - e.touches[1].clientX,
@@ -50,7 +50,7 @@ images.forEach((image) => {
             }
         });
 
-        lightbox_img.addEventListener('touchmove', (e) => {
+        overlay.addEventListener('touchmove', (e) => {
             if (e.touches.length === 2) {
                 let distance = Math.hypot(
                     e.touches[0].clientX - e.touches[1].clientX,
@@ -63,7 +63,7 @@ images.forEach((image) => {
             }
         });
 
-        lightbox_img.addEventListener('touchend', (e) => {
+        overlay.addEventListener('touchend', (e) => {
             lastDistance = 0;
         });
     });

@@ -36,6 +36,7 @@ html[data-theme="light"] {
   --primary-extra-light-color: hsl(20, 83%, 98%);
   --white-color: hsl(0, 0%, 99%);
   --black-color: hsl(0, 0%, 0%);
+  --true-white-color: hsl(0, 0%, 99%);
 }
 
 html[data-theme="dark"] {
@@ -48,6 +49,7 @@ html[data-theme="dark"] {
   --primary-extra-light-color: hsl(0, 0%, 5%);
   --white-color: hsl(0, 0%, 2%);
   --black-color: hsl(0, 0%, 80%);
+  --true-white-color: hsl(0, 0%, 99%);
 }
 
 @font-face {

@@ -205,6 +205,8 @@
 
     img {
       max-width: 100%;
+      background-color: var(--true-white-color);
+      cursor: pointer;
     }
 
     blockquote {
@@ -354,12 +356,15 @@
   background-color: rgba(0, 0, 0, 0.8);
   display: grid;
   place-items: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   z-index: 1000;
-}
 
-/* Lightbox image */
-.lightbox-img {
-  max-width: 90%;
-  max-height: 90%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  .lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    background-color: var(--true-white-color);
+  }
 }
