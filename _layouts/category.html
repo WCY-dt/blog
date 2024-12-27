@@ -1,24 +1,28 @@
 ---
 layout: default
 ---
-<hgroup id="archive-info-container" class="no-select no-print">
-  <h1 id="archive-title">Category</h1>
+<hgroup id='archive-info-container' class='no-select no-print'>
+  <h1 id='archive-title'>Category</h1>
 </hgroup>
 
 {% assign sorted_categories = site.categories | sort %}
 {% for category in sorted_categories %}
-  <a id="category-item-container" class="no-select no-print" href="{{ category | first | slugify }}">
-    <span id="category-item-title">
+  <a
+    id='category-item-container'
+    class='no-select no-print'
+    href='{{ category | first | slugify }}'
+  >
+    <span id='category-item-title'>
       {{ category | first }}
     </span>
-    <div id="category-item-info">{{ category | last | size }}</div>
+    <div id='category-item-info'>{{ category | last | size }}</div>
   </a>
   {%- unless forloop.last -%}
-    <hr class="category-hr">
+    <hr class='category-hr'>
   {%- endunless -%}
 {% endfor %}
 
-<p id="pagination-count" class="no-select no-print">
+<p id='pagination-count' class='no-select no-print'>
   {%- assign categories_count = 0 -%}
   {%- for category in site.categories -%}
     {%- assign categories_count = categories_count | plus: 1 -%}

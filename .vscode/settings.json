@@ -2,12 +2,13 @@
     "files.associations": {
         "*.html": "liquid",
         "*.md": "markdown",
+        "search.json": "liquid"
     },
     "[liquid]": {
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
         "editor.autoIndent": "advanced",
-        "editor.detectIndentation": false,
+        "editor.detectIndentation": false
     },
     "[scss]": {
         "editor.tabSize": 2,
@@ -33,13 +34,13 @@
         "MD024": false, // Disable multiple headers with the same content check
         "MD026": false, // Disable Trailing punctuation in header check
         "MD028": false, // Disable blank line inside blockquote check
-        "MD033": false, // Disable inline HTML check
+        "MD033": false // Disable inline HTML check
     },
     "files.exclude": {
         "**/_site": true, // Exclude Jekyll build folder from the file explorer
         "**/.sass-cache": true,
         "**/.jekyll-cache": true,
-        "**/.jekyll-metadata": true,
+        "**/.jekyll-metadata": true
     },
-    "liveServer.settings.root": "/_site", // Assuming '_site' is your Jekyll build directory
+    "liveServer.settings.root": "/_site" // Assuming '_site' is your Jekyll build directory
 }

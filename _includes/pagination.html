@@ -3,27 +3,33 @@
     {%- if post.draft -%}
       {%- continue -%}
     {%- endif -%}
-    <a id="pagination-item-container" class="no-select no-print" href="{{ post.url | relative_url }}">
-      <span id="pagination-item-title">
+    <a
+      id='pagination-item-container'
+      class='no-select no-print'
+      href='{{ post.url | relative_url }}'
+    >
+      <span id='pagination-item-title'>
         {% if post.series %}
-          <div id="pagination-item-series">{{ post.series }} | ({{ post.series_index }})</div>
+          <div id='pagination-item-series'>
+            {{ post.series }} | ({{ post.series_index }})
+          </div>
         {% endif %}
-        <div id="pagination-item-title-text">
+        <div id='pagination-item-title-text'>
           {{ post.title }}
         </div>
       </span>
-      <div id="pagination-item-info">
-        <div id="pagination-item-time">
-          <span class="material-symbols-outlined"> calendar_month </span>
+      <div id='pagination-item-info'>
+        <div id='pagination-item-time'>
+          <span class='material-symbols-outlined'> calendar_month </span>
           {{- post.date | date: site.theme_config.date_format -}}
         </div>
-        <div id="pagination-item-category">
-          <span class="material-symbols-outlined"> archive </span>
+        <div id='pagination-item-category'>
+          <span class='material-symbols-outlined'> archive </span>
           {{- post.categories -}}
         </div>
-        <div id="pagination-item-tag">
+        <div id='pagination-item-tag'>
           {% for tag in post.tags %}
-            <span class="material-symbols-outlined"> tag </span>{{ tag }}
+            <span class='material-symbols-outlined'> tag </span>{{ tag }}
           {% endfor %}
         </div>
       </div>
@@ -41,7 +47,7 @@
   {%- endunless -%}
 {%- endfor -%}
 
-<p id="pagination-count" class="no-select no-print">
+<p id='pagination-count' class='no-select no-print'>
   {%- if non_draft_posts_count == 0 -%}
     - no public post -
   {%- elsif non_draft_posts_count == 1 -%}

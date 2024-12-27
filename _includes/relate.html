@@ -1,4 +1,4 @@
-<div id="relate-container" class="no-select no-print">
+<div id='relate-container' class='no-select no-print'>
   {% assign related_posts_tot_num = 3 %}
   {% assign related_posts_num = related_posts_tot_num %}
   {% assign related_posts_tot_num = related_posts_tot_num | minus: 1 %}
@@ -9,14 +9,19 @@
       {%- continue -%}
     {%- endif -%}
     {% if post.url != page.url %}
-      {% assign common_tags = post.tags | where_exp: 'tag', 'page.tags contains tag' %}
+      {% assign common_tags = post.tags
+        | where_exp: 'tag', 'page.tags contains tag'
+      %}
       {% if common_tags.size > 0 %}
         {% assign post_with_count = post | merge: "common_tags_count" : common_tags.size %}
         {% assign related_posts = related_posts | push: post_with_count %}
       {% endif %}
     {% endif %}
   {% endfor %}
-  {% assign related_posts = related_posts | sort: 'common_tags_count' | reverse %}
+  {% assign related_posts = related_posts
+    | sort: 'common_tags_count'
+    | reverse
+  %}
   {% if related_posts.size > related_posts_num %}
     {% assign related_posts = related_posts | slice: 0, related_posts_num %}
   {% endif %}
@@ -30,9 +35,13 @@
         {%- continue -%}
       {%- endif -%}
       {% unless related_posts contains post or post.url == page.url %}
-        {% assign common_categories = post.categories | where_exp: 'category', 'page.categories contains category' %}
+        {% assign common_categories = post.categories
+          | where_exp: 'category', 'page.categories contains category'
+        %}
         {% if common_categories.size > 0 %}
-          {% assign recommendation_reason = recommendation_reason | push: 'category' %}
+          {% assign recommendation_reason = recommendation_reason
+            | push: 'category'
+          %}
           {% assign related_posts = related_posts | push: post %}
           {% assign related_posts_num = related_posts_num | minus: 1 %}
         {% endif %}
@@ -48,7 +57,9 @@
         {%- continue -%}
       {%- endif -%}
       {% unless related_posts contains post or post.url == page.url %}
-        {% assign recommendation_reason = recommendation_reason | push: 'time' %}
+        {% assign recommendation_reason = recommendation_reason
+          | push: 'time'
+        %}
         {% assign related_posts = related_posts | push: post %}
         {% assign related_posts_num = related_posts_num | minus: 1 %}
       {% endunless %}
@@ -62,15 +73,15 @@
   <ul>
     {% for i in (0..related_posts_tot_num) %}
       <li>
-        <a href="{{ related_posts[i].url | relative_url }}">
+        <a href='{{ related_posts[i].url | relative_url }}'>
           {% if recommendation_reason[i] == 'tag' %}
-            <span class="material-symbols-outlined">tag</span>
+            <span class='material-symbols-outlined'>tag</span>
           {% elsif recommendation_reason[i] == 'category' %}
-            <span class="material-symbols-outlined">archive</span>
+            <span class='material-symbols-outlined'>archive</span>
           {% elsif recommendation_reason[i] == 'time' %}
-            <span class="material-symbols-outlined">calendar_month</span>
+            <span class='material-symbols-outlined'>calendar_month</span>
           {% endif %}
-          <span class="title">{{ related_posts[i].title }}</span>
+          <span class='title'>{{ related_posts[i].title }}</span>
         </a>
       </li>
     {% endfor %}

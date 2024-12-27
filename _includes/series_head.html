@@ -1,20 +1,24 @@
-{% assign sorted_posts = site.posts | where: 'series', page.series | sort: 'series_index' %}
-<div id="series-head-container" class="no-select no-print">
-  <p id="series-description">
+{% assign sorted_posts = site.posts
+  | where: 'series', page.series
+  | sort: 'series_index'
+%}
+<div id='series-head-container' class='no-select no-print'>
+  <p id='series-description'>
     {% if sorted_posts.size == 1 %}
-      There is 1 post in series <span id="series-name">{{ page.series }}</span>.
+      There is 1 post in series <span id='series-name'>{{ page.series }}</span>.
     {% else %}
-      There are {{ sorted_posts.size }} posts in series <span id="series-name">{{ page.series }}</span>.
+      There are {{ sorted_posts.size }} posts in series
+      <span id='series-name'>{{ page.series }}</span>.
     {% endif %}
   </p>
-  <ul id="series-item-list">
+  <ul id='series-item-list'>
     {% for post in sorted_posts %}
       {% if post.series_index == page.series_index %}
-        <span class="material-symbols-outlined">arrow_right_alt</span>
-        <a href="{{ post.url | relative_url }}" class="em">{{ post.title }}</a>
+        <span class='material-symbols-outlined'>arrow_right_alt</span>
+        <a href='{{ post.url | relative_url }}' class='em'>{{ post.title }}</a>
       {% else %}
         <span>{{ post.series_index }}</span>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <a href='{{ post.url | relative_url }}'>{{ post.title }}</a>
       {% endif %}
     {% endfor %}
   </ul>

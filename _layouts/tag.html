@@ -1,23 +1,27 @@
 ---
 layout: default
 ---
-<hgroup id="archive-info-container" class="no-select no-print">
-  <h1 id="archive-title">Tag</h1>
+<hgroup id='archive-info-container' class='no-select no-print'>
+  <h1 id='archive-title'>Tag</h1>
 </hgroup>
 
-<div id="tag-container">
+<div id='tag-container'>
   {% assign sorted_tags = site.tags | sort %}
   {% for tag in sorted_tags %}
-    <a id="tag-item-container" class="no-select no-print" href="{{ tag | first | slugify }}">
-      <span id="tag-item-title">
+    <a
+      id='tag-item-container'
+      class='no-select no-print'
+      href='{{ tag | first | slugify }}'
+    >
+      <span id='tag-item-title'>
         {{ tag | first }}
       </span>
-      <div id="tag-item-info">{{ tag | last | size }}</div>
+      <div id='tag-item-info'>{{ tag | last | size }}</div>
     </a>
   {% endfor %}
 </div>
 
-<p id="pagination-count" class="no-select no-print">
+<p id='pagination-count' class='no-select no-print'>
   {%- assign tags_count = 0 -%}
   {%- for tag in site.tags -%}
     {%- assign tags_count = tags_count | plus: 1 -%}

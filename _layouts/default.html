@@ -2,30 +2,39 @@
 layout: compress
 ---
 <!doctype html>
-<html lang="{{ site.lang | default: 'en' }}" data-theme="{{ site.color_theme | default: 'dark' }}">
+<html
+  lang='{{ site.lang | default: 'en' }}'
+  data-theme='{{ site.color_theme | default: 'dark' }}'
+>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     {%- if page.layout == 'post' -%}
-      <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | append: '...' }}">
-      <meta name="keywords" content="{{ page.tags | join: ', ' }}">
+      <meta
+        name='description'
+        content='{{ page.excerpt | strip_html | strip_newlines | append: '...' }}'
+      >
+      <meta name='keywords' content='{{ page.tags | join: ', ' }}'>
     {%- else -%}
-      <meta name="description" content="{{ site.description }}">
-      <meta name="keywords" content="{{ site.keywords | join: ', ' }}">
+      <meta name='description' content='{{ site.description }}'>
+      <meta name='keywords' content='{{ site.keywords | join: ', ' }}'>
     {%- endif -%}
-    <meta name="author" content="{{ site.author.name }}">
-    <meta name="robots" content="index, follow">
-    <meta name="application-name" content="{{ site.author.name }}'s Blog">
-    <meta name="theme-color" content="#d74514">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="msapplication-TileColor" content="#d74514">
+    <meta name='author' content='{{ site.author.name }}'>
+    <meta name='robots' content='index, follow'>
+    <meta name='application-name' content="{{ site.author.name }}'s Blog">
+    <meta name='theme-color' content='#d74514'>
+    <meta
+      name='apple-mobile-web-app-status-bar-style'
+      content='black-translucent'
+    >
+    <meta name='msapplication-TileColor' content='#d74514'>
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property='og:type' content='website'>
+    <meta property='og:url' content='{{ page.url | absolute_url }}'>
     <meta
-      property="og:title"
-      content="
+      property='og:title'
+      content='
         {%- if page.title -%}
           {%- if page.layout == 'post' -%}
             {{ site.author.name | append: "'s blog" | escape }} | {{ page.title | escape }}
@@ -35,43 +44,66 @@ layout: compress
         {%- else -%}
           {{ site.author.name | append: "'s blog" | escape }}
         {%- endif -%}
-      "
+      '
     >
     {%- if page.layout == 'post' -%}
-      <meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | append: '...' }}">
+      <meta
+        property='og:description'
+        content='{{ page.excerpt | strip_html | strip_newlines | append: '...' }}'
+      >
     {%- else -%}
-      <meta property="og:description" content="{{ site.description }}">
+      <meta property='og:description' content='{{ site.description }}'>
     {%- endif -%}
-    <meta property="og:image" content="{{ site.url }}/assets/img/ogimage.png">
+    <meta property='og:image' content='{{ site.url }}/assets/img/ogimage.png'>
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{ page.url | absolute_url }}">
-    <meta name="twitter:title" content="{{ page.title | default: site.title }}">
+    <meta name='twitter:card' content='summary_large_image'>
+    <meta name='twitter:url' content='{{ page.url | absolute_url }}'>
+    <meta name='twitter:title' content='{{ page.title | default: site.title }}'>
     {%- if page.layout == 'post' -%}
-      <meta name="twitter:description" content="{{ page.excerpt | strip_html | strip_newlines | append: '...' }}">
+      <meta
+        name='twitter:description'
+        content='{{ page.excerpt | strip_html | strip_newlines | append: '...' }}'
+      >
     {%- else -%}
-      <meta name="twitter:description" content="{{ site.description }}">
+      <meta name='twitter:description' content='{{ site.description }}'>
     {%- endif -%}
-    <meta name="twitter:image" content="{{ site.url }}/assets/img/twittercard.png">
+    <meta
+      name='twitter:image'
+      content='{{ site.url }}/assets/img/twittercard.png'
+    >
 
     <!-- Favicon -->
     <link
-      rel="icon"
-      type="image/svg+xml"
-      href="{{ site.url }}/assets/img/favicon.svg"
+      rel='icon'
+      type='image/svg+xml'
+      href='{{ site.url }}/assets/img/favicon.svg'
     >
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ site.url }}/assets/img/apple-touch-icon.png">
+    <link
+      rel='apple-touch-icon'
+      sizes='180x180'
+      href='{{ site.url }}/assets/img/apple-touch-icon.png'
+    >
 
     <!-- meta -->
-    <meta name="baseurl" content="{{ site.baseurl }}">
-    <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml">
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ site.url }}/sitemap.xml">
+    <meta name='baseurl' content='{{ site.baseurl }}'>
+    <link
+      rel='alternate'
+      type='application/rss+xml'
+      href='{{ site.url }}/feed.xml'
+    >
+    <link
+      rel='sitemap'
+      type='application/xml'
+      title='Sitemap'
+      href='{{ site.url }}/sitemap.xml'
+    >
 
     <title>
       {%- if page.title -%}
         {%- if page.layout == 'post' -%}
-          {{ site.author.name | append: "'s blog" | escape }} | {{ page.title | escape }}
+          {{ site.author.name | append: "'s blog" | escape }} |
+          {{ page.title | escape }}
         {%- else -%}
           {{ page.title | escape }}
         {%- endif -%}
@@ -82,82 +114,92 @@ layout: compress
 
     <!-- Baidu siteverify -->
     {%- if site.baidu_site_verification -%}
-      <meta name="baidu-site-verification" content="{{ site.baidu_site_verification }}">
+      <meta
+        name='baidu-site-verification'
+        content='{{ site.baidu_site_verification }}'
+      >
     {%- endif -%}
 
     <!-- Analytics -->
     {%- if site.google_analytics -%}
-      <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+      <script
+        async
+        src='https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}'
+      ></script>
       <script>
-        window.dataLayer = window.dataLayer || [];
+        window.dataLayer = window.dataLayer || []
         function gtag() {
-          dataLayer.push(arguments);
+          dataLayer.push(arguments)
         }
-        gtag('js', new Date());
-        gtag('config', '{{ site.google_analytics }}');
+        gtag('js', new Date())
+        gtag('config', '{{ site.google_analytics }}')
       </script>
     {%- endif -%}
     {%- if site.umami -%}
-      <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ site.umami }}"></script>
+      <script
+        defer
+        src='https://cloud.umami.is/script.js'
+        data-website-id='{{ site.umami }}'
+      ></script>
     {%- endif -%}
 
     <!-- Font Awesome -->
     {%- if page.layout == 'post' -%}
       <link
-        rel="preload"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        as="style"
+        rel='preload'
+        href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'
+        as='style'
         onload="this.onload=null;this.rel='stylesheet'"
       >
       <noscript>
         <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          rel='stylesheet'
+          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'
         >
       </noscript>
     {%- endif -%}
 
     <!-- 主样式表 -->
     <link
-      rel="stylesheet"
-      href="{{ '/assets/css/main.css' | relative_url }}"
+      rel='stylesheet'
+      href='{{ '/assets/css/main.css' | relative_url }}'
     >
 
     <!-- Giscus 样式表 -->
     {% if page.layout == 'post' %}
       <link
-        rel="preload"
-        href="{{ '/assets/css/giscus_light.css' | relative_url }}"
-        as="style"
+        rel='preload'
+        href='{{ '/assets/css/giscus_light.css' | relative_url }}'
+        as='style'
         onload="this.onload=null;this.rel='stylesheet'"
       >
       <link
-        rel="preload"
-        href="{{ '/assets/css/giscus_dark.css' | relative_url }}"
-        as="style"
+        rel='preload'
+        href='{{ '/assets/css/giscus_dark.css' | relative_url }}'
+        as='style'
         onload="this.onload=null;this.rel='stylesheet'"
       >
       <noscript>
         <link
-          rel="stylesheet"
-          href="{{ '/assets/css/giscus_light.css' | relative_url }}"
+          rel='stylesheet'
+          href='{{ '/assets/css/giscus_light.css' | relative_url }}'
         >
         <link
-          rel="stylesheet"
-          href="{{ '/assets/css/giscus_dark.css' | relative_url }}"
+          rel='stylesheet'
+          href='{{ '/assets/css/giscus_dark.css' | relative_url }}'
         >
       </noscript>
     {% endif %}
   </head>
 
-  <body color_theme="{{ site.theme_config.color_theme | default: 'light' }}">
-    <header class="no-select no-print">
+  <body color_theme='{{ site.theme_config.color_theme | default: 'light' }}'>
+    <header class='no-select no-print'>
       {%- include header.html -%}
     </header>
     <main>
       {{ content }}
     </main>
-    <footer class="no-select no-print">
+    <footer class='no-select no-print'>
       {%- include footer.html -%}
     </footer>
 
@@ -165,32 +207,37 @@ layout: compress
 
     <!-- 代码复制 -->
     {% if page.layout == 'post' %}
-      <script src="{{ '/assets/js/copy_code.js' | relative_url }}"></script>
+      <script src='{{ '/assets/js/copy_code.js' | relative_url }}'></script>
     {% endif %}
 
     <!-- 图标加载优化 -->
-    <script src="{{ '/assets/js/optimize.js' | relative_url }}"></script>
+    <script src='{{ '/assets/js/optimize.js' | relative_url }}'></script>
 
     <!-- 数学公式 -->
     {% if page.mathjax %}
       <script
         async
-        id="MathJax-script"
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+        id='MathJax-script'
+        src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
       ></script>
     {% endif %}
 
     <!-- mermaid.js -->
     {% if page.mermaid %}
-      <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+      <script
+        src='https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js'
+      ></script>
       <script async>
         document.addEventListener('DOMContentLoaded', function () {
           mermaid.initialize({
             startOnLoad: true,
             theme: 'default',
-          });
-          window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
-        });
+          })
+          window.mermaid.init(
+            undefined,
+            document.querySelectorAll('.language-mermaid')
+          )
+        })
       </script>
     {% endif %}
   </body>
