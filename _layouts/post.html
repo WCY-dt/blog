@@ -1,38 +1,40 @@
 ---
 layout: default
 ---
-<div id="post-container">
-  <hgroup id="post-info-container">
-    <h1 id="post-title">
+<div id='post-container'>
+  <hgroup id='post-info-container'>
+    <h1 id='post-title'>
       {% if page.series %}
-        <div id="post-series">{{ page.series }} | ({{ page.series_index }})</div>
+        <div id='post-series'>
+          {{ page.series }} | ({{ page.series_index }})
+        </div>
       {% endif %}
-      <div id="post-title-text">
+      <div id='post-title-text'>
         {{ page.title }}
       </div>
     </h1>
-    <div id="post-info" class="no-select no-print">
-      <div id="post-date">
-        <a href="{{ '/year/' | relative_url }}{{ page.date | date: "%Y" }}/">
-          <span class="material-symbols-outlined"> calendar_month </span>
+    <div id='post-info' class='no-select no-print'>
+      <div id='post-date'>
+        <a href='{{ '/year/' | relative_url }}{{ page.date | date: "%Y" }}/'>
+          <span class='material-symbols-outlined'> calendar_month </span>
           {{- page.date | date: site.theme_config.date_format -}}
         </a>
       </div>
-      <div id="post-categories">
+      <div id='post-categories'>
         {%- if page.categories -%}
           {%- for category in page.categories -%}
-            <a href="{{ '/category/' | relative_url }}{{ category | slugify }}/">
-              <span class="material-symbols-outlined"> archive </span>
+            <a href='{{ '/category/' | relative_url }}{{ category | slugify }}/'>
+              <span class='material-symbols-outlined'> archive </span>
               {{ category -}}
             </a>
           {%- endfor -%}
         {%- endif -%}
       </div>
-      <div id="post-tags">
+      <div id='post-tags'>
         {%- if page.tags -%}
           {%- for tag in page.tags -%}
-            <a href="{{ '/tag/' | relative_url }}{{ tag | slugify }}/">
-              <span class="material-symbols-outlined"> tag </span>
+            <a href='{{ '/tag/' | relative_url }}{{ tag | slugify }}/'>
+              <span class='material-symbols-outlined'> tag </span>
               {{ tag }}
             </a>
           {%- endfor -%}
@@ -43,12 +45,12 @@ layout: default
       {% include series_head.html %}
     {%- endif -%}
   </hgroup>
-  <article id="post-content-container">
+  <article id='post-content-container'>
     {{ content }}
   </article>
-  <script src="{{ '/assets/js/modify_id.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/lightbox.js' | relative_url }}"></script>
-  <div id="post-footer-container">
+  <script src='{{ '/assets/js/modify_id.js' | relative_url }}'></script>
+  <script src='{{ '/assets/js/lightbox.js' | relative_url }}'></script>
+  <div id='post-footer-container'>
     {% include copyright.html %}
     {%- if page.series -%}
       {% include series_foot.html %}

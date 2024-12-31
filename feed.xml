@@ -10,7 +10,7 @@
     <language>{{ site.lang }}</language>
     <copyright>Copyright {{ site.time | date: '%Y' }}, {{ site.author.name }}</copyright>
     <managingEditor>{{ site.author.email }} ({{ site.author.name }})</managingEditor>
-    <webMaster>{{ site.author.email }} ({{ site.author.name }})</webMaster>    
+    <webMaster>{{ site.author.email }} ({{ site.author.name }})</webMaster>
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>

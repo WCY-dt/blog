@@ -1,69 +1,69 @@
-<div id="share-container" class="no-select no-print">
+<div id='share-container' class='no-select no-print'>
   <h1>Share This Post</h1>
   <ul>
     {% if site.share contains 'hackernews' %}
       <li>
         <a
-          href="https://news.ycombinator.com/submitlink?u={{ site.url | append: page.url | url_encode }}&t={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
+          href='https://news.ycombinator.com/submitlink?u={{ site.url | append: page.url | url_encode }}&t={{ page.title | url_encode }}'
+          target='_blank'
+          rel='noopener'
         >
-          <i class="fa-brands fa-hacker-news"></i>
+          <i class='fa-brands fa-hacker-news'></i>
         </a>
       </li>
     {% endif %}
     {% if site.share contains 'twitter' %}
       <li>
         <a
-          href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url | append: page.url | url_encode }}"
-          target="_blank"
-          rel="noopener"
+          href='https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url | append: page.url | url_encode }}'
+          target='_blank'
+          rel='noopener'
         >
-          <i class="fa-brands fa-x-twitter"></i>
+          <i class='fa-brands fa-x-twitter'></i>
         </a>
       </li>
     {% endif %}
     {% if site.share contains 'facebook' %}
       <li>
         <a
-          href="https://www.facebook.com/sharer/sharer.php?u={{ site.url | append: page.url | url_encode }}"
-          target="_blank"
-          rel="noopener"
+          href='https://www.facebook.com/sharer/sharer.php?u={{ site.url | append: page.url | url_encode }}'
+          target='_blank'
+          rel='noopener'
         >
-          <i class="fa-brands fa-facebook"></i>
+          <i class='fa-brands fa-facebook'></i>
         </a>
       </li>
     {% endif %}
     {% if site.share contains 'reddit' %}
       <li>
         <a
-          href="https://www.reddit.com/r/programming/submit?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
+          href='https://www.reddit.com/r/programming/submit?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}'
+          target='_blank'
+          rel='noopener'
         >
-          <i class="fa-brands fa-reddit"></i>
+          <i class='fa-brands fa-reddit'></i>
         </a>
       </li>
     {% endif %}
     {% if site.share contains 'telegram' %}
       <li>
         <a
-          href="https://t.me/share/url?url={{ site.url | append: page.url | url_encode }}&text={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
+          href='https://t.me/share/url?url={{ site.url | append: page.url | url_encode }}&text={{ page.title | url_encode }}'
+          target='_blank'
+          rel='noopener'
         >
-          <i class="fa-brands fa-telegram"></i>
+          <i class='fa-brands fa-telegram'></i>
         </a>
       </li>
     {% endif %}
     {% if site.share contains 'weibo' %}
       <li>
         <a
-          href="http://service.weibo.com/share/share.php?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}"
-          target="_blank"
-          rel="noopener"
+          href='http://service.weibo.com/share/share.php?url={{ site.url | append: page.url | url_encode }}&title={{ page.title | url_encode }}'
+          target='_blank'
+          rel='noopener'
         >
-          <i class="fa-brands fa-weibo"></i>
+          <i class='fa-brands fa-weibo'></i>
         </a>
       </li>
     {% endif %}

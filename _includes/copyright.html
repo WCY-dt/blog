@@ -1,46 +1,50 @@
 {%- if page.copyrights contains '原创' -%}
-  <div id="copyright-container">
+  <div id='copyright-container'>
     <img
-      src="/assets/img/cc.svg"
-      alt="copyright cc"
-      class="no-select"
+      src='/assets/img/cc.svg'
+      alt='copyright cc'
+      class='no-select'
     >
     <img
-      src="/assets/img/by.svg"
-      alt="copyright by"
-      class="no-select"
+      src='/assets/img/by.svg'
+      alt='copyright by'
+      class='no-select'
     >
     <img
-      src="/assets/img/nc.svg"
-      alt="copyright nc"
-      class="no-select"
+      src='/assets/img/nc.svg'
+      alt='copyright nc'
+      class='no-select'
     >
     <img
-      src="/assets/img/sa.svg"
-      alt="copyright sa"
-      class="no-select"
+      src='/assets/img/sa.svg'
+      alt='copyright sa'
+      class='no-select'
     >
-    <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" class="no-print">
+    <p
+      xmlns:cc='http://creativecommons.org/ns#'
+      xmlns:dct='http://purl.org/dc/terms/'
+      class='no-print'
+    >
       <a
-        property="dct:title"
-        rel="cc:attributionURL"
-        href="{{ page.url | absolute_url }}"
+        property='dct:title'
+        rel='cc:attributionURL'
+        href='{{ page.url | absolute_url }}'
       >
         {{- page.title -}}
       </a>
       © {{ page.date | date: '%Y' }} by
       <a
-        rel="cc:attributionURL dct:creator"
-        property="cc:attributionName"
-        href="{{ site.author.link }}"
+        rel='cc:attributionURL dct:creator'
+        property='cc:attributionName'
+        href='{{ site.author.link }}'
       >
         {{- site.author.name -}}
       </a>
       is licensed under
       <a
-        href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
-        target="_blank"
-        rel="license noopener noreferrer"
+        href='https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1'
+        target='_blank'
+        rel='license noopener noreferrer'
         >CC BY-NC-SA 4.0</a
       >
     </p>

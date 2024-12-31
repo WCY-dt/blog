@@ -1,14 +1,18 @@
-<div id="sidebar-container" class="no-select no-print">
+<div id='sidebar-container' class='no-select no-print'>
   <!-- back to top -->
-  <span id="back-to-top-button" class="material-symbols-outlined"> vertical_align_top </span>
-  <script src="{{ '/assets/js/back_to_top.js' | relative_url }}"></script>
+  <span id='back-to-top-button' class='material-symbols-outlined'>
+    vertical_align_top
+  </span>
+  <script src='{{ '/assets/js/back_to_top.js' | relative_url }}'></script>
   <!-- menu -->
-  <div id="menu-container-mobile">
-    <span id="menu-container-mobile-button" class="material-symbols-outlined">featured_play_list</span>
-    <menu id="menu-container-mobile-menu">
+  <div id='menu-container-mobile'>
+    <span id='menu-container-mobile-button' class='material-symbols-outlined'
+      >featured_play_list</span
+    >
+    <menu id='menu-container-mobile-menu'>
       {% for item in site.navy %}
-        <a href="{{ item.url | relative_url }}">
-          <span class="material-symbols-outlined">
+        <a href='{{ item.url | relative_url }}'>
+          <span class='material-symbols-outlined'>
             {{ item.icon }}
           </span>
           <p>{{ item.title }}</p>
@@ -16,15 +20,15 @@
       {% endfor %}
     </menu>
   </div>
-  <script src="{{ '/assets/js/menu.js' | relative_url }}"></script>
+  <script src='{{ '/assets/js/menu.js' | relative_url }}'></script>
   <!-- theme switcher -->
-  <span id="theme-switcher" class="material-symbols-outlined">dark_mode</span>
-  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+  <span id='theme-switcher' class='material-symbols-outlined'>dark_mode</span>
+  <script src='{{ '/assets/js/theme.js' | relative_url }}'></script>
   <!-- toc -->
   {% if page.layout == 'post' %}
-    <div id="toc-container" class="no-select no-print">
+    <div id='toc-container' class='no-select no-print'>
       <button>
-        <span class="material-symbols-outlined">toc</span>
+        <span class='material-symbols-outlined'>toc</span>
       </button>
       {% include toc.html html=content h_min=2 h_max=4 %}
     </div>
