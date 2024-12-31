@@ -86,7 +86,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
         color: var(--primary-dark-color);
         border: none;
 
-        &>div.mx-2.mb-\[-1px\].mt-2 {
+        & > div.mx-2.mb-\[-1px\].mt-2 {
           margin-bottom: 0 !important;
 
           .color-text-primary {
@@ -139,7 +139,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
       }
 
       .gsc-comment-box-bottom {
-        &>button {
+        & > button {
           color: var(--primary-dark-color);
           transition: all 0.25s ease-in-out;
 
@@ -151,7 +151,6 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
         }
 
         .gsc-comment-box-buttons {
-
           button,
           a {
             border: none;
@@ -173,12 +172,12 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
       .gsc-comment {
         background-color: var(--primary-extra-light-color);
 
-        &>div {
+        & > div {
           border: none;
 
           .gsc-comment-header {
             .gsc-comment-author {
-              &>div {
+              & > div {
                 span {
                   border: none;
                   background-color: var(--primary-light-color);
@@ -187,8 +186,9 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             }
           }
 
-          .gsc-comment-content {
-            padding-top: 2rem;
+          .gsc-comment-content,
+          .gsc-reply-content {
+            padding-top: 1rem;
 
             .zeroclipboard-container button {
               position: absolute;
@@ -405,8 +405,10 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               }
             }
 
-            p code {
+            p code.notranslate {
               font-weight: 700;
+              background-color: transparent;
+              padding: 0;
             }
 
             hr {
@@ -488,10 +490,24 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             .gsc-reply {
               margin-left: 1rem;
               border-left: 2px solid var(--primary-dark-color);
+
+              .gsc-reply-content {
+                padding-top: 0;
+
+                div:has(.notranslate) {
+                  border: 0.05rem solid var(--primary-dark-color);
+                  box-sizing: border-box;
+                }
+
+                blockquote {
+                  border: 0.05rem solid var(--primary-dark-color);
+                  border-left: 0.25rem solid var(--primary-dark-color);
+                }
+              }
             }
 
             .gsc-reply-author {
-              &>div {
+              & > div {
                 span {
                   border: none;
                   background-color: var(--primary-semi-light-color);
