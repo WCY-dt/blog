@@ -34,6 +34,9 @@
         "MD024": false, // Disable multiple headers with the same content check
         "MD026": false, // Disable Trailing punctuation in header check
         "MD028": false, // Disable blank line inside blockquote check
+        "MD029": false, // Disable Ordered list item prefix check
+        "MD031": false, // Disable Fenced code blocks should be surrounded by blank lines check
+        "MD032": false, // Disable Lists should be surrounded by blank lines check
         "MD033": false // Disable inline HTML check
     },
     "files.exclude": {
