@@ -9,9 +9,11 @@
         </url>
     {% endif %}
   {% endfor %}
-  {% for page in site.posts %}
-    <url>
-      <loc>{{ site.url }}{{ page.url | replace: 'index.html', '' }}</loc>
+  {% for post in site.posts %}
+    {% unless post.draft %}
+      <url>
+        <loc>{{ site.url }}{{ post.url | replace: 'index.html', '' }}</loc>
       </url>
+    {% endunless %}
   {% endfor %}
 </urlset>
