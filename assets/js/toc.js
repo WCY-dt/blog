@@ -7,6 +7,11 @@ function tocActive() {
 
     let headerLinks = document.querySelectorAll('h2, h3, h4, h5, h6')
 
+    if (headerLinks.length === 0) {
+        toc.style.display = 'none'
+        return
+    }
+
     let headerLinksOffset = Array.from(headerLinks).map(function (link) {
         return link.getBoundingClientRect().top + window.scrollY
     })
