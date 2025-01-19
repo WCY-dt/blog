@@ -18,7 +18,11 @@
     {% for post in site.posts limit:20 %}
       {% unless post.draft %}
         <item>
-          <title>{{ post.title | xml_escape }}</title>
+          {% if post.series %}
+            <title>{{ post.series | escape }} ({{ post.series_index }}) - {{ post.title | xml_escape }}</title>
+          {% else %}
+            <title>{{ post.title | xml_escape }}</title>
+          {% endif %}
           <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
           <description>{{ post.content | xml_escape }}</description>
           <author>{{ site.author.email }} ({{ site.author.name }})</author>

@@ -37,7 +37,11 @@ layout: compress
       content='
         {%- if page.title -%}
           {%- if page.layout == 'post' -%}
-            {{ site.author.name | append: "'s blog" | escape }} | {{ page.title | escape }}
+            {%- if page.series -%}
+              {{ site.author.name | append: "'s blog" | escape }} | {{ page.series | escape }} ({{ page.series_index }}) - {{ page.title | escape }}
+            {%- else -%}
+              {{ site.author.name | append: "'s blog" | escape }} | {{ page.title | escape }}
+            {%- endif -%}
           {%- else -%}
             {{ page.title | escape }}
           {%- endif -%}
@@ -102,8 +106,14 @@ layout: compress
     <title>
       {%- if page.title -%}
         {%- if page.layout == 'post' -%}
-          {{ site.author.name | append: "'s blog" | escape }} |
-          {{ page.title | escape }}
+          {%- if page.series -%}
+            {{ site.author.name | append: "'s blog" | escape }} |
+            {{ page.series | escape }} ({{ page.series_index }}) -
+            {{ page.title | escape }}
+          {%- else -%}
+            {{ site.author.name | append: "'s blog" | escape }} |
+            {{ page.title | escape }}
+          {%- endif -%}
         {%- else -%}
           {{ page.title | escape }}
         {%- endif -%}

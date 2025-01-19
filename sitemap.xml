@@ -6,7 +6,7 @@
     {% if page.url contains '.xml' or page.url contains 'assets' or page.url contains '.json' or page.url contains '404' or page.url contains '404' %}{% else %}
       <url>
         <loc>{{ site.url }}{{ page.url }}</loc>
-        </url>
+      </url>
     {% endif %}
   {% endfor %}
   {% for post in site.posts %}
