@@ -121,6 +121,26 @@
     background-color: var(--white-color);
     overflow: hidden;
 
+    details {
+      border: 0.05rem solid var(--primary-color);
+      padding: 0.5rem 0.5rem 0 0.5rem;
+      cursor: pointer;
+
+      summary {
+        font-weight: bold;
+        margin: -.5em -.5em 0;
+        padding: .5em;
+        background-color: var(--primary-color);
+        color: var(--white-color);
+      }
+
+      &[open] {
+        summary {
+          border-bottom: 0.05rem solid var(--primary-color);
+        }
+      }
+    }
+
     p,
     ul,
     ol,
