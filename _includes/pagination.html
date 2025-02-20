@@ -1,11 +1,11 @@
 {%- if posts.size > 0 -%}
   {%- for post in posts -%}
-    {%- if post.draft -%}
+    {%- if post.draft and jekyll.environment == 'production' -%}
       {%- continue -%}
     {%- endif -%}
     <a
       id='pagination-item-container'
-      class='no-select no-print'
+      class='no-select no-print {% if post.draft and jekyll.environment != 'production' %}draft{% endif %}'
       href='{{ post.url | relative_url }}'
     >
       <span id='pagination-item-title'>
@@ -16,8 +16,14 @@
         {% endif %}
         <div id='pagination-item-title-text'>
           {{ post.title }}
+          {%- if post.draft and jekyll.environment != 'production' -%}
+            <span class='material-symbols-outlined'> stylus_note </span>
+          {%- endif -%}
         </div>
       </span>
+      {%- if post.draft and jekyll.environment != 'production' -%}
+        <div id='pagination-item-draft'>Draft will hide on production</div>
+      {%- endif -%}
       <div id='pagination-item-info'>
         <div id='pagination-item-time'>
           <span class='material-symbols-outlined'> calendar_month </span>

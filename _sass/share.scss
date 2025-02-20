@@ -53,4 +53,14 @@
       }
     }
   }
+
+  #share-draft {
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
+    background-color: var(--primary-light-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
 }

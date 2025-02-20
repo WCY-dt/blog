@@ -107,50 +107,56 @@ layout: compress
       {%- if page.title -%}
         {%- if page.layout == 'post' -%}
           {%- if page.series -%}
+            {%- if jekyll.environment != 'production' -%}[PREVIEW]{%- endif -%}
             {{ site.author.name | append: "'s blog" | escape }} |
             {{ page.series | escape }} ({{ page.series_index }}) -
             {{ page.title | escape }}
           {%- else -%}
+            {%- if jekyll.environment != 'production' -%}[PREVIEW]{%- endif -%}
             {{ site.author.name | append: "'s blog" | escape }} |
             {{ page.title | escape }}
           {%- endif -%}
         {%- else -%}
+          {%- if jekyll.environment != 'production' -%}[PREVIEW]{%- endif -%}
           {{ page.title | escape }}
         {%- endif -%}
       {%- else -%}
+        {%- if jekyll.environment != 'production' -%}[PREVIEW]{%- endif -%}
         {{ site.author.name | append: "'s blog" | escape }}
       {%- endif -%}
     </title>
 
-    <!-- Baidu siteverify -->
-    {%- if site.baidu_site_verification -%}
-      <meta
-        name='baidu-site-verification'
-        content='{{ site.baidu_site_verification }}'
-      >
-    {%- endif -%}
+    {%- if jekyll.environment == 'production' -%}
+      <!-- Baidu siteverify -->
+      {%- if site.baidu_site_verification -%}
+        <meta
+          name='baidu-site-verification'
+          content='{{ site.baidu_site_verification }}'
+        >
+      {%- endif -%}
 
-    <!-- Analytics -->
-    {%- if site.google_analytics -%}
-      <script
-        async
-        src='https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}'
-      ></script>
-      <script>
-        window.dataLayer = window.dataLayer || []
-        function gtag() {
-          dataLayer.push(arguments)
-        }
-        gtag('js', new Date())
-        gtag('config', '{{ site.google_analytics }}')
-      </script>
-    {%- endif -%}
-    {%- if site.umami -%}
-      <script
-        defer
-        src='https://cloud.umami.is/script.js'
-        data-website-id='{{ site.umami }}'
-      ></script>
+      <!-- Analytics -->
+      {%- if site.google_analytics -%}
+        <script
+          async
+          src='https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}'
+        ></script>
+        <script>
+          window.dataLayer = window.dataLayer || []
+          function gtag() {
+            dataLayer.push(arguments)
+          }
+          gtag('js', new Date())
+          gtag('config', '{{ site.google_analytics }}')
+        </script>
+      {%- endif -%}
+      {%- if site.umami -%}
+        <script
+          defer
+          src='https://cloud.umami.is/script.js'
+          data-website-id='{{ site.umami }}'
+        ></script>
+      {%- endif -%}
     {%- endif -%}
 
     <!-- Font Awesome -->
@@ -176,7 +182,7 @@ layout: compress
     >
 
     <!-- Giscus 样式表 -->
-    {% if page.layout == 'post' %}
+    {% if page.layout == 'post' and jekyll.environment == 'production' %}
       <link
         rel='preload'
         href='{{ '/assets/css/giscus_light.css' | relative_url }}'

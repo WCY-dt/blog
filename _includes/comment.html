@@ -1,27 +1,32 @@
 {% if page.comments and site.giscus %}
   <div id='comment-container' class='no-select no-print'>
     <h1>Comments</h1>
-    <script
-      src='https://giscus.app/client.js'
-      data-repo='{{ site.giscus.data-repo }}'
-      data-repo-id='{{ site.giscus.data-repo-id }}'
-      data-category='Comments'
-      data-category-id='{{ site.giscus.data-category-id }}'
-      data-mapping='title'
-      data-strict='0'
-      data-reactions-enabled='1'
-      data-emit-metadata='0'
-      data-input-position='top'
-      data-theme='{{ site.url }}/assets/css/giscus_light.css'
-      data-lang='en'
-      data-loading='lazy'
-      crossorigin='anonymous'
-      async
-    ></script>
+    {%- if jekyll.environment == 'production' -%}
+      <script
+        src='https://giscus.app/client.js'
+        data-repo='{{ site.giscus.data-repo }}'
+        data-repo-id='{{ site.giscus.data-repo-id }}'
+        data-category='Comments'
+        data-category-id='{{ site.giscus.data-category-id }}'
+        data-mapping='title'
+        data-strict='0'
+        data-reactions-enabled='1'
+        data-emit-metadata='0'
+        data-input-position='top'
+        data-theme='{{ site.url }}/assets/css/giscus_light.css'
+        data-lang='en'
+        data-loading='lazy'
+        crossorigin='anonymous'
+        async
+      ></script>
+    {%- else -%}
+      <div id='comment-draft'>Comments are unavailable on development</div>
+    {%- endif -%}
   </div>
   <script>
     const commentScript = document.querySelector('#comment-container script')
     function setCommentTheme(currentTheme) {
+      if (!commentScript) return
       commentScript.setAttribute(
         'data-theme',
         `{{ site.url }}/assets/css/giscus_${currentTheme}.css`

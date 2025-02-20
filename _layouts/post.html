@@ -1,6 +1,11 @@
 ---
 layout: default
 ---
+{% if page.draft and jekyll.environment == 'production' %}
+  <script>
+    window.location.replace('{{ site.url }}/404.html')
+  </script>
+{% endif %}
 <div id='post-container'>
   <hgroup id='post-info-container'>
     <h1 id='post-title'>
@@ -11,8 +16,14 @@ layout: default
       {% endif %}
       <div id='post-title-text'>
         {{ page.title }}
+        {%- if page.draft and jekyll.environment != 'production' -%}
+          <span class='material-symbols-outlined'> stylus_note </span>
+        {%- endif -%}
       </div>
     </h1>
+    {%- if page.draft and jekyll.environment != 'production' -%}
+      <div id='post-draft'>Draft will redirect to 404 page on production</div>
+    {%- endif -%}
     <div id='post-info' class='no-select no-print'>
       <div id='post-date'>
         <a href='{{ '/year/' | relative_url }}{{ page.date | date: "%Y" }}/'>
