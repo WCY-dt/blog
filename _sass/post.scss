@@ -124,7 +124,6 @@
     details {
       border: 0.05rem solid var(--primary-color);
       padding: 0.5rem 0.5rem 0 0.5rem;
-      cursor: pointer;
 
       summary {
         font-weight: bold;
@@ -132,6 +131,12 @@
         padding: .5em;
         background-color: var(--primary-color);
         color: var(--white-color);
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
       }
 
       &[open] {

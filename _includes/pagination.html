@@ -48,17 +48,29 @@
 
 {%- assign non_draft_posts_count = 0 -%}
 {%- for post in posts -%}
-  {%- unless post.draft -%}
+  {%- unless post.draft and jekyll.environment == 'production' -%}
     {%- assign non_draft_posts_count = non_draft_posts_count | plus: 1 -%}
   {%- endunless -%}
 {%- endfor -%}
 
-<p id='pagination-count' class='no-select no-print'>
-  {%- if non_draft_posts_count == 0 -%}
-    - no public post -
-  {%- elsif non_draft_posts_count == 1 -%}
-    - find 1 public post -
-  {%- else -%}
-    - find {{ non_draft_posts_count }} public posts -
-  {%- endif -%}
-</p>
+{%- if jekyll.environment == 'production' -%}
+  <p id='pagination-count' class='no-select no-print'>
+    {%- if non_draft_posts_count == 0 -%}
+      - no public post -
+    {%- elsif non_draft_posts_count == 1 -%}
+      - find 1 public post -
+    {%- else -%}
+      - find {{ non_draft_posts_count }} public posts -
+    {%- endif -%}
+  </p>
+{%- else -%}
+  <p id='pagination-count' class='no-select no-print'>
+    {%- if non_draft_posts_count == 0 -%}
+      - no post -
+    {%- elsif non_draft_posts_count == 1 -%}
+      - find 1 post -
+    {%- else -%}
+      - find {{ non_draft_posts_count }} posts -
+    {%- endif -%}
+  </p>
+{%- endif -%}
