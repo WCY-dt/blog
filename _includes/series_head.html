@@ -1,7 +1,15 @@
-{% assign sorted_posts = site.posts
-  | where: 'series', page.series
-  | sort: 'series_index'
-%}
+{% if jekyll.environment == 'production' %}
+  {% assign sorted_posts = site.posts
+    | where: 'series', page.series
+    | where: 'draft', false
+    | sort: 'series_index'
+  %}
+{% else %}
+  {% assign sorted_posts = site.posts
+    | where: 'series', page.series
+    | sort: 'series_index'
+  %}
+{% endif %}
 <div id='series-head-container' class='no-select no-print'>
   <p id='series-description'>
     {% if sorted_posts.size == 1 %}

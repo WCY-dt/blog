@@ -1,8 +1,7 @@
 {
     "files.associations": {
         "*.html": "liquid",
-        "*.md": "markdown",
-        "search.json": "liquid"
+        "*.md": "markdown"
     },
     "[liquid]": {
         "editor.tabSize": 2,
@@ -27,6 +26,9 @@
         "editor.insertSpaces": true,
         "editor.autoIndent": "advanced",
         "editor.detectIndentation": false,
+    },
+    "[json]": {
+      "editor.formatOnSave": false
     },
     "markdownlint.config": {
         "MD010": false, // Disable hard tabs check
