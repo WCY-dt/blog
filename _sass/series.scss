@@ -27,22 +27,37 @@
     display: grid;
     gap: 0.5rem 1rem;
     grid-template-columns: auto 1fr;
-    align-items: center;
+    place-items: auto center;
 
     span {
       text-align: right;
       color: var(--primary-semi-light-color);
+      transition: all 0.25s ease-in-out;
 
       &.material-symbols-outlined {
         font-size: 1.2rem;
         color: var(--primary-color);
+      }
+
+      @media (hover: hover) {
+        &:has(+ a:hover) {
+            color: var(--primary-color);
+        }
+
+        &:hover {
+          color: var(--primary-color);
+
+          & + a {
+            color: var(--primary-color);
+          }
+        }
       }
     }
 
     a {
       text-decoration: none;
       color: var(--primary-dark-color);
-      transition: all 0.3s ease-in-out;
+      transition: all 0.25s ease-in-out;
 
       &.em {
         color: var(--primary-color);
@@ -92,12 +107,18 @@
         &:hover {
           background-color: var(--primary-color);
           color: var(--white-color);
+
+          .material-symbols-outlined {
+            font-size: 2.5rem;
+          }
         }
       }
 
-      span {
+      .material-symbols-outlined {
         font-size: 3rem;
+        line-height: 3rem;
         color: var(--primary-semi-light-color);
+        transition: all 0.25s ease-in-out;
       }
     }
 

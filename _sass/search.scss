@@ -137,11 +137,14 @@
     #search-input {
       height: 2.5rem;
       font-size: 1.25rem;
+      box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
     }
 
     #results-container {
       bottom: 2.5rem;
       width: 22rem;
+      box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+      z-index: -1;
     }
   }
 }

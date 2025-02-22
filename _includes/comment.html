@@ -26,8 +26,9 @@
     {%- endif -%}
   </div>
   <script>
-    const commentScript = document.querySelector('#comment-container script')
-    function setCommentTheme(currentTheme) {
+    const commentScript = document.querySelector('#comment-container script') // This comment is required to eliminate error, TBH I don't know why
+
+    const setCommentTheme = (currentTheme) => {
       if (!commentScript) return
       commentScript.setAttribute(
         'data-theme',
