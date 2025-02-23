@@ -140,6 +140,8 @@
       }
 
       &[open] {
+        padding: 0.5rem 0.5rem 1rem 0.5rem;
+
         summary {
           border-bottom: 0.05rem solid var(--primary-color);
         }
