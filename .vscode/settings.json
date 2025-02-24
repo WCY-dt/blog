@@ -31,6 +31,7 @@
       "editor.formatOnSave": false
     },
     "markdownlint.config": {
+        "MD007": false, // Disable Unordered list indentation check
         "MD010": false, // Disable hard tabs check
         "MD013": false, // Disable line length check
         "MD024": false, // Disable multiple headers with the same content check
