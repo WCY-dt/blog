@@ -5,17 +5,29 @@ layout: default
   <h1 id='archive-title'>Category</h1>
 </hgroup>
 
-{% assign sorted_categories = site.categories | sort %}
-{% for category in sorted_categories %}
+{% assign categories_array = '' | split: '' %}
+{% for category in site.categories %}
+  {% assign category_name = category | first %}
+  {% assign posts_size = category | last | size %}
+  {% assign size_padded = posts_size | prepend: '0000' | slice: -4, 4 %}
+  {% assign category_item = size_padded | append: ',' | append: category_name %}
+  {% assign categories_array = categories_array | push: category_item %}
+{% endfor %}
+{% assign sorted_categories = categories_array | sort | reverse %}
+
+{% for category_string in sorted_categories %}
+  {% assign category_info = category_string | split: ',' %}
+  {% assign category_name = category_info[1] %}
+  {% assign posts_count = category_info[0] | plus: 0 %}
   <a
     id='category-item-container'
     class='no-select no-print'
-    href='{{ category | first | slugify }}'
+    href='{{ category_name | slugify }}'
   >
     <span id='category-item-title'>
-      {{ category | first }}
+      {{ category_name }}
     </span>
-    <div id='category-item-info'>{{ category | last | size }}</div>
+    <div id='category-item-info'>{{ posts_count }}</div>
   </a>
   {%- unless forloop.last -%}
     <hr class='category-hr'>
@@ -23,15 +35,11 @@ layout: default
 {% endfor %}
 
 <p id='pagination-count' class='no-select no-print'>
-  {%- assign categories_count = 0 -%}
-  {%- for category in site.categories -%}
-    {%- assign categories_count = categories_count | plus: 1 -%}
-  {%- endfor -%}
-  {%- if categories_count == 0 -%}
+  {%- if sorted_categories.size == 0 -%}
     - no category -
-  {%- elsif categories_count == 1 -%}
+  {%- elsif sorted_categories.size == 1 -%}
     - find 1 category -
   {%- else -%}
-    - find {{ categories_count }} categories -
+    - find {{ sorted_categories.size }} categories -
   {%- endif -%}
 </p>
