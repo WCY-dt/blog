@@ -5,7 +5,7 @@ function tocActive() {
     }
     let tocItems = toc.querySelectorAll('a')
 
-    let headerLinks = document.querySelectorAll('h2, h3, h4, h5, h6')
+    let headerLinks = document.querySelectorAll('h2, h3, h4')
 
     if (headerLinks.length === 0) {
         toc.style.display = 'none'

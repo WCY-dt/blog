@@ -222,10 +222,16 @@
       font-weight: 700;
     }
 
-    h5,
+    h5 {
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
     h6 {
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--primary-little-light-color);
     }
 
     p:has(img) {
