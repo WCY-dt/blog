@@ -342,6 +342,19 @@
       padding: 0.5rem;
       line-height: 1.2rem;
       font-size: 1rem;
+      overflow-x: auto;
+
+      * {
+        white-space: pre;
+      }
+
+      &::-webkit-scrollbar {
+        width: 0.4rem;
+        height: 0.4rem;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--primary-semi-light-color);
+      }
 
       &::after {
         content: 'Click to copy';
