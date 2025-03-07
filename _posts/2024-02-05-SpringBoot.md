@@ -188,276 +188,559 @@ public class WebConfig implements WebMvcConfigurer {
 
 这样，我们就实现了一个简单的 Spring Boot 项目。
 
-## MyBatis
+## Spring Boot 源码解读
 
-### 为什么需要 MyBatis
+### `@SpringBootApplication`
 
-在实际开发中，我们经常会遇到这样的情况：需要操作数据库，但是 JDBC 太底层，Spring JDBC 太繁琐。MyBatis 就是为了解决这些问题而生的。
+<details>
+<summary>点击查看 @SpringBootApplication 源码解读</summary>
+<div markdown="1">
 
-MyBatis 是一个持久层框架，它将 SQL 语句和 Java 对象映射起来，使得操作数据库更加方便。
-
-### MyBatis 使用
-
-MyBatis 使用 XML 文件或者注解来配置 SQL 语句。我们这里只介绍注解配置方法。
-
-首先，我们需要在配置文件中配置数据源：
-
-```yaml
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/book
-    username: root
-    password: password
-```
-
-然后，我们需要配置 MyBatis：
+直接看 `@SpringBootApplication` 注解的源码：
 
 ```java
-@Configuration
-@MapperScan("com.example.mapper")
-public class MyBatisConfig {
-  @Bean
-  public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-    SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-    factoryBean.setDataSource(dataSource);
-    return factoryBean.getObject();
-  }
+@Target(ElementType.TYPE) // 只能用于类、接口、枚举
+@Retention(RetentionPolicy.RUNTIME) // 注解在运行时保留
+@Documented
+@Inherited // 子类可以继承父类的注解
+@SpringBootConfiguration // Spring Boot 配置类
+@EnableAutoConfiguration // 启用自动配置
+@ComponentScan(excludeFilters = {
+    @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+    @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class)
+}) // 组件扫描
+public @interface SpringBootApplication {
+  // 排除部分自动配置类的方法
+  @AliasFor(annotation = EnableAutoConfiguration.class)
+  Class<?>[] exclude() default {};
+  @AliasFor(annotation = EnableAutoConfiguration.class)
+  String[] excludeName() default {};
+
+  // 设置 basePackage
+  @AliasFor(annotation = ComponentScan.class, attribute = "basePackages")
+  String[] scanBasePackages() default {};
+  @AliasFor(annotation = ComponentScan.class, attribute = "basePackageClasses")
+  Class<?>[] scanBasePackageClasses() default {};
+
+  // 设置 Bean 的命名规则
+  @AliasFor(annotation = ComponentScan.class, attribute = "nameGenerator")
+  Class<? extends BeanNameGenerator> nameGenerator() default BeanNameGenerator.class;
+
+  // 控制配置类中 @Bean 方法是否通过代理调用
+  @AliasFor(annotation = Configuration.class)
+  boolean proxyBeanMethods() default true;
 }
 ```
 
-然后，我们需要定义一个映射器接口：
+这里，我们就能看到 `@SpringBootApplication` 注解实际上就是给 `@SpringBootConfiguration`、`@EnableAutoConfiguration` 和 `@ComponentScan` 合体了。
 
-```java
-@Mapper
-public interface BookMapper {
-  @Select("SELECT * FROM book WHERE id = #{id}")
-  Book getBookById(int id);
+> 根据这里我们可以发现，一个最完整的 `@SpringBootApplication` 注解的使用是这样的：
+>
+> ```java
+> @SpringBootApplication(
+>     exclude = {DataSourceAutoConfiguration.class},
+>     excludeName = {"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"},
+>     scanBasePackages = {"com.example"},
+>     scanBasePackageClasses = {Application.class},
+>     nameGenerator = MyBeanNameGenerator.class,
+>     proxyBeanMethods = false
+> )
+> ```
+>
+> 当然，这个注解的使用是非常少见的，大部分时候我们只需要使用 `@SpringBootApplication` 注解就可以了。
 
-  @Insert("INSERT INTO book VALUES(#{id}, #{title}, #{author})")
-  void addBook(Book book);
-}
-```
+接下来，我们挨个来看这几个注解：
 
-这个接口中定义了两个方法，一个用于查询，一个用于插入。它们分别使用了 `@Select` 和 `@Insert` 注解。类似的，我们还可以使用 `@Update`、`@Delete` 注解。注解中的 SQL 语句使用 `#{}` 或者 `${}` 来引用参数。值得注意的是，`#{}` 使用的是占位符，通过预编译的方式来防止 SQL 注入，而 `${}` 直接拼接参数，容易导致 SQL 注入。
-
-然后，我们就可以使用映射器接口来操作数据库：
-
-```java
-@Service
-public class BookService {
-  @Autowired
-  private BookMapper bookMapper;
-
-  public Book getBookById(int id) {
-    return bookMapper.getBookById(id);
-  }
-
-  public void addBook(Book book) {
-    bookMapper.addBook(book);
-  }
-}
-```
-
-这样，我们就实现了一个简单的 MyBatis。
-
-### MyBatis 高级用法
-
-MyBatis 还有很多高级用法，例如：
-
-- **动态 SQL**
+- `@SpringBootConfiguration`
 
   ```java
-  @SelectProvider(type = BookSqlProvider.class, method = "getBook")
-  Book getBook(int id, String title);
-  ```
-
-  ```java
-  public class BookSqlProvider {
-    public String getBook(int id, String title) {
-      return new SQL() {% raw %}{{{% endraw %}
-        SELECT("*");
-        FROM("book");
-        if (id != 0) {
-          WHERE("id = #{id}");
-        }
-        if (title != null) {
-          WHERE("title = #{title}");
-        }
-      {% raw %}}}{% endraw %}.toString();
-    }
+  @Target(ElementType.TYPE)
+  @Retention(RetentionPolicy.RUNTIME)
+  @Documented
+  @Configuration
+  @Indexed
+  public @interface SpringBootConfiguration {
+    @AliasFor(annotation = Configuration.class)
+    boolean proxyBeanMethods() default true;
   }
   ```
 
-  它可以支持 `if`、`choose`、`when`、`otherwise`、`trim`、`where`、`set`、`foreach` 等标签。
+  可以看到，`@SpringBootConfiguration` 注解实际上就是 `@Configuration` 注解的一个子注解，它的作用是标记一个类是 Spring 的配置类。
 
-- **批量操作**
+- `@EnableAutoConfiguration`
 
   ```java
-  @InsertProvider(type = BookSqlProvider.class, method = "addBooks")
-  void addBooks(List<Book> books);
+  @Target(ElementType.TYPE)
+  @Retention(RetentionPolicy.RUNTIME)
+  @Documented
+  @Inherited
+  @AutoConfigurationPackage
+  @Import(AutoConfigurationImportSelector.class)
+  public @interface EnableAutoConfiguration {
+
+    String ENABLED_OVERRIDE_PROPERTY = "spring.boot.enableautoconfiguration";
+
+    Class<?>[] exclude() default {};
+
+    String[] excludeName() default {};
+  }
   ```
 
+  `@EnableAutoConfiguration` 注解最重要的功能就是利用 `@Import` 注解导入 `AutoConfigurationImportSelector` 类，这个类的作用就是根据条件加载 Bean。
+
+  对于 `AutoConfigurationImportSelector` 类，我们可以直接看它的 `selectImports` 方法：
+
   ```java
-  public class BookSqlProvider {
-    public String addBooks(Map<String, List<Book>> map) {
-      List<Book> books = map.get("books");
-      StringBuilder sql = new StringBuilder();
-      sql.append("INSERT INTO book VALUES ");
-      for (Book book : books) {
-        sql.append("(").append(book.getId()).append(", '").append(book.getTitle()).append("', '").append(book.getAuthor()).append("'), ");
+  @Override
+  public String[] selectImports(AnnotationMetadata annotationMetadata) {
+      // 判断是否启用自动装配
+      if (!isEnabled(annotationMetadata)) {
+          return NO_IMPORTS;
       }
-      sql.delete(sql.length() - 2, sql.length());
-      return sql.toString();
-    }
+
+      // 获取自动配置类的名称
+      AutoConfigurationEntry autoConfigurationEntry = getAutoConfigurationEntry(annotationMetadata);
+      // 返回配置类
+      return StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());
   }
   ```
 
-- **缓存**
+  这里跟踪进 `getAutoConfigurationEntry` 方法：
 
   ```java
-  @CacheNamespace
-  public interface BookMapper {
-    @Select("SELECT * FROM book WHERE id = #{id}")
-    @Options(useCache = true)
-    Book getBookById(int id);
+  protected AutoConfigurationEntry getAutoConfigurationEntry(AnnotationMetadata annotationMetadata) {
+      // 判断是否启用自动装配
+      if (!isEnabled(annotationMetadata)) {
+          return EMPTY_ENTRY;
+      }
+
+      // 解析 @EnableAutoConfiguration 或 @SpringBootApplication 注解的属性，提取 exclude 和 excludeName 参数
+      AnnotationAttributes attributes = getAttributes(annotationMetadata);
+
+      // 从 META-INF/spring.factories 文件中加载所有声明的自动配置类
+      List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes);
+
+      // 确保配置类无重复
+      configurations = removeDuplicates(configurations);
+
+      // 收集所有需要排除的配置类
+      Set<String> exclusions = getExclusions(annotationMetadata, attributes);
+
+      // 检查排除的类是否有效
+      checkExcludedClasses(configurations, exclusions);
+
+      // 从候选配置列表中移除所有排除的类
+      configurations.removeAll(exclusions);
+
+      // 基于 @Conditional 注解的条件过滤配置类
+      configurations = getConfigurationClassFilter().filter(configurations);
+
+      // 发布 AutoConfigurationImportEvent 事件，通知监听器已处理的自动配置类
+      fireAutoConfigurationImportEvents(configurations, exclusions);
+
+      return new AutoConfigurationEntry(configurations, exclusions);
   }
   ```
 
-  它可以支持 `@CacheNamespace`、`@Options` 注解。
+  这里我们可以看到，`getAutoConfigurationEntry` 方法的主要作用就是获取所有的自动配置类，并且排除掉不需要的自动配置类。同时，按照不同的条件，执行 `@Conditional` 注解的条件过滤配置类。最后，返回一个 `AutoConfigurationEntry` 对象，这个对象包含了所有的自动配置类和排除的自动配置类。
 
-  当我们添加了 `@CacheNamespace` 注解后，MyBatis 会自动缓存查询结果，当我们再次查询相同的数据时，MyBatis 会直接从缓存中获取数据，而不会再次查询数据库。
+- `@ComponentScan`
 
-### MyBatis Plus
+  这个注解我们在 IoC 的部分已经详细看过，这里就不再赘述了。
 
-MyBatis Plus 是 MyBatis 的增强工具，它提供了很多增强功能，例如：
+</div>
+</details>
 
-- **代码生成器**
+能够发现，`@SpringBootApplication` 注解的作用就是将 `@SpringBootConfiguration`、`@EnableAutoConfiguration` 和 `@ComponentScan` 注解结合在一起，简化了 Spring Boot 的配置。
 
-  MyBatis Plus 提供了代码生成器，可以根据数据库表生成实体类、映射器接口、XML 文件。
+在这个过程中，完成了自动配置类的加载和过滤、包扫描和 Bean 的注册等工作。
 
-  ```java
-  public class CodeGenerator {
-    public static void main(String[] args) {
-      AutoGenerator generator = new AutoGenerator();
-      generator.setGlobalConfig(new GlobalConfig().setOutputDir(System.getProperty("user.dir") + "/src/main/java"));
-      generator.setDataSource(new DataSourceConfig().setUrl("jdbc:mysql://localhost:3306/book").setUsername("root").setPassword("password"));
-      generator.setPackageInfo(new PackageConfig().setParent("com.example").setModuleName("book"));
-      generator.setStrategy(new StrategyConfig().setInclude("book"));
-      generator.execute();
-    }
-  }
-  ```
+### 应用启动
 
-  运行这个代码，就可以生成实体类、映射器接口、XML 文件。
+<details>
+<summary>点击查看应用启动源码解读</summary>
+<div markdown="1">
 
-- **分页插件**
-
-  MyBatis Plus 提供了分页插件，可以方便地进行分页查询。
-
-  ```java
-  @GetMapping("/book")
-  public Page<Book> list(@RequestParam("page") int page, @RequestParam("size") int size) {
-    return bookService.listBooks(page, size);
-  }
-  ```
-
-  ```java
-  @Service
-  public class BookService {
-    @Autowired
-    private BookMapper bookMapper;
-
-    public Page<Book> listBooks(int page, int size) {
-      return bookMapper.selectPage(new Page<>(page, size), null);
-    }
-  }
-  ```
-
-  这里，我们使用了 `Page` 类来表示分页查询结果。MyBatis Plus 会自动查询总数，并返回分页查询结果。
-
-- **逻辑删除**
-
-  MyBatis Plus 提供了逻辑删除功能，可以方便地进行逻辑删除。
-
-  ```java
-  @TableLogic
-  private Integer deleted;
-  ```
-
-  ```java
-  @Delete("DELETE FROM book WHERE id = #{id}")
-  void deleteBookById(int id);
-  ```
-
-  ```java
-  @Update("UPDATE book SET deleted = 1 WHERE id = #{id}")
-  void deleteBookById(int id);
-  ```
-
-  这里，我们使用了 `@TableLogic` 注解来表示逻辑删除字段。MyBatis Plus 会自动将逻辑删除字段加入到查询条件中。
-
-- **多租户**
-
-  MyBatis Plus 提供了多租户功能，可以方便地进行多租户查询。
-
-  ```java
-  @MultiTenant
-  private String tenantId;
-  ```
-
-  ```java
-  @Select("SELECT * FROM book WHERE tenant_id = #{tenantId}")
-  List<Book> listBooks(String tenantId);
-  ```
-
-  ```java
-  @InterceptorIgnore(tenantLine = "true")
-  @Select("SELECT * FROM book")
-  List<Book> listBooks();
-  ```
-
-  这里，我们使用了 `@MultiTenant` 注解来表示多租户字段。MyBatis Plus 会自动将多租户字段加入到查询条件中。
-
-## Spring Security
-
-### 为什么需要 Spring Security
-
-在实际开发中，我们经常会遇到这样的情况：需要对用户进行认证、授权。如果没有框架，我们需要自己处理这些事情，这样会导致代码冗余、耦合度高、不利于维护。Spring Security 就是为了解决这些问题而生的。
-
-Spring Security 是一个安全框架，它提供了认证、授权、攻击防护等功能，使得应用程序更加安全。
-
-### Spring Security 使用
-
-Spring Security 使用 Java 配置来配置项目：
+在使用 `@SpringBootApplication` 注解定义类（例如 `MyApplication` 类）后，我们要想启动它，就必须执行 `SpringApplication.run(MyApplication.class, args)` 方法，这个方法的作用就是启动 Spring Boot 应用。
 
 ```java
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-  @Autowired
-  private UserService userService;
+public static ConfigurableApplicationContext run(Class<?> primarySource, String... args) {
+    return run(new Class<?>[] { primarySource }, args);
+}
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
-  }
-
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-      .antMatchers("/login").permitAll()
-      .anyRequest().authenticated()
-      .and()
-      .formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
-      .and()
-      .logout().permitAll();
-  }
+public static ConfigurableApplicationContext run(Class<?>[] primarySources, String[] args) {
+    return new SpringApplication(primarySources).run(args);
 }
 ```
 
-这个配置类继承了 `WebSecurityConfigurerAdapter` 类，它重写了 `configure` 方法，用于配置认证和授权。
+终于能看最关键的 `run()` 方法了：
 
-`configure(AuthenticationManagerBuilder auth)` 方法用于配置认证，我们可以使用 `auth.userDetailsService()` 方法来配置用户认证服务，使用 `auth.inMemoryAuthentication()` 方法来配置内存用户认证服务。
+```java
+public ConfigurableApplicationContext run(String... args) {
+    Startup startup = Startup.create();
 
-`configure(HttpSecurity http)` 方法用于配置授权，我们可以使用 `http.authorizeRequests()` 方法来配置请求授权，使用 `http.formLogin()` 方法来配置表单登录，使用 `http.logout()` 方法来配置退出登录。
+    // 注册关闭钩子，用于优雅地关闭应用
+    if (this.properties.isRegisterShutdownHook()) {
+        SpringApplication.shutdownHook.enableShutdownHookAddition();
+    }
+
+    // 初始化引导上下文，用于在 Spring 应用上下文完全初始化前的早期配置
+    DefaultBootstrapContext bootstrapContext = createBootstrapContext();
+    ConfigurableApplicationContext context = null;
+
+    // 设置系统属性 java.awt.headless=true，确保应用在无图形界面环境下正常运行
+    configureHeadlessProperty();
+
+    // 通过SPI机制加载获取所有 SpringApplicationRunListener 实例
+    SpringApplicationRunListeners listeners = getRunListeners(args);
+    // 触发 starting 事件，通知监听器应用开始启动
+    listeners.starting(bootstrapContext, this.mainApplicationClass);
+    
+    // 核心启动流程
+    try {
+        // 封装命令行参数，提供便捷的访问接口，例如 --key=value
+        ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
+
+        // 加载配置（如 application.properties、环境变量、命令行参数）
+        // 触发 environmentPrepared 事件，允许监听器修改环境配置
+        ConfigurableEnvironment environment = prepareEnvironment(listeners, bootstrapContext, applicationArguments);
+
+        // 根据配置打印启动Banner
+        Banner printedBanner = printBanner(environment);
+
+        // 根据应用类型（Servlet / Reactive）创建具体的上下文实例
+        context = createApplicationContext();
+        // 设置启动过程追踪器 ApplicationStartup，用于性能监控
+        context.setApplicationStartup(this.applicationStartup);
+
+        // 将环境、参数、Banner 等信息绑定到上下文
+        // 加载 @SpringBootApplication 标注的类，注册Bean定义
+        // 触发 contextPrepared 和 contextLoaded 事件
+        prepareContext(bootstrapContext, context, environment, listeners, applicationArguments, printedBanner);
+
+        // 加载 BeanDefinition 并执行 Bean 的生命周期流程
+        // 启动内嵌服务器（如 Tomcat）
+        refreshContext(context);
+
+        // 执行自定义后置逻辑，这里默认是空实现
+        afterRefresh(context, applicationArguments);
+
+        startup.started();
+        if (this.properties.isLogStartupInfo()) {
+            new StartupInfoLogger(this.mainApplicationClass, environment).logStarted(getApplicationLog(), startup);
+        }
+
+        // 触发 started 事件，通知监听器应用已启动
+        listeners.started(context, startup.timeTakenToStarted());
+
+        // 执行所有 ApplicationRunner 和 CommandLineRunner 的 run 方法，用于启动后执行自定义逻辑
+        callRunners(context, applicationArguments);
+    }
+    catch (Throwable ex) {
+        throw handleRunFailure(context, ex, listeners);
+    }
+    try {
+        // 触发 ready 事件，通知应用已完全就绪
+        if (context.isRunning()) {
+            listeners.ready(context, startup.ready());
+        }
+    }
+    catch (Throwable ex) {
+        throw handleRunFailure(context, ex, null);
+    }
+    return context;
+}
+```
+
+整个流程我们其实差不多已经看出来了，我们看一看具体的执行细节：
+
+- `prepareEnvironment`
+
+  ```java
+  private ConfigurableEnvironment prepareEnvironment(SpringApplicationRunListeners listeners,
+      DefaultBootstrapContext bootstrapContext, ApplicationArguments applicationArguments) {
+      // 根据应用类型（Web / 非 Web）创建对应的环境对象
+      ConfigurableEnvironment environment = getOrCreateEnvironment();
+
+      // 将命令行参数和环境变量整合到环境中
+      configureEnvironment(environment, applicationArguments.getSourceArgs());
+
+      // 将 @ConfigurationProperties 绑定的对象属性附加到环境
+      ConfigurationPropertySources.attach(environment);
+
+      // 通知监听器环境已准备就绪
+      // 加载 application.yml / application.properties 等配置文件
+      listeners.environmentPrepared(bootstrapContext, environment);
+
+      // 确保默认配置优先级最低
+      ApplicationInfoPropertySource.moveToEnd(environment);
+      DefaultPropertiesPropertySource.moveToEnd(environment);
+
+      Assert.state(!environment.containsProperty("spring.main.environment-prefix"),
+          "Environment prefix cannot be set via properties.");
+
+      // 将环境中的属性绑定到 SpringApplication 实例
+      bindToSpringApplication(environment);
+
+      // 确保环境类型与应用类型一致
+      if (!this.isCustomEnvironment) {
+          EnvironmentConverter environmentConverter = new EnvironmentConverter(getClassLoader());
+          environment = environmentConverter.convertEnvironmentIfNecessary(environment, deduceEnvironmentClass());
+      }
+      ConfigurationPropertySources.attach(environment);
+      return environment;
+  }
+  ```
+
+  这个方法的主要作用就是加载配置文件，并绑定命令行参数和环境变量到环境中。
+
+  > 举个例子，我们运行：
+  >
+  > ```shell
+  > java -jar app.jar --spring.profiles.active=prod --server.port=8080
+  > ```
+  >
+  > 这里会
+  >
+  > 1. `--spring.profiles.active=prod` 会激活 `application-prod.yml` 配置文件
+  > 2. `@ConfigurationProperties` 注解会将 `server.port` 的值绑定到 `ServerProperties` 类中
+  > 3. 然后会加载 `application-prod.yml` 中的配置
+  > 4. 最后会将 `server.port` 属性覆盖掉 `application-prod.yml` 中的配置
+
+- `prepareContext`
+
+  ```java
+  private void prepareContext(DefaultBootstrapContext bootstrapContext, ConfigurableApplicationContext context,
+      ConfigurableEnvironment environment, SpringApplicationRunListeners listeners,
+      ApplicationArguments applicationArguments, Banner printedBanner) {
+      // 将已准备好的环境绑定到应用上下文
+      context.setEnvironment(environment);
+
+      // 设置资源加载器、配置类型转换服务、注册默认的 BeanNameGenerator
+      postProcessApplicationContext(context);
+
+      // AOT 编译
+      addAotGeneratedInitializerIfNecessary(this.initializers);
+
+      // 执行所有注册的 ApplicationContextInitializer 实现类
+      applyInitializers(context);
+
+      // 发布 ApplicationContextInitializedEvent 事件，通知监听器上下文已初步就绪
+      listeners.contextPrepared(context);
+
+      bootstrapContext.close(context);
+
+      if (this.properties.isLogStartupInfo()) {
+          logStartupInfo(context.getParent() == null);
+          logStartupInfo(context);
+          logStartupProfileInfo(context);
+      }
+
+      // 注册 springApplicationArguments，允许通过 @Autowired 注入命令行参数
+      ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
+      beanFactory.registerSingleton("springApplicationArguments", applicationArguments);
+
+      if (printedBanner != null) {
+          beanFactory.registerSingleton("springBootBanner", printedBanner);
+      }
+
+      // 允许循环引用​，允许 Bean 定义覆盖
+      if (beanFactory instanceof AbstractAutowireCapableBeanFactory autowireCapableBeanFactory) {
+          autowireCapableBeanFactory.setAllowCircularReferences(this.properties.isAllowCircularReferences());
+          if (beanFactory instanceof DefaultListableBeanFactory listableBeanFactory) {
+              listableBeanFactory.setAllowBeanDefinitionOverriding(this.properties.isAllowBeanDefinitionOverriding());
+          }
+      }
+
+      // 处理懒加载
+      if (this.properties.isLazyInitialization()) {
+          context.addBeanFactoryPostProcessor(new LazyInitializationBeanFactoryPostProcessor());
+      }
+
+      // 防止应用在空闲时被意外关闭
+      if (this.properties.isKeepAlive()) {
+          context.addApplicationListener(new KeepAlive());
+      }
+
+      // 确保 application.properties 等配置源的优先级正确
+      context.addBeanFactoryPostProcessor(new PropertySourceOrderingBeanFactoryPostProcessor(context));
+
+      // 加载标注 @SpringBootApplication 的类和其他配置源
+      if (!AotDetector.useGeneratedArtifacts()) {
+          Set<Object> sources = getAllSources();
+          Assert.notEmpty(sources, "Sources must not be empty");
+          load(context, sources.toArray(new Object[0]));
+      }
+
+      // 发布 ApplicationPreparedEvent 事件，通知监听器上下文已完全加载
+      listeners.contextLoaded(context);
+  }
+  ```
+
+  这个方法的主要作用就是将环境绑定到上下文，并执行所有的 `ApplicationContextInitializer` 实现类。
+
+- `refreshContext`
+
+  ```java
+  private void refreshContext(ConfigurableApplicationContext context) {
+      if (this.properties.isRegisterShutdownHook()) {
+          shutdownHook.registerApplicationContext(context);
+      }
+      refresh(context);
+  }
+  ```
+
+  这里的 `refresh` 方法就是 `AbstractApplicationContext` 中的 `refresh` 方法。我们在 IoC 部分也详细看过，不再赘述。
+
+</div>
+</details>
+
+这里做的主要工作就是将默认配置、文件配置、命令行参数、环境变量等加载并应用，最后执行 `refresh()` 方法来刷新上下文，从而实例化并初始化所有的 Bean。
+
+### Tomcat 加载
+
+到这里，我们依然有点懵，Tomcat 是怎么启动的呢？其实就和 `refreshContext` 方法相关。
+
+还记得我们之前讨论的 ApplicationContext 的继承关系吗？`AbstractApplicationContext` 是一个抽象类，它有一个子类 `GenericApplicationContext`。再往下继承还有 `GenericWebApplicationContext`，这个类就是 Spring Boot 中的 Web 应用上下文。再往下看还有 `ServletWebServerApplicationContext`，这个类就是 Spring Boot 中的 Servlet Web 应用上下文。这个类的作用就是创建一个内嵌的 Servlet 容器。
+
+这个类覆写了 `AbstractApplicationContext` 中空着没实现的 `onRefresh()` 方法。
+
+```java
+@Override
+protected void onRefresh() {
+    super.onRefresh();
+    try {
+        createWebServer();
+    }
+    catch (Throwable ex) {
+        throw new ApplicationContextException("Unable to start web server", ex);
+    }
+}
+```
+
+> 回顾一下之前讲过的 `refresh()` 方法：
+>
+> ```java
+> public void refresh() throws BeansException, IllegalStateException {
+>     /* ... */
+>     // 初始化 i18n（需要名为 messageSource 的 Bean）
+>     initMessageSource();
+>     //初始化事件多播器，用于发布事件到监听器
+>     initApplicationEventMulticaster();
+>
+>     // 模板方法，供子类初始化特殊的 Bean
+>     onRefresh();
+>     // 注册 ApplicationListener Bean 到事件多播器，并发布早期事件
+>     registerListeners();
+>
+>     // 完成 BeanFactory 的初始化
+>     // 初始化所有非延迟单例 Bean、触发 BeanPostProcessor、解决循环依赖等（下文会详细介绍）
+>     finishBeanFactoryInitialization(beanFactory);
+>
+>     // 发布容器刷新完成事件，启动生命周期处理器
+>     finishRefresh();
+>     /* ... */
+> }
+> ```
+>
+> 可以看到，`onRefresh()` 方法是在 `refresh()` 方法中调用的，其调用时机在实例化所有 Bean 之前。
+
+这个方法的作用就是创建一个内嵌的 Servlet 容器。
+
+<details>
+<summary>点击查看 Tomcat 加载源码解读</summary>
+<div markdown="1">
+
+我们来看其中的 `createWebServer()` 方法：
+
+```java
+private void createWebServer() {
+    WebServer webServer = this.webServer;
+    // 通过 Spring 容器获取自动配置的 ServletWebServerFactory 实例
+    ServletContext servletContext = getServletContext();
+
+    // 首次启动内嵌的 Web 服务器
+    if (webServer == null && servletContext == null) {
+        StartupStep createWebServer = getApplicationStartup().start("spring.boot.webserver.create");
+
+        ServletWebServerFactory factory = getWebServerFactory();
+        createWebServer.tag("factory", factory.getClass().toString());
+        
+        // 通过工厂创建 Web 服务器，并传入一个 ServletContextInitializer 用于初始化 Servlet 组件
+        this.webServer = factory.getWebServer(getSelfInitializer());
+        createWebServer.end();
+
+        // 将 Web 服务器的生命周期与 Spring 容器的生命周期绑定
+        getBeanFactory().registerSingleton("webServerGracefulShutdown",
+            new WebServerGracefulShutdownLifecycle(this.webServer));
+        getBeanFactory().registerSingleton("webServerStartStop",
+            new WebServerStartStopLifecycle(this, this.webServer));
+    }
+    else if (servletContext != null) {
+        try {
+            // 当应用部署到外部 Servlet 容器时，直接初始化 Servlet 上下文
+            getSelfInitializer().onStartup(servletContext);
+        }
+        catch (ServletException ex) {
+            throw new ApplicationContextException("Cannot initialize servlet context", ex);
+        }
+    }
+    initPropertySources();
+}
+```
+
+这个方法的主要作用就是创建一个内嵌的 Web 服务器，并将其与 Spring 容器的生命周期绑定。
+
+`getWebServer()` 方法有多种实现，最常用的就是 `TomcatServletWebServerFactory` 类中的：
+
+```java
+@Override
+public WebServer getWebServer(ServletContextInitializer... initializers) {
+    // MBean 用于 JMX 监控，若不需要监控 Tomcat 内部状态，可禁用以节省资源
+    if (this.disableMBeanRegistry) {
+        Registry.disableRegistry();
+    }
+
+    // 初始化 Tomcat 对象，这是 Apache Tomcat 内嵌服务器的入口
+    Tomcat tomcat = new Tomcat();
+    // 设置 Tomcat 的工作目录，用于存放临时文件、日志等
+    File baseDir = (this.baseDirectory != null) ? this.baseDirectory : createTempDir("tomcat");
+    tomcat.setBaseDir(baseDir.getAbsolutePath());
+
+    // 为 Tomcat 的 Server 组件添加生命周期监听器
+    for (LifecycleListener listener : this.serverLifecycleListeners) {
+        tomcat.getServer().addLifecycleListener(listener);
+    }
+
+    // 配置主连接器
+    Connector connector = new Connector(this.protocol);
+    connector.setThrowOnFailure(true);
+    tomcat.getService().addConnector(connector);
+    customizeConnector(connector);
+    tomcat.setConnector(connector);
+
+    // 将连接器关联到 Tomcat 的共享线程池，优化请求处理效率
+    registerConnectorExecutor(tomcat, connector);
+
+    // 配置 Tomcat
+    tomcat.getHost().setAutoDeploy(false);
+    configureEngine(tomcat.getEngine());
+
+    // 支持多个连接器，如同时监听 HTTP 和 HTTPS
+    for (Connector additionalConnector : this.additionalTomcatConnectors) {
+        tomcat.getService().addConnector(additionalConnector);
+        registerConnectorExecutor(tomcat, additionalConnector);
+    }
+
+    // 配置 Tomcat 的 Context
+    // 注册 ServletContextInitializer、设置上下文路径、​加载静态资源
+    prepareContext(tomcat.getHost(), initializers);
+
+    return getTomcatWebServer(tomcat);
+}
+```
+
+这个方法的主要作用就是创建一个 Tomcat 对象，并配置 Tomcat 的连接器、线程池、上下文等，最后将其与 Spring 集成。
+
+</div>
+</details>
