@@ -142,12 +142,12 @@ layout: compress
           src='https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}'
         ></script>
         <script>
-          window.dataLayer = window.dataLayer || []
+          window.dataLayer = window.dataLayer || [];
           function gtag() {
-            dataLayer.push(arguments)
+            dataLayer.push(arguments);
           }
-          gtag('js', new Date())
-          gtag('config', '{{ site.google_analytics }}')
+          gtag('js', new Date());
+          gtag('config', '{{ site.google_analytics }}');
         </script>
       {%- endif -%}
       {%- if site.umami -%}
@@ -241,19 +241,24 @@ layout: compress
     <!-- mermaid.js -->
     {% if page.mermaid %}
       <script
-        src='https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js'
+        src='https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js'
       ></script>
       <script async>
         document.addEventListener('DOMContentLoaded', function () {
           mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default',
-          })
-          window.mermaid.init(
-            undefined,
-            document.querySelectorAll('.language-mermaid')
-          )
-        })
+            startOnLoad: false,
+            theme: 'light',
+            securityLevel: 'loose',
+          });
+          mermaid
+            .run({
+              querySelector: '.language-mermaid',
+              suppressErrors: true,
+            })
+            .catch((err) => {
+              console.error('Mermaid failed to render:', err);
+            });
+        });
       </script>
     {% endif %}
   </body>

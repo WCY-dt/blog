@@ -274,6 +274,27 @@
       pre:has(code) {
         border: 0.05rem solid var(--primary-color);
         box-sizing: border-box;
+
+        &:has(.language-mermaid) {
+          border: none;
+          background-color: var(--white-color);
+          -webkit-user-select: none;
+          user-select: none;
+          -webkit-user-drag: none;
+          -moz-user-drag: none;
+          cursor: pointer;
+
+          code {
+            display: grid;
+            place-items: center;
+            width: 100%;
+            height: 100%;
+
+            svg {
+              background-color: var(--true-white-color);
+            }
+          }
+        }
       }
 
       blockquote {
@@ -370,6 +391,26 @@
         right: 0rem;
         opacity: 0;
         transition: opacity 0.25s ease-in-out;
+      }
+
+      &:has(.language-mermaid) {
+        background-color: var(--white-color);
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
+        cursor: pointer;
+
+        code {
+          display: grid;
+          place-items: center;
+          width: 100%;
+          height: 100%;
+
+          svg {
+            background-color: var(--true-white-color);
+          }
+        }
       }
 
       @media (hover: hover) {
