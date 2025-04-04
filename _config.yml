@@ -21,6 +21,8 @@ powered_by: false
 baseurl:
 # the base hostname & protocol for your site
 url: https://blog.ch3nyang.top
+# the path to the github repo of your site
+github_repo: https://github.com/WCY-dt/blog
 # OPTIONAL settings: delete the following line if you don't need
 giscus:
   data-repo: WCY-dt/blog
