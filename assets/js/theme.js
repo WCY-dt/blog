@@ -4,39 +4,22 @@ function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme) // Use data-theme attribute on the html element
     themeSwitcher.textContent = theme === 'light' ? 'dark_mode' : 'light_mode'
     localStorage.setItem('theme', theme)
+    if (typeof setCommentTheme === 'function') {
+        setCommentTheme(theme)
+    }
 }
 
 function applySystemTheme() {
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)')
-    const systemTheme = prefersDarkScheme.matches ? 'dark' : 'light'
-    setTheme(systemTheme)
-    if (typeof setCommentTheme === 'function') {
-        setCommentTheme(systemTheme)
-    }
+    setTheme(prefersDarkScheme.matches ? 'dark' : 'light')
 }
 
 const currentTheme = localStorage.getItem('theme')
-if (currentTheme) {
-    setTheme(currentTheme)
-    if (typeof setCommentTheme === 'function') {
-        setCommentTheme(currentTheme)
-    }
-} else {
-    applySystemTheme()
-}
+currentTheme ? setTheme(currentTheme) : applySystemTheme()
 
 themeSwitcher.addEventListener('click', () => {
-    if (document.documentElement.getAttribute('data-theme') === 'light') {
-        setTheme('dark')
-        if (typeof setCommentTheme === 'function') {
-            setCommentTheme('dark')
-        }
-    } else {
-        setTheme('light')
-        if (typeof setCommentTheme === 'function') {
-            setCommentTheme('light')
-        }
-    }
+    const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
 })
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySystemTheme)

@@ -1,135 +1,78 @@
 function tocActive() {
-    let toc = document.querySelector('#toc-container')
-    if (!toc) {
-        return
-    }
-    let tocItems = toc.querySelectorAll('a')
+    const toc = document.querySelector('#toc-container');
+    if (!toc) return;
 
-    let headerLinks = document.querySelectorAll('h2, h3, h4')
+    const tocItems = toc.querySelectorAll('a');
+    const headerLinks = document.querySelectorAll('h2, h3, h4');
 
     if (headerLinks.length === 0) {
-        toc.style.display = 'none'
-        return
+        toc.style.display = 'none';
+        return;
     }
 
-    let headerLinksOffset = Array.from(headerLinks).map(function (link) {
-        return link.getBoundingClientRect().top + window.scrollY
-    })
+    const headerOffsets = Array.from(headerLinks).map(link => link.getBoundingClientRect().top + window.scrollY);
+    const activeIndex = headerOffsets.findIndex(offset => offset >= window.scrollY + window.innerHeight / 2) - 1;
 
-    let headerLinksOffsetBottom = Array.from(headerLinks).map(function (link) {
-        return link.getBoundingClientRect().bottom + window.scrollY
-    })
+    tocItems.forEach(item => item.classList.remove('active'));
+    const activeItem = tocItems[Math.max(activeIndex, 0)];
+    if (!activeItem) return;
 
-    let headerLinksOffsetLength = headerLinksOffset.length
+    activeItem.classList.add('active');
+    toc.querySelectorAll('.expand').forEach(el => el.classList.remove('expand'));
 
-    let headerLinksOffsetIndex = 0
-
-    for (let i = 0; i < headerLinksOffsetLength; i++) {
-        if (headerLinksOffset[i] < window.scrollY + window.innerHeight / 2) {
-            headerLinksOffsetIndex = i
-        }
-    }
-
-    for (let _i = 0; _i < tocItems.length; _i++) {
-        tocItems[_i].classList.remove('active')
-    }
-
-    let activeItem = tocItems[headerLinksOffsetIndex]
-
-    if (!activeItem) {
-        return
-    }
-    activeItem.classList.add('active')
-
-    toc.querySelectorAll('.expand').forEach(function (el) {
-        el.classList.remove('expand')
-    })
-    let nextSibling = activeItem.nextSibling
-    if (nextSibling && nextSibling.tagName === 'UL') {
-        nextSibling.classList.add('expand')
-    }
-    let parent = activeItem.parentNode
+    let parent = activeItem;
     while (parent) {
         if (parent.tagName === 'UL') {
-            parent.classList.add('expand')
+            parent.classList.add('expand');
+            const siblingUl = parent.nextElementSibling;
+            if (siblingUl && siblingUl.tagName === 'UL') {
+                siblingUl.classList.add('expand');
+            }
         }
-        parent = parent.parentNode
+        parent = parent.parentNode;
     }
 
-    activeItem.scrollIntoView({ behavior: 'smooth' })
+    activeItem.scrollIntoView({ behavior: 'smooth' });
 }
 
-window.addEventListener('scroll', tocActive)
-window.addEventListener('resize', tocActive)
-window.addEventListener('load', tocActive)
-document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('load', function () {
-        tocActive()
-    })
-})
-tocActive()
+function handleAnchorClick(e) {
+    e.preventDefault();
 
-document.querySelectorAll('#toc-container a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault()
+    const href = this.getAttribute('href').replace(/#(\d)/g, '#§$1');
+    const target = document.querySelector(decodeURIComponent(href));
+    if (!target) {
+        console.error('Target not found:', href);
+        return;
+    }
 
-        function checkStartWithNumber(str) {
-            return str.replace(/#(\d)/g, '#§$1')
-        }
+    const scrollToTarget = () => {
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+        window.scroll({ top: targetPosition - window.innerHeight / 3, behavior: 'smooth' });
+    };
 
-        const hrefAttribute = this.getAttribute('href')
-        const escapedHref = checkStartWithNumber(decodeURIComponent(hrefAttribute))
-        const target = document.querySelector(escapedHref)
-        if (!target) {
-            console.error('Target not found:', escapedHref)
-            return
-        }
+    const imagesBeforeTarget = Array.from(document.querySelectorAll('img')).filter(img =>
+        img.getBoundingClientRect().top + window.scrollY < target.getBoundingClientRect().top + window.scrollY
+    );
 
-        function scrollToTarget() {
-            const targetPosition = target.getBoundingClientRect().top + window.scrollY
-            const scrollPosition = targetPosition - (window.innerHeight / 3)
+    imagesBeforeTarget.forEach(img => img.addEventListener('load', scrollToTarget));
+    scrollToTarget();
 
-            window.scroll({
-                top: scrollPosition,
-                behavior: 'smooth'
-            })
-        }
-
-        const imagesBeforeTarget = Array.from(document.querySelectorAll('img')).filter(img => {
-            const imgPosition = img.getBoundingClientRect().top + window.scrollY
-            return imgPosition < target.getBoundingClientRect().top + window.scrollY
-        })
-
-        const imagesWithListener = []
-
-        imagesBeforeTarget.forEach(img => {
-            img.addEventListener('load', scrollToTarget)
-            imagesWithListener.push(img)
-        })
-
-        scrollToTarget()
-
-        setTimeout(() => {
-            imagesWithListener.forEach(img => {
-                img.removeEventListener('load', scrollToTarget)
-            })
-        }, 10000)
-    })
-})
+    setTimeout(() => imagesBeforeTarget.forEach(img => img.removeEventListener('load', scrollToTarget)), 10000);
+}
 
 function toggleTOC() {
-    let toc = document.querySelector('#toc-container')
-    let tocul = toc.querySelector('&>ul')
-    let tocButton = document.querySelector('#toc-container button span')
-    if (tocul.style.display === 'flex') {
-        tocul.style.display = 'none'
-        tocButton.innerHTML = 'toc'
-    } else {
-        tocul.style.display = 'flex'
-        tocButton.innerHTML = 'close'
-    }
+    const toc = document.querySelector('#toc-container');
+    const tocul = toc.querySelector(':scope > ul'); // Fixed selector
+    const tocButton = document.querySelector('#toc-container button span');
+
+    const isVisible = tocul.style.display === 'flex';
+    tocul.style.display = isVisible ? 'none' : 'flex';
+    tocButton.innerHTML = isVisible ? 'toc' : 'close';
 }
-tocButton = document.querySelector('#toc-container button')
-if (tocButton) {
-    tocButton.addEventListener('click', toggleTOC)
-}
+
+document.querySelectorAll('#toc-container a').forEach(anchor => anchor.addEventListener('click', handleAnchorClick));
+document.querySelector('#toc-container button')?.addEventListener('click', toggleTOC);
+
+['scroll', 'resize', 'load'].forEach(event => window.addEventListener(event, tocActive));
+document.querySelectorAll('img').forEach(img => img.addEventListener('load', tocActive));
+tocActive();

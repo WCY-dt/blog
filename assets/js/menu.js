@@ -5,11 +5,7 @@ const menuContainerMobileMenu = document.querySelector('#menu-container-mobile-m
 menuContainerMobileMenu.style.display = 'none'
 
 menuContainerMobile.addEventListener('click', () => {
-    if (menuContainerMobileMenu.style.display === 'none') {
-        menuContainerMobileMenu.style.display = 'flex'
-        menuContainerMobileButton.innerHTML = 'close'
-    } else {
-        menuContainerMobileMenu.style.display = 'none'
-        menuContainerMobileButton.innerHTML = 'featured_play_list'
-    }
+    const isHidden = menuContainerMobileMenu.style.display === 'none'
+    menuContainerMobileMenu.style.display = isHidden ? 'flex' : 'none'
+    menuContainerMobileButton.innerHTML = isHidden ? 'close' : 'featured_play_list'
 })
