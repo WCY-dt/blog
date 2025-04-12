@@ -16,7 +16,9 @@ main {
     gap: 0.5rem;
     padding: 1rem 1.5rem;
     width: min(100%, 30rem);
-    transition: background-color 0.25s ease-in-out;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
@@ -98,9 +100,72 @@ main {
   }
 
   hr {
-    width: min(100%, calc(30rem + 3rem));
+    width: min(100%, 30rem);
     margin: 0;
     border: 1px solid var(--primary-light-color);
+    transition: all 0.25s ease-in-out;
+  }
+
+  #pagination-archived-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    width: min(100%, 33rem);
+
+    summary {
+      background-color: var(--primary-light-color);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      font-weight: 900;
+      font-family: var(--ui-font);
+      text-align: center;
+      margin: 2rem 0 0.25rem 0;
+      cursor: pointer;
+      transition: all 0.25s ease-in-out;
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--primary-color);
+          color: var(--primary-light-color);
+        }
+      }
+    }
+
+    &[open] summary {
+      background-color: var(--primary-color);
+      color: var(--primary-light-color);
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--primary-light-color);
+          color: var(--primary-color);
+        }
+      }
+    }
+
+    #pagination-archived-item {
+      width: min(100%, 30rem);
+
+      #pagination-item-container {
+        width: 100%;
+      }
+    }
+
+    hr {
+      margin-left: 1.5rem;
+    }
+  }
+
+  hr:has(+ #pagination-item-container:hover) {
+    border-color: transparent;
+  }
+
+  #pagination-item-container:hover + hr {
+    border-color: transparent;
   }
 }
 

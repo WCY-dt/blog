@@ -8,7 +8,8 @@ series: OverTheWire
 series_index: 3
 comments: true
 mathjax: true
-copyrights: 原创 未完待续
+copyrights: 原创
+archived: true
 ---
 
 [https://overthewire.org/wargames/narnia/](https://overthewire.org/wargames/narnia/)

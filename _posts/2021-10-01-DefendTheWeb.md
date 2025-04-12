@@ -6,7 +6,8 @@ categories: 安全
 tags: game
 comments: true
 mathjax: true
-copyrights: 原创 未完待续
+copyrights: 原创
+archived: true
 ---
 
 本文介绍了[DefendTheWeb](https://defendtheweb.net/)的部分通关方法

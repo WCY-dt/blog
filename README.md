@@ -44,11 +44,12 @@ title:      "原神游玩指南"
 date:       2000-01-01 00:00:00 +0800
 categories: 游戏 // 只能有一个分类
 tags:       开放世界 RPG 原神 // 可以有多个标签，用空格分隔
-comments:   true // 如果设置为 true，文章会显示评论区；否则不显示
+comments:   false // 如果设置为 true，文章会显示评论区；否则不显示
 mathjax:    true // 可省略，默认为 false。如果设置为 true，会启用数学公式支持
-mermaid:    false // 可省略，默认为 false。如果设置为 true，会启用流程图支持
+mermaid:    true // 可省略，默认为 false。如果设置为 true，会启用流程图支持
 copyrights: 原创 // 如果设置为原创，文末会显示版权声明；否则不显示
 draft:      true // 可省略，默认为 false。如果设置为 true，文章不会显示在主页上
+archived:   true // 可省略，默认为 false。如果设置为 true，文章会被标记为已归档
 ```
 
 您可能还需要修改 [`.github`](./.github) 文件夹下的工作流程文件、网站图标 [`favicon.svg`](./favicon.svg) 以及 [`CNAME`](./CNAME)，以适应您的需求。
@@ -87,6 +88,7 @@ draft:      true // 可省略，默认为 false。如果设置为 true，文章�
 - [x] 无障碍访问
 - [x] 草稿系统
 - [x] 内容折叠
+- [x] 文章归档
 - [ ] 更多功能...
 
 ## 版权声明

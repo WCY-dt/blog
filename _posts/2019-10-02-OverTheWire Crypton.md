@@ -8,7 +8,8 @@ series: OverTheWire
 series_index: 2
 comments: true
 mathjax: true
-copyrights: 原创 未完待续
+copyrights: 原创
+archived: true
 ---
 
 [https://overthewire.org/wargames/krypton/krypton0.html](https://overthewire.org/wargames/krypton/krypton0.html)
