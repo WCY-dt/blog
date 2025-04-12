@@ -58,7 +58,7 @@
       text-align: center;
       background-color: var(--primary-light-color);
       padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
+      border-radius: 0.5rem;
     }
 
     #post-info {
@@ -124,6 +124,8 @@
     details {
       border: 0.05rem solid var(--primary-color);
       padding: 0.5rem 0.5rem 0 0.5rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
 
       summary {
         font-weight: bold;
@@ -270,14 +272,17 @@
       box-sizing: border-box;
       background-color: var(--primary-extra-light-color);
       padding: 0.5rem 2rem;
+      border-radius: 0.5rem;
 
       pre:has(code) {
         border: 0.05rem solid var(--primary-color);
         box-sizing: border-box;
+        border-radius: 0.5rem;
 
         &:has(.language-mermaid) {
           border: none;
           background-color: var(--white-color);
+          border-radius: 0rem;
           -webkit-user-select: none;
           user-select: none;
           -webkit-user-drag: none;
@@ -319,6 +324,8 @@
       border: 0.05rem solid var(--primary-color);
       box-sizing: border-box;
       width: 100%;
+      border-radius: 0.5rem;
+      overflow: hidden;
 
       th,
       td {
@@ -364,6 +371,7 @@
       line-height: 1.2rem;
       font-size: 1rem;
       overflow-x: auto;
+      border-radius: 0.5rem;
 
       * {
         white-space: pre;
@@ -373,8 +381,14 @@
         width: 0.4rem;
         height: 0.4rem;
       }
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 0.5rem;
+        overflow: hidden;
+      }
       &::-webkit-scrollbar-thumb {
         background-color: var(--primary-semi-light-color);
+        border-radius: 0.5rem;
       }
 
       &::after {
@@ -395,6 +409,7 @@
 
       &:has(.language-mermaid) {
         background-color: var(--white-color);
+        border-radius: 0rem;
         -webkit-user-select: none;
         user-select: none;
         -webkit-user-drag: none;

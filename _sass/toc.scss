@@ -36,11 +36,13 @@
 
     &::-webkit-scrollbar-thumb {
       background-color: transparent;
+      border-radius: 0.5rem;
       transition: all 0.25s ease-in-out;
     }
 
     &::-webkit-scrollbar-track {
       background-color: transparent;
+      border-radius: 0.5rem;
       transition: all 0.25s ease-in-out;
     }
 
@@ -139,6 +141,7 @@
       padding: 1rem;
       z-index: -1;
       box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+      border-radius: 0.5rem;
     }
   }
 }

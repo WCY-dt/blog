@@ -61,6 +61,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
       .gsc-right-header {
         .BtnGroup-item:not(.BtnGroup-item--selected) {
           color: var(--primary-little-light-color);
+          border-radius: 0.5rem;
           transition: all 0.25s ease-in-out;
 
           @media (hover: hover) {
@@ -73,6 +74,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
         .BtnGroup-item--selected {
           background-color: var(--primary-little-light-color);
           color: var(--white-color);
+          border-radius: 0.5rem;
         }
       }
     }
@@ -80,11 +82,13 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
     .gsc-comment-box {
       border: none;
       background-color: var(--primary-light-color);
+      border-radius: 0.5rem;
 
       .gsc-comment-box-tabs {
         background-color: var(--primary-little-light-color);
         color: var(--primary-dark-color);
         border: none;
+        border-radius: 0.5rem;
 
         & > div.mx-2.mb-\[-1px\].mt-2 {
           margin-bottom: 0 !important;
@@ -92,11 +96,13 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           .color-text-primary {
             border: none;
             background-color: var(--primary-light-color);
+            border-radius: 0.5rem 0.5rem 0 0;
             transition: all 0.25s ease-in-out;
           }
 
           .color-text-secondary {
             color: var(--white-color);
+            border-radius: 0.5rem 0.5rem 0 0;
             transition: all 0.25s ease-in-out;
 
             @media (hover: hover) {
@@ -116,6 +122,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
         .gsc-comment-box-write {
           border: none;
           background-color: var(--primary-extra-light-color);
+          border-radius: 0.5rem;
 
           .gsc-comment-box-textarea {
             border: none;
@@ -156,6 +163,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             border: none;
             color: var(--white-color);
             background-color: var(--primary-little-light-color);
+            border-radius: 0.5rem;
             transition: all 0.25s ease-in-out;
 
             @media (hover: hover) {
@@ -169,6 +177,8 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
     }
 
     .gsc-timeline {
+      border-radius: 0.5rem;
+
       .gsc-comment {
         background-color: var(--primary-extra-light-color);
 

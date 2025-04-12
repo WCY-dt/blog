@@ -102,10 +102,12 @@ html[data-theme="dark"] {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--primary-color);
+  border-radius: 0.5rem;
 }
 
 ::-webkit-scrollbar-track {
   background-color: var(--primary-extra-light-color);
+  border-radius: 0.5rem;
 }
 
 :root {

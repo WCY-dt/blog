@@ -7,6 +7,7 @@
   gap: 1rem;
   align-items: center;
   justify-content: center;
+  border-radius: 0.5rem;
 
   #series-description {
     font-weight: 700;
@@ -101,6 +102,7 @@
       background-color: var(--primary-light-color);
       color: var(--primary-little-light-color);
       text-decoration: none;
+      border-radius: 0.5rem;
       transition: all 0.25s ease-in-out;
 
       @media (hover: hover) {
@@ -125,11 +127,21 @@
     #series-previous {
       justify-content: start;
       text-align: left;
+      @media (hover: hover) {
+        &:hover {
+          border-radius: 2rem 0rem 0rem 0rem;
+        }
+      }
     }
 
     #series-next {
       justify-content: end;
       text-align: right;
+      @media (hover: hover) {
+        &:hover {
+          border-radius: 0rem 0rem 2rem 0rem;
+        }
+      }
     }
   }
 }

@@ -18,19 +18,23 @@
     background-color: var(--primary-little-light-color);
     color: var(--primary-light-color);
     cursor: pointer;
-    transition: background-color 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
         background-color: var(--primary-color);
       }
     }
+
+    &.active {
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
   }
 
   #search-input {
-    /* remove default styles */
     appearance: none;
     border: none;
+    border-radius: 0.5rem 0 0 0.5rem;
     outline: none;
     background-color: var(--primary-light-color);
     color: var(--primary-dark-color);
@@ -56,6 +60,20 @@
     max-height: 50vh;
     overflow-x: hidden;
     overflow-y: scroll;
+    border-radius: 0.5rem;
+
+    &::scrollbar {
+      width: 0.5rem;
+      background-color: var(--primary-extra-light-color);
+    }
+    &::scrollbar-thumb {
+      background-color: var(--primary-semi-light-color);
+      border-radius: 0.5rem;
+    }
+    &::scrollbar-track {
+      background-color: var(--primary-extra-light-color);
+      border-radius: 0.5rem;
+    }
 
     #results {
       list-style-type: none;
@@ -111,6 +129,7 @@
             padding: 0 0.25rem;
             background-color: var(--primary-dark-color);
             color: var(--primary-extra-light-color);
+            border-radius: 0.25rem;
           }
         }
 

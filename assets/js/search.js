@@ -10,8 +10,12 @@ searchButton.addEventListener('click', () => {
   searchInput.style.width = isSearching ? '20rem' : '0'
   searchInput.style.padding = isSearching ? '0.5rem' : '0'
   if (isSearching) {
+    searchButton.classList.add('active')
+    searchInput.classList.add('active')
     searchInput.focus()
   } else {
+    searchButton.classList.remove('active')
+    searchInput.classList.remove('active')
     searchInput.value = ''
     searchResults.innerHTML = ''
   }

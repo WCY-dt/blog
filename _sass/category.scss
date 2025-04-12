@@ -8,6 +8,7 @@ main {
     gap: 1rem;
     padding: 1rem 1.5rem;
     width: min(100%, 15rem);
+    border-radius: 0.5rem;
     transition: background-color 0.25s ease-in-out;
 
     @media (hover: hover) {
@@ -52,8 +53,16 @@ main {
   }
 
   .category-hr {
-    width: min(100%, calc(15rem + 3rem));
+    width: min(100%, calc(15rem + 2rem));
     margin: 0;
     border: 1px solid var(--primary-light-color);
+  }
+
+  .category-hr:has(+ #category-item-container:hover) {
+    border-color: transparent;
+  }
+
+  #category-item-container:hover + .category-hr {
+    border-color: transparent;
   }
 }

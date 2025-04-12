@@ -11,7 +11,8 @@ main {
       justify-content: center;
       gap: 0.5rem;
       padding: 0.5rem 1rem;
-      transition: background-color 0.1s ease-in-out;
+      border-radius: 0.5rem;
+      transition: background-color 0.25s ease-in-out;
 
       @media (hover: hover) {
         &:hover {
@@ -34,7 +35,7 @@ main {
         font-weight: 900;
         font-family: var(--ui-font);
         margin: 0;
-        transition: all 0.1s ease-in-out;
+        transition: all 0.25s ease-in-out;
       }
 
       #tag-item-info {
@@ -47,7 +48,7 @@ main {
         width: 1.5rem;
         height: 1.5rem;
         border-radius: 50%;
-        transition: all 0.1s ease-in-out;
+        transition: all 0.25s ease-in-out;
       }
 
       .material-symbols-outlined {

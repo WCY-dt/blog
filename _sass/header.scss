@@ -5,12 +5,15 @@ header {
   display: flex;
   align-items: center;
   justify-content: start;
+  gap: 0.25rem;
   font-family: var(--ui-font);
+  background-color: var(--primary-light-color);
   width: 100%;
   height: 6rem;
   z-index: 5;
 
   #title-container {
+    position: relative;
     padding: 0 3rem 0.5rem 0.5rem;
     margin: 0;
     text-decoration: none;
@@ -24,8 +27,30 @@ header {
     background-color: var(--primary-color);
     color: var(--white-color);
     height: calc(100% - 0.5rem);
+    border-radius: 0 0 1rem 0;
     text-transform: uppercase;
     z-index: 8;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -2rem;
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--primary-color);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -2rem;
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--primary-light-color);
+      border-radius: 1rem 0 0 0;
+    }
 
     p {
       margin: 0;
@@ -39,17 +64,21 @@ header {
     display: flex;
     align-items: end;
     justify-content: start;
-    gap: 0;
+    gap: 0.5rem;
     background-color: var(--primary-light-color);
     color: var(--black-color);
-    height: 100%;
+    border-radius: 1rem 0 0 0;
+    padding: 0.5rem;
+    height: calc(100% - 1rem);
+    z-index: 9;
 
     a {
       position: relative;
       text-decoration: none;
       color: var(--black-color);
-      height: calc(100% - 0.5rem);
-      padding: 0 0.8rem 1rem 2.6rem;
+      height: calc(100% - 1rem);
+      padding: 0 0.5rem 1rem 1.5rem;
+      border-radius: 0.5rem;
       display: flex;
       flex-direction: column;
       align-items: start;
@@ -58,9 +87,9 @@ header {
 
       span {
         position: absolute;
-        left: 0.8rem;
+        left: 0.5rem;
         bottom: 1.2rem;
-        font-size: 3rem;
+        font-size: 2.5rem;
         color: var(--primary-semi-light-color);
         transition: all 0.25s ease-in-out;
       }
@@ -77,12 +106,12 @@ header {
       }
 
       &.active {
-        padding: 0.25rem 1.7rem 0.75rem 1.7rem;
+        padding: 0.25rem 1rem 0.75rem 1rem;
         background-color: var(--primary-semi-light-color);
 
         span {
           color: var(--primary-little-light-color);
-          font-size: 2.5rem;
+          font-size: 2.2rem;
           left: 50%;
           transform: translateX(-50%) translateY(-50%);
         }
@@ -90,15 +119,28 @@ header {
     }
 
     @media (hover: hover) {
+      &:has(a:hover) {
+        a.active {
+          padding: 0 0.5rem 1rem 1.5rem;
+          background-color: var(--primary-light-color);
+
+          span {
+            color: var(--primary-semi-light-color);
+            font-size: 2.5rem;
+            left: 0.5rem;
+            transform: translateX(0) translateY(0);
+          }
+        }
+      }
       a:hover {
-        padding: 0.25rem 1.7rem 0.75rem 1.7rem;
-        background-color: var(--primary-semi-light-color);
+        padding: 0.25rem 1rem 0.75rem 1rem !important;
+        background-color: var(--primary-semi-light-color) !important;
 
         span {
-          color: var(--primary-little-light-color);
-          font-size: 2.5rem;
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
+          color: var(--primary-little-light-color) !important;
+          font-size: 2.2rem !important;
+          left: 50% !important;
+          transform: translateX(-50%) translateY(-50%) !important;
         }
       }
     }
@@ -109,6 +151,7 @@ header {
   header {
     flex-direction: column;
     height: 4rem;
+    background-color: transparent;
 
     #title-container {
       width: 100%;
@@ -117,6 +160,7 @@ header {
       gap: 1rem;
       align-items: center;
       justify-content: center;
+      border-radius: 0;
     }
 
     #menu-container {
