@@ -13,7 +13,7 @@
         data-reactions-enabled='1'
         data-emit-metadata='0'
         data-input-position='top'
-        data-theme='{{ site.url }}/assets/css/giscus_light.css'
+        data-theme='{{ site.url }}/assets/style/giscus_light.css'
         data-lang='en'
         data-loading='lazy'
         crossorigin='anonymous'
@@ -26,24 +26,24 @@
     {%- endif -%}
   </div>
   <script>
-    const commentScript = document.querySelector('#comment-container script') // This comment is required to eliminate error, TBH I don't know why
+    const commentScript = document.querySelector('#comment-container script'); // This comment is required to eliminate error, TBH I don't know why
 
     const setCommentTheme = (currentTheme) => {
-      if (!commentScript) return
+      if (!commentScript) return;
       commentScript.setAttribute(
         'data-theme',
-        `{{ site.url }}/assets/css/giscus_${currentTheme}.css`
-      )
+        `{{ site.url }}/assets/style/giscus_${currentTheme}.css`
+      );
 
-      const giscusFrame = document.querySelector('.giscus-frame')
+      const giscusFrame = document.querySelector('.giscus-frame');
       if (giscusFrame) {
-        let giscusFrameSrc = giscusFrame.getAttribute('src')
+        let giscusFrameSrc = giscusFrame.getAttribute('src');
         giscusFrameSrc = giscusFrameSrc.replace(
           /giscus_(light|dark).css/,
           `giscus_${currentTheme}.css`
-        )
-        giscusFrame.src = giscusFrameSrc
+        );
+        giscusFrame.src = giscusFrameSrc;
       }
-    }
+    };
   </script>
 {% endif %}

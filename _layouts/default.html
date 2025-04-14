@@ -178,31 +178,31 @@ layout: compress
     <!-- 主样式表 -->
     <link
       rel='stylesheet'
-      href='{{ '/assets/css/main.css' | relative_url }}'
+      href='{{ '/assets/style/main.css' | relative_url }}'
     >
 
     <!-- Giscus 样式表 -->
     {% if page.layout == 'post' and jekyll.environment == 'production' %}
       <link
         rel='preload'
-        href='{{ '/assets/css/giscus_light.css' | relative_url }}'
+        href='{{ '/assets/style/giscus_light.css' | relative_url }}'
         as='style'
         onload="this.onload=null;this.rel='stylesheet'"
       >
       <link
         rel='preload'
-        href='{{ '/assets/css/giscus_dark.css' | relative_url }}'
+        href='{{ '/assets/style/giscus_dark.css' | relative_url }}'
         as='style'
         onload="this.onload=null;this.rel='stylesheet'"
       >
       <noscript>
         <link
           rel='stylesheet'
-          href='{{ '/assets/css/giscus_light.css' | relative_url }}'
+          href='{{ '/assets/style/giscus_light.css' | relative_url }}'
         >
         <link
           rel='stylesheet'
-          href='{{ '/assets/css/giscus_dark.css' | relative_url }}'
+          href='{{ '/assets/style/giscus_dark.css' | relative_url }}'
         >
       </noscript>
     {% endif %}
