@@ -1,19 +1,22 @@
-<a id="title-container" href="{{ site.url }}">
+<a id='title-container' href='{{ site.url }}'>
   <span>{{ site.author.name }}'s</span>
   <span>blog</span>
 </a>
-<menu id="menu-container">
+<menu id='menu-container'>
   {% for item in site.navy %}
-    {% if page.url == (item.url | relative_url) %}
-      <a href="{{ item.url | relative_url }}" class="active">
+    {% assign is_active = false %}
+    {% if page.layout == item.title or page.type == item.title %}
+      {% assign is_active = true %}
     {% elsif page.layout == 'post' and item.title == 'post' %}
-      <a href="{{ item.url | relative_url }}" class="active">
-    {% elsif page.layout == 'archive' and item.title == 'post' %}
-      <a href="{{ item.url | relative_url }}" class="active">
-    {% else %}
-      <a href="{{ item.url | relative_url }}">
+      {% assign is_active = true %}
+    {% elsif page.layout == 'home' and item.title == 'post' %}
+      {% assign is_active = true %}
     {% endif %}
-      <span class="material-symbols-outlined">
+    <a
+      href='{{ item.url | relative_url }}'
+      class='{% if is_active %}active{% endif %}'
+    >
+      <span class='material-symbols-outlined'>
         {{ item.icon }}
       </span>
       <p>{{ item.title }}</p>
