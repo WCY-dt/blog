@@ -71,6 +71,8 @@ markdown: kramdown
 highlighter: rouge # Supported language: https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
 kramdown:
   input: GFM
+sass:
+  style: compressed
 jekyll-archives:
   enabled: [categories, tags, year]
   layout: archive

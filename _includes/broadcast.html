@@ -2,26 +2,9 @@
   <div class='broadcast-container'>
     <span class='material-symbols-outlined'>notifications</span>
     <div class='broadcast-text-wrapper'>
-      <div class='broadcast-text' id='broadcast-text'></div>
+      <div class='broadcast-text' id='broadcast-text'>
+        {% broadcast_messages %}
+      </div>
     </div>
   </div>
 </a>
-
-<script>
-  fetch('/broadcast-messages.txt')
-    .then((response) => response.text())
-    .then((data) => {
-      const lines = data.split('\n');
-      const container = document.getElementById('broadcast-text');
-      lines.forEach((line) => {
-        if (line.trim()) {
-          const p = document.createElement('p');
-          p.textContent = line;
-          container.appendChild(p);
-        }
-      });
-    })
-    .catch((error) =>
-      console.error('Error loading broadcast messages:', error)
-    );
-</script>
