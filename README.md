@@ -20,7 +20,7 @@
 
 推荐使用 Visual Studio Code 编辑器，安装插件 [`Shopify Liquid`](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode)、[`markdownlint`](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) 和 [`Live Server`](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) 以获得更好的开发体验。
 
-构建前先安装好 Ruby 和 Jekyll，然后安装依赖：
+构建前先安装好 [Ruby](https://rubyinstaller.org/downloads/)（≥ 3.4.0）和 [Jekyll](https://jekyllrb.com/docs/installation/) ，然后安装依赖：
 
 ```bash
 bundle install

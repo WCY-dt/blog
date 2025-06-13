@@ -1,6 +1,6 @@
 source 'https://gems.ruby-china.com/'
 
-ruby '>= 3.3.0'
+ruby '>= 3.4.0'
 
 gem 'jekyll', '~> 4.4', '>= 4.4.1'
 
