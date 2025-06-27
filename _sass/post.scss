@@ -121,6 +121,10 @@
     background-color: var(--white-color);
     overflow: hidden;
 
+    details + blockquote {
+      margin-top: 1rem;
+    }
+
     details {
       border: 0.05rem solid var(--primary-color);
       padding: 0.5rem 0.5rem 0 0.5rem;
@@ -264,6 +268,67 @@
       max-width: 100%;
       background-color: var(--true-white-color);
       cursor: pointer;
+    }
+
+    // GitHub code button styles
+    .github-code-btn-wrapper + details {
+      margin-top: 1rem;
+    }
+    .github-code-btn-wrapper + .github-code-btn-wrapper {
+      margin-top: 0.5rem;
+    }
+    .github-code-btn-wrapper {
+      margin: 0;
+
+      .github-code-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        background-color: #f6f8fa;
+        color: #24292f;
+        text-decoration: none;
+        border-radius: 0.3rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+        border: 0.1rem solid #d1d9e0;
+        line-height: 1.1;
+
+        .github-icon {
+          width: 1.2rem;
+          height: 1.2rem;
+          flex-shrink: 0;
+          fill: currentColor;
+        }
+
+        .github-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.05rem;
+          min-width: 0;
+
+          .file-path, .github-path {
+            font-weight: 600;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .line-number, .github-lines {
+            font-weight: 400;
+            font-size: 0.7rem;
+            opacity: 0.8;
+          }
+        }
+
+        @media (hover: hover) {
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
     }
 
     blockquote {

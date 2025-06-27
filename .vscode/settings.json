@@ -40,7 +40,8 @@
         "MD029": false, // Disable Ordered list item prefix check
         "MD031": false, // Disable Fenced code blocks should be surrounded by blank lines check
         "MD032": false, // Disable Lists should be surrounded by blank lines check
-        "MD033": false // Disable inline HTML check
+        "MD033": false, // Disable inline HTML check
+        "MD034": false, // Disable bare URL check
     },
     "files.exclude": {
         "**/_site": true, // Exclude Jekyll build folder from the file explorer
