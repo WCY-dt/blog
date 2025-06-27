@@ -41,9 +41,9 @@ navy:
   - title: post
     url: /
     icon: collections_bookmark
-  - title: about
-    url: https://ch3nyang.top
-    icon: person
+  - title: github
+    url: https://github.com/WCY-dt
+    icon: data_object
   - title: category
     url: /category/
     icon: category
