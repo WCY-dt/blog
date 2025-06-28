@@ -444,8 +444,44 @@
     }
 
     hr {
-      width: 100%;
-      border: 1px solid var(--primary-light-color);
+      border: none;
+      margin: 2rem auto;
+      position: relative;
+      height: 0.5rem;
+      width: min(12rem, 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &::before {
+        content: '';
+        width: 0.5rem;
+        height: 0.5rem;
+        background: var(--primary-color);
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 0.2rem;
+        background: linear-gradient(
+          to right,
+          var(--primary-semi-light-color) 0%,
+          var(--primary-semi-light-color) 40%,
+          transparent 40%,
+          transparent 60%,
+          var(--primary-semi-light-color) 60%,
+          var(--primary-semi-light-color) 100%
+        );
+        transform: translateY(-50%);
+        z-index: 0;
+      }
     }
 
     .footnotes p {
