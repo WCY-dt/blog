@@ -27,7 +27,7 @@ copyrights: 原创
    A @ 185.199.111.153
    ```
 
-   然后在 [github.com/WCY-dt/wcy-dt.github.io](https://github.com/WCY-dt/wcy-dt.github.io) 仓库中添加 `CNAME` 文件：
+   然后在 {% github_link https://github.com/WCY-dt/wcy-dt.github.io %} 仓库中添加 `CNAME` 文件：
 
    ```cname
    ch3nyang.top
@@ -59,7 +59,7 @@ copyrights: 原创
 
    其中，这个地址随意[^2]。
 
-4. 第 4 点需要在 [github.com/WCY-dt/mindclip](https://github.com/WCY-dt/mindclip) 仓库中添加 `CNAME` 文件：
+4. 第 4 点需要在 {% github_link https://github.com/WCY-dt/mindclip %} 仓库中添加 `CNAME` 文件：
 
    ```cname
    mind.ch3nyang.top
