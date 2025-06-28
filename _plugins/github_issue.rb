@@ -111,13 +111,13 @@ module Jekyll
         <div class="github-issue" markdown="1">
         <div class="github-issue-header">
         <div class="github-issue-user">
-        <img src="#{avatar_url}" alt="#{username}" class="github-issue-avatar">
+        <img src="#{avatar_url}" alt="#{username}" class="github-issue-avatar no-select">
         <div class="github-issue-info">
         <strong><a href="https://github.com/#{username}">@#{username}</a></strong>
         <br>
         <span class="github-issue-meta">in <a href="https://github.com/#{repo_name}">#{repo_name}</a> · <a href="#{url}">#{issue_number}</a></span>
         </div>
-        <a href="#{url}" class="github-issue-link" title="查看原文">🔗</a>
+        <a href="#{url}" class="github-issue-link no-select" title="查看原文">🔗</a>
         </div>
         </div>
 

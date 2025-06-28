@@ -104,7 +104,7 @@ module Jekyll
     def generate_link_html(url, name, avatar_url, type)
       # 构建头像部分
       avatar_html = if avatar_url
-        "<img src=\"#{avatar_url}\" alt=\"#{name}\" class=\"github-link-avatar\">"
+        "<img src=\"#{avatar_url}\" alt=\"#{name}\" class=\"github-link-avatar no-select\">"
       else
         # 使用SVG图标作为备选
         icon_svg = case type

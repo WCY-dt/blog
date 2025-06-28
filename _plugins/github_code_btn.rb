@@ -91,7 +91,7 @@ module Jekyll
       # 构建完整的按钮 HTML
       html = <<~HTML.strip
         <a href="#{url}" class="github-code-btn" target="_blank" rel="noopener noreferrer">
-          <div class="github-icon">
+          <div class="github-icon no-select">
             <svg width="16" height="16" viewBox="0 0 16 16">
               <use href="/assets/img/github.svg#github"></use>
             </svg>
