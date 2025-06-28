@@ -1,0 +1,183 @@
+// GitHub related styles for Jekyll plugins
+
+// GitHub code button styles
+.github-code-btn-wrapper + details {
+  margin-top: 1rem;
+}
+.github-code-btn-wrapper + .github-code-btn-wrapper {
+  margin-top: 0.5rem;
+}
+.github-code-btn-wrapper {
+  margin: 0;
+
+  .github-code-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--primary-extra-light-color);
+    color: var(--black-color)!important;
+    text-decoration: none;
+    border-radius: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    border: 0.1rem solid var(--primary-semi-light-color);
+    line-height: 1.1;
+
+    .github-icon {
+      width: 1.2rem;
+      height: 1.2rem;
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+
+    .github-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+      min-width: 0;
+
+      .file-path, .github-path {
+        font-weight: 600;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .line-number, .github-lines {
+        font-weight: 400;
+        font-size: 0.7rem;
+        opacity: 0.8;
+      }
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--primary-light-color);
+        box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
+        text-decoration: none!important;
+      }
+    }
+  }
+}
+
+// GitHub issue styles
+.github-issue-wrapper + details {
+  margin-top: 1rem;
+}
+.github-issue-wrapper + .github-issue-wrapper {
+  margin-top: 0.5rem;
+}
+.github-issue-wrapper {
+  margin: 1rem 0;
+
+  .github-issue {
+    border: 1px solid var(--primary-semi-light-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    .github-issue-header {
+      background-color: var(--primary-extra-light-color);
+      padding: 1rem;
+      border-bottom: 1px solid var(--primary-semi-light-color);
+
+      .github-issue-user {
+        display: flex;
+        align-items: center;
+
+        .github-issue-avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin-right: 0.5rem;
+        }
+
+        .github-issue-info {
+          flex: 1;
+
+          .github-issue-meta {
+            font-size: 0.75rem;
+            color: var(--primary-dark-color);
+
+            a {
+              color: var(--primary-dark-color)!important;
+            }
+          }
+        }
+
+        .github-issue-link {
+          color: var(--primary-dark-color)!important;
+          text-decoration: none!important;
+          margin-left: 0.5rem;
+
+          @media (hover: hover) {
+            &:hover {
+              color: var(--black-color)!important;
+            }
+          }
+        }
+      }
+    }
+
+    .github-issue-content {
+      background-color: var(--white-color);
+      padding: 0 1rem;
+    }
+  }
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.4rem 0.2rem 0.3rem;
+  background-color: var(--primary-extra-light-color);
+  color: var(--black-color)!important;
+  text-decoration: none;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  border: 0.1rem solid var(--primary-semi-light-color);
+  line-height: 1.2;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  .github-link-avatar {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .github-link-icon {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    fill: currentColor;
+  }
+
+  .github-link-name {
+    font-weight: 600;
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 12rem; // 限制最大宽度防止过长
+  }
+
+  &.github-link-user, &.github-link-repo {
+    background-color: var(--primary-extra-light-color);
+    border-color: var(--primary-semi-light-color);
+    color: var(--black-color)!important;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--primary-light-color);
+      box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
+      text-decoration: none!important;
+    }
+  }
+}
