@@ -107,11 +107,18 @@ module Jekyll
     end
 
     def generate_issue_html(url, username, avatar_url, repo_name, issue_number, content)
+      # 生成头像HTML，包含失败时的备用方案
+      avatar_html = if avatar_url
+        "<span class=\"github-issue-avatar-wrapper\"><img src=\"#{avatar_url}\" alt=\"#{username}\" class=\"github-issue-avatar no-select\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='inline-block';\"><img src=\"/assets/img/github-user-icon.svg\" alt=\"#{username}\" class=\"github-issue-avatar-fallback no-select\" style=\"display: none;\"></span>"
+      else
+        "<img src=\"/assets/img/github-user-icon.svg\" alt=\"#{username}\" class=\"github-issue-avatar no-select\">"
+      end
+
       <<~HTML
         <div class="github-issue" markdown="1">
         <div class="github-issue-header">
         <div class="github-issue-user">
-        <img src="#{avatar_url}" alt="#{username}" class="github-issue-avatar no-select">
+        #{avatar_html}
         <div class="github-issue-info">
         <strong><a href="https://github.com/#{username}">@#{username}</a></strong>
         <br>

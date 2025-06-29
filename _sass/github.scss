@@ -87,6 +87,28 @@
         display: flex;
         align-items: center;
 
+        .github-issue-avatar-wrapper {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          margin-right: 0.5rem;
+          flex-shrink: 0;
+
+          .github-issue-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+          }
+
+          .github-issue-avatar-fallback {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+          }
+        }
+
         .github-issue-avatar {
           width: 40px;
           height: 40px;
@@ -145,6 +167,29 @@
   vertical-align: middle;
   white-space: nowrap;
 
+  .github-link-avatar-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 1.2rem;
+    height: 1.2rem;
+    flex-shrink: 0;
+
+    .github-link-avatar {
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .github-link-fallback {
+      width: 1.2rem;
+      height: 1.2rem;
+      flex-shrink: 0;
+      border-radius: 50%;
+    }
+  }
+
   .github-link-avatar {
     width: 1.2rem;
     height: 1.2rem;
@@ -153,10 +198,10 @@
   }
 
   .github-link-icon {
-    width: 1rem;
-    height: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
     flex-shrink: 0;
-    fill: currentColor;
+    border-radius: 50%;
   }
 
   .github-link-name {

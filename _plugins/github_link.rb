@@ -102,20 +102,23 @@ module Jekyll
     end
 
     def generate_link_html(url, name, avatar_url, type)
-      # 构建头像部分
-      avatar_html = if avatar_url
-        "<img src=\"#{avatar_url}\" alt=\"#{name}\" class=\"github-link-avatar no-select\">"
+      # 生成备用SVG图标路径
+      fallback_icon_src = case type
+      when 'user'
+        '/assets/img/github-user-icon.svg'
+      when 'repo'
+        '/assets/img/github-repo-icon.svg'
       else
-        # 使用SVG图标作为备选
-        icon_svg = case type
-        when 'user'
-          '<svg width="16" height="16" viewBox="0 0 16 16" class="github-link-icon"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>'
-        when 'repo'
-          '<svg width="16" height="16" viewBox="0 0 16 16" class="github-link-icon"><path fill="currentColor" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"/></svg>'
-        else
-          '<svg width="16" height="16" viewBox="0 0 16 16" class="github-link-icon"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>'
-        end
-        icon_svg
+        '/assets/img/github-default-icon.svg'
+      end
+
+      # 构建头像部分，包含失败时的备用方案
+      avatar_html = if avatar_url
+        # 使用优雅的JavaScript备用方案，加载失败时显示SVG文件
+        "<span class=\"github-link-avatar-wrapper\"><img src=\"#{avatar_url}\" alt=\"#{name}\" class=\"github-link-avatar no-select\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='inline-block';\"><img src=\"#{fallback_icon_src}\" alt=\"#{name}\" class=\"github-link-fallback no-select\" style=\"display: none;\"></span>"
+      else
+        # 直接使用SVG图标文件
+        "<img src=\"#{fallback_icon_src}\" alt=\"#{name}\" class=\"github-link-icon no-select\">"
       end
 
       # 构建完整的链接HTML（行内小药丸样式）

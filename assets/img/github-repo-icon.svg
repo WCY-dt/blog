@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- 白色圆形背景 -->
+  <circle cx="16" cy="16" r="16" fill="#fcfcfc" stroke="none"/>
+  <!-- 仓库图标 - 只保留主体文件夹 -->
+  <path d="M6 10c0-1.1.9-2 2-2h5l2 2h9c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V10z" fill="hsl(15, 83%, 46%)"/>
+</svg>
