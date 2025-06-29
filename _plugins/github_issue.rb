@@ -124,7 +124,7 @@ module Jekyll
         <br>
         <span class="github-issue-meta">in <a href="https://github.com/#{repo_name}">#{repo_name}</a> · <a href="#{url}">#{issue_number}</a></span>
         </div>
-        <a href="#{url}" class="github-issue-link no-select" title="查看原文">🔗</a>
+        <a href="#{url}" class="github-issue-link no-select" title="查看原文"><span class="material-symbols-outlined">open_in_new</span></a>
         </div>
         </div>
 

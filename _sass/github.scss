@@ -130,13 +130,19 @@
         }
 
         .github-issue-link {
-          color: var(--primary-dark-color)!important;
+          color: var(--primary-color)!important;
           text-decoration: none!important;
           margin-left: 0.5rem;
+          transition: color 0.2s ease-in-out;
+
+          .material-symbols-outlined {
+            font-size: 1.2rem;
+            vertical-align: middle;
+          }
 
           @media (hover: hover) {
             &:hover {
-              color: var(--black-color)!important;
+              color: var(--primary-dark-color)!important;
             }
           }
         }
