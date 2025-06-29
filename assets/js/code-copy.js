@@ -14,6 +14,11 @@
   window.hideCopyButton = function(codeId) {
     const button = document.getElementById('copy-btn-' + codeId);
     if (button) {
+      // 如果正在显示成功状态，不要隐藏
+      const checkIcon = button.querySelector('.check-icon');
+      if (checkIcon && checkIcon.style.display === 'inline-block') {
+        return;
+      }
       button.style.opacity = '0';
     }
   };
@@ -103,14 +108,13 @@
       if (!codeBlock.closest('.code-block-wrapper')) {
         const wrapper = document.createElement('div');
         wrapper.className = 'code-block-wrapper';
+        wrapper.setAttribute('onmouseenter', 'showCopyButton("' + codeBlock.id + '")');
+        wrapper.setAttribute('onmouseleave', 'hideCopyButton("' + codeBlock.id + '")');
 
         // 如果代码块没有ID，生成一个
         if (!codeBlock.id) {
           codeBlock.id = 'code-' + Math.random().toString(36).substr(2, 9);
         }
-
-        wrapper.setAttribute('onmouseenter', 'showCopyButton("' + codeBlock.id + '")');
-        wrapper.setAttribute('onmouseleave', 'hideCopyButton("' + codeBlock.id + '")');
 
         // 创建复制按钮
         const button = document.createElement('div');
@@ -118,7 +122,7 @@
         button.id = 'copy-btn-' + codeBlock.id;
         button.setAttribute('onclick', 'copyCode("' + codeBlock.id + '")');
         button.setAttribute('title', '复制代码');
-        button.innerHTML = '<span class="copy-icon material-symbols-outlined">content_copy</span><span class="check-icon material-symbols-outlined" style="display: none;">check</span>';
+        button.innerHTML = '<span class="copy-icon">📋</span><span class="check-icon" style="display: none;">✅</span>';
 
         // 包装代码块
         const pre = codeBlock.parentNode;
@@ -129,4 +133,4 @@
     });
   });
 
-})()
+})();
