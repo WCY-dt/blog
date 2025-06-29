@@ -16,14 +16,15 @@
     gap: 0.5rem;
     padding: 0.25rem 0.5rem;
     background-color: var(--primary-extra-light-color);
-    color: var(--black-color)!important;
+    color: var(--primary-dark-color)!important;
     text-decoration: none;
     border-radius: 0.3rem;
     font-size: 0.8rem;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
-    border: 0.1rem solid var(--primary-semi-light-color);
+    border: 1px solid var(--primary-semi-light-color);
     line-height: 1.1;
+    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
     .github-icon {
       width: 1.2rem;
@@ -56,7 +57,7 @@
     @media (hover: hover) {
       &:hover {
         background-color: var(--primary-light-color);
-        box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
         text-decoration: none!important;
       }
     }
@@ -77,11 +78,11 @@
     border: 1px solid var(--primary-semi-light-color);
     border-radius: 0.5rem;
     overflow: hidden;
+    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
     .github-issue-header {
-      background-color: var(--primary-extra-light-color);
+      background-color: var(--primary-light-color);
       padding: 1rem;
-      border-bottom: 1px solid var(--primary-semi-light-color);
 
       .github-issue-user {
         display: flex;
@@ -150,8 +151,9 @@
     }
 
     .github-issue-content {
-      background-color: var(--white-color);
-      padding: 0 1rem;
+      background-color: var(--primary-extra-light-color);
+      margin: 0;
+      padding: 1rem;
     }
   }
 }
@@ -162,16 +164,17 @@
   gap: 0.25rem;
   padding: 0.2rem 0.4rem 0.2rem 0.3rem;
   background-color: var(--primary-extra-light-color);
-  color: var(--black-color)!important;
+  color: var(--primary-dark-color)!important;
   text-decoration: none;
   border-radius: 1rem;
   font-size: 0.8rem;
   font-weight: 500;
   transition: all 0.2s ease-in-out;
-  border: 0.1rem solid var(--primary-semi-light-color);
+  border: 1px solid var(--primary-semi-light-color);
   line-height: 1.2;
   vertical-align: middle;
   white-space: nowrap;
+  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
   .github-link-avatar-wrapper {
     position: relative;
@@ -221,13 +224,12 @@
   &.github-link-user, &.github-link-repo {
     background-color: var(--primary-extra-light-color);
     border-color: var(--primary-semi-light-color);
-    color: var(--black-color)!important;
+    color: var(--primary-dark-color)!important;
   }
 
   @media (hover: hover) {
     &:hover {
       background-color: var(--primary-light-color);
-      box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
       text-decoration: none!important;
     }
   }

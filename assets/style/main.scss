@@ -20,7 +20,7 @@
 @use 'not_found';
 @use 'github';
 @use 'image_caption';
-@use 'copy-button';
+@use 'copy_button';
 @use 'syntax_light';
 @use 'syntax_dark';
 
@@ -42,6 +42,7 @@ html[data-theme="light"] {
   --white-color: hsl(0, 0%, 99%);
   --black-color: hsl(0, 0%, 0%);
   --true-white-color: hsl(0, 0%, 99%);
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 html[data-theme="dark"] {
@@ -55,6 +56,7 @@ html[data-theme="dark"] {
   --white-color: hsl(0, 0%, 2%);
   --black-color: hsl(0, 0%, 80%);
   --true-white-color: hsl(0, 0%, 99%);
+  --shadow-color: rgba(255, 255, 255, 0.05);
 }
 
 @font-face {

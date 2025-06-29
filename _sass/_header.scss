@@ -11,6 +11,7 @@ header {
   width: 100%;
   height: 6rem;
   z-index: 5;
+  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
   #title-container {
     position: relative;
@@ -66,7 +67,6 @@ header {
     justify-content: start;
     gap: 0.5rem;
     background-color: var(--primary-light-color);
-    color: var(--black-color);
     border-radius: 1rem 0 0 0;
     padding: 0.5rem;
     height: calc(100% - 1rem);
@@ -101,13 +101,14 @@ header {
         line-height: 1.5rem;
         text-transform: capitalize;
         z-index: 10;
-        color: var(--primary-dark-color);
+        color: var(--primary-semi-dark-color);
         transition: all 0.25s ease-in-out;
       }
 
       &.active {
         padding: 0.25rem 1rem 0.75rem 1rem;
         background-color: var(--primary-semi-light-color);
+        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
         span {
           color: var(--primary-little-light-color);
@@ -123,6 +124,7 @@ header {
         a.active {
           padding: 0 0.5rem 1rem 1.5rem;
           background-color: var(--primary-light-color);
+          box-shadow: none;
 
           span {
             color: var(--primary-semi-light-color);
@@ -134,10 +136,15 @@ header {
       }
       a:hover {
         padding: 0.25rem 1rem 0.75rem 1rem !important;
-        background-color: var(--primary-semi-light-color) !important;
+        background-color: var(--primary-color) !important;
+        box-shadow: 0 0.1rem 0.3rem var(--shadow-color)!important;
+
+        p {
+          color: var(--primary-extra-light-color);
+        }
 
         span {
-          color: var(--primary-little-light-color) !important;
+          color: var(--primary-semi-light-color) !important;
           font-size: 2.2rem !important;
           left: 50% !important;
           transform: translateX(-50%) translateY(-50%) !important;

@@ -143,6 +143,7 @@
         user-select: none;
         -webkit-user-drag: none;
         -moz-user-drag: none;
+        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
       }
 
       &[open] {
@@ -277,11 +278,16 @@
       background-color: var(--primary-extra-light-color);
       padding: 0.5rem 2rem;
       border-radius: 0.5rem;
+      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
       pre:has(code) {
-        border: 0.05rem solid var(--primary-color);
+        border: 1px solid var(--primary-semi-light-color);
         box-sizing: border-box;
         border-radius: 0.5rem;
+
+        &:not(:has(.language-mermaid)) {
+          box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+        }
 
         &:has(.language-mermaid) {
           border: none;
@@ -291,6 +297,7 @@
           user-select: none;
           -webkit-user-drag: none;
           -moz-user-drag: none;
+          box-shadow: none;
           cursor: pointer;
 
           code {
@@ -307,7 +314,7 @@
       }
 
       blockquote {
-        border: 0.05rem solid var(--primary-color);
+        border: 0.05rem solid var(--primary-semi-light-color);
         border-left: 0.25rem solid var(--primary-color);
       }
     }
@@ -330,6 +337,7 @@
       width: 100%;
       border-radius: 0.5rem;
       overflow: hidden;
+      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
       th,
       td {
@@ -376,6 +384,7 @@
       font-size: 1rem;
       overflow-x: auto;
       border-radius: 0.5rem;
+      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
       * {
         white-space: pre;

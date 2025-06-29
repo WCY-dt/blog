@@ -10,12 +10,12 @@
     &:hover {
       .broadcast-container {
         background-color: var(--primary-color);
-        color: var(--white-color);
+        color: var(--primary-extra-light-color);
 
         .broadcast-text-wrapper {
           animation-play-state: paused;
           p {
-            color: var(--white-color);
+            color: var(--primary-extra-light-color);
           }
         }
       }
@@ -31,10 +31,11 @@
     padding: 0.2rem 1.5rem;
     background-color: var(--primary-semi-light-color);
     border-radius: 0.5rem;
-    color: var(--primary-color);
+    color: var(--primary-semi-dark-color);
     position: relative;
     overflow: hidden;
     height: 50px;
+    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
     transition: all 0.2s ease-in-out;
 
     .broadcast-text-wrapper {

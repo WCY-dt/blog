@@ -8,6 +8,7 @@ footer {
   align-items: end;
   justify-content: center;
   z-index: 10;
+  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
   #footer-container {
     width: 100%;
