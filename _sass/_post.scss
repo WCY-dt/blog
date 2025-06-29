@@ -66,7 +66,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.25rem 1rem;
-      color: var(--primary-dark-color);
+      color: var(--primary-semi-dark-color);
       white-space: nowrap;
       flex-wrap: wrap;
 
@@ -88,7 +88,7 @@
 
       a {
         position: relative;
-        color: var(--primary-dark-color);
+        color: var(--primary-semi-dark-color);
         text-decoration: none;
         transition: color 0.25s ease-in-out;
 

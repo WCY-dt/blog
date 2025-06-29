@@ -104,24 +104,20 @@ layout: compress
     >
 
     <title>
+      {%- if jekyll.environment != 'production' and site.dev_mode != true -%}
+        [PREVIEW]
+      {%- endif -%}
       {%- if page.title -%}
         {%- if page.layout == 'post' -%}
+          {{ site.author.name | append: "'s blog" | escape }} |&nbsp;
           {%- if page.series -%}
-            {%- if jekyll.environment != 'production' -%}[PREVIEW]{%- endif -%}
-            {{ site.author.name | append: "'s blog" | escape }} |
             {{ page.series | escape }} ({{ page.series_index }}) -
-            {{ page.title | escape }}
-          {%- else -%}
-            {%- if jekyll.environment != 'production' -%}[PREVIEW]{%- endif -%}
-            {{ site.author.name | append: "'s blog" | escape }} |
-            {{ page.title | escape }}
           {%- endif -%}
+          {{ page.title | escape }}
         {%- else -%}
-          {%- if jekyll.environment != 'production' -%}[PREVIEW]{%- endif -%}
           {{ page.title | escape }}
         {%- endif -%}
       {%- else -%}
-        {%- if jekyll.environment != 'production' -%}[PREVIEW]{%- endif -%}
         {{ site.author.name | append: "'s blog" | escape }}
       {%- endif -%}
     </title>

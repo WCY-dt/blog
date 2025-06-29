@@ -1,7 +1,7 @@
 {% if page.comments and site.giscus %}
   <div id='comment-container' class='no-select no-print'>
     <h1>Comments</h1>
-    {%- if jekyll.environment == 'production' -%}
+    {%- if jekyll.environment == 'production' or site.dev_mode -%}
       <script
         src='https://giscus.app/client.js'
         data-repo='{{ site.giscus.data-repo }}'

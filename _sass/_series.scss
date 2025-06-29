@@ -12,7 +12,7 @@
 
   #series-description {
     font-weight: 700;
-    color: var(--primary-dark-color);
+    color: var(--primary-semi-dark-color);
     margin: 0;
 
     #series-name {
@@ -58,7 +58,7 @@
 
     a {
       text-decoration: none;
-      color: var(--primary-dark-color);
+      color: var(--primary-semi-dark-color);
       transition: all 0.25s ease-in-out;
 
       &.em {
@@ -100,8 +100,8 @@
       padding: 0.5rem;
       font-size: 1.2rem;
       font-weight: 700;
-      background-color: var(--primary-light-color);
-      color: var(--primary-little-light-color);
+      background-color: var(--primary-semi-light-color);
+      color: var(--primary-semi-dark-color);
       text-decoration: none;
       border-radius: 0.5rem;
       box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
@@ -110,10 +110,11 @@
       @media (hover: hover) {
         &:hover {
           background-color: var(--primary-color);
-          color: var(--white-color);
+          color: var(--primary-extra-light-color);
 
           .material-symbols-outlined {
             font-size: 2.5rem;
+            color: var(--primary-semi-light-color);
           }
         }
       }
@@ -121,7 +122,7 @@
       .material-symbols-outlined {
         font-size: 3rem;
         line-height: 3rem;
-        color: var(--primary-semi-light-color);
+        color: var(--primary-color);
         transition: all 0.25s ease-in-out;
       }
     }

@@ -63,6 +63,9 @@ share:
 # - weibo
 
 ############# Other Settings #############
+# Enable this when you need to modify the theme
+dev_mode: true
+
 # Please do not modify the following settings unless you know what you are doing.
 permalink: /post/:title/
 theme_config:

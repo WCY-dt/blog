@@ -1,6 +1,6 @@
 <div id='share-container' class='no-select no-print'>
   <h1>Share This Post</h1>
-  {%- if jekyll.environment == 'production' -%}
+  {%- if jekyll.environment == 'production' or site.dev_mode -%}
     <ul>
       {% if site.share contains 'hackernews' %}
         <li>

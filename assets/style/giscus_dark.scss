@@ -11,6 +11,7 @@ html {
   --primary-extra-light-color: hsl(0, 0%, 5%);
   --white-color: hsl(0, 0%, 2%);
   --black-color: hsl(0, 0%, 80%);
+  --shadow-color: rgba(255, 255, 255, 0.05);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
@@ -19,7 +20,7 @@ $ui-font: 'Orbitron', sans-serif;
 $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif';
 
 .gsc-main {
-  color: var(--primary-dark-color);
+  color: var(--primary-semi-dark-color);
 
   &::selection {
     color: var(--white-color);
@@ -42,17 +43,11 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
     display: none;
   }
 
-  * {
-    border-radius: 0 !important;
-  }
-
   .gsc-comments {
     gap: 0.5rem;
 
     .gsc-header {
       .gsc-left-header {
-        color: var(--primary-little-light-color);
-
         em {
           display: none;
         }
@@ -60,21 +55,30 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
       .gsc-right-header {
         .BtnGroup-item:not(.BtnGroup-item--selected) {
-          color: var(--primary-little-light-color);
           border-radius: 0.5rem;
           transition: all 0.25s ease-in-out;
-
-          @media (hover: hover) {
-            &:hover {
-              background-color: var(--primary-light-color);
-            }
-          }
         }
 
         .BtnGroup-item--selected {
-          background-color: var(--primary-little-light-color);
-          color: var(--white-color);
+          background-color: var(--primary-semi-light-color);
           border-radius: 0.5rem;
+          border: none;
+          box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+          transition: all 0.25s ease-in-out;
+        }
+
+        .BtnGroup-item {
+          .btn {
+            transition: all 0.25s ease-in-out;
+          }
+
+          @media (hover: hover) {
+            &:hover {
+              background-color: var(--primary-color);
+              color: var(--primary-extra-light-color);
+              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+            }
+          }
         }
       }
     }
@@ -83,12 +87,13 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
       border: none;
       background-color: var(--primary-light-color);
       border-radius: 0.5rem;
+      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
       .gsc-comment-box-tabs {
-        background-color: var(--primary-little-light-color);
-        color: var(--primary-dark-color);
+        background-color: var(--primary-semi-light-color);
+        color: var(--primary-semi-dark-color);
         border: none;
-        border-radius: 0.5rem;
+        border-radius: 0.5rem 0.5rem 0 0;
 
         & > div.mx-2.mb-\[-1px\].mt-2 {
           margin-bottom: 0 !important;
@@ -97,24 +102,27 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             border: none;
             background-color: var(--primary-light-color);
             border-radius: 0.5rem 0.5rem 0 0;
+            font-weight: 700;
             transition: all 0.25s ease-in-out;
           }
 
           .color-text-secondary {
-            color: var(--white-color);
             border-radius: 0.5rem 0.5rem 0 0;
             transition: all 0.25s ease-in-out;
+          }
 
+          .color-text-primary,
+          .color-text-secondary {
             @media (hover: hover) {
               &:hover {
-                color: var(--primary-extra-light-color);
+                color: var(--primary-color);
               }
             }
           }
         }
 
         .gsc-comment-box-md-toolbar {
-          color: var(--white-color);
+          color: var(--primary-semi-dark-color);
         }
       }
 
@@ -123,19 +131,20 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           border: none;
           background-color: var(--primary-extra-light-color);
           border-radius: 0.5rem;
+          box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
           .gsc-comment-box-textarea {
             border: none;
             border-bottom-style: dashed;
             border-bottom-width: 1px;
-            border-bottom-color: var(--primary-dark-color);
+            border-bottom-color: var(--primary-semi-dark-color);
           }
 
           .gsc-comment-box-textarea-extras {
             border: none;
 
             a {
-              color: var(--primary-dark-color);
+              color: var(--primary-semi-dark-color);
             }
           }
         }
@@ -147,7 +156,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
       .gsc-comment-box-bottom {
         & > button {
-          color: var(--primary-dark-color);
+          color: var(--primary-semi-dark-color);
           transition: all 0.25s ease-in-out;
 
           @media (hover: hover) {
@@ -161,13 +170,16 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           button,
           a {
             border: none;
-            color: var(--white-color);
-            background-color: var(--primary-little-light-color);
+            color: var(--primary-semi-dark-color);
+            background-color: var(--primary-semi-light-color);
             border-radius: 0.5rem;
+            box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+            font-weight: 700;
             transition: all 0.25s ease-in-out;
 
             @media (hover: hover) {
               &:hover {
+                color: var(--primary-extra-light-color);
                 background-color: var(--primary-color);
               }
             }
@@ -177,21 +189,29 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
     }
 
     .gsc-timeline {
-      border-radius: 0.5rem;
+      border-radius: 0.5rem 0.5rem 0 0;
+      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
       .gsc-comment {
         background-color: var(--primary-extra-light-color);
+        border-radius: 0.5rem 0.5rem 0 0;
 
         & > div {
           border: none;
 
           .gsc-comment-header {
+            padding-top: 0.5rem;
+
             .gsc-comment-author {
               & > div {
                 span {
                   border: none;
                   background-color: var(--primary-light-color);
                 }
+              }
+
+              img {
+                box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
               }
             }
           }
@@ -246,7 +266,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 display: block;
                 width: 10rem;
                 height: 0.8rem;
-                background-color: var(--primary-dark-color);
+                background-color: var(--primary-semi-dark-color);
                 z-index: -1;
                 position: absolute;
                 bottom: 0.3rem;
@@ -266,7 +286,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 display: block;
                 width: 6rem;
                 height: 0.6rem;
-                background-color: var(--primary-dark-color);
+                background-color: var(--primary-semi-dark-color);
                 z-index: -1;
                 position: absolute;
                 bottom: 0.5rem;
@@ -294,7 +314,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             }
 
             a {
-              color: var(--primary-dark-color);
+              color: var(--primary-semi-dark-color);
               text-decoration: underline;
               transition: all 0.25s ease-in-out;
 
@@ -317,19 +337,19 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
             blockquote {
               margin: 0;
-              border-left: 0.25rem solid var(--primary-dark-color);
+              border-left: 0.25rem solid var(--primary-semi-dark-color);
               box-sizing: border-box;
-              background-color: var(--primary-light-color);
+              background-color: var(--primary-semi-light-color);
               padding: 0.5rem 2rem;
 
               pre:has(code) {
-                border: 0.05rem solid var(--primary-dark-color);
+                border: 0.05rem solid var(--primary-semi-dark-color);
                 box-sizing: border-box;
               }
 
               blockquote {
-                border: 0.05rem solid var(--primary-dark-color);
-                border-left: 0.25rem solid var(--primary-dark-color);
+                border: 0.05rem solid var(--primary-semi-dark-color);
+                border-left: 0.25rem solid var(--primary-semi-dark-color);
               }
             }
 
@@ -339,14 +359,14 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
               li {
                 &::marker {
-                  color: var(--primary-dark-color);
+                  color: var(--primary-semi-dark-color);
                 }
               }
             }
 
             table {
               border-collapse: collapse;
-              border: 0.05rem solid var(--primary-dark-color);
+              border: 0.05rem solid var(--primary-semi-dark-color);
               box-sizing: border-box;
               width: 100%;
 
@@ -357,7 +377,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               }
 
               thead {
-                background-color: var(--primary-dark-color);
+                background-color: var(--primary-semi-dark-color);
                 color: var(--white-color);
               }
 
@@ -407,7 +427,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               }
 
               &::-webkit-scrollbar-thumb {
-                background-color: var(--primary-dark-color);
+                background-color: var(--primary-semi-dark-color);
               }
 
               &::-webkit-scrollbar-track {
@@ -432,7 +452,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
               &,
               a {
-                color: var(--primary-dark-color);
+                color: var(--primary-semi-dark-color);
               }
 
               a {
@@ -446,14 +466,15 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               .gsc-reactions-menu {
                 .gsc-social-reaction-summary-item {
                   border: none;
-                  background-color: var(--primary-light-color);
-                  color: var(--primary-dark-color);
+                  background-color: var(--primary-semi-light-color);
+                  color: var(--primary-semi-dark-color);
+                  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                   transition: all 0.25s ease-in-out;
 
                   @media (hover: hover) {
                     &:hover {
-                      background-color: var(--primary-dark-color);
-                      color: var(--white-color);
+                      background-color: var(--primary-color);
+                      color: var(--primary-extra-light-color);
                     }
                   }
                 }
@@ -461,6 +482,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 .gsc-reactions-popover {
                   border: none;
                   background-color: var(--primary-light-color);
+                  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
                   div.color-border-primary.my-2.border-t {
                     border: none;
@@ -469,7 +491,9 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                   div.m-2 {
                     button.has-reacted {
                       border: none;
+                      border-radius: 0.25rem;
                       background-color: var(--primary-semi-light-color);
+                      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                     }
                   }
                 }
@@ -478,14 +502,15 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               .gsc-direct-reaction-buttons {
                 button {
                   border: none;
-                  color: var(--primary-dark-color);
-                  background-color: var(--primary-light-color);
+                  color: var(--primary-semi-dark-color);
+                  background-color: var(--primary-semi-light-color);
+                  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                   transition: all 0.25s ease-in-out;
 
                   @media (hover: hover) {
                     &:hover {
-                      background-color: var(--primary-dark-color);
-                      color: var(--white-color);
+                      background-color: var(--primary-color);
+                      color: var(--primary-extra-light-color);
                     }
                   }
                 }
@@ -496,21 +521,22 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           .gsc-replies {
             border: none;
             background-color: var(--primary-light-color);
+            border-radius: 0;
 
             .gsc-reply {
               margin-left: 1rem;
-              border-left: 2px solid var(--primary-dark-color);
+              border-left: 2px solid var(--primary-semi-dark-color);
 
               .gsc-reply-content {
                 padding-top: 0;
 
                 div:has(.notranslate) {
-                  border: 0.05rem solid var(--primary-dark-color);
+                  border: 0.05rem solid var(--primary-semi-dark-color);
                   box-sizing: border-box;
                 }
 
                 blockquote {
-                  border: 0.05rem solid var(--primary-dark-color);
+                  border: 0.05rem solid var(--primary-semi-dark-color);
                   border-left: 0.25rem solid var(--primary-dark-color);
                 }
               }
@@ -532,12 +558,13 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                     border: none;
                     background-color: var(--primary-light-color);
                     color: var(--primary-dark-color);
+                    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                     transition: all 0.25s ease-in-out;
 
                     @media (hover: hover) {
                       &:hover {
-                        background-color: var(--primary-dark-color);
-                        color: var(--white-color);
+                        background-color: var(--primary-semi-dark-color);
+                        color: var(--primary-extra-light-color);
                       }
                     }
                   }
@@ -545,6 +572,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                   .gsc-reactions-popover {
                     border: none;
                     background-color: var(--primary-semi-light-color);
+                    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
                     div.color-border-primary.my-2.border-t {
                       border: none;
@@ -553,7 +581,8 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                     div.m-2 {
                       button.has-reacted {
                         border: none;
-                        background-color: var(--primary-light-color);
+                        background-color: var(--primary-semi-light-color);
+                        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                       }
                     }
                   }
@@ -562,14 +591,15 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 .gsc-direct-reaction-buttons {
                   button {
                     border: none;
-                    color: var(--primary-dark-color);
-                    background-color: var(--primary-light-color);
+                    color: var(--primary-semi-dark-color);
+                    background-color: var(--primary-semi-light-color);
+                    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                     transition: all 0.25s ease-in-out;
 
                     @media (hover: hover) {
                       &:hover {
-                        background-color: var(--primary-dark-color);
-                        color: var(--white-color);
+                        background-color: var(--primary-color);
+                        color: var(--primary-extra-light-color);
                       }
                     }
                   }
@@ -582,11 +612,22 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             border: none;
             background-color: var(--primary-light-color);
             padding: 0.5rem;
+            border-radius: 0 0 0.5rem 0.5rem;
 
             button {
               border: none;
               margin: 0 0.5rem;
               background-color: var(--primary-extra-light-color);
+              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+            }
+          }
+
+          .gsc-comment-box-is-reply {
+            border-radius: 0 0 0.5rem 0.5rem;
+            padding-bottom: 0.25rem;
+
+            .gsc-comment-box-tabs {
+              border-radius: 0;
             }
           }
         }
