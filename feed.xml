@@ -1,6 +1,6 @@
 ---
 ---
-{%- if jekyll.environment == 'production' -%}
+{%- if jekyll.environment == 'production' or site.dev_mode -%}
   <?xml version="1.0" encoding="UTF-8"?>
   <?xml-stylesheet href="/assets/style/pretty-feed-v3.xsl" type="text/xsl"?>
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
