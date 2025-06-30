@@ -2,6 +2,20 @@ function tocActive() {
     const toc = document.querySelector('#toc-container');
     if (!toc) return;
 
+    // 检查 #post-footer-container 的位置
+    const footerContainer = document.querySelector('#post-footer-container');
+    if (footerContainer) {
+        const footerTop = footerContainer.getBoundingClientRect().top + window.scrollY;
+        const halfViewportHeight = window.innerHeight / 2;
+
+        if (footerTop <= window.scrollY + halfViewportHeight) {
+            toc.style.display = 'none';
+            return;
+        } else {
+            toc.style.display = '';
+        }
+    }
+
     const tocItems = toc.querySelectorAll('a');
     const headerLinks = document.querySelectorAll('h2, h3, h4');
 
@@ -11,28 +25,37 @@ function tocActive() {
     }
 
     const headerOffsets = Array.from(headerLinks).map(link => link.getBoundingClientRect().top + window.scrollY);
-    const activeIndex = headerOffsets.findIndex(offset => offset >= window.scrollY + window.innerHeight / 2) - 1;
+    const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-    tocItems.forEach(item => item.classList.remove('active'));
-    const activeItem = tocItems[Math.max(activeIndex, 0)];
-    if (!activeItem) return;
-
-    activeItem.classList.add('active');
-    toc.querySelectorAll('.expand').forEach(el => el.classList.remove('expand'));
-
-    let parent = activeItem;
-    while (parent) {
-        if (parent.tagName === 'UL') {
-            parent.classList.add('expand');
-            const siblingUl = parent.nextElementSibling;
-            if (siblingUl && siblingUl.tagName === 'UL') {
-                siblingUl.classList.add('expand');
-            }
+    // Find the active header index
+    let activeIndex = 0;
+    for (let i = headerOffsets.length - 1; i >= 0; i--) {
+        if (scrollPosition >= headerOffsets[i]) {
+            activeIndex = i;
+            break;
         }
-        parent = parent.parentNode;
     }
 
-    activeItem.scrollIntoView({ behavior: 'smooth' });
+    tocItems.forEach(item => item.classList.remove('active'));
+    const activeItem = tocItems[activeIndex];
+    if (activeItem) {
+        activeItem.classList.add('active');
+        toc.querySelectorAll('.expand').forEach(el => el.classList.remove('expand'));
+
+        let parent = activeItem;
+        while (parent) {
+            if (parent.tagName === 'UL') {
+                parent.classList.add('expand');
+                const siblingUl = parent.nextElementSibling;
+                if (siblingUl && siblingUl.tagName === 'UL') {
+                    siblingUl.classList.add('expand');
+                }
+            }
+            parent = parent.parentNode;
+        }
+
+        activeItem.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 function handleAnchorClick(e) {

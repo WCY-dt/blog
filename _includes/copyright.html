@@ -30,7 +30,10 @@
         rel='cc:attributionURL'
         href='{{ page.url | absolute_url }}'
       >
-        {{- page.title -}}
+        {%- if page.series -%}
+          {{ page.series | escape }} ({{ page.series_index }}) -
+        {%- endif -%}
+        {{ page.title | escape }}
       </a>
       © {{ page.date | date: '%Y' }} by
       <a
@@ -38,7 +41,7 @@
         property='cc:attributionName'
         href='{{ site.author.link }}'
       >
-        {{- site.author.name -}}
+        {{ site.author.name | escape }}
       </a>
       is licensed under
       <a
