@@ -33,8 +33,8 @@
         padding: 1rem;
         font-size: 1.2rem;
         font-weight: 700;
-        background-color: var(--primary-semi-light-color);
-        color: var(--primary-semi-dark-color);
+        background-color: var(--primary-light-color);
+        color: var(--primary-little-light-color);
         text-decoration: none;
         box-sizing: border-box;
         border-radius: 0.5rem;
@@ -50,7 +50,7 @@
           bottom: 0;
           right: 0;
           font-size: 4rem;
-          color: var(--primary-color);
+          color: var(--primary-semi-light-color);
           z-index: 0;
           transition: all 0.25s ease-in-out;
         }
@@ -63,7 +63,7 @@
             .material-symbols-outlined {
               bottom: 0.25rem;
               right: 0.25rem;
-              color: var(--primary-semi-light-color);
+              color: var(--primary-semi-dark-color);
               font-size: 3rem;
             }
           }

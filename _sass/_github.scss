@@ -15,16 +15,17 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.25rem 0.5rem;
-    background-color: var(--primary-extra-light-color);
-    color: var(--primary-dark-color)!important;
+    background-color: var(--primary-light-color);
+    color: var(--primary-little-light-color)!important;
     text-decoration: none;
     border-radius: 0.3rem;
     font-size: 0.8rem;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
-    border: 1px solid var(--primary-semi-light-color);
+    // border: 1px solid var(--primary-semi-light-color);
     line-height: 1.1;
     box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+    transition: all 0.2s ease-in-out!important;
 
     .github-icon {
       width: 1.2rem;
@@ -56,8 +57,8 @@
 
     @media (hover: hover) {
       &:hover {
-        background-color: var(--primary-light-color);
-        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+        background-color: var(--primary-color);
+        color: var(--primary-extra-light-color)!important;
         text-decoration: none!important;
       }
     }
@@ -75,7 +76,7 @@
   margin: 1rem 0;
 
   .github-issue {
-    border: 1px solid var(--primary-semi-light-color);
+    // border: 1px solid var(--primary-semi-light-color);
     border-radius: 0.5rem;
     overflow: hidden;
     box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
@@ -122,10 +123,10 @@
 
           .github-issue-meta {
             font-size: 0.75rem;
-            color: var(--primary-dark-color);
+            color: var(--primary-little-light-color);
 
             a {
-              color: var(--primary-dark-color)!important;
+              color: var(--primary-little-light-color)!important;
             }
           }
         }
@@ -164,13 +165,12 @@
   gap: 0.25rem;
   padding: 0.2rem 0.4rem 0.2rem 0.3rem;
   background-color: var(--primary-extra-light-color);
-  color: var(--primary-dark-color)!important;
   text-decoration: none;
   border-radius: 1rem;
   font-size: 0.8rem;
   font-weight: 500;
   transition: all 0.2s ease-in-out;
-  border: 1px solid var(--primary-semi-light-color);
+  // border: 1px solid var(--primary-semi-light-color);
   line-height: 1.2;
   vertical-align: middle;
   white-space: nowrap;
@@ -222,14 +222,16 @@
   }
 
   &.github-link-user, &.github-link-repo {
-    background-color: var(--primary-extra-light-color);
+    background-color: var(--primary-light-color);
     border-color: var(--primary-semi-light-color);
-    color: var(--primary-dark-color)!important;
+    color: var(--primary-little-light-color)!important;
+    transition: all 0.2s ease-in-out!important;
   }
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--primary-light-color);
+      background-color: var(--primary-color);
+      color: var(--primary-extra-light-color)!important;
       text-decoration: none!important;
     }
   }

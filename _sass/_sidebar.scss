@@ -27,8 +27,8 @@
     line-height: 3rem;
     font-size: 2rem;
     text-align: center;
-    background: var(--primary-semi-light-color);
-    color: var(--primary-semi-dark-color);
+    background: var(--primary-light-color);
+    color: var(--primary-little-light-color);
     cursor: pointer;
     transition: background-color 0.25s ease-in-out;
 
@@ -80,7 +80,7 @@
         position: absolute;
         bottom: 0;
         right: 1.5rem;
-        background-color: var(--primary-light-color);
+        background-color: var(--primary-extra-light-color);
         width: 14rem;
         padding: 1rem;
         flex-direction: column;
@@ -100,6 +100,7 @@
 
           span {
             color: var(--primary-semi-light-color);
+            z-index: -1;
           }
 
           p {

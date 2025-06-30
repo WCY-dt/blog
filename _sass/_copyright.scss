@@ -24,8 +24,8 @@
         top: calc(100% + 0.6rem - 1rem);
         left: 0;
         width: 100%;
-        background-color: var(--primary-semi-light-color);
-        color: var(--primary-semi-dark-color);
+        background-color: var(--primary-light-color);
+        color: var(--primary-little-light-color);
         padding: 0.5rem 0;
         box-sizing: border-box;
         border-radius: 0.5rem;
@@ -33,7 +33,7 @@
         text-align: center;
 
         a {
-          color: var(--primary-semi-dark-color);
+          color: var(--primary-little-light-color);
           text-decoration: underline;
         }
 
@@ -45,7 +45,7 @@
           transform: translateX(-50%);
           border-left: 0.6rem solid transparent;
           border-right: 0.6rem solid transparent;
-          border-bottom: 0.6rem solid var(--primary-semi-light-color);
+          border-bottom: 0.6rem solid var(--primary-light-color);
         }
       }
     }

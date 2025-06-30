@@ -4,7 +4,7 @@
   right: max(2rem, calc((100vw - min(100% - 2rem, 40rem)) / 2 - 3rem));
   transform: translateX(100%);
   max-width: min(12rem, calc((100vw - min(100% - 2rem, 40rem)) / 2 - 3rem));
-  color: var(--primary-semi-dark-color);
+  color: var(--primary-semi-light-color);
   box-sizing: border-box;
   padding: 1rem;
   font-size: 1rem;
@@ -70,6 +70,7 @@
 
       &.active {
         color: var(--primary-color);
+        font-weight: 700;
       }
     }
 
@@ -126,8 +127,8 @@
       height: 2.5rem;
       line-height: 2.5rem;
       font-size: 1.5rem;
-      background-color: var(--primary-color);
-      color: var(--white-color);
+      background: var(--primary-light-color);
+      color: var(--primary-little-light-color);
       z-index: 92;
     }
 
@@ -136,7 +137,7 @@
       position: absolute;
       bottom: 1.5rem;
       right: 1.5rem;
-      background-color: var(--primary-light-color);
+      background-color: var(--primary-extra-light-color);
       width: 16rem;
       padding: 1rem;
       z-index: -1;

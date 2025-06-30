@@ -48,19 +48,23 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
     .gsc-header {
       .gsc-left-header {
+        color: var(--primary-little-light-color);
+
         em {
           display: none;
         }
       }
 
       .gsc-right-header {
+        color: var(--primary-little-light-color);
+
         .BtnGroup-item:not(.BtnGroup-item--selected) {
           border-radius: 0.5rem;
           transition: all 0.25s ease-in-out;
         }
 
         .BtnGroup-item--selected {
-          background-color: var(--primary-semi-light-color);
+          background-color: var(--primary-light-color);
           border-radius: 0.5rem;
           border: none;
           box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
@@ -91,7 +95,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
       .gsc-comment-box-tabs {
         background-color: var(--primary-semi-light-color);
-        color: var(--primary-semi-dark-color);
+        color: var(--primary-little-light-color);
         border: none;
         border-radius: 0.5rem 0.5rem 0 0;
 
@@ -122,7 +126,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
         }
 
         .gsc-comment-box-md-toolbar {
-          color: var(--primary-semi-dark-color);
+          color: var(--primary-little-light-color);
         }
       }
 
@@ -137,14 +141,14 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             border: none;
             border-bottom-style: dashed;
             border-bottom-width: 1px;
-            border-bottom-color: var(--primary-semi-dark-color);
+            border-bottom-color: var(--primary-little-light-color);
           }
 
           .gsc-comment-box-textarea-extras {
             border: none;
 
             a {
-              color: var(--primary-semi-dark-color);
+              color: var(--primary-little-light-color);
             }
           }
         }
@@ -156,7 +160,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
       .gsc-comment-box-bottom {
         & > button {
-          color: var(--primary-semi-dark-color);
+          color: var(--primary-little-light-color);
           transition: all 0.25s ease-in-out;
 
           @media (hover: hover) {
@@ -170,7 +174,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           button,
           a {
             border: none;
-            color: var(--primary-semi-dark-color);
+            color: var(--primary-little-light-color);
             background-color: var(--primary-semi-light-color);
             border-radius: 0.5rem;
             box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
@@ -200,6 +204,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           border: none;
 
           .gsc-comment-header {
+            color: var(--primary-little-light-color);
             padding-top: 0.5rem;
 
             .gsc-comment-author {
@@ -220,20 +225,8 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           .gsc-reply-content {
             padding-top: 1rem;
 
-            .zeroclipboard-container button {
-              position: absolute;
-              top: 0;
-              right: 0;
-              border: none;
-              background-color: var(--primary-dark-color);
-              color: var(--white-color);
-              transition: all 0.25s ease-in-out;
-
-              @media (hover: hover) {
-                &:hover {
-                  background-color: var(--primary-color);
-                }
-              }
+            .zeroclipboard-container {
+              display: none;
             }
 
             p,
@@ -266,7 +259,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 display: block;
                 width: 10rem;
                 height: 0.8rem;
-                background-color: var(--primary-semi-dark-color);
+                background-color: var(--primary-little-light-color);
                 z-index: -1;
                 position: absolute;
                 bottom: 0.3rem;
@@ -286,7 +279,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 display: block;
                 width: 6rem;
                 height: 0.6rem;
-                background-color: var(--primary-semi-dark-color);
+                background-color: var(--primary-semi-light-color);
                 z-index: -1;
                 position: absolute;
                 bottom: 0.5rem;
@@ -314,7 +307,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             }
 
             a {
-              color: var(--primary-semi-dark-color);
+              color: var(--primary-little-light-color);
               text-decoration: underline;
               transition: all 0.25s ease-in-out;
 
@@ -333,23 +326,25 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
             img {
               max-width: 100%;
+              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
             }
 
             blockquote {
               margin: 0;
-              border-left: 0.25rem solid var(--primary-semi-dark-color);
+              border-left: 0.25rem solid var(--primary-little-light-color);
               box-sizing: border-box;
-              background-color: var(--primary-semi-light-color);
-              padding: 0.5rem 2rem;
+              background-color: var(--primary-light-color);
+              padding: 0.5rem 1rem 0 1rem;
+              border-radius: 0.25rem;
+              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
-              pre:has(code) {
-                border: 0.05rem solid var(--primary-semi-dark-color);
-                box-sizing: border-box;
+              pre.notranslate {
+                border: 1px solid var(--primary-little-light-color);
               }
 
               blockquote {
-                border: 0.05rem solid var(--primary-semi-dark-color);
-                border-left: 0.25rem solid var(--primary-semi-dark-color);
+                border: 1px solid var(--primary-little-light-color);
+                border-left: 0.25rem solid var(--primary-little-light-color);
               }
             }
 
@@ -359,29 +354,31 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
               li {
                 &::marker {
-                  color: var(--primary-semi-dark-color);
+                  color: var(--primary-little-light-color);
                 }
               }
             }
 
             table {
-              border-collapse: collapse;
-              border: 0.05rem solid var(--primary-semi-dark-color);
-              box-sizing: border-box;
               width: 100%;
+              border-radius: 0.25rem;
+              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
               th,
               td {
                 padding: 0;
-                border: none;
+                border: 0px;
               }
 
               thead {
-                background-color: var(--primary-semi-dark-color);
-                color: var(--white-color);
+                background-color: var(--primary-little-light-color);
+                color: var(--primary-extra-light-color);
+                border-radius: 0.25rem 0.25rem 0 0;
               }
 
               tbody {
+                border-radius: 0 0 0.25rem 0.25rem;
+
                 tr {
                   transition: background-color 0.25s ease-in-out;
 
@@ -391,6 +388,10 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
                   &:nth-child(odd) {
                     background-color: var(--primary-light-color);
+                  }
+
+                  &:last-child {
+                    border-radius: 0 0 0.25rem 0.25rem;
                   }
 
                   @media (hover: hover) {
@@ -413,25 +414,27 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               white-space: pre-wrap;
             }
 
-            .notranslate,
-            pre:has(code),
-            div:has(.notranslate) {
+            pre.notranslate {
               position: relative;
               background-color: var(--primary-light-color);
               padding: 0.5rem;
               line-height: 1.2rem;
               font-size: 1rem;
+              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+              border-radius: 0.25rem;
 
               &::-webkit-scrollbar {
                 height: 0.25rem;
               }
 
               &::-webkit-scrollbar-thumb {
-                background-color: var(--primary-semi-dark-color);
+                background-color: var(--primary-little-light-color);
+                border-radius: 0.25rem;
               }
 
               &::-webkit-scrollbar-track {
-                background-color: var(--primary-extra-light-color);
+                background-color: var(--primary-light-color);
+                border-radius: 0 0 0.25rem 0.25rem;
               }
             }
 
@@ -444,15 +447,14 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             hr {
               width: 100%;
               height: 0;
-              border: 1px solid var(--primary-semi-light-color);
+              border: 1px solid var(--primary-little-light-color);
             }
 
             .footnotes p {
               margin: 0;
 
-              &,
-              a {
-                color: var(--primary-semi-dark-color);
+              &, a {
+                color: var(--primary-little-light-color);
               }
 
               a {
@@ -466,8 +468,8 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               .gsc-reactions-menu {
                 .gsc-social-reaction-summary-item {
                   border: none;
-                  background-color: var(--primary-semi-light-color);
-                  color: var(--primary-semi-dark-color);
+                  background-color: var(--primary-light-color);
+                  color: var(--primary-little-light-color);
                   box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                   transition: all 0.25s ease-in-out;
 
@@ -502,8 +504,8 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               .gsc-direct-reaction-buttons {
                 button {
                   border: none;
-                  color: var(--primary-semi-dark-color);
-                  background-color: var(--primary-semi-light-color);
+                  background-color: var(--primary-light-color);
+                  color: var(--primary-little-light-color);
                   box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                   transition: all 0.25s ease-in-out;
 
@@ -525,19 +527,20 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
             .gsc-reply {
               margin-left: 1rem;
-              border-left: 2px solid var(--primary-semi-dark-color);
+              border-left: 2px solid var(--primary-little-light-color);
 
               .gsc-reply-content {
                 padding-top: 0;
 
                 div:has(.notranslate) {
-                  border: 0.05rem solid var(--primary-semi-dark-color);
-                  box-sizing: border-box;
+                  border: 0.05rem solid var(--primary-little-light-color);
+                  border-radius: 0.25rem;
                 }
 
                 blockquote {
-                  border: 0.05rem solid var(--primary-semi-dark-color);
+                  border: 0.05rem solid var(--primary-little-light-color);
                   border-left: 0.25rem solid var(--primary-dark-color);
+                  border-radius: 0.25rem;
                 }
               }
             }
@@ -556,14 +559,14 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 .gsc-reactions-menu {
                   .gsc-social-reaction-summary-item {
                     border: none;
-                    background-color: var(--primary-light-color);
-                    color: var(--primary-dark-color);
+                    background-color: var(--primary-semi-light-color);
+                    color: var(--primary-little-light-color);
                     box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                     transition: all 0.25s ease-in-out;
 
                     @media (hover: hover) {
                       &:hover {
-                        background-color: var(--primary-semi-dark-color);
+                        background-color: var(--primary-color);
                         color: var(--primary-extra-light-color);
                       }
                     }
@@ -581,7 +584,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                     div.m-2 {
                       button.has-reacted {
                         border: none;
-                        background-color: var(--primary-semi-light-color);
+                        background-color: var(--primary-little-light-color);
                         box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                       }
                     }
@@ -591,8 +594,8 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 .gsc-direct-reaction-buttons {
                   button {
                     border: none;
-                    color: var(--primary-semi-dark-color);
                     background-color: var(--primary-semi-light-color);
+                    color: var(--primary-little-light-color);
                     box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
                     transition: all 0.25s ease-in-out;
 

@@ -17,10 +17,10 @@ footer {
     align-items: center;
     justify-content: end;
     background-color: var(--primary-light-color);
-    color: var(--primary-dark-color);
+    color: var(--primary-little-light-color);
     font-family: var(--ui-font);
     font-weight: 900;
-    padding: 1.5rem 0 1rem 0;
+    padding: 1rem 0 1rem 0;
 
     p {
       margin: 0;
@@ -28,7 +28,7 @@ footer {
 
       a {
         text-decoration: underline;
-        color: var(--primary-dark-color);
+        color: var(--primary-little-light-color);
         transition: color 0.25s ease-in-out;
 
         @media (hover: hover) {
@@ -44,7 +44,7 @@ footer {
 @media screen and (max-height: 1024px) {
   footer {
     #footer-container {
-      padding: 1rem 0 0.5rem 0;
+      padding: 0.5rem 0 0.5rem 0;
     }
   }
 }

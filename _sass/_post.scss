@@ -174,9 +174,10 @@
     h5,
     h6 {
       font-family: var(--ui-font);
+      color: var(--primary-semi-dark-color);
 
       a {
-        color: var(--black-color);
+        color: var(--primary-semi-dark-color);
 
         @media (hover: hover) {
           &:hover {
@@ -197,7 +198,7 @@
         display: block;
         width: 10rem;
         height: 0.8rem;
-        background-color: var(--primary-color);
+        background-color: var(--primary-semi-light-color);
         z-index: -1;
         position: absolute;
         bottom: 0;
@@ -216,7 +217,7 @@
         display: block;
         width: 6rem;
         height: 0.6rem;
-        background-color: var(--primary-semi-light-color);
+        background-color: var(--primary-light-color);
         z-index: -1;
         position: absolute;
         bottom: 0;
@@ -384,7 +385,6 @@
       font-size: 1rem;
       overflow-x: auto;
       border-radius: 0.5rem;
-      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
       * {
         white-space: pre;
@@ -418,6 +418,10 @@
         right: 0rem;
         opacity: 0;
         transition: opacity 0.25s ease-in-out;
+      }
+
+      &:not(:has(.language-mermaid)) {
+        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
       }
 
       &:has(.language-mermaid) {

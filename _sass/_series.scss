@@ -12,7 +12,7 @@
 
   #series-description {
     font-weight: 700;
-    color: var(--primary-semi-dark-color);
+    color: var(--primary-little-light-color);
     margin: 0;
 
     #series-name {
@@ -44,13 +44,16 @@
       @media (hover: hover) {
         &:has(+ a:hover) {
             color: var(--primary-color);
+            font-weight: 700;
         }
 
         &:hover {
           color: var(--primary-color);
+          font-weight: 700;
 
           & + a {
             color: var(--primary-color);
+            font-weight: 700;
           }
         }
       }
@@ -58,7 +61,7 @@
 
     a {
       text-decoration: none;
-      color: var(--primary-semi-dark-color);
+      color: var(--primary-little-light-color);
       transition: all 0.25s ease-in-out;
 
       &.em {
@@ -100,8 +103,8 @@
       padding: 0.5rem;
       font-size: 1.2rem;
       font-weight: 700;
-      background-color: var(--primary-semi-light-color);
-      color: var(--primary-semi-dark-color);
+      background-color: var(--primary-light-color);
+      color: var(--primary-little-light-color);
       text-decoration: none;
       border-radius: 0.5rem;
       box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
@@ -122,7 +125,7 @@
       .material-symbols-outlined {
         font-size: 3rem;
         line-height: 3rem;
-        color: var(--primary-color);
+        color: var(--primary-semi-light-color);
         transition: all 0.25s ease-in-out;
       }
     }

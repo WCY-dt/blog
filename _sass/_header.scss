@@ -75,7 +75,6 @@ header {
     a {
       position: relative;
       text-decoration: none;
-      color: var(--black-color);
       height: calc(100% - 1rem);
       padding: 0 0.5rem 1rem 1.5rem;
       border-radius: 0.5rem;
@@ -101,7 +100,7 @@ header {
         line-height: 1.5rem;
         text-transform: capitalize;
         z-index: 10;
-        color: var(--primary-semi-dark-color);
+        color: var(--primary-little-light-color);
         transition: all 0.25s ease-in-out;
       }
 
@@ -111,10 +110,14 @@ header {
         box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
 
         span {
-          color: var(--primary-little-light-color);
+          color: var(--primary-color);
           font-size: 2.2rem;
           left: 50%;
           transform: translateX(-50%) translateY(-50%);
+        }
+
+        p {
+          color: var(--primary-color);
         }
       }
     }

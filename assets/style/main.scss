@@ -40,9 +40,10 @@ html[data-theme="light"] {
   --primary-light-color: hsl(20, 83%, 95%);
   --primary-extra-light-color: hsl(20, 83%, 98%);
   --white-color: hsl(0, 0%, 99%);
+  --gray-color: hsl(0, 0%, 40%);
   --black-color: hsl(0, 0%, 0%);
   --true-white-color: hsl(0, 0%, 99%);
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: hsla(0, 0%, 0%, 0.1);
 }
 
 html[data-theme="dark"] {
@@ -54,9 +55,10 @@ html[data-theme="dark"] {
   --primary-light-color: hsl(0, 0%, 10%);
   --primary-extra-light-color: hsl(0, 0%, 5%);
   --white-color: hsl(0, 0%, 2%);
+  --gray-color: hsl(0, 0%, 67%);
   --black-color: hsl(0, 0%, 80%);
   --true-white-color: hsl(0, 0%, 99%);
-  --shadow-color: rgba(255, 255, 255, 0.05);
+  --shadow-color: hsla(0, 0%, 100%, 0.05);
 }
 
 @font-face {

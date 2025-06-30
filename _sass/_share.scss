@@ -34,13 +34,13 @@
         display: inline-block;
         margin: 0;
         padding: 0;
-        color: var(--primary-semi-dark-color);
+        color: var(--primary-color);
         text-decoration: none;
         transition: all 0.25s ease-in-out;
 
         @media (hover: hover) {
           &:hover {
-            color: var(--primary-color);
+            color: var(--primary-semi-dark-color);
           }
         }
 
