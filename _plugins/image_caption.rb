@@ -6,7 +6,6 @@ module Jekyll
     end
 
     def render(context)
-      # 解析参数：图片URL和描述
       parts = @markup.split('|').map(&:strip)
 
       if parts.length < 2
@@ -16,11 +15,9 @@ module Jekyll
       image_url = parts[0]
       caption = parts[1]
 
-      # alt文本强制与caption相同，CSS类为可选参数
       alt_text = caption
       css_class = parts[2] || "image-caption"
 
-      # 生成HTML
       html = <<~HTML
         <figure class="#{css_class}">
           <img src="#{image_url}" alt="#{alt_text}" />
