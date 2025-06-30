@@ -3,15 +3,17 @@
 
 html {
   --primary-dark-color: hsl(0, 0%, 60%);
-  --primary-semi-dark-color: hsl(16, 83%, 65%);
+  --primary-semi-dark-color: hsl(0, 0%, 50%);
   --primary-color: hsl(15, 83%, 46%);
   --primary-little-light-color: hsl(12, 83%, 35%);
   --primary-semi-light-color: hsl(0, 0%, 20%);
   --primary-light-color: hsl(0, 0%, 10%);
   --primary-extra-light-color: hsl(0, 0%, 5%);
   --white-color: hsl(0, 0%, 2%);
+  --gray-color: hsl(0, 0%, 67%);
   --black-color: hsl(0, 0%, 80%);
-  --shadow-color: rgba(255, 255, 255, 0.05);
+  --true-white-color: hsl(0, 0%, 99%);
+  --shadow-color: hsla(0, 0%, 100%, 0.05);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');

@@ -10,8 +10,10 @@ html {
   --primary-light-color: hsl(20, 83%, 95%);
   --primary-extra-light-color: hsl(20, 83%, 98%);
   --white-color: hsl(0, 0%, 99%);
+  --gray-color: hsl(0, 0%, 40%);
   --black-color: hsl(0, 0%, 0%);
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --true-white-color: hsl(0, 0%, 99%);
+  --shadow-color: hsla(0, 0%, 0%, 0.1);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');

@@ -26,23 +26,30 @@
     {%- endif -%}
   </div>
   <script>
-    const commentScript = document.querySelector('#comment-container script'); // This comment is required to eliminate error, TBH I don't know why
-
     const setCommentTheme = (currentTheme) => {
-      if (!commentScript) return;
-      commentScript.setAttribute(
-        'data-theme',
-        `{{ site.url }}/assets/style/giscus_${currentTheme}.css`
-      );
+      const commentScript = document.querySelector('#comment-container script');
+      const siteUrl = '{{ site.url }}';
 
-      const giscusFrame = document.querySelector('.giscus-frame');
-      if (giscusFrame) {
-        let giscusFrameSrc = giscusFrame.getAttribute('src');
-        giscusFrameSrc = giscusFrameSrc.replace(
-          /giscus_(light|dark).css/,
-          `giscus_${currentTheme}.css`
+      if (commentScript) {
+        commentScript.setAttribute(
+          'data-theme',
+          siteUrl + '/assets/style/giscus_' + currentTheme + '.css'
         );
-        giscusFrame.src = giscusFrameSrc;
+      }
+
+      const isGiscusFrameLoading = document.querySelector(
+        '.giscus-frame--loading'
+      );
+      if (isGiscusFrameLoading == null) {
+        const giscusFrame = document.querySelector('.giscus-frame');
+        if (giscusFrame) {
+          try {
+            window.location.reload();
+            return;
+          } catch (e) {
+            console.warn('Failed to reload page for Giscus theme change:', e);
+          }
+        }
       }
     };
   </script>

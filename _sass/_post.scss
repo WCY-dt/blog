@@ -377,6 +377,12 @@
       white-space: pre-wrap;
     }
 
+    div.highlighter-rouge,
+    div.highlight,
+    .code-block-wrapper {
+      background-color: transparent;
+    }
+
     pre:has(code) {
       position: relative;
       background-color: var(--primary-extra-light-color);
