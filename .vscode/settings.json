@@ -1,7 +1,9 @@
 {
     "files.associations": {
         "*.html": "liquid",
-        "*.md": "markdown"
+        "*.md": "markdown",
+        "**/assets/js/theme.js": "liquid",
+        "**/assets/style/main.scss": "liquid"
     },
     "[liquid]": {
         "editor.tabSize": 2,

@@ -33,7 +33,7 @@ umami: 71d80a81-5062-4211-9e2c-8b1e1784811f # https://umami.is/
 baidu_site_verification: codeva-dciGw99jsc
 
 ############# Theme Settings #############
-color_theme: dark # light or dark
+color_theme: light # light or dark
 
 # icons are from https://fonts.google.com/icons
 # Modify this may cause unexpected errors from includes/header.html
