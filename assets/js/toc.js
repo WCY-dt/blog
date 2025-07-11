@@ -41,6 +41,10 @@ function tocActive() {
     if (activeItem) {
         activeItem.classList.add('active');
         toc.querySelectorAll('.expand').forEach(el => el.classList.remove('expand'));
+        const nextUl = activeItem.nextElementSibling;
+        if (nextUl && nextUl.tagName === 'UL') {
+            nextUl.classList.add('expand');
+        }
 
         let parent = activeItem;
         while (parent) {
