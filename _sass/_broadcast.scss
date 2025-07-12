@@ -35,7 +35,7 @@
     position: relative;
     overflow: hidden;
     height: 50px;
-    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+    box-shadow: var(--normal-shadow);
     transition: all 0.2s ease-in-out;
 
     .broadcast-text-wrapper {

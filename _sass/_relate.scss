@@ -38,7 +38,7 @@
         text-decoration: none;
         box-sizing: border-box;
         border-radius: 0.5rem;
-        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+        box-shadow: var(--normal-shadow);
         transition: all 0.25s ease-in-out;
 
         .title {

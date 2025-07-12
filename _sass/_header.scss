@@ -11,7 +11,7 @@ header {
   width: 100%;
   height: 6rem;
   z-index: 5;
-  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+  box-shadow: var(--normal-shadow);
 
   #title-container {
     position: relative;
@@ -107,7 +107,7 @@ header {
       &.active {
         padding: 0.25rem 1rem 0.75rem 1rem;
         background-color: var(--primary-semi-light-color);
-        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+        box-shadow: var(--normal-shadow);
 
         span {
           color: var(--primary-color);
@@ -144,7 +144,7 @@ header {
       a:hover {
         padding: 0.25rem 1rem 0.75rem 1rem !important;
         background-color: var(--primary-color) !important;
-        box-shadow: 0 0.1rem 0.3rem var(--shadow-color)!important;
+        box-shadow: var(--normal-shadow)!important;
 
         p {
           color: var(--primary-extra-light-color)!important;

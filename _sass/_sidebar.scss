@@ -15,7 +15,7 @@
   #toc-container button,
   #search-button {
     border-radius: 0.5rem;
-    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+    box-shadow: var(--normal-shadow);
   }
 
   #back-to-top-button,
@@ -87,7 +87,7 @@
         gap: 0.6rem;
         border-radius: 0.5rem;
         z-index: -1;
-        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+        box-shadow: var(--normal-shadow);
 
         a {
           position: relative;

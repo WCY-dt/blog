@@ -143,7 +143,7 @@
         user-select: none;
         -webkit-user-drag: none;
         -moz-user-drag: none;
-        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+        box-shadow: var(--normal-shadow);
       }
 
       &[open] {
@@ -273,13 +273,13 @@
     }
 
     blockquote {
-      margin: 0;
+      margin: 0 0.2rem 0 0;
       border-left: 0.25rem solid var(--primary-color);
       box-sizing: border-box;
       background-color: var(--primary-extra-light-color);
       padding: 0.5rem 2rem;
       border-radius: 0.5rem;
-      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+      box-shadow: var(--normal-shadow);
 
       pre:has(code) {
         border: 1px solid var(--primary-semi-light-color);
@@ -287,7 +287,7 @@
         border-radius: 0.5rem;
 
         &:not(:has(.language-mermaid)) {
-          box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+          box-shadow: var(--normal-shadow);
         }
 
         &:has(.language-mermaid) {
@@ -335,14 +335,15 @@
       border-collapse: collapse;
       border: 0.05rem solid var(--primary-color);
       box-sizing: border-box;
-      width: 100%;
+      margin: 0 0.2rem;
+      width: calc(100% - 0.4rem);
       border-radius: 0.5rem;
       overflow: hidden;
-      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+      box-shadow: var(--normal-shadow);
 
       th,
       td {
-        padding: 0;
+        padding: 0 0.5rem;
       }
 
       thead {
@@ -427,7 +428,8 @@
       }
 
       &:not(:has(.language-mermaid)) {
-        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+        margin: 1rem 0.2rem;
+        box-shadow: var(--normal-shadow);
       }
 
       &:has(.language-mermaid) {

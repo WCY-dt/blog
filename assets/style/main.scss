@@ -58,7 +58,7 @@ html[data-theme="dark"] {
   --gray-color: hsl(0, 0%, 67%);
   --black-color: hsl(0, 0%, 80%);
   --true-white-color: hsl(0, 0%, 99%);
-  --shadow-color: hsla(0, 0%, 100%, 0.05);
+  --shadow-color: hsla(0, 0%, 100%, 0.15);
 }
 
 @font-face {
@@ -135,6 +135,7 @@ html[data-theme="dark"] {
 }
 
 html {
+  --normal-shadow: 0 0 0.3rem var(--shadow-color);
   overflow-x: hidden;
 }
 

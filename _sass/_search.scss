@@ -156,13 +156,13 @@
     #search-input {
       height: 2.5rem;
       font-size: 1.25rem;
-      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+      box-shadow: var(--normal-shadow);
     }
 
     #results-container {
       bottom: 2.5rem;
       width: 22rem;
-      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+      box-shadow: var(--normal-shadow);
       z-index: -1;
     }
   }

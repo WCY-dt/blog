@@ -14,6 +14,7 @@ html {
   --black-color: hsl(0, 0%, 0%);
   --true-white-color: hsl(0, 0%, 99%);
   --shadow-color: hsla(0, 0%, 0%, 0.1);
+  --normal-shadow: 0 0 0.3rem var(--shadow-color);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
@@ -69,7 +70,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           background-color: var(--primary-light-color);
           border-radius: 0.5rem;
           border: none;
-          box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+          box-shadow: var(--normal-shadow);
           transition: all 0.25s ease-in-out;
         }
 
@@ -82,7 +83,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             &:hover {
               background-color: var(--primary-color);
               color: var(--primary-extra-light-color);
-              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+              box-shadow: var(--normal-shadow);
             }
           }
         }
@@ -93,7 +94,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
       border: none;
       background-color: var(--primary-light-color);
       border-radius: 0.5rem;
-      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+      box-shadow: var(--normal-shadow);
 
       .gsc-comment-box-tabs {
         background-color: var(--primary-semi-light-color);
@@ -137,7 +138,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
           border: none;
           background-color: var(--primary-extra-light-color);
           border-radius: 0.5rem;
-          box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+          box-shadow: var(--normal-shadow);
 
           .gsc-comment-box-textarea {
             border: none;
@@ -179,7 +180,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             color: var(--primary-little-light-color);
             background-color: var(--primary-semi-light-color);
             border-radius: 0.5rem;
-            box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+            box-shadow: var(--normal-shadow);
             font-weight: 700;
             transition: all 0.25s ease-in-out;
 
@@ -196,7 +197,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
     .gsc-timeline {
       border-radius: 0.5rem 0.5rem 0 0;
-      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+      box-shadow: var(--normal-shadow);
 
       .gsc-comment {
         background-color: var(--primary-extra-light-color);
@@ -218,7 +219,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               }
 
               img {
-                box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+                box-shadow: var(--normal-shadow);
               }
             }
           }
@@ -328,7 +329,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
 
             img {
               max-width: 100%;
-              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+              box-shadow: var(--normal-shadow);
             }
 
             blockquote {
@@ -338,7 +339,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               background-color: var(--primary-light-color);
               padding: 0.5rem 1rem 0 1rem;
               border-radius: 0.25rem;
-              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+              box-shadow: var(--normal-shadow);
 
               pre.notranslate {
                 border: 1px solid var(--primary-little-light-color);
@@ -364,7 +365,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             table {
               width: 100%;
               border-radius: 0.25rem;
-              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+              box-shadow: var(--normal-shadow);
 
               th,
               td {
@@ -422,7 +423,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               padding: 0.5rem;
               line-height: 1.2rem;
               font-size: 1rem;
-              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+              box-shadow: var(--normal-shadow);
               border-radius: 0.25rem;
 
               &::-webkit-scrollbar {
@@ -472,7 +473,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                   border: none;
                   background-color: var(--primary-light-color);
                   color: var(--primary-little-light-color);
-                  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+                  box-shadow: var(--normal-shadow);
                   transition: all 0.25s ease-in-out;
 
                   @media (hover: hover) {
@@ -486,7 +487,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                 .gsc-reactions-popover {
                   border: none;
                   background-color: var(--primary-light-color);
-                  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+                  box-shadow: var(--normal-shadow);
 
                   div.color-border-primary.my-2.border-t {
                     border: none;
@@ -497,7 +498,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                       border: none;
                       border-radius: 0.25rem;
                       background-color: var(--primary-semi-light-color);
-                      box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+                      box-shadow: var(--normal-shadow);
                     }
                   }
                 }
@@ -508,7 +509,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                   border: none;
                   background-color: var(--primary-light-color);
                   color: var(--primary-little-light-color);
-                  box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+                  box-shadow: var(--normal-shadow);
                   transition: all 0.25s ease-in-out;
 
                   @media (hover: hover) {
@@ -563,7 +564,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                     border: none;
                     background-color: var(--primary-semi-light-color);
                     color: var(--primary-little-light-color);
-                    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+                    box-shadow: var(--normal-shadow);
                     transition: all 0.25s ease-in-out;
 
                     @media (hover: hover) {
@@ -577,7 +578,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                   .gsc-reactions-popover {
                     border: none;
                     background-color: var(--primary-semi-light-color);
-                    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+                    box-shadow: var(--normal-shadow);
 
                     div.color-border-primary.my-2.border-t {
                       border: none;
@@ -587,7 +588,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                       button.has-reacted {
                         border: none;
                         background-color: var(--primary-little-light-color);
-                        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+                        box-shadow: var(--normal-shadow);
                       }
                     }
                   }
@@ -598,7 +599,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
                     border: none;
                     background-color: var(--primary-semi-light-color);
                     color: var(--primary-little-light-color);
-                    box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+                    box-shadow: var(--normal-shadow);
                     transition: all 0.25s ease-in-out;
 
                     @media (hover: hover) {
@@ -623,7 +624,7 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               border: none;
               margin: 0 0.5rem;
               background-color: var(--primary-extra-light-color);
-              box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+              box-shadow: var(--normal-shadow);
             }
           }
 

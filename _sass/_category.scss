@@ -14,7 +14,7 @@ main {
     @media (hover: hover) {
       &:hover {
         background-color: var(--primary-light-color);
-        box-shadow: 0 0.1rem 0.3rem var(--shadow-color);
+        box-shadow: var(--normal-shadow);
 
         #category-item-info {
           background-color: var(--primary-semi-light-color);
