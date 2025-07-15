@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Wait for deployment to complete
+        run: |
+          echo "Waiting for deployment to complete..."
+          sleep 120
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v3
         with:
