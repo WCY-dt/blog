@@ -1,14 +1,25 @@
 ---
 layout: post
 title:  "部署一个 Docker Registry"
-date:   2025-07-15 00:00:00 +0800
-categories: 编程
-tags: go
+date:   2025-07-15 22:00:00 +0800
+categories: 分布式
+tags: docker registry mirror
 comments: true
 copyrights: 原创
 render_with_liquid: false
-draft: true
 ---
+
+Docker Hub 被墙后，使用 Docker 成了一件麻烦事。我实在受不了，只好自行搭建了一个 Docker Registry 来作为镜像仓库。这个 Registry 支持了 Docker Hub 的镜像拉取、私有镜像存储、用户认证等功能。
+
+先看效果：
+
+![Docker Registry 最终效果](/assets/post/images/docker_registry1.webp)
+
+可以看到，基本功能是没有问题的，只不过下载速度略慢。考虑到我的服务器远在大洋彼岸的 LA，这速度也算能够接受。
+
+下面，我们来一步步部署这个 Docker Registry。
+
+> 注意，文中所有的 `<DOMAIN NAME>` 都需要替换为您实际使用的域名。
 
 ## 基础配置
 
@@ -54,8 +65,20 @@ usermod -aG docker $USER
 systemctl start docker
 systemctl enable docker
 docker version
-apt install -y docker-compose
+apt install -y docker-compose apache2-utils
 docker-compose version
+```
+
+接下来创建用户认证文件。首先生成用户密码（请替换 `<username>` 为您想要的用户名）：
+
+```shell
+# 创建第一个用户
+htpasswd -Bc /opt/docker-registry/auth/htpasswd <username>
+# 系统会提示输入密码，输入后会自动加密存储
+
+# 添加更多用户
+htpasswd -B /opt/docker-registry/auth/htpasswd <username>
+# 同样会提示输入该用户的密码
 ```
 
 `/opt/docker-registry/config/registry.yml` 中存储 Docker Registry 的配置：
@@ -87,6 +110,10 @@ http:
     read: 300s
     write: 300s
     idle: 300s
+auth:
+  htpasswd:
+    realm: basic-realm
+    path: /auth/htpasswd
 health:
   storagedriver:
     enabled: true
@@ -168,6 +195,9 @@ http {
         add_header Strict-Transport-Security "max-age=63072000" always;
 
         location /v2/ {
+            auth_basic "Docker Registry";
+            auth_basic_user_file /etc/nginx/auth/htpasswd;
+            
             add_header 'Access-Control-Allow-Origin' '*' always;
             add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
             add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Cache-Control,Content-Type' always;
@@ -219,6 +249,7 @@ services:
       - "127.0.0.1:5000:5000"
     volumes:
       - ./config/registry.yml:/etc/docker/registry/config.yml:ro
+      - ./auth:/auth:ro
       - ./data:/var/lib/registry
       - ./logs:/var/log
     environment:
@@ -243,6 +274,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./ssl:/etc/nginx/ssl:ro
+      - ./auth:/etc/nginx/auth:ro
       - ./logs:/var/log/nginx
     depends_on:
       - registry
@@ -538,8 +570,8 @@ Docker 也需要一些优化配置，可以创建 `/etc/docker/daemon.json` 文�
 
 ```shell
 docker-compose ps
-curl -k https://<DOMAIN NAME>/health
-curl -k https://<DOMAIN NAME>/v2/
+curl -k -u <USERNAME>:<PASSWORD> https://<DOMAIN NAME>/health
+curl -k -u <USERNAME>:<PASSWORD> https://<DOMAIN NAME>/v2/
 ```
 
 要想在本地拉取镜像，可以配置 Docker 的 daemon.json 文件，添加 registry-mirrors 选项：
@@ -559,3 +591,72 @@ curl -k https://<DOMAIN NAME>/v2/
   }
 }
 ```
+
+不过，你需要先登陆到您的私有 Registry：
+
+```shell
+docker login <DOMAIN NAME>
+# 输入您在 htpasswd 文件中创建的用户名和密码
+```
+
+你可以使用该私有 Registry 来执行以下操作：
+
+- **拉取 Docker Hub 上的镜像**：
+
+  ```shell
+  docker pull <IMAGE NAME>:<TAG>
+  ```
+
+- **标记和推送镜像**
+
+  ```shell
+  docker tag <IMAGE NAME>:<TAG> <DOMAIN NAME>/<IMAGE NAME>:<TAG>
+  docker push <DOMAIN NAME>/<IMAGE NAME>:<TAG>
+  ```
+
+- **拉取私有镜像**
+
+  ```shell
+  docker pull <DOMAIN NAME>/<IMAGE NAME>:<TAG>
+  ```
+
+- **查看仓库中的镜像**
+
+  ```shell
+  curl -u <USERNAME>:<PASSWORD> https://<DOMAIN NAME>/v2/_catalog
+  curl -u <USERNAME>:<PASSWORD> https://<DOMAIN NAME>/v2/<IMAGE NAME>/tags/list
+  ```
+
+- **删除镜像**
+
+  ```shell
+  curl -I -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
+    -u <USERNAME>:<PASSWORD> \
+    https://<DOMAIN NAME>/v2/<IMAGE NAME>/manifests/latest
+
+  # 使用 digest 删除镜像
+  curl -X DELETE -u <USERNAME>:<PASSWORD> \
+    https://<DOMAIN NAME>/v2/<IMAGE NAME>/manifests/<digest>
+  ```
+
+还可以随时添加或删除用户：
+
+```shell
+# 添加新用户
+htpasswd -B /opt/docker-registry/auth/htpasswd <USERNAME>
+# 删除用户
+htpasswd -D /opt/docker-registry/auth/htpasswd <USERNAME>
+# 更改用户密码
+htpasswd -B /opt/docker-registry/auth/htpasswd <USERNAME>
+# 查看所有用户
+cat /opt/docker-registry/auth/htpasswd
+```
+
+修改用户后，需要重启 nginx 容器以生效：
+
+```shell
+cd /opt/docker-registry
+docker-compose restart nginx
+```
+
+至此，我们再也不用担心 Docker Hub 被墙的问题了。
