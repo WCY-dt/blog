@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "部署一个 Docker Registry"
-date:   2025-07-15 22:00:00 +0800
+date:   2024-12-15 22:00:00 +0800
 categories: 分布式
 tags: docker registry mirror
 comments: true
