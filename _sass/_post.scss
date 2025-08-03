@@ -336,22 +336,55 @@
       border: 0.05rem solid var(--primary-color);
       box-sizing: border-box;
       margin: 0 0.2rem;
-      width: calc(100% - 0.4rem);
+      min-width: calc(100% - 0.4rem);
+      max-width: calc(100% - 0.4rem);
       border-radius: 0.5rem;
-      overflow: hidden;
       box-shadow: var(--normal-shadow);
+      display: inline-block;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+        width: 0.4rem;
+        height: 0.4rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 0.5rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--primary-semi-light-color);
+        border-radius: 0.5rem;
+      }
+
+      thead,
+      tbody,
+      tr {
+        display: table-row-group;
+        width: 100%;
+      }
+
+
+      tr {
+        display: table-row;
+      }
 
       th,
       td {
+        display: table-cell;
         padding: 0 0.5rem;
       }
 
       thead {
         background-color: var(--primary-color);
         color: var(--white-color);
+        display: table-header-group;
       }
 
       tbody {
+        display: table-row-group;
+
         tr {
           transition: background-color 0.25s ease-in-out;
 
