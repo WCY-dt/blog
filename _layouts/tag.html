@@ -21,7 +21,7 @@ layout: default
   {% endfor %}
 </div>
 
-<p id='pagination-count' class='no-select no-print'>
+<p class='no-select no-print pagination__count'>
   {%- assign tags_count = 0 -%}
   {%- for tag in site.tags -%}
     {%- assign tags_count = tags_count | plus: 1 -%}

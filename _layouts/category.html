@@ -34,7 +34,7 @@ layout: default
   {%- endunless -%}
 {% endfor %}
 
-<p id='pagination-count' class='no-select no-print'>
+<p class='no-select no-print pagination__count'>
   {%- if sorted_categories.size == 0 -%}
     - no category -
   {%- elsif sorted_categories.size == 1 -%}
