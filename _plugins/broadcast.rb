@@ -15,7 +15,7 @@ module Jekyll
         end
 
         lines.each do |line|
-          output << "<p>#{CGI.escapeHTML(line)}</p>"
+          output << "<p class='broadcast__text-item'>#{CGI.escapeHTML(line)}</p>"
         end
       else
         Jekyll.logger.error "Broadcast:", "broadcast-messages.txt file not found"

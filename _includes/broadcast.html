@@ -1,10 +1,6 @@
-<a class='broadcast no-select' href='{{ site.github_repo }}' target='_blank'>
-  <div class='broadcast-container'>
-    <span class='material-symbols-outlined'>notifications</span>
-    <div class='broadcast-text-wrapper'>
-      <div class='broadcast-text' id='broadcast-text'>
-        {% broadcast_messages %}
-      </div>
-    </div>
+<a class='broadcast-wrapper no-select' href='{{ site.github_repo }}' target='_blank'>
+  <span class='broadcast__icon material-symbols-outlined'>notifications</span>
+  <div class='broadcast__text' id='broadcast-messages'>
+    {% broadcast_messages %}
   </div>
 </a>

@@ -1,4 +1,5 @@
-<div id='relate-container' class='no-select no-print'>
+<div class='no-select no-print sector-wrapper suggest-wrapper'>
+  {% comment %} find suggest BEGIN {% endcomment %}
   {% assign related_posts_tot_num = 3 %}
   {% assign related_posts_num = related_posts_tot_num %}
   {% assign related_posts_tot_num = related_posts_tot_num | minus: 1 %}
@@ -68,22 +69,31 @@
       {% endif %}
     {% endfor %}
   {% endif %}
+  {% comment %} find suggest END {% endcomment %}
 
-  <h1>Suggested Posts</h1>
-  <ul>
-    {% for i in (0..related_posts_tot_num) %}
-      <li>
-        <a href='{{ related_posts[i].url | relative_url }}'>
-          {% if recommendation_reason[i] == 'tag' %}
-            <span class='material-symbols-outlined'>tag</span>
-          {% elsif recommendation_reason[i] == 'category' %}
-            <span class='material-symbols-outlined'>archive</span>
-          {% elsif recommendation_reason[i] == 'time' %}
-            <span class='material-symbols-outlined'>calendar_month</span>
-          {% endif %}
-          <span class='title'>{{ related_posts[i].title }}</span>
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  <h1 class='sector__title suggest__title'>Suggested Posts</h1>
+  {%- if related_posts.size == 0 -%}
+    <div class='sector__content--draft suggest__content--draft'>
+      No suggested posts available.
+    </div>
+  {%- else -%}
+    <ul class='suggest__content'>
+      {% for i in (0..related_posts_tot_num) %}
+        <li class='suggest__item'>
+          <a
+            href='{{ related_posts[i].url | relative_url }}'
+            class='suggest__item-link'
+          >
+            <span class='suggest__item-link-icon material-symbols-outlined'>
+              {% if recommendation_reason[i] == 'tag' %}tag
+              {% elsif recommendation_reason[i] == 'category' %}archive
+              {% elsif recommendation_reason[i] == 'time' %}calendar_month
+              {% endif %}
+            </span>
+            <span class='suggest__item-link-text'>{{ related_posts[i].title }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {%- endif -%}
 </div>

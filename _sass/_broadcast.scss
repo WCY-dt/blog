@@ -1,106 +1,99 @@
-.broadcast {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.broadcast-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  place-content: center;
+  gap: 0.5rem;
   width: min(100%, 33rem);
+  height: 50px;
   margin-bottom: 1rem;
+  padding: 0.2rem 1.5rem;
+  border-radius: 0.5rem;
   text-decoration: none;
+  background-color: var(--primary-extra-light-color);
+  color: var(--primary-little-light-color);
+  overflow: hidden;
+  box-shadow: var(--normal-shadow);
+  transition: all 0.2s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
-      .broadcast-container {
-        background-color: var(--primary-color);
-        color: var(--primary-extra-light-color);
+      background-color: var(--primary-color);
+      color: var(--primary-extra-light-color);
 
-        .broadcast-text-wrapper {
-          animation-play-state: paused;
-          p {
-            color: var(--primary-extra-light-color);
-          }
+      .broadcast__text {
+        animation-play-state: paused;
+        .broadcast__text-item {
+          color: var(--primary-extra-light-color);
         }
       }
     }
   }
 
-  .broadcast-container {
+  .broadcast__icon {
+    display: grid;
+    place-content: center;
+ }
+
+  .broadcast__text {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: column;
+    animation: scrollText 15s linear infinite;
     width: 100%;
-    padding: 0.2rem 1.5rem;
-    background-color: var(--primary-extra-light-color);
-    border-radius: 0.5rem;
-    color: var(--primary-little-light-color);
-    position: relative;
-    overflow: hidden;
-    height: 50px;
-    box-shadow: var(--normal-shadow);
     transition: all 0.2s ease-in-out;
 
-    .broadcast-text-wrapper {
+    .broadcast__text-item {
       display: flex;
-      flex-direction: column;
-      animation: scrollText 15s linear infinite;
-      width: 100%;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      height: 50px;
+      text-align: left;
+      font-weight: 700;
       transition: all 0.2s ease-in-out;
+    }
 
-      p {
-        display: flex;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-        height: 50px;
-        text-align: left;
-        font-weight: 700;
-        transition: all 0.2s ease-in-out;
+    @keyframes scrollText {
+      0% {
+        transform: translateY(100px);
       }
-
-      @keyframes scrollText {
-        0% {
-          transform: translateY(100px);
-        }
-        18% {
-          transform: translateY(100px);
-        }
-        20% {
-          transform: translateY(50px);
-        }
-        38% {
-          transform: translateY(50px);
-        }
-        40% {
-          transform: translateY(0);
-        }
-        58% {
-          transform: translateY(0);
-        }
-        60% {
-          transform: translateY(-50px);
-        }
-        78% {
-          transform: translateY(-50px);
-        }
-        80% {
-          transform: translateY(-100px);
-        }
-        98% {
-          transform: translateY(-100px);
-        }
-        100% {
-          transform: translateY(100px);
-        }
+      18% {
+        transform: translateY(100px);
+      }
+      20% {
+        transform: translateY(50px);
+      }
+      38% {
+        transform: translateY(50px);
+      }
+      40% {
+        transform: translateY(0);
+      }
+      58% {
+        transform: translateY(0);
+      }
+      60% {
+        transform: translateY(-50px);
+      }
+      78% {
+        transform: translateY(-50px);
+      }
+      80% {
+        transform: translateY(-100px);
+      }
+      98% {
+        transform: translateY(-100px);
+      }
+      100% {
+        transform: translateY(100px);
       }
     }
   }
 }
 
 @media screen and (max-width: 768px) {
-  .broadcast {
-    width: min(100%, 40rem);
-
-    .broadcast-container {
-      padding: 0rem 1rem;
-    }
+  .broadcast-wrapper {
+    width: min(calc(100% - 2rem), 40rem);
+    padding: 0rem 1rem;
   }
 }

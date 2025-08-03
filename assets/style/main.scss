@@ -1,6 +1,7 @@
 ---
 ---
 
+@use 'common';
 @use 'header';
 @use 'pagination';
 @use 'category';
@@ -9,7 +10,7 @@
 @use 'post';
 @use 'series';
 @use 'copyright';
-@use 'relate';
+@use 'suggest';
 @use 'comment';
 @use 'share';
 @use 'archive';
@@ -152,6 +153,20 @@ body {
   gap: 1rem;
   scroll-behavior: smooth;
   background-color: var(--white-color);
+}
+
+.main-wrapper {
+  padding: 16rem 1rem 8rem 1rem;
+  display: grid;
+  grid-template-columns: auto;
+  place-content: center;
+  width: calc(100% - 2rem);
+}
+
+@media screen and (max-width: 425px) {
+  .main-wrapper {
+    padding: 8rem 1rem 5.75rem 1rem;
+  }
 }
 
 * button {

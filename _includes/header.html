@@ -1,8 +1,8 @@
-<a id='title-container' href='{{ site.url }}'>
+<a class='header__title-wrapper' href='{{ site.url }}'>
   <span>{{ site.author.name }}'s</span>
   <span>blog</span>
 </a>
-<menu id='menu-container'>
+<menu class='header__menu-wrapper'>
   {% for item in site.navy %}
     {% assign is_active = false %}
     {% if page.layout == item.title or page.type == item.title %}
@@ -14,12 +14,12 @@
     {% endif %}
     <a
       href='{{ item.url | relative_url }}'
-      class='{% if is_active %}active{% endif %}'
+      class='header__menu-item {% if is_active %}header__menu-item--active{% endif %}'
     >
-      <span class='material-symbols-outlined'>
+      <span class='header__menu-item-icon material-symbols-outlined'>
         {{ item.icon }}
       </span>
-      <p>{{ item.title }}</p>
+      <p class="header__menu-item-title">{{ item.title }}</p>
     </a>
   {% endfor %}
 </menu>

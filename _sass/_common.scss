@@ -1,0 +1,25 @@
+.sector-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-content: center;
+  gap: 1rem;
+
+  .sector__title {
+    margin: 5rem 0 0 0;
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: var(--ui-font);
+    color: var(--primary-color);
+    text-align: center;
+  }
+
+  .sector__content--draft {
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
+    background-color: var(--primary-light-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+}

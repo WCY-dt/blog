@@ -205,13 +205,13 @@ layout: compress
   </head>
 
   <body color_theme='{{ site.theme_config.color_theme | default: 'light' }}'>
-    <header class='no-select no-print'>
+    <header class='no-select no-print header-wrapper'>
       {%- include header.html -%}
     </header>
-    <main>
+    <main class='main-wrapper'>
       {{ content }}
     </main>
-    <footer class='no-select no-print'>
+    <footer class='no-select no-print footer-wrapper'>
       {%- include footer.html -%}
     </footer>
 

@@ -18,27 +18,27 @@
 {% endfor %}
 {% assign total_posts = sorted_posts.size | minus: 1 %}
 {% if total_posts > 0 %}
-  <div id='series-foot-container' class='no-select no-print'>
-    <h1>Series {{ page.series }}</h1>
-    <div id='series-switcher'>
+  <div class='no-select no-print sector-wrapper series-footer-wrapper'>
+    <h1 class='sector__title series-footer__title'>Series {{ page.series }}</h1>
+    <div class='series-footer__switcher'>
       {% if current_index > 0 %}
         {% assign previous_index = current_index | minus: 1 %}
         <a
-          id='series-previous'
           href='{{ sorted_posts[previous_index].url | relative_url }}'
+          class='series-footer__switcher-button series-footer__switcher-button--previous'
         >
-          <span class='material-symbols-outlined'> arrow_back </span>
+          <span class='series-footer__switcher-button-icon material-symbols-outlined'> arrow_back </span>
           {{ sorted_posts[previous_index].title }}
         </a>
       {% endif %}
       {% assign next_index = current_index | plus: 1 %}
       {% if current_index < total_posts %}
         <a
-          id='series-next'
           href='{{ sorted_posts[next_index].url | relative_url }}'
+          class='series-footer__switcher-button series-footer__switcher-button--next'
         >
           {{ sorted_posts[next_index].title }}
-          <span class='material-symbols-outlined'> arrow_forward </span>
+          <span class='series-footer__switcher-button-icon material-symbols-outlined'> arrow_forward </span>
         </a>
       {% endif %}
     </div>
