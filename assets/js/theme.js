@@ -1,6 +1,6 @@
 ---
 ---
-const themeSwitcher = document.querySelector('#theme-switcher');
+const themeSwitcher = document.querySelector('#sidebar__theme-btn');
 
 function setTheme(theme) { document.documentElement.setAttribute('data-theme',
 theme); themeSwitcher.textContent = theme === 'light' ? 'dark_mode' :

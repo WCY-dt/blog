@@ -1,8 +1,8 @@
 ---
 layout: default
 ---
-<hgroup id='archive-info-container' class='no-select no-print'>
-  <h1 id='archive-title'>Category</h1>
+<hgroup class='no-select no-print archive__title category__title'>
+  <h1 class='archive__title-text category__title-text'>Category</h1>
 </hgroup>
 
 {% assign categories_array = '' | split: '' %}
@@ -20,17 +20,16 @@ layout: default
   {% assign category_name = category_info[1] %}
   {% assign posts_count = category_info[0] | plus: 0 %}
   <a
-    id='category-item-container'
-    class='no-select no-print'
+    class='no-select no-print category__item'
     href='{{ category_name | slugify }}'
   >
-    <span id='category-item-title'>
+    <span class='category__item-title'>
       {{ category_name }}
     </span>
-    <div id='category-item-info'>{{ posts_count }}</div>
+    <div class='category__item-info'>{{ posts_count }}</div>
   </a>
   {%- unless forloop.last -%}
-    <hr class='category-hr'>
+    <hr class='category__separator'>
   {%- endunless -%}
 {% endfor %}
 

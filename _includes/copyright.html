@@ -1,34 +1,35 @@
 {%- if page.copyrights contains '原创' -%}
-  <div id='copyright-container'>
+  <div class='copyright-wrapper'>
     <img
       src='/assets/img/cc.svg'
       alt='copyright cc'
-      class='no-select'
+      class='no-select copyright__icon'
     >
     <img
       src='/assets/img/by.svg'
       alt='copyright by'
-      class='no-select'
+      class='no-select copyright__icon'
     >
     <img
       src='/assets/img/nc.svg'
       alt='copyright nc'
-      class='no-select'
+      class='no-select copyright__icon'
     >
     <img
       src='/assets/img/sa.svg'
       alt='copyright sa'
-      class='no-select'
+      class='no-select copyright__icon'
     >
     <p
       xmlns:cc='http://creativecommons.org/ns#'
       xmlns:dct='http://purl.org/dc/terms/'
-      class='no-print'
+      class='copyright__text'
     >
       <a
         property='dct:title'
         rel='cc:attributionURL'
         href='{{ page.url | absolute_url }}'
+        class='copyright__text-link'
       >
         {%- if page.series -%}
           {{ page.series | escape }} ({{ page.series_index }}) -
@@ -40,6 +41,7 @@
         rel='cc:attributionURL dct:creator'
         property='cc:attributionName'
         href='{{ site.author.link }}'
+        class='copyright__text-link'
       >
         {{ site.author.name | escape }}
       </a>
@@ -48,8 +50,10 @@
         href='https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1'
         target='_blank'
         rel='license noopener noreferrer'
-        >CC BY-NC-SA 4.0</a
+        class='copyright__text-link'
       >
+        CC BY-NC-SA 4.0
+      </a>
     </p>
   </div>
 {%- endif -%}

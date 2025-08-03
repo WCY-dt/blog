@@ -1,4 +1,4 @@
-const backToTopButton = document.querySelector("#back-to-top-button")
+const backToTopButton = document.querySelector("#sidebar__top-btn")
 
 backToTopButton.addEventListener("click", () => {
     window.scrollTo({

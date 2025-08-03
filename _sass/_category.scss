@@ -1,65 +1,59 @@
-main {
-  #category-item-container {
-    text-decoration: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
-    width: min(100%, 15rem);
-    border-radius: 0.5rem;
-    transition: background-color 0.25s ease-in-out;
+.category__item {
+  display: grid;
+  grid-template-columns: auto auto;
+  place-content: center;
+  gap: .5rem;
+  padding: 1rem 1.5rem;
+  margin: 0 auto;
+  width: min(100%, 15rem);
+  border-radius: .5rem;
+  text-decoration: none;
+  transition: background-color 0.25s ease-in-out;
 
-    @media (hover: hover) {
-      &:hover {
-        background-color: var(--primary-light-color);
-        box-shadow: var(--normal-shadow);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--primary-light-color);
+      box-shadow: var(--normal-shadow);
 
-        #category-item-info {
-          background-color: var(--primary-semi-light-color);
-          color: var(--primary-little-light-color);
-        }
+      .category__item-info {
+        background-color: var(--primary-semi-light-color);
+        color: var(--primary-little-light-color);
       }
     }
-
-    #category-item-title {
-      color: var(--primary-semi-dark-color);
-      font-size: 1.5rem;
-      font-weight: 900;
-      font-family: var(--ui-font);
-      margin: 0;
-      transition: all 0.25s ease-in-out;
-    }
-
-    #category-item-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary-semi-light-color);
-      background-color: var(--primary-light-color);
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 50%;
-      transition: all 0.25s ease-in-out;
-    }
-
-    .material-symbols-outlined {
-      padding: 0;
-    }
   }
 
-  .category-hr {
-    width: min(100%, calc(15rem + 2rem));
+  .category__item-title {
+    color: var(--primary-semi-dark-color);
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: var(--ui-font);
     margin: 0;
-    border: 1px solid var(--primary-light-color);
+    transition: all 0.25s ease-in-out;
   }
 
-  .category-hr:has(+ #category-item-container:hover) {
-    border-color: transparent;
+  .category__item-info {
+    display: grid;
+    place-content: center;
+    margin: auto 0;
+    color: var(--primary-semi-light-color);
+    background-color: var(--primary-light-color);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    transition: all 0.25s ease-in-out;
   }
+}
 
-  #category-item-container:hover + .category-hr {
-    border-color: transparent;
-  }
+.category__separator {
+  width: min(100%, calc(15rem + 2rem));
+  margin: 0 auto;
+  border: 1px solid var(--primary-light-color);
+}
+
+.category__separator:has(+ .category__item:hover) {
+  border-color: transparent;
+}
+
+.category__item:hover + .category__separator {
+  border-color: transparent;
 }

@@ -30,7 +30,7 @@
   }
 }
 
-@media screen and (max-height: 1024px) {
+@media screen and ((max-height: 1024px) or (max-height: 650px)) {
   .footer-wrapper {
     padding: 0.5rem 0;
   }

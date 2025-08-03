@@ -1,9 +1,8 @@
 function tocActive() {
-    const toc = document.querySelector('#toc-container');
+  const toc = document.querySelector('#sidebar__toc-wrapper');
     if (!toc) return;
 
-    // 检查 #post-footer-container 的位置
-    const footerContainer = document.querySelector('#post-footer-container');
+  const footerContainer = document.querySelector('#footer-wrapper');
     if (footerContainer) {
         const footerTop = footerContainer.getBoundingClientRect().top + window.scrollY;
         const halfViewportHeight = window.innerHeight / 2;
@@ -88,17 +87,17 @@ function handleAnchorClick(e) {
 }
 
 function toggleTOC() {
-    const toc = document.querySelector('#toc-container');
-    const tocul = toc.querySelector(':scope > ul'); // Fixed selector
-    const tocButton = document.querySelector('#toc-container button span');
+  const toc = document.querySelector('#sidebar__toc-wrapper');
+  const tocul = toc.querySelector(':scope > ul'); // Fixed selector
+  const tocButton = document.querySelector('#sidebar__toc-btn');
 
     const isVisible = tocul.style.display === 'flex';
     tocul.style.display = isVisible ? 'none' : 'flex';
     tocButton.innerHTML = isVisible ? 'toc' : 'close';
 }
 
-document.querySelectorAll('#toc-container a').forEach(anchor => anchor.addEventListener('click', handleAnchorClick));
-document.querySelector('#toc-container button')?.addEventListener('click', toggleTOC);
+document.querySelectorAll('#sidebar__toc-wrapper a').forEach(anchor => anchor.addEventListener('click', handleAnchorClick));
+document.querySelector('#sidebar__toc-btn')?.addEventListener('click', toggleTOC);
 
 ['scroll', 'resize', 'load'].forEach(event => window.addEventListener(event, tocActive));
 document.querySelectorAll('img').forEach(img => img.addEventListener('load', tocActive));

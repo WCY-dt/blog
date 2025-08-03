@@ -1,48 +1,46 @@
-#series-head-container {
-  margin: 2rem 0 -2rem 0;
-  background-color: var(--primary-light-color);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
+.series-header-wrapper {
+  display: grid;
+  place-content: center;
   gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.5rem;
+  margin: 2rem 0 -2rem 0;
+  padding: 1rem;
+  border-radius: .5rem;
+  background-color: var(--primary-light-color);
   box-shadow: var(--normal-shadow);
 
-  #series-description {
+  .series-header__desc {
     font-weight: 700;
     color: var(--primary-little-light-color);
-    margin: 0;
+    margin: 0 auto;
 
-    #series-name {
+    .series-header__desc-name {
       font-weight: 900;
       font-family: var(--ui-font);
       text-decoration: underline;
     }
   }
 
-  #series-item-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .series-header__list {
     display: grid;
     gap: 0.5rem 1rem;
     grid-template-columns: auto 1fr;
     place-items: auto center;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
 
-    span {
+    .series-header__list-index {
       text-align: right;
       color: var(--primary-semi-light-color);
       transition: all 0.25s ease-in-out;
 
-      &.material-symbols-outlined {
+      &.series-header__list-index--current {
         font-size: 1.2rem;
         color: var(--primary-color);
       }
 
       @media (hover: hover) {
-        &:has(+ a:hover) {
+        &:has(+ .series-header__list-title:hover) {
             color: var(--primary-color);
             font-weight: 700;
         }
@@ -51,7 +49,7 @@
           color: var(--primary-color);
           font-weight: 700;
 
-          & + a {
+          & + .series-header__list-title {
             color: var(--primary-color);
             font-weight: 700;
           }
@@ -59,12 +57,12 @@
       }
     }
 
-    a {
+    .series-header__list-title {
       text-decoration: none;
       color: var(--primary-little-light-color);
       transition: all 0.25s ease-in-out;
 
-      &.em {
+      &.series-header__list-title--current {
         color: var(--primary-color);
         font-weight: 700;
       }

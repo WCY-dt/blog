@@ -4,7 +4,8 @@
   grid-template-columns: auto 1fr;
   place-content: center;
   gap: 0.5rem;
-  width: min(100%, 33rem);
+  width: min(calc(100% - 2rem), 30rem);
+  margin: 0 auto;
   height: 50px;
   margin-bottom: 1rem;
   padding: 0.2rem 1.5rem;

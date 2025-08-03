@@ -1,6 +1,6 @@
-const searchInput = document.getElementById('search-input')
-const searchButton = document.getElementById('search-button')
-const searchResults = document.getElementById('results')
+const searchInput = document.getElementById('sidebar__search-input')
+const searchButton = document.getElementById('sidebar__search-btn')
+const searchResults = document.getElementById('sidebar__search-list')
 
 let isSearching = false
 
@@ -10,12 +10,10 @@ searchButton.addEventListener('click', () => {
   searchInput.style.width = isSearching ? '20rem' : '0'
   searchInput.style.padding = isSearching ? '0.5rem' : '0'
   if (isSearching) {
-    searchButton.classList.add('active')
-    searchInput.classList.add('active')
+    searchButton.classList.add('sidebar__search-btn--active')
     searchInput.focus()
   } else {
-    searchButton.classList.remove('active')
-    searchInput.classList.remove('active')
+    searchButton.classList.remove('sidebar__search-btn--active')
     searchInput.value = ''
     searchResults.innerHTML = ''
   }
@@ -40,11 +38,11 @@ const searchContent = (searchText) => {
               ? `...${post.content.substring(
                   Math.max(0, post.content.toLowerCase().indexOf(searchText.toLowerCase()) - 60),
                   Math.min(post.content.length, post.content.toLowerCase().indexOf(searchText.toLowerCase()) + searchText.length + 60)
-                )}...`.replace(regex, '<em>$&</em>')
+              )}...`.replace(regex, '<em class="sidebar__search-link-text--em">$&</em>')
               : post.content.substring(0, 120) + '...'
             return {
               ...post,
-              title: titleMatch ? post.title.replace(regex, '<em>$&</em>') : post.title,
+              title: titleMatch ? post.title.replace(regex, '<em class="sidebar__search-link-text--em">$&</em>') : post.title,
               content: snippet
             }
           }
@@ -59,10 +57,10 @@ const renderSearchResults = (posts) => {
   searchResults.innerHTML = posts
     .map(
       post => /*html*/ `
-      <li>
-        <a href="${post.url}">
-          <div class="search-title">${post.title}</div>
-          <p class="search-content">${post.content}</p>
+      <li class="sidebar__search-item">
+        <a href="${post.url}" class="sidebar__search-link">
+          <div class="sidebar__search-link-title">${post.title}</div>
+          <p class="sidebar__search-link-text">${post.content}</p>
         </a>
       </li>
     `

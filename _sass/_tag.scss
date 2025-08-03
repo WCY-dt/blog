@@ -1,57 +1,49 @@
-main {
-  #tag-container {
-    margin: 0 auto;
-    width: min(100%, 40rem);
-    justify-content: center;
+.tag-wrapper{
+  margin: 0 auto;
+  width: min(100%, 40rem);
 
-    #tag-item-container {
-      text-decoration: none;
-      display: inline-flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      transition: background-color 0.25s ease-in-out;
+  .tag__item {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    place-content: center;
+    gap: .5rem;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    text-decoration: none;
+    transition: background-color 0.25s ease-in-out;
 
-      @media (hover: hover) {
-        &:hover {
-          background-color: var(--primary-light-color);
-          box-shadow: var(--normal-shadow);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--primary-light-color);
+        box-shadow: var(--normal-shadow);
 
-          #tag-item-info {
-            background-color: var(--primary-semi-light-color);
-            color: var(--primary-little-light-color);
-          }
+        .tag__item-info {
+          background-color: var(--primary-semi-light-color);
+          color: var(--primary-little-light-color);
         }
       }
+    }
 
-      #tag-item-title {
-        color: var(--primary-semi-dark-color);
-        font-size: 1.5rem;
-        font-weight: 900;
-        font-family: var(--ui-font);
-        margin: 0;
-        transition: all 0.25s ease-in-out;
-      }
+    .tag__item-title {
+      color: var(--primary-semi-dark-color);
+      font-size: 1.5rem;
+      font-weight: 900;
+      font-family: var(--ui-font);
+      margin: 0;
+      transition: all 0.25s ease-in-out;
+    }
 
-      #tag-item-info {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--white-color);
-        color: var(--primary-semi-light-color);
-        background-color: var(--primary-light-color);
-        width: 1.5rem;
-        height: 1.5rem;
-        border-radius: 50%;
-        transition: all 0.25s ease-in-out;
-      }
-
-      .material-symbols-outlined {
-        padding: 0;
-      }
+    .tag__item-info {
+      display: grid;
+      place-content: center;
+      margin: auto 0;
+      color: var(--white-color);
+      color: var(--primary-semi-light-color);
+      background-color: var(--primary-light-color);
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      transition: all 0.25s ease-in-out;
     }
   }
 }

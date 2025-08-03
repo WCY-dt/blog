@@ -1,38 +1,60 @@
-<div id='sidebar-container' class='no-select no-print'>
+<div class='no-select no-print sidebar-wrapper'>
   <!-- back to top -->
-  <span id='back-to-top-button' class='material-symbols-outlined'>
-    vertical_align_top
-  </span>
-  <script src='{{ '/assets/js/back_to_top.js' | relative_url }}'></script>
+  <div id='sidebar__top-wrapper' class='sidebar__top-wrapper sidebar__item-wrapper'>
+    <span id='sidebar__top-btn' class='sidebar__top-btn sidebar__item-btn material-symbols-outlined'>
+      vertical_align_top
+    </span>
+    <script src='{{ '/assets/js/back_to_top.js' | relative_url }}'></script>
+  </div>
+
   <!-- menu -->
-  <div id='menu-container-mobile'>
-    <span id='menu-container-mobile-button' class='material-symbols-outlined'
-      >featured_play_list</span
-    >
-    <menu id='menu-container-mobile-menu'>
+  <div id='sidebar__menu-wrapper' class='sidebar__menu-wrapper sidebar__item-wrapper'>
+    <span id='sidebar__menu-btn' class='sidebar__menu-btn sidebar__item-btn material-symbols-outlined'>featured_play_list</span>
+    <menu id='sidebar__menu-content' class='sidebar__menu-content'>
       {% for item in site.navy %}
-        <a href='{{ item.url | relative_url }}'>
-          <span class='material-symbols-outlined'>
+        <a href='{{ item.url | relative_url }}' class='sidebar__menu-item'>
+          <span class='sidebar__menu-item-icon material-symbols-outlined'>
             {{ item.icon }}
           </span>
-          <p>{{ item.title }}</p>
+          <p class='sidebar__menu-item-title'>{{ item.title }}</p>
         </a>
       {% endfor %}
     </menu>
   </div>
   <script src='{{ '/assets/js/menu.js' | relative_url }}'></script>
+
   <!-- theme switcher -->
-  <span id='theme-switcher' class='material-symbols-outlined'>dark_mode</span>
-  <script src='{{ '/assets/js/theme.js' | relative_url }}'></script>
+  <div class='sidebar__theme-wrapper sidebar__item-wrapper'>
+    <span id='sidebar__theme-btn' class='sidebar__theme-btn sidebar__item-btn material-symbols-outlined'>dark_mode</span>
+    <script src='{{ '/assets/js/theme.js' | relative_url }}'></script>
+  </div>
+
   <!-- toc -->
   {% if page.layout == 'post' %}
-    <div id='toc-container' class='no-select no-print'>
-      <button>
-        <span class='material-symbols-outlined'>toc</span>
-      </button>
+    <div id='sidebar__toc-wrapper' class='sidebar__toc-wrapper sidebar__item-wrapper'>
+      <span id='sidebar__toc-btn' class='sidebar__toc-btn sidebar__item-btn material-symbols-outlined'>
+        toc
+      </span>
       {% include toc.html html=content h_min=2 h_max=4 %}
+      <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
     </div>
   {% endif %}
+
   <!-- search -->
-  {%- include search.html -%}
+  <div id='sidebar__search-wrapper' class='sidebar__search-wrapper sidebar__item-wrapper'>
+    <input
+      name='search'
+      id='sidebar__search-input'
+      placeholder='Search something'
+      spellcheck='false'
+      class='sidebar__search-input'
+    >
+    <span id='sidebar__search-btn' class='sidebar__search-btn sidebar__item-btn material-symbols-outlined'>
+      manage_search
+    </span>
+    <div class='sidebar__search-result'>
+      <ul id='sidebar__search-list' class='sidebar__search-list'></ul>
+    </div>
+  </div>
+  <script src='{{ '/assets/js/search.js' | relative_url }}'></script>
 </div>

@@ -130,7 +130,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and ((max-width: 1024px) or (max-height: 650px)) {
   .header-wrapper {
     height: 3.5rem;
 
