@@ -8,7 +8,7 @@
   width: min(100%, 15rem);
   border-radius: .5rem;
   text-decoration: none;
-  transition: background-color 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
@@ -48,6 +48,7 @@
   width: min(100%, calc(15rem + 2rem));
   margin: 0 auto;
   border: 1px solid var(--primary-light-color);
+  transition: all 0.25s ease-in-out;
 }
 
 .category__separator:has(+ .category__item:hover) {

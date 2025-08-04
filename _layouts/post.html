@@ -6,52 +6,61 @@ layout: default
     window.location.replace('{{ site.url }}/404.html');
   </script>
 {% endif %}
-<div id='post-container'>
-  <hgroup id='post-info-container'>
-    <h1 id='post-title'>
+<div id='post-wrapper' class='post-wrapper'>
+  <hgroup class='post__info'>
+    <h1 class='post__info-title'>
       {% if page.series %}
-        <div id='post-series'>
+        <div class='post__info-title-series'>
           {{ page.series }} | ({{ page.series_index }})
         </div>
       {% endif %}
-      <div id='post-title-text'>
+      <div class='post__info-title-text'>
         {{ page.title }}
         {%- if page.draft and jekyll.environment != 'production' -%}
-          <span class='material-symbols-outlined no-select'> stylus_note </span>
+          <span class='post__info-title-icon material-symbols-outlined no-select'> stylus_note </span>
         {%- endif -%}
       </div>
     </h1>
     {%- if page.draft and jekyll.environment != 'production' -%}
-      <div id='post-draft' class='no-select'>
+      <div class='post__info-draft no-select'>
         Draft will redirect to 404 page on production
       </div>
     {%- endif -%}
     {%- if page.archived -%}
-      <div id='post-draft' class='no-select'>
+      <div class='post__info-archived no-select'>
         This post is archived and may has outdated information.
       </div>
     {%- endif -%}
-    <div id='post-info' class='no-select no-print'>
-      <div id='post-date'>
-        <a href='{{ '/year/' | relative_url }}{{ page.date | date: "%Y" }}/'>
+    <div class='post__info-detail no-select no-print'>
+      <div class='post__info-detail-date'>
+        <a
+          href='{{ '/year/' | relative_url }}{{ page.date | date: "%Y" }}/'
+          class='post__info-detail-link'
+        >
           <span class='material-symbols-outlined'> calendar_month </span>
           {{- page.date | date: site.theme_config.date_format -}}
         </a>
       </div>
-      <div id='post-categories'>
+      <div class='post__info-detail-categories'>
         {%- if page.categories -%}
           {%- for category in page.categories -%}
-            <a href='{{ '/category/' | relative_url }}{{ category | slugify }}/'>
+            <a
+              href='{{ '/category/' | relative_url }}{{ category | slugify }}/'
+              class='post__info-detail-link'
+            >
               <span class='material-symbols-outlined'> archive </span>
               {{ category -}}
             </a>
           {%- endfor -%}
         {%- endif -%}
       </div>
-      <div id='post-tags'>
+      <div class='post__info-detail-tags'>
         {%- if page.tags -%}
           {%- for tag in page.tags -%}
-            <a href='{{ '/tag/' | relative_url }}{{ tag | slugify }}/'>
+            <a
+              href='{{ '/tag/' | relative_url }}{{ tag | slugify }}/'
+              class='post__info-detail-link'
+            >
               <span class='material-symbols-outlined'> tag </span>
               {{ tag }}
             </a>
@@ -63,11 +72,11 @@ layout: default
       {% include series_head.html %}
     {%- endif -%}
   </hgroup>
-  <article id='post-content-container'>
+  <article class='post__content'>
     {{ content }}
   </article>
   <script src='{{ '/assets/js/lightbox.js' | relative_url }}'></script>
-  <div id='post-footer-container'>
+  <div class='post__footer'>
     {% include copyright.html %}
     {%- if page.series -%}
       {% include series_foot.html %}

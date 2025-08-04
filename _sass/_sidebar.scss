@@ -10,10 +10,11 @@
   gap: 1rem;
 
   .sidebar__item-btn {
-    display: block;
+    display: grid;
+    place-items: center;
     width: 3rem;
     height: 3rem;
-    border-radius: 0.5rem;
+    border-radius: .5rem;
     line-height: 3rem;
     font-size: 2rem;
     text-align: center;
@@ -21,7 +22,7 @@
     color: var(--primary-little-light-color);
     box-shadow: var(--normal-shadow);
     cursor: pointer;
-    transition: background-color 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
@@ -61,11 +62,11 @@
       display: none !important;
     }
 
-    ul:not(.expand) {
+    .sidebar__toc-submenu:not(.sidebar__toc-submenu--expand) {
       display: none;
     }
 
-    &>ul {
+    .sidebar__toc-content {
       list-style-type: none;
       margin: 0;
       padding: 0 .25rem 0 0;
@@ -104,45 +105,45 @@
         font-family: 'Courier New', Courier, monospace, '微软雅黑';
       }
 
-      a {
+      .sidebar__toc-anchor {
         color: inherit;
         text-decoration: none;
         word-wrap: break-word;
         word-break: break-word;
         transition: all .25s ease-in-out;
 
-        &.active {
+        &.sidebar__toc-anchor--active {
           color: var(--primary-color);
           font-weight: 700;
         }
       }
 
       @media (hover: hover) {
-        &:has(a:hover) {
-          a.active {
+        &:has(.sidebar__toc-anchor:hover) {
+          .sidebar__toc-anchor.sidebar__toc-anchor--active {
             color: inherit;
             font-weight: inherit;
           }
 
-          a:hover {
+          .sidebar__toc-anchor:hover {
             color: var(--primary-color);
             font-weight: 700;
           }
         }
       }
 
-      &>li>a {
+      &>.sidebar__toc-item>.sidebar__toc-anchor {
         font-weight: 700;
         font-size: 1.1rem;
       }
 
-      li {
+      .sidebar__toc-item {
         list-style-type: none;
         margin: 0;
         padding: .1rem 0;
       }
 
-      ul {
+      .sidebar__toc-submenu {
         margin: 0;
         padding: 0 0 0 1.5rem;
       }
@@ -297,16 +298,16 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .toc {
+  .sidebar__toc-content {
     right: calc((100vw - 40rem) / 2 - 20rem);
   }
 }
 
 @media screen and (max-width: 1440px) and (min-width: 1024px) {
-  .toc {
+  .sidebar__toc-content {
     font-size: .9rem;
 
-    &>li>a {
+    &>.sidebar__toc-item>.sidebar__toc-anchor {
       font-size: 1rem;
     }
   }
@@ -328,6 +329,7 @@
       display: block;
 
       .sidebar__menu-content {
+        display: none;
         position: absolute;
         bottom: 0;
         right: 1.5rem;
@@ -361,7 +363,6 @@
             font-weight: 700;
             line-height: 1.5rem;
             text-transform: capitalize;
-            z-index: 10;
             color: var(--primary-color);
             transition: color 0.25s ease-in-out;
           }
@@ -391,7 +392,7 @@
         display: block !important;
       }
 
-      &>ul {
+      .sidebar__toc-content {
         display: none;
         position: absolute;
         bottom: 1.5rem;

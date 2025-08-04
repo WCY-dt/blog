@@ -1,104 +1,89 @@
+// Initialize the TOC functionality
 function tocActive() {
-  const toc = document.querySelector('#sidebar__toc-wrapper');
-    if (!toc) return;
+  const tocWrapper = document.querySelector('#sidebar__toc-wrapper');
+  if (!tocWrapper) return;
+  const footerWrapper = document.querySelector('#footer-wrapper');
+  if (footerWrapper) {
+    const footerWrapperTop = footerWrapper.getBoundingClientRect().top + window.scrollY;
+    const halfViewportHeight = window.innerHeight / 2;
 
-  const footerContainer = document.querySelector('#footer-wrapper');
-    if (footerContainer) {
-        const footerTop = footerContainer.getBoundingClientRect().top + window.scrollY;
-        const halfViewportHeight = window.innerHeight / 2;
-
-        if (footerTop <= window.scrollY + halfViewportHeight) {
-            toc.style.display = 'none';
-            return;
-        } else {
-            toc.style.display = '';
-        }
+    if (footerWrapperTop <= window.scrollY + halfViewportHeight) {
+      tocWrapper.style.display = 'none';
+      return;
+    } else {
+      tocWrapper.style.display = '';
     }
-
-    const tocItems = toc.querySelectorAll('a');
-    const headerLinks = document.querySelectorAll('h2, h3, h4');
-
-    if (headerLinks.length === 0) {
-        toc.style.display = 'none';
-        return;
+  }
+  const tocAnchors = tocWrapper.querySelectorAll('.sidebar__toc-anchor');
+  const headerLinks = document.querySelectorAll('h2, h3, h4');
+  if (headerLinks.length === 0) {
+    tocWrapper.style.display = 'none';
+    return;
+  }
+  const headerOffsets = Array.from(headerLinks).map(link => link.getBoundingClientRect().top + window.scrollY);
+  const currentScrollPos = window.scrollY + window.innerHeight / 2;
+  let currentActiveIdx = 0;
+  for (let i = headerOffsets.length - 1; i >= 0; i--) {
+    if (currentScrollPos >= headerOffsets[i]) {
+      currentActiveIdx = i;
+      break;
     }
-
-    const headerOffsets = Array.from(headerLinks).map(link => link.getBoundingClientRect().top + window.scrollY);
-    const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-    // Find the active header index
-    let activeIndex = 0;
-    for (let i = headerOffsets.length - 1; i >= 0; i--) {
-        if (scrollPosition >= headerOffsets[i]) {
-            activeIndex = i;
-            break;
-        }
+  }
+  tocAnchors.forEach(item => item.classList.remove('sidebar__toc-anchor--active'));
+  const currentActiveAnchor = tocAnchors[currentActiveIdx];
+  if (currentActiveAnchor) {
+    currentActiveAnchor.classList.add('sidebar__toc-anchor--active');
+    tocWrapper.querySelectorAll('.sidebar__toc-submenu--expand').forEach(el => el.classList.remove('sidebar__toc-submenu--expand'));
+    const nextUl = currentActiveAnchor.nextElementSibling;
+    if (nextUl && nextUl.tagName === 'UL') {
+      nextUl.classList.add('sidebar__toc-submenu--expand');
     }
-
-    tocItems.forEach(item => item.classList.remove('active'));
-    const activeItem = tocItems[activeIndex];
-    if (activeItem) {
-        activeItem.classList.add('active');
-        toc.querySelectorAll('.expand').forEach(el => el.classList.remove('expand'));
-        const nextUl = activeItem.nextElementSibling;
-        if (nextUl && nextUl.tagName === 'UL') {
-            nextUl.classList.add('expand');
+    let parentAnchor = currentActiveAnchor;
+    while (parentAnchor) {
+      if (parentAnchor && parentAnchor.classList && (parentAnchor.classList.contains('sidebar__toc-submenu') || parentAnchor.classList.contains('sidebar__toc-content'))) {
+        parentAnchor.classList.add('sidebar__toc-submenu--expand');
+        const siblingAnchor = parentAnchor.nextElementSibling;
+        if (siblingAnchor && siblingAnchor.classList && (siblingAnchor.classList.contains('sidebar__toc-submenu') || siblingAnchor.classList.contains('sidebar__toc-content'))) {
+          siblingAnchor.classList.add('sidebar__toc-submenu--expand');
         }
-
-        let parent = activeItem;
-        while (parent) {
-            if (parent.tagName === 'UL') {
-                parent.classList.add('expand');
-                const siblingUl = parent.nextElementSibling;
-                if (siblingUl && siblingUl.tagName === 'UL') {
-                    siblingUl.classList.add('expand');
-                }
-            }
-            parent = parent.parentNode;
-        }
-
-        activeItem.scrollIntoView({ behavior: 'smooth' });
+      }
+      parentAnchor = parentAnchor.parentNode;
     }
+    currentActiveAnchor.scrollIntoView({ behavior: 'smooth' });
+  }
 }
-
-function handleAnchorClick(e) {
-    e.preventDefault();
-
-    const href = this.getAttribute('href').replace(/#(\d)/g, '#§$1');
-    const target = document.querySelector(decodeURIComponent(href));
-    if (!target) {
-        console.error('Target not found:', href);
-        return;
-    }
-
-    const scrollToTarget = () => {
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-        window.scroll({ top: targetPosition - window.innerHeight / 3, behavior: 'smooth' });
-    };
-
-    const imagesBeforeTarget = Array.from(document.querySelectorAll('img')).filter(img =>
-        img.getBoundingClientRect().top + window.scrollY < target.getBoundingClientRect().top + window.scrollY
-    );
-
-    imagesBeforeTarget.forEach(img => img.addEventListener('load', scrollToTarget));
-    scrollToTarget();
-
-    setTimeout(() => imagesBeforeTarget.forEach(img => img.removeEventListener('load', scrollToTarget)), 10000);
-}
-
-function toggleTOC() {
-  const toc = document.querySelector('#sidebar__toc-wrapper');
-  const tocul = toc.querySelector(':scope > ul'); // Fixed selector
-  const tocButton = document.querySelector('#sidebar__toc-btn');
-
-    const isVisible = tocul.style.display === 'flex';
-    tocul.style.display = isVisible ? 'none' : 'flex';
-    tocButton.innerHTML = isVisible ? 'toc' : 'close';
-}
-
-document.querySelectorAll('#sidebar__toc-wrapper a').forEach(anchor => anchor.addEventListener('click', handleAnchorClick));
-document.querySelector('#sidebar__toc-btn')?.addEventListener('click', toggleTOC);
-
 ['scroll', 'resize', 'load'].forEach(event => window.addEventListener(event, tocActive));
 document.querySelectorAll('img').forEach(img => img.addEventListener('load', tocActive));
 tocActive();
+
+// Handle anchor clicks in the TOC
+function handleAnchorClick(e) {
+  e.preventDefault();
+  const href = this.getAttribute('href').replace(/#(\d)/g, '#§$1');
+  const target = document.querySelector(decodeURIComponent(href));
+  if (!target) {
+    console.error('Target not found:', href);
+    return;
+  }
+  const scrollToTarget = () => {
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+    window.scroll({ top: targetPosition - window.innerHeight / 3, behavior: 'smooth' });
+  };
+  const imagesBeforeTarget = Array.from(document.querySelectorAll('img')).filter(img =>
+    img.getBoundingClientRect().top + window.scrollY < target.getBoundingClientRect().top + window.scrollY
+  );
+  imagesBeforeTarget.forEach(img => img.addEventListener('load', scrollToTarget));
+  scrollToTarget();
+  setTimeout(() => imagesBeforeTarget.forEach(img => img.removeEventListener('load', scrollToTarget)), 10000);
+}
+document.querySelectorAll('.sidebar__toc-anchor').forEach(anchor => anchor.addEventListener('click', handleAnchorClick));
+
+// toggle TOC button on mobile
+function toggleToc() {
+  const tocContent = document.querySelector('.sidebar__toc-content');
+  const tocButton = document.querySelector('#sidebar__toc-btn');
+  const isTocVisible = tocContent.style.display === 'flex';
+  tocContent.style.display = isTocVisible ? 'none' : 'flex';
+  tocButton.innerHTML = isTocVisible ? 'toc' : 'close';
+}
+document.querySelector('#sidebar__toc-btn')?.addEventListener('click', toggleToc);

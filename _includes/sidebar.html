@@ -35,7 +35,7 @@
       <span id='sidebar__toc-btn' class='sidebar__toc-btn sidebar__item-btn material-symbols-outlined'>
         toc
       </span>
-      {% include toc.html html=content h_min=2 h_max=4 %}
+      {% include toc.html html=content h_min=2 h_max=4 class='sidebar__toc-content' item_class='sidebar__toc-item' submenu_class='sidebar__toc-submenu' anchor_class='sidebar__toc-anchor' %}
       <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
     </div>
   {% endif %}

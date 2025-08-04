@@ -36,8 +36,8 @@ const searchContent = (searchText) => {
           if (titleMatch || contentMatch) {
             const snippet = contentMatch
               ? `...${post.content.substring(
-                  Math.max(0, post.content.toLowerCase().indexOf(searchText.toLowerCase()) - 60),
-                  Math.min(post.content.length, post.content.toLowerCase().indexOf(searchText.toLowerCase()) + searchText.length + 60)
+                Math.max(0, post.content.toLowerCase().indexOf(searchText.toLowerCase()) - 60),
+                Math.min(post.content.length, post.content.toLowerCase().indexOf(searchText.toLowerCase()) + searchText.length + 60)
               )}...`.replace(regex, '<em class="sidebar__search-link-text--em">$&</em>')
               : post.content.substring(0, 120) + '...'
             return {
