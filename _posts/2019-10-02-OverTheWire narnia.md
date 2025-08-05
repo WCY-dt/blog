@@ -4,6 +4,7 @@ title:  "Narnia"
 date:   2019-10-02 00:00:00 +0800
 categories: 安全
 tags: game
+summary: "本文为 Narnia 题解。"
 series: OverTheWire
 series_index: 3
 comments: true

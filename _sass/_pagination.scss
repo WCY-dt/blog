@@ -1,22 +1,14 @@
-.main-wrapper {
-  padding: 16rem 1rem 8rem 1rem;
-  display: grid;
-  grid-template-columns: auto;
-  place-content: center;
-  width: calc(100% - 2rem);
-}
-
 .pagination__item-wrapper {
   text-decoration: none;
   display: grid;
   place-content: left;
-  gap: 0.5rem;
+  gap: .5rem;
   padding: 1rem 1.5rem;
   margin: 0 auto;
   width: min(100%, 30rem);
-  border-radius: 0.5rem;
+  border-radius: .5rem;
   cursor: pointer;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
@@ -42,45 +34,168 @@
       display: flex;
       align-items: center;
       justify-content: start;
-      gap: 0.25rem;
+      gap: .25rem;
       max-width: 100%;
     }
   }
 
   .pagination__item-draft {
     color: var(--primary-color);
-    font-size: 0.75rem;
+    font-size: .75rem;
     font-weight: 900;
     text-align: center;
     background-color: var(--primary-light-color);
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.25s ease-in-out;
+    padding: .25rem .5rem;
+    border-radius: .25rem;
+    transition: all .25s ease-in-out;
   }
 
   .pagination__item-info {
     display: flex;
     align-items: center;
     justify-content: start;
-    gap: 0.25rem 1rem;
+    gap: .25rem 1rem;
     color: var(--primary-semi-dark-color);
     white-space: nowrap;
     flex-wrap: wrap;
+
+    .pagination__item-time,
+    .pagination__item-category,
+    .pagination__item-tag-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.5rem;
+    }
 
     .pagination__item-tag {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.25rem;
+      gap: .5rem;
     }
   }
 
-  .material-symbols-outlined {
+  .pagination__item-info-icon {
     padding: 0;
   }
 }
 
-.pagination__item-wrapper.pagination__item-wrapper--draft {
+.pagination__item-wrapper.pagination__item-wrapper--first {
+  position: relative;
+  gap: .5rem;
+  margin-bottom: .5rem;
+  background-color: var(--primary-color);
+  box-shadow: var(--normal-shadow);
+  transition: all .25s ease-in-out;
+
+  &::before {
+    content: 'New!';
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(calc(-100% - 0.5rem));
+    color: var(--primary-color);
+    font-family: var(--ui-font);
+    font-size: 1.2rem;
+    font-weight: 900;
+    transition: all .25s ease-in-out;
+  }
+
+  .pagination__item-title {
+    color: var(--white-color);
+    font-size: 1.8rem;
+    font-weight: 900;
+    transition: all .25s ease-in-out;
+
+    .pagination__item-title-series {
+      color: var(--primary-semi-light-color);
+      transition: all .25s ease-in-out;
+    }
+  }
+
+  .pagination__item-info {
+    transition: all .25s ease-in-out;
+
+    .pagination__item-time,
+    .pagination__item-category,
+    .pagination__item-tag-item {
+      position: relative;
+      color: var(--primary-light-color);
+      z-index: 1;
+      transition: all .25s ease-in-out;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -0.15rem;
+        left: 0;
+        right: 0;
+        height: .75rem;
+        background-color: var(--primary-little-light-color);
+        z-index: -1;
+        transition: all .25s ease-in-out;
+      }
+    }
+  }
+
+  .pagination__item-draft {
+    margin-top: -0.5rem;
+    background-color: var(--primary-semi-light-color);
+    color: var(--primary-little-light-color);
+    transition: all .25s ease-in-out;
+  }
+
+  .pagination__item-summary {
+    color: var(--primary-semi-light-color);
+    font-weight: 500;
+    line-height: 1.5rem;
+    margin: .8rem 0 .5rem 0;
+    transition: all .25s ease-in-out;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--primary-light-color);
+
+      &::before {
+        transform: translateX(-25%) translateY(-70%);
+        rotate: -30deg;
+      }
+
+      .pagination__item-title {
+        color: var(--primary-color);
+
+        .pagination__item-title-series {
+          color: var(--primary-little-light-color);
+        }
+      }
+
+      .pagination__item-info {
+        .pagination__item-time,
+        .pagination__item-category,
+        .pagination__item-tag-item {
+          color: var(--primary-semi-dark-color);
+
+          &::after {
+            opacity: 0;
+          }
+        }
+      }
+
+      .pagination__item-draft {
+        background-color: var(--primary-semi-light-color);
+        color: var(--primary-color);
+      }
+
+      .pagination__item-summary {
+        color: var(--primary-little-light-color);
+      }
+    }
+  }
+}
+
+.pagination__item-wrapper.pagination__item-wrapper--draft:not(.pagination__item-wrapper--first) {
   background-color: var(--primary-semi-light-color);
 
   @media (hover: hover) {
@@ -98,7 +213,7 @@
   width: min(100%, 30rem);
   margin: 0 auto;
   border: 1px solid var(--primary-light-color);
-  transition: border-color 0.25s ease-in-out;
+  transition: border-color .25s ease-in-out;
 
   &:has(+ .pagination__item-wrapper:hover),
   &:hover + .pagination__separator {
@@ -116,16 +231,16 @@
 
   .pagination__item-wrapper-title--archived {
     background-color: var(--primary-light-color);
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
     color: var(--primary-color);
     font-size: 1.2rem;
     font-weight: 900;
     font-family: var(--ui-font);
     text-align: center;
-    margin: 2rem 0 0.25rem 0;
+    margin: 2rem 0 .25rem 0;
     cursor: pointer;
-    transition: all 0.25s ease-in-out;
+    transition: all .25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
@@ -165,7 +280,7 @@
   width: 100%;
   text-align: center;
   color: var(--primary-little-light-color);
-  font-size: 0.8rem;
+  font-size: .8rem;
   font-family: var(--ui-font);
   font-weight: 900;
   text-transform: uppercase;
@@ -174,6 +289,14 @@
 @media screen and (max-width: 768px) {
   .pagination__item-wrapper {
     width: min(calc(100% - 2rem), 40rem);
+
+    &::before {
+      display: none;
+    }
+
+    .pagination__item-info-icon {
+      font-size: 1.5rem;
+    }
   }
 }
 
@@ -186,7 +309,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.25rem;
+      gap: .25rem;
       text-align: center;
     }
 

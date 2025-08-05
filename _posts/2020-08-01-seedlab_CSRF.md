@@ -4,6 +4,7 @@ title:  "CSRF"
 date:   2020-08-01 00:00:00 +0800
 categories: 实验
 tags: seedlab csrf
+summary: "本文为 SEED Labs 2.0 - Cross-Site Request Forgery Attack Lab 的实验记录，介绍了如何利用 CSRF 攻击加好友和修改用户资料，并探讨了相应的防御措施。"
 series: SEEDLabs
 series_index: 3
 comments: true

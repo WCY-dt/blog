@@ -4,6 +4,7 @@ title:  "Bandit"
 date:   2019-10-01 00:00:00 +0800
 categories: 安全
 tags: game
+summary: "本文为 Bandit 题解。"
 series: OverTheWire
 series_index: 1
 comments: true

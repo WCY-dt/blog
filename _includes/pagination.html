@@ -12,6 +12,7 @@
 {%- endfor -%}
 
 {%- if normal_posts_count > 0 -%}
+  {%- assign is_first_normal_post = true -%}
   {%- for post in posts -%}
     {%- if post.draft and jekyll.environment == 'production' -%}
       {%- continue -%}
@@ -20,56 +21,126 @@
       {%- continue -%}
     {%- endif -%}
     {%- assign normal_posts_count = normal_posts_count | minus: 1 -%}
-    {% comment %} item of pagination BEGIN {% endcomment %}
-    <a
-      class='no-select no-print pagination__item-wrapper
-      {% if post.draft and jekyll.environment != 'production' %}
-        pagination__item-wrapper--draft
-      {% endif %}'
-      href='{{ post.url | relative_url }}'
-    >
-      <span class='pagination__item-title'>
-        {% if post.series %}
-          <div class='pagination__item-title-series'>
-            {{ post.series }} | ({{ post.series_index }})
+
+    {%- if is_first_normal_post and include.layout == 'home' -%}
+      {% comment %} First normal post - special handling BEGIN {% endcomment %}
+      <a
+        class='
+          no-select no-print pagination__item-wrapper pagination__item-wrapper--first
+          {% if post.draft and jekyll.environment != 'production' %}
+            pagination__item-wrapper--draft
+          {% endif %}
+        '
+        href='{{ post.url | relative_url }}'
+      >
+        <span class='pagination__item-title'>
+          {% if post.series %}
+            <div class='pagination__item-title-series'>
+              {{ post.series }} | ({{ post.series_index }})
+            </div>
+          {% endif %}
+          <div class='pagination__item-title-text'>
+            {{ post.title }}
+            {%- if post.draft and jekyll.environment != 'production' -%}
+              <span class='pagination__item-title-text--edit-icon material-symbols-outlined'>
+                stylus_note
+              </span>
+            {%- endif -%}
           </div>
-        {% endif %}
-        <div class='pagination__item-title-text'>
-          {{ post.title }}
-          {%- if post.draft and jekyll.environment != 'production' -%}
-            <span class='pagination__item-title-text--edit-icon material-symbols-outlined'> stylus_note </span>
-          {%- endif -%}
+        </span>
+        {%- if post.draft and jekyll.environment != 'production' -%}
+          <div class='pagination__item-draft'>
+            Draft will hide on production
+          </div>
+        {%- endif -%}
+        <div class='pagination__item-info'>
+          <div class='pagination__item-time'>
+            <span class='pagination__item-info-icon material-symbols-outlined'> calendar_month </span>
+            {{- post.date | date: site.theme_config.date_format -}}
+          </div>
+          <div class='pagination__item-category'>
+            <span class='pagination__item-info-icon material-symbols-outlined'> archive </span>
+            {{- post.categories -}}
+          </div>
+          <div class='pagination__item-tag'>
+            {% for tag in post.tags %}
+              <div class='pagination__item-tag-item'>
+                <span class='pagination__item-info-icon material-symbols-outlined'> tag </span>{{ tag }}
+              </div>
+            {% endfor %}
+          </div>
         </div>
-      </span>
-      {%- if post.draft and jekyll.environment != 'production' -%}
-        <div class='pagination__item-draft'>Draft will hide on production</div>
+        <div class='pagination__item-summary'>
+          {{ post.summary | strip_html }}
+        </div>
+      </a>
+      {% comment %} First normal post - special handling END {% endcomment %}
+      {%- assign is_first_normal_post = false -%}
+    {%- else -%}
+      {%- if is_first_normal_post -%}
+        {%- assign is_first_normal_post = false -%}
       {%- endif -%}
-      <div class='pagination__item-info'>
-        <div class='pagination__item-time'>
-          <span class='material-symbols-outlined'> calendar_month </span>
-          {{- post.date | date: site.theme_config.date_format -}}
+      {% comment %} Regular normal post - standard handling BEGIN {% endcomment %}
+      <a
+        class='
+          no-select no-print pagination__item-wrapper
+          {% if post.draft and jekyll.environment != 'production' %}
+            pagination__item-wrapper--draft
+          {% endif %}
+        '
+        href='{{ post.url | relative_url }}'
+      >
+        <span class='pagination__item-title'>
+          {% if post.series %}
+            <div class='pagination__item-title-series'>
+              {{ post.series }} | ({{ post.series_index }})
+            </div>
+          {% endif %}
+          <div class='pagination__item-title-text'>
+            {{ post.title }}
+            {%- if post.draft and jekyll.environment != 'production' -%}
+              <span class='pagination__item-title-text--edit-icon material-symbols-outlined'>
+                stylus_note
+              </span>
+            {%- endif -%}
+          </div>
+        </span>
+        {%- if post.draft and jekyll.environment != 'production' -%}
+          <div class='pagination__item-draft'>
+            Draft will hide on production
+          </div>
+        {%- endif -%}
+        <div class='pagination__item-info'>
+          <div class='pagination__item-time'>
+            <span class='pagination__item-info-icon material-symbols-outlined'> calendar_month </span>
+            {{- post.date | date: site.theme_config.date_format -}}
+          </div>
+          <div class='pagination__item-category'>
+            <span class='pagination__item-info-icon material-symbols-outlined'> archive </span>
+            {{- post.categories -}}
+          </div>
+          <div class='pagination__item-tag'>
+            {% for tag in post.tags %}
+              <div class='pagination__item-tag-item'>
+                <span class='pagination__item-info-icon material-symbols-outlined'> tag </span>{{ tag }}
+              </div>
+            {% endfor %}
+          </div>
         </div>
-        <div class='pagination__item-category'>
-          <span class='material-symbols-outlined'> archive </span>
-          {{- post.categories -}}
-        </div>
-        <div class='pagination__item-tag'>
-          {% for tag in post.tags %}
-            <span class='material-symbols-outlined'> tag </span>{{ tag }}
-          {% endfor %}
-        </div>
-      </div>
-    </a>
-    {% comment %} item of pagination END {% endcomment %}
-    {%- unless normal_posts_count == 0 -%}
-      <hr class='no-select no-print pagination__separator'>
-    {%- endunless -%}
+      </a>
+      {% comment %} Regular normal post - standard handling END {% endcomment %}
+      {%- unless normal_posts_count == 0 -%}
+        <hr class='no-select no-print pagination__separator'>
+      {%- endunless -%}
+    {%- endif -%}
   {%- endfor -%}
 {%- endif -%}
 
 {%- if archived_posts_count > 0 -%}
   <details class='pagination__item-wrapper--archived'>
-    <summary class='pagination__item-wrapper-title--archived'>Archived Posts</summary>
+    <summary class='pagination__item-wrapper-title--archived'>
+      Archived Posts
+    </summary>
     <div class='pagination__item-wrapper-content--archived'>
       {%- for post in posts -%}
         {%- if post.draft and jekyll.environment == 'production' -%}
@@ -78,10 +149,12 @@
         {%- if post.archived -%}
           {%- assign archived_posts_count = archived_posts_count | minus: 1 -%}
           <a
-            class='no-select no-print pagination__item-wrapper
-            {% if post.draft and jekyll.environment != 'production' %}
-              pagination__item-wrapper--draft
-            {% endif %}'
+            class='
+              no-select no-print pagination__item-wrapper
+              {% if post.draft and jekyll.environment != 'production' %}
+                pagination__item-wrapper--draft
+              {% endif %}
+            '
             href='{{ post.url | relative_url }}'
           >
             <span class='pagination__item-title'>
@@ -93,7 +166,9 @@
               <div class='pagination__item-title-text'>
                 {{ post.title }}
                 {%- if post.draft and jekyll.environment != 'production' -%}
-                  <span class='pagination__item-title-text--edit-icon material-symbols-outlined'> stylus_note </span>
+                  <span class='pagination__item-title-text--edit-icon material-symbols-outlined'>
+                    stylus_note
+                  </span>
                 {%- endif -%}
               </div>
             </span>

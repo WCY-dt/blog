@@ -4,6 +4,7 @@ title:  "Github Pages DNS配置"
 date:   2024-04-23 00:00:00 +0800
 categories: 网络
 tags: dns github
+summary: "本文介绍了如何将自定义域名配置到 GitHub Pages 上，包括主域和子域的配置方法。"
 comments: true
 mathjax: true
 copyrights: 原创

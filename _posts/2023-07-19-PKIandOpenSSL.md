@@ -4,12 +4,13 @@ title:  "PKI和OpenSSL"
 date:   2023-07-19 00:00:00 +0800
 categories: 密码
 tags: pki openssl
+summary: "本文讨论了 PKI 和 OpenSSL 的相关内容，包括中间人攻击、公钥证书、CA 的作用以及如何使用 OpenSSL 创建和管理证书。"
 comments: true
 mathjax: true
 copyrights: 原创
 ---
 
-本文讨论了 PKI 和 OpenSSL 的相关内容。别急，这个也还没写完……
+本文讨论了 PKI 和 OpenSSL 的相关内容。
 
 ## PKI
 

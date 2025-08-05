@@ -4,6 +4,7 @@ title:  "格式化字符串漏洞"
 date:   2023-09-10 00:00:00 +0800
 categories: 安全
 tags: pwn format-string
+summary: "格式化字符串漏洞是由于程序未正确处理用户输入的格式化字符串，导致攻击者可以读取或写入任意内存地址。本文介绍了格式化字符串漏洞的原理、常见攻击方式，并通过实例演示如何利用该漏洞进行攻击。"
 comments: true
 mathjax: true
 copyrights: 原创

@@ -4,6 +4,7 @@ title:  "最小的 Hello World"
 date:   2023-04-20 00:00:00 +0800
 categories: 汇编
 tags: assembly c
+summary: "本文介绍了如何编写一个最小的 Hello World 可执行文件。通过逐步优化，从使用 C 语言到汇编语言，最终实现了一个仅有 440 字节的 ELF 文件。"
 comments: true
 mathjax: true
 copyrights: 原创

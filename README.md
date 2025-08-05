@@ -4,21 +4,11 @@
 
 本仓库为我的个人博客。博客使用了自己从头打造的 Jekyll 主题，主要存放一些技术性文章以及个人笔记。更新频率飘忽不定，尽量每个月尽量更新一篇。
 
-- [main 分支](https://github.com/WCY-dt/blog/tree/main) 为页面发布分支。
-- [stale 分支](https://github.com/WCY-dt/blog/tree/stale) 为过时的主题，不再维护。
-
-站点目前使用 GitHub Pages 托管，使用 Cloudflare 做 DNS 解析。
-
-## 站点地址
-
-- [个人主页](https://ch3nyang.top/)
-- [博客主页](https://blog.ch3nyang.top/)
+👉 [https://blog.ch3nyang.top/](https://blog.ch3nyang.top/)
 
 ## 本地开发
 
 你可以自由地将本博客的主题用于你的博客。
-
-推荐使用 Visual Studio Code 编辑器，安装插件 [`Shopify Liquid`](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode)、[`markdownlint`](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) 和 [`Live Server`](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) 以获得更好的开发体验。
 
 构建前先安装好 [Ruby](https://rubyinstaller.org/downloads/)（≥ 3.4.0）和 [Jekyll](https://jekyllrb.com/docs/installation/) ，然后安装依赖：
 
@@ -44,6 +34,7 @@ title:      "原神游玩指南"
 date:       2000-01-01 00:00:00 +0800
 categories: 游戏 // 只能有一个分类
 tags:       开放世界 RPG 原神 // 可以有多个标签，用空格分隔
+summary:    "本文为原神游玩指南，介绍了游戏的基本玩法、角色培养、资源获取等内容，帮助新手玩家快速上手原神。" // 可省略
 comments:   false // 如果设置为 true，文章会显示评论区；否则不显示
 mathjax:    true // 可省略，默认为 false。如果设置为 true，会启用数学公式支持
 mermaid:    true // 可省略，默认为 false。如果设置为 true，会启用流程图支持
@@ -91,6 +82,7 @@ archived:   true // 可省略，默认为 false。如果设置为 true，文章�
 - [x] 文章归档
 - [x] 嵌入式 GitHub 组件
 - [x] 图片排版插件
+- [x] 文章总结
 - [ ] 更多功能...
 
 ## 版权声明

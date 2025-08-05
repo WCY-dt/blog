@@ -4,6 +4,7 @@ title:  "Spring MVC"
 date:   2024-02-04 00:00:00 +0800
 categories: 编程
 tags: java spring
+summary: "这是 Spring 系列的第四篇，介绍了 Spring MVC，并结合源码详细讲解了 Spring MVC 的实现原理。"
 series: 深入 Spring 源码
 series_index: 4
 comments: true

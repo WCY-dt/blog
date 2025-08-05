@@ -4,6 +4,7 @@ title:  "ICMP Redirect Attack"
 date:   2022-10-02 00:00:00 +0800
 categories: 实验
 tags: seedlab icmp
+summary: "本文为 SEED Labs 2.0 - ICMP Redirect Attack Lab 的实验记录，介绍了如何利用 ICMP 重定向攻击实现中间人攻击 (MITM)。"
 series: SEEDLabs
 series_index: 8
 comments: true

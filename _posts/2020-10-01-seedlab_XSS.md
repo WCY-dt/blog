@@ -4,6 +4,7 @@ title:  "XSS"
 date:   2020-10-01 00:00:00 +0800
 categories: 实验
 tags: seedlab xss
+summary: "本文为 SEED Labs 2.0 - Cross-Site Scripting Attack Lab 的实验记录，介绍了如何利用 XSS 漏洞实施攻击，并探讨了 CSP 防御 XSS 的作用。"
 series: SEEDLabs
 series_index: 4
 comments: true
