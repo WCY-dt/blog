@@ -228,6 +228,7 @@
   justify-content: center;
   gap: 0;
   width: min(100%, 33rem);
+  margin: 0 auto;
 
   .pagination__item-wrapper-title--archived {
     background-color: var(--primary-light-color);
