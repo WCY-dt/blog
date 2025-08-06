@@ -6,6 +6,8 @@
 
 👉 [https://blog.ch3nyang.top/](https://blog.ch3nyang.top/)
 
+英文版本：[https://blog-en.ch3nyang.top/](https://blog-en.ch3nyang.top/)（仅部分文章）
+
 ## 本地开发
 
 你可以自由地将本博客的主题用于你的博客。

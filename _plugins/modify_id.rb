@@ -7,8 +7,8 @@ Jekyll::Hooks.register [:posts, :pages], :post_render do |doc|
   begin
     doc_html = Nokogiri::HTML(doc.output)
 
-    container = doc_html.css('#post-content-container')
-    container = doc_html.css('.post-content') if container.empty?
+    container = doc_html.css('#post__content')
+    container = doc_html.css('.post__content') if container.empty?
     container = doc_html.css('article') if container.empty?
 
     unless container.empty?
