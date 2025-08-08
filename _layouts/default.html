@@ -177,32 +177,40 @@ layout: compress
       rel='stylesheet'
       href='{{ '/assets/style/main.css' | relative_url }}'
     >
+    {%- if page.layout == 'post' -%}
+      <link
+        rel='stylesheet'
+        href='{{ '/assets/style/post.css' | relative_url }}'
+      >
+    {%- endif -%}
 
     <!-- Giscus 样式表 -->
-    {% if page.layout == 'post' and jekyll.environment == 'production' %}
-      <link
-        rel='preload'
-        href='{{ '/assets/style/giscus_light.css' | relative_url }}'
-        as='style'
-        onload="this.onload=null;this.rel='stylesheet'"
-      >
-      <link
-        rel='preload'
-        href='{{ '/assets/style/giscus_dark.css' | relative_url }}'
-        as='style'
-        onload="this.onload=null;this.rel='stylesheet'"
-      >
-      <noscript>
+    {%- if page.layout == 'post' -%}
+      {%- if jekyll.environment == 'production' or site.dev_mode -%}
         <link
-          rel='stylesheet'
+          rel='preload'
           href='{{ '/assets/style/giscus_light.css' | relative_url }}'
+          as='style'
+          onload="this.onload=null;this.rel='stylesheet'"
         >
         <link
-          rel='stylesheet'
+          rel='preload'
           href='{{ '/assets/style/giscus_dark.css' | relative_url }}'
+          as='style'
+          onload="this.onload=null;this.rel='stylesheet'"
         >
-      </noscript>
-    {% endif %}
+        <noscript>
+          <link
+            rel='stylesheet'
+            href='{{ '/assets/style/giscus_light.css' | relative_url }}'
+          >
+          <link
+            rel='stylesheet'
+            href='{{ '/assets/style/giscus_dark.css' | relative_url }}'
+          >
+        </noscript>
+      {%- endif -%}
+    {%- endif -%}
   </head>
 
   <body color_theme='{{ site.theme_config.color_theme | default: 'light' }}'>
@@ -219,21 +227,21 @@ layout: compress
     {%- include sidebar.html -%}
 
     <!-- 代码复制 -->
-    {% if page.layout == 'post' %}
+    {%- if page.layout == 'post' -%}
       <script src='{{ '/assets/js/copy_code.js' | relative_url }}'></script>
-    {% endif %}
+    {%- endif -%}
 
     <!-- 数学公式 -->
-    {% if page.mathjax %}
+    {%- if page.mathjax -%}
       <script
         async
         id='MathJax-script'
         src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
       ></script>
-    {% endif %}
+    {%- endif -%}
 
     <!-- mermaid.js -->
-    {% if page.mermaid %}
+    {%- if page.mermaid -%}
       <script
         src='https://cdn.jsdelivr.net/npm/mermaid@11.9.0/dist/mermaid.min.js'
       ></script>
@@ -254,6 +262,6 @@ layout: compress
             });
         });
       </script>
-    {% endif %}
+    {%- endif -%}
   </body>
 </html>

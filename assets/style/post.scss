@@ -2,13 +2,24 @@
 ---
 
 @use 'common';
-@use 'header';
-@use 'pagination';
-@use 'category';
-@use 'tag';
-@use 'footer';
-@use 'sidebar';
-@use 'not_found';
+@use 'article';
+@use 'series';
+@use 'copyright';
+@use 'suggest';
+@use 'comment';
+@use 'share';
+@use 'github';
+@use 'image_caption';
+@use 'copy_button';
+@use 'syntax_light';
+@use 'syntax_dark';
+
+[data-theme='light'] {
+  @include syntax_light.syntax_light;
+}
+[data-theme='dark'] {
+  @include syntax_dark.syntax_dark;
+}
 
 html[data-theme="light"] {
   --primary-dark-color: hsl(10, 83%, 20%);
@@ -111,40 +122,6 @@ html[data-theme="dark"] {
 @media screen and (max-width: 768px) {
   :root {
     font-size: 12px;
-  }
-}
-
-html {
-  --normal-shadow: 0 0 0.3rem var(--shadow-color);
-  overflow-x: hidden;
-}
-
-body {
-  width: 100%;
-  overflow-x: hidden;
-  min-height: 100vh;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  gap: 1rem;
-  scroll-behavior: smooth;
-  background-color: var(--white-color);
-}
-
-.main-wrapper {
-  padding: 12rem 1rem 8rem 1rem;
-  display: grid;
-  grid-template-columns: auto;
-  place-content: center;
-  width: calc(100% - 2rem);
-}
-
-@media screen and (max-width: 425px) {
-  .main-wrapper {
-    padding: 8rem 1rem 5.75rem 1rem;
   }
 }
 
