@@ -35,12 +35,14 @@ baidu_site_verification: codeva-dciGw99jsc
 ############# Theme Settings #############
 color_theme: light # light or dark
 
-# icons are from https://fonts.google.com/icons
-# Modify this may cause unexpected errors from includes/header.html
+# icons are from https://fonts.google.com/icons. If you want to modify it,
+# you may need to replace assets/font/Material_Symbols_Outlined.woff2 with
+# assets/font/Material_Symbols_Outlined.woff2.backup
+# Modify this may cause unexpected errors from _includes/header.html
 navy:
   - title: post
     url: /
-    icon: collections_bookmark
+    icon: web_stories
   - title: github
     url: https://github.com/WCY-dt
     icon: data_object
@@ -54,6 +56,10 @@ navy:
     url: feed.xml
     icon: rss_feed
 
+# icons are from https://fontawesome.com/icons. If you want to add other icons,
+# you may need to search for "/assets/style/font-awesome.css" and replace it
+# with https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css.
+# You may also modify _includes/share.html
 share:
   - hackernews
   - twitter

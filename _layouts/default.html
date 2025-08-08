@@ -160,14 +160,14 @@ layout: compress
     {%- if page.layout == 'post' -%}
       <link
         rel='preload'
-        href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'
+        href='/assets/style/font-awesome.css'
         as='style'
         onload="this.onload=null;this.rel='stylesheet'"
       >
       <noscript>
         <link
           rel='stylesheet'
-          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'
+          href='/assets/style/font-awesome.css'
         >
       </noscript>
     {%- endif -%}
@@ -222,9 +222,6 @@ layout: compress
     {% if page.layout == 'post' %}
       <script src='{{ '/assets/js/copy_code.js' | relative_url }}'></script>
     {% endif %}
-
-    <!-- 图标加载优化 -->
-    <script src='{{ '/assets/js/optimize.js' | relative_url }}'></script>
 
     <!-- 数学公式 -->
     {% if page.mathjax %}
