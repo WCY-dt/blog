@@ -69,17 +69,17 @@ module Jekyll
     end
 
     def generate_button_html(url, path, lines)
-      lines_html = lines ? "<div class=\"line-number\">#{lines}</div>" : ""
+      lines_html = lines ? "<div class=\"github-code-btn__line-number\">#{lines}</div>" : ""
 
       html = <<~HTML.strip
-        <a href="#{url}" class="github-code-btn" target="_blank" rel="noopener noreferrer">
-          <div class="github-icon no-select">
+        <a href="#{url}" class="github-code-btn__btn" target="_blank" rel="noopener noreferrer">
+          <div class="github-code-btn__icon no-select">
             <svg width="16" height="16" viewBox="0 0 16 16">
               <use href="/assets/img/github.svg#github"></use>
             </svg>
           </div>
-          <div class="github-info">
-            <div class="file-path">#{path}</div>
+          <div class="github-code-btn__info">
+            <div class="github-code-btn__file-path">#{path}</div>
             #{lines_html}
           </div>
         </a>

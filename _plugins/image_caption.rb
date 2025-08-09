@@ -16,12 +16,12 @@ module Jekyll
       caption = parts[1]
 
       alt_text = caption
-      css_class = parts[2] || "image-caption"
+      css_class = parts[2] || ""
 
       html = <<~HTML
-        <figure class="#{css_class}">
-          <img src="#{image_url}" alt="#{alt_text}" />
-          <figcaption>#{caption}</figcaption>
+        <figure class="image-caption #{css_class}">
+          <img src="#{image_url}" alt="#{alt_text}" class="image-caption__image" />
+          <figcaption class="image-caption__caption">#{caption}</figcaption>
         </figure>
       HTML
 

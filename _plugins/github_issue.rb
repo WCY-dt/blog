@@ -92,30 +92,25 @@ module Jekyll
 
     def generate_issue_html(url, username, avatar_url, repo_name, issue_number, content)
       avatar_html = if avatar_url
-        "<span class=\"github-issue-avatar-wrapper\"><img src=\"#{avatar_url}\" alt=\"#{username}\" class=\"github-issue-avatar no-select\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='inline-block';\"><img src=\"/assets/img/github-user-icon.svg\" alt=\"#{username}\" class=\"github-issue-avatar-fallback no-select\" style=\"display: none;\"></span>"
+        "<span class=\"github-issue__avatar-wrapper\"><img src=\"#{avatar_url}\" alt=\"#{username}\" class=\"github-issue__avatar github-issue__avatar--avater no-select\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='inline-block';\"><img src=\"/assets/img/github-user-icon.svg\" alt=\"#{username}\" class=\"github-issue__avatar github-issue__avatar--fallback no-select\" style=\"display: none;\"></span>"
       else
-        "<img src=\"/assets/img/github-user-icon.svg\" alt=\"#{username}\" class=\"github-issue-avatar no-select\">"
+        "<img src=\"/assets/img/github-user-icon.svg\" alt=\"#{username}\" class=\"github-issue__avatar github-issue__avatar--icon no-select\">"
       end
 
       <<~HTML
-        <div class="github-issue" markdown="1">
-        <div class="github-issue-header">
-        <div class="github-issue-user">
-        #{avatar_html}
-        <div class="github-issue-info">
-        <strong><a href="https://github.com/#{username}">@#{username}</a></strong>
-        <br>
-        <span class="github-issue-meta">in <a href="https://github.com/#{repo_name}">#{repo_name}</a> · <a href="#{url}">#{issue_number}</a></span>
-        </div>
-        <a href="#{url}" class="github-issue-link no-select"><span class="material-symbols-outlined">open_in_new</span></a>
-        </div>
+        <div class="github-issue__header">
+          #{avatar_html}
+          <div class="github-issue__info">
+            <strong><a href="https://github.com/#{username}">@#{username}</a></strong>
+            <br>
+            <span class="github-issue__info-meta">in <a href="https://github.com/#{repo_name}" class="github-issue__info-meta-link">#{repo_name}</a> · <a href="#{url}" class="github-issue__info-meta-link">#{issue_number}</a></span>
+          </div>
+          <a href="#{url}" class="github-issue__link no-select"><span class="github-issue__link-icon material-symbols-outlined">open_in_new</span></a>
         </div>
 
-        <div class="github-issue-content" markdown="1">
+        <div class="github-issue__content" markdown="1">
 
-        #{content}
-
-        </div>
+          #{content}
 
         </div>
       HTML

@@ -97,12 +97,12 @@ module Jekyll
       end
 
       avatar_html = if avatar_url
-        "<span class=\"github-link-avatar-wrapper\"><img src=\"#{avatar_url}\" alt=\"#{name}\" class=\"github-link-avatar no-select\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='inline-block';\"><img src=\"#{fallback_icon_src}\" alt=\"#{name}\" class=\"github-link-fallback no-select\" style=\"display: none;\"></span>"
+        "<span class=\"github-link__avatar-wrapper\"><img src=\"#{avatar_url}\" alt=\"#{name}\" class=\"github-link__avatar github-link__avatar--avatar no-select\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='inline-block';\"><img src=\"#{fallback_icon_src}\" alt=\"#{name}\" class=\"github-link__avatar github-link__avatar--fallback no-select\" style=\"display: none;\"></span>"
       else
-        "<img src=\"#{fallback_icon_src}\" alt=\"#{name}\" class=\"github-link-icon no-select\">"
+        "<img src=\"#{fallback_icon_src}\" alt=\"#{name}\" class=\"github-link__avatar github-link__avatar--icon no-select\">"
       end
 
-      html = "<a href=\"#{url}\" class=\"github-link github-link-#{type}\" target=\"_blank\" rel=\"noopener noreferrer\">#{avatar_html}<span class=\"github-link-name\">#{name}</span></a>"
+      html = "<a href=\"#{url}\" class=\"github-link github-link--#{type}\" target=\"_blank\" rel=\"noopener noreferrer\">#{avatar_html}<span class=\"github-link__name\">#{name}</span></a>"
 
       html
     end

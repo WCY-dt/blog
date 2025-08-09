@@ -23,7 +23,7 @@
 
 .series-header__list {
   display: grid;
-  gap: 0.5rem 1rem;
+  gap: .5rem 1rem;
   grid-template-columns: auto 1fr;
   place-items: auto center;
   padding: 0;
@@ -34,7 +34,7 @@
 .series-header__list-index {
   text-align: right;
   color: var(--primary-semi-light-color);
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 
   &.series-header__list-index--current {
     font-size: 1.2rem;
@@ -62,7 +62,7 @@
 .series-header__list-title {
   text-decoration: none;
   color: var(--primary-little-light-color);
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 
   &.series-header__list-title--current {
     color: var(--primary-color);
