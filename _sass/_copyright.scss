@@ -5,50 +5,51 @@
   place-content: center;
   gap: .25rem;
   padding: 1rem 0;
+  box-sizing: border-box;
+}
 
-  .copyright__icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+.copyright__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 
-  .copyright__text {
-    display: none;
-  }
+.copyright__text {
+  display: none;
+}
 
-  @media (hover: hover) {
-    &:hover {
-      .copyright__text {
+@media (hover: hover) {
+  .copyright-wrapper:hover {
+    .copyright__text {
+      position: absolute;
+      display: block;
+      margin: 0;
+      top: calc(100% + 0.6rem - 1rem);
+      left: 0;
+      right: 0;
+      background-color: var(--primary-light-color);
+      color: var(--primary-little-light-color);
+      padding: .5rem 0;
+      box-sizing: border-box;
+      border-radius: .5rem;
+      line-height: 1.5rem;
+      text-align: center;
+      font-weight: 900;
+      font-size: 0.8rem;
+
+      &::before {
+        content: '';
         position: absolute;
-        display: block;
-        margin: 0;
-        top: calc(100% + 0.6rem - 1rem);
-        left: 0;
-        right: 0;
-        background-color: var(--primary-light-color);
+        top: -0.6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: .6rem solid transparent;
+        border-right: .6rem solid transparent;
+        border-bottom: .6rem solid var(--primary-light-color);
+      }
+
+      .copyright__text-link {
         color: var(--primary-little-light-color);
-        padding: .5rem 0;
-        box-sizing: border-box;
-        border-radius: .5rem;
-        line-height: 1.5rem;
-        text-align: center;
-        font-weight: 900;
-        font-size: 0.8rem;
-
-        .copyright__text-link {
-          color: var(--primary-little-light-color);
-          text-decoration: underline;
-        }
-
-        &::before {
-          content: '';
-          position: absolute;
-          top: -0.6rem;
-          left: 50%;
-          transform: translateX(-50%);
-          border-left: .6rem solid transparent;
-          border-right: .6rem solid transparent;
-          border-bottom: .6rem solid var(--primary-light-color);
-        }
+        text-decoration: underline;
       }
     }
   }

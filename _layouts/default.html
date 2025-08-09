@@ -240,6 +240,10 @@ layout: compress
       ></script>
     {%- endif -%}
 
+    <!-- DNS 预解析和预连接 -->
+    <link rel='dns-prefetch' href='//cdn.jsdelivr.net'>
+    <link rel='preconnect' href='https://cdn.jsdelivr.net' crossorigin>
+
     <!-- mermaid.js -->
     {%- if page.mermaid -%}
       <script

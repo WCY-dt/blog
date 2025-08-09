@@ -12,7 +12,18 @@
     <span id='sidebar__menu-btn' class='sidebar__menu-btn sidebar__item-btn material-symbols-outlined'>featured_play_list</span>
     <menu id='sidebar__menu-content' class='sidebar__menu-content'>
       {% for item in site.navy %}
-        <a href='{{ item.url | relative_url }}' class='sidebar__menu-item'>
+        {% assign is_active = false %}
+        {% if page.layout == item.title or page.type == item.title %}
+          {% assign is_active = true %}
+        {% elsif page.layout == 'post' and item.title == 'post' %}
+          {% assign is_active = true %}
+        {% elsif page.layout == 'home' and item.title == 'post' %}
+          {% assign is_active = true %}
+        {% endif %}
+        <a
+          href='{{ item.url | relative_url }}'
+          class='sidebar__menu-item {% if is_active %}sidebar__menu-item--active{% endif %}'
+        >
           <span class='sidebar__menu-item-icon material-symbols-outlined'>
             {{ item.icon }}
           </span>

@@ -22,33 +22,33 @@
 }
 
 html[data-theme="light"] {
-  --primary-dark-color: hsl(10, 83%, 20%);
-  --primary-semi-dark-color: hsl(12, 83%, 35%);
-  --primary-color: hsl(15, 83%, 46%);
-  --primary-little-light-color: hsl(16, 83%, 65%);
-  --primary-semi-light-color: hsl(18, 83%, 85%);
-  --primary-light-color: hsl(20, 83%, 95%);
-  --primary-extra-light-color: hsl(20, 83%, 98%);
-  --white-color: hsl(0, 0%, 99%);
-  --gray-color: hsl(0, 0%, 40%);
-  --black-color: hsl(0, 0%, 0%);
-  --true-white-color: hsl(0, 0%, 99%);
-  --shadow-color: hsla(0, 0%, 0%, 0.1);
+  --primary-dark-color: #5d1709;
+  --primary-semi-dark-color: #a32d0f;
+  --primary-color: #d74514;
+  --primary-little-light-color: #f0835c;
+  --primary-semi-light-color: #f8ccb9;
+  --primary-light-color: #fdefe8;
+  --primary-extra-light-color: #fef8f6;
+  --white-color: #fcfcfc;
+  --gray-color: #666;
+  --black-color: #000;
+  --true-white-color: #fcfcfc;
+  --shadow-color: #0000001a;
 }
 
 html[data-theme="dark"] {
-  --primary-dark-color: hsl(0, 0%, 60%);
-  --primary-semi-dark-color: hsl(0, 0%, 50%);
-  --primary-color: hsl(15, 83%, 46%);
-  --primary-little-light-color: hsl(12, 83%, 35%);
-  --primary-semi-light-color: hsl(0, 0%, 20%);
-  --primary-light-color: hsl(0, 0%, 10%);
-  --primary-extra-light-color: hsl(0, 0%, 5%);
-  --white-color: hsl(0, 0%, 2%);
-  --gray-color: hsl(0, 0%, 67%);
-  --black-color: hsl(0, 0%, 80%);
-  --true-white-color: hsl(0, 0%, 99%);
-  --shadow-color: hsla(0, 0%, 100%, 0.15);
+  --primary-dark-color: #999;
+  --primary-semi-dark-color: #808080;
+  --primary-color: #d74514;
+  --primary-little-light-color: #a32d0f;
+  --primary-semi-light-color: #333;
+  --primary-light-color: #1a1a1a;
+  --primary-extra-light-color: #0d0d0d;
+  --white-color: #050505;
+  --gray-color: #ababab;
+  --black-color: #ccc;
+  --true-white-color: #fcfcfc;
+  --shadow-color: #ffffff26;
 }
 
 @font-face {

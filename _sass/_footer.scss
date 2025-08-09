@@ -12,20 +12,20 @@
   font-weight: 900;
   box-shadow: var(--normal-shadow);
   z-index: 10;
+}
 
-  .footer__copyright {
-    margin: 0;
-    text-align: center;
+.footer__copyright {
+  margin: 0;
+  text-align: center;
+}
 
-    .footer__copyright-link {
-      color: var(--primary-little-light-color);
-      transition: color 0.25s ease-in-out;
+.footer__copyright-link {
+  color: var(--primary-little-light-color);
+  transition: color 0.25s ease-in-out;
 
-      @media (hover: hover) {
-        &:hover {
-          color: var(--primary-color);
-        }
-      }
+  @media (hover: hover) {
+    &:hover {
+      color: var(--primary-color);
     }
   }
 }

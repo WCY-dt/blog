@@ -7,148 +7,145 @@
   border-radius: .5rem;
   background-color: var(--primary-light-color);
   box-shadow: var(--normal-shadow);
+}
 
-  .series-header__desc {
-    font-weight: 700;
-    color: var(--primary-little-light-color);
-    margin: 0 auto;
+.series-header__desc {
+  font-weight: 700;
+  color: var(--primary-little-light-color);
+  margin: 0 auto;
+}
 
-    .series-header__desc-name {
-      font-weight: 900;
-      font-family: var(--ui-font);
-      text-decoration: underline;
-    }
+.series-header__desc-name {
+  font-weight: 900;
+  font-family: var(--ui-font);
+  text-decoration: underline;
+}
+
+.series-header__list {
+  display: grid;
+  gap: 0.5rem 1rem;
+  grid-template-columns: auto 1fr;
+  place-items: auto center;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.series-header__list-index {
+  text-align: right;
+  color: var(--primary-semi-light-color);
+  transition: all 0.25s ease-in-out;
+
+  &.series-header__list-index--current {
+    font-size: 1.2rem;
+    color: var(--primary-color);
   }
 
-  .series-header__list {
-    display: grid;
-    gap: 0.5rem 1rem;
-    grid-template-columns: auto 1fr;
-    place-items: auto center;
-    padding: 0;
-    margin: 0 auto;
-    list-style: none;
-
-    .series-header__list-index {
-      text-align: right;
-      color: var(--primary-semi-light-color);
-      transition: all 0.25s ease-in-out;
-
-      &.series-header__list-index--current {
-        font-size: 1.2rem;
-        color: var(--primary-color);
-      }
-
-      @media (hover: hover) {
-        &:has(+ .series-header__list-title:hover) {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        &:hover {
-          color: var(--primary-color);
-          font-weight: 700;
-
-          & + .series-header__list-title {
-            color: var(--primary-color);
-            font-weight: 700;
-          }
-        }
-      }
-    }
-
-    .series-header__list-title {
-      text-decoration: none;
-      color: var(--primary-little-light-color);
-      transition: all 0.25s ease-in-out;
-
-      &.series-header__list-title--current {
+  @media (hover: hover) {
+    &:has(+ .series-header__list-title:hover) {
         color: var(--primary-color);
         font-weight: 700;
-      }
+    }
 
-      @media (hover: hover) {
-        &:hover {
-          color: var(--primary-color);
-        }
+    &:hover {
+      color: var(--primary-color);
+      font-weight: 700;
+
+      & + .series-header__list-title {
+        color: var(--primary-color);
+        font-weight: 700;
       }
     }
   }
 }
 
-.series-footer-wrapper {
-  .series-footer__switcher {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    place-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+.series-header__list-title {
+  text-decoration: none;
+  color: var(--primary-little-light-color);
+  transition: all 0.25s ease-in-out;
 
-    .series-footer__switcher-button {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem;
-      font-size: 1.2rem;
-      font-weight: 700;
-      background-color: var(--primary-light-color);
-      color: var(--primary-little-light-color);
-      text-decoration: none;
-      border-radius: 0.5rem;
-      box-shadow: var(--normal-shadow);
-      transition: all 0.25s ease-in-out;
+  &.series-header__list-title--current {
+    color: var(--primary-color);
+    font-weight: 700;
+  }
 
-      @media (hover: hover) {
-        &:hover {
-          background-color: var(--primary-color);
-          color: var(--primary-extra-light-color);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
 
-          .series-footer__switcher-button-icon {
-            font-size: 2.5rem;
-            color: var(--primary-semi-light-color);
-          }
-        }
-      }
 
-      .series-footer__switcher-button-icon {
-        font-size: 3rem;
-        line-height: 3rem;
+.series-footer__switcher {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.series-footer__switcher-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: var(--primary-light-color);
+  color: var(--primary-little-light-color);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  box-shadow: var(--normal-shadow);
+  transition: all 0.25s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--primary-color);
+      color: var(--primary-extra-light-color);
+
+      .series-footer__switcher-button-icon.material-symbols-outlined {
+        font-size: 2.5rem;
         color: var(--primary-semi-light-color);
-        transition: all 0.25s ease-in-out;
       }
     }
+  }
+}
 
-    .series-footer__switcher-button--previous {
-      justify-content: start;
-      text-align: left;
-      @media (hover: hover) {
-        &:hover {
-          border-radius: 2rem 0rem 0rem 0rem;
-        }
-      }
+.series-footer__switcher-button-icon.material-symbols-outlined {
+  font-size: 3rem;
+  line-height: 3rem;
+  color: var(--primary-semi-light-color);
+  transition: all 0.25s ease-in-out;
+}
+
+.series-footer__switcher-button--previous {
+  justify-content: start;
+  text-align: left;
+  @media (hover: hover) {
+    &:hover {
+      border-radius: 2rem 0rem 0rem 0rem;
     }
+  }
+}
 
-    .series-footer__switcher-button--next {
-      justify-content: end;
-      text-align: right;
-      @media (hover: hover) {
-        &:hover {
-          border-radius: 0rem 0rem 2rem 0rem;
-        }
-      }
+.series-footer__switcher-button--next {
+  justify-content: end;
+  text-align: right;
+  @media (hover: hover) {
+    &:hover {
+      border-radius: 0rem 0rem 2rem 0rem;
     }
   }
 }
 
 @media screen and (max-width: 550px) {
-  .series-footer-wrapper {
-    .series-footer__switcher {
-      grid-template-columns: 1fr;
+  .series-footer__switcher {
+    grid-template-columns: 1fr;
+  }
 
-      .series-footer__switcher-button-icon {
-        font-size: 3rem;
-      }
-    }
+  .series-footer__switcher-button-icon.material-symbols-outlined {
+    font-size: 3rem;
   }
 }

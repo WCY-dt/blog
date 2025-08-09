@@ -2,18 +2,18 @@
 ---
 
 html {
-  --primary-dark-color: hsl(0, 0%, 60%);
-  --primary-semi-dark-color: hsl(0, 0%, 50%);
-  --primary-color: hsl(15, 83%, 46%);
-  --primary-little-light-color: hsl(12, 83%, 35%);
-  --primary-semi-light-color: hsl(0, 0%, 20%);
-  --primary-light-color: hsl(0, 0%, 10%);
-  --primary-extra-light-color: hsl(0, 0%, 5%);
-  --white-color: hsl(0, 0%, 2%);
-  --gray-color: hsl(0, 0%, 67%);
-  --black-color: hsl(0, 0%, 80%);
-  --true-white-color: hsl(0, 0%, 99%);
-  --shadow-color: hsla(0, 0%, 100%, 0.15);
+  --primary-dark-color: #999;
+  --primary-semi-dark-color: #808080;
+  --primary-color: #d74514;
+  --primary-little-light-color: #a32d0f;
+  --primary-semi-light-color: #333;
+  --primary-light-color: #1a1a1a;
+  --primary-extra-light-color: #0d0d0d;
+  --white-color: #050505;
+  --gray-color: #ababab;
+  --black-color: #ccc;
+  --true-white-color: #fcfcfc;
+  --shadow-color: #ffffff26;
   --normal-shadow: 0 0 0.3rem var(--shadow-color);
 }
 
