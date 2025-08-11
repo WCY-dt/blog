@@ -1,4 +1,5 @@
 .pagination__item-wrapper {
+  position: relative;
   text-decoration: none;
   display: grid;
   place-content: left;
@@ -18,6 +19,10 @@
 
       & + .pagination__separator {
         border-color: transparent;
+      }
+
+      .pagination__item-idx {
+        color: var(--primary-color);
       }
     }
   }
@@ -86,8 +91,19 @@
   padding: 0;
 }
 
+.pagination__item-idx {
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  transform: translateX(calc(-100% - .5rem));
+  color: var(--primary-semi-light-color);
+  font-family: var(--ui-font);
+  font-weight: 700;
+  cursor: default;
+  transition: all .25s ease-in-out;
+}
+
 .pagination__item-wrapper.pagination__item-wrapper--first {
-  position: relative;
   gap: .5rem;
   margin-bottom: .5rem;
   background-color: var(--primary-color);
@@ -284,6 +300,10 @@
     width: min(100%, 40rem);
 
     &::before {
+      display: none;
+    }
+
+    .pagination__item-idx {
       display: none;
     }
 

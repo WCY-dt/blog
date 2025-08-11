@@ -13,6 +13,7 @@
 
 {%- if normal_posts_count > 0 -%}
   {%- assign is_first_normal_post = true -%}
+  {%- assign current_post_index = 0 -%}
   {%- for post in posts -%}
     {%- if post.draft and jekyll.environment == 'production' -%}
       {%- continue -%}
@@ -76,9 +77,11 @@
       </a>
       {% comment %} First normal post - special handling END {% endcomment %}
       {%- assign is_first_normal_post = false -%}
+      {%- assign current_post_index = current_post_index | plus: 1 -%}
     {%- else -%}
       {%- if is_first_normal_post -%}
         {%- assign is_first_normal_post = false -%}
+        {%- assign current_post_index = current_post_index | plus: 1 -%}
       {%- endif -%}
       {% comment %} Regular normal post - standard handling BEGIN {% endcomment %}
       <a
@@ -127,6 +130,11 @@
             {% endfor %}
           </div>
         </div>
+        {%- assign mod_check = current_post_index | divided_by: 5.0 | floor | times: 5 -%}
+        {%- if current_post_index == mod_check -%}
+          <div class='pagination__item-idx'>#{{ current_post_index }}</div>
+        {%- endif -%}
+        {%- assign current_post_index = current_post_index | plus: 1 -%}
       </a>
       {% comment %} Regular normal post - standard handling END {% endcomment %}
       {%- unless normal_posts_count == 0 -%}
