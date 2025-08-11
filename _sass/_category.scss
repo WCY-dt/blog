@@ -9,7 +9,7 @@
   border-radius: .5rem;
   text-decoration: none;
   box-sizing: border-box;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
@@ -30,7 +30,7 @@
   font-weight: 900;
   font-family: var(--ui-font);
   margin: 0;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .category__item-info {
@@ -42,14 +42,14 @@
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .category__separator {
   width: min(100%, 15rem);
   margin: 0 auto;
   border: 1px solid var(--primary-light-color);
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .category__separator:has(+ .category__item:hover) {

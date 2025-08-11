@@ -456,7 +456,8 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
             .footnotes p {
               margin: 0;
 
-              &, a {
+              &,
+              a {
                 color: var(--primary-little-light-color);
               }
 

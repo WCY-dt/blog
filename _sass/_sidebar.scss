@@ -23,7 +23,7 @@
   color: var(--primary-little-light-color);
   box-shadow: var(--normal-shadow);
   cursor: pointer;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
@@ -365,8 +365,8 @@
     display: flex;
     align-items: center;
     justify-content: start;
-    gap: 0.5rem;
-    transition: all 0.25s ease-in-out;
+    gap: .5rem;
+    transition: all .25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
@@ -398,7 +398,7 @@
     line-height: 1.5rem;
     text-transform: capitalize;
     color: var(--primary-color);
-    transition: color 0.25s ease-in-out;
+    transition: color .25s ease-in-out;
   }
 
   .sidebar__toc-wrapper {
@@ -425,7 +425,7 @@
     padding: 1rem;
     z-index: -1;
     box-shadow: var(--normal-shadow);
-    border-radius: 0.5rem;
+    border-radius: .5rem;
   }
 
   .sidebar__search-btn {

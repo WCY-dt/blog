@@ -2,7 +2,7 @@
   margin-top: 1rem;
 }
 .github-code-btn-wrapper + .github-code-btn-wrapper {
-  margin-top: 0.5rem;
+  margin-top: .5rem;
 }
 .github-code-btn-wrapper {
   margin: 0;
@@ -11,13 +11,13 @@
 .github-code-btn__btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0.5rem;
+  gap: .5rem;
+  padding: .25rem .5rem;
   background-color: var(--primary-light-color);
   color: var(--primary-little-light-color)!important;
   text-decoration: none;
-  border-radius: 0.3rem;
-  font-size: 0.8rem;
+  border-radius: .3rem;
+  font-size: .8rem;
   font-weight: 500;
   line-height: 1.1;
   box-shadow: var(--normal-shadow);
@@ -42,13 +42,13 @@
 .github-code-btn__info {
   display: flex;
   flex-direction: column;
-  gap: 0.05rem;
+  gap: .05rem;
   min-width: 0;
 }
 
 .github-code-btn__file-path {
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: .8rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -56,8 +56,8 @@
 
 .github-code-btn__line-number {
   font-weight: 400;
-  font-size: 0.7rem;
-  opacity: 0.8;
+  font-size: .7rem;
+  opacity: .8;
 }
 
 .github-issue-wrapper + details {
@@ -65,12 +65,12 @@
 }
 
 .github-issue-wrapper + .github-issue-wrapper {
-  margin-top: 0.5rem;
+  margin-top: .5rem;
 }
 
 .github-issue-wrapper {
   margin: 1rem 0;
-  border-radius: 0.5rem;
+  border-radius: .5rem;
   overflow: hidden;
   box-shadow: var(--normal-shadow);
 }
@@ -88,7 +88,7 @@
   align-items: center;
   width: 40px;
   height: 40px;
-  margin-right: 0.5rem;
+  margin-right: .5rem;
   flex-shrink: 0;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .github-issue__avatar--icon {
-  margin-right: 0.5rem;
+  margin-right: .5rem;
 }
 
 .github-issue__info {
@@ -107,7 +107,7 @@
 }
 
 .github-issue__info-meta {
-  font-size: 0.75rem;
+  font-size: .75rem;
   color: var(--primary-little-light-color);
 }
 
@@ -118,7 +118,7 @@
 .github-issue__link {
   color: var(--primary-color)!important;
   text-decoration: none!important;
-  margin-left: 0.5rem;
+  margin-left: .5rem;
   transition: color .25s ease-in-out;
 
   @media (hover: hover) {
@@ -142,12 +142,12 @@
 .github-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.2rem 0.4rem 0.2rem 0.3rem;
+  gap: .25rem;
+  padding: .2rem .4rem .2rem .3rem;
   background-color: var(--primary-extra-light-color);
   text-decoration: none;
   border-radius: 1rem;
-  font-size: 0.8rem;
+  font-size: .8rem;
   font-weight: 500;
   line-height: 1.2;
   vertical-align: middle;
@@ -190,7 +190,7 @@
 
 .github-link__name {
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: .8rem;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 12rem;

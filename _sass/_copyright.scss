@@ -23,7 +23,7 @@
       position: absolute;
       display: block;
       margin: 0;
-      top: calc(100% + 0.6rem - 1rem);
+      top: calc(100% + .6rem - 1rem);
       left: 0;
       right: 0;
       background-color: var(--primary-light-color);
@@ -34,12 +34,12 @@
       line-height: 1.5rem;
       text-align: center;
       font-weight: 900;
-      font-size: 0.8rem;
+      font-size: .8rem;
 
       &::before {
         content: '';
         position: absolute;
-        top: -0.6rem;
+        top: -.6rem;
         left: 50%;
         transform: translateX(-50%);
         border-left: .6rem solid transparent;

@@ -35,10 +35,10 @@
   display: flex;
   align-items: end;
   justify-content: start;
-  gap: 0.5rem;
+  gap: .5rem;
   height: 100%;
   margin: 0;
-  padding: 0.5rem;
+  padding: .5rem;
   border-radius: 1rem 0 0 0;
   background-color: var(--primary-light-color);
   box-shadow: var(--normal-shadow);
@@ -53,20 +53,20 @@
   align-items: start;
   justify-content: end;
   height: 100%;
-  padding: 0 0.5rem 1rem 1.5rem;
-  border-radius: 0.5rem;
+  padding: 0 .5rem 1rem 1.5rem;
+  border-radius: .5rem;
   text-decoration: none;
   box-sizing: border-box;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .header__menu-item-icon.material-symbols-outlined {
   position: absolute;
-  left: 0.5rem;
+  left: .5rem;
   bottom: 1.2rem;
   font-size: 2.5rem;
   color: var(--primary-semi-light-color);
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .header__menu-item-title {
@@ -76,11 +76,11 @@
   text-transform: capitalize;
   color: var(--primary-little-light-color);
   z-index: 10;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .header__menu-item.header__menu-item--active {
-  padding: 0.25rem 1rem 0.75rem 1rem;
+  padding: .25rem 1rem .75rem 1rem;
   background-color: var(--primary-semi-light-color);
   box-shadow: var(--normal-shadow);
 
@@ -99,14 +99,14 @@
 @media (hover: hover) {
   .header__menu-wrapper:has(.header__menu-item:hover) {
     .header__menu-item.header__menu-item--active {
-      padding: 0 0.5rem 1rem 1.5rem;
+      padding: 0 .5rem 1rem 1.5rem;
       background-color: var(--primary-light-color);
       box-shadow: none;
 
       .header__menu-item-icon.material-symbols-outlined {
         color: var(--primary-semi-light-color);
         font-size: 2.5rem;
-        left: 0.5rem;
+        left: .5rem;
         transform: translateX(0) translateY(0);
       }
 
@@ -116,7 +116,7 @@
     }
   }
   .header__menu-item:hover {
-    padding: 0.25rem 1rem 0.75rem 1rem !important;
+    padding: .25rem 1rem .75rem 1rem !important;
     background-color: var(--primary-color) !important;
     box-shadow: var(--normal-shadow)!important;
 

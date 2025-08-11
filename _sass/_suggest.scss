@@ -20,7 +20,7 @@
 .suggest__item-link {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: .5rem;
   height: 100%;
   padding: 1rem;
   font-size: 1.2rem;
@@ -29,9 +29,9 @@
   color: var(--primary-little-light-color);
   text-decoration: none;
   box-sizing: border-box;
-  border-radius: 0.5rem;
+  border-radius: .5rem;
   box-shadow: var(--normal-shadow);
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
@@ -39,8 +39,8 @@
       color: var(--primary-extra-light-color);
 
       .suggest__item-link-icon.material-symbols-outlined {
-        bottom: 0.25rem;
-        right: 0.25rem;
+        bottom: .25rem;
+        right: .25rem;
         color: var(--primary-semi-dark-color);
         font-size: 3rem;
       }
@@ -59,7 +59,7 @@
   font-size: 4rem;
   color: var(--primary-semi-light-color);
   z-index: 0;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 @media screen and (max-width: 550px) {

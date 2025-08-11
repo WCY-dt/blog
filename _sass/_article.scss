@@ -24,7 +24,7 @@
 }
 
 .post__info-title {
-  margin-bottom: 0.5rem;
+  margin-bottom: .5rem;
   max-width: 100%;
   font-size: 3rem;
   line-height: 3.5rem;
@@ -37,7 +37,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: .5rem;
 }
 
 .post__info-title-series {
@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: .5rem;
   max-width: 100%;
 
   .post__info-title-icon.material-symbols-outlined {
@@ -64,15 +64,15 @@
   font-weight: 900;
   text-align: center;
   background-color: var(--primary-light-color);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
+  padding: .25rem .5rem;
+  border-radius: .5rem;
 }
 
 .post__info-detail {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem 1rem;
+  gap: .25rem 1rem;
   color: var(--primary-semi-dark-color);
   white-space: nowrap;
   flex-wrap: wrap;
@@ -83,7 +83,7 @@
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 0.25rem;
+  gap: .25rem;
 }
 
 .post__info-detail-date,
@@ -98,7 +98,7 @@
   position: relative;
   color: var(--primary-semi-dark-color);
   text-decoration: none;
-  transition: color 0.25s ease-in-out;
+  transition: color .25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
@@ -106,7 +106,7 @@
         content: '';
         display: block;
         width: 110%;
-        height: 0.5rem;
+        height: .5rem;
         background-color: var(--primary-light-color);
         position: absolute;
         bottom: 0rem;
@@ -122,15 +122,16 @@
   color: var(--black-color);
   background-color: var(--white-color);
   overflow: hidden;
+  box-sizing: border-box;
 
   details + blockquote {
     margin-top: 1rem;
   }
 
   details {
-    border: 0.05rem solid var(--primary-color);
-    padding: 0.5rem 0.5rem 0 0.5rem;
-    border-radius: 0.5rem;
+    border: .05rem solid var(--primary-color);
+    padding: .5rem .5rem 0 .5rem;
+    border-radius: .5rem;
     overflow: hidden;
 
     summary {
@@ -149,10 +150,10 @@
     }
 
     &[open] {
-      padding: 0.5rem 0.5rem 1rem 0.5rem;
+      padding: .5rem .5rem 1rem .5rem;
 
       summary {
-        border-bottom: 0.05rem solid var(--primary-color);
+        border-bottom: .05rem solid var(--primary-color);
       }
     }
   }
@@ -199,7 +200,7 @@
       content: '';
       display: block;
       width: 10rem;
-      height: 0.8rem;
+      height: .8rem;
       background-color: var(--primary-semi-light-color);
       z-index: -1;
       position: absolute;
@@ -218,7 +219,7 @@
       content: '';
       display: block;
       width: 6rem;
-      height: 0.6rem;
+      height: .6rem;
       background-color: var(--primary-light-color);
       z-index: -1;
       position: absolute;
@@ -253,7 +254,7 @@
   a {
     color: var(--primary-color);
     text-decoration: none;
-    transition: text-decoration 0.25s ease-in-out;
+    transition: text-decoration .25s ease-in-out;
 
     @media (hover: hover) {
       &:hover {
@@ -275,18 +276,18 @@
   }
 
   blockquote {
-    margin: 0 0.2rem 0 0;
-    border-left: 0.25rem solid var(--primary-color);
+    margin: 0 .2rem 0 0;
+    border-left: .25rem solid var(--primary-color);
     box-sizing: border-box;
     background-color: var(--primary-extra-light-color);
-    padding: 0.5rem 2rem;
-    border-radius: 0.5rem;
+    padding: .5rem 2rem;
+    border-radius: .5rem;
     box-shadow: var(--normal-shadow);
 
     pre:has(code) {
       border: 1px solid var(--primary-semi-light-color);
       box-sizing: border-box;
-      border-radius: 0.5rem;
+      border-radius: .5rem;
 
       &:not(:has(.language-mermaid)) {
         box-shadow: var(--normal-shadow);
@@ -317,8 +318,8 @@
     }
 
     blockquote {
-      border: 0.05rem solid var(--primary-semi-light-color);
-      border-left: 0.25rem solid var(--primary-color);
+      border: .05rem solid var(--primary-semi-light-color);
+      border-left: .25rem solid var(--primary-color);
     }
   }
 
@@ -337,7 +338,7 @@
     border: .05rem solid var(--primary-color);
     box-sizing: border-box;
     margin: 0 .2rem;
-    width: 100%;
+    width: calc(100% - .4rem);
     border-radius: .5rem;
     box-shadow: var(--normal-shadow);
     box-sizing: border-box;
@@ -420,28 +421,28 @@
   pre:has(code) {
     position: relative;
     background-color: var(--primary-extra-light-color);
-    padding: 0.5rem;
+    padding: .5rem;
     line-height: 1.2rem;
     font-size: 1rem;
     overflow-x: auto;
-    border-radius: 0.5rem;
+    border-radius: .5rem;
 
     * {
       white-space: pre;
     }
 
     &::-webkit-scrollbar {
-      width: 0.4rem;
-      height: 0.4rem;
+      width: .4rem;
+      height: .4rem;
     }
     &::-webkit-scrollbar-track {
       background-color: transparent;
-      border-radius: 0.5rem;
+      border-radius: .5rem;
       overflow: hidden;
     }
     &::-webkit-scrollbar-thumb {
       background-color: var(--primary-semi-light-color);
-      border-radius: 0.5rem;
+      border-radius: .5rem;
     }
 
     &::after {
@@ -457,7 +458,7 @@
       top: -1.2rem;
       right: 0rem;
       opacity: 0;
-      transition: opacity 0.25s ease-in-out;
+      transition: opacity .25s ease-in-out;
     }
 
     &:not(:has(.language-mermaid)) {
@@ -467,7 +468,7 @@
 
     &:has(.language-mermaid) {
       background-color: var(--white-color);
-      border-radius: 0rem;
+      border-radius: 0;
       -webkit-user-select: none;
       user-select: none;
       -webkit-user-drag: none;
@@ -501,7 +502,7 @@
     border: none;
     margin: 2rem auto;
     position: relative;
-    height: 0.5rem;
+    height: .5rem;
     width: min(12rem, 100%);
     display: flex;
     align-items: center;
@@ -509,8 +510,8 @@
 
     &::before {
       content: '';
-      width: 0.5rem;
-      height: 0.5rem;
+      width: .5rem;
+      height: .5rem;
       background: var(--primary-color);
       display: inline-block;
       position: relative;
@@ -523,7 +524,7 @@
       top: 50%;
       left: 0;
       right: 0;
-      height: 0.2rem;
+      height: .2rem;
       background: linear-gradient(
         to right,
         var(--primary-semi-light-color) 0%,
@@ -569,7 +570,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, .8);
   display: grid;
   place-items: center;
   -webkit-backdrop-filter: blur(10px);
@@ -579,7 +580,7 @@
   .lightbox__img {
     max-width: 90%;
     max-height: 90%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     padding: 1rem;
     background-color: var(--true-white-color);
   }

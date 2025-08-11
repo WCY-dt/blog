@@ -17,7 +17,7 @@
 .share__item-link {
   color: var(--primary-color);
   text-decoration: none;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {

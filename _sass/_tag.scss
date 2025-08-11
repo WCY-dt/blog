@@ -11,7 +11,7 @@
   padding: .5rem 1rem;
   border-radius: .5rem;
   text-decoration: none;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
@@ -32,7 +32,7 @@
   font-weight: 900;
   font-family: var(--ui-font);
   margin: 0;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .tag__item-info {
@@ -45,5 +45,5 @@
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  transition: all 0.25s ease-in-out;
+  transition: all .25s ease-in-out;
 }

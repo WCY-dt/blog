@@ -99,7 +99,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translateX(calc(-100% - 0.5rem));
+    transform: translateX(calc(-100% - .5rem));
     color: var(--primary-color);
     font-family: var(--ui-font);
     font-size: 1.2rem;
@@ -133,7 +133,7 @@
       &::after {
         content: '';
         position: absolute;
-        bottom: -0.15rem;
+        bottom: -.15rem;
         left: 0;
         right: 0;
         height: .75rem;
@@ -145,7 +145,7 @@
   }
 
   .pagination__item-draft {
-    margin-top: -0.5rem;
+    margin-top: -.5rem;
     background-color: var(--primary-semi-light-color);
     color: var(--primary-little-light-color);
     transition: all .25s ease-in-out;

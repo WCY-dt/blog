@@ -21,7 +21,7 @@
 
 .footer__copyright-link {
   color: var(--primary-little-light-color);
-  transition: color 0.25s ease-in-out;
+  transition: color .25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
@@ -32,6 +32,6 @@
 
 @media screen and ((max-height: 1024px) or (max-height: 650px)) {
   .footer-wrapper {
-    padding: 0.5rem 0;
+    padding: .5rem 0;
   }
 }

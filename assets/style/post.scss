@@ -95,17 +95,17 @@ html[data-theme="dark"] {
 }
 
 ::-webkit-scrollbar {
-  width: 0.25rem;
+  width: .25rem;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--primary-color);
-  border-radius: 0.5rem;
+  border-radius: .5rem;
 }
 
 ::-webkit-scrollbar-track {
   background-color: var(--primary-extra-light-color);
-  border-radius: 0.5rem;
+  border-radius: .5rem;
 }
 
 :root {
@@ -153,9 +153,9 @@ html[data-theme="dark"] {
 }
 
 * .material-symbols-outlined {
-  vertical-align: -0.2em;
+  vertical-align: -.2em;
 }
 
 * .iconify {
-  vertical-align: -0.1em;
+  vertical-align: -.1em;
 }
