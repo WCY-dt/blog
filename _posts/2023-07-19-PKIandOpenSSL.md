@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "PKI和OpenSSL"
+title:  "PKI 和 OpenSSL——原理与应用"
 date:   2023-07-19 00:00:00 +0800
 categories: 密码
 tags: pki openssl

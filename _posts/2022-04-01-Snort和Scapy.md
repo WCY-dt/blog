@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Snort和Scapy"
+title:  "Snort 和 Scapy"
 date:   2022-04-01 00:00:00 +0800
 categories: 安全
 tags: snort scapy python

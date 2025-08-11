@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Github Pages DNS配置"
+title:  "Github Pages DNS 配置"
 date:   2024-04-23 00:00:00 +0800
 categories: 网络
 tags: dns github
