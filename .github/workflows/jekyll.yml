@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Modify Gemfile
         run: sed -i 's/https:\/\/gems.ruby-china.com/https:\/\/rubygems.org/g' Gemfile
       - name: Setup Ruby
