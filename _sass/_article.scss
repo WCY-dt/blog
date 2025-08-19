@@ -321,6 +321,12 @@
       border: .05rem solid var(--primary-semi-light-color);
       border-left: .25rem solid var(--primary-color);
     }
+
+    details {
+      summary {
+        line-height: 1.5rem;
+      }
+    }
   }
 
   ul,
@@ -494,7 +500,8 @@
     }
   }
 
-  p code {
+  p code,
+  li code {
     font-weight: 700;
   }
 
