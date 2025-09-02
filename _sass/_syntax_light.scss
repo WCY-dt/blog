@@ -1,7 +1,7 @@
 @mixin syntax_light {
   .highlight {
-    .c, .ch, .cd, .cm, .cpf, .c1, .gl, .go { color: #888888; }
-    .kt { color: #888888; font-weight: bold; }
+    .ch, .cd, .cm, .cpf, .c1, .gl, .go { color: #888888; }
+    .c { color: #888888; font-style: italic; }
     .cp { color: #cc0000; font-weight: bold; }
     .cs { color: #cc0000; background-color: #fff0f0; font-weight: bold; }
     .err { color: #a61717; background-color: #e3d2d2; }
@@ -14,7 +14,7 @@
     .gs { font-weight: bold; }
     .gp, .nd { color: #555555; }
     .kp, .sr, .ow { color: #008800; }
-    .k, .kc, .kd, .kn, .kr, .kv, .sa { color: #008800; font-weight: bold; }
+    .kt, .k, .kc, .kd, .kn, .kr, .kv, .sa { color: #008800; font-weight: bold; }
     .m, .mb, .mf, .mh, .mi, .il, .mo, .mx { color: #9b00dd; font-weight: bold; }
     .s, .sb, .sc, .dl, .sd, .s2, .sh, .s1 { color: #dd9e00; }
     .se { color: #0044dd; background-color: #fff0f0; }

@@ -14,4 +14,6 @@ gem 'tzinfo-data', '~> 1.2025', '>= 1.2025.2'
 
 gem 'wdm', '~> 0.2.0' if Gem.win_platform?
 
-gem 'nokogiri', '~> 1.18', '>= 1.18.8'
+gem 'nokogiri', '~> 1.18', '>= 1.18.9'
+
+gem 'fiddle', '~> 1.1', '>= 1.1.8'

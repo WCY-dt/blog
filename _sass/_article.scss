@@ -500,9 +500,12 @@
     }
   }
 
-  p code,
-  li code {
+  code {
     font-weight: 700;
+  }
+
+  .highlight code {
+    font-weight: normal;
   }
 
   hr {
