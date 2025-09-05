@@ -1,6 +1,8 @@
 source 'https://gems.ruby-china.com/'
 
-ruby '>= 3.4.0'
+ruby '>= 3.4.5'
+
+gem 'logger', '~> 1.7'
 
 gem 'jekyll', '~> 4.4', '>= 4.4.1'
 
