@@ -349,26 +349,214 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             .container {
-                padding: 24px;
-                margin: 10px;
+                padding: 20px;
+                margin: 8px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 24px;
             }
 
             .options-grid {
                 grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 16px;
+                margin-bottom: 20px;
+            }
+
+            .option-group label {
+                font-size: 13px;
+            }
+
+            select {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+
+            .sample-articles {
+                margin-bottom: 20px;
+            }
+
+            .sample-articles h3 {
+                font-size: 15px;
+                margin-bottom: 10px;
             }
 
             .sample-buttons {
                 grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .sample-btn {
+                padding: 12px 14px;
+                font-size: 13px;
+            }
+
+            .sample-title {
+                font-size: 14px;
+                margin-bottom: 3px;
+            }
+
+            .sample-desc {
+                font-size: 11px;
+            }
+
+            .input-area, .context-area, .output-area {
+                margin-bottom: 20px;
+            }
+
+            .input-area label, .context-area label, .output-area label {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+
+            textarea {
+                padding: 12px;
+                font-size: 15px;
+                min-height: 160px;
+            }
+
+            input[type="text"] {
+                padding: 10px 12px;
+                font-size: 15px;
             }
 
             .action-area {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 10px;
+                margin-bottom: 20px;
             }
 
-            .summarize-btn, .stream-btn {
+            .summarize-btn, .stream-btn, .cancel-btn {
                 min-width: auto;
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+
+            .output-box {
+                padding: 12px;
+                min-height: 100px;
+                font-size: 15px;
+            }
+
+            .progress-info {
+                font-size: 13px;
+            }
+
+            .progress-bar {
+                height: 6px;
+                margin-bottom: 12px;
+            }
+
+            .status {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+
+            .error {
+                padding: 10px;
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+
+            .info-tip {
+                padding: 12px;
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                padding: 16px;
+                margin: 5px;
+                border-radius: 8px;
+            }
+
+            h1 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .options-grid {
+                padding: 12px;
+                gap: 10px;
+                margin-bottom: 16px;
+            }
+
+            .option-group label {
+                font-size: 12px;
+            }
+
+            select {
+                padding: 6px 8px;
+                font-size: 13px;
+            }
+
+            .sample-articles h3 {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .sample-btn {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            .sample-title {
+                font-size: 13px;
+            }
+
+            .sample-desc {
+                font-size: 10px;
+            }
+
+            textarea {
+                padding: 10px;
+                font-size: 14px;
+                min-height: 120px;
+            }
+
+            input[type="text"] {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+
+            .action-area {
+                gap: 8px;
+                margin-bottom: 16px;
+            }
+
+            .summarize-btn, .stream-btn, .cancel-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .output-box {
+                padding: 10px;
+                min-height: 80px;
+                font-size: 14px;
+            }
+
+            .input-area, .context-area, .output-area {
+                margin-bottom: 16px;
+            }
+
+            .input-area label, .context-area label, .output-area label {
+                font-size: 13px;
+                margin-bottom: 5px;
             }
         }
     </style>

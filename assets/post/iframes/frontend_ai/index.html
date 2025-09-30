@@ -14,7 +14,7 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 6px;
             max-width: 600px;
             margin: 0 auto;
@@ -29,7 +29,6 @@
             font-weight: 500;
             border: 2px solid #ddd;
             transition: all 0.2s ease;
-            max-width: 150px;
             min-height: 40px;
             display: flex;
             align-items: center;
@@ -48,9 +47,21 @@
             color: #721c24;
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
             .features-grid {
-                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .feature-card {
+                font-size: 0.75em;
+                padding: 10px 6px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .feature-card {
+                font-size: 0.8em;
+                padding: 12px;
             }
         }
     </style>

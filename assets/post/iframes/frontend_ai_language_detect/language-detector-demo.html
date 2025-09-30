@@ -207,12 +207,150 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             .container {
-                padding: 24px;
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 24px;
             }
 
             .sample-texts {
                 grid-template-columns: 1fr;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .sample-btn {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .sample-lang {
+                font-size: 14px;
+                margin-bottom: 3px;
+            }
+
+            .sample-text {
+                font-size: 12px;
+            }
+
+            .input-area, .output-area {
+                margin-bottom: 20px;
+            }
+
+            .input-area label, .output-area label {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+
+            textarea {
+                padding: 12px;
+                font-size: 15px;
+                min-height: 100px;
+            }
+
+            .results-container {
+                padding: 12px;
+                min-height: 100px;
+            }
+
+            .language-result {
+                padding: 6px 10px;
+                margin: 3px 0;
+            }
+
+            .language-code {
+                font-size: 15px;
+            }
+
+            .language-name {
+                font-size: 13px;
+                margin-left: 6px;
+            }
+
+            .confidence {
+                font-size: 13px;
+            }
+
+            .confidence-bar {
+                width: 60px;
+                margin-left: 8px;
+            }
+
+            .status {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+
+            .error {
+                padding: 10px;
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                padding: 16px;
+                border-radius: 8px;
+            }
+
+            h1 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .sample-btn {
+                padding: 8px 10px;
+            }
+
+            .sample-lang {
+                font-size: 13px;
+            }
+
+            .sample-text {
+                font-size: 11px;
+            }
+
+            textarea {
+                padding: 10px;
+                font-size: 14px;
+                min-height: 80px;
+            }
+
+            .results-container {
+                padding: 10px;
+                min-height: 80px;
+            }
+
+            .language-result {
+                padding: 5px 8px;
+                border-radius: 4px;
+            }
+
+            .language-code {
+                font-size: 14px;
+            }
+
+            .confidence {
+                font-size: 12px;
+            }
+
+            .confidence-bar {
+                width: 50px;
+                height: 3px;
+                margin-left: 6px;
             }
         }
     </style>

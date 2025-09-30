@@ -465,17 +465,8 @@ main .code-block-wrapper .code-copy-button {
 
 @media (max-width: 768px) {
   .iframe-container {
-    margin: 1rem -1rem;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-
     .iframe-header {
       padding: .5rem 1rem;
-
-      .iframe-title {
-        font-size: .85rem;
-      }
     }
 
     iframe {

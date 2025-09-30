@@ -178,8 +178,6 @@
             display: none;
         }
 
-
-
         .conversation-history {
             max-height: 200px;
             overflow-y: auto;
@@ -187,6 +185,7 @@
             border-radius: 8px;
             padding: 16px;
             background: #f8f9fa;
+            margin-bottom: 16px;
         }
 
         .message {
@@ -289,25 +288,230 @@
             margin-bottom: 8px;
         }
 
-        .conversation-history {
-            margin-bottom: 16px;
-        }
-
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             .container {
-                padding: 24px;
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 24px;
+            }
+
+            .demo-section {
+                margin-bottom: 24px;
+                padding: 16px;
+                border-radius: 8px;
+            }
+
+            .demo-section h2 {
+                font-size: 18px;
+                margin-bottom: 12px;
             }
 
             .options-grid {
                 grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 12px;
+                margin-bottom: 20px;
+            }
+
+            .option-group label {
+                font-size: 13px;
+            }
+
+            input, select {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .input-group {
+                margin-bottom: 12px;
+            }
+
+            .input-group label {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+
+            textarea {
+                padding: 12px;
+                font-size: 15px;
+                min-height: 100px;
             }
 
             .button-group {
                 flex-direction: column;
+                gap: 10px;
+                margin-bottom: 12px;
             }
 
             button {
-                width: 100%;
+                flex: none;
+                padding: 10px 20px;
+                font-size: 15px;
+            }
+
+            .output-box {
+                padding: 12px;
+                min-height: 100px;
+                font-size: 15px;
+            }
+
+            .conversation-history {
+                max-height: 160px;
+                padding: 12px;
+            }
+
+            .message {
+                margin-bottom: 10px;
+                padding: 6px 10px;
+            }
+
+            .message-role {
+                font-size: 11px;
+                margin-bottom: 3px;
+            }
+
+            .status {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+
+            .error {
+                padding: 10px;
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+
+            .usage-info {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+
+            .schema-area {
+                margin-bottom: 20px;
+            }
+
+            .schema-area label {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                padding: 16px;
+                border-radius: 8px;
+            }
+
+            h1 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .demo-section {
+                margin-bottom: 20px;
+                padding: 12px;
+            }
+
+            .demo-section h2 {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            .options-grid {
+                padding: 10px;
+                gap: 10px;
+                margin-bottom: 16px;
+            }
+
+            .option-group label {
+                font-size: 12px;
+            }
+
+            input, select {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .input-group {
+                margin-bottom: 10px;
+            }
+
+            .input-group label {
+                font-size: 13px;
+                margin-bottom: 5px;
+            }
+
+            textarea {
+                padding: 10px;
+                font-size: 14px;
+                min-height: 80px;
+            }
+
+            .button-group {
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .output-box {
+                padding: 10px;
+                min-height: 80px;
+                font-size: 14px;
+            }
+
+            .conversation-history {
+                max-height: 120px;
+                padding: 10px;
+            }
+
+            .message {
+                margin-bottom: 8px;
+                padding: 5px 8px;
+                border-radius: 4px;
+            }
+
+            .message-role {
+                font-size: 10px;
+                margin-bottom: 2px;
+            }
+
+            .usage-info {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .schema-area {
+                margin-bottom: 16px;
+            }
+
+            .schema-area label {
+                font-size: 13px;
+                margin-bottom: 5px;
+            }
+
+            .input-area, .output-area {
+                margin-bottom: 16px;
+            }
+
+            .input-area label, .output-area label {
+                font-size: 13px;
+                margin-bottom: 5px;
             }
         }
     </style>
