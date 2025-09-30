@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome AI 翻译 API 演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fef8f6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            border: 2px solid #f0f0f0;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 32px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .language-selector {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .language-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .language-group label {
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        select {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #d74514;
+        }
+
+        .swap-btn {
+            background: #d74514;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .swap-btn:hover {
+            background: #b73a12;
+            transform: rotate(180deg);
+        }
+
+        .input-area {
+            margin-bottom: 24px;
+        }
+
+        .input-area label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 120px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #d74514;
+        }
+
+        .output-area {
+            margin-bottom: 24px;
+        }
+
+        .output-box {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 120px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #d74514;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .status {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+            min-height: 20px;
+        }
+
+        .error {
+            background: #fee;
+            color: #c53030;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #c53030;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px;
+            }
+
+            .language-selector {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .swap-btn {
+                justify-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            Chrome AI 翻译 API 演示
+        </h1>
+
+        <div class="language-selector">
+            <div class="language-group">
+                <label for="sourceLanguage">源语言</label>
+                <select id="sourceLanguage">
+                    <option value="en">英语 (English)</option>
+                    <option value="zh-CN">中文简体</option>
+                    <option value="zh-TW">中文繁体</option>
+                    <option value="ja">日语 (日本語)</option>
+                    <option value="ko">韩语 (한국어)</option>
+                    <option value="fr">法语 (Français)</option>
+                    <option value="de">德语 (Deutsch)</option>
+                    <option value="es">西班牙语 (Español)</option>
+                    <option value="ru">俄语 (Русский)</option>
+                    <option value="ar">阿拉伯语 (العربية)</option>
+                </select>
+            </div>
+
+            <button class="swap-btn" id="swapLanguages" title="交换语言">⇄</button>
+
+            <div class="language-group">
+                <label for="targetLanguage">目标语言</label>
+                <select id="targetLanguage">
+                    <option value="zh-CN" selected>中文简体</option>
+                    <option value="en">英语 (English)</option>
+                    <option value="zh-TW">中文繁体</option>
+                    <option value="ja">日语 (日本語)</option>
+                    <option value="ko">韩语 (한국어)</option>
+                    <option value="fr">法语 (Français)</option>
+                    <option value="de">德语 (Deutsch)</option>
+                    <option value="es">西班牙语 (Español)</option>
+                    <option value="ru">俄语 (Русский)</option>
+                    <option value="ar">阿拉伯语 (العربية)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <label for="inputText">请输入要翻译的文本：</label>
+            <textarea id="inputText" placeholder="例如：How are you today? I hope you're having a great day!">How are you today? I hope you're having a great day!</textarea>
+        </div>
+
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div class="error" id="errorMessage"></div>
+
+        <div class="output-area">
+            <label>翻译结果：</label>
+            <div class="output-box" id="outputText">实时翻译结果将显示在这里...</div>
+        </div>
+    </div>
+
+    <script>
+        class TranslatorDemo {
+            constructor() {
+                this.translator = null;
+                this.initializeElements();
+                this.bindEvents();
+                this.checkAPISupport();
+            }
+
+            initializeElements() {
+                this.sourceLanguage = document.getElementById('sourceLanguage');
+                this.targetLanguage = document.getElementById('targetLanguage');
+                this.swapBtn = document.getElementById('swapLanguages');
+                this.inputText = document.getElementById('inputText');
+                this.outputText = document.getElementById('outputText');
+                this.status = document.getElementById('status');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.progressBar = document.getElementById('progressBar');
+                this.progressFill = document.getElementById('progressFill');
+                this.translateTimer = null;
+            }
+
+            bindEvents() {
+                this.swapBtn.addEventListener('click', () => this.swapLanguages());
+
+                // 实时翻译：监听输入变化
+                this.inputText.addEventListener('input', () => this.handleInput());
+                this.inputText.addEventListener('paste', () => {
+                    setTimeout(() => this.handleInput(), 0);
+                });
+
+                // 语言改变时重新创建翻译器并翻译
+                this.sourceLanguage.addEventListener('change', () => {
+                    this.resetTranslator();
+                    this.handleInput();
+                });
+                this.targetLanguage.addEventListener('change', () => {
+                    this.resetTranslator();
+                    this.handleInput();
+                });
+            }
+
+            handleInput() {
+                // 清除之前的定时器
+                if (this.translateTimer) {
+                    clearTimeout(this.translateTimer);
+                }
+
+                const text = this.inputText.value.trim();
+                if (!text) {
+                    this.outputText.textContent = '请输入要翻译的文本...';
+                    this.hideStatus();
+                    return;
+                }
+
+                // 设置延迟翻译，避免过于频繁的API调用
+                this.translateTimer = setTimeout(() => {
+                    this.translate();
+                }, 800); // 800ms延迟
+            }
+
+            async checkAPISupport() {
+                if (!('Translator' in self)) {
+                    this.showError('您的浏览器不支持 Chrome AI 翻译 API。请确保使用最新版本的 Chrome 浏览器并启用实验性 AI 功能。');
+                    this.inputText.disabled = true;
+                    return false;
+                }
+
+                try {
+                    // 尝试创建一个简单的翻译器来测试API可用性
+                    const testTranslator = await Translator.create({
+                        sourceLanguage: 'en',
+                        targetLanguage: 'zh-CN'
+                    });
+
+                    this.showStatus('翻译 API 可用，开始输入文本即可实时翻译');
+                    // 初始翻译默认文本
+                    this.handleInput();
+                    return true;
+                } catch (error) {
+                    if (error.message.includes('download')) {
+                        this.showStatus('翻译模型需要下载，首次使用时间可能较长。');
+                        this.handleInput();
+                        return true;
+                    }
+                    this.showError(`API 检查失败: ${error.message}`);
+                    this.inputText.disabled = true;
+                    return false;
+                }
+            }            async createTranslator() {
+                try {
+                    this.showStatus('正在初始化翻译器...');
+                    this.showProgress(0);
+
+                    const sourceLanguage = this.sourceLanguage.value;
+                    const targetLanguage = this.targetLanguage.value;
+
+                    if (sourceLanguage === targetLanguage) {
+                        throw new Error('源语言和目标语言不能相同');
+                    }
+
+                    const self = this;
+                    this.translator = await Translator.create({
+                        sourceLanguage: sourceLanguage,
+                        targetLanguage: targetLanguage,
+                        monitor(m) {
+                            m.addEventListener('downloadprogress', (e) => {
+                                const progress = Math.round(e.loaded * 100);
+                                self.showProgress(progress);
+                                self.showStatus(`下载翻译模型中... ${progress}%`);
+                            });
+                        }
+                    });
+
+                    this.hideProgress();
+                    this.showStatus('翻译器就绪');
+                    return true;
+                } catch (error) {
+                    this.hideProgress();
+                    this.showError(`创建翻译器失败: ${error.message}`);
+                    return false;
+                }
+            }
+
+            async translate() {
+                const text = this.inputText.value.trim();
+                if (!text) {
+                    return;
+                }
+
+                this.hideError();
+
+                try {
+                    // 如果翻译器不存在或语言设置已改变，重新创建
+                    if (!this.translator) {
+                        const success = await this.createTranslator();
+                        if (!success) {
+                            return;
+                        }
+                    }
+
+                    this.showStatus('正在翻译...');
+                    const startTime = Date.now();
+
+                    const result = await this.translator.translate(text);
+
+                    const endTime = Date.now();
+                    const duration = endTime - startTime;
+
+                    this.outputText.textContent = result;
+                    this.showStatus(`翻译完成 (耗时: ${duration}ms)`);
+
+                } catch (error) {
+                    this.showError(`翻译失败: ${error.message}`);
+                }
+            }
+
+            swapLanguages() {
+                const sourceValue = this.sourceLanguage.value;
+                const targetValue = this.targetLanguage.value;
+
+                // 同时交换输入和输出的内容
+                const inputContent = this.inputText.value;
+                const outputContent = this.outputText.textContent;
+
+                this.sourceLanguage.value = targetValue;
+                this.targetLanguage.value = sourceValue;
+
+                this.inputText.value = outputContent;
+                this.outputText.textContent = inputContent;
+
+                // 重置翻译器并重新翻译
+                this.resetTranslator();
+                this.handleInput();
+            }
+
+            resetTranslator() {
+                if (this.translator) {
+                    this.translator = null;
+                    this.showStatus('语言设置已更改，正在重新初始化...');
+                }
+            }
+
+            showStatus(message) {
+                this.status.textContent = message;
+            }
+
+            hideStatus() {
+                this.status.textContent = '';
+            }
+
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorMessage.style.display = 'block';
+            }
+
+            hideError() {
+                this.errorMessage.style.display = 'none';
+            }
+
+            showProgress(percentage) {
+                this.progressBar.style.display = 'block';
+                this.progressFill.style.width = percentage + '%';
+            }
+
+            hideProgress() {
+                this.progressBar.style.display = 'none';
+                this.progressFill.style.width = '0%';
+            }
+        }
+
+        // 初始化演示
+        document.addEventListener('DOMContentLoaded', () => {
+            new TranslatorDemo();
+        });
+    </script>
+</body>
+</html>

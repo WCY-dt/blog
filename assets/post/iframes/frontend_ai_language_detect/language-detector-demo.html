@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome AI 语言检测 API 演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fef8f6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            border: 2px solid #f0f0f0;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 32px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .input-area {
+            margin-bottom: 24px;
+        }
+
+        .input-area label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 120px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #d74514;
+        }
+
+        .output-area {
+            margin-bottom: 24px;
+        }
+
+        .results-container {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 120px;
+        }
+
+        .language-result {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 4px 0;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #d74514;
+        }
+
+        .language-result.top {
+            border-left-color: #28a745;
+            background: #f8fff9;
+        }
+
+        .language-code {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .language-name {
+            color: #666;
+            font-size: 14px;
+            margin-left: 8px;
+        }
+
+        .confidence {
+            font-family: 'Monaco', 'Menlo', monospace;
+            color: #28a745;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .confidence-bar {
+            width: 80px;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-left: 12px;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: #28a745;
+            transition: width 0.3s ease;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #d74514;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .status {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+            min-height: 20px;
+        }
+
+        .error {
+            background: #fee;
+            color: #c53030;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #c53030;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .sample-texts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .sample-btn {
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .sample-btn:hover {
+            border-color: #d74514;
+            background: #fef7f5;
+        }
+
+        .sample-lang {
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .sample-text {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.3;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px;
+            }
+
+            .sample-texts {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            Chrome AI 语言检测 API 演示
+        </h1>
+
+        <div class="sample-texts">
+            <button class="sample-btn" data-text="Hallo und herzlich willkommen! Wie geht es Ihnen heute?">
+                <span class="sample-lang">德语</span>
+                <span class="sample-text">Hallo und herzlich willkommen!</span>
+            </button>
+            <button class="sample-btn" data-text="Bonjour! Comment allez-vous aujourd'hui?">
+                <span class="sample-lang">法语</span>
+                <span class="sample-text">Bonjour! Comment allez-vous?</span>
+            </button>
+            <button class="sample-btn" data-text="¡Hola! ¿Cómo estás hoy? Espero que tengas un buen día.">
+                <span class="sample-lang">西班牙语</span>
+                <span class="sample-text">¡Hola! ¿Cómo estás hoy?</span>
+            </button>
+            <button class="sample-btn" data-text="こんにちは！今日はどのような一日をお過ごしですか？">
+                <span class="sample-lang">日语</span>
+                <span class="sample-text">こんにちは！今日はどのような...</span>
+            </button>
+            <button class="sample-btn" data-text="Привет! Как дела сегодня? Надеюсь, у тебя хороший день.">
+                <span class="sample-lang">俄语</span>
+                <span class="sample-text">Привет! Как дела сегодня?</span>
+            </button>
+            <button class="sample-btn" data-text="Hello! How are you doing today? I hope you're having a wonderful day.">
+                <span class="sample-lang">英语</span>
+                <span class="sample-text">Hello! How are you doing today?</span>
+            </button>
+        </div>
+
+        <div class="input-area">
+            <label for="inputText">请输入要检测语言的文本：</label>
+            <textarea id="inputText" placeholder="例如：Hallo und herzlich willkommen! 或输入任何语言的文本...">Hallo und herzlich willkommen! Wie geht es Ihnen heute?</textarea>
+        </div>
+
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div class="error" id="errorMessage"></div>
+
+        <div class="output-area">
+            <label>检测结果：</label>
+            <div class="results-container" id="resultsContainer">
+                <div class="no-results">实时检测结果将显示在这里...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class LanguageDetectorDemo {
+            constructor() {
+                this.detector = null;
+                this.initializeElements();
+                this.bindEvents();
+                this.checkAPISupport();
+            }
+
+            initializeElements() {
+                this.inputText = document.getElementById('inputText');
+                this.resultsContainer = document.getElementById('resultsContainer');
+                this.status = document.getElementById('status');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.progressBar = document.getElementById('progressBar');
+                this.progressFill = document.getElementById('progressFill');
+                this.detectTimer = null;
+            }
+
+            bindEvents() {
+                // 实时检测：监听输入变化
+                this.inputText.addEventListener('input', () => this.handleInput());
+                this.inputText.addEventListener('paste', () => {
+                    setTimeout(() => this.handleInput(), 0);
+                });
+
+                // 示例文本按钮
+                document.querySelectorAll('.sample-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const text = btn.getAttribute('data-text');
+                        this.inputText.value = text;
+                        this.handleInput();
+                    });
+                });
+            }
+
+            handleInput() {
+                // 清除之前的定时器
+                if (this.detectTimer) {
+                    clearTimeout(this.detectTimer);
+                }
+
+                const text = this.inputText.value.trim();
+                if (!text) {
+                    this.resultsContainer.innerHTML = '<div class="no-results">请输入要检测的文本...</div>';
+                    this.hideStatus();
+                    return;
+                }
+
+                // 设置延迟检测，避免过于频繁的API调用
+                this.detectTimer = setTimeout(() => {
+                    this.detectLanguage();
+                }, 500); // 500ms延迟
+            }
+
+            async checkAPISupport() {
+                if (!('LanguageDetector' in self)) {
+                    this.showError('您的浏览器不支持 Chrome AI 语言检测 API。请确保使用最新版本的 Chrome 浏览器并启用实验性 AI 功能。');
+                    this.inputText.disabled = true;
+                    return false;
+                }
+
+                try {
+                    // 尝试创建一个检测器来测试API可用性
+                    this.detector = await LanguageDetector.create({
+                        monitor: (m) => {
+                            m.addEventListener('downloadprogress', (e) => {
+                                this.showProgress(e.loaded);
+                            });
+                        }
+                    });
+
+                    this.showStatus('语言检测 API 可用，开始输入文本即可实时检测语言');
+                    // 初始检测默认文本
+                    this.handleInput();
+                    return true;
+                } catch (error) {
+                    if (error.message.includes('download')) {
+                        this.showError('模型下载失败，请检查网络连接并重试。');
+                    } else {
+                        this.showError(`API 初始化失败: ${error.message}`);
+                    }
+                    return false;
+                }
+            }
+
+            async detectLanguage() {
+                const text = this.inputText.value.trim();
+                if (!text || !this.detector) return;
+
+                try {
+                    this.showStatus('正在检测语言...');
+
+                    const results = await this.detector.detect(text);
+                    this.displayResults(results);
+                    this.hideStatus();
+                } catch (error) {
+                    this.showError(`检测失败: ${error.message}`);
+                    console.error('Language detection error:', error);
+                }
+            }
+
+            displayResults(results) {
+                if (!results || results.length === 0) {
+                    this.resultsContainer.innerHTML = '<div class="no-results">未能检测到语言</div>';
+                    return;
+                }
+
+                // 过滤掉 'und' (undetermined) 结果，因为它表示未确定的语言，对用户没有意义
+                const filteredResults = results.filter(result => result.detectedLanguage !== 'und');
+
+                if (filteredResults.length === 0) {
+                    this.resultsContainer.innerHTML = '<div class="no-results">无法确定语言类型</div>';
+                    return;
+                }
+
+                const html = filteredResults.slice(0, 6).map((result, index) => {
+                    const confidence = Math.round(result.confidence * 10000) / 100; // 保留两位小数的百分比
+                    const isTop = index === 0;
+
+                    return `
+                        <div class="language-result ${isTop ? 'top' : ''}">
+                            <div>
+                                <span class="language-code">${result.detectedLanguage}</span>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span class="confidence">${confidence}%</span>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" style="width: ${result.confidence * 100}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                this.resultsContainer.innerHTML = html;
+            }
+
+            showStatus(message) {
+                this.status.textContent = message;
+                this.status.style.display = 'block';
+                this.hideError();
+            }
+
+            hideStatus() {
+                this.status.textContent = '';
+            }
+
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorMessage.style.display = 'block';
+                this.hideStatus();
+                this.hideProgress();
+            }
+
+            hideError() {
+                this.errorMessage.style.display = 'none';
+            }
+
+            showProgress(progress) {
+                this.progressBar.style.display = 'block';
+                this.progressFill.style.width = `${progress * 100}%`;
+                this.showStatus(`正在下载模型: ${Math.round(progress * 100)}%`);
+            }
+
+            hideProgress() {
+                this.progressBar.style.display = 'none';
+            }
+        }
+
+        // 初始化演示
+        new LanguageDetectorDemo();
+    </script>
+</body>
+</html>

@@ -85,6 +85,7 @@ archived:   true // 可省略，默认为 false。如果设置为 true，文章�
 - [x] 嵌入式 GitHub 组件
 - [x] 图片排版插件
 - [x] 文章总结
+- [x] 嵌入式 iframe 插件
 - [ ] 更多功能...
 
 ## 版权声明

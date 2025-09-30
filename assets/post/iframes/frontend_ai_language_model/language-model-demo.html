@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome AI 语言模型 API 演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fef8f6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            border: 2px solid #f0f0f0;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 32px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .demo-section {
+            margin-bottom: 32px;
+            padding: 24px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .demo-section h2 {
+            color: #495057;
+            margin-bottom: 16px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 120px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+            background: white;
+        }
+
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #d74514;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 24px;
+            background: #d74514;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        button:hover {
+            background: #b73a12;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        button.secondary {
+            background: #6c757d;
+        }
+
+        button.secondary:hover {
+            background: #5a6268;
+        }
+
+        .output-box {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 120px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 12px 0;
+            display: none;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #d74514;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .status {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+            min-height: 20px;
+        }
+
+        .error {
+            background: #fee;
+            color: #c53030;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #c53030;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+
+
+        .conversation-history {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .message.user {
+            border-left: 4px solid #2196f3;
+        }
+
+        .message.assistant {
+            border-left: 4px solid #9c27b0;
+        }
+
+        .message.system {
+            border-left: 4px solid #ff9800;
+        }
+
+        .message-role {
+            font-weight: 600;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-group label {
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .option-group input[type="range"] {
+            width: 100%;
+            margin: 4px 0;
+        }
+
+        .input-area {
+            margin-bottom: 24px;
+        }
+
+        .input-area label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .output-area {
+            margin-bottom: 24px;
+        }
+
+        .output-area label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .usage-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .schema-area {
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .schema-area.show {
+            display: block;
+        }
+
+        .schema-area label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .conversation-history {
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chrome AI 语言模型 API 演示</h1>
+
+        <!-- 状态显示 -->
+        <div class="status" id="status"></div>
+        <div class="error" id="error"></div>
+
+        <!-- 进度条 -->
+        <div class="progress-bar" id="mainProgress">
+            <div class="progress-fill" id="mainProgressFill"></div>
+        </div>
+
+        <!-- 设置面板 -->
+        <div class="options-grid">
+            <div class="option-group">
+                <label for="chatMode">对话模式</label>
+                <select id="chatMode" onchange="switchMode()">
+                    <option value="single">单次对话</option>
+                    <option value="conversation">多轮对话</option>
+                    <option value="structured">结构化输出</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <label for="temperature">温度: <span id="temperatureValue">1.0</span></label>
+                <input type="range" id="temperature" min="0.1" max="2.0" step="0.1" value="1.0">
+            </div>
+
+            <div class="option-group">
+                <label for="topK">TopK: <span id="topKValue">3</span></label>
+                <input type="range" id="topK" min="1" max="128" step="1" value="3">
+            </div>
+        </div>
+
+        <!-- 对话历史区域 (多轮对话模式) -->
+        <div class="conversation-history" id="conversationHistory" style="display: none;">
+            <div class="message system">
+                <div class="message-role">System</div>
+                <div>你是一个友好、博学的助手。</div>
+            </div>
+        </div>
+
+        <!-- 使用量信息 -->
+        <div class="usage-info" id="usageInfo" style="display: none;">
+            使用量: <span id="inputUsage">0</span> / <span id="inputQuota">0</span> |
+            会话状态: <span id="sessionStatus">未创建</span>
+        </div>
+
+        <!-- 结构化输出配置 -->
+        <div class="schema-area" id="schemaArea">
+            <label for="outputSchema">输出格式 (JSON Schema):</label>
+            <textarea id="outputSchema" rows="4">{
+  "type": "object",
+  "properties": {
+    "rating": { "type": "number", "minimum": 1, "maximum": 5 },
+    "summary": { "type": "string" },
+    "sentiment": { "type": "string", "enum": ["positive", "negative", "neutral"] }
+  },
+  "required": ["rating", "summary", "sentiment"]
+}</textarea>
+        </div>
+
+        <!-- 输入区域 -->
+        <div class="input-area">
+            <label for="userPrompt" id="promptLabel">输入您的消息：</label>
+            <textarea id="userPrompt" placeholder="请输入您的问题或消息..."></textarea>
+        </div>
+
+        <!-- 按钮组 -->
+        <div class="button-group">
+            <button onclick="sendMessage()" id="sendBtn">发送消息</button>
+            <button onclick="sendStreamingMessage()" class="secondary" id="streamBtn">流式响应</button>
+            <button onclick="resetChat()" class="secondary">重置对话</button>
+        </div>
+
+        <!-- 输出区域 -->
+        <div class="output-area">
+            <label>AI 回复：</label>
+            <div class="output-box" id="aiOutput">AI 的回复将显示在这里...</div>
+        </div>
+    </div>    <script>
+        // 全局变量
+        let currentSession = null;
+        let modelParams = null;
+        let currentMode = 'single';
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initializeAPI();
+            setupEventListeners();
+        });
+
+        // API 初始化
+        async function initializeAPI() {
+            try {
+                // 检查 API 可用性
+                if (!('LanguageModel' in self)) {
+                    showStatus('status', '当前浏览器不支持 Language Model API', 'error');
+                    return;
+                }
+
+                const availability = await LanguageModel.availability();
+                if (availability === 'unavailable') {
+                    showStatus('status', 'Language Model API 当前不可用', 'error');
+                    return;
+                }
+
+                // 获取模型参数
+                modelParams = await LanguageModel.params();
+                updateParameterUI();
+
+                showStatus('status', 'API 初始化成功，可以开始使用');
+
+            } catch (error) {
+                showStatus('status', `初始化失败: ${error.message}`, 'error');
+            }
+        }
+
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 参数滑块事件
+            const tempSlider = document.getElementById('temperature');
+            const topKSlider = document.getElementById('topK');
+
+            tempSlider.addEventListener('input', (e) => {
+                document.getElementById('temperatureValue').textContent = e.target.value;
+            });
+
+            topKSlider.addEventListener('input', (e) => {
+                document.getElementById('topKValue').textContent = e.target.value;
+            });
+
+            // 回车键发送消息
+            document.getElementById('userPrompt').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    sendMessage();
+                }
+            });
+        }
+
+        // 更新参数UI
+        function updateParameterUI() {
+            if (!modelParams) return;
+
+            const tempSlider = document.getElementById('temperature');
+            const topKSlider = document.getElementById('topK');
+
+            tempSlider.min = 0.1;
+            tempSlider.max = modelParams.maxTemperature;
+            tempSlider.value = modelParams.defaultTemperature;
+
+            topKSlider.min = 1;
+            topKSlider.max = modelParams.maxTopK;
+            topKSlider.value = modelParams.defaultTopK;
+
+            document.getElementById('temperatureValue').textContent = modelParams.defaultTemperature;
+            document.getElementById('topKValue').textContent = modelParams.defaultTopK;
+        }
+
+        // 切换模式
+        function switchMode() {
+            currentMode = document.getElementById('chatMode').value;
+            const conversationHistory = document.getElementById('conversationHistory');
+            const usageInfo = document.getElementById('usageInfo');
+            const schemaArea = document.getElementById('schemaArea');
+            const promptLabel = document.getElementById('promptLabel');
+            const streamBtn = document.getElementById('streamBtn');
+
+            // 重置会话
+            if (currentSession) {
+                currentSession.destroy();
+                currentSession = null;
+            }
+
+            switch (currentMode) {
+                case 'single':
+                    conversationHistory.style.display = 'none';
+                    usageInfo.style.display = 'none';
+                    schemaArea.classList.remove('show');
+                    promptLabel.textContent = '输入您的问题：';
+                    streamBtn.style.display = 'inline-block';
+                    document.getElementById('sessionStatus').textContent = '未创建';
+                    break;
+
+                case 'conversation':
+                    conversationHistory.style.display = 'block';
+                    usageInfo.style.display = 'block';
+                    schemaArea.classList.remove('show');
+                    promptLabel.textContent = '继续对话：';
+                    streamBtn.style.display = 'inline-block';
+                    resetConversationHistory();
+                    break;
+
+                case 'structured':
+                    conversationHistory.style.display = 'none';
+                    usageInfo.style.display = 'none';
+                    schemaArea.classList.add('show');
+                    promptLabel.textContent = '输入要分析的文本：';
+                    streamBtn.style.display = 'none';
+                    document.getElementById('sessionStatus').textContent = '未创建';
+                    break;
+            }
+
+            document.getElementById('aiOutput').textContent = 'AI 的回复将显示在这里...';
+            showStatus('status', `已切换到${getModeDisplayName(currentMode)}模式`);
+        }        function getModeDisplayName(mode) {
+            const names = {
+                'single': '单次对话',
+                'conversation': '多轮对话',
+                'structured': '结构化输出'
+            };
+            return names[mode] || mode;
+        }
+
+        // 核心消息发送功能
+        async function sendMessage() {
+            const prompt = document.getElementById('userPrompt').value.trim();
+            if (!prompt) return;
+
+            try {
+                showStatus('status', '正在生成回复...');
+                await createSessionIfNeeded();
+
+                const startTime = Date.now();
+                let result;
+
+                if (currentMode === 'structured') {
+                    result = await handleStructuredOutput(prompt);
+                } else {
+                    result = await currentSession.prompt(prompt);
+
+                    if (currentMode === 'conversation') {
+                        addMessageToHistory('user', prompt);
+                        addMessageToHistory('assistant', result);
+                        document.getElementById('userPrompt').value = '';
+                        updateUsageInfo();
+                    }
+                }
+
+                const duration = Date.now() - startTime;
+                document.getElementById('aiOutput').textContent = result;
+                showStatus('status', `回复完成 (耗时: ${duration}ms)`);
+                hideProgress('mainProgress');
+
+            } catch (error) {
+                hideProgress('mainProgress');
+                showStatus('status', `生成失败: ${error.message}`, 'error');
+            }
+        }
+
+        async function sendStreamingMessage() {
+            const prompt = document.getElementById('userPrompt').value.trim();
+            if (!prompt || currentMode === 'structured') return;
+
+            try {
+                showStatus('status', '正在生成流式回复...');
+                await createSessionIfNeeded();
+
+                const outputElement = document.getElementById('aiOutput');
+                outputElement.textContent = '';
+
+                const startTime = Date.now();
+                const stream = currentSession.promptStreaming(prompt);
+
+                for await (const chunk of stream) {
+                    outputElement.textContent += chunk;
+                }
+
+                const duration = Date.now() - startTime;
+
+                if (currentMode === 'conversation') {
+                    addMessageToHistory('user', prompt);
+                    addMessageToHistory('assistant', outputElement.textContent);
+                    document.getElementById('userPrompt').value = '';
+                    updateUsageInfo();
+                }
+
+                showStatus('status', `流式回复完成 (耗时: ${duration}ms)`);
+
+            } catch (error) {
+                showStatus('status', `生成失败: ${error.message}`, 'error');
+            }
+        }
+
+        async function createSessionIfNeeded() {
+            if (currentSession) return;
+
+            const temperature = parseFloat(document.getElementById('temperature').value);
+            const topK = parseInt(document.getElementById('topK').value);
+
+            showProgress('mainProgress', 10);
+
+            const sessionConfig = {
+                temperature: temperature,
+                topK: topK,
+                monitor(m) {
+                    m.addEventListener('downloadprogress', (e) => {
+                        showProgress('mainProgress', 10 + e.loaded * 80);
+                    });
+                }
+            };
+
+            if (currentMode === 'conversation') {
+                sessionConfig.initialPrompts = [
+                    { role: 'system', content: '你是一个友好、博学的助手。' }
+                ];
+            }
+
+            currentSession = await LanguageModel.create(sessionConfig);
+            document.getElementById('sessionStatus').textContent = '已创建';
+            showProgress('mainProgress', 95);
+        }
+
+        async function handleStructuredOutput(prompt) {
+            const schemaText = document.getElementById('outputSchema').value.trim();
+
+            if (!schemaText) {
+                throw new Error('请输入 JSON Schema');
+            }
+
+            let schema;
+            try {
+                schema = JSON.parse(schemaText);
+            } catch (e) {
+                throw new Error('JSON Schema 格式错误');
+            }
+
+            const analysisPrompt = `请分析以下内容并按照指定格式返回结构化数据：\n\n${prompt}`;
+
+            const result = await currentSession.prompt(analysisPrompt, {
+                responseConstraint: schema,
+                omitResponseConstraintInput: true
+            });
+
+            // 格式化 JSON 输出
+            try {
+                const jsonResult = JSON.parse(result);
+                return JSON.stringify(jsonResult, null, 2);
+            } catch (e) {
+                return result;
+            }
+        }
+
+        // 工具函数
+        function showStatus(elementId, message, type = 'info') {
+            const statusElement = document.getElementById('status');
+            const errorElement = document.getElementById('error');
+
+            if (type === 'error') {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+                statusElement.textContent = '';
+            } else {
+                statusElement.textContent = message;
+                errorElement.style.display = 'none';
+            }
+        }
+
+        function hideStatus(elementId) {
+            const statusElement = document.getElementById('status');
+            const errorElement = document.getElementById('error');
+            statusElement.textContent = '';
+            errorElement.style.display = 'none';
+        }
+
+        function showProgress(progressId, percentage) {
+            const progressBar = document.getElementById(progressId);
+            const progressFill = document.getElementById(progressId + 'Fill');
+            progressBar.style.display = 'block';
+            progressFill.style.width = percentage + '%';
+        }
+
+        function hideProgress(progressId) {
+            const progressBar = document.getElementById(progressId);
+            progressBar.style.display = 'none';
+        }
+
+        // 多轮对话辅助函数
+        function addMessageToHistory(role, content) {
+            const historyElement = document.getElementById('conversationHistory');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+
+            const roleDiv = document.createElement('div');
+            roleDiv.className = 'message-role';
+            roleDiv.textContent = role === 'user' ? 'User' : 'Assistant';
+
+            const contentDiv = document.createElement('div');
+            contentDiv.textContent = content;
+
+            messageDiv.appendChild(roleDiv);
+            messageDiv.appendChild(contentDiv);
+            historyElement.appendChild(messageDiv);
+
+            // 滚动到底部
+            historyElement.scrollTop = historyElement.scrollHeight;
+        }
+
+        function updateUsageInfo() {
+            if (currentSession && currentMode === 'conversation') {
+                document.getElementById('inputUsage').textContent = currentSession.inputUsage || 0;
+                document.getElementById('inputQuota').textContent = currentSession.inputQuota || 0;
+            }
+        }
+
+        function resetConversationHistory() {
+            const historyElement = document.getElementById('conversationHistory');
+            historyElement.innerHTML = `
+                <div class="message system">
+                    <div class="message-role">System</div>
+                    <div>你是一个友好、博学的助手。</div>
+                </div>
+            `;
+            document.getElementById('inputUsage').textContent = '0';
+            document.getElementById('inputQuota').textContent = '0';
+        }
+
+        // 重置功能
+        function resetChat() {
+            if (currentSession) {
+                currentSession.destroy();
+                currentSession = null;
+            }
+
+            document.getElementById('userPrompt').value = '';
+            document.getElementById('aiOutput').textContent = 'AI 的回复将显示在这里...';
+            document.getElementById('sessionStatus').textContent = '未创建';
+
+            if (currentMode === 'conversation') {
+                resetConversationHistory();
+            }
+
+            showStatus('status', '对话已重置');
+        }
+
+        // 页面卸载时清理资源
+        window.addEventListener('beforeunload', () => {
+            if (currentSession) {
+                currentSession.destroy();
+            }
+        });
+    </script>
+</body>
+</html>

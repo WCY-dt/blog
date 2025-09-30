@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome AI 摘要 API 演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fef8f6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            border: 2px solid #f0f0f0;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 32px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-group label {
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        select {
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #d74514;
+        }
+
+        .sample-articles {
+            margin-bottom: 24px;
+        }
+
+        .sample-articles h3 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .sample-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .sample-btn {
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .sample-btn:hover {
+            border-color: #d74514;
+            background: #fef7f5;
+        }
+
+        .sample-title {
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .sample-desc {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.3;
+        }
+
+        .input-area, .context-area {
+            margin-bottom: 24px;
+        }
+
+        .input-area label, .context-area label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 200px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #d74514;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #d74514;
+        }
+
+        .action-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            justify-content: center;
+        }
+
+        .summarize-btn, .stream-btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .summarize-btn {
+            background: #d74514;
+            color: white;
+        }
+
+        .summarize-btn:hover:not(:disabled) {
+            background: #b73a12;
+            transform: translateY(-2px);
+        }
+
+        .stream-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .stream-btn:hover:not(:disabled) {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .summarize-btn:disabled, .stream-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            display: none;
+            border: 1px solid #ddd;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d74514, #ff6b35);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 3px;
+        }
+
+        .progress-info {
+            display: none;
+            text-align: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .progress-info.active {
+            display: block;
+        }
+
+        .progress-percentage {
+            font-weight: bold;
+            color: #d74514;
+        }
+
+        .progress-status {
+            margin-top: 4px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .status {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+            min-height: 20px;
+        }
+
+        .error {
+            background: #fee;
+            color: #c53030;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #c53030;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .info-tip {
+            background: #e8f4fd;
+            color: #1a365d;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid #3182ce;
+            margin-bottom: 16px;
+        }
+
+        .info-tip .tip-content strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c5282;
+        }
+
+        .info-tip ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .info-tip li {
+            margin: 4px 0;
+        }
+
+        .output-area {
+            margin-bottom: 24px;
+        }
+
+        .output-area label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .output-box {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 120px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+        }
+
+        .output-box.streaming {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { border-color: #e0e0e0; }
+            50% { border-color: #28a745; }
+        }
+
+        .cancel-btn {
+            background: #dc3545;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            display: none;
+        }
+
+        .cancel-btn:hover:not(:disabled) {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn.active {
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px;
+                margin: 10px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sample-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .action-area {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .summarize-btn, .stream-btn {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chrome AI 摘要 API 演示</h1>
+
+        <div class="options-grid">
+            <div class="option-group">
+                <label for="summaryType">摘要类型</label>
+                <select id="summaryType">
+                    <option value="key-points">关键点 (key-points)</option>
+                    <option value="tldr">简要总结 (tl;dr)</option>
+                    <option value="teaser">预告片 (teaser)</option>
+                    <option value="headline">标题 (headline)</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <label for="summaryLength">摘要长度</label>
+                <select id="summaryLength">
+                    <option value="short">短 (short)</option>
+                    <option value="medium" selected>中 (medium)</option>
+                    <option value="long">长 (long)</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <label for="summaryFormat">输出格式</label>
+                <select id="summaryFormat">
+                    <option value="markdown" selected>Markdown</option>
+                    <option value="plain-text">纯文本</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <label for="outputLanguage">输出语言</label>
+                <select id="outputLanguage">
+                    <option value="zh">中文 (zh)</option>
+                    <option value="en" selected>英语 (en)</option>
+                    <option value="es">西班牙语 (es)</option>
+                    <option value="ja">日语 (ja)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="sample-articles">
+            <h3>示例文章</h3>
+            <div class="sample-buttons">
+                <button class="sample-btn" data-title="技术文章" data-context="This is a technical article about web development">
+                    <span class="sample-title">Web开发技术</span>
+                    <span class="sample-desc">现代前端框架和工具的深入介绍</span>
+                </button>
+                <button class="sample-btn" data-title="科学研究" data-context="This is a scientific research paper">
+                    <span class="sample-title">人工智能研究</span>
+                    <span class="sample-desc">机器学习在自然语言处理中的应用</span>
+                </button>
+                <button class="sample-btn" data-title="新闻文章" data-context="This is a news article">
+                    <span class="sample-title">科技新闻</span>
+                    <span class="sample-desc">最新的科技行业发展动态</span>
+                </button>
+                <button class="sample-btn" data-title="用户手册" data-context="This is a user manual or documentation">
+                    <span class="sample-title">产品文档</span>
+                    <span class="sample-desc">软件产品的使用说明和最佳实践</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <label for="inputText">请输入要摘要的文本：</label>
+            <textarea id="inputText" placeholder="粘贴或输入需要摘要的长文本..."></textarea>
+        </div>
+
+        <div class="context-area">
+            <label for="contextText">上下文信息（可选）：</label>
+            <input type="text" id="contextText" placeholder="例如：This article is intended for tech-savvy audience">
+        </div>
+
+        <div class="action-area">
+            <button id="summarizeBtn" class="summarize-btn">生成摘要</button>
+            <button id="streamBtn" class="stream-btn">流式生成</button>
+            <button id="cancelBtn" class="cancel-btn">取消操作</button>
+        </div>
+
+        <div class="progress-info" id="progressInfo">
+            <div class="progress-percentage" id="progressPercentage">0%</div>
+            <div class="progress-status" id="progressStatus">准备下载...</div>
+        </div>
+
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div class="error" id="errorMessage"></div>
+
+        <div class="info-tip" id="downloadTip" style="display: none;">
+            <div class="tip-content">
+                <strong>💡 首次使用提示：</strong>
+                <p>Chrome AI 摘要功能首次使用时需要下载约30-100MB的模型文件。下载时间取决于您的网络速度：</p>
+                <ul>
+                    <li>快速网络：1-3分钟</li>
+                    <li>一般网络：3-10分钟</li>
+                    <li>慢速网络：可能需要更长时间</li>
+                </ul>
+                <p>请耐心等待，下载完成后后续使用将会很快。</p>
+            </div>
+        </div>
+
+
+
+        <div class="output-area">
+            <label>摘要结果：</label>
+            <div class="output-box" id="outputText">点击上方按钮开始生成摘要...</div>
+        </div>
+    </div>
+
+    <script>
+        class SummarizerDemo {
+            constructor() {
+                this.summarizer = null;
+                this.isStreaming = false;
+                this.currentOperation = null;
+                this.operationTimeout = null;
+                this.initializeElements();
+                this.bindEvents();
+                this.loadSampleContent();
+                this.checkAPISupport();
+            }
+
+            initializeElements() {
+                this.summaryType = document.getElementById('summaryType');
+                this.summaryLength = document.getElementById('summaryLength');
+                this.summaryFormat = document.getElementById('summaryFormat');
+                this.outputLanguage = document.getElementById('outputLanguage');
+                this.inputText = document.getElementById('inputText');
+                this.contextText = document.getElementById('contextText');
+                this.summarizeBtn = document.getElementById('summarizeBtn');
+                this.streamBtn = document.getElementById('streamBtn');
+                this.cancelBtn = document.getElementById('cancelBtn');
+                this.outputText = document.getElementById('outputText');
+                this.status = document.getElementById('status');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.progressBar = document.getElementById('progressBar');
+                this.progressFill = document.getElementById('progressFill');
+                this.progressInfo = document.getElementById('progressInfo');
+                this.progressPercentage = document.getElementById('progressPercentage');
+                this.progressStatus = document.getElementById('progressStatus');
+                this.downloadTip = document.getElementById('downloadTip');
+            }
+
+            bindEvents() {
+                this.summarizeBtn.addEventListener('click', () => this.summarize());
+                this.streamBtn.addEventListener('click', () => this.summarizeStreaming());
+                this.cancelBtn.addEventListener('click', () => this.cancelOperation());
+
+                // 示例文章按钮
+                document.querySelectorAll('.sample-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const title = btn.getAttribute('data-title');
+                        const context = btn.getAttribute('data-context');
+                        this.loadSampleArticle(title, context);
+                    });
+                });
+
+                // 选项改变时重新创建摘要器
+                [this.summaryType, this.summaryLength, this.summaryFormat, this.outputLanguage].forEach(select => {
+                    select.addEventListener('change', () => {
+                        this.resetSummarizer();
+                    });
+                });
+            }
+
+
+
+            async checkAPISupport() {
+                if (!('Summarizer' in self)) {
+                    this.showError('您的浏览器不支持 Chrome AI 摘要 API。请确保使用最新版本的 Chrome 浏览器并启用实验性 AI 功能。');
+                    this.disableButtons();
+                    return false;
+                }
+
+                try {
+                    const availability = await Promise.race([
+                        Summarizer.availability(),
+                        new Promise((_, reject) =>
+                            setTimeout(() => reject(new Error('API 检查超时')), 10000)
+                        )
+                    ]);
+
+                    if (availability === 'unavailable') {
+                        this.showError('摘要 API 当前不可用。请稍后重试或检查浏览器设置。');
+                        this.disableButtons();
+                        return false;
+                    }
+
+                    if (availability === 'readily') {
+                        this.showStatus('摘要 API 已就绪，可以直接使用');
+                    } else {
+                        this.showStatus('摘要 API 可用。⚠️ 首次使用需要下载模型（约30-100MB），请耐心等待');
+                    }
+                    return true;
+                } catch (error) {
+                    this.showError(`API 检查失败: ${error.message}`);
+                    this.disableButtons();
+                    return false;
+                }
+            }
+
+            async createSummarizer() {
+                if (this.summarizer) {
+                    return this.summarizer;
+                }
+
+                if (!navigator.userActivation.isActive) {
+                    this.showError('需要用户交互才能创建摘要器，请点击按钮后重试。');
+                    return null;
+                }
+
+                // 显示下载提示
+                this.downloadTip.style.display = 'block';
+
+                try {
+                    const options = {
+                        type: this.summaryType.value,
+                        format: this.summaryFormat.value,
+                        length: this.summaryLength.value,
+                        outputLanguage: this.outputLanguage.value,
+                        monitor: (m) => {
+                            this.showProgress(0, '开始下载模型...');
+
+                            m.addEventListener('downloadprogress', (e) => {
+                                const progress = Math.round(e.loaded * 100);
+                                const progressText = `正在下载模型: ${progress}%`;
+                                this.showProgress(e.loaded, progressText);
+                            });
+                        }
+                    };
+
+                    this.showStatus('正在创建摘要器...');
+                    this.showProgress(0, '正在初始化摘要器...');
+
+                    // 添加超时处理和进度模拟
+                    const createPromise = Summarizer.create(options);
+
+                    // 如果没有下载进度事件，显示一个模拟的进度
+                    let simulatedProgress = 0;
+                    const progressInterval = setInterval(() => {
+                        if (simulatedProgress < 0.95) {
+                            simulatedProgress += Math.random() * 0.1;
+                            if (simulatedProgress > 0.95) simulatedProgress = 0.95;
+                            this.showProgress(simulatedProgress, '正在下载和加载模型...');
+                        }
+                    }, 2000);
+
+                    const timeoutPromise = new Promise((_, reject) =>
+                        setTimeout(() => {
+                            clearInterval(progressInterval);
+                            reject(new Error('创建摘要器超时 (120秒) - 可能是网络问题或模型下载失败'));
+                        }, 120000)
+                    );
+
+                    this.summarizer = await Promise.race([createPromise, timeoutPromise]);
+
+                    clearInterval(progressInterval);
+                    this.showProgress(1, '摘要器创建完成！');
+
+                    // 延迟一下让用户看到100%
+                    setTimeout(() => {
+                        this.hideProgress();
+                        this.downloadTip.style.display = 'none';
+                    }, 1000);
+
+                    return this.summarizer;
+                } catch (error) {
+                    this.showError(`创建摘要器失败: ${error.message}`);
+                    this.hideProgress();
+                    this.downloadTip.style.display = 'none';
+                    return null;
+                }
+            }
+
+            async summarize() {
+                const text = this.inputText.value.trim();
+                if (!text) {
+                    this.showError('请输入要摘要的文本');
+                    return;
+                }
+
+                if (this.isStreaming || this.currentOperation) {
+                    this.showError('正在进行其他操作，请等待完成后再试');
+                    return;
+                }
+
+                try {
+                    this.currentOperation = 'summarize';
+                    this.disableButtons();
+                    this.showCancelButton();
+                    this.showStatus('正在生成摘要...');
+
+                    const summarizer = await this.createSummarizer();
+                    if (!summarizer) return;
+
+                    const context = this.contextText.value.trim();
+                    const options = context ? { context } : {};
+
+                    // 设置操作超时
+                    const timeoutPromise = new Promise((_, reject) => {
+                        this.operationTimeout = setTimeout(() =>
+                            reject(new Error('摘要生成超时 (120秒)')), 120000
+                        );
+                    });
+
+                    const summaryPromise = summarizer.summarize(text, options);
+                    const summary = await Promise.race([summaryPromise, timeoutPromise]);
+
+                    this.displayResult(summary);
+                    this.showStatus('摘要生成完成');
+                } catch (error) {
+                    if (error.message === '操作已取消') {
+                        this.showStatus('操作已取消');
+                    } else {
+                        this.showError(`摘要生成失败: ${error.message}`);
+                    }
+                } finally {
+                    this.currentOperation = null;
+                    this.clearOperationTimeout();
+                    this.enableButtons();
+                    this.hideCancelButton();
+                }
+            }
+
+            async summarizeStreaming() {
+                const text = this.inputText.value.trim();
+                if (!text) {
+                    this.showError('请输入要摘要的文本');
+                    return;
+                }
+
+                if (this.isStreaming || this.currentOperation) {
+                    this.showError('正在进行其他操作，请等待完成后再试');
+                    return;
+                }
+
+                try {
+                    this.isStreaming = true;
+                    this.currentOperation = 'stream';
+                    this.disableButtons();
+                    this.showCancelButton();
+                    this.showStatus('正在进行流式摘要...');
+                    this.outputText.classList.add('streaming');
+                    this.outputText.textContent = '';
+
+                    const summarizer = await this.createSummarizer();
+                    if (!summarizer) return;
+
+                    const context = this.contextText.value.trim();
+                    const options = context ? { context } : {};
+
+                    // 设置超时
+                    const timeoutId = setTimeout(() => {
+                        throw new Error('流式摘要超时 (180秒)');
+                    }, 180000);
+
+                    const stream = summarizer.summarizeStreaming(text, options);
+
+                    for await (const chunk of stream) {
+                        if (this.currentOperation !== 'stream') {
+                            // 操作被取消
+                            throw new Error('操作已取消');
+                        }
+                        this.outputText.textContent += chunk;
+                    }
+
+                    clearTimeout(timeoutId);
+                    this.outputText.classList.remove('streaming');
+                    this.showStatus('流式摘要完成');
+                } catch (error) {
+                    this.outputText.classList.remove('streaming');
+                    if (error.message === '操作已取消') {
+                        this.showStatus('操作已取消');
+                    } else {
+                        this.showError(`流式摘要失败: ${error.message}`);
+                    }
+                } finally {
+                    this.isStreaming = false;
+                    this.currentOperation = null;
+                    this.clearOperationTimeout();
+                    this.enableButtons();
+                    this.hideCancelButton();
+                }
+            }
+
+            displayResult(result) {
+                this.outputText.textContent = result;
+                this.outputText.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            resetSummarizer() {
+                this.summarizer = null;
+                this.showStatus('选项已更改，下次操作将重新创建摘要器');
+            }
+
+            disableButtons() {
+                this.summarizeBtn.disabled = true;
+                this.streamBtn.disabled = true;
+            }
+
+            enableButtons() {
+                this.summarizeBtn.disabled = false;
+                this.streamBtn.disabled = false;
+            }
+
+            showStatus(message) {
+                this.status.textContent = message;
+                this.status.style.display = 'block';
+                this.hideError();
+            }
+
+            hideStatus() {
+                this.status.textContent = '';
+            }
+
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorMessage.style.display = 'block';
+                this.hideStatus();
+                this.hideProgress();
+            }
+
+            hideError() {
+                this.errorMessage.style.display = 'none';
+            }
+
+            showProgress(progress, statusText = '') {
+                const percentage = Math.round(progress * 100);
+
+                // 显示进度条和信息
+                this.progressBar.style.display = 'block';
+                this.progressInfo.classList.add('active');
+                this.progressFill.style.width = `${percentage}%`;
+                this.progressPercentage.textContent = `${percentage}%`;
+
+                if (statusText) {
+                    this.progressStatus.textContent = statusText;
+                    this.showStatus(statusText);
+                }
+
+                // 添加动画效果
+                if (percentage === 0) {
+                    this.progressStatus.textContent = '初始化下载...';
+                } else if (percentage === 100) {
+                    this.progressStatus.textContent = '下载完成，正在加载模型...';
+                }
+            }
+
+            hideProgress() {
+                this.progressBar.style.display = 'none';
+                this.progressInfo.classList.remove('active');
+                this.progressFill.style.width = '0%';
+                this.progressPercentage.textContent = '0%';
+                this.progressStatus.textContent = '准备下载...';
+            }
+
+            loadSampleContent() {
+                // 预设的示例文章内容
+                this.sampleArticles = {
+                    '技术文章': `现代前端开发已经从简单的HTML、CSS和JavaScript演变成一个复杂的生态系统。React、Vue和Angular等框架改变了我们构建用户界面的方式，它们提供了组件化的开发模式，使代码更加模块化和可维护。
+
+同时，构建工具如Webpack、Vite和Parcel简化了开发流程，自动化了代码打包、优化和部署过程。TypeScript的普及提高了代码的类型安全性，减少了运行时错误。
+
+现代前端开发还需要考虑性能优化、可访问性、SEO优化和移动端适配等多个方面。PWA（渐进式Web应用）技术让Web应用具备了类似原生应用的体验。
+
+微前端架构正在成为大型应用的新选择，它允许不同团队独立开发和部署应用的不同部分。同时，Serverless和JAMstack等新兴架构模式也在改变我们对Web应用部署和运维的认知。`,
+
+                    '科学研究': `自然语言处理（NLP）是人工智能领域的一个重要分支，专注于使计算机能够理解、解释和生成人类语言。近年来，深度学习技术的发展极大地推动了NLP领域的进步。
+
+Transformer架构的出现标志着NLP发展的一个重要里程碑。基于Transformer的模型如BERT、GPT系列和T5等在各种NLP任务中都取得了突破性的成果。这些大型语言模型通过在海量文本数据上进行预训练，学习到了丰富的语言知识和模式。
+
+预训练-微调的范式成为了NLP任务的标准方法。预训练模型在大规模无标注数据上学习通用的语言表示，然后在特定任务的标注数据上进行微调，这种方法显著提高了模型在各种下游任务上的性能。
+
+多模态学习也是当前研究的热点，将文本与图像、音频等其他模态的信息结合，实现更全面的理解和生成。同时，模型的可解释性、公平性和安全性也越来越受到关注。`,
+
+                    '新闻文章': `人工智能技术正在快速发展并深刻影响各个行业。最新的大型语言模型展现出了前所未有的能力，不仅能够进行自然对话，还能协助编程、写作、分析和创作等多种任务。
+
+科技巨头们正在加大对AI技术的投资。谷歌、微软、OpenAI等公司在AI模型和应用开发方面展现出激烈竞争。同时，AI芯片的发展也在加速，专门为AI计算优化的处理器正在推动整个行业的发展。
+
+自动驾驶技术也取得了重要进展，多家公司的自动驾驶测试车辆已经在多个城市进行路测。虽然完全自动驾驶仍面临技术和法律挑战，但Level 4级别的自动驾驶在特定场景下已经开始商业化应用。
+
+与此同时，AI技术的发展也引发了关于就业、隐私、安全和伦理等方面的讨论。如何确保AI技术的发展造福人类，成为了全社会关注的重要议题。`,
+
+                    '用户手册': `本用户手册将指导您如何使用我们的项目管理软件来提高团队协作效率。该软件集成了任务管理、时间追踪、团队沟通和项目报告等功能。
+
+首先，创建项目是使用软件的第一步。点击"新建项目"按钮，输入项目名称、描述和预计完成时间。您可以选择使用预设的项目模板，如敏捷开发、市场营销或产品发布等模板，这些模板包含了相应的任务结构和工作流程。
+
+任务管理是核心功能之一。您可以创建任务、分配给团队成员、设置优先级和截止日期。任务可以通过拖拽方式在不同状态之间移动，如"待办"、"进行中"、"审核中"和"已完成"。子任务功能允许您将复杂的任务分解为更小的可管理单元。
+
+时间跟踪功能帮助您了解项目进度和资源分配。团队成员可以记录在各个任务上花费的时间，系统会自动生成时间报告和项目进度统计。集成的日历功能可以显示所有重要的截止日期和里程碑。`
+                };
+            }
+
+            loadSampleArticle(title, context) {
+                if (this.sampleArticles[title]) {
+                    this.inputText.value = this.sampleArticles[title];
+                    this.contextText.value = context || '';
+                    this.showStatus(`已加载示例文章: ${title}`);
+                    // 清除之前的输出
+                    this.outputText.textContent = '点击上方按钮开始生成摘要...';
+                } else {
+                    this.showError(`未找到示例文章: ${title}`);
+                }
+            }
+
+            cancelOperation() {
+                if (this.currentOperation) {
+                    this.currentOperation = null;
+                    this.isStreaming = false;
+                    this.clearOperationTimeout();
+                    this.showStatus('正在取消操作...');
+
+                    // 重置UI状态
+                    this.outputText.classList.remove('streaming');
+                    this.enableButtons();
+                    this.hideCancelButton();
+                    this.hideProgress();
+
+                    setTimeout(() => {
+                        this.showStatus('操作已取消');
+                    }, 500);
+                } else {
+                    this.showError('没有正在进行的操作');
+                }
+            }
+
+            clearOperationTimeout() {
+                if (this.operationTimeout) {
+                    clearTimeout(this.operationTimeout);
+                    this.operationTimeout = null;
+                }
+            }
+
+            showCancelButton() {
+                this.cancelBtn.classList.add('active');
+            }
+
+            hideCancelButton() {
+                this.cancelBtn.classList.remove('active');
+            }
+        }
+
+        // 初始化演示
+        new SummarizerDemo();
+    </script>
+</body>
+</html>
