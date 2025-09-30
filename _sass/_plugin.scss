@@ -377,3 +377,110 @@ main .code-block-wrapper .code-copy-button {
   }
 }
 
+/* Iframe Plugin Styles */
+.iframe-container {
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-color);
+  border-radius: .5rem;
+  overflow: hidden;
+  box-shadow: var(--normal-shadow);
+  background: var(--bg-color);
+
+  .iframe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75rem 1rem;
+    background: var(--primary-light-color);
+    border-bottom: 1px solid var(--border-color);
+
+    .iframe-title {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: .9rem;
+    }
+
+    .iframe-controls {
+      display: flex;
+      gap: .5rem;
+
+      .iframe-fullscreen-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--primary-color);
+        padding: .25rem;
+        border-radius: .25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .25s ease;
+
+        @media (hover: hover) {
+          &:hover {
+            color: var(--primary-dark-color);
+          }
+        }
+
+        .material-symbols-outlined {
+          font-size: 1.1rem !important;
+        }
+      }
+    }
+  }
+
+  iframe {
+    width: 100%;
+    height: 400px; /* Default height, can be overridden by inline style */
+    border: none;
+    display: block;
+    background: var(--bg-color);
+  }
+
+  &.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999;
+    border-radius: 0;
+    margin: 0;
+
+    iframe {
+      height: calc(100vh - 60px) !important;
+    }
+  }
+}
+
+.iframe-error {
+  padding: 1rem;
+  background: var(--primary-light-color);
+  border: 1px solid var(--border-color);
+  border-radius: .5rem;
+  color: var(--primary-color);
+  margin: 1rem 0;
+  font-size: .9rem;
+}
+
+@media (max-width: 768px) {
+  .iframe-container {
+    margin: 1rem -1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+
+    .iframe-header {
+      padding: .5rem 1rem;
+
+      .iframe-title {
+        font-size: .85rem;
+      }
+    }
+
+    iframe {
+      height: 300px;
+    }
+  }
+}
+
