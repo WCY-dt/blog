@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器 AI 功能支持检测</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 6px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 4px;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.8em;
+            font-weight: 500;
+            border: 2px solid #ddd;
+            transition: all 0.2s ease;
+            max-width: 150px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card.supported {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .feature-card.not-supported {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        @media (max-width: 500px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="features-grid">
+        <div class="feature-card" id="translator-card">
+            翻译 API
+        </div>
+
+        <div class="feature-card" id="language-detector-card">
+            语言检测 API
+        </div>
+
+        <div class="feature-card" id="summarizer-card">
+            摘要 API
+        </div>
+
+        <div class="feature-card" id="language-model-card">
+            语言模型 API
+        </div>
+    </div>
+
+    <script>
+        // 检测功能并更新卡片颜色
+        function checkFeature(apiName, cardId, displayName) {
+            const supported = apiName in self;
+            const card = document.getElementById(`${cardId}-card`);
+
+            if (supported) {
+                card.classList.add('supported');
+                console.log(`${displayName} 可用`);
+            } else {
+                card.classList.add('not-supported');
+                console.log(`${displayName} 不可用`);
+            }
+        }
+
+        // 页面加载完成后开始检测
+        document.addEventListener('DOMContentLoaded', function() {
+            checkFeature('Translator', 'translator', '翻译 API');
+            checkFeature('LanguageDetector', 'language-detector', '语言检测 API');
+            checkFeature('Summarizer', 'summarizer', '摘要 API');
+            checkFeature('LanguageModel', 'language-model', 'Language Model API');
+        });
+    </script>
+</body>
+</html>

@@ -13,6 +13,10 @@ copyrights: 原创
 
 本文将详细介绍这些 API 的使用方法，并提供完整的示例代码。
 
+这些功能基本都需要 Chrome 浏览器 138 或更高版本，下面展示了你的浏览器是否支持这些 API：
+
+{% iframe frontend_ai height=80px %}
+
 ## 翻译 API
 
 ### 样例
