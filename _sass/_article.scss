@@ -124,7 +124,8 @@
   overflow: hidden;
   box-sizing: border-box;
 
-  details + blockquote {
+  details + blockquote,
+  blockquote + blockquote {
     margin-top: 1rem;
   }
 

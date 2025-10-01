@@ -43,12 +43,15 @@ navy:
   - title: post
     url: /
     icon: web_stories
+  - title: about
+    url: https://ch3nyang.top
+    icon: assignment_ind
   - title: github
     url: https://github.com/WCY-dt
     icon: data_object
-  - title: category
-    url: /category/
-    icon: category
+  # - title: category
+  #   url: /category/
+  #   icon: category
   - title: tag
     url: /tag/
     icon: local_offer
