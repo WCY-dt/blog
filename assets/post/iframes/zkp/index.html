@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>零知识证明演示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 5px;
+            height: calc(100vh - 10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fef8f6;
+            overflow-x: auto;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            min-width: 280px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .grid-container {
+            position: relative;
+            display: inline-block;
+            width: 260px;
+            height: 260px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 20px);
+            grid-template-rows: repeat(5, 20px);
+            gap: 0px;
+        }
+
+        .cell {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cell.number-25 {
+            background-color: #d74514 !important;
+            color: white !important;
+        }
+
+        .overlay {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            background-color: black;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+        }
+
+        .hole {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+
+        .center-square {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #d74514;
+            background-color: transparent;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 5px;
+            z-index: 10;
+            position: relative;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 8px 16px;
+            font-size: 14px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            min-width: 80px;
+        }
+
+        @media (max-width: 320px) {
+            body {
+                padding: 2px;
+            }
+
+            .container {
+                min-width: auto;
+                width: 100%;
+                gap: 5px;
+                margin-top: 2px;
+            }
+
+            .grid-container {
+                width: 260px;
+                height: 260px;
+                margin: 0 auto;
+                overflow: visible;
+            }
+
+            .buttons {
+                gap: 5px;
+                margin-top: 5px;
+            }
+
+            button {
+                padding: 6px 12px;
+                font-size: 12px;
+                min-width: 60px;
+            }
+        }
+
+        .refresh-btn {
+            background-color: #d74514;
+            color: white;
+        }
+
+        .refresh-btn:hover {
+            background-color: #b93a11;
+        }
+
+        .reveal-btn {
+            background-color: #d74514;
+            color: white;
+        }
+
+        .reveal-btn:hover {
+            background-color: #b93a11;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grid-container">
+            <div class="center-square"></div>
+            <div class="grid" id="grid"></div>
+            <div class="overlay" id="overlay">
+                <div class="hole" id="hole"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="refresh-btn" onclick="refreshGrid()">刷新</button>
+            <button class="reveal-btn" onclick="toggleReveal()">显示/隐藏表格</button>
+        </div>
+    </div>
+
+    <script>
+        let numbers = [];
+        let gridPosition = { x: 0, y: 0 };
+        let target25Position = { row: 0, col: 0 };
+        let isRevealed = false;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function generateRandomGrid() {
+            // 生成1-25的数字数组并打乱
+            numbers = Array.from({ length: 25 }, (_, i) => i + 1);
+            shuffleArray(numbers);
+
+            // 找到数字25的位置
+            const index25 = numbers.indexOf(25);
+            target25Position.row = Math.floor(index25 / 5);
+            target25Position.col = index25 % 5;
+
+            // 计算表格位置，使数字25落在13x13区域的中央5x5范围内
+            // 中央5x5范围是从(4,4)到(8,8)
+            const centerMinX = 4; // 中央5x5的左边界
+            const centerMaxX = 8; // 中央5x5的右边界
+            const centerMinY = 4; // 中央5x5的上边界
+            const centerMaxY = 8; // 中央5x5的下边界
+
+            // 计算表格左上角位置，使25落在中央范围内
+            const target25GlobalX = centerMinX + Math.floor(Math.random() * 5); // 4-8
+            const target25GlobalY = centerMinY + Math.floor(Math.random() * 5); // 4-8
+
+            // 反推表格位置
+            gridPosition.x = target25GlobalX - target25Position.col;
+            gridPosition.y = target25GlobalY - target25Position.row;
+
+            // 确保表格完全在13x13范围内
+            gridPosition.x = Math.max(0, Math.min(8, gridPosition.x));
+            gridPosition.y = Math.max(0, Math.min(8, gridPosition.y));
+        }
+
+        function getGrayColor(number) {
+            // 根据数字大小(1-25)计算灰色深度
+            // number越大，颜色越浅；number越小，颜色越深
+            const intensity = 120 + (number - 1) * 5; // 从120到240的范围，确保最深色也能看清黑色文字
+            return `rgb(${intensity}, ${intensity}, ${intensity})`;
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+
+            for (let i = 0; i < 25; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.textContent = numbers[i];
+
+                if (numbers[i] === 25) {
+                    cell.classList.add('number-25');
+                } else {
+                    cell.style.backgroundColor = getGrayColor(numbers[i]);
+                }
+
+                grid.appendChild(cell);
+            }
+        }
+
+        function updateOverlay() {
+            const overlay = document.getElementById('overlay');
+            const hole = document.getElementById('hole');
+
+            // 计算黑色遮罩在13x13区域中的位置
+            const containerSize = 260; // 13 * 20
+            const cellSize = 20;
+
+            // 设置遮罩大小为13x13，居中显示
+            overlay.style.width = containerSize + 'px';
+            overlay.style.height = containerSize + 'px';
+
+            // 计算表格相对于13x13容器的偏移
+            const gridOffsetX = gridPosition.x * cellSize;
+            const gridOffsetY = gridPosition.y * cellSize;
+
+            // 计算数字25在表格中的精确位置
+            const hole25X = gridOffsetX + target25Position.col * cellSize;
+            const hole25Y = gridOffsetY + target25Position.row * cellSize;
+
+            // 设置洞的位置和内容（显示数字25）
+            hole.style.left = hole25X + 'px';
+            hole.style.top = hole25Y + 'px';
+            hole.style.backgroundColor = '#d74514';
+            hole.innerHTML = '<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white;">25</div>';
+
+            // 调整表格位置
+            const grid = document.getElementById('grid');
+            grid.style.position = 'absolute';
+            grid.style.left = gridOffsetX + 'px';
+            grid.style.top = gridOffsetY + 'px';
+        }
+
+        function refreshGrid() {
+            generateRandomGrid();
+            renderGrid();
+            updateOverlay();
+
+            // 重置显示状态
+            isRevealed = false;
+            document.getElementById('overlay').classList.remove('hidden');
+        }
+
+        function toggleReveal() {
+            const overlay = document.getElementById('overlay');
+            isRevealed = !isRevealed;
+
+            if (isRevealed) {
+                overlay.classList.add('hidden');
+            } else {
+                overlay.classList.remove('hidden');
+            }
+        }
+
+        // 初始化
+        window.onload = function() {
+            refreshGrid();
+        };
+    </script>
+</body>
+</html>

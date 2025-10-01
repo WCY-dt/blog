@@ -5,15 +5,18 @@ module Jekyll
   class IframeTag < Liquid::Tag
     def initialize(tag_name, markup, tokens)
       super
-      # Parse parameters: iframe_name [height=400px]
+      # Parse parameters: iframe_name [height=400px] [hide_header=false]
       parts = markup.strip.split(/\s+/)
       @iframe_name = parts[0]
       @height = '400px'
+      @hide_header = false
 
-      # Parse height parameter if provided
+      # Parse parameters if provided
       parts[1..-1].each do |part|
         if part.match(/^height=(.+)$/)
           @height = $1
+        elsif part.match(/^hide_header=(true|false)$/)
+          @hide_header = $1 == 'true'
         end
       end
     end
@@ -61,8 +64,8 @@ module Jekyll
       end
 
       # Generate iframe HTML
-      <<~HTML
-        <div class="iframe-container" data-iframe-name="#{@iframe_name}" data-height="#{@height}">
+      header_html = unless @hide_header
+        <<~HEADER
           <div class="iframe-header">
             <span class="iframe-title">#{title}</span>
             <div class="iframe-controls">
@@ -71,7 +74,14 @@ module Jekyll
               </button>
             </div>
           </div>
-          <iframe
+        HEADER
+      else
+        ""
+      end
+
+      <<~HTML
+        <div class="iframe-container" data-iframe-name="#{@iframe_name}" data-height="#{@height}">
+          #{header_html}<iframe
             id="#{iframe_id}"
             src="#{iframe_src}"
             frameborder="0"
