@@ -1,0 +1,95 @@
+html[data-theme="light"] {
+  --mermaid-primary-color: var(--primary-color);
+  --mermaid-text-color: var(--black-color);
+  --mermaid-background-color: var(--white-color);
+  --mermaid-primary-fill-color: var(--primary-light-color);
+  --mermaid-secondary-fill-color: var(--primary-extra-light-color);
+  --mermaid-primary-stroke-color: var(--primary-color);
+  --mermaid-secondary-stroke-color: var(--primary-semi-light-color);
+  --mermaid-box-line-color: var(--primary-color);
+  --mermaid-label-bg-color: var(--primary-light-color);
+}
+
+html[data-theme="dark"] {
+  --mermaid-primary-color: var(--primary-color);
+  --mermaid-text-color: var(--black-color);
+  --mermaid-background-color: var(--white-color);
+  --mermaid-primary-fill-color: var(--primary-color);
+  --mermaid-secondary-fill-color: var(--primary-extra-light-color);
+  --mermaid-primary-stroke-color: var(--primary-light-color);
+  --mermaid-secondary-stroke-color: var(--primary-semi-light-color);
+  --mermaid-box-line-color: var(--primary-color);
+  --mermaid-label-bg-color: var(--primary-light-color);
+}
+
+.language-mermaid svg,
+div.mermaid svg,
+.mermaid svg,
+.lightbox__img svg {
+  background-color: var(--mermaid-background-color) !important;
+  color: var(--mermaid-text-color) !important;
+
+  * tspan,
+  .messageText {
+    fill: var(--mermaid-text-color) !important;
+  }
+
+  .nodeLabel {
+    fill: var(--mermaid-text-color) !important;
+    color: var(--mermaid-text-color) !important;
+  }
+
+  .edgeLabel {
+    fill: var(--mermaid-text-color) !important;
+    color: var(--mermaid-text-color) !important;
+  }
+
+  .edgeLabel p {
+    background-color: var(--mermaid-label-bg-color) !important;
+  }
+
+  #arrowhead path,
+  .marker.flowchart-v2 path {
+    fill: var(--mermaid-text-color) !important;
+    stroke: var(--mermaid-text-color) !important;
+  }
+
+  .messageLine0,
+  .messageLine1,
+  .messageLine2,
+  .messageLine3,
+  .messageLine4,
+  .messageLine5,
+  .messageLine6,
+  .messageLine7,
+  .messageLine8,
+  .messageLine9,
+  .flowchart-link {
+    stroke: var(--mermaid-text-color) !important;
+  }
+
+  * {
+    font-family: var(--text-font) !important;
+  }
+
+  .label-container,
+  .label-container *,
+  .actor-top,
+  .actor-bottom,
+  .labelBox {
+    fill: var(--mermaid-primary-fill-color) !important;
+    stroke: var(--mermaid-primary-stroke-color) !important;
+  }
+
+  .actor-line,
+  .loopLine {
+    fill: var(--mermaid-box-line-color) !important;
+    stroke: var(--mermaid-box-line-color) !important;
+  }
+
+  .cluster rect,
+  .note {
+    fill: var(--mermaid-secondary-fill-color) !important;
+    stroke: var(--mermaid-secondary-stroke-color) !important;
+  }
+}
