@@ -135,7 +135,7 @@ module Jekyll
     def build_tabs_html(html_code, css_code, js_code)
       tabs = []
       tabs << { id: 'html', label: 'HTML', code: html_code, active: true, language: 'html' } if html_code && !html_code.empty?
-      tabs << { id: 'css', label: 'CSS', code: css_code, active: false, language: 'css' } if css_code && !css_code.empty?
+      tabs << { id: 'css', label: 'CSS', code: css_code, active: false, language: 'scss' } if css_code && !css_code.empty?
       tabs << { id: 'js', label: 'JavaScript', code: js_code, active: false, language: 'javascript' } if js_code && !js_code.empty?
 
       # Set the first tab as active
