@@ -215,7 +215,7 @@ main .code-block-wrapper .code-copy-button {
   &.github-link--repo {
     background-color: var(--primary-light-color);
     border-color: var(--primary-semi-light-color);
-    color: var(--primary-little-light-color)!important;
+    color: var(--primary-color)!important;
     transition: all .25s ease-in-out!important;
   }
 
@@ -304,7 +304,7 @@ main .code-block-wrapper .code-copy-button {
 }
 
 .cite-with-link__info-title {
-  color: var(--primary-little-light-color)!important;
+  color: var(--primary-color)!important;
 }
 
 .cite-with-link__link {

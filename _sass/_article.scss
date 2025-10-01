@@ -270,6 +270,16 @@
     }
   }
 
+  em {
+    font-weight: 100;
+  }
+
+  strong em,
+  em strong {
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+
   img {
     max-width: 100%;
     background-color: var(--true-white-color);
@@ -560,6 +570,13 @@
 
     a {
       text-decoration: underline;
+    }
+
+    @media (hover: hover) {
+      a:hover {
+        color: var(--primary-color);
+        background-color: transparent;
+      }
     }
   }
 }
