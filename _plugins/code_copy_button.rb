@@ -49,8 +49,8 @@ module Jekyll
     <<~HTML
       <div class="code-block-wrapper no-select" onmouseenter="showCopyButton('#{code_id}')" onmouseleave="hideCopyButton('#{code_id}')">
         <div class="code-copy-button" id="copy-btn-#{code_id}" onclick="copyCode('#{code_id}')" title="复制代码">
-          <span class="copy-icon material-symbols-outlined">content_copy</span>
-          <span class="check-icon material-symbols-outlined" style="display: none;">check</span>
+          <span class="copy-icon material-symbols-outlined no-select">content_copy</span>
+          <span class="check-icon material-symbols-outlined no-select" style="display: none;">check</span>
         </div>
         #{pre_code_with_id}
       </div>

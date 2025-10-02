@@ -486,6 +486,58 @@ main .code-block-wrapper .code-copy-button {
 .code-preview {
   display: flex;
   background-color: var(--primary-extra-light-color);
+  position: relative;
+}
+
+.code-preview-restore-btn {
+  background: var(--primary-color);
+  border: none;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background .25s ease-in-out;
+  color: var(--white-color);
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.code-preview-restore-btn:hover {
+  background: var(--primary-semi-dark-color);
+}
+
+.code-preview-restore-btn .material-symbols-outlined {
+  font-size: 1.5rem;
+}
+
+// Horizontal layout (left-right)
+.code-preview--horizontal .code-preview-restore-btn {
+  width: 24px;
+  height: 100%;
+  padding: 0;
+}
+
+.code-preview--horizontal .code-preview-restore-btn--source {
+  order: -1; // Place before divider
+}
+
+.code-preview--horizontal .code-preview-restore-btn--preview {
+  order: 1; // Place after divider
+}
+
+// Vertical layout (top-bottom)
+.code-preview--vertical .code-preview-restore-btn {
+  width: 100%;
+  height: 24px;
+  padding: 0;
+}
+
+.code-preview--vertical .code-preview-restore-btn--source {
+  order: -1; // Place before divider
+}
+
+.code-preview--vertical .code-preview-restore-btn--preview {
+  order: 1; // Place after divider
 }
 
 .code-preview__source {
@@ -493,12 +545,32 @@ main .code-block-wrapper .code-copy-button {
   flex-direction: column;
   min-width: 200px;
   min-height: 100px;
+  transition: all 0.3s ease-in-out;
+}
+
+.code-preview__source.hidden {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  flex: 0 0 0 !important;
+}
+
+.code-preview--horizontal .code-preview__source.hidden {
+  width: 0;
+}
+
+.code-preview--vertical .code-preview__source.hidden {
+  height: 0;
 }
 
 .code-preview-tabs {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.code-preview__source.hidden .code-preview-tabs {
+  display: none;
 }
 
 .code-preview-tab-buttons {
@@ -509,6 +581,36 @@ main .code-block-wrapper .code-copy-button {
   flex-shrink: 0;
   gap: 0;
   height: 2.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.code-preview-tab-buttons__tabs {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+.code-preview-tab-toggle {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 0 .75rem;
+  cursor: pointer;
+  transition: all .25s ease-in-out;
+  color: var(--primary-little-light-color);
+  margin-left: auto;
+}
+
+.code-preview-tab-toggle:hover {
+  background-color: var(--primary-color) !important;
+  color: var(--primary-extra-light-color) !important;
+}
+
+.code-preview-tab-toggle .material-symbols-outlined {
+  font-size: 1.2rem;
 }
 
 .code-preview-tab {
@@ -609,10 +711,31 @@ main .code-block-wrapper .code-copy-button {
   background: var(--white-color);
   min-width: 200px;
   min-height: 100px;
+  transition: all 0.3s ease-in-out;
+}
+
+.code-preview__preview.hidden {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  flex: 0 0 0 !important;
+}
+
+.code-preview--horizontal .code-preview__preview.hidden {
+  width: 0;
+}
+
+.code-preview--vertical .code-preview__preview.hidden {
+  height: 0;
+}
+
+.code-preview__preview.hidden .code-preview__iframe,
+.code-preview__preview.hidden .code-preview__output {
+  display: none;
 }
 
 .code-preview__preview-header {
-  padding: 0 1rem;
+  padding: 0 0 0 1rem;
   background: var(--primary-light-color);
   display: flex;
   justify-content: space-between;
@@ -631,8 +754,14 @@ main .code-block-wrapper .code-copy-button {
 .code-preview-controls {
   display: flex;
   gap: .5rem;
+  padding: 0 .75rem;
 }
 
+.code-preview-tab-buttons .code-preview-controls {
+  padding: 0 .75rem;
+}
+
+.code-preview-toggle-btn,
 .code-preview-refresh-btn,
 .code-preview-fullscreen-btn {
   background: transparent;
@@ -649,11 +778,13 @@ main .code-block-wrapper .code-copy-button {
   height: 1.5rem;
 }
 
+.code-preview-toggle-btn:hover,
 .code-preview-refresh-btn:hover,
 .code-preview-fullscreen-btn:hover {
   color: var(--primary-dark-color);
 }
 
+.code-preview-toggle-btn .material-symbols-outlined,
 .code-preview-refresh-btn .material-symbols-outlined,
 .code-preview-fullscreen-btn .material-symbols-outlined {
   font-size: 1.2rem;
@@ -665,6 +796,39 @@ main .code-block-wrapper .code-copy-button {
   height: 100%;
   border: none;
   background: white;
+}
+
+.code-preview__output {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 1rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', 'Menlo', monospace;
+  font-size: .875rem;
+  line-height: 1.6;
+  color: white;
+  background: black;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.code-preview__output::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.code-preview__output::-webkit-scrollbar-track {
+  background: var(--primary-extra-light-color);
+}
+
+.code-preview__output::-webkit-scrollbar-thumb {
+  background: var(--primary-semi-light-color);
+  border-radius: 4px;
+}
+
+.code-preview__output::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
 }
 
 .code-preview-wrapper.fullscreen {
@@ -726,6 +890,21 @@ main .code-block-wrapper .code-copy-button {
 
   .code-preview__source {
     border-right: none;
+  }
+
+  // 在小屏幕上，所有布局都变成垂直布局，恢复按钮也要相应调整
+  .code-preview-restore-btn,
+  .code-preview--horizontal .code-preview-restore-btn {
+    width: 100% !important;
+    height: 24px !important;
+  }
+
+  .code-preview--horizontal .code-preview-restore-btn--source {
+    order: -1;
+  }
+
+  .code-preview--horizontal .code-preview-restore-btn--preview {
+    order: 1;
   }
 }
 

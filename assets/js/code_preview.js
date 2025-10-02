@@ -24,7 +24,58 @@ document.addEventListener('DOMContentLoaded', () => {
       tabsContainer.querySelector(`.code-preview-tab-content[data-tab-content="${tabName}"]`).classList.add('active');
     });
   });
+
+  // Handle initial hidden state - hide toggle buttons for the opposite panel
+  document.querySelectorAll('.code-preview').forEach(preview => {
+    const sourcePanel = preview.querySelector('.code-preview__source');
+    const previewPanel = preview.querySelector('.code-preview__preview');
+    const sourceToggleBtns = sourcePanel.querySelectorAll('.code-preview-toggle-btn');
+    const previewToggleBtns = previewPanel.querySelectorAll('.code-preview-toggle-btn');
+
+    if (sourcePanel.classList.contains('hidden')) {
+      // If source is hidden initially, hide preview's toggle buttons
+      previewToggleBtns.forEach(btn => btn.style.display = 'none');
+    }
+
+    if (previewPanel.classList.contains('hidden')) {
+      // If preview is hidden initially, hide source's toggle buttons
+      sourceToggleBtns.forEach(btn => btn.style.display = 'none');
+    }
+  });
+
+  // Handle responsive icon changes
+  updateRestoreButtonIcons();
 });
+
+// Update restore button icons based on screen size
+function updateRestoreButtonIcons() {
+  const isSmallScreen = window.innerWidth <= 768;
+
+  document.querySelectorAll('.code-preview').forEach(preview => {
+    const layout = preview.getAttribute('data-layout');
+    const restoreBtns = preview.querySelectorAll('.code-preview-restore-btn');
+
+    restoreBtns.forEach(btn => {
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (!icon) return;
+
+      // On small screens, always use vertical icons
+      // On large screens, use the layout-specific icons
+      if (isSmallScreen) {
+        const verticalIcon = btn.getAttribute('data-icon-vertical');
+        if (verticalIcon) icon.textContent = verticalIcon;
+      } else {
+        const layoutIcon = layout === 'vertical'
+          ? btn.getAttribute('data-icon-vertical')
+          : btn.getAttribute('data-icon-horizontal');
+        if (layoutIcon) icon.textContent = layoutIcon;
+      }
+    });
+  });
+}
+
+// Update icons on window resize
+window.addEventListener('resize', updateRestoreButtonIcons);
 
 // Refresh iframe content
 function refreshCodePreview(previewId) {
@@ -57,6 +108,78 @@ function toggleCodePreviewFullscreen(previewId) {
   } else {
     wrapper.classList.add('fullscreen');
     if (btn) btn.textContent = 'close_fullscreen';
+  }
+}
+
+// Toggle code or preview panel visibility
+function toggleCodePreviewPanel(previewId, panelType) {
+  const preview = document.getElementById(previewId);
+  if (!preview) return;
+
+  const sourcePanel = preview.querySelector('.code-preview__source');
+  const previewPanel = preview.querySelector('.code-preview__preview');
+  const divider = preview.querySelector('.code-preview__divider');
+  const restoreBtnSource = preview.querySelector('.code-preview-restore-btn--source');
+  const restoreBtnPreview = preview.querySelector('.code-preview-restore-btn--preview');
+
+  // Get toggle buttons from both panels
+  const sourceToggleBtns = sourcePanel.querySelectorAll('.code-preview-toggle-btn');
+  const previewToggleBtns = previewPanel.querySelectorAll('.code-preview-toggle-btn');
+
+  if (panelType === 'source') {
+    const isHidden = sourcePanel.classList.contains('hidden');
+
+    if (isHidden) {
+      // Show source panel
+      sourcePanel.classList.remove('hidden');
+      if (divider && !previewPanel.classList.contains('hidden')) divider.style.display = '';
+      // 面板展示后，隐藏恢复按钮
+      if (restoreBtnSource) restoreBtnSource.style.display = 'none';
+
+      // Show preview panel's toggle buttons again
+      previewToggleBtns.forEach(btn => btn.style.display = '');
+    } else {
+      // Prevent hiding if preview panel is already hidden
+      if (previewPanel.classList.contains('hidden')) {
+        return;
+      }
+
+      // Hide source panel
+      sourcePanel.classList.add('hidden');
+      if (divider) divider.style.display = 'none';
+      // 面板隐藏后，显示恢复按钮
+      if (restoreBtnSource) restoreBtnSource.style.display = 'flex';
+
+      // Hide preview panel's toggle buttons
+      previewToggleBtns.forEach(btn => btn.style.display = 'none');
+    }
+  } else if (panelType === 'preview') {
+    const isHidden = previewPanel.classList.contains('hidden');
+
+    if (isHidden) {
+      // Show preview panel
+      previewPanel.classList.remove('hidden');
+      if (divider && !sourcePanel.classList.contains('hidden')) divider.style.display = '';
+      // 面板展示后，隐藏恢复按钮
+      if (restoreBtnPreview) restoreBtnPreview.style.display = 'none';
+
+      // Show source panel's toggle buttons again
+      sourceToggleBtns.forEach(btn => btn.style.display = '');
+    } else {
+      // Prevent hiding if source panel is already hidden
+      if (sourcePanel.classList.contains('hidden')) {
+        return;
+      }
+
+      // Hide preview panel
+      previewPanel.classList.add('hidden');
+      if (divider) divider.style.display = 'none';
+      // 面板隐藏后，显示恢复按钮
+      if (restoreBtnPreview) restoreBtnPreview.style.display = 'flex';
+
+      // Hide source panel's toggle buttons
+      sourceToggleBtns.forEach(btn => btn.style.display = 'none');
+    }
   }
 }
 

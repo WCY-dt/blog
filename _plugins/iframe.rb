@@ -66,7 +66,7 @@ module Jekyll
       # Generate iframe HTML
       header_html = unless @hide_header
         <<~HEADER
-          <div class="iframe-header">
+          <div class="iframe-header no-select">
             <span class="iframe-title">#{title}</span>
             <div class="iframe-controls">
               <button class="iframe-fullscreen-btn" onclick="toggleIframeFullscreen('#{iframe_id}')" title="Fullscreen">
