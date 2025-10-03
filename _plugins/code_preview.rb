@@ -262,9 +262,10 @@ module Jekyll
       layout_class = @layout == 'vertical' ? 'code-preview--vertical' : 'code-preview--horizontal'
       flex_direction = @layout == 'vertical' ? 'column' : 'row'
 
-      # Escape output content for HTML display and preserve line breaks
+      # Escape output content for HTML display and preserve line breaks and spaces
       # Strip to remove any leading/trailing whitespace that might cause indentation issues
-      escaped_output = CGI.escapeHTML(output_content.strip).gsub("\n", "<br>")
+      # Note: white-space: pre-wrap in CSS will handle the actual rendering of spaces and newlines
+      escaped_output = CGI.escapeHTML(output_content.strip)
 
       # Determine initial visibility
       source_hidden = @hide == 'code' ? ' hidden' : ''
@@ -296,9 +297,7 @@ module Jekyll
                   </button>
                 </div>
               </div>
-              <div class="code-preview__output">
-                #{escaped_output}
-              </div>
+              <pre class="code-preview__output" style="margin: 0; padding: 16px; overflow: auto; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; white-space: pre-wrap; word-wrap: break-word;">#{escaped_output}</pre>
             </div>
             <button class="code-preview-restore-btn code-preview-restore-btn--preview no-select" onclick="toggleCodePreviewPanel('#{id}', 'preview')" title="Show Output Panel" style="#{restore_preview_display}" data-icon-horizontal="keyboard_arrow_left" data-icon-vertical="keyboard_arrow_up">
               <span class="material-symbols-outlined">#{@layout == 'vertical' ? 'keyboard_arrow_up' : 'keyboard_arrow_left'}</span>
