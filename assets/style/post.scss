@@ -37,7 +37,7 @@ html[data-theme="light"] {
 
 html[data-theme="dark"] {
   --primary-dark-color: #999;
-  --primary-semi-dark-color: #808080;
+  --primary-semi-dark-color: #d1613c;
   --primary-color: #d74514;
   --primary-little-light-color: #a32d0f;
   --primary-semi-light-color: #333;
@@ -60,7 +60,7 @@ html[data-theme="dark"] {
 }
 
 @font-face {
-  {% comment %} https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=archive,arrow_back,arrow_forward,arrow_right_alt,calendar_month,category,check,close,content_copy,dark_mode,data_object,featured_play_list,light_mode,local_offer,manage_search,open_in_new,rss_feed,stylus_note,tag,toc,vertical_align_top,web_stories {% endcomment %}
+  {% comment %} https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=archive,arrow_back,arrow_forward,arrow_right_alt,assignment_ind,calendar_month,category,check,close,close_fullscreen,content_copy,dark_mode,data_object,featured_play_list,keyboard_arrow_down,keyboard_arrow_left,keyboard_arrow_right,keyboard_arrow_up,light_mode,local_offer,manage_search,open_in_full,open_in_new,refresh,rss_feed,stylus_note,tag,toc,vertical_align_top,visibility,visibility_off,web_stories {% endcomment %}
   font-family: 'Material Symbols Outlined';
   font-style: normal;
   font-weight: 400;
@@ -86,6 +86,8 @@ html[data-theme="dark"] {
 :root {
   --ui-font: 'Orbitron', sans-serif;
   --text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif';
+
+  --normal-shadow: 0 0 .3rem var(--shadow-color);
 }
 
 ::selection {
