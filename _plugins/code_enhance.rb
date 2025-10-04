@@ -47,10 +47,15 @@ module Jekyll
     pre_code_with_id = match.sub(/<code/, "<code id=\"#{code_id}\"")
 
     <<~HTML
-      <div class="code-block-wrapper no-select" onmouseenter="showCopyButton('#{code_id}')" onmouseleave="hideCopyButton('#{code_id}')">
-        <div class="code-copy-button" id="copy-btn-#{code_id}" onclick="copyCode('#{code_id}')" title="复制代码">
-          <span class="copy-icon material-symbols-outlined no-select">content_copy</span>
-          <span class="check-icon material-symbols-outlined no-select" style="display: none;">check</span>
+      <div class="code-block-wrapper no-select" id="wrapper-#{code_id}" onmouseenter="showCodeButtons('#{code_id}')" onmouseleave="hideCodeButtons('#{code_id}')">
+        <div class="code-block-buttons">
+          <button class="code-fullscreen-button" id="fullscreen-btn-#{code_id}" onclick="toggleCodeFullscreen('#{code_id}')" title="Toggle Fullscreen">
+            <span class="material-symbols-outlined no-select">open_in_full</span>
+          </button>
+          <button class="code-copy-button" id="copy-btn-#{code_id}" onclick="copyCode('#{code_id}')" title="Copy Code">
+            <span class="copy-icon material-symbols-outlined no-select">content_copy</span>
+            <span class="check-icon material-symbols-outlined no-select" style="display: none;">check</span>
+          </button>
         </div>
         #{pre_code_with_id}
       </div>

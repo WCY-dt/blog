@@ -2,18 +2,25 @@
   position: relative;
   overflow: visible;
 
-  .code-copy-button {
+  .code-block-buttons {
     position: absolute;
     top: .25rem;
     right: .5rem;
+    display: flex;
+    gap: .5rem;
+    opacity: 0;
+    z-index: 15;
+    transition: opacity .25s ease-in-out;
+  }
+
+  .code-copy-button,
+  .code-fullscreen-button {
     background: var(--primary-light-color);
     color: var(--primary-little-light-color);
     border: none;
     border-radius: .25rem;
     padding: .2rem;
     cursor: pointer;
-    opacity: 0;
-    z-index: 15;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
     display: flex;
     align-items: center;
@@ -30,12 +37,13 @@
       }
     }
 
-    .copy-icon,
-    .check-icon {
+    .material-symbols-outlined {
       font-size: 1rem !important;
       transition: all .25s ease;
     }
+  }
 
+  .code-copy-button {
     .copy-icon {
       display: inline-block;
     }
@@ -45,12 +53,38 @@
     }
   }
 
-  &:hover .code-copy-button {
+  &:hover .code-block-buttons {
     opacity: 1;
+  }
+
+  &.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999;
+    border-radius: 0;
+    margin: 0;
+    background: var(--primary-extra-light-color);
+    display: flex;
+    flex-direction: column;
+
+    pre {
+      flex: 1;
+      margin: 0 !important;
+      border-radius: 0;
+      height: 100% !important;
+      overflow: auto;
+    }
+
+    .code-block-buttons {
+      opacity: 1;
+    }
   }
 }
 
-main .code-block-wrapper .code-copy-button {
+main .code-block-wrapper .code-block-buttons {
   z-index: 4;
 }
 
@@ -374,6 +408,47 @@ main .code-block-wrapper .code-copy-button {
 
   .image-caption__image {
     width: 100%;
+  }
+}
+
+/* Image Grid Plugin Styles */
+.image-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.image-grid__item {
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-grid__image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.image-grid__caption {
+  margin-top: .5rem;
+  font-style: italic;
+  color: var(--gray-color);
+  font-size: .85rem;
+  line-height: 1.4;
+  padding: 0 .5rem;
+}
+
+@media (max-width: 768px) {
+  .image-grid {
+    grid-template-columns: 1fr !important;
+    gap: .75rem;
+    margin: 1rem 0;
+  }
+
+  .image-grid__caption {
+    font-size: .8rem;
   }
 }
 
