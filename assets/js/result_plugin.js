@@ -1,36 +1,36 @@
 /**
- * Code Preview Plugin JavaScript
+ * Result Plugin JavaScript
  * Handles fullscreen, refresh, and tab switching
  */
 
 // Tab switching
 document.addEventListener('DOMContentLoaded', () => {
   // Handle tab clicks
-  document.querySelectorAll('.code-preview-tab').forEach(button => {
+  document.querySelectorAll('.result-tab').forEach(button => {
     button.addEventListener('click', function() {
       const tabName = this.getAttribute('data-tab');
-      const tabsContainer = this.closest('.code-preview-tabs');
+      const tabsContainer = this.closest('.result-tabs');
 
       // Remove active class from all tabs and contents
-      tabsContainer.querySelectorAll('.code-preview-tab').forEach(tab => {
+      tabsContainer.querySelectorAll('.result-tab').forEach(tab => {
         tab.classList.remove('active');
       });
-      tabsContainer.querySelectorAll('.code-preview-tab-content').forEach(content => {
+      tabsContainer.querySelectorAll('.result-tab-content').forEach(content => {
         content.classList.remove('active');
       });
 
       // Add active class to clicked tab and corresponding content
       this.classList.add('active');
-      tabsContainer.querySelector(`.code-preview-tab-content[data-tab-content="${tabName}"]`).classList.add('active');
+      tabsContainer.querySelector(`.result-tab-content[data-tab-content="${tabName}"]`).classList.add('active');
     });
   });
 
   // Handle initial hidden state - hide toggle buttons for the opposite panel
-  document.querySelectorAll('.code-preview').forEach(preview => {
-    const sourcePanel = preview.querySelector('.code-preview__source');
-    const previewPanel = preview.querySelector('.code-preview__preview');
-    const sourceToggleBtns = sourcePanel.querySelectorAll('.code-preview-toggle-btn');
-    const previewToggleBtns = previewPanel.querySelectorAll('.code-preview-toggle-btn');
+  document.querySelectorAll('.result').forEach(preview => {
+    const sourcePanel = preview.querySelector('.result__source');
+    const previewPanel = preview.querySelector('.result__preview');
+    const sourceToggleBtns = sourcePanel.querySelectorAll('.result-toggle-btn');
+    const previewToggleBtns = previewPanel.querySelectorAll('.result-toggle-btn');
 
     if (sourcePanel.classList.contains('hidden')) {
       // If source is hidden initially, hide preview's toggle buttons
@@ -51,9 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateRestoreButtonIcons() {
   const isSmallScreen = window.innerWidth <= 768;
 
-  document.querySelectorAll('.code-preview').forEach(preview => {
+  document.querySelectorAll('.result').forEach(preview => {
     const layout = preview.getAttribute('data-layout');
-    const restoreBtns = preview.querySelectorAll('.code-preview-restore-btn');
+    const restoreBtns = preview.querySelectorAll('.result-restore-btn');
 
     restoreBtns.forEach(btn => {
       const icon = btn.querySelector('.material-symbols-outlined');
@@ -78,11 +78,11 @@ function updateRestoreButtonIcons() {
 window.addEventListener('resize', updateRestoreButtonIcons);
 
 // Refresh iframe content
-function refreshCodePreview(previewId) {
+function refreshResult(previewId) {
   const preview = document.getElementById(previewId);
   if (!preview) return;
 
-  const iframe = preview.querySelector('.code-preview__iframe');
+  const iframe = preview.querySelector('.result__iframe');
   if (iframe) {
     const src = iframe.getAttribute('srcdoc');
     iframe.setAttribute('srcdoc', '');
@@ -93,14 +93,14 @@ function refreshCodePreview(previewId) {
 }
 
 // Toggle fullscreen mode
-function toggleCodePreviewFullscreen(previewId) {
+function toggleResultFullscreen(previewId) {
   const preview = document.getElementById(previewId);
   if (!preview) return;
 
-  const wrapper = preview.closest('.code-preview-wrapper');
+  const wrapper = preview.closest('.result-wrapper');
   if (!wrapper) return;
 
-  const btn = wrapper.querySelector('.code-preview-fullscreen-btn .material-symbols-outlined');
+  const btn = wrapper.querySelector('.result-fullscreen-btn .material-symbols-outlined');
 
   if (wrapper.classList.contains('fullscreen')) {
     wrapper.classList.remove('fullscreen');
@@ -112,19 +112,19 @@ function toggleCodePreviewFullscreen(previewId) {
 }
 
 // Toggle code or preview panel visibility
-function toggleCodePreviewPanel(previewId, panelType) {
+function toggleResultPanel(previewId, panelType) {
   const preview = document.getElementById(previewId);
   if (!preview) return;
 
-  const sourcePanel = preview.querySelector('.code-preview__source');
-  const previewPanel = preview.querySelector('.code-preview__preview');
-  const divider = preview.querySelector('.code-preview__divider');
-  const restoreBtnSource = preview.querySelector('.code-preview-restore-btn--source');
-  const restoreBtnPreview = preview.querySelector('.code-preview-restore-btn--preview');
+  const sourcePanel = preview.querySelector('.result__source');
+  const previewPanel = preview.querySelector('.result__preview');
+  const divider = preview.querySelector('.result__divider');
+  const restoreBtnSource = preview.querySelector('.result-restore-btn--source');
+  const restoreBtnPreview = preview.querySelector('.result-restore-btn--preview');
 
   // Get toggle buttons from both panels
-  const sourceToggleBtns = sourcePanel.querySelectorAll('.code-preview-toggle-btn');
-  const previewToggleBtns = previewPanel.querySelectorAll('.code-preview-toggle-btn');
+  const sourceToggleBtns = sourcePanel.querySelectorAll('.result-toggle-btn');
+  const previewToggleBtns = previewPanel.querySelectorAll('.result-toggle-btn');
 
   if (panelType === 'source') {
     const isHidden = sourcePanel.classList.contains('hidden');
@@ -186,10 +186,10 @@ function toggleCodePreviewPanel(previewId, panelType) {
 // Handle ESC key to exit fullscreen
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    const fullscreenPreview = document.querySelector('.code-preview-wrapper.fullscreen');
+    const fullscreenPreview = document.querySelector('.result-wrapper.fullscreen');
     if (fullscreenPreview) {
-      const previewId = fullscreenPreview.querySelector('.code-preview').id;
-      toggleCodePreviewFullscreen(previewId);
+      const previewId = fullscreenPreview.querySelector('.result').id;
+      toggleResultFullscreen(previewId);
     }
   }
 });

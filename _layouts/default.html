@@ -226,14 +226,21 @@ layout: compress
 
     {%- include sidebar.html -%}
 
-    <!-- 代码复制 -->
     {%- if page.layout == 'post' -%}
-      <script src='{{ '/assets/js/code_enhance.js' | relative_url }}'></script>
-    {%- endif -%}
+      <!-- 图像放大展示 -->
+      <script src='{{ '/assets/js/lightbox.js' | relative_url }}'></script>
 
-    <!-- iframe 插件 -->
-    {%- if page.layout == 'post' -%}
-      <script src='{{ '/assets/js/iframe.js' | relative_url }}'></script>
+      <!-- 代码块增强插件 -->
+      <script src='{{ '/assets/js/code_enhance.js' | relative_url }}'></script>
+
+      <!-- 表格增强插件 -->
+      <script src='{{ '/assets/js/table_enhance.js' | relative_url }}'></script>
+
+      <!-- iframe 插件 -->
+      <script src='{{ '/assets/js/iframe_plugin.js' | relative_url }}'></script>
+
+      <!-- result 插件 -->
+      <script src='{{ '/assets/js/result_plugin.js' | relative_url }}'></script>
     {%- endif -%}
 
     <!-- 数学公式 -->

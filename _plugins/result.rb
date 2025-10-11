@@ -2,13 +2,13 @@ require 'liquid'
 require 'cgi'
 
 module Jekyll
-  class CodePreviewTag < Liquid::Block
+  class ResultTag < Liquid::Block
     def initialize(tag_name, markup, tokens)
       super
       # Parse parameters: [height=400px] [split=50] [title="My Demo"] [layout=horizontal|vertical] [hide=code|preview]
       @height = '400px'
       @split_ratio = '50' # percentage for left/top panel
-      @title = 'Code Preview'
+      @title = 'Result'
       @layout = 'horizontal' # default to horizontal (left-right)
       @hide = nil # default: show both panels, can be 'code' or 'preview'
 
@@ -38,26 +38,27 @@ module Jekyll
       all_blocks = extract_all_code_blocks(content)
 
       if all_blocks.empty?
-        return '<div class="code-preview-error">Error: At least one code block is required</div>'
+        return '<div class="result-error">Error: At least one code block is required</div>'
       end
 
-      # Check if last block is plaintext (output mode)
+      # Check if last block is plaintext or image (output mode)
       last_block = all_blocks.last
-      is_output_mode = last_block[:language] == 'plaintext'
+      is_output_mode = ['plaintext', 'image'].include?(last_block[:language])
 
       # Generate unique ID
       preview_id = "preview-#{rand(100000..999999)}"
 
       if is_output_mode
-        # Output mode: code blocks + plaintext output
+        # Output mode: code blocks + plaintext/image output
         code_blocks = all_blocks[0..-2]
         output_content = last_block[:code]
+        output_type = last_block[:language]
 
         if code_blocks.empty?
-          return '<div class="code-preview-error">Error: At least one code block is required before the plaintext output</div>'
+          return '<div class="result-error">Error: At least one code block is required before the output</div>'
         end
 
-        generate_output_preview_html(preview_id, code_blocks, output_content)
+        generate_output_preview_html(preview_id, code_blocks, output_content, output_type)
       else
         # Original HTML preview mode (backward compatibility)
         html_content = extract_code_block(content, 'html')
@@ -65,7 +66,7 @@ module Jekyll
         js_content = extract_code_block(content, 'javascript') || extract_code_block(content, 'js')
 
         if html_content.nil? || html_content.empty?
-          return '<div class="code-preview-error">Error: HTML code block is required</div>'
+          return '<div class="result-error">Error: HTML code block is required</div>'
         end
 
         # Generate combined HTML for iframe
@@ -134,7 +135,7 @@ module Jekyll
       tabs_html = build_tabs_html(html_code, css_code, js_code)
 
       # Determine layout class and flex direction
-      layout_class = @layout == 'vertical' ? 'code-preview--vertical' : 'code-preview--horizontal'
+      layout_class = @layout == 'vertical' ? 'result--vertical' : 'result--horizontal'
       flex_direction = @layout == 'vertical' ? 'column' : 'row'
 
       # Determine initial visibility
@@ -146,32 +147,32 @@ module Jekyll
       restore_preview_display = @hide == 'preview' ? 'display: flex;' : 'display: none;'
 
       <<~HTML
-        <div class="code-preview-wrapper" data-height="#{@height}">
-          <div class="code-preview #{layout_class}" id="#{id}" data-layout="#{@layout}" style="height: #{@height}; flex-direction: #{flex_direction};">
-            <button class="code-preview-restore-btn code-preview-restore-btn--source no-select" onclick="toggleCodePreviewPanel('#{id}', 'source')" title="Show Code Panel" style="#{restore_source_display}" data-icon-horizontal="keyboard_arrow_right" data-icon-vertical="keyboard_arrow_down">
+        <div class="result-wrapper" data-height="#{@height}">
+          <div class="result #{layout_class}" id="#{id}" data-layout="#{@layout}" style="height: #{@height}; flex-direction: #{flex_direction};">
+            <button class="result-restore-btn result-restore-btn--source no-select" onclick="toggleResultPanel('#{id}', 'source')" title="Show Code Panel" style="#{restore_source_display}" data-icon-horizontal="keyboard_arrow_right" data-icon-vertical="keyboard_arrow_down">
               <span class="material-symbols-outlined">#{@layout == 'vertical' ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</span>
             </button>
-            <div class="code-preview__source#{source_hidden}" style="flex: #{left_flex};">
+            <div class="result__source#{source_hidden}" style="flex: #{left_flex};">
               #{tabs_html}
             </div>
-            <div class="code-preview__divider" style="#{divider_display}"></div>
-            <div class="code-preview__preview#{preview_hidden}" style="flex: #{right_flex};">
-              <div class="code-preview__preview-header no-select">
-                <span class="code-preview__preview-title">#{@title}</span>
-                <div class="code-preview-controls">
-                  <button class="code-preview-toggle-btn" onclick="toggleCodePreviewPanel('#{id}', 'preview')" title="Toggle Preview Panel">
+            <div class="result__divider" style="#{divider_display}"></div>
+            <div class="result__preview#{preview_hidden}" style="flex: #{right_flex};">
+              <div class="result__preview-header no-select">
+                <span class="result__preview-title">#{@title}</span>
+                <div class="result-controls">
+                  <button class="result-toggle-btn" onclick="toggleResultPanel('#{id}', 'preview')" title="Toggle Preview Panel">
                     <span class="material-symbols-outlined">visibility_off</span>
                   </button>
-                  <button class="code-preview-refresh-btn" onclick="refreshCodePreview('#{id}')" title="Refresh">
+                  <button class="result-refresh-btn" onclick="refreshResult('#{id}')" title="Refresh">
                     <span class="material-symbols-outlined">refresh</span>
                   </button>
-                  <button class="code-preview-fullscreen-btn" onclick="toggleCodePreviewFullscreen('#{id}')" title="Fullscreen">
+                  <button class="result-fullscreen-btn" onclick="toggleResultFullscreen('#{id}')" title="Fullscreen">
                     <span class="material-symbols-outlined">open_in_full</span>
                   </button>
                 </div>
               </div>
               <iframe
-                class="code-preview__iframe"
+                class="result__iframe"
                 srcdoc="#{CGI.escapeHTML(iframe_content)}"
                 frameborder="0"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
@@ -179,7 +180,7 @@ module Jekyll
                 loading="lazy">
               </iframe>
             </div>
-            <button class="code-preview-restore-btn code-preview-restore-btn--preview no-select" onclick="toggleCodePreviewPanel('#{id}', 'preview')" title="Show Preview Panel" style="#{restore_preview_display}" data-icon-horizontal="keyboard_arrow_left" data-icon-vertical="keyboard_arrow_up">
+            <button class="result-restore-btn result-restore-btn--preview no-select" onclick="toggleResultPanel('#{id}', 'preview')" title="Show Preview Panel" style="#{restore_preview_display}" data-icon-horizontal="keyboard_arrow_left" data-icon-vertical="keyboard_arrow_up">
               <span class="material-symbols-outlined">#{@layout == 'vertical' ? 'keyboard_arrow_up' : 'keyboard_arrow_left'}</span>
             </button>
           </div>
@@ -201,7 +202,7 @@ module Jekyll
 
       tab_buttons = tabs.map do |tab|
         active_class = tab[:active] ? ' active' : ''
-        "<button class=\"code-preview-tab#{active_class}\" data-tab=\"#{tab[:id]}\">#{tab[:label]}</button>"
+        "<button class=\"result-tab#{active_class}\" data-tab=\"#{tab[:id]}\">#{tab[:label]}</button>"
       end.join
 
       tab_contents = tabs.map do |tab|
@@ -209,25 +210,25 @@ module Jekyll
         # Use Rouge to highlight the code
         highlighted_code = highlight_code(tab[:code], tab[:language])
         <<~TAB
-          <div class="code-preview-tab-content#{active_class}" data-tab-content="#{tab[:id]}">
+          <div class="result-tab-content#{active_class}" data-tab-content="#{tab[:id]}">
             #{highlighted_code}
           </div>
         TAB
       end.join
 
       <<~HTML
-        <div class="code-preview-tabs">
-          <div class="code-preview-tab-buttons no-select">
-            <div class="code-preview-tab-buttons__tabs">
+        <div class="result-tabs">
+          <div class="result-tab-buttons no-select">
+            <div class="result-tab-buttons__tabs">
               #{tab_buttons}
             </div>
-            <div class="code-preview-controls">
-              <button class="code-preview-toggle-btn" onclick="toggleCodePreviewPanel('#{preview_id}', 'source')" title="Toggle Code Panel">
+            <div class="result-controls">
+              <button class="result-toggle-btn" onclick="toggleResultPanel('#{preview_id}', 'source')" title="Toggle Code Panel">
                 <span class="material-symbols-outlined">visibility_off</span>
               </button>
             </div>
           </div>
-          <div class="code-preview-tab-contents">
+          <div class="result-tab-contents">
             #{tab_contents}
           </div>
         </div>
@@ -247,7 +248,7 @@ module Jekyll
       highlighted
     end
 
-    def generate_output_preview_html(id, code_blocks, output_content)
+    def generate_output_preview_html(id, code_blocks, output_content, output_type = 'plaintext')
       # Calculate flex ratios
       left_flex = @split_ratio.to_i
       right_flex = 100 - left_flex
@@ -259,13 +260,11 @@ module Jekyll
       tabs_html = build_code_tabs_html(code_blocks)
 
       # Determine layout class and flex direction
-      layout_class = @layout == 'vertical' ? 'code-preview--vertical' : 'code-preview--horizontal'
+      layout_class = @layout == 'vertical' ? 'result--vertical' : 'result--horizontal'
       flex_direction = @layout == 'vertical' ? 'column' : 'row'
 
-      # Escape output content for HTML display and preserve line breaks and spaces
-      # Strip to remove any leading/trailing whitespace that might cause indentation issues
-      # Note: white-space: pre-wrap in CSS will handle the actual rendering of spaces and newlines
-      escaped_output = CGI.escapeHTML(output_content.strip)
+      # Generate output content based on type
+      output_html = generate_output_content(output_content, output_type)
 
       # Determine initial visibility
       source_hidden = @hide == 'code' ? ' hidden' : ''
@@ -275,36 +274,97 @@ module Jekyll
       restore_source_display = @hide == 'code' ? 'display: flex;' : 'display: none;'
       restore_preview_display = @hide == 'preview' ? 'display: flex;' : 'display: none;'
 
+      # Determine output panel title based on type
+      output_panel_title = output_type == 'image' ? 'Toggle Image Panel' : 'Toggle Output Panel'
+      restore_panel_title = output_type == 'image' ? 'Show Image Panel' : 'Show Output Panel'
+
       <<~HTML
-        <div class="code-preview-wrapper" data-height="#{@height}">
-          <div class="code-preview #{layout_class}" id="#{id}" data-layout="#{@layout}" style="height: #{@height}; flex-direction: #{flex_direction};">
-            <button class="code-preview-restore-btn code-preview-restore-btn--source no-select" onclick="toggleCodePreviewPanel('#{id}', 'source')" title="Show Code Panel" style="#{restore_source_display}" data-icon-horizontal="keyboard_arrow_right" data-icon-vertical="keyboard_arrow_down">
+        <div class="result-wrapper" data-height="#{@height}">
+          <div class="result #{layout_class}" id="#{id}" data-layout="#{@layout}" style="height: #{@height}; flex-direction: #{flex_direction};">
+            <button class="result-restore-btn result-restore-btn--source no-select" onclick="toggleResultPanel('#{id}', 'source')" title="Show Code Panel" style="#{restore_source_display}" data-icon-horizontal="keyboard_arrow_right" data-icon-vertical="keyboard_arrow_down">
               <span class="material-symbols-outlined">#{@layout == 'vertical' ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</span>
             </button>
-            <div class="code-preview__source#{source_hidden}" style="flex: #{left_flex};">
+            <div class="result__source#{source_hidden}" style="flex: #{left_flex};">
               #{tabs_html}
             </div>
-            <div class="code-preview__divider" style="#{divider_display}"></div>
-            <div class="code-preview__preview#{preview_hidden}" style="flex: #{right_flex};">
-              <div class="code-preview__preview-header no-select">
-                <span class="code-preview__preview-title">#{@title}</span>
-                <div class="code-preview-controls">
-                  <button class="code-preview-toggle-btn" onclick="toggleCodePreviewPanel('#{id}', 'preview')" title="Toggle Output Panel">
+            <div class="result__divider" style="#{divider_display}"></div>
+            <div class="result__preview#{preview_hidden}" style="flex: #{right_flex};">
+              <div class="result__preview-header no-select">
+                <span class="result__preview-title">#{@title}</span>
+                <div class="result-controls">
+                  <button class="result-toggle-btn" onclick="toggleResultPanel('#{id}', 'preview')" title="#{output_panel_title}">
                     <span class="material-symbols-outlined">visibility_off</span>
                   </button>
-                  <button class="code-preview-fullscreen-btn" onclick="toggleCodePreviewFullscreen('#{id}')" title="Fullscreen">
+                  <button class="result-fullscreen-btn" onclick="toggleResultFullscreen('#{id}')" title="Fullscreen">
                     <span class="material-symbols-outlined">open_in_full</span>
                   </button>
                 </div>
               </div>
-              <pre class="code-preview__output" style="margin: 0; padding: 16px; overflow: auto; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; white-space: pre-wrap; word-wrap: break-word;">#{escaped_output}</pre>
+              #{output_html}
             </div>
-            <button class="code-preview-restore-btn code-preview-restore-btn--preview no-select" onclick="toggleCodePreviewPanel('#{id}', 'preview')" title="Show Output Panel" style="#{restore_preview_display}" data-icon-horizontal="keyboard_arrow_left" data-icon-vertical="keyboard_arrow_up">
+            <button class="result-restore-btn result-restore-btn--preview no-select" onclick="toggleResultPanel('#{id}', 'preview')" title="#{restore_panel_title}" style="#{restore_preview_display}" data-icon-horizontal="keyboard_arrow_left" data-icon-vertical="keyboard_arrow_up">
               <span class="material-symbols-outlined">#{@layout == 'vertical' ? 'keyboard_arrow_up' : 'keyboard_arrow_left'}</span>
             </button>
           </div>
         </div>
       HTML
+    end
+
+    def generate_output_content(content, type)
+      case type
+      when 'image'
+        generate_image_output(content)
+      else
+        # Default to plaintext
+        generate_text_output(content)
+      end
+    end
+
+    def generate_text_output(content)
+      # Escape output content for HTML display and preserve line breaks and spaces
+      # Strip to remove any leading/trailing whitespace that might cause indentation issues
+      # Note: white-space: pre-wrap in CSS will handle the actual rendering of spaces and newlines
+      escaped_output = CGI.escapeHTML(content.strip)
+
+      <<~HTML
+        <pre class="result__output" style="margin: 0; padding: 16px; overflow: auto; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; white-space: pre-wrap; word-wrap: break-word;">#{escaped_output}</pre>
+      HTML
+    end
+
+    def generate_image_output(content)
+      # Parse image URLs from content (one per line)
+      # Support both single image and multiple images
+      image_urls = content.strip.split("\n").map(&:strip).reject(&:empty?)
+
+      if image_urls.empty?
+        return '<div class="result-error">Error: No image URLs provided</div>'
+      end
+
+      # Generate image gallery HTML
+      if image_urls.length == 1
+        # Single image
+        image_url = image_urls.first
+        <<~HTML
+          <div class="result__image-output">
+            <img src="#{CGI.escapeHTML(image_url)}" alt="Generated Image" loading="lazy">
+          </div>
+        HTML
+      else
+        # Multiple images - create a grid
+        images_html = image_urls.map do |url|
+          <<~IMG
+            <div class="result__image-item">
+              <img src="#{CGI.escapeHTML(url)}" alt="Generated Image" loading="lazy">
+            </div>
+          IMG
+        end.join
+
+        <<~HTML
+          <div class="result__image-output result__image-grid">
+            #{images_html}
+          </div>
+        HTML
+      end
     end
 
     def build_code_tabs_html(code_blocks)
@@ -323,7 +383,7 @@ module Jekyll
 
       tab_buttons = tabs.map do |tab|
         active_class = tab[:active] ? ' active' : ''
-        "<button class=\"code-preview-tab#{active_class}\" data-tab=\"#{tab[:id]}\">#{tab[:label]}</button>"
+        "<button class=\"result-tab#{active_class}\" data-tab=\"#{tab[:id]}\">#{tab[:label]}</button>"
       end.join
 
       tab_contents = tabs.map do |tab|
@@ -331,25 +391,25 @@ module Jekyll
         # Use Rouge to highlight the code
         highlighted_code = highlight_code(tab[:code], tab[:language])
         <<~TAB
-          <div class="code-preview-tab-content#{active_class}" data-tab-content="#{tab[:id]}">
+          <div class="result-tab-content#{active_class}" data-tab-content="#{tab[:id]}">
             #{highlighted_code}
           </div>
         TAB
       end.join
 
       <<~HTML
-        <div class="code-preview-tabs">
-          <div class="code-preview-tab-buttons no-select">
-            <div class="code-preview-tab-buttons__tabs">
+        <div class="result-tabs">
+          <div class="result-tab-buttons no-select">
+            <div class="result-tab-buttons__tabs">
               #{tab_buttons}
             </div>
-            <div class="code-preview-controls">
-              <button class="code-preview-toggle-btn" onclick="toggleCodePreviewPanel('#{preview_id}', 'source')" title="Toggle Code Panel">
+            <div class="result-controls">
+              <button class="result-toggle-btn" onclick="toggleResultPanel('#{preview_id}', 'source')" title="Toggle Code Panel">
                 <span class="material-symbols-outlined">visibility_off</span>
               </button>
             </div>
           </div>
-          <div class="code-preview-tab-contents">
+          <div class="result-tab-contents">
             #{tab_contents}
           </div>
         </div>
@@ -358,4 +418,4 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag('code_preview', Jekyll::CodePreviewTag)
+Liquid::Template.register_tag('result', Jekyll::ResultTag)

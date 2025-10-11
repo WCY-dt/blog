@@ -4,7 +4,7 @@ require 'net/http'
 require 'nokogiri'
 
 module Jekyll
-  class CiteWithLinkTag < Liquid::Block
+  class CiteTag < Liquid::Block
     def initialize(tag_name, markup, tokens)
       super
       @markup = markup.strip
@@ -14,7 +14,7 @@ module Jekyll
       params = parse_params(@markup)
 
       unless params['url']
-        raise "cite_with_link requires a URL parameter"
+        raise "cite requires a URL parameter"
       end
 
       url = params['url']
@@ -25,7 +25,7 @@ module Jekyll
 
       html = generate_cite_html(url, title, favicon_url, content)
 
-      "\n\n<div class=\"cite-with-link-wrapper\">#{html}</div>\n\n"
+      "\n\n<div class=\"cite-wrapper\">#{html}</div>\n\n"
     end
 
     private
@@ -59,7 +59,7 @@ module Jekyll
         http.read_timeout = 5
 
         request = Net::HTTP::Get.new(uri.request_uri)
-        request['User-Agent'] = 'Mozilla/5.0 (compatible; Jekyll cite_with_link)'
+        request['User-Agent'] = 'Mozilla/5.0 (compatible; Jekyll cite)'
 
         response = http.request(request)
 
@@ -107,7 +107,7 @@ module Jekyll
           http.read_timeout = 3
 
           request = Net::HTTP::Get.new(uri.request_uri)
-          request['User-Agent'] = 'Mozilla/5.0 (compatible; Jekyll cite_with_link)'
+          request['User-Agent'] = 'Mozilla/5.0 (compatible; Jekyll cite)'
 
           response = http.request(request)
 
@@ -171,22 +171,22 @@ module Jekyll
       domain = URI.parse(url).host rescue 'unknown'
 
       <<~HTML
-        <div class="cite-with-link__header">
-          <div class="cite-with-link__favicon-wrapper">
-            <img src="#{favicon_url}" alt="#{title}" class="cite-with-link__favicon no-select" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-            <img src="/assets/img/link-icon.svg" alt="#{title}" class="cite-with-link__favicon cite-with-link__favicon--fallback no-select" style="display: none;">
+        <div class="cite__header">
+          <div class="cite__favicon-wrapper">
+            <img src="#{favicon_url}" alt="#{title}" class="cite__favicon no-select" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <img src="/assets/img/link-icon.svg" alt="#{title}" class="cite__favicon cite__favicon--fallback no-select" style="display: none;">
           </div>
-          <div class="cite-with-link__info">
-            <strong class="cite-with-link__info-title">#{title}</strong>
+          <div class="cite__info">
+            <strong class="cite__info-title">#{title}</strong>
             <br>
-            <span class="cite-with-link__info-domain">#{domain}</span>
+            <span class="cite__info-domain">#{domain}</span>
           </div>
-          <a href="#{url}" class="cite-with-link__link no-select" target="_blank" rel="noopener noreferrer">
-            <span class="cite-with-link__link-icon material-symbols-outlined">open_in_new</span>
+          <a href="#{url}" class="cite__link no-select" target="_blank" rel="noopener noreferrer">
+            <span class="cite__link-icon material-symbols-outlined">open_in_new</span>
           </a>
         </div>
 
-        <div class="cite-with-link__content" markdown="1">
+        <div class="cite__content" markdown="1">
 
           #{content}
 
@@ -196,4 +196,4 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag('cite_with_link', Jekyll::CiteWithLinkTag)
+Liquid::Template.register_tag('cite', Jekyll::CiteTag)
