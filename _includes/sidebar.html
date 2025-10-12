@@ -51,6 +51,16 @@
     </div>
   {% endif %}
 
+  <!-- translation -->
+  {% if site.translation %}
+    <div id='sidebar__translate-wrapper' class='sidebar__translate-wrapper sidebar__item-wrapper'>
+      <a id='sidebar__translate-btn' class='sidebar__translate-btn sidebar__item-btn material-symbols-outlined'
+        href='{{ site.translation.link }}' alt='Translate to {{ site.translation.lang }}'>
+        translate
+      </a>
+    </div>
+  {% endif %}
+
   <!-- search -->
   <div id='sidebar__search-wrapper' class='sidebar__search-wrapper sidebar__item-wrapper'>
     <input
