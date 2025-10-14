@@ -7,4 +7,5 @@ menuContainerMobileButton.addEventListener('click', () => {
   const isHidden = menuContainerMobileMenu.style.display === 'none'
   menuContainerMobileMenu.style.display = isHidden ? 'flex' : 'none'
   menuContainerMobileButton.innerHTML = isHidden ? 'close' : 'featured_play_list'
+  menuContainerMobileButton.classList.toggle('sidebar__menu-btn--active', isHidden);
 })

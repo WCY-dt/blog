@@ -311,6 +311,14 @@
       font-size: 1.5rem;
     }
   }
+
+  .pagination__item-wrapper--archived {
+    width: min(100%, 40rem);
+  }
+
+  .pagination__separator {
+    width: min(100%, calc(40rem - 3rem));
+  }
 }
 
 @media screen and (max-width: 550px) {
