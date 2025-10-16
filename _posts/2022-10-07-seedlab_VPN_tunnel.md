@@ -31,7 +31,7 @@ dcbuild
 dcup
 ```
 
-<img src="/assets/post/images/vpn2.webp" alt="vpn2"  />
+<img src="/assets/post/images/vpn2.svg" alt="vpn2" style="width:min(100%,450px);" />
 
 使用新的 terminal：
 
@@ -861,7 +861,7 @@ rtt min/avg/max/mdev = 57.842/57.842/57.842/0.000 ms
 
 ## Task 8: VPN Between Private Networks
 
-<img src="/assets/post/images/vpn4.webp" alt="vpn4"  />
+<img src="/assets/post/images/vpn4.svg" alt="vpn4" />
 
 启动新的 docker：
 

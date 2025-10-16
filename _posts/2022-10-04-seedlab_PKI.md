@@ -32,7 +32,7 @@ sudo vi /etc/hosts
 
 添加：
 
-```hosts
+```plaintext
 10.9.0.80 www.chenyang2022.com
 ```
 
@@ -419,7 +419,7 @@ sudo vi /etc/hosts
 
 添加：
 
-```hosts
+```plaintext
 10.9.0.80 www.seu.edu.cn
 ```
 

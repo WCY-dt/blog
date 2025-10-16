@@ -107,3 +107,12 @@ webrick:
 exclude:
   - LICENSE.txt
   - README.md
+  - dev/
+  - _test/
+  - scripts/
+  - .github/
+  - .vscode/
+  - .gitignore
+  - .gitattributes
+  - .DS_Store
+  - CNAME

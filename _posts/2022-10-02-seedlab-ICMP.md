@@ -25,7 +25,7 @@ ICMP 重定向是路由器向 IP 数据包发送者发送的错误消息。 当�
 
 ## Task 1: Launching ICMP Redirect Attack
 
-![icmp1](/assets/post/images/icmp1.webp)
+![icmp1](/assets/post/images/icmp1.svg)
 
 启动 docker：
 

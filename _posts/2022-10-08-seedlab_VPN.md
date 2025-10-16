@@ -194,7 +194,7 @@ networks:
 
 它们的 IP 和连接关系如下图所示
 
-![vpn1](/assets/post/images/vpn1.webp)
+![vpn1](/assets/post/images/vpn1.svg)
 
 设置完成后，我们启动 docker
 

@@ -46,7 +46,7 @@ dcup
 # export PS1="\w M-10.9.0.105$ "
 ```
 
-![arp1](/assets/post/images/arp1.webp)
+<img src="/assets/post/images/arp1.svg" alt="arp1" style="width:min(100%,400px);" />
 
 ### Task 1.A using ARP request
 
@@ -327,8 +327,6 @@ A-10.9.0.5$ arp -n
 可见该情况和 reply 的结果是一样的。
 
 ## Task 2: MITM Attack on Telnet using ARP Cache Poisoning
-
-![arp7](/assets/post/images/arp7.webp)
 
 ### Step 1 Launch the ARP cache poisoning attack
 

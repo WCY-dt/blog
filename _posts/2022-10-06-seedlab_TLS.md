@@ -318,7 +318,7 @@ sudo vi /etc/hosts
 
 依据之前看到的 ip，在 hosts 中添加：
 
-```hosts
+```plaintext
 58.192.118.142 www.nju.edu.cn
 ```
 
@@ -846,7 +846,7 @@ Data Base Updated
 
 在 `/etc/hosts` 中添加：
 
-```hosts
+```plaintext
 10.9.0.143 codeforces.com
 ```
 

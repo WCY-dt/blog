@@ -131,16 +131,16 @@ public class HelloController {
 
 Spring MVC 使用 `@RequestMapping` 注解来处理请求。它有以下几种用法：
 
-- **`@RequestMapping` 注解**
+- ***`@RequestMapping` 注解***
 
   用于处理请求，可以用在类上或者方法上。它有以下几种属性：
 
-  - **`value`**：请求 URL，可以是一个字符串或者字符串数组
-  - **`method`**：请求方法，可以是一个 `RequestMethod` 枚举值或者枚举值数组
-  - **`params`**：请求参数，可以是一个字符串数组
-  - **`headers`**：请求头，可以是一个字符串数组
-  - **`consumes`**：请求内容类型，可以是一个字符串数组
-  - **`produces`**：响应内容类型，可以是一个字符串数组
+  - ***`value`***：请求 URL，可以是一个字符串或者字符串数组
+  - ***`method`***：请求方法，可以是一个 `RequestMethod` 枚举值或者枚举值数组
+  - ***`params`***：请求参数，可以是一个字符串数组
+  - ***`headers`***：请求头，可以是一个字符串数组
+  - ***`consumes`***：请求内容类型，可以是一个字符串数组
+  - ***`produces`***：响应内容类型，可以是一个字符串数组
 
   例如：
 
@@ -160,7 +160,7 @@ Spring MVC 使用 `@RequestMapping` 注解来处理请求。它有以下几种�
   }
   ```
 
-- **`@GetMapping`、`@PostMapping`、`@PutMapping`、`@DeleteMapping` 注解**
+- ***`@GetMapping`、`@PostMapping`、`@PutMapping`、`@DeleteMapping` 注解***
 
   用于处理 GET、POST、PUT、DELETE 请求。它们是 `@RequestMapping` 的缩写，例如：
 
@@ -180,7 +180,7 @@ Spring MVC 使用 `@RequestMapping` 注解来处理请求。它有以下几种�
   }
   ```
 
-- **`@PathVariable` 注解**
+- ***`@PathVariable` 注解***
 
   用于获取 URL 中的参数，例如：
 
@@ -193,7 +193,7 @@ Spring MVC 使用 `@RequestMapping` 注解来处理请求。它有以下几种�
   }
   ```
 
-- **`@RequestParam`、`@RequestHeader`、`@RequestBody` 注解**
+- ***`@RequestParam`、`@RequestHeader`、`@RequestBody` 注解***
 
   用于获取请求参数、请求头、请求体，例如：
 
@@ -206,7 +206,7 @@ Spring MVC 使用 `@RequestMapping` 注解来处理请求。它有以下几种�
   }
   ```
 
-- **`@ModelAttribute` 注解**
+- ***`@ModelAttribute` 注解***
 
   用于将请求参数绑定到模型对象，例如：
 
@@ -218,7 +218,7 @@ Spring MVC 使用 `@RequestMapping` 注解来处理请求。它有以下几种�
   }
   ```
 
-- **`@SessionAttributes` 注解**
+- ***`@SessionAttributes` 注解***
 
   用于将模型对象存储到会话中，例如：
 
@@ -242,7 +242,7 @@ Spring MVC 使用 `@RequestMapping` 注解来处理请求。它有以下几种�
   }
   ```
 
-- **`@ResponseBody` 注解**
+- ***`@ResponseBody` 注解***
 
   用于返回 JSON 数据，例如：
 

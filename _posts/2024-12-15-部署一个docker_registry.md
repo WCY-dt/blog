@@ -602,33 +602,33 @@ docker login <DOMAIN NAME>
 
 你可以使用该私有 Registry 来执行以下操作：
 
-- **拉取 Docker Hub 上的镜像**：
+- ***拉取 Docker Hub 上的镜像***：
 
   ```shell
   docker pull <IMAGE NAME>:<TAG>
   ```
 
-- **标记和推送镜像**
+- ***标记和推送镜像***
 
   ```shell
   docker tag <IMAGE NAME>:<TAG> <DOMAIN NAME>/<IMAGE NAME>:<TAG>
   docker push <DOMAIN NAME>/<IMAGE NAME>:<TAG>
   ```
 
-- **拉取私有镜像**
+- ***拉取私有镜像***
 
   ```shell
   docker pull <DOMAIN NAME>/<IMAGE NAME>:<TAG>
   ```
 
-- **查看仓库中的镜像**
+- ***查看仓库中的镜像***
 
   ```shell
   curl -u <USERNAME>:<PASSWORD> https://<DOMAIN NAME>/v2/_catalog
   curl -u <USERNAME>:<PASSWORD> https://<DOMAIN NAME>/v2/<IMAGE NAME>/tags/list
   ```
 
-- **删除镜像**
+- ***删除镜像***
 
   ```shell
   curl -I -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \

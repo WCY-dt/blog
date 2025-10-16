@@ -256,7 +256,7 @@ Section Headers:
 
 我们直接手动设置符号链接 `link.lds`：
 
-```lds
+```nasm
 ENTRY(nomainhere)
 SECTIONS
 {

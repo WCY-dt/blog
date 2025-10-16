@@ -44,7 +44,7 @@ snort 默认安装在 `/etc/snort` 下。目录结构如下：
 
 修改 `test.rules` 内容为：
 
-```rules
+```plaintext
 alert tcp any any -> any 8080 (flags: A; msg: "TEST ALERT"; content: "I am IDS Homework I"; nocase; offset: 100; depth: 100; sid: 1000001; rev: 1;)
 ```
 
@@ -90,7 +90,7 @@ sudo snort -A console -i ens33 -u snort -g snort -c /etc/snort/snort.conf
 
 此时，snort 已经在正常嗅探了。
 
-<img src="/assets/post/images/snort1.webp" alt="snort1" style="zoom:50%;" />
+<img src="/assets/post/images/snort1.webp" alt="snort1" style="width:min(100%,500px);" />
 
 ## rules 编写
 
@@ -132,7 +132,7 @@ rules
 
 我们举一个例子：
 
-```rules
+```plaintext
 alert tcp 192.168.200.5 any -> $HOME_NET 8080 (msg:"ET TROJAN IRC Potential bot
 update/download via ftp command"; flowbits:isset,is_proto_irc;
 flow:established,to_client; content:"ftp|3a|//"; nocase; fast_pattern:only;
@@ -157,7 +157,7 @@ rev:5; metadata:created_at 2010_07_30, updated_at 2019_10_07;)
 
 现在，回过来看我们之前定义的规则：
 
-```snort
+```plaintext
 alert tcp any any -> any 8080 (flags: A; msg: "TEST ALERT"; content: "I am IDS Homework I"; nocase; offset: 100; depth: 100; sid: 1000001; rev: 1;)
 ```
 
@@ -171,7 +171,7 @@ sudo scapy
 
 即可开始使用 scapy。
 
-<img src="/assets/post/images/snort2.webp" alt="snort2" style="zoom:50%;" />
+<img src="/assets/post/images/snort2.webp" alt="snort2" style="width:min(100%,500px);" />
 
 我们试着新建一个 IP 包：
 
