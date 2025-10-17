@@ -119,7 +119,7 @@ if (pass=="e256a02c7e") {
 
 所以，打开`robots.txt`文件`https://defendtheweb.net/robots.txt`查看：
 
-```robots
+```plaintext
 User-agent: *
 Allow: /
 Disallow: /help/contact
@@ -308,7 +308,7 @@ document.cookie="i3_access=true";
 
 这个字符格式不标准，我们先处理一下。
 
-```morse
+```plaintext
 .... .. --..-- / - .... .- -. -.- ... / - --- / ... .- -- ..- . .-.. / -- --- .-. ... . / - .... . / - .-. .- -. ... -- .. ... ... .. --- -. / --- ..-. / - . .-.. . --. .-. .- .--. .... .. -.-. / .. -. ..-. --- .-. -- .- - .. --- -. / .-- .- ... / ... - .- -. -.. .- .-. -.. .. --.. . -.. .-.-.- / .... . / ..- ... . -.. / -.. --- - ... / .- -. -.. / -.. .- ... .... . ... / - --- / -.-. .-. . .- - . / .- / ... - .- -. -.. .- .-. -.. / .-- .- -.-- / --- ..-. / -.-. --- -- -- ..- -. .. -.-. .- - .. --- -. --..-- / .... . / .... .- ... / .... . .-.. .--. . -.. / -.-- --- ..- / - --- -.. .- -.-- / - --- / --. . - / - .... . / .--. .- ... ... ---... / - .... .- -. -.- -.-- --- ..- ... .. .-.
 ```
 
@@ -525,7 +525,7 @@ body{
 
 音频隐写，常规操作一通，在频谱看到了信息。
 
-<img src="/assets/post/images/defendtheweb2.webp" alt="defendtheweb2" style="zoom:50%;" />
+<img src="/assets/post/images/defendtheweb2.webp" alt="defendtheweb2" />
 
 这显然是某种密码，经过查找，发现是 mayan numbers
 
@@ -594,7 +594,7 @@ CA50-44C7-0BCD-17BF
 
 ida 打开后能看到明显的答案
 
-<img src="/assets/post/images/defendtheweb3.webp" alt="defendtheweb3" style="zoom:50%;" />
+<img src="/assets/post/images/defendtheweb3.webp" alt="defendtheweb3" style="width:min(300px,100%);" />
 
 ## Captcha 2 / CAPTCHA
 
