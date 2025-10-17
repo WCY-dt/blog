@@ -14,13 +14,13 @@ copyrights: 原创
 
 本文为 [SEED Labs 2.0 - Virtual Private Network (VPN) Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/VPN/) 的实验记录。
 
-## 0. 实验目标
+## 实验目标
 
 本实验要求完成 VPN 的实现。其应当支持 TUN 建立、隧道加密、服务器认证、客户端登录、多用户等功能。
 
 本实验的实验手册使用多虚拟机与 C 语言完成，而我们希望直接**使用 docker 和 Python**。我们一步到位完成了所有程序的编写，下面描述我们的具体步骤。
 
-## 1. 生成证书
+## 生成证书
 
 创建 CA
 
@@ -52,7 +52,7 @@ eaa14a05
 $ ln -s ca.crt eaa14a05.0
 ```
 
-## 2. 设置 Docker
+## 设置 Docker
 
 编写 `docker-compose.yml`
 
@@ -203,7 +203,7 @@ dcbuild
 dcup
 ```
 
-## 3. 编写程序
+## 编写程序
 
 编写 VPN 服务器和中间人攻击服务器使用的 `vpnserver.py`
 
@@ -515,10 +515,10 @@ while True:
     └── vpnserver.py
 ```
 
-## 4. 测试
+## 测试
 
 相关命令几乎全是简单的 `ping` 和 `telnet`，此处不再赘述。
 
-## 5. 总结
+## 总结
 
 本实验较为简单。
