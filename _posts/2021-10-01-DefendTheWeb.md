@@ -523,7 +523,7 @@ body{
 
 音频隐写，常规操作一通，在频谱看到了信息。
 
-<img src="/assets/post/images/defendtheweb2.webp" alt="defendtheweb2" />
+<img src="/assets/post/images/defendtheweb2.webp" alt="音频隐写" />
 
 这显然是某种密码，经过查找，发现是 mayan numbers
 
@@ -592,7 +592,7 @@ CA50-44C7-0BCD-17BF
 
 ida 打开后能看到明显的答案
 
-<img src="/assets/post/images/defendtheweb3.webp" alt="defendtheweb3" style="width:min(300px,100%);" />
+<img src="/assets/post/images/defendtheweb3.webp" alt="ida 结果" style="width:min(300px,100%);" />
 
 ## Captcha 2 / CAPTCHA
 

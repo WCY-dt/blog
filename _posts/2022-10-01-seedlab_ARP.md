@@ -44,7 +44,7 @@ dcup
 # export PS1="\w M-10.9.0.105$ "
 ```
 
-<img src="/assets/post/images/arp1.svg" alt="arp1" style="width:min(100%,400px);" />
+<img src="/assets/post/images/arp1.svg" alt="ARP Cache Poisoning 拓扑" style="width:min(100%,400px);" />
 
 ### Task 1.A using ARP request
 
@@ -120,7 +120,7 @@ Sent 1 packets.
 
 通过 wireshark 抓包可以看到：
 
-![arp2](/assets/post/images/arp2.webp)
+![ARP 请求抓包](/assets/post/images/arp2.webp)
 
 此时 `A` 中新增了 arp 记录：
 
@@ -188,7 +188,7 @@ Sent 1 packets.
 
 抓包得到：
 
-![arp3](/assets/post/images/arp3.webp)
+![ARP 回复抓包](/assets/post/images/arp3.webp)
 
 此时 `A` 上的记录被更新：
 
@@ -218,7 +218,7 @@ Sent 1 packets.
 
 抓包得到：
 
-![arp4](/assets/post/images/arp4.webp)
+![ARP 回复再次抓包](/assets/post/images/arp4.webp)
 
 此时 `A` 上的记录没有变化：
 
@@ -284,7 +284,7 @@ Sent 1 packets.
 
 抓包得到：
 
-![arp5](/assets/post/images/arp5.webp)
+![ARP gratuitous 消息抓包](/assets/post/images/arp5.webp)
 
 此时 `A` 上的记录被更新：
 
@@ -314,7 +314,7 @@ Sent 1 packets.
 
 抓包得到：
 
-![arp6](/assets/post/images/arp6.webp)
+![ARP gratuitous 消息再次抓包](/assets/post/images/arp6.webp)
 
 此时 `A` 上的记录没有变化：
 

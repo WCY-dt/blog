@@ -1,5 +1,5 @@
 @mixin syntax_light {
-  .highlight {
+  pre.highlight {
     color: #000000;
     font-weight: normal;
     font-style: normal;
@@ -14,5 +14,42 @@
     .gd { color: #ff0000; background-color: #ffeeee; }
     .gi { color: #00aa00; background-color: #eeffee; }
     .err { color: #ff0000; background-color: #ffff00; }
+  }
+  .language-shell,
+  .language-bash,
+  .language-powershell {
+    pre.highlight {
+      border-radius: .5rem;
+      background-color: #000000;
+      color: #ffffff;
+      .c, .c1, .cm, .nd, .cp, .cpf, .kn, .nn { color: #b769d8; }
+      .k, .kc, .kd, .kt, .p, .o, .ow, .nf, .sa, .n, .si, .nx, .nt, .na, .nb .nv, .pi { color: #ffffff; }
+      .nf, .nc, .no { color: #dd8726; }
+      .m, .mi, .mf, .mh, .sh, .s, .s1, .s2, .si, .se { color: #37ad37; }
+      .nl, .nv { color: #458bc5; }
+      .gd { color: #ff6666; background-color: #5a1a1a; }
+      .gi { color: #66ff66; background-color: #1a5a1a; }
+      .err { color: #ff6666; background-color: #666600; }
+      &:not(:has(.language-mermaid)) {
+        box-shadow: 0 0 .3rem #ffffff26;
+      }
+    }
+    *::-webkit-scrollbar-thumb { background-color: #333; }
+    .code-copy-button,
+    .code-fullscreen-button {
+      background: #1a1a1a;
+      color: #a32d0f;
+      @media (hover: hover) {
+        &:hover {
+          background: var(--primary-color);
+          color: #0d0d0d;
+          box-shadow: 0 0 .3rem #ffffff26;
+        }
+      }
+    }
+    &.fullscreen { background: #0d0d0d; }
+  }
+  .language-plaintext {
+    pre.highlight { background-color: #fafafa; }
   }
 }

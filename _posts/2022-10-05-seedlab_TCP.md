@@ -24,7 +24,7 @@ TCP/IP 协议中的漏洞代表了协议设计和实现中一种特殊类型的�
 
 ## Task 1: SYN Flooding Attack
 
-<img src="/assets/post/images/tcp1.svg" alt="tcp1" style="width:min(100%,500px);" />
+<img src="/assets/post/images/tcp1.svg" alt="SYN Flooding Attack 拓扑" style="width:min(100%,500px);" />
 
 为方便观察，我们修改名称：
 

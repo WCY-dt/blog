@@ -26,11 +26,11 @@ mathjax:    true
 </script>
 ```
 
-<img src="/assets/post/images/xss1.webp" alt="xss1" style="zoom:67%;" />
+<img src="/assets/post/images/xss1.webp" alt="Posting a Malicious Message to Display an Alert Window" />
 
 保存后，看到已经生效
 
-<img src="/assets/post/images/xss2.webp" alt="xss2" style="zoom:67%;" />
+<img src="/assets/post/images/xss2.webp" alt="Posting a Malicious Message to Display an Alert Window 结果" />
 
 ## Task 2: Posting a Malicious Message to Display Cookies
 
@@ -42,11 +42,11 @@ mathjax:    true
 </script>
 ```
 
-<img src="/assets/post/images/xss3.webp" alt="xss3" style="zoom:67%;" />
+<img src="/assets/post/images/xss3.webp" alt="Posting a Malicious Message to Display Cookies" />
 
 保存后，看到已经生效
 
-<img src="/assets/post/images/xss4.webp" alt="xss4" style="zoom: 67%;" />
+<img src="/assets/post/images/xss4.webp" alt="Posting a Malicious Message to Display Cookies 结果" />
 
 ## Task 3: Stealing Cookies from the Victim’s Machine
 
@@ -60,7 +60,7 @@ mathjax:    true
 </script>
 ```
 
-<img src="/assets/post/images/xss5.webp" alt="xss5" style="zoom:67%;" />
+<img src="/assets/post/images/xss5.webp" alt="Stealing Cookies from the Victim’s Machine" />
 
 在端口上开启监听
 
@@ -106,11 +106,11 @@ Referer: http://www.seed-server.com/profile/samy
 </script>
 ```
 
-<img src="/assets/post/images/xss7.webp" alt="xss7" style="zoom:67%;" />
+<img src="/assets/post/images/xss7.webp" alt="Becoming the Victim’s Friend" />
 
 登录 Alice 账号，点进 Samy 的 profile，看到已经添加了好友
 
-<img src="/assets/post/images/xss8.webp" alt="xss8" style="zoom:67%;" />
+<img src="/assets/post/images/xss8.webp" alt="Becoming the Victim’s Friend 结果" />
 
 > **Question 1**: Explain the purpose of Lines 5 and 6, why are they are needed?
 
@@ -151,11 +151,11 @@ Referer: http://www.seed-server.com/profile/samy
 </script>
 ```
 
-<img src="/assets/post/images/xss9.webp" alt="xss9" style="zoom:67%;" />
+<img src="/assets/post/images/xss9.webp" alt="Modifying the Victim’s Profile" />
 
 登录 Alice 账号，查看 Samy 的 profile，看到自己的 profile 已经被修改了
 
-<img src="/assets/post/images/xss10.webp" alt="xss10" style="zoom:67%;" />
+<img src="/assets/post/images/xss10.webp" alt="Modifying the Victim’s Profile 结果" />
 
 > **Question 3**: Why do we need Line 14? Remove this line, and repeat your attack. Report and explain your observation.
 
@@ -205,25 +205,25 @@ Referer: http://www.seed-server.com/profile/samy
 </script>
 ```
 
-<img src="/assets/post/images/xss11.webp" alt="xss11" style="zoom:67%;" />
+<img src="/assets/post/images/xss11.webp" alt="DOM Approach" />
 
 登录 Alice 账号，查看 Samy 的 profile，看到自己的 profile 已经被修改了
 
-<img src="/assets/post/images/xss12.webp" alt="xss12" style="zoom:67%;" />
+<img src="/assets/post/images/xss12.webp" alt="DOM Approach 结果1" />
 
 登录 Charlie 账号，查看 Alice 的 profile，看到自己的 profile 已经被修改了
 
-<img src="/assets/post/images/xss13.webp" alt="xss13" style="zoom:67%;" />
+<img src="/assets/post/images/xss13.webp" alt="DOM Approach 结果2" />
 
 ## Task 7: Defeating XSS Attacks Using CSP
 
 这个 Task 探究 CSP 防御 XSS 的作用。原始状态为
 
-<img src="/assets/post/images/xss14.webp" alt="xss14" style="zoom:67%;" />
+<img src="/assets/post/images/xss14.webp" alt="Defeating XSS Attacks Using CSP 原始状态 1" />
 
-<img src="/assets/post/images/xss15.webp" alt="xss15" style="zoom:67%;" />
+<img src="/assets/post/images/xss15.webp" alt="Defeating XSS Attacks Using CSP 原始状态 2" />
 
-<img src="/assets/post/images/xss16.webp" alt="xss16" style="zoom:67%;" />
+<img src="/assets/post/images/xss16.webp" alt="Defeating XSS Attacks Using CSP 原始状态 3" />
 
 修改 apache_csp.conf
 
@@ -243,7 +243,7 @@ Referer: http://www.seed-server.com/profile/samy
 
 看到 [example32b.com](http://www.example32b.com) 的 4、5、6 变成了 OK
 
-<img src="/assets/post/images/xss18.webp" alt="xss18" style="zoom:67%;" />
+<img src="/assets/post/images/xss18.webp" alt="Defeating XSS Attacks Using CSP 结果 1" />
 
 修改 phpindex.php
 
@@ -260,7 +260,7 @@ Referer: http://www.seed-server.com/profile/samy
 
 看到 [example32c.com](http://www.example32c.com) 的 1、2、4、5、6 变成了 OK
 
-<img src="/assets/post/images/xss20.webp" alt="xss20" style="zoom:67%;" />
+<img src="/assets/post/images/xss20.webp" alt="Defeating XSS Attacks Using CSP 结果 2" />
 
 > Please explain why CSP can help prevent Cross-Site Scripting attacks.
 

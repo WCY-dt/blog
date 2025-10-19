@@ -14,7 +14,7 @@ mathjax:    true
 
 ## 实验原理
 
-<img src="/assets/post/images/return2libc1.svg" alt="return2libc1" style="width:min(100%,500px);" />
+<img src="/assets/post/images/return2libc1.svg" alt="return2libc 内存示意图" style="width:min(100%,500px);" />
 
 ## Task 1: Finding out the Addresses of libc Functions
 
@@ -207,7 +207,7 @@ $4 = {<text variable, no debug info>} 0xf7e4f80 <exit>
 
 然后 `disas bof` 获取 `bof()` 函数返回地址
 
-<img src="/assets/post/images/return2libc2.webp" alt="return2libc2" style="width:min(100%,600px);" />
+<img src="/assets/post/images/return2libc2.webp" alt="return2libc 返回地址" style="width:min(100%,600px);" />
 
 同时我们还有 retlib 打印出的 `bof()` 函数 ebp 位置和 MYSHELL 地址，根据这些修改 exploit.py
 

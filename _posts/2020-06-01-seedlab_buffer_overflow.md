@@ -14,7 +14,7 @@ mathjax:    true
 
 ## 实验原理
 
-<img src="/assets/post/images/bufferoverflow1.svg" alt="bufferoverflow1" style="width:min(100%,450px);" />
+<img src="/assets/post/images/bufferoverflow1.svg" alt="buffer overflow 内存示意图" style="width:min(100%,450px);" />
 
 ## Task1: Get Familiar with the Shellcode
 
@@ -619,7 +619,7 @@ nc -lnv 9090
 
 在尝试 $$52417$$ 次后，成功获得权限
 
-<img src="/assets/post/images/bufferoverflow2.webp" alt="bufferflow2" style="width:min(100%,600px);" />
+<img src="/assets/post/images/bufferoverflow2.webp" alt="buffer overflow 成功获得权限" style="width:min(100%,600px);" />
 
 ## Tasks 7: Experimenting with Other Countermeasures
 
