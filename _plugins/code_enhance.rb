@@ -58,8 +58,8 @@ module Jekyll
 
     # Return the wrapped HTML structure
     <<~HTML
-      <div class="code-block-wrapper no-select" id="wrapper-#{code_id}" onmouseenter="showCodeButtons('#{code_id}')" onmouseleave="hideCodeButtons('#{code_id}')">
-        <div class="code-block-buttons">
+      <div class="code-block-wrapper" id="wrapper-#{code_id}" onmouseenter="showCodeButtons('#{code_id}')" onmouseleave="hideCodeButtons('#{code_id}')">
+        <div class="code-block-buttons no-select">
           <button class="code-fullscreen-button" id="fullscreen-btn-#{code_id}" onclick="toggleCodeFullscreen('#{code_id}')" title="Toggle Fullscreen">
             <span class="material-symbols-outlined no-select">open_in_full</span>
           </button>

@@ -153,7 +153,7 @@
 
         // Create a container for the buttons
         const buttonContainer = document.createElement('div');
-        buttonContainer.className = 'code-block-buttons';
+        buttonContainer.className = 'code-block-buttons no-select';
 
         // Create the fullscreen button
         const fullscreenButton = document.createElement('button');

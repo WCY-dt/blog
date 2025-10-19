@@ -3,17 +3,27 @@
     color: #ffffff;
     font-weight: normal;
     font-style: normal;
-    .nf, .nc, .no { font-weight: bold; }
+    .nc, .nf, .no { font-weight: bold; }
     .c, .c1, .cm { font-weight: lighter;}
     .c, .c1, .cm, .s, .s1, .s2, .si { font-style: italic; }
-    .c, .c1, .cm, .nd, .cp, .cpf, .kn, .nn { color: #b769d8; }
-    .k, .kc, .kd, .kt, .p, .o, .ow, .nf, .sa, .n, .si, .nx, .nt, .na, .nb .nv, .pi { color: #ffffff; }
-    .nf, .nc, .no { color: #dd8726; }
-    .m, .mi, .mf, .mh, .sh, .s, .s1, .s2, .si, .se { color: #37ad37; }
-    .nl, .nv { color: #458bc5; }
+    .c, .c1, .cm, .cp, .cpf, .nd, .nn, .kn { color: #b769d8; }
+    .k, .kc, .kd, .kt, .p, .pi, .o, .ow, .sa, .si, .n, .na, .nb, .nf, .nt, .nv, .nx { color: #ffffff; }
+    .nc, .nf, .no { color: #dd8726; }
+    .m, .mb, .mi, .mf, .mh, .s, .s1, .s2, .se, .sh, .si { color: #37ad37; }
+    .nl { color: #458bc5; }
     .gd { color: #ff6666; background-color: #5a1a1a; }
     .gi { color: #66ff66; background-color: #1a5a1a; }
     .err { color: #ff6666; background-color: #666600; }
+  }
+  .language-shell,
+  .language-bash,
+  .language-powershell {
+    pre.highlight {
+      .nb { font-weight: bold; }
+      .nt { color: #b769d8; }
+      .nb { color: #dd8726; }
+      .nv { color: #458bc5; }
+    }
   }
   .language-plaintext {
     pre.highlight { background-color: #111111; }

@@ -3,14 +3,14 @@
     color: #000000;
     font-weight: normal;
     font-style: normal;
-    .nf, .nc, .no { font-weight: bold; }
+    .nc, .nf, .no { font-weight: bold; }
     .c, .c1, .cm { font-weight: lighter;}
     .c, .c1, .cm, .s, .s1, .s2, .si { font-style: italic; }
-    .c, .c1, .cm, .nd, .cp, .cpf, .kn, .nn { color: #9b00dd; }
-    .k, .kc, .kd, .kt, .p, .o, .ow, .nf, .sa, .n, .si, .nx, .nt, .na, .nb .nv, .pi { color: #000000; }
-    .nf, .nc, .no { color: #dd7700; }
-    .m, .mi, .mf, .mh, .sh, .s, .s1, .s2, .si, .se { color: #008800; }
-    .nl, .nv { color: #16568b; }
+    .c, .c1, .cm, .cp, .cpf, .nd, .nn, .kn { color: #9b00dd; }
+    .k, .kc, .kd, .kt, .p, .pi, .o, .ow, .sa, .si, .n, .na, .nb, .nf, .nt, .nv, .nx { color: #000000; }
+    .nc, .nf, .no { color: #dd7700; }
+    .m, .mb, .mi, .mf, .mh, .s, .s1, .s2, .se, .sh, .si { color: #008800; }
+    .nl { color: #16568b; }
     .gd { color: #ff0000; background-color: #ffeeee; }
     .gi { color: #00aa00; background-color: #eeffee; }
     .err { color: #ff0000; background-color: #ffff00; }
@@ -22,10 +22,11 @@
       border-radius: .5rem;
       background-color: #000000;
       color: #ffffff;
-      .c, .c1, .cm, .nd, .cp, .cpf, .kn, .nn { color: #b769d8; }
-      .k, .kc, .kd, .kt, .p, .o, .ow, .nf, .sa, .n, .si, .nx, .nt, .na, .nb .nv, .pi { color: #ffffff; }
-      .nf, .nc, .no { color: #dd8726; }
-      .m, .mi, .mf, .mh, .sh, .s, .s1, .s2, .si, .se { color: #37ad37; }
+      .nb { font-weight: bold; }
+      .c, .c1, .cm, .cp, .cpf, .nd, .nn, .nt, .kn { color: #b769d8; }
+      .k, .kc, .kd, .kt, .p, .pi, .o, .ow, .sa, .si, .n, .na, .nf, .nx { color: #ffffff; }
+      .nb, .nc, .nf, .no { color: #dd8726; }
+      .m, .mb, .mi, .mf, .mh, .s, .s1, .s2, .se, .sh, .si { color: #37ad37; }
       .nl, .nv { color: #458bc5; }
       .gd { color: #ff6666; background-color: #5a1a1a; }
       .gi { color: #66ff66; background-color: #1a5a1a; }
@@ -47,7 +48,11 @@
         }
       }
     }
-    &.fullscreen { background: #0d0d0d; }
+  }
+  .code-block-wrapper.fullscreen {
+    pre.highlight {
+      border-radius: 0;
+    }
   }
   .language-plaintext {
     pre.highlight { background-color: #fafafa; }
