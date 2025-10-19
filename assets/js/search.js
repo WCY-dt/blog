@@ -1,9 +1,12 @@
+// Get references to the search input, button, and results container
 const searchInput = document.getElementById('sidebar__search-input')
 const searchButton = document.getElementById('sidebar__search-btn')
 const searchResults = document.getElementById('sidebar__search-list')
 
+// State variable to track whether the search is active
 let isSearching = false
 
+// Toggle search bar visibility and functionality when the search button is clicked
 searchButton.addEventListener('click', () => {
   isSearching = !isSearching
   searchButton.innerHTML = isSearching ? 'close' : 'manage_search'
@@ -19,11 +22,13 @@ searchButton.addEventListener('click', () => {
   }
 })
 
+// Handle input events in the search bar
 searchInput.addEventListener('input', (event) => {
   const searchText = event.target.value
   searchText.length > 0 ? searchContent(searchText) : (searchResults.innerHTML = '')
 })
 
+// Fetch and filter search results based on the input text
 const searchContent = (searchText) => {
   fetch('/search.json')
     .then(response => response.json())
@@ -53,6 +58,7 @@ const searchContent = (searchText) => {
     })
 }
 
+// Render the filtered search results in the results container
 const renderSearchResults = (posts) => {
   searchResults.innerHTML = posts
     .map(

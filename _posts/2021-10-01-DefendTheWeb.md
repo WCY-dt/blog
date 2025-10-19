@@ -1,14 +1,12 @@
 ---
-layout: post
-title:  "DefendTheWeb"
-date:   2021-10-01 00:00:00 +0800
+layout:     post
+title:      "DefendTheWeb"
+date:       2021-10-01 00:00:00 +0800
 categories: 安全
-tags: game
-summary: "本文介绍了 DefendTheWeb 的部分通关方法。"
-comments: true
-mathjax: true
-copyrights: 原创
-archived: true
+tags:       game
+summary:    "本文介绍了 DefendTheWeb 的部分通关方法。"
+mathjax:    true
+archived:   true
 ---
 
 本文介绍了[DefendTheWeb](https://defendtheweb.net/)的部分通关方法

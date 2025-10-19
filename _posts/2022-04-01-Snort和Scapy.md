@@ -1,13 +1,11 @@
 ---
-layout: post
-title:  "Snort 和 Scapy"
-date:   2022-04-01 00:00:00 +0800
+layout:     post
+title:      "Snort 和 Scapy"
+date:       2022-04-01 00:00:00 +0800
 categories: 安全
-tags: snort scapy python
-summary: "本文将简单描述如何使用 scapy 来测试 snort 规则。"
-comments: true
-mathjax: true
-copyrights: 原创
+tags:       snort scapy python
+summary:    "本文将简单描述如何使用 scapy 来测试 snort 规则。"
+mathjax:    true
 ---
 
 本文将简单描述如何使用 scapy 来测试 snort 规则。

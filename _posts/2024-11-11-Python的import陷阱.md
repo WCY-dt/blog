@@ -1,15 +1,13 @@
 ---
-layout: post
-title:  "Python 的 import 陷阱"
-date:   2024-11-11 17:00:00 +0800
+layout:     post
+title:      "Python 的 import 陷阱"
+date:       2024-11-11 17:00:00 +0800
 categories: 编程
-tags: python
-summary: "本文介绍了 Python 中 import 语句的工作原理，包括绝对路径和相对路径导入、包范围陷阱和 __init__.py 陷阱。通过理解这些概念，可以避免在导入模块时遇到的问题。"
-series: Python 指北
+tags:       python
+summary:    "本文介绍了 Python 中 import 语句的工作原理，包括绝对路径和相对路径导入、包范围陷阱和 __init__.py 陷阱。通过理解这些概念，可以避免在导入模块时遇到的问题。"
+series:     Python 指北
 series_index: 2
-comments: true
-mathjax: true
-copyrights: 原创
+mathjax:    true
 ---
 
 在 Python 中，当我们使用 `import` 语句导入模块时，Python 解释器会按照一定的规则查找模块：

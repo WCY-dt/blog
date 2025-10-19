@@ -551,7 +551,7 @@ sudo nano /etc/profile
 
 添加
 
-```bash
+```shell
 # 在PATH中，找到程序可执行文件的路径。
 export PATH=$PATH:/usr/local/openssl/bin
 # gcc 编译器找到头文件（xx.h）的路径，写C++程序一般都不会用到gcc,所以这个可以忽略不写

@@ -1,16 +1,14 @@
 ---
-layout: post
-title:  "Bandit"
-date:   2019-10-01 00:00:00 +0800
+layout:     post
+title:      "Bandit"
+date:       2019-10-01 00:00:00 +0800
 categories: 安全
-tags: game
-summary: "本文为 Bandit 题解。"
-series: OverTheWire
+tags:       game
+summary:    "本文为 Bandit 题解。"
+series:     OverTheWire
 series_index: 1
-comments: true
-mathjax: true
-copyrights: 原创
-archived: true
+mathjax:    true
+archived:   true
 ---
 
 OverTheWire:Bandit是一个学习linux命令的WarGame，通过闯关的模式，不断的学习新的命令，对于学习安全和Linux的朋友是一个很好的练习游戏。这个游戏目前有34关，从Level0—Level34。游戏形式是通过ssh连接游戏服务器，通过各种命令行读取下一关的游戏服务器密钥，然后连接下一关的服务器继续读取，直到通关。

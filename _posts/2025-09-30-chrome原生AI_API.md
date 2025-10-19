@@ -1,12 +1,10 @@
 ---
-layout: post
-title:  "Chrome 原生 AI API 开发实践"
-date:   2025-09-30 00:00:00 +0800
+layout:     post
+title:      "Chrome 原生 AI API 开发实践"
+date:       2025-09-30 00:00:00 +0800
 categories: 前端
-tags: javascript ai chrome
-summary: "Chrome 内置了一些 AI 相关的 API，可以直接在浏览器中使用，无需依赖第三方服务。本文介绍了翻译、语言检测、摘要和提示词等 API 的使用方法和示例代码。"
-comments: true
-copyrights: 原创
+tags:       javascript ai chrome
+summary:    "Chrome 内置了一些 AI 相关的 API，可以直接在浏览器中使用，无需依赖第三方服务。本文介绍了翻译、语言检测、摘要和提示词等 API 的使用方法和示例代码。"
 ---
 
 随着 Web AI 技术的快速发展，浏览器厂商开始将 AI 能力直接集成到浏览器内核中。Chrome 从 138 版本开始，正式提供了一套原生的 AI API，包括翻译、语言检测、文本摘要和语言模型等功能。这意味着开发者可以在不依赖外部服务的情况下，直接调用浏览器内置的 AI 能力来构建智能化的 Web 应用。

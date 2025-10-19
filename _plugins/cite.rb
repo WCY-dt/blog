@@ -33,12 +33,12 @@ module Jekyll
     def parse_params(markup)
       params = {}
 
-      # 首先提取 URL（第一个参数）
+      # First, extract the URL (the first parameter)
       if markup.match(/^(https?:\/\/[^\s]+)/)
         params['url'] = $1
         remaining = markup.sub(/^https?:\/\/[^\s]+\s*/, '')
 
-        # 解析其他参数
+        # Parse other parameters
         remaining.scan(/(\w+)=["']?([^"'\s]+)["']?/) do |key, value|
           params[key] = value
         end
@@ -52,7 +52,7 @@ module Jekyll
         uri = URI.parse(url)
         domain = uri.host
 
-        # 尝试获取网页标题
+        # Attempt to fetch the webpage title
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = (uri.scheme == 'https')
         http.open_timeout = 5
@@ -71,10 +71,10 @@ module Jekyll
           end
         end
 
-        # 如果无法获取标题，返回域名
+        # If the title cannot be fetched, return the domain name
         return domain
       rescue => e
-        # 出错时返回域名
+        # On error, return the domain name
         begin
           return URI.parse(url).host
         rescue
@@ -88,7 +88,7 @@ module Jekyll
         uri = URI.parse(url)
         base_url = "#{uri.scheme}://#{uri.host}"
 
-        # 尝试常见的 favicon 路径
+        # Attempt common favicon paths
         favicon_paths = [
           '/favicon.ico',
           '/favicon.png',
@@ -99,7 +99,7 @@ module Jekyll
           '/static/images/favicon.ico',
         ]
 
-        # 先尝试从页面获取 favicon 链接
+        # First, try to fetch the favicon link from the page
         begin
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = (uri.scheme == 'https')
@@ -114,7 +114,7 @@ module Jekyll
           if response.code == '200'
             doc = Nokogiri::HTML(response.body)
 
-            # 查找 favicon 链接
+            # Look for the favicon link
             favicon_link = doc.at('link[rel*="icon"]')
             if favicon_link && favicon_link['href']
               href = favicon_link['href']
@@ -130,10 +130,10 @@ module Jekyll
             end
           end
         rescue
-          # 继续尝试默认路径
+          # Continue trying default paths
         end
 
-        # 如果页面中没有找到，尝试常见路径
+        # If not found on the page, try common paths
         favicon_paths.each do |path|
           favicon_url = "#{base_url}#{path}"
           if check_url_exists(favicon_url)
@@ -141,11 +141,11 @@ module Jekyll
           end
         end
 
-        # 使用 Google 的 favicon 服务作为备选
+        # Use Google's favicon service as a fallback
         return "https://www.google.com/s2/favicons?domain=#{uri.host}&sz=16"
 
       rescue => e
-        # 出错时使用默认图标
+        # On error, use the default icon
         return "/assets/img/link-icon.svg"
       end
     end

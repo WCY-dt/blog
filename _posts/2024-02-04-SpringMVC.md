@@ -1,14 +1,12 @@
 ---
-layout: post
-title:  "Spring MVC"
-date:   2024-02-04 00:00:00 +0800
+layout:     post
+title:      "Spring MVC"
+date:       2024-02-04 00:00:00 +0800
 categories: 编程
-tags: java spring
-summary: "这是 Spring 系列的第四篇，介绍了 Spring MVC，并结合源码详细讲解了 Spring MVC 的实现原理。"
-series: 深入 Spring 源码
+tags:       java spring
+summary:    "这是 Spring 系列的第四篇，介绍了 Spring MVC，并结合源码详细讲解了 Spring MVC 的实现原理。"
+series:     深入 Spring 源码
 series_index: 4
-comments: true
-copyrights: 原创
 ---
 
 Spring 是一个开源的轻量级 JavaEE 框架。它的核心是控制反转（IoC）和面向切面编程（AOP）。Spring 的 IoC 容器负责管理 JavaBean 的生命周期，而 AOP 容器负责管理切面。Spring 还提供了一系列的模块，如 Spring MVC、Spring JDBC、Spring Security 等。

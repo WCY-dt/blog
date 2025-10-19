@@ -1,4 +1,4 @@
-{% if page.comments and site.giscus %}
+{% if page.comments != false and site.giscus %}
   <div id='comment-wrapper' class='no-select no-print sector-wrapper comment-wrapper'>
     <h1 class='sector__title comment__title'>Comments</h1>
     {%- if jekyll.environment == 'production' or site.dev_mode -%}

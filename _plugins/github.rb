@@ -2,6 +2,7 @@ require 'liquid'
 require 'uri'
 
 module Jekyll
+  # Tag to generate a GitHub code button
   class GitHubCodeBtnTag < Liquid::Tag
     def initialize(tag_name, markup, tokens)
       super
@@ -11,13 +12,14 @@ module Jekyll
     def render(context)
       params = parse_params(@markup)
 
+      # Ensure the 'url' parameter is provided
       unless params['url']
         raise "GitHub code button requires 'url' parameter"
       end
 
       url = params['url']
-      path = params['path'] || extract_path_from_url(url)
-      lines = params['lines'] || extract_lines_from_url(url)
+      path = params['path'] || extract_path_from_url(url) # Extract file path from URL if not provided
+      lines = params['lines'] || extract_lines_from_url(url) # Extract line numbers from URL if not provided
 
       html = generate_button_html(url, path, lines)
 
@@ -26,6 +28,7 @@ module Jekyll
 
     private
 
+    # Parse parameters from the tag markup
     def parse_params(markup)
       params = {}
 
@@ -47,6 +50,7 @@ module Jekyll
       params
     end
 
+    # Extract the file path from the GitHub URL
     def extract_path_from_url(url)
       uri = URI.parse(url)
       path_parts = uri.path.split('/')
@@ -60,6 +64,7 @@ module Jekyll
       'source code'
     end
 
+    # Extract line numbers from the GitHub URL fragment
     def extract_lines_from_url(url)
       uri = URI.parse(url)
       fragment = uri.fragment
@@ -75,6 +80,7 @@ module Jekyll
       end
     end
 
+    # Generate the HTML for the GitHub code button
     def generate_button_html(url, path, lines)
       lines_html = lines ? "<div class=\"github-code-btn__line-number\">#{lines}</div>" : ""
 
@@ -96,6 +102,7 @@ module Jekyll
     end
   end
 
+  # Tag to generate a GitHub link with an avatar
   class GitHubLinkTag < Liquid::Tag
     def initialize(tag_name, markup, tokens)
       super
@@ -105,20 +112,22 @@ module Jekyll
     def render(context)
       params = parse_params(@markup)
 
+      # Ensure the 'url' parameter is provided
       unless params['url']
         raise "GitHub link requires 'url' parameter"
       end
 
       url = params['url']
-      type = params['type'] || detect_type_from_url(url)
-      name = params['name'] || extract_name_from_url(url)
-      avatar_url = params['avatar'] || generate_avatar_url(url, type)
+      type = params['type'] || detect_type_from_url(url) # Detect the type (user or repo) from the URL
+      name = params['name'] || extract_name_from_url(url) # Extract the name from the URL
+      avatar_url = params['avatar'] || generate_avatar_url(url, type) # Generate the avatar URL
 
       generate_link_html(url, name, avatar_url, type)
     end
 
     private
 
+    # Parse parameters from the tag markup
     def parse_params(markup)
       params = {}
 
@@ -140,6 +149,7 @@ module Jekyll
       params
     end
 
+    # Detect the type (user or repo) from the GitHub URL
     def detect_type_from_url(url)
       uri = URI.parse(url)
       path_parts = uri.path.split('/').reject(&:empty?)
@@ -153,6 +163,7 @@ module Jekyll
       end
     end
 
+    # Extract the name (user or repo) from the GitHub URL
     def extract_name_from_url(url)
       uri = URI.parse(url)
       path_parts = uri.path.split('/').reject(&:empty?)
@@ -171,6 +182,7 @@ module Jekyll
       end
     end
 
+    # Generate the avatar URL based on the type
     def generate_avatar_url(url, type)
       uri = URI.parse(url)
       path_parts = uri.path.split('/').reject(&:empty?)
@@ -187,6 +199,7 @@ module Jekyll
       end
     end
 
+    # Generate the HTML for the GitHub link
     def generate_link_html(url, name, avatar_url, type)
       fallback_icon_src = case type
       when 'user'
@@ -209,6 +222,7 @@ module Jekyll
     end
   end
 
+  # Tag to generate a GitHub issue block
   class GitHubIssueTag < Liquid::Block
     def initialize(tag_name, markup, tokens)
       super
@@ -218,15 +232,16 @@ module Jekyll
     def render(context)
       params = parse_params(@markup)
 
+      # Ensure the 'url' parameter is provided
       unless params['url']
         raise "GitHub issue requires 'url' parameter"
       end
 
       url = params['url']
-      username = params['username'] || extract_username_from_url(url) || 'unknown'
-      avatar_url = params['avatar'] || get_default_avatar(username)
-      repo_name = params['repo'] || extract_repo_from_url(url)
-      issue_number = params['issue'] || extract_issue_number_from_url(url)
+      username = params['username'] || extract_username_from_url(url) || 'unknown' # Extract username from URL
+      avatar_url = params['avatar'] || get_default_avatar(username) # Get default avatar if not provided
+      repo_name = params['repo'] || extract_repo_from_url(url) # Extract repository name from URL
+      issue_number = params['issue'] || extract_issue_number_from_url(url) # Extract issue number from URL
 
       content = super.strip
 
@@ -237,6 +252,7 @@ module Jekyll
 
     private
 
+    # Parse parameters from the tag markup
     def parse_params(markup)
       params = {}
 
@@ -258,6 +274,7 @@ module Jekyll
       params
     end
 
+    # Extract the username from the GitHub URL
     def extract_username_from_url(url)
       if url.include?('issuecomment-')
         return nil
@@ -267,6 +284,7 @@ module Jekyll
       nil
     end
 
+    # Get the default avatar URL for a username
     def get_default_avatar(username)
       avatars = {
         'rsc' => 'https://avatars.githubusercontent.com/u/104030?v=4'
@@ -279,6 +297,7 @@ module Jekyll
       end
     end
 
+    # Extract the repository name from the GitHub URL
     def extract_repo_from_url(url)
       if url.match(/github\.com\/([^\/]+)\/([^\/]+)/)
         return "#{$1}/#{$2}"
@@ -286,6 +305,7 @@ module Jekyll
       'unknown/repo'
     end
 
+    # Extract the issue number from the GitHub URL
     def extract_issue_number_from_url(url)
       if url.match(/\/issues\/(\d+)/)
         return "issue ##{$1}"
@@ -297,6 +317,7 @@ module Jekyll
       'post'
     end
 
+    # Generate the HTML for the GitHub issue block
     def generate_issue_html(url, username, avatar_url, repo_name, issue_number, content)
       avatar_html = if avatar_url
         "<span class=\"github-issue__avatar-wrapper\"><img src=\"#{avatar_url}\" alt=\"#{username}\" class=\"github-issue__avatar github-issue__avatar--avater no-select\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='inline-block';\"><img src=\"/assets/img/github-user-icon.svg\" alt=\"#{username}\" class=\"github-issue__avatar github-issue__avatar--fallback no-select\" style=\"display: none;\"></span>"
@@ -325,6 +346,7 @@ module Jekyll
   end
 end
 
+# Register the custom Liquid tags
 Liquid::Template.register_tag('github_code_btn', Jekyll::GitHubCodeBtnTag)
 Liquid::Template.register_tag('github_link', Jekyll::GitHubLinkTag)
 Liquid::Template.register_tag('github_issue', Jekyll::GitHubIssueTag)

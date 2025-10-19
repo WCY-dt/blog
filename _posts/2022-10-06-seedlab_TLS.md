@@ -1,15 +1,13 @@
 ---
-layout: post
-title:  "TLS"
-date:   2022-10-06 00:00:00 +0800
+layout:     post
+title:      "TLS"
+date:       2022-10-06 00:00:00 +0800
 categories: 实验
-tags: seedlab tls
-summary: "本文为 SEED Labs 2.0 - TLS Lab 的实验记录，介绍了传输层安全 (TLS) 的基本原理和实现方法。通过编写 TLS 客户端和服务器程序，了解 TLS 协议的工作机制和安全特性。"
-series: SEEDLabs
+tags:       seedlab tls
+summary:    "本文为 SEED Labs 2.0 - TLS Lab 的实验记录，介绍了传输层安全 (TLS) 的基本原理和实现方法。通过编写 TLS 客户端和服务器程序，了解 TLS 协议的工作机制和安全特性。"
+series:     SEEDLabs
 series_index: 12
-comments: true
-mathjax: true
-copyrights: 原创
+mathjax:    true
 ---
 
 本文为 [SEED Labs 2.0 - TLS Lab](https://seedsecuritylabs.org/Labs_20.04/Crypto/Crypto_TLS/) 的实验记录。

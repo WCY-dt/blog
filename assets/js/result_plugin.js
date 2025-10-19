@@ -133,7 +133,7 @@ function toggleResultPanel(previewId, panelType) {
       // Show source panel
       sourcePanel.classList.remove('hidden');
       if (divider && !previewPanel.classList.contains('hidden')) divider.style.display = '';
-      // 面板展示后，隐藏恢复按钮
+      // Hide restore button after the panel is shown
       if (restoreBtnSource) restoreBtnSource.style.display = 'none';
 
       // Show preview panel's toggle buttons again
@@ -147,7 +147,7 @@ function toggleResultPanel(previewId, panelType) {
       // Hide source panel
       sourcePanel.classList.add('hidden');
       if (divider) divider.style.display = 'none';
-      // 面板隐藏后，显示恢复按钮
+      // Show restore button after the panel is hidden
       if (restoreBtnSource) restoreBtnSource.style.display = 'flex';
 
       // Hide preview panel's toggle buttons
@@ -160,7 +160,7 @@ function toggleResultPanel(previewId, panelType) {
       // Show preview panel
       previewPanel.classList.remove('hidden');
       if (divider && !sourcePanel.classList.contains('hidden')) divider.style.display = '';
-      // 面板展示后，隐藏恢复按钮
+      // Hide restore button after the panel is shown
       if (restoreBtnPreview) restoreBtnPreview.style.display = 'none';
 
       // Show source panel's toggle buttons again
@@ -174,7 +174,7 @@ function toggleResultPanel(previewId, panelType) {
       // Hide preview panel
       previewPanel.classList.add('hidden');
       if (divider) divider.style.display = 'none';
-      // 面板隐藏后，显示恢复按钮
+      // Show restore button after the panel is hidden
       if (restoreBtnPreview) restoreBtnPreview.style.display = 'flex';
 
       // Hide source panel's toggle buttons
