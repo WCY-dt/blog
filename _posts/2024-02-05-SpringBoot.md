@@ -27,22 +27,22 @@ Spring Boot 项目的目录结构：
 
 ```plaintext
 src/
-  main/
-    java/
-      com/example/
-        controller/
-          BookController.java
-        model/
-          Book.java
-        service/
-          BookService.java
-        Application.java
-    resources/
-      application.yml
-      static/
-        style.css
-      templates/
-        book.html
+ └──main/
+     ├──java/
+     │   ├──com/example/
+     │   │   ├──controller/
+     │   │   │   └──BookController.java
+     │   │   ├──model/
+     │   │   │   └──Book.java
+     │   │   ├──service/
+     │   │   │   └──BookService.java
+     │   │   └──Application.java
+     └──resources/
+         ├──application.yml
+         ├──static/
+         │   └──style.css
+         └──templates/
+             └──book.html
 ```
 
 ### Spring Boot 配置

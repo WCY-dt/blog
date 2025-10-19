@@ -417,6 +417,23 @@ $text-font: 'Helvetica Neue', 'Helvetica', '微软雅黑', 'Arial', 'sans-serif'
               white-space: pre-wrap;
             }
 
+            .highlight {
+              color: #ffffff;
+              font-weight: normal;
+              font-style: normal;
+              .nf, .nc, .no { font-weight: bold; }
+              .c, .c1, .cm { font-weight: lighter;}
+              .c, .c1, .cm, .s, .s1, .s2, .si { font-style: italic; }
+              .c, .c1, .cm, .nd, .cp, .cpf, .kn, .nn { color: #b769d8; }
+              .k, .kc, .kd, .kt, .p, .o, .ow, .nf, .sa, .n, .si, .nx, .nt, .na, .nb .nv, .pi { color: #ffffff; }
+              .nf, .nc, .no { color: #dd8726; }
+              .m, .mi, .mf, .mh, .sh, .s, .s1, .s2, .si, .se { color: #37ad37; }
+              .nl, .nv { color: #458bc5; }
+              .gd { color: #ff6666; background-color: #5a1a1a; }
+              .gi { color: #66ff66; background-color: #1a5a1a; }
+              .err { color: #ff6666; background-color: #666600; }
+            }
+
             pre.notranslate {
               position: relative;
               background-color: var(--primary-light-color);

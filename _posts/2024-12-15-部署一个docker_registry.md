@@ -33,21 +33,21 @@ cd /opt/docker-registry
 
 ```plaintext
 /opt/docker-registry/
-├── config/
-│   └── registry.yml
-├── ssl/
-│   ├── fullchain.pem
-│   └── privkey.pem
-├── auth/
-│   └── htpasswd
-├── data/
-├── logs/
-├── scripts/
-│   ├── monitor.sh
-│   ├── cleanup.sh
-│   └── renew-cert.sh
-├── docker-compose.yml
-└── nginx.conf
+ ├──config/
+ │   └──registry.yml
+ ├──ssl/
+ │   ├──fullchain.pem
+ │   └──privkey.pem
+ ├──auth/
+ │   └──htpasswd
+ ├──data/
+ ├──logs/
+ ├──scripts/
+ │   ├──monitor.sh
+ │   ├──cleanup.sh
+ │   └──renew-cert.sh
+ ├──docker-compose.yml
+ └──nginx.conf
 ```
 
 然后安装 Docker 和 Docker Compose：

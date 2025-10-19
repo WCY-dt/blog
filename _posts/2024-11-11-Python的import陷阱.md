@@ -59,9 +59,9 @@ if __name__ == '__main__':
 
 ```plaintext
 packageA/
-    subpackageA/
-        moduleA.py
-        moduleB.py
+ └──subpackageA/
+     ├──moduleA.py
+     └──moduleB.py
 ```
 
 在根目录下运行 `python packageA/subpackageA/moduleB.py`，依然可以正常输出 `moduleA foo()`。
@@ -137,11 +137,11 @@ def baz():
 ```plaintext
 main.py
 packageA/
-    subpackageA/
-        moduleA.py
-        moduleB.py
-    subpackageB/
-        moduleC.py
+ ├──subpackageA/
+ │   ├──moduleA.py
+ │   └──moduleB.py
+ └──subpackageB/
+     └──moduleC.py
 ```
 
 我们在 `main.py` 中导入 `moduleC.py`：
@@ -177,12 +177,12 @@ if __name__ == '__main__':
 ```plaintext
 main.py
 packageA/
-    submain.py
-    subpackageA/
-        moduleA.py
-        moduleB.py
-    subpackageB/
-        moduleC.py
+ ├──submain.py
+ ├──subpackageA/
+ │   ├──moduleA.py
+ │   └──moduleB.py
+ └──subpackageB/
+     └──moduleC.py
 ```
 
 运行 `python packageA/submain.py`，会报错：
@@ -238,7 +238,7 @@ ImportError: attempted relative import with no known parent package
 ```plaintext
 main.py
 packageA/
-    __init__.py
+ └──__init__.py
 ```
 
 `__init__.py` 文件中有如下代码：

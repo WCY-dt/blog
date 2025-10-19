@@ -83,13 +83,13 @@ modulus:
 
 > What part of the certificate indicates this is a CA’s certificate?
 
-```plaintext
+```properties
 CA:TRUE
 ```
 
 > What part of the certificate indicates this is a self-signed certificate?
 
-```plaintext
+```properties
 Issuer: CN = www.modelCA.com, O = Model CA LTD., C = US
 Subject: CN = www.modelCA.com, O = Model CA LTD., C = US
 ```
@@ -100,7 +100,7 @@ Subject 和 Issuer 相同，说明这是自签名 CA。
 
 在 CA 的私钥文件中，$n$ 为
 
-```plaintext
+```properties
 modulus:
     00:c1:89:79:8c:3b:28:db:ab:a4:f0:d1:0b:83:e2:
     b1:10:06:df:a9:2d:e8:4b:30:17:2e:d2:84:1b:79:
@@ -141,7 +141,7 @@ modulus:
 
 $p$ 和 $q$ 分别为
 
-```plaintext
+```properties
 prime1:
     00:e0:c1:03:60:63:87:56:b1:89:e3:62:91:57:ac:
     5f:57:c1:02:f1:af:c9:05:99:26:c9:2a:bb:30:c9:
@@ -184,7 +184,7 @@ prime2:
 
 $e$ 和 $d$ 分别为
 
-```plaintext
+```properties
 publicExponent: 65537 (0x10001)
 privateExponent:
     00:b3:da:f6:42:03:98:6c:cc:8e:73:dd:51:3e:37:

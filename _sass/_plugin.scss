@@ -310,7 +310,7 @@ main .table-wrapper .table-buttons {
   gap: .25rem;
   padding: .2rem .4rem .2rem .3rem;
   background-color: var(--primary-extra-light-color);
-  text-decoration: none;
+  text-decoration: none!important;
   border-radius: 1rem;
   font-size: .8rem;
   font-weight: 500;
@@ -330,7 +330,7 @@ main .table-wrapper .table-buttons {
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--primary-color);
+      background-color: var(--primary-color)!important;
       color: var(--primary-extra-light-color)!important;
       text-decoration: none!important;
     }
