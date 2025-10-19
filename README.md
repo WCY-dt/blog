@@ -2,13 +2,15 @@
 
 ## 基本信息
 
-本仓库为我的个人博客。博客使用了自己从头打造的 Jekyll 主题，主要存放一些技术性文章以及个人笔记。更新频率飘忽不定，尽量每个月尽量更新一篇。
+本仓库为我的个人博客，主要存放一些技术性文章以及个人笔记。更新频率飘忽不定，尽量每个月尽量更新一篇。
 
 👉 [https://blog.ch3nyang.top/](https://blog.ch3nyang.top/)
 
 英文版本：[https://blog-en.ch3nyang.top/](https://blog-en.ch3nyang.top/)（仅部分文章）
 
 ## 功能特色
+
+本博客基于 [Jekyll](https://jekyllrb.com/) 静态网站生成器构建，使用完全自定义的主题 [tangerine](https://github.com/wcy-dt/tangerine)，并集成了多种实用功能：
 
 | 基础功能 | 内容组织 | 用户体验 | 增强功能 | 扩展插件 |
 |----------|----------|----------|----------|----------|
