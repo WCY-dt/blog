@@ -204,6 +204,10 @@ module Jekyll
                     title="Toggle Fullscreen" type="button">
               <span class="material-symbols-outlined no-select">open_in_full</span>
             </button>
+            <!--<button class="code-line-numbers-button" id="line-numbers-btn-#{code_id}"
+                    title="Toggle Line Numbers" type="button">
+              <span class="material-symbols-outlined no-select">format_list_numbered</span>
+            </button> -->
             <button class="code-white-space-button" id="whitespace-btn-#{code_id}"
                     title="Enable Word Wrap" type="button">
               <span class="material-symbols-outlined no-select">format_paragraph</span>
@@ -237,6 +241,10 @@ module Jekyll
                     title="Toggle Fullscreen" type="button">
               <span class="material-symbols-outlined no-select">open_in_full</span>
             </button>
+            <!--  <button class="code-line-numbers-button" id="line-numbers-btn-#{code_id}"
+                    title="Toggle Line Numbers" type="button">
+              <span class="material-symbols-outlined no-select">format_list_numbered</span>
+            </button> -->
             <button class="code-white-space-button" id="whitespace-btn-#{code_id}"
                     title="Enable Word Wrap" type="button">
               <span class="material-symbols-outlined no-select">format_paragraph</span>

@@ -9,6 +9,29 @@ series:     test
 series_index: 3
 ---
 
+- If no language is specified, it should default to plaintext
+- If a fake language is specified, it should still be highlighted as if the language exists
+- If the language is plaintext or diff, it should be highlighted with grey backgrounds
+- If the language is shell or any alias of shell (bash, sh, zsh, powershell), it should be highlighted with black backgrounds as in dark mode, and have more colorful syntax highlighting
+
+***No Language Specified***
+
+```
+This is a code block without a specified language.
+It should be treated as plain text.
+It can contain any characters: !@#$%^&*()_+{}|:"<>? and numbers 1234567890.
+```
+
+***Fake Language***
+
+```fakelang
+This is a code block with a fake language specified.
+It should also be treated as the language does exist.
+function fakeFunction() {
+    console.log("This is a fake language code block.");
+}
+```
+
 ***HTML + CSS + JavaScript***
 
 ```html

@@ -96,12 +96,11 @@
     textArea.select();
 
     try {
-      const successful = document.execCommand('copy');
-      if (successful) {
+      navigator.clipboard.writeText(text).then(function () {
         showSuccessState(copyIcon, checkIcon);
-      } else {
-        console.error('Failed to execute copy command');
-      }
+      }).catch(function (err) {
+        console.error('Failed to copy text:', err);
+      });
     } catch (err) {
       console.error('Failed to copy text using fallback method:', err);
     }
