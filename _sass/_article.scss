@@ -446,8 +446,16 @@
     overflow-x: auto;
     border-radius: .5rem;
 
-    * {
+    code,
+    code * {
       white-space: pre;
+      word-break: normal;
+    }
+
+    code.word-wrap-enabled,
+    code.word-wrap-enabled * {
+      white-space: pre-wrap;
+      word-break: break-all;
     }
 
     &::-webkit-scrollbar {

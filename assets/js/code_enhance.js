@@ -124,17 +124,13 @@
       button.addEventListener('click', function () {
         const codeElement = document.getElementById(codeId);
         if (codeElement) {
-          if (codeElement.style.whiteSpace === 'pre-wrap') {
-            codeElement.style.whiteSpace = 'pre';
-            codeElement.style.wordBreak = 'normal';
+          if (codeElement.classList.contains('word-wrap-enabled')) {
             button.title = 'Enable Word Wrap';
-            button.classList.remove('active');
           } else {
-            codeElement.style.whiteSpace = 'pre-wrap';
-            codeElement.style.wordBreak = 'break-word';
             button.title = 'Disable Word Wrap';
-            button.classList.add('active');
           }
+          button.classList.toggle('active');
+          codeElement.classList.toggle('word-wrap-enabled');
         }
       });
     });
