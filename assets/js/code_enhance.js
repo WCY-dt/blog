@@ -1,29 +1,6 @@
 (function () {
   'use strict';
 
-  // Function to show code block buttons (e.g., copy, fullscreen) when hovering over the wrapper
-  window.showCodeButtons = function (codeId) {
-    const buttons = document.querySelector('#wrapper-' + codeId + ' .code-block-buttons');
-    if (buttons) {
-      buttons.style.opacity = '1';
-    }
-  };
-
-  // Function to hide code block buttons when the mouse leaves the wrapper
-  window.hideCodeButtons = function (codeId) {
-    const buttons = document.querySelector('#wrapper-' + codeId + ' .code-block-buttons');
-    if (buttons) {
-      const wrapper = document.getElementById('wrapper-' + codeId);
-      if (wrapper && !wrapper.classList.contains('fullscreen')) {
-        buttons.style.opacity = '0';
-      }
-    }
-  };
-
-  // Backward compatibility for older function names
-  window.showCopyButton = window.showCodeButtons;
-  window.hideCopyButton = window.hideCodeButtons;
-
   // Function to toggle fullscreen mode for a code block
   window.toggleCodeFullscreen = function (codeId) {
     const wrapper = document.getElementById('wrapper-' + codeId);
@@ -132,56 +109,43 @@
     document.body.removeChild(textArea);
   }
 
-  // Add event listener to enhance code blocks after the DOM is fully loaded
+  // Add event listeners after the DOM is fully loaded
   document.addEventListener('DOMContentLoaded', function () {
-    const codeBlocks = document.querySelectorAll('pre code:not(.language-mermaid)');
+    // Add event listeners to all copy buttons
+    document.querySelectorAll('.code-copy-button').forEach(function (button) {
+      const codeId = button.id.replace('copy-btn-', '');
+      button.addEventListener('click', function () {
+        copyCode(codeId);
+      });
+    });
 
-    codeBlocks.forEach(function (codeBlock, index) {
-      if (!codeBlock.closest('.code-block-wrapper')) {
-        // Create a wrapper for the code block
-        const wrapper = document.createElement('div');
-        wrapper.className = 'code-block-wrapper';
-
-        if (!codeBlock.id) {
-          // Assign a unique ID to the code block if it doesn't have one
-          codeBlock.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    // Add event listeners to all toggle white space buttons
+    document.querySelectorAll('.code-white-space-button').forEach(function (button) {
+      const codeId = button.id.replace('whitespace-btn-', '');
+      button.addEventListener('click', function () {
+        const codeElement = document.getElementById(codeId);
+        if (codeElement) {
+          if (codeElement.style.whiteSpace === 'pre-wrap') {
+            codeElement.style.whiteSpace = 'pre';
+            codeElement.style.wordBreak = 'normal';
+            button.title = 'Enable Word Wrap';
+            button.classList.remove('active');
+          } else {
+            codeElement.style.whiteSpace = 'pre-wrap';
+            codeElement.style.wordBreak = 'break-word';
+            button.title = 'Disable Word Wrap';
+            button.classList.add('active');
+          }
         }
+      });
+    });
 
-        wrapper.id = 'wrapper-' + codeBlock.id;
-        wrapper.setAttribute('onmouseenter', 'showCodeButtons("' + codeBlock.id + '")');
-        wrapper.setAttribute('onmouseleave', 'hideCodeButtons("' + codeBlock.id + '")');
-
-        // Create a container for the buttons
-        const buttonContainer = document.createElement('div');
-        buttonContainer.className = 'code-block-buttons no-select';
-
-        // Create the fullscreen button
-        const fullscreenButton = document.createElement('button');
-        fullscreenButton.className = 'code-fullscreen-button';
-        fullscreenButton.id = 'fullscreen-btn-' + codeBlock.id;
-        fullscreenButton.setAttribute('onclick', 'toggleCodeFullscreen("' + codeBlock.id + '")');
-        fullscreenButton.setAttribute('title', 'Toggle Fullscreen');
-        fullscreenButton.innerHTML = '<span class="material-symbols-outlined">open_in_full</span>';
-
-        // Create the copy button
-        const copyButton = document.createElement('button');
-        copyButton.className = 'code-copy-button';
-        copyButton.id = 'copy-btn-' + codeBlock.id;
-        copyButton.setAttribute('onclick', 'copyCode("' + codeBlock.id + '")');
-        copyButton.setAttribute('title', 'Copy Code');
-        copyButton.innerHTML = '<span class="copy-icon material-symbols-outlined">content_copy</span><span class="check-icon material-symbols-outlined" style="display: none;">check</span>';
-
-        // Append buttons to the container
-        buttonContainer.appendChild(fullscreenButton);
-        buttonContainer.appendChild(copyButton);
-
-        // Wrap the code block with the wrapper and add buttons
-        const pre = codeBlock.parentNode;
-        pre.parentNode.insertBefore(wrapper, pre);
-        wrapper.appendChild(buttonContainer);
-        wrapper.appendChild(pre);
-      }
+    // Add event listeners to all fullscreen buttons
+    document.querySelectorAll('.code-fullscreen-button').forEach(function (button) {
+      const codeId = button.id.replace('fullscreen-btn-', '');
+      button.addEventListener('click', function () {
+        toggleCodeFullscreen(codeId);
+      });
     });
   });
-
-})()
+})();

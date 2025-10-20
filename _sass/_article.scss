@@ -464,22 +464,6 @@
       border-radius: .5rem;
     }
 
-    &::after {
-      content: 'Click to copy';
-      display: block;
-      width: -moz-fit-content;
-      width: fit-content;
-      color: var(--primary-dark-color);
-      font-size: 0.8rem;
-      font-family: var(--ui-font);
-      font-weight: 700;
-      position: absolute;
-      top: -1.2rem;
-      right: 0rem;
-      opacity: 0;
-      transition: opacity .25s ease-in-out;
-    }
-
     &:not(:has(.language-mermaid)) {
       margin: 1rem 0.2rem;
       box-shadow: var(--normal-shadow);

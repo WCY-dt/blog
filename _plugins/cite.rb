@@ -73,7 +73,7 @@ module Jekyll
 
         # If the title cannot be fetched, return the domain name
         return domain
-      rescue => e
+      rescue
         # On error, return the domain name
         begin
           return URI.parse(url).host
@@ -144,7 +144,7 @@ module Jekyll
         # Use Google's favicon service as a fallback
         return "https://www.google.com/s2/favicons?domain=#{uri.host}&sz=16"
 
-      rescue => e
+      rescue
         # On error, use the default icon
         return "/assets/img/link-icon.svg"
       end

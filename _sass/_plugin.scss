@@ -13,7 +13,25 @@
     transition: opacity .25s ease-in-out;
   }
 
+  .code-language-label {
+    line-height: 1.2rem;
+    font-size: .8rem;
+    color: var(--primary-little-light-color);
+    background-color: var(--primary-extra-light-color);
+    border-radius: .25rem;
+    margin: 0;
+    padding: 0;
+    transition: color .25s ease-in-out;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+
   .code-copy-button,
+  .code-white-space-button,
   .code-fullscreen-button {
     background: var(--primary-light-color);
     color: var(--primary-little-light-color);
@@ -28,6 +46,11 @@
     width: 1.2rem;
     height: 1.2rem;
     transition: all .25s ease-in-out;
+
+    &.active {
+      color: var(--primary-color);
+      background: var(--primary-semi-light-color);
+    }
 
     @media (hover: hover) {
       &:hover {

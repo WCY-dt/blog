@@ -25,7 +25,9 @@
       .nv { color: #458bc5; }
     }
   }
-  .language-plaintext {
+  .language-plaintext,
+  .language-diff {
     pre.highlight { background-color: #111111; }
+    .code-language-label { background-color: #111111; }
   }
 }
