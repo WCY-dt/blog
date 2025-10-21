@@ -198,15 +198,45 @@ The plugin automatically reads HTML files from the `assets/post/iframes/iframe_n
 
 #### Default Style (Show Header)
 
-{% iframe test %}
+{% iframe code_runner %}
 
 #### Custom Height
 
-{% iframe test height=800px %}
+{% iframe code_runner height=800px %}
 
 #### Hide Header
 
-{% iframe test hide_header=true %}
+{% iframe code_runner hide_header=true %}
+
+#### Online Runner
+
+We also use the `iframe` plugin to offer an online code runner for readers to test code snippets directly in the browser.
+
+> Python & JavaScript will run directly in the browser. Other languages will be sent to [wandbox](https://wandbox.org/) for execution.
+>
+> ***Supported languages***
+>
+> - C
+> - C++
+> - Go
+> - Haskell
+> - Java
+> - JavaScript
+> - Lua
+> - Perl
+> - Python
+> - Ruby
+> - Rust
+
+You can pass code and language parameters to pre-fill the code editor.
+
+```liquid
+{% raw %}{% iframe code_runner height=600px language=python code=print("Hello,%20World!") %}{% endraw %}
+```
+
+For example, to pre-fill Python code:
+
+{% iframe code_runner height=600px hide_header=true language=python code=def%20greet(name)%3A%0A%20%20%20%20return%20f%22Hello%2C%20%7Bname%7D!%22%0A%0Aprint(greet(%22World%22)) %}
 
 ## `result` Plugin
 

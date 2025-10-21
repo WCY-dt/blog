@@ -1,24 +1,27 @@
 require 'liquid'
 require 'pathname'
+require 'cgi'
 
 module Jekyll
   class IframeTag < Liquid::Tag
     def initialize(tag_name, markup, tokens)
       super
-      # Parse parameters: iframe_name [height=400px] [hide_header=false]
+      # Parse parameters: iframe_name [key1=value1] [key2=value2] ...
       parts = markup.strip.split(/\s+/)
       @iframe_name = parts[0]
-      @height = '400px'
-      @hide_header = false
+      @params = {}
 
-      # Parse parameters if provided
+      # Parse all key=value pairs
       parts[1..-1].each do |part|
-        if part.match(/^height=(.+)$/)
-          @height = $1
-        elsif part.match(/^hide_header=(true|false)$/)
-          @hide_header = $1 == 'true'
+        if part.include?('=')
+          key, value = part.split('=', 2)
+          @params[key] = value
         end
       end
+
+      # Extract known parameters
+      @height = @params.delete('height') || '400px'
+      @hide_header = (@params.delete('hide_header') == 'true')
     end
 
     def render(context)
@@ -48,6 +51,10 @@ module Jekyll
 
       # Generate path relative to site root
       iframe_src = "/assets/post/iframes/#{@iframe_name}/#{html_filename}"
+
+      # Build query string from additional parameters
+      query_string = @params.map { |k, v| "#{CGI.escape(k)}=#{CGI.escape(v)}" }.join('&')
+      iframe_src += "?#{query_string}" unless query_string.empty?
 
       # Generate unique iframe ID
       iframe_id = "iframe-#{@iframe_name}-#{rand(1000..9999)}"

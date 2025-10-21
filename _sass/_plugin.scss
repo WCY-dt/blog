@@ -608,7 +608,7 @@ main .table-wrapper .table-buttons {
     height: 400px; /* Default height, can be overridden by inline style */
     border: none;
     display: block;
-    background: var(--bg-color);
+    background: var(--primary-extra-light-color);
   }
 
   &.fullscreen {
