@@ -600,6 +600,29 @@ main .table-wrapper .table-buttons {
           font-size: 1.1rem !important;
         }
       }
+
+      .iframe-refresh-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--primary-color);
+        padding: .25rem;
+        border-radius: .25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .25s ease;
+
+        @media (hover: hover) {
+          &:hover {
+            color: var(--primary-dark-color);
+          }
+        }
+
+        .material-symbols-outlined {
+          font-size: 1.1rem !important;
+        }
+      }
     }
   }
 

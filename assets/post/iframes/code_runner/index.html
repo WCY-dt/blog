@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-language Online Code Runner</title>
+    <title>Ch3nyang's Online Code Runner</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <style>
         /* Global reset and box-sizing */
@@ -15,8 +15,8 @@
 
         /* CSS custom properties for colors */
         :root {
-            --primary: #d74514;
-            --secondary: #a32d0f;
+            --primary: #f0835c;
+            --secondary: #d74514;
             --success: #27ae60;
             --warning: #f39c12;
             --danger: #e74c3c;
@@ -45,6 +45,7 @@
         .container {
             width: 100%;
             height: 100%;
+            padding-top: 10px;
         }
 
         /* Content layout */
@@ -212,6 +213,7 @@
             height: 100%;
             font-family: 'Consolas', 'Courier New', monospace;
             white-space: pre-wrap;
+            word-break: break-all;
             overflow: auto;
         }
 
@@ -244,22 +246,6 @@
             color: var(--danger);
         }
 
-        /* Loading spinner animation */
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgb(215, 69, 20, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
         /* Hidden class for visibility control */
         .hidden {
             display: none;
@@ -267,15 +253,6 @@
 
         /* Responsive design for mobile devices */
         @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-            }
-
-            .editor-section {
-                width: 100%;
-                height: 60%;
-            }
-
             .top-controls {
                 flex-direction: column;
                 align-items: flex-start;
@@ -311,7 +288,18 @@
             }
 
             .code-editor-container {
-                height: calc(100% - 83px);
+                height: calc(100% - 69px);
+            }
+        }
+
+        @media (max-width: 375px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .editor-section {
+                width: 100%;
+                height: 60%;
             }
 
             .output-section {
@@ -360,7 +348,6 @@
                 <div id="output" class="output-container">Output will be displayed here...</div>
 
                 <div id="status" class="status hidden">
-                    <div class="spinner"></div>
                     <span id="status-text">Loading runtime...</span>
                 </div>
             </div>
@@ -654,7 +641,7 @@
 
             // Read URL parameters for language and code first
             const urlParams = new URLSearchParams(window.location.search);
-            const langParam = urlParams.get('lang');
+            const langParam = urlParams.get('lang') || urlParams.get('language');
             const codeParam = urlParams.get('code');
 
             // Check if loaded in iframe
@@ -682,7 +669,7 @@
                 });
             }
 
-            if (langParam && ['c', 'cpp', 'go', 'haskell', 'java', 'javascript', 'lua', 'perl', 'php', 'python', 'ruby', 'rust'].includes(langParam)) {
+            if (langParam && ['c', 'cpp', 'go', 'haskell', 'java', 'javascript', 'lua', 'perl', 'python', 'ruby', 'rust'].includes(langParam)) {
                 currentLanguage = langParam;
                 document.getElementById('language-select').value = langParam;
             }

@@ -1,5 +1,12 @@
 // Iframe Plugin JavaScript Functions
 
+function refreshIframe(iframeId) {
+  const iframe = document.getElementById(iframeId);
+  if (iframe) {
+    iframe.src = iframe.src;
+  }
+}
+
 function toggleIframeFullscreen(iframeId) {
   const iframe = document.getElementById(iframeId);
   if (!iframe) return;

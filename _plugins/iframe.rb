@@ -76,6 +76,9 @@ module Jekyll
           <div class="iframe-header no-select">
             <span class="iframe-title">#{title}</span>
             <div class="iframe-controls">
+              <button class="iframe-refresh-btn" onclick="refreshIframe('#{iframe_id}')" title="Refresh">
+                <span class="material-symbols-outlined">refresh</span>
+              </button>
               <button class="iframe-fullscreen-btn" onclick="toggleIframeFullscreen('#{iframe_id}')" title="Fullscreen">
                 <span class="material-symbols-outlined">open_in_full</span>
               </button>
