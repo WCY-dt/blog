@@ -247,9 +247,8 @@ layout: compress
     {%- if page.mathjax -%}
       <script>
         window.MathJax = {
-          tex: {
-            packages: {'[+]': ['ams', 'physics', 'color', 'amssymb']}
-          }
+          loader: {load: ['[tex]/boldsymbol', '[tex]/color', '[tex]/colorv2', '[tex]/physics', '[tex]/cases', '[tex]/empheq']},
+          tex: {packages: {'[+]': ['ams', 'boldsymbol', 'color', 'physics', 'amssymb', 'cases', 'empheq']}}
         };
       </script>
       <script
