@@ -245,6 +245,13 @@ layout: compress
 
     <!-- 数学公式 -->
     {%- if page.mathjax -%}
+      <script>
+        window.MathJax = {
+          tex: {
+            packages: {'[+]': ['ams', 'physics', 'color', 'amssymb']}
+          }
+        };
+      </script>
       <script
         async
         id='MathJax-script'
