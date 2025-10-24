@@ -13,7 +13,7 @@ summary:    "Chrome 内置了一些 AI 相关的 API，可以直接在浏览器�
 
 这些功能基本都需要 Chrome 浏览器 138 或更高版本，下面的小工具展示了你的浏览器是否支持这些 API：
 
-{% iframe frontend_ai height=80px hide_header=true is_embedded=true %}
+{% iframe frontend_ai is_embedded=true %}
 
 ## 翻译 API
 
@@ -21,7 +21,7 @@ summary:    "Chrome 内置了一些 AI 相关的 API，可以直接在浏览器�
 
 如果你使用的是 Chrome 浏览器 138 或更高版本，下面的示例便可以直接运行。
 
-{% iframe frontend_ai_translate height=750px %}
+{% iframe frontend_ai_translate %}
 
 当然，这套 API 目前正在逐渐被各浏览器支持，你也可以在 [Can I use](https://caniuse.com/mdn-api_translator) 上查看最新的支持情况。
 
@@ -73,7 +73,7 @@ for await (const chunk of stream) {
 
 同样，如果你使用的是 Chrome 浏览器的最新版本，下面的示例也可以直接运行。
 
-{% iframe frontend_ai_language_detect height=950px %}
+{% iframe frontend_ai_language_detect %}
 
 语言检测 API 目前也在逐步推广中，你也可以在 [Can I use](https://caniuse.com/mdn-api_languagedetector) 上查看最新的支持情况。
 
@@ -123,7 +123,7 @@ for (const result of results) {
 
 如果你使用的是支持摘要 API 的 Chrome 浏览器版本，下面的示例可以直接运行。
 
-{% iframe frontend_ai_summarizer height=1450px %}
+{% iframe frontend_ai_summarizer %}
 
 摘要 API 目前也在逐步推广中，你也可以在 [Can I use](https://caniuse.com/mdn-api_summarizer) 上查看最新的支持情况。
 
@@ -208,7 +208,7 @@ for await (const chunk of stream) {
 
 如果你使用的是支持 Language Model API 的 Chrome 浏览器版本，下面的示例可以直接运行。
 
-{% iframe frontend_ai_language_model height=950px %}
+{% iframe frontend_ai_language_model %}
 
 提示词 API 目前也在逐步推广中，你也可以在 [Can I use](https://caniuse.com/mdn-api_languagemodel) 上查看最新的支持情况。
 

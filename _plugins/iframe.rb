@@ -20,9 +20,13 @@ module Jekyll
       end
 
       # Extract known parameters
-      @height = @params.delete('height') || '400px'
-      @hide_header = (@params.delete('hide_header') == 'true')
+      @height = @params.delete('height')
       @is_embedded = (@params.delete('is_embedded') == 'true')
+      @hide_header = if @params.has_key?('hide_header')
+        (@params.delete('hide_header') == 'true')
+      else
+        @is_embedded
+      end
     end
 
     def render(context)
@@ -92,9 +96,10 @@ module Jekyll
 
       # Generate iframe style
       container_style = @is_embedded ? "border-radius: 0; box-shadow: none; background-color: var(--white-color);" : ""
+      iframe_style = @height ? "height: #{@height};" : ""
 
       <<~HTML
-        <div class="iframe-container" data-iframe-name="#{@iframe_name}" data-height="#{@height}" style="#{container_style}">
+        <div class="iframe-container" data-iframe-name="#{@iframe_name}" data-height="#{@height || 'auto'}" style="#{container_style}">
           #{header_html}<iframe
             id="#{iframe_id}"
             src="#{iframe_src}"
@@ -103,7 +108,7 @@ module Jekyll
             loading="lazy"
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
             title="#{title}"
-            style="height: #{@height};">
+            #{ @height ? "style=\"#{iframe_style}\"" : "onload=\"try { const iframe = this; const body = iframe.contentWindow.document.body; iframe.style.height = body.scrollHeight + 'px'; const resizeObserver = new ResizeObserver(() => { iframe.style.height = body.scrollHeight + 'px'; }); resizeObserver.observe(body); } catch(e) { console.warn('Cannot adjust iframe height due to cross-origin restrictions or unsupported features'); }\"" }>
             <p>Your browser does not support iframes. <a href="#{iframe_src}" target="_blank">Click here to visit the content</a></p>
           </iframe>
         </div>

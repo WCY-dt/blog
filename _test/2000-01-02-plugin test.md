@@ -184,15 +184,14 @@ https://placehold.co/400x300/d35400/ffffff | Another image with description
 {% raw %}{% iframe iframe_name %}{% endraw %}
 {% raw %}{% iframe iframe_name height=500px %}{% endraw %}
 {% raw %}{% iframe iframe_name hide_header=true %}{% endraw %}
-{% raw %}{% iframe iframe_name height=500px hide_header=true %}{% endraw %}
-{% raw %}{% iframe iframe_name height=500px hide_header=true is_embedded=true %}{% endraw %}
+{% raw %}{% iframe iframe_name is_embedded=true %}{% endraw %}
 ```
 
 The plugin automatically reads HTML files from the `assets/post/iframes/iframe_name/` directory and displays them as iframes.
 
 ### Available Parameters
 
-- `height`: Custom iframe height (default 400px)
+- `height`: Custom iframe height (default auto)
 - `hide_header`: Hide header title bar (default false)
 - `is_embedded`: Embedded mode without border and shadow (default false)
 
@@ -212,7 +211,7 @@ The plugin automatically reads HTML files from the `assets/post/iframes/iframe_n
 
 #### Embedded Mode
 
-{% iframe code_runner height=600px hide_header=true is_embedded=true %}
+{% iframe code_runner is_embedded=true %}
 
 #### Online Runner
 
@@ -237,12 +236,12 @@ We also use the `iframe` plugin to offer an online code runner for readers to te
 You can pass code and language parameters to pre-fill the code editor.
 
 ```liquid
-{% raw %}{% iframe code_runner height=600px language=python is_embedded=true code=print("Hello,%20World!") %}{% endraw %}
+{% raw %}{% iframe code_runner is_embedded=true language=python code=print("Hello,%20World!") %}{% endraw %}
 ```
 
 For example, to pre-fill Python code:
 
-{% iframe code_runner height=600px hide_header=true is_embedded=true language=python code=def%20greet(name)%3A%0A%20%20%20%20return%20f%22Hello%2C%20%7Bname%7D!%22%0A%0Aprint(greet(%22World%22)) %}
+{% iframe code_runner is_embedded=true language=python code=def%20greet(name)%3A%0A%20%20%20%20return%20f%22Hello%2C%20%7Bname%7D!%22%0A%0Aprint(greet(%22World%22)) %}
 
 ## `result` Plugin
 
