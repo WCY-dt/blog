@@ -558,14 +558,14 @@ main .table-wrapper .table-buttons {
   border-radius: .5rem;
   overflow: hidden;
   box-shadow: var(--normal-shadow);
-  background: var(--bg-color);
+  background-color: var(--primary-extra-light-color);
 
   .iframe-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: .75rem 1rem;
-    background: var(--primary-light-color);
+    background-color: var(--primary-light-color);
     border-bottom: 1px solid var(--border-color);
 
     .iframe-title {
@@ -579,7 +579,7 @@ main .table-wrapper .table-buttons {
       gap: .5rem;
 
       .iframe-fullscreen-btn {
-        background: transparent;
+        background-color: transparent;
         border: none;
         cursor: pointer;
         color: var(--primary-color);
@@ -602,7 +602,7 @@ main .table-wrapper .table-buttons {
       }
 
       .iframe-refresh-btn {
-        background: transparent;
+        background-color: transparent;
         border: none;
         cursor: pointer;
         color: var(--primary-color);
@@ -631,7 +631,6 @@ main .table-wrapper .table-buttons {
     height: 400px; /* Default height, can be overridden by inline style */
     border: none;
     display: block;
-    background: var(--primary-extra-light-color);
   }
 
   &.fullscreen {

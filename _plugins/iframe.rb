@@ -22,6 +22,7 @@ module Jekyll
       # Extract known parameters
       @height = @params.delete('height') || '400px'
       @hide_header = (@params.delete('hide_header') == 'true')
+      @is_embedded = (@params.delete('is_embedded') == 'true')
     end
 
     def render(context)
@@ -89,8 +90,11 @@ module Jekyll
         ""
       end
 
+      # Generate iframe style
+      container_style = @is_embedded ? "border-radius: 0; box-shadow: none; background-color: var(--white-color);" : ""
+
       <<~HTML
-        <div class="iframe-container" data-iframe-name="#{@iframe_name}" data-height="#{@height}">
+        <div class="iframe-container" data-iframe-name="#{@iframe_name}" data-height="#{@height}" style="#{container_style}">
           #{header_html}<iframe
             id="#{iframe_id}"
             src="#{iframe_src}"

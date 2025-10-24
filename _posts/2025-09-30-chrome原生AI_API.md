@@ -13,7 +13,7 @@ summary:    "Chrome 内置了一些 AI 相关的 API，可以直接在浏览器�
 
 这些功能基本都需要 Chrome 浏览器 138 或更高版本，下面的小工具展示了你的浏览器是否支持这些 API：
 
-{% iframe frontend_ai height=80px hide_header=true %}
+{% iframe frontend_ai height=80px hide_header=true is_embedded=true %}
 
 ## 翻译 API
 
