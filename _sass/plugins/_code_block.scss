@@ -1,0 +1,114 @@
+/* Code Block Styles */
+.code-block-wrapper {
+  position: relative;
+  overflow: visible;
+
+  .code-block-buttons {
+    position: absolute;
+    top: .25rem;
+    right: .5rem;
+    display: flex;
+    gap: .5rem;
+    opacity: 0;
+    z-index: 15;
+    transition: opacity .25s ease-in-out;
+  }
+
+  .code-language-label {
+    line-height: 1.2rem;
+    font-size: .8rem;
+    color: var(--primary-little-light-color);
+    background-color: var(--primary-extra-light-color);
+    border-radius: .25rem;
+    margin: 0;
+    padding: 0;
+    transition: color .25s ease-in-out;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .code-copy-button,
+  .code-line-numbers-button,
+  .code-white-space-button,
+  .code-fullscreen-button {
+    background: var(--primary-light-color);
+    color: var(--primary-little-light-color);
+    border: none;
+    border-radius: .25rem;
+    padding: .2rem;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.2rem;
+    height: 1.2rem;
+    transition: all .25s ease-in-out;
+
+    &.active {
+      color: var(--primary-color);
+      background: var(--primary-semi-light-color);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--primary-color);
+        color: var(--primary-extra-light-color);
+        box-shadow: var(--normal-shadow);
+      }
+    }
+
+    .material-symbols-outlined {
+      font-size: 1rem !important;
+      transition: all .25s ease;
+    }
+  }
+
+  .code-copy-button {
+    .copy-icon {
+      display: inline-block;
+    }
+
+    .check-icon {
+      display: none;
+    }
+  }
+
+  &:hover .code-block-buttons {
+    opacity: 1;
+  }
+
+  &.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999;
+    border-radius: 0;
+    margin: 0;
+    background: var(--primary-extra-light-color);
+    display: flex;
+    flex-direction: column;
+
+    pre {
+      flex: 1;
+      margin: 0 !important;
+      border-radius: 0;
+      height: 100% !important;
+      overflow: auto;
+    }
+
+    .code-block-buttons {
+      opacity: 1;
+    }
+  }
+}
+
+main .code-block-wrapper .code-block-buttons {
+  z-index: 4;
+}

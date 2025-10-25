@@ -1,0 +1,159 @@
+/* Code Runner Plugin Styles */
+.code-runner__container {
+  border-radius: .5rem;
+  box-shadow: var(--normal-shadow);
+  background-color: var(--white-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+
+.code-runner__header {
+  border-radius: .5rem .5rem 0 0;
+  background-color: var(--primary-light-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.code-runner__language-selector {
+  select {
+    padding: .25rem .5rem;
+    border-radius: .5rem 0 0 0;
+    height: 2rem;
+    font-size: .875rem;
+    font-weight: 700;
+    outline: none;
+    border: none;
+    color: var(--primary-color);
+    background-color: var(--primary-semi-light-color);
+
+    option {
+      color: var(--black-color);
+      background-color: var(--white-color);
+    }
+  }
+}
+
+.code-runner__controls {
+  display: flex;
+  gap: .25rem;
+}
+
+.code-runner__refresh-btn,
+.code-runner__run-btn {
+  border: none;
+  height: 2rem;
+  cursor: pointer;
+  transition: all .25s ease;
+
+  .material-symbols-outlined {
+    font-size: 1.2rem;
+  }
+}
+
+.code-runner__refresh-btn {
+  background-color: transparent;
+  color: var(--primary-color);
+
+  &:hover {
+    color: var(--primary-dark-color);
+  }
+}
+
+.code-runner__run-btn {
+  padding: .5rem;
+  border-radius: 0 .5rem 0 0;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+
+  &:hover {
+    background-color: var(--primary-semi-dark-color);
+  }
+}
+
+.code-runner__content {
+  flex: 1;
+  display: flex;
+}
+
+.code-runner__editor-section,
+.code-runner__output-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.code-runner__editor,
+.code-runner__output {
+  flex: 1;
+  padding: .5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.code-runner__editor {
+  resize: none;
+  border: none;
+  outline: none;
+  color: var(--black-color);
+  background-color: var(--primary-extra-light-color);
+  border-right: 1px solid var(--black-color);
+  white-space: pre;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--primary-extra-light-color);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-semi-light-color);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+  }
+}
+
+.code-runner__output {
+  color: var(--true-white-color);
+  background-color: #000;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.code-runner__status {
+  border-radius: 0 0 .5rem .5rem;
+  background-color: var(--primary-light-color);
+  padding: .5rem;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--primary-little-light-color);
+
+  .material-symbols-outlined {
+    font-size: 1rem;
+    vertical-align: middle;
+  }
+
+  &:has(.code-runner__status-text--error) {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+  }
+}
+
+@media (max-width: 768px) {
+  .code-runner__content {
+    flex-direction: column;
+  }
+
+  .code-runner__editor {
+    border-right: none;
+    border-bottom: 1px solid var(--black-color);
+  }
+}

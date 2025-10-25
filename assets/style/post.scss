@@ -2,16 +2,23 @@
 ---
 
 @use 'common';
-@use 'article';
-@use 'series';
-@use 'copyright';
-@use 'suggest';
-@use 'comment';
-@use 'share';
-@use 'plugin';
-@use 'mermaid';
-@use 'syntax_light';
-@use 'syntax_dark';
+@use 'article/article';
+@use 'article/series';
+@use 'article/copyright';
+@use 'article/suggest';
+@use 'article/comment';
+@use 'article/share';
+@use 'article/mermaid';
+@use 'plugins/cite';
+@use 'plugins/code_block';
+@use 'plugins/code_runner';
+@use 'plugins/github';
+@use 'plugins/iframe';
+@use 'plugins/image';
+@use 'plugins/result';
+@use 'plugins/table';
+@use 'highlight/syntax_light';
+@use 'highlight/syntax_dark';
 
 [data-theme='light'] {
   @include syntax_light.syntax_light;
@@ -60,7 +67,7 @@ html[data-theme="dark"] {
 }
 
 @font-face {
-  {% comment %} https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=apps,archive,arrow_back,arrow_forward,arrow_right_alt,assignment_ind,calendar_month,category,check,close,close_fullscreen,content_copy,dark_mode,data_object,featured_play_list,format_list_numbered,format_paragraph,keyboard_arrow_down,keyboard_arrow_left,keyboard_arrow_right,keyboard_arrow_up,light_mode,local_offer,manage_search,open_in_full,open_in_new,refresh,rss_feed,stylus_note,tag,toc,translate,vertical_align_top,visibility,visibility_off,web_stories {% endcomment %}
+  {% comment %} https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=apps,archive,arrow_back,arrow_forward,arrow_right_alt,assignment_ind,bug_report,calendar_month,category,check,close,close_fullscreen,collapse_all,content_copy,dark_mode,data_object,expand_all,featured_play_list,feedback,format_list_numbered,format_paragraph,keyboard_arrow_down,keyboard_arrow_left,keyboard_arrow_right,keyboard_arrow_up,light_mode,local_offer,manage_search,open_in_full,open_in_new,refresh,rss_feed,stylus_note,tag,toc,translate,vertical_align_top,visibility,visibility_off,web_stories {% endcomment %}
   font-family: 'Material Symbols Outlined';
   font-style: normal;
   font-weight: 400;

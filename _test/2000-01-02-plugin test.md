@@ -199,49 +199,19 @@ The plugin automatically reads HTML files from the `assets/post/iframes/iframe_n
 
 #### Default Style (Show Header)
 
-{% iframe code_runner %}
+{% iframe test %}
 
 #### Custom Height
 
-{% iframe code_runner height=800px %}
+{% iframe test height=400px %}
 
 #### Hide Header
 
-{% iframe code_runner hide_header=true %}
+{% iframe test hide_header=true %}
 
 #### Embedded Mode
 
-{% iframe code_runner is_embedded=true %}
-
-#### Online Runner
-
-We also use the `iframe` plugin to offer an online code runner for readers to test code snippets directly in the browser.
-
-> Python & JavaScript will run directly in the browser. Other languages will be sent to [wandbox](https://wandbox.org/) for execution.
->
-> ***Supported languages***
->
-> - C
-> - C++
-> - Go
-> - Haskell
-> - Java
-> - JavaScript
-> - Lua
-> - Perl
-> - Python
-> - Ruby
-> - Rust
-
-You can pass code and language parameters to pre-fill the code editor.
-
-```liquid
-{% raw %}{% iframe code_runner is_embedded=true language=python code=print("Hello,%20World!") %}{% endraw %}
-```
-
-For example, to pre-fill Python code:
-
-{% iframe code_runner is_embedded=true language=python code=def%20greet(name)%3A%0A%20%20%20%20return%20f%22Hello%2C%20%7Bname%7D!%22%0A%0Aprint(greet(%22World%22)) %}
+{% iframe test is_embedded=true %}
 
 ## `result` Plugin
 
@@ -326,134 +296,7 @@ Link2
 
 {% result title="Counter Application" %}
 ```html
-<div class="counter-app">
-  <h2>Counter Application</h2>
-  <div class="counter-display">
-    <span id="counter">0</span>
-  </div>
-  <div class="counter-controls">
-    <button id="decrementBtn" class="btn btn-red">-</button>
-    <button id="resetBtn" class="btn btn-gray">Reset</button>
-    <button id="incrementBtn" class="btn btn-green">+</button>
-  </div>
-</div>
-```
-
-```css
-.counter-app {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 30px;
-  background: #f5f5f5;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.counter-display {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-#counter {
-  font-size: 72px;
-  font-weight: bold;
-  color: #191970;
-  display: inline-block;
-  min-width: 120px;
-}
-
-.counter-controls {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.btn {
-  border: none;
-  padding: 15px 25px;
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: white;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.btn-red {
-  background: #e74c3c;
-}
-
-.btn-green {
-  background: #2ecc71;
-}
-
-.btn-gray {
-  background: #95a5a6;
-}
-```
-
-```javascript
-let count = 0;
-const counterElement = document.getElementById('counter');
-
-document.getElementById('incrementBtn').addEventListener('click', () => {
-  count++;
-  counterElement.textContent = count;
-  animateCounter();
-});
-
-document.getElementById('decrementBtn').addEventListener('click', () => {
-  count--;
-  counterElement.textContent = count;
-  animateCounter();
-});
-
-document.getElementById('resetBtn').addEventListener('click', () => {
-  count = 0;
-  counterElement.textContent = count;
-  animateCounter();
-});
-
-function animateCounter() {
-  counterElement.style.transform = 'scale(1.2)';
-  setTimeout(() => {
-    counterElement.style.transform = 'scale(1)';
-  }, 200);
-}
-
-counterElement.style.transition = 'transform 0.2s';
-```
-{% endresult %}
-
-#### HTML Only
-
-{% result title="Simple HTML" %}
-```html
-<div style="text-align: center; padding: 40px; font-family: Arial;">
-  <h1 style="color: #191970;">Pure HTML</h1>
-  <p>This example only has HTML, no CSS or JavaScript!</p>
-  <p>✨ Simple and clean ✨</p>
-</div>
-```
-{% endresult %}
-
-#### With Split Ratio
-
-{% result title="CSS Animation" split=60 %}
-```html
 <div class="animation-demo">
-  <h2>CSS Animation Demo</h2>
   <div class="box-container">
     <div class="box box1">Box</div>
   </div>
@@ -465,11 +308,6 @@ counterElement.style.transition = 'transform 0.2s';
 .animation-demo {
   padding: 10px;
   text-align: center;
-}
-
-h2 {
-  color: #333;
-  margin-bottom: 30px;
 }
 
 .box-container {
@@ -492,7 +330,9 @@ h2 {
   transition: all 0.5s ease;
 }
 
-.box { background: #e74c3c; }
+.box {
+  background: #d74514;
+}
 
 .box.animate {
   animation: bounce 1s ease;
@@ -502,16 +342,84 @@ h2 {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-50px) rotate(360deg); }
 }
+```
 
-#animateBtn {
-  background: #191970;
+```javascript
+document.getElementById('animateBtn').addEventListener('click', function() {
+  const boxes = document.querySelectorAll('.box');
+  
+  boxes.forEach((box, index) => {
+    setTimeout(() => {
+      box.classList.add('animate');
+      setTimeout(() => {
+        box.classList.remove('animate');
+      }, 1000);
+    }, index * 200);
+  });
+});
+```
+{% endresult %}
+
+#### HTML Only
+
+{% result title="Simple HTML" %}
+```html
+<div style="text-align: center; padding: 40px; font-family: Arial;">
+  <h1 style="color: #d74514;">Pure HTML</h1>
+  <p>This example only has HTML, no CSS or JavaScript!</p>
+</div>
+```
+{% endresult %}
+
+#### With Split Ratio
+
+{% result title="CSS Animation" split=60 %}
+```html
+<div class="animation-demo">
+  <div class="box-container">
+    <div class="box box1">Box</div>
+  </div>
+  <button id="animateBtn">Animate!</button>
+</div>
+```
+
+```css
+.animation-demo {
+  padding: 10px;
+  text-align: center;
+}
+
+.box-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.box {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
-  border: none;
-  padding: 12px 30px;
-  font-size: 16px;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background 0.3s;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+}
+
+.box {
+  background: #d74514;
+}
+
+.box.animate {
+  animation: bounce 1s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-50px) rotate(360deg); }
 }
 ```
 
@@ -535,68 +443,65 @@ document.getElementById('animateBtn').addEventListener('click', function() {
 
 {% result title="Vertical Layout Demo" height=800px layout=vertical %}
 ```html
-<div class="vertical-demo">
-  <h2>Vertical Layout Example</h2>
-  <p>This result uses a vertical (top-bottom) layout!</p>
-  <div class="color-grid">
-    <div class="color-box" style="background: #e74c3c;" data-color="Red">Red</div>
-    <div class="color-box" style="background: #3498db;" data-color="Blue">Blue</div>
-    <div class="color-box" style="background: #2ecc71;" data-color="Green">Green</div>
-    <div class="color-box" style="background: #f39c12;" data-color="Orange">Orange</div>
+<div class="animation-demo">
+  <div class="box-container">
+    <div class="box box1">Box</div>
   </div>
-  <p id="selected-color">Click a color box!</p>
+  <button id="animateBtn">Animate!</button>
 </div>
 ```
 
 ```css
-.vertical-demo {
-  padding: 20px;
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
-
-h2 {
-  color: #191970;
-  margin-bottom: 10px;
-}
-
-.color-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  max-width: 400px;
-  margin: 20px auto;
-}
-
-.color-box {
+.animation-demo {
   padding: 10px;
+  text-align: center;
+}
+
+.box-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.box {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   font-weight: bold;
   border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.5s ease;
 }
 
-.color-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+.box {
+  background: #d74514;
 }
 
-#selected-color {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #191970;
+.box.animate {
+  animation: bounce 1s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-50px) rotate(360deg); }
 }
 ```
 
 ```javascript
-document.querySelectorAll('.color-box').forEach(box => {
-  box.addEventListener('click', function() {
-    const color = this.getAttribute('data-color');
-    const selectedElement = document.getElementById('selected-color');
-    selectedElement.textContent = `You selected: ${color}!`;
-    selectedElement.style.color = this.style.background;
+document.getElementById('animateBtn').addEventListener('click', function() {
+  const boxes = document.querySelectorAll('.box');
+  
+  boxes.forEach((box, index) => {
+    setTimeout(() => {
+      box.classList.add('animate');
+      setTimeout(() => {
+        box.classList.remove('animate');
+      }, 1000);
+    }, index * 200);
   });
 });
 ```
@@ -713,3 +618,65 @@ https://placehold.co/400x300
 https://placehold.co/400x300
 ```
 {% endresult %}
+
+## `code_runner` Plugin
+
+The `code_runner` plugin provides an interactive code editor and runner directly in the page.
+
+```liquid
+{% raw %}{% code_runner_empty %}{% endraw %}
+{% raw %}{% code_runner height=400px %}{% endraw %}
+{% raw %}{% code_runner height=400px %}{% endraw %}
+{% raw %}```js{% endraw %}
+// some code
+{% raw %}‌﻿‌‍```{% endraw %}
+{% raw %}{% endcode_runner %}{% endraw %}
+```
+
+> Python & JavaScript will run directly in the browser. Other languages will be sent to [wandbox](https://wandbox.org/) for execution.
+>
+> ***Supported languages***
+>
+> - C
+> - C++
+> - Go
+> - Haskell
+> - Java
+> - JavaScript
+> - Lua
+> - Perl
+> - Python
+> - Ruby
+> - Rust
+
+### Available Parameters
+
+- `height=400px` - Set the height of the code runner (default 300px)
+
+### Usage Example
+
+#### Empty Code Runner
+
+{% code_runner_empty %}
+
+#### Code Runner with Pre-filled Code
+
+{% code_runner %}
+```js
+console.log("Hello, World!");
+for (let i = 0; i < 5; i++) {
+  console.log(`Count: ${i}`);
+}
+```
+{% endcode_runner %}
+
+#### Code Runner with Custom Height
+
+{% code_runner height=400px %}
+```python
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("World"))
+```
+{% endcode_runner %}

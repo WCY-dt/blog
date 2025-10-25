@@ -241,6 +241,10 @@ layout: compress
 
       <!-- result 插件 -->
       <script src='{{ '/assets/js/result_plugin.js' | relative_url }}'></script>
+
+      <!-- code_runner 插件 -->
+      <script defer src="{{ '/assets/js/cdn/pyodide.js' | relative_url }}"></script>
+      <script src='{{ '/assets/js/code_runner.js' | relative_url }}'></script>
     {%- endif -%}
 
     <!-- 数学公式 -->
