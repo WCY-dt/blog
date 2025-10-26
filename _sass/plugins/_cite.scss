@@ -55,14 +55,14 @@
 }
 
 .cite__link {
-  color: var(--primary-color)!important;
+  color: var(--primary-little-light-color)!important;
   text-decoration: none!important;
   margin-left: .5rem;
   transition: color .25s ease-in-out;
 
   @media (hover: hover) {
     &:hover {
-      color: var(--primary-dark-color)!important;
+      color: var(--primary-color)!important;
     }
   }
 }

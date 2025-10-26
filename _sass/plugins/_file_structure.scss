@@ -15,7 +15,7 @@
   align-items: center;
   padding: .5rem;
   border-radius: .25rem .25rem 0 0;
-  background-color: var(--primary-semi-light-color);
+  background-color: var(--primary-light-color);
 }
 
 .file-structure__title {
@@ -25,12 +25,12 @@
 }
 
 .file-structure__toggle {
-  color: var(--primary-color);
+  color: var(--primary-little-light-color);
   cursor: pointer;
 
   @media (hover:hover) {
     &:hover {
-      color: var(--primary-semi-dark-color);
+      color: var(--primary-color);
     }
   }
 

@@ -29,7 +29,7 @@
         background-color: transparent;
         border: none;
         cursor: pointer;
-        color: var(--primary-color);
+        color: var(--primary-little-light-color);
         padding: .25rem;
         border-radius: .25rem;
         display: flex;
@@ -39,7 +39,7 @@
 
         @media (hover: hover) {
           &:hover {
-            color: var(--primary-dark-color);
+            color: var(--primary-color);
           }
         }
 
@@ -52,7 +52,7 @@
         background-color: transparent;
         border: none;
         cursor: pointer;
-        color: var(--primary-color);
+        color: var(--primary-little-light-color);
         padding: .25rem;
         border-radius: .25rem;
         display: flex;
@@ -62,7 +62,7 @@
 
         @media (hover: hover) {
           &:hover {
-            color: var(--primary-dark-color);
+            color: var(--primary-color);
           }
         }
 

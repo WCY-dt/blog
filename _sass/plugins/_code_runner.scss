@@ -41,6 +41,7 @@
 }
 
 .code-runner__refresh-btn,
+.code-runner__fullscreen-btn,
 .code-runner__run-btn {
   border: none;
   height: 2rem;
@@ -52,12 +53,15 @@
   }
 }
 
-.code-runner__refresh-btn {
+.code-runner__refresh-btn,
+.code-runner__fullscreen-btn {
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--primary-little-light-color);
 
-  &:hover {
-    color: var(--primary-dark-color);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 }
 
@@ -67,8 +71,10 @@
   background-color: var(--primary-color);
   color: var(--white-color);
 
-  &:hover {
-    background-color: var(--primary-semi-dark-color);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--primary-semi-dark-color);
+    }
   }
 }
 
@@ -116,8 +122,10 @@
     border-radius: 4px;
   }
 
-  &::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color);
+  @media (hover: hover) {
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-color);
+    }
   }
 }
 
@@ -155,5 +163,23 @@
   .code-runner__editor {
     border-right: none;
     border-bottom: 1px solid var(--black-color);
+  }
+}
+
+.code-runner__container.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 9999;
+  border-radius: 0;
+  margin: 0;
+
+  .code-runner__header,
+  .code-runner__language-select,
+  .code-runner__run-btn,
+  .code-runner__status {
+    border-radius: 0;
   }
 }

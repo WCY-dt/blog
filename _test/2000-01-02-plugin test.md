@@ -37,6 +37,26 @@ Tables support fullscreen functionality
 | Go | Compiled | Medium | ⭐⭐⭐ |
 | Rust | Compiled | Hard | ⭐⭐ |
 
+## `cite` Plugin
+
+```liquid
+{% raw %}{% cite url title="Title" favicon="favicon_url" %}{% endraw %}
+Citation content
+{% raw %}{% endcite %}{% endraw %}
+```
+
+### Available Parameters
+
+- `url`: The URL of the cited source (required)
+- `title="Title"`: The title to display for the citation (optional, defaults to the webpage title)
+- `favicon="favicon_url"`: The URL of the favicon to display (optional, defaults to the favicon of the cited webpage)
+
+### Usage Example
+
+{% cite https://en.wikipedia.org/wiki/Coat_Corporation title="Wikipedia" favicon="https://en.wikipedia.org/static/favicon/wikipedia.ico" %}
+The central figure of Inmu videos is ***Yaju Senpai (Japanese: 野獣先輩 "beast senpai")***, an actor appearing in the original porn, who is parodied the most. His true name is never revealed and an attempt to identify him in 2016 was cancelled due to moral concerns.
+{% endcite %}
+
 ## `github_link` Plugin
 
 ```liquid

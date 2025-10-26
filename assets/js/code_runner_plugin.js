@@ -9,6 +9,7 @@ class CodeRunner {
     this.status = this.container.querySelector('.code-runner__status-text');
     this.runBtn = this.container.querySelector('.code-runner__run-btn');
     this.refreshBtn = this.container.querySelector('.code-runner__refresh-btn');
+    this.fullscreenBtn = this.container.querySelector('.code-runner__fullscreen-btn');
 
     this.currentLanguage = this.container.dataset.language || 'python';
     this.pyodide = null;
@@ -27,6 +28,7 @@ class CodeRunner {
     await this.initializeLanguage(this.currentLanguage);
     this.runBtn.addEventListener('click', async () => await this.runCode());
     this.refreshBtn.addEventListener('click', async () => await this.refresh());
+    this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
   }
 
   async runCode() {
@@ -253,6 +255,43 @@ class CodeRunner {
   setStatus(text, isErr = false) {
     this.status.textContent = text;
     this.status.className = `code-runner__status-text${isErr ? ' code-runner__status-text--error' : ''}`;
+  }
+
+  toggleFullscreen() {
+    const isFullscreen = this.container.classList.contains('fullscreen');
+
+    if (isFullscreen) {
+      // Exit fullscreen
+      this.container.classList.remove('fullscreen');
+      document.body.style.overflow = '';
+
+      // Update button icon
+      const icon = this.fullscreenBtn.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.textContent = 'open_in_full';
+      }
+
+      // Remove escape key listener
+      document.removeEventListener('keydown', this.escapeHandler);
+    } else {
+      // Enter fullscreen
+      this.container.classList.add('fullscreen');
+      document.body.style.overflow = 'hidden';
+
+      // Update button icon
+      const icon = this.fullscreenBtn.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.textContent = 'close_fullscreen';
+      }
+
+      // Add escape key listener
+      this.escapeHandler = (e) => {
+        if (e.key === 'Escape') {
+          this.toggleFullscreen();
+        }
+      };
+      document.addEventListener('keydown', this.escapeHandler);
+    }
   }
 }
 

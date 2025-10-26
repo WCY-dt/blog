@@ -68,6 +68,9 @@ module Jekyll
               <button class="code-runner__refresh-btn">
                 <span class="material-symbols-outlined">refresh</span>
               </button>
+              <button class="code-runner__fullscreen-btn">
+                <span class="material-symbols-outlined">open_in_full</span>
+              </button>
               <button class="code-runner__run-btn">
                 <span class="material-symbols-outlined">bug_report</span>
               </button>
@@ -136,6 +139,9 @@ module Jekyll
               <button class="code-runner__refresh-btn">
                 <span class="material-symbols-outlined">refresh</span>
               </button>
+              <button class="code-runner__fullscreen-btn">
+                <span class="material-symbols-outlined">open_in_full</span>
+              </button>
               <button class="code-runner__run-btn">
                 <span class="material-symbols-outlined">bug_report</span>
               </button>
@@ -161,10 +167,3 @@ end
 
 Liquid::Template.register_tag('code_runner', Jekyll::CodeRunnerTag)
 Liquid::Template.register_tag('code_runner_empty', Jekyll::CodeRunnerEmptyTag)
-
-# Hook to detect code_runner usage
-Jekyll::Hooks.register [:posts, :pages], :post_render do |doc|
-  if doc.output.include?('code-runner__container')
-    doc.data['uses_code_runner'] = true
-  end
-end
