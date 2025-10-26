@@ -1,0 +1,254 @@
+.file-structure__container {
+  background-color: var(--primary-extra-light-color);
+  border-radius: .25rem;
+  color: var(--black-color);
+  font-size: 1rem;
+  * {
+    box-sizing: border-box;
+    line-height: 1.2rem;
+  }
+}
+
+.file-structure__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem;
+  border-radius: .25rem .25rem 0 0;
+  background-color: var(--primary-semi-light-color);
+}
+
+.file-structure__title {
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: .9rem;
+}
+
+.file-structure__toggle {
+  color: var(--primary-color);
+  cursor: pointer;
+
+  @media (hover:hover) {
+    &:hover {
+      color: var(--primary-semi-dark-color);
+    }
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.1rem;
+  }
+}
+
+.file-structure__tree {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  display: flex;
+  align-items: center;
+  padding: .5rem;
+  border-radius: 0 0 .25rem .25rem;
+  width: 100%;
+
+  & > .file-structure__tree-item {
+    width: 100%;
+  }
+
+  & > .file-structure__tree-children {
+    width: 100%;
+    padding-left: 0;
+  }
+}
+
+.file-structure__tree-item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.file-structure__tree-content {
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: .25rem;
+  cursor: pointer;
+  border-radius: .25rem;
+  transition: all .2s ease;
+
+  @media (hover:hover) {
+    &:hover {
+      background-color: var(--primary-light-color);
+    }
+  }
+
+  &:not(:has(.file-structure__tree-icon)) {
+    padding-left: 1.75rem;
+
+    @media (hover:hover) {
+      &:hover {
+        background-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.file-structure__tree-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: .25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &.file-structure__tree-icon--folder {
+    &::before {
+      content: "📂";
+    }
+  }
+
+  &.file-structure__tree-icon--file {
+    &::before {
+      content: "📄";
+    }
+  }
+}
+
+.file-structure__tree-item--empty, .file-structure__tree-children--collapsed {
+  & > .file-structure__tree-content .file-structure__tree-icon--folder::before {
+    content: "📁";
+  }
+}
+
+.file-structure__tree-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #526179;
+
+  &.file-structure__tree-label--c {
+    color: #00599C;
+  }
+
+  &.file-structure__tree-label--clojure {
+    color: #5881D8;
+  }
+
+  &.file-structure__tree-label--cplusplus {
+    color: #00599C;
+  }
+
+  &.file-structure__tree-label--csharp {
+    color: #239120;
+  }
+
+  &.file-structure__tree-label--css {
+    color: #1572B6;
+  }
+
+  &.file-structure__tree-label--elixir {
+    color: #4E2A8E;
+  }
+
+  &.file-structure__tree-label--go {
+    color: #00ADD8;
+  }
+
+  &.file-structure__tree-label--html {
+    color: #E34F26;
+  }
+
+  &.file-structure__tree-label--java {
+    color: #ED8B00;
+  }
+
+  &.file-structure__tree-label--javascript {
+    color: #F7DF1E;
+  }
+
+  &.file-structure__tree-label--json {
+    color: #00A86B;
+  }
+
+  &.file-structure__tree-label--jsx {
+    color: #61DAFB;
+  }
+
+  &.file-structure__tree-label--kotlin {
+    color: #7F52FF;
+  }
+
+  &.file-structure__tree-label--markdown {
+    color: #083FA1;
+  }
+
+  &.file-structure__tree-label--php {
+    color: #777BB4;
+  }
+
+  &.file-structure__tree-label--prototype {
+    color: #8DB6CD;
+  }
+
+  &.file-structure__tree-label--python {
+    color: #3776AB;
+  }
+
+  &.file-structure__tree-label--ruby {
+    color: #CC342D;
+  }
+
+  &.file-structure__tree-label--rust {
+    color: #FF6B35;
+  }
+
+  &.file-structure__tree-label--scss {
+    color: #CC6699;
+  }
+
+  &.file-structure__tree-label--shell {
+    color: #89E051;
+  }
+
+  &.file-structure__tree-label--sql {
+    color: #336791;
+  }
+
+  &.file-structure__tree-label--swift {
+    color: #FA7343;
+  }
+
+  &.file-structure__tree-label--tsx {
+    color: #61DAFB;
+  }
+
+  &.file-structure__tree-label--typescript {
+    color: #3178C6;
+  }
+
+  &.file-structure__tree-label--xml {
+    color: #FF6600;
+  }
+
+  &.file-structure__tree-label--yaml {
+    color: #CB171E;
+  }
+}
+
+.file-structure__tree-children {
+  list-style: none;
+  margin: 0;
+  padding-left: 20px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+
+  &.file-structure__tree-children--collapsed {
+    max-height: 0;
+  }
+
+  &.file-structure__tree-children--expanded {
+    max-height: 2000px;
+  }
+}
+
+.file-structure__container + .file-structure__container {
+  margin-top: 1rem;
+}

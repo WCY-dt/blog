@@ -27,20 +27,22 @@ MVC 是一种设计模式，它将应用程序分为三个部分：模型（Mode
 
 我们这里只介绍纯 Java 配置方法。Spring MVC 有着不一样的目录结构：
 
-```plaintext
-src/
- └──main/
-     ├──java/
-     │   └──com/example/config/
-     │       ├──WebAppInitializer.java # Servlet 容器初始化
-     │       ├──RootConfig.java        # 根容器配置（服务层、数据源等）
-     │       └──WebConfig.java         # Web层配置（控制器、视图解析器等）
-     └──webapp/
-         └──WEB-INF/
-             ├──views/
-             │   └──hello.jsp          # 视图文件
-             └──index.jsp              # 首页
-```
+{% file_structure %}
+- src/
+  - main/
+    - java/
+      - com/
+        - example/
+          - config/
+            - WebAppInitializer.java
+            - RootConfig.java
+            - WebConfig.java
+    - webapp/
+      - WEB-INF/
+        - views/
+          - hello.jsp
+        - index.jsp
+{% endfile_structure %}
 
 首先编写 `WebAppInitializer` 类：
 

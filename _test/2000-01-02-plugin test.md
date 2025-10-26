@@ -680,3 +680,65 @@ def greet(name):
 print(greet("World"))
 ```
 {% endcode_runner %}
+
+## `file_structure` Plugin
+
+```liquid
+{% raw %}{% file_structure %}{% endraw %}
+- root/
+  - folder1
+    - file1.txt
+    - [FILE]file2.txt
+  - folder2
+    - subfolder1/
+      - [FOLDER]subsubfolder1
+      - file3.txt
+  - file4.txt
+{% raw %}{% endfile_structure %}{% endraw %}
+{% raw %}{% file_structure title="Custom File Structure" %}{% endraw %}
+- root/
+  - folder1
+    - file1.txt
+    - [FILE]file2.txt
+  - folder2
+    - subfolder1/
+      - [FOLDER]subsubfolder1
+      - file3.txt
+  - file4.txt
+{% raw %}{% endfile_structure %}{% endraw %}
+```
+
+- If sub structure of a name is provided, it will be treated as a folder
+- If the name starts with `[FOLDER]`, it will be treated as a folder
+- If the name starts with `[FILE]`, it will be treated as a file
+- If the name ends with a `/`, it will be treated as a folder
+
+### Available Parameters
+
+- `title="File Structure"` - Set the title of the file structure display (default "File Structure")
+
+### Usage Example
+
+{% file_structure %}
+- project_root/
+  - src/
+    - main.py
+    - utils.py
+    - ...
+  - tests/
+    - [FOLDER]unit_tests
+    - test_main.py
+  - README.md
+{% endfile_structure %}
+
+{% file_structure title="My Project Structure" %}
+- my_project/
+  - app/
+    - init.go
+  - config/
+    - dev/
+      - config.go
+    - prod/
+      - config.go
+  - go.mod
+{% endfile_structure %}

@@ -18,23 +18,24 @@ snort 和 scapy 都可以直接 `sudo apt install`，不再赘述。
 
 snort 默认安装在 `/etc/snort` 下。目录结构如下：
 
-```plaintext
-/etc/snort/
- ├──attribute_table.dtd
- ├──file_magic.conf
- ├──unicode.map
- ├──classification.config
- ├──gen-msg.map
- ├──snort.conf
- ├──community-sid-msg.map
- ├──reference.config
- ├──snort.debian.conf
- ├──threshold.conf
- └──rules/
-    ├──attack-responses.rules
-    ├──// many rules
-    └──x11.rules
-```
+{% file_structure %}
+- etc/
+  - snort/
+    - attribute_table.dtd
+    - file_magic.conf
+    - unicode.map
+    - classification.config
+    - gen-msg.map
+    - snort.conf
+    - community-sid-msg.map
+    - reference.config
+    - snort.debian.conf
+    - threshold.conf
+    - rules/
+      - attack-responses.rules
+      - ...
+      - x11.rules
+{% endfile_structure %}
 
 目录中有大量的配置文件，每个文件都有详细的注释，感兴趣的可以仔细阅读并个性化配置。我们目前只需要用到 `snort.conf`。文件夹 `/rules` 里面存储的是默认的规则，我们暂时用不到它们。
 
@@ -94,37 +95,37 @@ sudo snort -A console -i ens33 -u snort -g snort -c /etc/snort/snort.conf
 
 通常来说，每行一条 rules。rules 由以下几个部分组成：
 
-```plaintext
-rules
-├── Header
-│   ├── RuleType
-│   └── Five Tuple
-│       ├── Protocol
-│       └── sip
-│           ├── dip
-│           ├── sport
-│           └── dport
-└── Options
-    ├── General
-    │   ├── Msg
-    │   ├── Reference
-    │   ├── gid / sid / rev
-    │   ├── Classtype
-    │   ├── priority
-    │   └── metadata
-    ├── Non-Payload
-    │   ├── dsize
-    │   ├── ttl
-    │   ├── tos
-    │   └── ……
-    ├── Payload
-    │   ├── depth / offset / within / distance
-    │   ├── decode: http / uri / sip
-    │   └── ……
-    ├── Post-Detection
-    ├── flow: to_client / to_server / established
-    └── flowbits: set / unset / isset / noalert
-```
+{% file_structure title="rules 组成" %}
+- rules
+  - Header
+    - RuleType
+    - Five Tuple
+      - Protocol
+      - sip
+        - dip
+        - sport
+        - dport
+  - Options
+    - General
+      - Msg
+      - Reference
+      - gid / sid / rev
+      - Classtype
+      - priority
+      - metadata
+    - Non-Payload
+      - dsize
+      - ttl
+      - tos
+      - ...
+    - Payload
+      - depth / offset / within / distance
+      - decode: http / uri / sip
+      - ...
+    - Post-Detection
+      - flow: to_client / to_server / established
+      - flowbits: set / unset / isset / noalert
+{% endfile_structure %}
 
 在 `RuleType` 中，对于 IDS，有 `alert`、`log`、`pass` 三种；对于 IPS，有 `drop`、`reject`、`sdrop` 三种。
 

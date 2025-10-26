@@ -492,26 +492,25 @@ while True:
 
 到目前为止，所有准备工作均已经完成，文件夹内结构如下所示：
 
-```plaintext
-./
- ├──docker-compose.yml
- └──volumes/
-     ├──crt/
-     │   ├──ca.key
-     │   ├──client-certs/
-     │   │   ├──eaa14a05.0
-     │   │   └──ca.crt
-     │   ├──demoCA
-     │   ├──myCA_openssl.cnf
-     │   ├──server-certs/
-     │   │   ├──vpn.crt
-     │   │   └──vpn.key
-     │   └──vpn.csr
-     ├──vpnclient1.py
-     ├──vpnclient2.py
-     ├──vpnclient3.py
-     └──vpnserver.py
-```
+{% file_structure %}
+- docker-compose.yml
+- volumes/
+  - crt/
+    - ca.key
+    - client-certs/
+      - eaa14a05.0
+      - ca.crt
+    - demoCA/
+    - myCA_openssl.cnf
+    - server-certs/
+      - vpn.crt
+      - vpn.key
+    - vpn.csr
+  - vpnclient1.py
+  - vpnclient2.py
+  - vpnclient3.py
+  - vpnserver.py
+{% endfile_structure %}
 
 ## 测试
 

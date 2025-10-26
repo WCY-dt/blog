@@ -25,25 +25,26 @@ Spring Boot 可以直接使用 Spring Initializr 来生成项目，生成时，�
 
 Spring Boot 项目的目录结构：
 
-```plaintext
-src/
- └──main/
-     ├──java/
-     │   ├──com/example/
-     │   │   ├──controller/
-     │   │   │   └──BookController.java
-     │   │   ├──model/
-     │   │   │   └──Book.java
-     │   │   ├──service/
-     │   │   │   └──BookService.java
-     │   │   └──Application.java
-     └──resources/
-         ├──application.yml
-         ├──static/
-         │   └──style.css
-         └──templates/
-             └──book.html
-```
+{% file_structure %}
+- src/
+  - main/
+    - java/
+      - com/
+        - example/
+          - controller/
+            - BookController.java
+          - model/
+            - Book.java
+          - service/
+            - BookService.java
+          - Application.java
+    - resources/
+      - application.yml
+        - static/
+          - style.css
+        - templates/
+          - book.html
+{% endfile_structure %}
 
 ### Spring Boot 配置
 

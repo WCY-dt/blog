@@ -57,12 +57,12 @@ if __name__ == '__main__':
 
 现在，我们将 `moduleA.py` 和 `moduleB.py` 都放到 `packageA/subpackageA` 目录下，目录结构如下：
 
-```plaintext
-packageA/
- └──subpackageA/
-     ├──moduleA.py
-     └──moduleB.py
-```
+{% file_structure %}
+- packageA/
+  - subpackageA/
+    - moduleA.py
+    - moduleB.py
+{% endfile_structure %}
 
 在根目录下运行 `python packageA/subpackageA/moduleB.py`，依然可以正常输出 `moduleA foo()`。
 
@@ -134,15 +134,15 @@ def baz():
 
 此时文件夹结构如下：
 
-```plaintext
-main.py
-packageA/
- ├──subpackageA/
- │   ├──moduleA.py
- │   └──moduleB.py
- └──subpackageB/
-     └──moduleC.py
-```
+{% file_structure %}
+- main.py
+- packageA/
+  - subpackageA/
+    - moduleA.py
+    - moduleB.py
+  - subpackageB/
+    - moduleC.py
+{% endfile_structure %}
 
 我们在 `main.py` 中导入 `moduleC.py`：
 
@@ -174,16 +174,16 @@ if __name__ == '__main__':
 
 此时文件夹结构如下：
 
-```plaintext
-main.py
-packageA/
- ├──submain.py
- ├──subpackageA/
- │   ├──moduleA.py
- │   └──moduleB.py
- └──subpackageB/
-     └──moduleC.py
-```
+{% file_structure %}
+- main.py
+- packageA/
+  - submain.py
+  - subpackageA/
+    - moduleA.py
+    - moduleB.py
+  - subpackageB/
+    - moduleC.py
+{% endfile_structure %}
 
 运行 `python packageA/submain.py`，会报错：
 
@@ -207,13 +207,13 @@ ImportError: attempted relative import beyond top-level package
 这让我们理解了另一个问题。此时的 `moduleB.py` 为：
 
 ```python
-    from .moduleA import foo
+from .moduleA import foo
 
-    def bar():
-        foo()
+def bar():
+    foo()
 
-    if __name__ == '__main__':
-        bar()
+if __name__ == '__main__':
+    bar()
 ```
 
 假如我们直接在根目录下运行 `python packageA/subpackageA/moduleB.py`，会报错：
@@ -235,11 +235,11 @@ ImportError: attempted relative import with no known parent package
 
 例如，我们有如下文件夹结构：
 
-```plaintext
-main.py
-packageA/
- └──__init__.py
-```
+{% file_structure %}
+- main.py
+- packageA/
+  - __init__.py
+{% endfile_structure %}
 
 `__init__.py` 文件中有如下代码：
 

@@ -5,7 +5,6 @@ date:       2024-12-15 22:00:00 +0800
 categories: 分布式
 tags:       docker registry mirror
 summary:    "Docker Hub 被墙后，使用 Docker 成了一件麻烦事。我实在受不了，只好自行搭建了一个 Docker Registry 来作为镜像仓库。这个 Registry 支持了 Docker Hub 的镜像拉取、私有镜像存储、用户认证等功能。"
-render_with_liquid: false
 ---
 
 Docker Hub 被墙后，使用 Docker 成了一件麻烦事。我实在受不了，只好自行搭建了一个 Docker Registry 来作为镜像仓库。这个 Registry 支持了 Docker Hub 的镜像拉取、私有镜像存储、用户认证等功能。
@@ -31,24 +30,25 @@ cd /opt/docker-registry
 
 目录结构应当如下所示：
 
-```plaintext
-/opt/docker-registry/
- ├──config/
- │   └──registry.yml
- ├──ssl/
- │   ├──fullchain.pem
- │   └──privkey.pem
- ├──auth/
- │   └──htpasswd
- ├──data/
- ├──logs/
- ├──scripts/
- │   ├──monitor.sh
- │   ├──cleanup.sh
- │   └──renew-cert.sh
- ├──docker-compose.yml
- └──nginx.conf
-```
+{% file_structure %}
+- opt/
+  - docker-registry/
+    - config/
+      - registry.yml
+    - ssl/
+      - fullchain.pem
+      - privkey.pem
+    - auth/
+      - htpasswd
+    - data/
+    - logs/
+    - scripts/
+      - monitor.sh
+      - cleanup.sh
+      - renew-cert.sh
+    - docker-compose.yml
+    - nginx.conf
+{% endfile_structure %}
 
 然后安装 Docker 和 Docker Compose：
 
@@ -414,11 +414,11 @@ check_service_response() {
 # 检查内存使用
 check_memory_usage() {
     # Registry容器内存使用
-    REGISTRY_MEM=$(docker stats docker-registry --no-stream --format "{{.MemPerc}}" | sed 's/%//')
+    {% raw %}REGISTRY_MEM=$(docker stats docker-registry --no-stream --format "{{.MemPerc}}" | sed 's/%//'){% endraw %}
     echo "[$DATE] Registry内存使用: ${REGISTRY_MEM}%" >> $LOG_FILE
     
     # Nginx容器内存使用
-    NGINX_MEM=$(docker stats registry-nginx --no-stream --format "{{.MemPerc}}" | sed 's/%//')
+    {% raw %}NGINX_MEM=$(docker stats registry-nginx --no-stream --format "{{.MemPerc}}" | sed 's/%//'){% endraw %}
     echo "[$DATE] Nginx内存使用: ${NGINX_MEM}%" >> $LOG_FILE
     
     # 如果内存使用过高，记录警告
