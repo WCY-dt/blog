@@ -118,3 +118,10 @@ module Jekyll
 end
 
 Liquid::Template.register_tag('iframe', Jekyll::IframeTag)
+
+# Hook to detect iframe usage
+Jekyll::Hooks.register [:posts, :pages], :post_render do |doc|
+  if doc.output.include?('iframe-container')
+    doc.data['uses_iframe'] = true
+  end
+end

@@ -7,7 +7,6 @@ tags:       seedlab sql
 summary:    "本文为 SEED Labs 2.0 - SQL Injection Attack Lab 的实验记录，介绍了如何使用 Docker 和 MySQL 进行 SQL 注入攻击及其防御。"
 series:     SEEDLabs
 series_index: 5
-mathjax:    true
 ---
 
 本文为 [SEED Labs 2.0 - SQL Injection Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Web/Web_SQL_Injection/) 的实验记录。

@@ -7,7 +7,6 @@ tags:       game
 summary:    "本文为 Bandit 题解。"
 series:     OverTheWire
 series_index: 1
-mathjax:    true
 archived:   true
 ---
 

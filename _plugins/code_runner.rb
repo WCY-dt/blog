@@ -161,3 +161,10 @@ end
 
 Liquid::Template.register_tag('code_runner', Jekyll::CodeRunnerTag)
 Liquid::Template.register_tag('code_runner_empty', Jekyll::CodeRunnerEmptyTag)
+
+# Hook to detect code_runner usage
+Jekyll::Hooks.register [:posts, :pages], :post_render do |doc|
+  if doc.output.include?('code-runner__container')
+    doc.data['uses_code_runner'] = true
+  end
+end

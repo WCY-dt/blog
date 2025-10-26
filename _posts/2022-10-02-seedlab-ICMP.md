@@ -7,7 +7,6 @@ tags:       seedlab icmp
 summary:    "本文为 SEED Labs 2.0 - ICMP Redirect Attack Lab 的实验记录，介绍了如何利用 ICMP 重定向攻击实现中间人攻击 (MITM)。"
 series:     SEEDLabs
 series_index: 8
-mathjax:    true
 ---
 
 本文为 [SEED Labs 2.0 - ICMP Redirect Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/ICMP_Redirect/) 的实验记录。

@@ -7,7 +7,6 @@ tags:       seedlab vpn
 summary:    "本文为 SEED Labs 2.0 - VPN Tunneling Lab 的实验记录，介绍了虚拟专用网络 (VPN) 的基本原理和实现方法。通过配置 TUN/TAP 虚拟接口、IP 隧道和路由，实现了一个简单的 VPN 隧道。"
 series:     SEEDLabs
 series_index: 13
-mathjax:    true
 ---
 
 本文为 [SEED Labs 2.0 - VPN Tunneling Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/VPN_Tunnel/) 的实验记录。

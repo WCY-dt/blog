@@ -7,7 +7,6 @@ tags:       seedlab vpn
 summary:    "本文为 SEED Labs 2.0 - Virtual Private Network (VPN) Lab 的实验记录，介绍了如何使用 Docker 和 Python 实现一个支持 TUN 建立、隧道加密、服务器认证、客户端登录和多用户功能的 VPN 系统。"
 series:     SEEDLabs
 series_index: 14
-mathjax:    true
 ---
 
 本文为 [SEED Labs 2.0 - Virtual Private Network (VPN) Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/VPN/) 的实验记录。

@@ -7,7 +7,6 @@ tags:       game
 summary:    "本文为 Narnia 题解。"
 series:     OverTheWire
 series_index: 3
-mathjax:    true
 archived:   true
 ---
 

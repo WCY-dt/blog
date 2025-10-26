@@ -7,7 +7,6 @@ tags:       seedlab arp
 summary:    "本文为 SEED Labs 2.0 - ARP Cache Poisoning Attack Lab 的实验记录，介绍了如何利用 ARP 缓存中毒实现中间人攻击 (MITM)。"
 series:     SEEDLabs
 series_index: 7
-mathjax:    true
 ---
 
 本文为 [SEED Labs 2.0 - ARP Cache Poisoning Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/ARP_Attack/) 的实验记录。

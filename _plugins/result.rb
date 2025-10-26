@@ -419,3 +419,10 @@ module Jekyll
 end
 
 Liquid::Template.register_tag('result', Jekyll::ResultTag)
+
+# Hook to detect result usage
+Jekyll::Hooks.register [:posts, :pages], :post_render do |doc|
+  if doc.output.include?('result-wrapper')
+    doc.data['uses_result'] = true
+  end
+end

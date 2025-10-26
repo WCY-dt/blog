@@ -7,7 +7,6 @@ tags:       seedlab network
 summary:    "本文为 SEED Labs 2.0 - Packet Sniffing and Spoofing Lab 的实验记录，介绍了如何使用 Scapy 进行数据包嗅探和欺骗。"
 series:     SEEDLabs
 series_index: 9
-mathjax:    true
 ---
 
 本文为 [SEED Labs 2.0 - Packet Sniffing and Spoofing Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/Sniffing_Spoofing/) 的实验记录。

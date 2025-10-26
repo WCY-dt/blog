@@ -7,7 +7,6 @@ tags:       seedlab pki
 summary:    "本文为 SEED Labs 2.0 - PKI Lab 的实验记录，介绍了公钥基础设施 (PKI) 的工作原理、如何保护 Web 以及如何击败中间人攻击。"
 series:     SEEDLabs
 series_index: 10
-mathjax:    true
 ---
 
 本文为 [SEED Labs 2.0 - PKI Lab](https://seedsecuritylabs.org/Labs_20.04/Crypto/Crypto_PKI/) 的实验记录。

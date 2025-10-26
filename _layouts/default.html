@@ -236,22 +236,30 @@ layout: compress
       <!-- 表格增强插件 -->
       <script src='{{ '/assets/js/table_enhance.js' | relative_url }}'></script>
 
-      <!-- iframe 插件 -->
-      <script src='{{ '/assets/js/iframe_plugin.js' | relative_url }}'></script>
+      {%- if page.uses_iframe -%}
+        <!-- iframe 插件 -->
+        <script src='{{ '/assets/js/iframe_plugin.js' | relative_url }}'></script>
+      {%- endif -%}
 
-      <!-- result 插件 -->
-      <script src='{{ '/assets/js/result_plugin.js' | relative_url }}'></script>
+      {%- if page.uses_result -%}
+        <!-- result 插件 -->
+        <script src='{{ '/assets/js/result_plugin.js' | relative_url }}'></script>
+      {%- endif -%}
 
-      <!-- code_runner 插件 -->
-      <script defer src="{{ '/assets/js/cdn/pyodide.js' | relative_url }}"></script>
-      <script src='{{ '/assets/js/code_runner_plugin.js' | relative_url }}'></script>
+      {%- if page.uses_code_runner -%}
+        <!-- code_runner 插件 -->
+        <script defer src="{{ '/assets/js/cdn/pyodide.js' | relative_url }}"></script>
+        <script src='{{ '/assets/js/code_runner_plugin.js' | relative_url }}'></script>
+      {%- endif -%}
 
-      <!-- file_structure 插件 -->
-      <script src='{{ '/assets/js/file_structure_plugin.js' | relative_url }}'></script>
+      {%- if page.uses_file_structure -%}
+        <!-- file_structure 插件 -->
+        <script src='{{ '/assets/js/file_structure_plugin.js' | relative_url }}'></script>
+      {%- endif -%}
     {%- endif -%}
 
-    <!-- 数学公式 -->
-    {%- if page.mathjax -%}
+    {%- if page.mathjax or page.uses_mathjax -%}
+      <!-- 数学公式 -->
       <script>
         window.MathJax = {
           loader: {load: ['[tex]/boldsymbol', '[tex]/color', '[tex]/colorv2', '[tex]/physics', '[tex]/cases', '[tex]/empheq']},
@@ -269,8 +277,8 @@ layout: compress
     <link rel='dns-prefetch' href='//cdn.jsdelivr.net'>
     <link rel='preconnect' href='https://cdn.jsdelivr.net' crossorigin>
 
-    <!-- mermaid.js -->
-    {%- if page.mermaid -%}
+    {%- if page.mermaid or page.uses_mermaid -%}
+      <!-- mermaid.js -->
       <script
         src='https://cdn.jsdelivr.net/npm/mermaid@11.9.0/dist/mermaid.min.js'
       ></script>

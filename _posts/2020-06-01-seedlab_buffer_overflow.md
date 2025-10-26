@@ -7,7 +7,6 @@ tags:       seedlab buffer-overflow
 summary:    "本文为 SEED Labs 2.0 - Buffer-Overflow Attack Lab (Server Version) 的实验记录，介绍了如何利用缓冲区溢出漏洞进行攻击，并探讨了相应的防御措施。"
 series:     SEEDLabs
 series_index: 1
-mathjax:    true
 ---
 
 本文为 [SEED Labs 2.0 - Buffer-Overflow Attack Lab (Server Version)](https://seedsecuritylabs.org/Labs_20.04/Software/Buffer_Overflow_Server/) 的实验记录。

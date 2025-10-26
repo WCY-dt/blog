@@ -182,3 +182,10 @@ module Jekyll
 end
 
 Liquid::Template.register_tag('file_structure', Jekyll::FileStructureTag)
+
+# Hook to detect file_structure usage
+Jekyll::Hooks.register [:posts, :pages], :post_render do |doc|
+  if doc.output.include?('file-structure__container')
+    doc.data['uses_file_structure'] = true
+  end
+end

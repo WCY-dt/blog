@@ -7,7 +7,6 @@ tags:       game
 summary:    "本文为 Crypton 题解。"
 series:     OverTheWire
 series_index: 2
-mathjax:    true
 archived:   true
 ---
 

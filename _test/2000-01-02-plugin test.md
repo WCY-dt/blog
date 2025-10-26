@@ -7,8 +7,6 @@ tags:       vue react angular svelte
 summary:    "This article introduces the plugins provided by the Tangerine theme, including code enhancement, table enhancement, GitHub integration, image captions, image grids, iframes, and result display."
 series:     test
 series_index: 2
-mathjax:    true
-mermaid:    true
 ---
 
 ## `code_enhance` Plugin

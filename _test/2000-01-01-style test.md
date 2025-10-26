@@ -7,8 +7,6 @@ tags:       vue react angular svelte
 summary:    "This is a test article mainly for testing various styles including code blocks, tables, math formulas, mermaid diagrams, blockquotes, lists, and more."
 series:     test
 series_index: 1
-mathjax:    true
-mermaid:    true
 ---
 
 This article is mainly for testing purposes.
