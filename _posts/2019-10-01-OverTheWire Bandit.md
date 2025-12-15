@@ -112,7 +112,7 @@ bandit3@bandit:~/inhere$ cat .hidden
 
 **Level Goal**:
 
-> The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+> The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the "reset" command.
 > **Commands you may need to solve this level**
 > `ls, cd, cat, file, du, find`
 
@@ -195,7 +195,7 @@ bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
 z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
 ```
 
-后面的`2>/dev/null`因为`find`命令在根目录下查找会经常有很多权限的报错信息，所有在linux中通常用这种方式将错误信息重定向到“黑洞中”
+后面的`2>/dev/null`因为`find`命令在根目录下查找会经常有很多权限的报错信息，所有在linux中通常用这种方式将错误信息重定向到「黑洞中」
 
 ## Level 7 → Level 8
 
@@ -278,7 +278,7 @@ The password is 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
 
 带有最常用选项的tr命令格式为：
 
-`tr -c -d -s [“string1_to_translate_from”][“string2_to_translate_to”] < input-file`
+`tr -c -d -s ["string1_to_translate_from"]["string2_to_translate_to"] < input-file`
 
 `Rot13`是一种特殊的凯撒密码转换，根据题目所说的字母的的顺序旋转了13个位置，就相当去26个字母的前13个位置与后13个位置调换了。那么我们就是用tr命令进行调换
 
@@ -414,7 +414,7 @@ bandit14@bandit:~$
 **Level Goal**:
 
 > The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.
-> *Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…*
+> *Helpful note: Getting "HEARTBEATING" and "Read R BLOCK"? Use -ign_eof and read the "CONNECTED COMMANDS" section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…*
 > **Commands you may need to solve this level**
 > `ssh, telnet, nc, openssl, s_client, nmap`
 
@@ -688,7 +688,7 @@ NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
 
 > A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
 > **Commands you may need to solve this level**
-> `cron, crontab, crontab(5) (use “man 5 crontab” to access this)`
+> `cron, crontab, crontab(5) (use "man 5 crontab" to access this)`
 
 先按照提示看看当前目录下有什么，可以看到这是一个执行了一个脚本，然后打开这个脚本看看这是一个定时将22关密码写到`/tmp`目录下的一个脚本，我们读取这个临时文件就知道了下一关的密码。
 
@@ -715,7 +715,7 @@ WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
 > A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
 > *NOTE: Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.*
 > **Commands you may need to solve this level**
-> `cron, crontab, crontab(5) (use “man 5 crontab” to access this)`
+> `cron, crontab, crontab(5) (use "man 5 crontab" to access this)`
 
 先来看看这关所说的定时脚本是什么，如下
 
@@ -764,7 +764,7 @@ QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
 > *NOTE: This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!*
 > *NOTE 2: Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…*
 > **Commands you may need to solve this level**
-> `cron, crontab, crontab(5) (use “man 5 crontab” to access this)`
+> `cron, crontab, crontab(5) (use "man 5 crontab" to access this)`
 
 老办法，还是先看看这个定时脚本写了什么
 

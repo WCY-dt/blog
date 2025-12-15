@@ -87,7 +87,7 @@ LEVEL TWO PASSWORD ROTTEN
 
 > ROT13 is a simple substitution cipher.
 >
-> Substitution ciphers are a simple replacement algorithm. In this example of a substitution cipher, we will explore a ‘monoalphebetic’ cipher. Monoalphebetic means, literally, “one alphabet” and you will see why.
+> Substitution ciphers are a simple replacement algorithm. In this example of a substitution cipher, we will explore a ‘monoalphebetic’ cipher. Monoalphebetic means, literally, "one alphabet" and you will see why.
 >
 > This level contains an old form of cipher called a ‘Caesar Cipher’. A Caesar cipher shifts the alphabet by a set number. For example:
 >
@@ -202,7 +202,7 @@ WELL DONE THE LEVEL FOUR PASSWORD IS BRUTE
 >
 > An example of a polyalphabetic cipher is called a Vigenère Cipher. It works like this:
 >
-> If we use the key(K) ‘GOLD’, and P = PROCEED MEETING AS AGREED, then “add” P to K, we get C. When adding, if we exceed 25, then we roll to 0 (modulo 26).
+> If we use the key(K) ‘GOLD’, and P = PROCEED MEETING AS AGREED, then "add" P to K, we get C. When adding, if we exceed 25, then we roll to 0 (modulo 26).
 >
 > ```plaintext
 > P P R O C E E D M E E T I N G A S A G R E E D\

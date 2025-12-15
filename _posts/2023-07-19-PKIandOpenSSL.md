@@ -118,7 +118,7 @@ Certificate:
 - `Signature Algorithm` 为签名的加密方式，例如东南大学的证书使用了SHA384和RSA
 - `Issuer` 表明证书是谁签发的，这里是 TrustAsia Technologies, Inc.
 - `Validity` 规定了证书的有效时间
-- `Subject` 表明证书拥有者的信息，也就是之前提到“Alice的名字”。这也是证书的主要目的
+- `Subject` 表明证书拥有者的信息，也就是之前提到「Alice的名字」。这也是证书的主要目的
 - `Subject Public Key Info` 为公钥。这里由于为RSA加密，故列出来模和指数
 - `X509v3 extensions` 为证书的一些扩展信息
 
@@ -1253,7 +1253,7 @@ accept = 3306
 connect = 1.2.3.4:3307
 ```
 
-`client = yes` 启用了“客户端模式”，让 Stunnel 知道远程服务使用 SSL。现在本地 Stunnel 守护进程将监听本地 MySQL 端口（3306），对连接进行加密，并将其转发到 MySQL 服务器机器（比如 1.2.3.4）上的另一个监听在 3307 端口上的 Stunnel。远程 Stunnel 将解密传输并转发到同一机器上监听在 3306 端口的 MySQL 服务器。所有响应将通过同一加密通道发送回。
+`client = yes` 启用了「客户端模式」，让 Stunnel 知道远程服务使用 SSL。现在本地 Stunnel 守护进程将监听本地 MySQL 端口（3306），对连接进行加密，并将其转发到 MySQL 服务器机器（比如 1.2.3.4）上的另一个监听在 3307 端口上的 Stunnel。远程 Stunnel 将解密传输并转发到同一机器上监听在 3306 端口的 MySQL 服务器。所有响应将通过同一加密通道发送回。
 
 在客户端上使用以下命令启动 Stunnel：
 

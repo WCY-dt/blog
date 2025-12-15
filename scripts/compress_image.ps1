@@ -117,6 +117,9 @@ foreach ($imageFile in $imageFiles) {
             $failedCount++
             Write-Host "  [-] Failed to optimize: $($imageFile.Name) - $($_.Exception.Message)" -ForegroundColor Red
         }
+    } elseif ($imageFile.Extension -eq ".gif") {
+        # Skip GIF files (WebP conversion of animated GIFs is not supported in this script)
+        Write-Host "  [*] Skipping GIF file (not converted): $($imageFile.Name)" -ForegroundColor Yellow
     } else {
         # Convert non-SVG images to WebP format
         $outputFile = Join-Path -Path $OutputFolder -ChildPath ($imageFile.BaseName + ".webp")
@@ -157,14 +160,13 @@ if ($deleteOriginal.ToUpper() -eq "Y") {
     $deletedCount = 0
     $processedDeletes = 0
 
-    # Loop through each image file and delete it (skip SVG files as they are only optimized, not converted)
+    # Loop through each image file and delete it (skip SVG and GIF files)
     foreach ($imageFile in $imageFiles) {
-        if ($imageFile.Extension -ne ".svg") {
+        if ($imageFile.Extension -ne ".svg" -and $imageFile.Extension -ne ".gif") {
             $processedDeletes++
-            $percentage = [math]::Round(($processedDeletes / ($imageFiles.Count - ($imageFiles | Where-Object { $_.Extension -eq ".svg" }).Count)) * 100, 2)
+            $percentage = [math]::Round(($processedDeletes / ($imageFiles.Count - ($imageFiles | Where-Object { $_.Extension -eq ".svg" -or $_.Extension -eq ".gif" }).Count)) * 100, 2)
             Clear-Host
-            Write-Progress -Activity "Deleting original images" -Status "Deleting $($imageFile.Name) ($processedDeletes/$($imageFiles.Count - ($imageFiles | Where-Object { $_.Extension -eq ".svg" }).Count))" -PercentComplete $percentage
-
+            Write-Progress -Activity "Deleting original images" -Status "Deleting $($imageFile.Name) ($processedDeletes/$($imageFiles.Count - ($imageFiles | Where-Object { $_.Extension -eq ".svg" -or $_.Extension -eq ".gif" }).Count))" -PercentComplete $percentage
             try {
                 # Delete the original image file
                 Remove-Item -Path $imageFile.FullName -Force

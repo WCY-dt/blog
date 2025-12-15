@@ -101,7 +101,7 @@ printf("a has value %d, b has value %d, c has address: %08x\n", a, b);
   如此一来，我们可以看到内存中任意位置的内容。
   
 - ```c
-  printf (“114514%n", &i);
+  printf ("114514%n", &i);
   ```
 
   正如前文所述，`%n` 表示的是已经输出了多少个 bytes。通过这种方法，我们可以向内存中写入任意数据。

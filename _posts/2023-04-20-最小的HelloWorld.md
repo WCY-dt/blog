@@ -489,6 +489,6 @@ $ wc -c hello_world
 
 ## 总结
 
-本文参考了 [http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html](http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html) 和 [https://cjting.me/2020/12/10/tiny-x64-helloworld/](https://cjting.me/2020/12/10/tiny-x64-helloworld/)。前者将一个什么也不干的 32 位 elf 优化到了 45 字节，后者将一个 64 位可以输出 “Hello World!” 的程序优化到了 170 字节，而我在此基础上进一步提升到了 140 字节。
+本文参考了 [http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html](http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html) 和 [https://cjting.me/2020/12/10/tiny-x64-helloworld/](https://cjting.me/2020/12/10/tiny-x64-helloworld/)。前者将一个什么也不干的 32 位 elf 优化到了 45 字节，后者将一个 64 位可以输出「Hello World!」的程序优化到了 170 字节，而我在此基础上进一步提升到了 140 字节。
 
 由于我能力有限，64 位的程序只能优化到这里了；但对于 32 位的程序来讲，由于其 elf 文件的结构和长度，理论上还可以进一步压缩。但我懒得安装 32 位的 Linux 环境，所以到此为止。
