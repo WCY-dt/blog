@@ -1,12 +1,19 @@
 ---
 layout: default
 ---
+{% assign is_essay = false %}
+{% if page.categories contains '随笔' or page.style == 'essay' %}
+  {% assign is_essay = true %}
+{% endif %}
 {% if page.draft and jekyll.environment == 'production' %}
   <script>
     window.location.replace('{{ site.url }}/404.html');
   </script>
 {% endif %}
-<div id='post-wrapper' class='post-wrapper'>
+<div
+  id='post-wrapper'
+  class='post-wrapper{% if is_essay %} post-wrapper--essay{% endif %}'
+>
   <hgroup class='post__info'>
     <h1 class='post__info-title'>
       {% if page.series %}
@@ -68,6 +75,9 @@ layout: default
         {%- endif -%}
       </div>
     </div>
+    {%- if is_essay and page.summary -%}
+      <p class='post__info-summary'>{{ page.summary }}</p>
+    {%- endif -%}
     {%- if page.series -%}
       {% include series_head.html %}
     {%- endif -%}

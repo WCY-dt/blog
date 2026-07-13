@@ -1,0 +1,262 @@
+.post-wrapper--essay {
+  --essay-text-color: color-mix(in srgb, var(--black-color) 90%, var(--primary-dark-color));
+  --essay-muted-color: color-mix(in srgb, var(--black-color) 58%, var(--white-color));
+  --essay-soft-color: color-mix(in srgb, var(--primary-light-color) 70%, var(--white-color));
+  --essay-line-color: color-mix(in srgb, var(--primary-color) 30%, transparent);
+  --essay-accent-color: color-mix(in srgb, var(--primary-color) 72%, var(--black-color));
+  position: relative;
+  width: min(100%, 50rem);
+  gap: 5rem;
+  padding: 3rem clamp(1rem, 4vw, 3.25rem) 2rem;
+  overflow: visible;
+  background: transparent;
+
+  .post__info {
+    position: relative;
+    gap: 1rem;
+    padding: 1rem 0 .5rem;
+  }
+
+  .post__info-title {
+    margin: 0;
+    max-width: 38rem;
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', serif;
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    line-height: 1.18;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--essay-text-color);
+    text-shadow: .04rem .08rem 0 color-mix(in srgb, var(--primary-semi-light-color) 42%, transparent);
+  }
+
+  .post__info-title-text {
+    display: block;
+  }
+
+  .post__info-detail {
+    gap: .35rem 1.1rem;
+    color: var(--essay-muted-color);
+    font-size: .92rem;
+    font-family: var(--text-font);
+  }
+
+  .post__info-detail-link {
+    color: var(--essay-muted-color);
+
+    @media (hover: hover) {
+      &:hover::after {
+        background-color: color-mix(in srgb, var(--primary-semi-light-color) 45%, transparent);
+      }
+    }
+  }
+
+  .post__info-summary {
+    position: relative;
+    max-width: 34rem;
+    margin: .45rem auto 0;
+    padding: .25rem 0 0;
+    color: var(--essay-muted-color);
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', serif;
+    font-size: 1.02rem;
+    line-height: 2;
+    text-align: center;
+  }
+
+  .post__content {
+    position: relative;
+    max-width: 42rem;
+    margin: 0 auto;
+    overflow: visible;
+    counter-reset: essay-section;
+    color: var(--essay-text-color);
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', serif;
+
+    p,
+    ul,
+    ol,
+    blockquote,
+    table {
+      font-size: 1.1rem;
+      line-height: 2.25;
+    }
+
+    p {
+      margin: 1.28rem 0;
+      text-indent: 2em;
+      text-align: justify;
+      text-justify: inter-ideograph;
+    }
+
+    h2 {
+      counter-increment: essay-section;
+      position: relative;
+      margin: 5rem auto 2.4rem;
+      padding-top: 0;
+      font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', serif;
+      font-size: 1.85rem;
+      line-height: 1.55;
+      font-weight: 700;
+      color: var(--essay-text-color);
+      text-align: center;
+
+      &::before {
+        content: '第 ' counter(essay-section, cjk-ideographic) ' 节';
+        display: block;
+        margin: 0 auto .45rem;
+        color: color-mix(in srgb, var(--primary-color) 62%, var(--black-color));
+        font-family: var(--text-font);
+        font-size: .78rem;
+        font-weight: 600;
+        letter-spacing: .08rem;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--text-font);
+      color: var(--essay-text-color);
+    }
+
+    a {
+      color: var(--essay-accent-color);
+      text-decoration-thickness: .05rem;
+      text-underline-offset: .25rem;
+    }
+
+    em {
+      color: var(--essay-muted-color);
+      font-style: normal;
+    }
+
+    blockquote {
+      position: relative;
+      margin: 2.5rem 0;
+      padding: .95rem 1.25rem;
+      border: 0;
+      border-left: .15rem solid var(--essay-line-color);
+      border-radius: 0;
+      background: color-mix(in srgb, var(--primary-light-color) 35%, transparent);
+      box-shadow: none;
+      color: var(--essay-muted-color);
+
+      &::before {
+        display: none;
+      }
+
+      p {
+        text-indent: 0;
+      }
+    }
+
+    ul,
+    ol {
+      margin: 1.4rem 0;
+      padding-left: 2.2rem;
+    }
+
+    li + li {
+      margin-top: .35rem;
+    }
+
+    hr {
+      margin: 3.2rem auto;
+      height: .05rem;
+      width: min(4rem, 42%);
+
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        height: .05rem;
+        background: color-mix(in srgb, var(--primary-color) 22%, transparent);
+      }
+    }
+
+    code,
+    code * {
+      font-family: 'Courier New', 'Microsoft YaHei', monospace, sans-serif;
+    }
+
+    code {
+      color: var(--essay-accent-color);
+      font-weight: 600;
+    }
+
+    pre:has(code) {
+      border: .05rem solid color-mix(in srgb, var(--primary-semi-light-color) 45%, transparent);
+      background-color: color-mix(in srgb, var(--white-color) 70%, var(--primary-extra-light-color));
+      box-shadow: none;
+    }
+  }
+}
+
+html[data-theme='dark'] .post-wrapper--essay {
+  --essay-soft-color: color-mix(in srgb, var(--primary-light-color) 44%, #151515);
+  --essay-line-color: color-mix(in srgb, var(--primary-color) 38%, transparent);
+}
+
+@media screen and (max-width: 768px) {
+  .post-wrapper--essay {
+    width: min(100%, 42rem);
+    gap: 3.75rem;
+    padding: 2.25rem .95rem 1.5rem;
+    border-radius: 0;
+
+    .post__info {
+      padding-top: 1rem;
+    }
+
+    .post__info-title {
+      font-size: 2.45rem;
+    }
+
+    .post__info-summary {
+      font-size: 1rem;
+    }
+
+    .post__content {
+      p,
+      ul,
+      ol,
+      blockquote,
+      table {
+        font-size: 1.16rem;
+        line-height: 2.15;
+      }
+
+      p {
+        margin: 1.12rem 0;
+      }
+
+      h2 {
+        margin: 4.1rem auto 2rem;
+        font-size: 1.72rem;
+      }
+    }
+  }
+}
+
+@media print {
+  .post-wrapper--essay {
+    width: 92%;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
