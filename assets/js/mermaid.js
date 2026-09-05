@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       // SVG edge labels have a hardcoded wrap width in Mermaid. HTML labels let
       // us remove that limit before Mermaid measures and lays out the graph.
       themeCSS: isFlowchart ? `
+        /* Match measurement fonts after insertion into a styled code block. */
+        foreignObject, foreignObject * { font-family: ${fontFamily} !important; }
         foreignObject > div {
           max-width: none !important;
           white-space: nowrap !important;
