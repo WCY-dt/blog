@@ -236,6 +236,9 @@ layout: compress
       <!-- 表格增强插件 -->
       <script src='{{ '/assets/js/table_enhance.js' | relative_url }}'></script>
 
+      <!-- 正文脚注预览 -->
+      <script src='{{ '/assets/js/footnotes.js' | relative_url }}'></script>
+
       {%- if page.uses_iframe -%}
         <!-- iframe 插件 -->
         <script src='{{ '/assets/js/iframe_plugin.js' | relative_url }}'></script>
@@ -280,24 +283,9 @@ layout: compress
     {%- if page.mermaid or page.uses_mermaid -%}
       <!-- mermaid.js -->
       <script
-        src='https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js'
+        src='https://cdn.jsdelivr.net/npm/mermaid@11.17.2/dist/mermaid.min.js'
       ></script>
-      <script async>
-        document.addEventListener('DOMContentLoaded', function () {
-          mermaid.initialize({
-            startOnLoad: false,
-            securityLevel: 'loose',
-          });
-          mermaid
-            .run({
-              querySelector: '.language-mermaid',
-              suppressErrors: true,
-            })
-            .catch((err) => {
-              console.error('Mermaid failed to render:', err);
-            });
-        });
-      </script>
+      <script defer src='{{ '/assets/js/mermaid.js' | relative_url }}'></script>
     {%- endif -%}
   </body>
 </html>

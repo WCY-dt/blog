@@ -153,7 +153,7 @@ postMermaidCodes.forEach((mermaid) => {
   mermaid.addEventListener('click', () => {
     const lightbox_img = document.createElement('div');
     lightbox_img.innerHTML = mermaid.innerHTML;
-    lightbox_img.classList.add('lightbox__img');
+    lightbox_img.classList.add('lightbox__img', 'lightbox__mermaid');
     lightbox_img.style.width = 'calc(min(100%,1000px))';
 
     const lightbox_svg = lightbox_img.querySelector('svg');
