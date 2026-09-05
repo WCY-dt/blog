@@ -11,7 +11,8 @@
     transition: opacity .25s ease-in-out;
   }
 
-  .table-fullscreen-button {
+  .table-fullscreen-button,
+  .markdown-copy-button {
     background: var(--primary-semi-dark-color);
     color: var(--primary-light-color);
     border: none;
@@ -40,8 +41,12 @@
     }
   }
 
-  &:hover .table-buttons {
-    opacity: 1;
+  &:hover .table-buttons, &:focus-within .table-buttons {
+    opacity: 1 !important;
+  }
+
+  @media (hover: none) {
+    .table-buttons { opacity: 1 !important; }
   }
 
   &.fullscreen {
@@ -71,4 +76,73 @@
 
 main .table-wrapper .table-buttons {
   z-index: 4;
+}
+
+// Wide tables scroll within their wrapper, including after column resizing.
+.table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  .table-column-resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    z-index: 2;
+    cursor: col-resize;
+    touch-action: none;
+    user-select: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      bottom: 20%;
+      right: 3px;
+      border-right: 2px solid currentColor;
+      opacity: .45;
+    }
+
+    &:hover::after, &:focus-visible::after { opacity: 1; }
+    &:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+  }
+
+  &.table-is-resizing { user-select: none; cursor: col-resize; }
+  &.table-is-resizing .table-buttons { pointer-events: none; }
+}
+
+// Let authored line breaks determine the initial columns, not the text column.
+.post__content .table-wrapper table {
+  width: max-content;
+  min-width: 100%;
+
+  th, td { white-space: nowrap; }
+
+  &.table-resizable th {
+    position: relative;
+    padding-right: 1rem;
+  }
+
+  &.table-resized {
+    table-layout: fixed;
+    min-width: 0;
+
+    th, td { white-space: normal; overflow-wrap: anywhere; }
+  }
+}
+
+@media print {
+  .table-column-resizer, .table-buttons { display: none; }
+  .post__content .table-wrapper table {
+    width: 100% !important;
+    min-width: 0;
+    th, td { white-space: normal; overflow-wrap: anywhere; }
+  }
 }

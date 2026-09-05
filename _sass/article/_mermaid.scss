@@ -99,3 +99,55 @@ html[data-theme="dark"] svg[aria-roledescription="sankey"] .link {
   background-color: var(--mermaid-background);
   border-radius: 12px;
 }
+
+// Keep diagrams inside the text column; the lightbox provides a larger view.
+.post__content pre:has(.language-mermaid) {
+  overflow: hidden;
+
+  code.language-mermaid {
+    min-width: 0;
+    height: auto;
+  }
+
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.post__content pre .mermaid-copy-button {
+  position: absolute;
+  top: .25rem;
+  right: .5rem;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  padding: .2rem;
+  border: 0;
+  border-radius: .25rem;
+  background: var(--primary-light-color);
+  color: var(--primary-little-light-color);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .25s ease-in-out;
+
+  .material-symbols-outlined { font-size: 1rem; }
+  &:hover, &:focus-visible {
+    background: var(--primary-color);
+    color: var(--primary-extra-light-color);
+  }
+}
+
+.post__content pre:hover .mermaid-copy-button,
+.post__content pre:focus-within .mermaid-copy-button { opacity: 1; }
+
+@media (hover: none) {
+  .post__content pre .mermaid-copy-button { opacity: 1; }
+}
+
+@media print {
+  .post__content pre .mermaid-copy-button { display: none; }
+}

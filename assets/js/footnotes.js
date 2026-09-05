@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const article = document.getElementById('post__content');
+  article?.querySelectorAll('.footnotes').forEach(notes => {
+    // Let keyboard users focus and scroll the endnotes without changing anchors.
+    notes.setAttribute('tabindex', '0');
+    notes.setAttribute('aria-label', '脚注');
+  });
   const references = article?.querySelectorAll('a.footnote[href^="#"]');
   if (!references?.length) return;
 

@@ -553,26 +553,6 @@
       z-index: 0;
     }
   }
-
-  .footnotes p {
-    margin: 0;
-
-    &,
-    a {
-      color: var(--primary-dark-color);
-    }
-
-    a {
-      text-decoration: underline;
-    }
-
-    @media (hover: hover) {
-      a:hover {
-        color: var(--primary-color);
-        background-color: transparent;
-      }
-    }
-  }
 }
 
 .post__footer {

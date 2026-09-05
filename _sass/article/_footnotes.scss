@@ -7,9 +7,13 @@
 }
 
 .post__content a.footnote {
-  padding: .1em .3em;
-  border-radius: .25em;
+  padding: .1em .4em;
+  border-radius: .35em;
+  color: var(--primary-semi-dark-color);
+  background-color: var(--primary-extra-light-color);
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
 
   &:hover,
   &:focus-visible,
@@ -22,6 +26,106 @@
   &:focus-visible {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
+  }
+}
+
+.post__content .footnotes {
+  box-sizing: border-box;
+  max-height: min(24rem, 50vh);
+  margin-top: 3rem;
+  padding: .75rem 1rem;
+  overflow: auto;
+  scrollbar-width: none;
+  scroll-padding-block: 1rem;
+  border: 1px solid var(--primary-semi-light-color);
+  border-radius: .75rem;
+  background-color: var(--primary-extra-light-color);
+  color: var(--gray-color);
+  font-family: var(--text-font);
+  font-size: max(14px, .9rem);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: -2px;
+  }
+
+  p, ul, ol, blockquote, table {
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  p {
+    margin: .3em 0;
+    text-indent: 0;
+    text-align: start;
+  }
+
+  ul, ol {
+    margin: .5em 0;
+    padding-left: 1.75em;
+  }
+
+  > ol {
+    margin: 0;
+
+    > li {
+      padding: .25em .3em;
+      border-radius: .3rem;
+      // Leave room for the fixed site header when following a footnote anchor.
+      scroll-margin-block: 7rem 1rem;
+
+      &::marker {
+        color: var(--primary-semi-dark-color);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+
+      + li {
+        margin-top: 0;
+      }
+
+      > :first-child { margin-top: 0; }
+      > :last-child { margin-bottom: 0; }
+
+      &:target {
+        background-color: var(--primary-light-color);
+        box-shadow: inset .2rem 0 var(--primary-color);
+        color: var(--black-color);
+      }
+    }
+  }
+
+  a {
+    color: var(--primary-semi-dark-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .2em;
+
+    &:hover { color: var(--primary-color); }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+  }
+
+  a.reversefootnote {
+    display: inline-block;
+    padding: 0 .4em;
+    border-radius: .3em;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--primary-light-color);
+    }
   }
 }
 
@@ -89,5 +193,10 @@
 }
 
 @media print {
+  .post__content .footnotes {
+    max-height: none;
+    overflow: visible;
+  }
+
   .footnote-preview { display: none !important; }
 }

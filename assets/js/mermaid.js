@@ -6,6 +6,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   }));
   if (!diagrams.length) return;
 
+  for (const { node, source } of diagrams) {
+    const fence = '`'.repeat(Math.max(3, ...(source.match(/`+/g) || []).map((run) => run.length + 1)));
+    const button = window.markdownCopy?.button(`${fence}mermaid\n${source.trimEnd()}\n${fence}`);
+    if (button) {
+      button.classList.add('mermaid-copy-button');
+      node.parentElement.append(button);
+    }
+  }
+
   await document.fonts.ready;
   const root = document.documentElement;
   let rendering = false;
