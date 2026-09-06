@@ -102,6 +102,8 @@ html[data-theme="dark"] svg[aria-roledescription="sankey"] .link {
 
 // Keep diagrams inside the text column; the lightbox provides a larger view.
 .post__content pre:has(.language-mermaid) {
+  --mermaid-preview-scale: .75;
+
   overflow: hidden;
 
   code.language-mermaid {
@@ -112,6 +114,7 @@ html[data-theme="dark"] svg[aria-roledescription="sankey"] .link {
   svg {
     max-width: 100%;
     height: auto;
+    zoom: var(--mermaid-preview-scale);
   }
 }
 
