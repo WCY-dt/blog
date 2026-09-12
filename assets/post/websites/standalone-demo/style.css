@@ -1,0 +1,47 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  color: #232a27;
+  background: #f5f3ec;
+}
+
+:root[data-color="mint"] {
+  background: #d9efdf;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 60rem;
+  margin: auto;
+  padding: clamp(2rem, 10vw, 8rem) 1.5rem;
+}
+
+.eyebrow, .note {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+button {
+  margin-top: 2rem;
+  padding: 0.8rem 1.4rem;
+  border: 1px solid currentColor;
+  border-radius: 2rem;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 3px solid #397451;
+  outline-offset: 4px;
+}

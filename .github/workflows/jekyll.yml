@@ -32,6 +32,17 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6
+      - name: Setup Node for website posts
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Cache website builds and dependencies
+        uses: actions/cache@v4
+        with:
+          path: .jekyll-cache/website-posts
+          key: websites-${{ runner.os }}-node24-${{ hashFiles('assets/post/websites/**', '_posts/**', '_plugins/website.rb', '_config.yml') }}
+          restore-keys: |
+            websites-${{ runner.os }}-node24-
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:

@@ -9,3 +9,17 @@ Gemfile.lock
 .idea
 *.log
 ~$博客.pptx
+
+# Website articles keep only source files in Git.
+assets/post/websites/**/node_modules/
+assets/post/websites/**/dist/
+assets/post/websites/**/build/
+assets/post/websites/**/out/
+assets/post/websites/**/coverage/
+assets/post/websites/**/.next/
+assets/post/websites/**/.nuxt/
+assets/post/websites/**/.output/
+assets/post/websites/**/.astro/
+assets/post/websites/**/.svelte-kit/
+assets/post/websites/**/.vite/
+assets/post/websites/**/*.tsbuildinfo
