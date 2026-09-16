@@ -221,4 +221,44 @@ class WebsitePostsTest < Minitest::Test
     refute File.exist?(File.join(@dest, 'post/demo/src'))
     refute File.exist?(File.join(@source, project, 'node_modules'))
   end
+
+  def test_external_url_redirect_keeps_metadata_and_skips_builds
+    url = "https://example.com/article?first=1&second=it's%20ok#section-2"
+    [url.to_json, { 'url' => url }.to_json].each do |website|
+      post(website: website, extra: 'permalink: /external.html')
+      write('search.json', "---\n---\n{{ site.posts.first.content | jsonify }}")
+      site = build
+      html = Nokogiri::HTML(File.read(File.join(@dest, 'external.html')))
+      assert_equal url, html.at_css('a')['href']
+      assert_equal url, html.at_css('link[rel="canonical"]')['href']
+      assert_equal "0;url=#{url}", html.at_css('meta[http-equiv="refresh"]')['content']
+      script_argument = html.at_css('script').content.delete_prefix('window.location.replace(').delete_suffix(');')
+      assert_equal url, JSON.parse(script_argument)
+      assert_equal 'Metadata title', html.at_css('title').content
+      assert_equal 'Metadata summary', site.posts.docs.first.data['summary']
+      assert_includes File.read(File.join(@dest, 'search.json')), 'Searchable'
+      refute File.exist?(File.join(@source, '.jekyll-cache/website-posts'))
+      assert_empty @commands
+    end
+  end
+
+  def test_invalid_or_ambiguous_external_urls_fail
+    [nil, '', '/relative', '//example.com', 'javascript:alert(1)', 'data:text/html,hello',
+     'https://', 'https://example.com/ space', "https://example.com/\npath", 'https://example.com/\\path'].each do |url|
+      post(website: { 'url' => url }.to_json)
+      assert_raises(Jekyll::Errors::FatalException) { build }
+    end
+    post(website: { 'url' => 'https://example.com/', 'source' => 'demo' }.to_json)
+    assert_raises(Jekyll::Errors::FatalException) { build }
+  end
+
+  def test_external_draft_keeps_production_404_behavior
+    post(website: 'https://example.com/', draft: true)
+    ENV['JEKYLL_ENV'] = 'production'
+    build
+    html = File.read(File.join(@dest, 'post/demo/index.html'))
+    assert_includes html, '/blog/404.html'
+    refute_includes html, 'https://example.com/'
+    assert_empty @commands
+  end
 end

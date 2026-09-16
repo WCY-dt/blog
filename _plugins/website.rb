@@ -6,6 +6,7 @@ require 'json'
 require 'open3'
 require 'pathname'
 require 'tmpdir'
+require 'uri'
 
 module WebsitePosts
   ROOT = 'assets/post/websites'.freeze
@@ -13,6 +14,47 @@ module WebsitePosts
 
   def self.fail!(message)
     raise Jekyll::Errors::FatalException, "Website posts: #{message}"
+  end
+
+  def self.external_url(post)
+    config = post.data['website']
+    if config.is_a?(Hash) && config.key?('url')
+      fail!("#{post.relative_path}: website.url cannot be combined with source, output or other options") unless config.keys == ['url']
+      url = config['url']
+    elsif config.is_a?(String) && config.match?(/\A(?:[a-z][a-z0-9+.-]*:|\/\/)/i)
+      url = config
+    else
+      return nil
+    end
+
+    if url.is_a?(String) && !url.match?(/[[:space:][:cntrl:]\\]/)
+      # Validate international URLs without changing their query strings or fragments.
+      uri = URI.parse(URI::DEFAULT_PARSER.escape(url, /[^\x00-\x7F]/))
+      return url if %w[http https].include?(uri.scheme&.downcase) && uri.host && !uri.host.empty?
+    end
+    fail!("#{post.relative_path}: website.url must be an absolute http:// or https:// URL")
+  rescue URI::InvalidURIError
+    fail!("#{post.relative_path}: website.url must be an absolute http:// or https:// URL")
+  end
+
+  def self.redirect_html(url, title)
+    escaped_url = CGI.escapeHTML(url)
+    # JSON quoting plus HTML-safe escapes keep URL text inside the script literal.
+    script_url = JSON.generate(url).gsub(/[<>&\u2028\u2029]/) { |char| format('\\u%04x', char.ord) }
+    <<~HTML
+      <!doctype html>
+      <html lang="zh-CN">
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>#{CGI.escapeHTML(title.to_s)}</title>
+          <link rel="canonical" href="#{escaped_url}">
+          <meta http-equiv="refresh" content="0;url=#{escaped_url}">
+          <script>window.location.replace(#{script_url});</script>
+        </head>
+        <body><p>正在跳转，若未自动打开，请<a href="#{escaped_url}">访问网页</a>。</p></body>
+      </html>
+    HTML
   end
 
   # Exclude projects only while reading, without changing config.exclude (the watcher
@@ -214,7 +256,6 @@ module WebsitePosts
       occupied = (site.pages + site.static_files + site.documents).to_h { |item| [item.destination(site.dest), item] }
       site.posts.docs.each do |post|
         next unless post.data.key?('website')
-        WebsitePosts.fail!("#{post.relative_path}: website posts need a permalink ending in /") unless post.url.end_with?('/')
         post.data['layout'] = nil
         # The webpage's sources are external to the Markdown document. Re-render its
         # small metadata body even under --incremental; the expensive build is cached.
@@ -222,7 +263,10 @@ module WebsitePosts
         if post.data['draft'] && Jekyll.env == 'production'
           url = CGI.escapeHTML("#{site.baseurl}/404.html")
           html = "<!doctype html><html><head><meta name=\"robots\" content=\"noindex\"><meta http-equiv=\"refresh\" content=\"0;url=#{url}\"></head><body><a href=\"#{url}\">404</a></body></html>"
+        elsif (url = WebsitePosts.external_url(post))
+          html = WebsitePosts.redirect_html(url, post.data['title'])
         else
+          WebsitePosts.fail!("#{post.relative_path}: local website posts need a permalink ending in /") unless post.url.end_with?('/')
           root, files = Builder.new(site, post).build
           html = File.read(File.join(root, 'index.html'), encoding: 'UTF-8')
           post_dir = Pathname.new(File.dirname(post.destination(site.dest))).relative_path_from(Pathname.new(site.dest)).to_s
