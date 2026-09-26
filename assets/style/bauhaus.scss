@@ -1,6 +1,8 @@
 ---
 ---
 @use 'home';
+@use 'home_discovery';
+@use 'rss';
 @use 'interactions';
 
 /* The page title spans the full grid; its continuation returns to the reading column. */

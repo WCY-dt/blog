@@ -1,48 +1,52 @@
 ---
+layout: null
 ---
-{%- if jekyll.environment == 'production' or site.dev_mode -%}
-  <?xml version="1.0" encoding="UTF-8"?>
-  <?xml-stylesheet href="/assets/style/pretty-feed-v3.xsl" type="text/xsl"?>
-  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-      <title>{{ site.title | xml_escape }}</title>
-      <link>{{ site.url }}{{ site.baseurl }}/</link>
-      <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
-      <description>{{ site.description | xml_escape }}</description>
-      <language>{{ site.lang }}</language>
-      <copyright>Copyright {{ site.time | date: '%Y' }}, {{ site.author.name }}</copyright>
-      <managingEditor>{{ site.author.email }} ({{ site.author.name }})</managingEditor>
-      <webMaster>{{ site.author.email }} ({{ site.author.name }})</webMaster>
-      <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
-      <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
-      <generator>Jekyll v{{ jekyll.version }}</generator>
-      <docs>https://www.rssboard.org/rss-specification</docs>
-      {% for post in site.posts limit:20 %}
-        {% unless post.draft %}
-          <item>
-            {% if post.series %}
-              <title>{{ post.series | escape }} ({{ post.series_index }}) - {{ post.title | xml_escape }}</title>
-            {% else %}
-              <title>{{ post.title | xml_escape }}</title>
-            {% endif %}
-            <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-            <description>{{ post.content | xml_escape }}</description>
-            <author>{{ site.author.email }} ({{ site.author.name }})</author>
-            {% for tag in post.tags %}
-              <category>{{ tag | xml_escape }}</category>
-            {% endfor %}
-            {% for cat in post.categories %}
-              <category>{{ cat | xml_escape }}</category>
-            {% endfor %}
-            <comments>{{ post.url | prepend: site.baseurl | prepend: site.url | append: "#comment-container" }}</comments>
-            <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-            <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-          </item>
-        {% endunless %}
-      {% endfor %}
-    </channel>
-  </rss>
-{%- else -%}
-  <?xml version="1.0" encoding="UTF-8"?>
-  <notify>RSS feed is unavailable on development</notify>
-{%- endif -%}
+{%- assign feed_url = '/feed.xml' | absolute_url -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="{{ '/assets/style/feed.css' | relative_url }}" type="text/css"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/1999/xhtml">
+  <channel>
+    <title>{{ site.title | xml_escape }}</title>
+    <link>{{ '/' | absolute_url | xml_escape }}</link>
+    <atom:link href="{{ feed_url | xml_escape }}" rel="self" type="application/rss+xml"/>
+    <atom:link href="{{ '/rss/' | absolute_url | xml_escape }}" rel="alternate" type="text/html"/>
+    <description>{{ site.description | xml_escape }}</description>
+    <language>{{ site.lang | default: 'zh-CN' | xml_escape }}</language>
+    <copyright>Copyright {{ site.time | date: '%Y' }}, {{ site.author.name | xml_escape }}</copyright>
+    <managingEditor>{{ site.author.email | xml_escape }} ({{ site.author.name | xml_escape }})</managingEditor>
+    <webMaster>{{ site.author.email | xml_escape }} ({{ site.author.name | xml_escape }})</webMaster>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <generator>Jekyll v{{ jekyll.version }}</generator>
+    <docs>https://www.rssboard.org/rss-specification</docs>
+    <h:meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:title>{{ site.title | xml_escape }} · RSS</h:title>
+    <h:header class="feed-header">
+      <h:a class="feed-brand" href="{{ '/' | relative_url }}" aria-label="Ch3nyang 的博客首页">{% capture feed_brand %}{% include brand-mark.svg %}{% endcapture %}{{ feed_brand | replace: '<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ' }}</h:a>
+      <h:h1>RSS 订阅</h:h1>
+      <h:p>把更新交给阅读器，按自己的节奏阅读。</h:p>
+      <h:code class="feed-address">{{ feed_url | xml_escape }}</h:code>
+      <h:a class="feed-help" href="{{ '/rss/' | relative_url }}">订阅说明{% capture feed_arrow %}{% include arrow.html %}{% endcapture %}{{ feed_arrow | replace: '<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ' }}</h:a>
+    </h:header>
+    {% assign feed_count = 0 %}
+    {% for post in site.posts %}
+      {% if post.draft or post.date > site.time %}{% continue %}{% endif %}
+      {% assign post_url = post.url | absolute_url %}
+      {% capture feed_title %}{% if post.series %}{{ post.series }} ({{ post.series_index }}) - {% endif %}{{ post.title }}{% endcapture %}
+      <item>
+        <title>{{ feed_title | strip | xml_escape }}</title>
+        <link>{{ post_url | xml_escape }}</link>
+        <description>{{ post.summary | default: post.excerpt | strip_html | strip | xml_escape }}</description>
+        <content:encoded>{{ post.content | rss_content: post_url | xml_escape }}</content:encoded>
+        <author>{{ site.author.email | xml_escape }} ({{ site.author.name | xml_escape }})</author>
+        {% assign feed_categories = post.tags | concat: post.categories | uniq %}
+        {% for category in feed_categories %}<category>{{ category | xml_escape }}</category>{% endfor %}
+        <comments>{{ post_url | append: '#comment-wrapper' | xml_escape }}</comments>
+        <guid isPermaLink="true">{{ post_url | xml_escape }}</guid>
+        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+        <h:a class="feed-entry-link" href="{{ post_url | xml_escape }}">{{ feed_title | strip | xml_escape }}{{ feed_arrow | replace: '<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ' }}</h:a>
+        <h:time class="feed-date" datetime="{{ post.date | date: '%Y-%m' }}">{{ post.date | date: '%Y-%m' }}</h:time>
+      </item>
+      {% assign feed_count = feed_count | plus: 1 %}{% if feed_count == 20 %}{% break %}{% endif %}
+    {% endfor %}
+  </channel>
+</rss>

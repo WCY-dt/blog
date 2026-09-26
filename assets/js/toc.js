@@ -119,3 +119,62 @@ function addTocAnchorListeners(wrapper) {
 }
 addTocAnchorListeners(document.querySelector('#sidebar__toc-wrapper'));
 addTocAnchorListeners(document.querySelector('#sidebar__toc-wrapper-mobile'));
+
+// Native fragment navigation happens before asynchronous math typesetting. Restore
+// the initial heading once that layout is ready, unless the reader has taken over.
+(() => {
+  const initialHash = location.hash;
+  if (!initialHash) return;
+  let cancelled = false;
+  let deadline;
+  const inputEvents = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
+  const cancel = () => {
+    cancelled = true;
+    clearTimeout(deadline);
+    inputEvents.forEach(event => window.removeEventListener(event, cancel));
+    window.removeEventListener('hashchange', cancel);
+    window.removeEventListener('pagehide', cancel);
+  };
+  inputEvents.forEach(event => window.addEventListener(event, cancel, { passive: true }));
+  window.addEventListener('hashchange', cancel, { once: true });
+  window.addEventListener('pagehide', cancel, { once: true });
+  // A failed or very slow CDN must never cause a surprise jump much later.
+  deadline = setTimeout(cancel, 15000);
+
+  const settle = async () => {
+    let id;
+    try { id = decodeURIComponent(initialHash.slice(1)); } catch { cancel(); return; }
+    const target = document.getElementById(id);
+    if (!target?.matches('#post__content h2, #post__content h3, #post__content h4')) {
+      cancel();
+      return;
+    }
+    const mathScript = document.getElementById('MathJax-script');
+    if (mathScript && !window.MathJax?.startup?.promise) {
+      await new Promise(resolve => {
+        mathScript.addEventListener('load', resolve, { once: true });
+        mathScript.addEventListener('error', resolve, { once: true });
+      });
+    }
+    try {
+      await window.MathJax?.startup?.promise;
+      await document.fonts?.ready;
+    } catch {
+      // If typesetting fails, the heading is still a valid native destination.
+    }
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (cancelled || location.hash !== initialHash || !target.isConnected) return;
+      const header = document.querySelector('.header-wrapper');
+      const floatingHeader = header && ['sticky', 'fixed'].includes(getComputedStyle(header).position);
+      const top = target.getBoundingClientRect().top + window.scrollY - (floatingHeader ? header.offsetHeight : 0) - 24;
+      window.scrollTo({ top, behavior: 'instant' });
+      tocActive();
+      cancel();
+    }));
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', settle, { once: true });
+  } else {
+    settle();
+  }
+})();

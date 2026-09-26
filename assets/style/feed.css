@@ -1,0 +1,33 @@
+/* XML remains a standard RSS document; CSS supplies its browser-only reading view. */
+rss { display:block; color-scheme:light; --ink:#20201e; --paper:#f5f5f1; --muted:#686861; --line:#d3d3cc; --accent:#b63810; --primary-color:#d74514; color:var(--ink); background:var(--paper); font:16px/1.8 system-ui,-apple-system,"Segoe UI",sans-serif; }
+rss * { box-sizing:border-box; }
+channel { display:block; max-width:1000px; margin:auto; padding:40px 40px 80px; }
+channel > *, item > * { display:none; }
+.feed-header { display:block; padding-bottom:40px; border-bottom:3px solid var(--ink); }
+.feed-brand { display:block; width:280px; max-width:100%; color:var(--ink); margin-bottom:48px; }
+.brand-wordmark { display:block; width:100%; height:auto; }
+.feed-header h1 { display:block; margin:0 0 20px; font-size:clamp(40px,7vw,76px); line-height:1.15; letter-spacing:-2px; }
+.feed-header p { display:block; margin:0 0 28px; color:var(--muted); font-size:15px; }
+.feed-address { display:block; width:fit-content; max-width:100%; padding:14px 18px; border-left:4px solid var(--primary-color); background:var(--paper); font:14px/1.7 ui-monospace,monospace; overflow-wrap:anywhere; user-select:all; }
+.feed-help { display:inline-flex; gap:14px; align-items:center; min-height:44px; margin-top:20px; color:var(--accent); text-decoration:none; font-size:13px; }
+.site-arrow { display:block; width:24px; height:24px; flex-shrink:0; }
+item { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px 24px; padding:28px 0; border-bottom:1px solid var(--line); }
+.feed-entry-link { display:flex; align-items:center; justify-content:space-between; gap:20px; grid-column:1; color:var(--ink); text-decoration:none; font-size:21px; font-weight:650; line-height:1.5; overflow-wrap:anywhere; }
+.feed-entry-link .site-arrow { width:20px; height:20px; color:var(--accent); }
+.feed-date { display:block; align-self:center; font:11px/1.5 ui-monospace,monospace; color:var(--muted); }
+item > description { display:block; grid-column:1/-1; font-size:14px; line-height:1.9; color:var(--muted); overflow-wrap:anywhere; }
+item > description:empty { display:none; }
+.feed-entry-link:hover,.feed-help:hover { color:var(--accent); text-decoration:underline; text-underline-offset:4px; }
+.feed-brand:focus-visible,.feed-entry-link:focus-visible,.feed-help:focus-visible { outline:2px solid var(--accent); outline-offset:5px; }
+@media (max-width:600px) {
+  channel { padding:28px 20px 48px; }
+  .feed-brand { width:230px; margin-bottom:36px; }
+  .feed-header { padding-bottom:28px; }
+  .feed-address { padding:12px; font-size:12px; }
+  item { display:flex; flex-wrap:wrap; gap:10px; padding:22px 0; }
+  .feed-entry-link { width:100%; font-size:18px; }
+  .feed-date { order:2; }
+}
+@media (prefers-color-scheme:dark) {
+  rss { color-scheme:dark; --ink:#eeeee6; --paper:#1c1d1a; --muted:#b1b4a8; --line:#484a42; --accent:#f0936c; }
+}

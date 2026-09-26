@@ -46,6 +46,7 @@ layout: default
       {% endif %}
       {% if page.series %}{% include series_head.html %}{% endif %}
       </div>{% endif %}
+      {% include reading_resume.html %}
       <article id='post__content' class='post__content'>{{ content }}</article>
       <div class='post__footer post-ending'>
         <div class='post-reading-continuation{% if page.series %} post-reading-continuation--series{% endif %}'>

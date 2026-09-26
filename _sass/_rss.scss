@@ -1,0 +1,71 @@
+.rss-title { padding-top:16px; }
+.rss-subscribe,.rss-updates { display:grid; grid-template-columns:220px minmax(0,1fr); column-gap:56px; }
+.rss-subscribe { margin:40px 0 56px; }
+.rss-address-label { padding-top:3px; font:600 15px/1.8 var(--text-font); }
+.rss-subscribe-body { min-width:0; }
+.rss-description { margin:0 0 20px; color:var(--gray-color); font:14px/1.9 var(--text-font); }
+.rss-address-field { display:flex; min-width:0; border:1px solid var(--black-color); background:var(--primary-extra-light-color); }
+.rss-address-field:focus-within { outline:2px solid var(--accent-text); outline-offset:3px; }
+.rss-address-field input { width:100%; min-width:0; height:56px; padding:0 18px; border:0; border-radius:0; outline:0; background:transparent; color:var(--black-color); font:13px/1.5 var(--mono-font); }
+.rss-copy { flex-shrink:0; min-width:88px; min-height:48px; padding:0 20px; border:0; border-left:1px solid var(--black-color); border-radius:0; background:var(--primary-color); color:var(--on-primary-color); font:600 13px/1.5 var(--text-font); cursor:pointer; }
+.rss-copy[hidden] { display:none; }
+.rss-copy:is(:hover,:focus-visible) { background:var(--primary-semi-dark-color); }
+.rss-copy:focus-visible { outline:2px solid var(--on-primary-color); outline-offset:-5px; }
+.rss-copy:disabled { cursor:wait; }
+.rss-subscribe-actions { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:0 24px; min-height:44px; margin-top:8px; }
+.rss-copy-status { margin:0; color:var(--gray-color); font:12px/1.8 var(--text-font); }
+.rss-copy-status[data-state='success'] { color:var(--accent-text); }
+.rss-address-hint { margin:12px 0 0; color:var(--gray-color); font:12px/1.9 var(--text-font); }
+.rss-address-hint code { font:inherit; color:var(--black-color); }
+.rss-source { display:inline-flex; align-items:center; gap:10px; min-height:44px; margin-left:auto; color:var(--black-color); font:12px/1.5 var(--text-font); text-decoration:none; }
+.rss-source svg { width:20px; height:20px; color:var(--accent-text); }
+.rss-source:is(:hover,:focus-visible) { color:var(--accent-text); text-decoration:underline; text-underline-offset:4px; }
+.rss-source:focus-visible,.rss-post:focus-visible { outline:2px solid var(--accent-text); outline-offset:4px; }
+.rss-updates-heading { align-self:start; border-top:2px solid var(--black-color); padding-top:24px; }
+.rss-updates-heading h2 { margin:0; font:700 17px/1.5 var(--ui-font); }
+.rss-list { list-style:none; margin:0; padding:0; border-top:2px solid var(--black-color); }
+.rss-post { display:grid; grid-template-columns:minmax(0,1fr) 24px; align-items:center; gap:28px; min-width:0; padding:28px 0; border-bottom:1px solid var(--line-color); color:var(--black-color); text-decoration:none; }
+.rss-post--illustrated { grid-template-columns:128px minmax(0,1fr) 24px; }
+.rss-post-art { width:128px; align-self:start; }
+.rss-post-copy { min-width:0; }
+.rss-post h3 { margin:0; font:650 23px/1.5 var(--ui-font); letter-spacing:-.3px; overflow-wrap:anywhere; text-wrap:pretty; }
+.rss-post time { display:block; margin-top:14px; color:var(--gray-color); font:11px/1.5 var(--mono-font); white-space:nowrap; }
+.rss-post p { margin:10px 0 0; color:var(--gray-color); font:13px/1.85 var(--text-font); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.rss-post-arrow { line-height:0; color:var(--accent-text); }
+.rss-post-arrow svg { width:24px; height:24px; }
+.rss-post:is(:hover,:focus-visible) h3 { color:var(--accent-text); }
+@media (min-width:901px) and (max-width:1100px) {
+  .rss-subscribe,.rss-updates { grid-template-columns:184px minmax(0,1fr); column-gap:40px; }
+}
+@media (max-width:900px) {
+  .rss-subscribe,.rss-updates { display:block; }
+  .rss-address-label { display:block; margin-bottom:12px; padding:0; }
+  .rss-subscribe { margin:32px 0 40px; }
+  .rss-updates-heading { border-top:0; padding:0 0 16px; }
+  .rss-updates-heading h2 { font-size:20px; }
+  .rss-post--illustrated { grid-template-columns:112px minmax(0,1fr) 24px; }
+  .rss-post-art { width:112px; }
+}
+@media (max-width:600px) {
+  .rss-description { font-size:13px; margin-bottom:16px; }
+  .rss-address-field input { height:48px; padding:0 12px; font-size:12px; }
+  .rss-copy { min-width:60px; padding:0 12px; }
+  .rss-subscribe-actions { gap:0 12px; }
+  .rss-copy-status:not(:empty) { flex-basis:100%; margin-top:6px; }
+  .rss-post { grid-template-columns:minmax(0,1fr) 20px; align-items:start; gap:10px 16px; padding:24px 0; }
+  .rss-post--illustrated { grid-template-columns:72px minmax(0,1fr); }
+  .rss-post-art { grid-column:1; grid-row:1/3; width:72px; }
+  .rss-post-copy { display:contents; }
+  .rss-post h3 { grid-column:1; grid-row:1; font-size:19px; letter-spacing:0; }
+  .rss-post time { grid-column:1; grid-row:2; margin:0; font-size:10px; }
+  .rss-post p { grid-column:1/-1; grid-row:3; margin:2px 0 0; }
+  .rss-post-arrow { grid-column:2; grid-row:2; justify-self:end; align-self:center; }
+  .rss-post--illustrated h3,.rss-post--illustrated time { grid-column:2; }
+  .rss-post--illustrated time { padding-right:30px; }
+  .rss-post-arrow svg { width:20px; height:20px; }
+}
+@media print {
+  .rss-copy,.rss-copy-status,.rss-post-arrow { display:none; }
+  .rss-address-field input { height:auto; padding:8px; }
+  .rss-post { break-inside:avoid; }
+}

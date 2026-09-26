@@ -1,0 +1,28 @@
+{% assign home_gallery = site.data.home_discovery.gallery %}
+{% if home_gallery.size > 0 %}
+<section class='home-gallery' aria-label='封面画廊'>
+  <div class='home-gallery-rows'>
+    {% for row in (0..1) %}
+    <div class='home-gallery-track' id='home-gallery-row-{{ row }}' role='group' aria-label='第 {{ row | plus: 1 }} 排封面，可横向浏览' tabindex='0'>
+      {% for item in home_gallery %}
+      {% assign gallery_row = forloop.index0 | modulo: 2 %}
+      {% if gallery_row == row %}
+      {% assign gallery_post = item.post %}
+      <a class='home-gallery-work' href='{{ gallery_post.url | relative_url | escape }}' aria-label='阅读：{{ gallery_post.title | escape }}'>
+        <span class='cover-art home-gallery-art'>
+          <img data-gallery-src='{{ gallery_post.cover_image | relative_url | escape }}' alt='' width='1254' height='1254' loading='lazy' decoding='async' fetchpriority='low'>
+          <noscript><img src='{{ gallery_post.cover_image | relative_url | escape }}' alt='' width='1254' height='1254' loading='lazy' decoding='async' fetchpriority='low'></noscript>
+        </span>
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  <button class='home-gallery-toggle' type='button' aria-label='封面自动滚动' aria-pressed='false' aria-controls='home-gallery-row-0 home-gallery-row-1' hidden>
+    <svg class='home-gallery-pause-icon' viewBox='0 0 24 24' fill='none' aria-hidden='true' focusable='false'><path d='M8 5v14M16 5v14' stroke='currentColor' stroke-width='2'/></svg>
+    <svg class='home-gallery-play-icon' viewBox='0 0 24 24' fill='none' aria-hidden='true' focusable='false'><path d='m8 5 11 7-11 7V5Z' stroke='currentColor' stroke-width='1.5' stroke-linejoin='round'/></svg>
+  </button>
+  <script data-cfasync='false' src='{{ "/assets/js/home_gallery.js" | relative_url }}?v={{ site.time | date: "%s" }}' defer></script>
+</section>
+{% endif %}

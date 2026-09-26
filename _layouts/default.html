@@ -17,7 +17,7 @@ layout: compress
       {%- endif -%}
       <meta name='keywords' content='{{ page.tags | join: ', ' }}'>
     {%- else -%}
-      <meta name='description' content='{{ site.description }}'>
+      <meta name='description' content='{{ page.description | default: site.description | escape }}'>
       <meta name='keywords' content='{{ site.keywords | join: ', ' }}'>
     {%- endif -%}
     <meta name='author' content='{{ site.author.name }}'>
@@ -57,7 +57,7 @@ layout: compress
         content='{{ page.excerpt | strip_html | strip_newlines | append: '...' }}'
       >
     {%- else -%}
-      <meta property='og:description' content='{{ site.description }}'>
+      <meta property='og:description' content='{{ page.description | default: site.description | escape }}'>
     {%- endif -%}
     <meta property='og:image' content='{{ site.url }}/assets/img/ogimage.png'>
 
@@ -71,7 +71,7 @@ layout: compress
         content='{{ page.excerpt | strip_html | strip_newlines | append: '...' }}'
       >
     {%- else -%}
-      <meta name='twitter:description' content='{{ site.description }}'>
+      <meta name='twitter:description' content='{{ page.description | default: site.description | escape }}'>
     {%- endif -%}
     <meta
       name='twitter:image'
@@ -95,7 +95,8 @@ layout: compress
     <link
       rel='alternate'
       type='application/rss+xml'
-      href='{{ site.url }}/feed.xml'
+      title='{{ site.title | escape }} · RSS'
+      href='{{ "/feed.xml" | absolute_url }}'
     >
     <link
       rel='sitemap'
@@ -180,11 +181,11 @@ layout: compress
     {%- if page.layout == 'post' -%}
       <link
         rel='stylesheet'
-        href='{{ '/assets/style/post.css' | relative_url }}'
+        href='{{ '/assets/style/post.css' | relative_url }}?v={{ site.time | date: "%s" }}'
       >
     {%- endif -%}
 
-    <link rel='stylesheet' href='{{ "/assets/style/bauhaus.css" | relative_url }}'>
+    <link rel='stylesheet' href='{{ "/assets/style/bauhaus.css" | relative_url }}?v={{ site.time | date: "%s" }}'>
     {% if page.layout == 'post' %}<link rel='stylesheet' href='{{ "/assets/style/components.css" | relative_url }}'>{% endif %}
     <link rel='stylesheet' href='{{ "/assets/style/navigation.css" | relative_url }}'>
     <script data-cfasync='false'>

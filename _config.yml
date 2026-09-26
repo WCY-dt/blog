@@ -63,7 +63,7 @@ navy:
     url: /tag/
     icon: local_offer
   - title: rss
-    url: feed.xml
+    url: /rss/
     icon: rss_feed
 
 # icons are from https://fontawesome.com/icons. If you want to add other icons,

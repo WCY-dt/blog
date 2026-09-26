@@ -1,0 +1,38 @@
+/* Only the complete artwork is visible; each image still names its destination. */
+.home-gallery { margin:32px 0 0; }
+.home-gallery-rows { display:grid; gap:12px; min-width:0; }
+.home-gallery-track { position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:112px; align-items:start; gap:12px; min-width:0; overflow-x:auto; overscroll-behavior-inline:contain; scroll-padding-inline:4px; scrollbar-color:var(--gray-color) transparent; padding:4px; margin:-4px; }
+.home-gallery-track:empty { display:none; }
+.home-gallery-work { display:block; min-width:0; color:var(--black-color); text-decoration:none; scroll-snap-align:start; }
+.home-gallery-art { position:relative; }
+.home-gallery-art noscript img { position:absolute; inset:0; }
+.home-gallery-work:is(:hover,:focus-visible) { outline:2px solid var(--accent-text); outline-offset:2px; }
+.home-gallery-track:focus-visible { outline:2px solid var(--accent-text); outline-offset:4px; }
+.home-gallery--enhanced .home-gallery-track { scrollbar-width:none; scroll-behavior:auto; scroll-snap-type:none; overflow-anchor:none; cursor:grab; }
+.home-gallery--enhanced .home-gallery-track::-webkit-scrollbar { display:none; }
+.home-gallery--dragging .home-gallery-track { cursor:grabbing; user-select:none; }
+.home-gallery-toggle { display:grid; place-items:center; width:44px; height:44px; margin:2px 0 0 auto; padding:13px; border:0; border-radius:0; background:transparent; color:var(--gray-color); cursor:pointer; }
+.home-gallery-toggle[hidden] { display:none; }
+.home-gallery-toggle svg { display:block; width:18px; height:18px; }
+.home-gallery-toggle[aria-pressed='true'] .home-gallery-play-icon,.home-gallery-toggle[aria-pressed='false'] .home-gallery-pause-icon { display:none; }
+.home-gallery-toggle:is(:hover,:focus-visible) { color:var(--accent-text); }
+.home-gallery-toggle:focus-visible { outline:2px solid var(--accent-text); outline-offset:3px; }
+
+/* Experimental articles remain identifiable when secondary tags are hidden. */
+.post-card-meta { flex-wrap:wrap; row-gap:6px; }
+.post-card-experiment { display:inline-flex; align-items:center; flex-shrink:0; padding:2px 6px; color:var(--on-primary-color); background:var(--primary-color); font:600 10px/1.5 var(--text-font); letter-spacing:.5px; }
+.archive-year-index .archive-experiment-entry { max-width:100%; gap:12px; min-height:44px; margin-bottom:24px; padding:12px 0; border-bottom:2px solid var(--primary-color); color:var(--accent-text); font:600 13px/1.5 var(--text-font); }
+.archive-year-index .archive-experiment-entry > span:last-child { display:inline; flex-shrink:0; font:11px/1.5 var(--text-font); }
+
+@media (max-width:900px) {
+  .home-gallery-track { grid-auto-columns:108px; }
+}
+@media (max-width:600px) {
+  .home-gallery { margin-top:28px; }
+  .home-gallery-track { grid-auto-columns:clamp(76px,24vw,100px); gap:10px; }
+  .archive-year-index .archive-experiment-entry { width:100%; margin-bottom:8px; }
+}
+@media print {
+  .home-gallery { display:none; }
+}
+

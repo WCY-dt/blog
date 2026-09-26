@@ -1,0 +1,8 @@
+<aside class='reading-resume no-print' id='reading-resume' aria-label='继续上次阅读' hidden>
+  <p class='reading-resume__context'><span class='reading-resume__label'>上次读到</span><span class='reading-resume__position' data-reading-position></span></p>
+  <div class='reading-resume__actions'>
+    <button type='button' class='reading-resume__continue' data-reading-continue>继续阅读 {% include arrow.html direction='down' %}</button>
+    <button type='button' class='reading-resume__dismiss' data-reading-dismiss aria-label='忽略并清除上次阅读位置'>忽略</button>
+  </div>
+</aside>
+<script data-cfasync='false' src='{{ "/assets/js/reading_resume.js" | relative_url }}?v={{ site.time | date: "%s" }}' defer></script>

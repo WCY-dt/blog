@@ -1,10 +1,10 @@
 <a class='pagination__item-wrapper{% if include.post.cover_image %} post-card--illustrated{% endif %}{% if include.index == 1 and include.layout == "home" %} pagination__item-wrapper--first{% endif %}{% if include.post.draft %} pagination__item-wrapper--draft{% endif %}' href='{{ include.post.url | relative_url }}'>
   <div class='post-card-body'>
-    <div class='post-card-meta'><span>{{ include.post.categories | join: ' · ' }}</span>{% if include.index == 1 and include.layout == 'home' %}<span class='latest-label'>最新文章</span>{% endif %}{% if include.post.draft %}<span class='post-card-draft draft-label'>草稿</span>{% endif %}</div>
+    <div class='post-card-meta'>{% if include.post.categories.size > 0 %}<span>{{ include.post.categories | join: ' · ' }}</span>{% endif %}{% if include.post.has_experiment %}<span class='post-card-experiment'>实验</span>{% endif %}{% if include.index == 1 and include.layout == 'home' %}<span class='latest-label'>最新文章</span>{% endif %}{% if include.post.draft %}<span class='post-card-draft draft-label'>草稿</span>{% endif %}</div>
     {% if include.post.series %}<span class='pagination__item-title-series'>{{ include.post.series }} / {{ include.post.series_index }}</span>{% endif %}
     <h3 class='pagination__item-title'>{{ include.post.title }}</h3>
     {% if include.post.summary %}<p class='pagination__item-summary'>{{ include.post.summary | strip_html | escape }}</p>{% endif %}
-    <div class='post-card-tags'>{% for tag in include.post.tags limit: 4 %}{% unless include.post.categories contains tag %}<span>{{ tag }}</span>{% endunless %}{% endfor %}{% if include.post.draft %}<span class='draft-label'>草稿</span>{% endif %}<time datetime='{{ include.post.date | date: "%Y-%m" }}'>{{ include.post.date | date: '%Y-%m' }}</time></div>
+    <div class='post-card-tags'>{% assign card_tag_count = 0 %}{% for tag in include.post.tags %}{% if tag == '实验' or include.post.categories contains tag %}{% continue %}{% endif %}<span>{{ tag }}</span>{% assign card_tag_count = card_tag_count | plus: 1 %}{% if card_tag_count == 4 %}{% break %}{% endif %}{% endfor %}{% if include.post.draft %}<span class='draft-label'>草稿</span>{% endif %}<time datetime='{{ include.post.date | date: "%Y-%m" }}'>{{ include.post.date | date: '%Y-%m' }}</time></div>
   </div>
   {% include cover_art.html post=include.post class='post-card-art' %}
   <span class='post-card-arrow' aria-hidden='true'>{% include arrow.html %}</span>

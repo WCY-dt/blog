@@ -7,7 +7,9 @@ layout: default
  {% include archive_back.html %}
 </header>
 <div class='complete-archive'>
- <nav class='archive-year-index' aria-label='按年份浏览文章'>
+ <nav class='archive-year-index' aria-label='浏览文章'>
+  {% assign experiment_count = 0 %}{% for post in site.tags['实验'] %}{% unless post.draft and jekyll.environment == 'production' %}{% assign experiment_count = experiment_count | plus: 1 %}{% endunless %}{% endfor %}
+  {% if experiment_count > 0 %}<a class='archive-experiment-entry' href='{{ "/tag/实验/" | relative_url }}'><span>含实验的文章</span><span>{{ experiment_count }} 篇</span></a>{% endif %}
   <h2>按年份</h2>
   {% assign years = site.posts | group_by_exp: 'post', 'post.date | date: "%Y"' %}
   {% for year in years %}

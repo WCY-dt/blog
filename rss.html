@@ -1,0 +1,50 @@
+---
+layout: default
+type: rss
+title: RSS 订阅说明
+permalink: /rss/
+description: 本页是订阅说明页，请使用以 /feed.xml 结尾的地址订阅博客更新。
+---
+<header class='archive__title rss-title'>
+  <h1 class='archive__title-text'>RSS 订阅</h1>
+  {% include archive_back.html %}
+</header>
+
+<section class='rss-subscribe' aria-labelledby='rss-address-label'>
+  <label class='rss-address-label' id='rss-address-label' for='rss-address'>订阅地址</label>
+  <div class='rss-subscribe-body'>
+    <p class='rss-description'>把这个地址添加到你喜欢的阅读器，新文章就会自动送达。</p>
+    <div class='rss-address-field'>
+      <input id='rss-address' type='url' readonly value='{{ "/feed.xml" | absolute_url | escape }}' spellcheck='false' autocomplete='off' aria-describedby='rss-address-hint rss-copy-status'>
+      <button class='rss-copy' id='rss-copy' type='button' aria-label='复制 RSS 订阅地址' hidden>复制</button>
+    </div>
+    <div class='rss-subscribe-actions'>
+      <p class='rss-copy-status' id='rss-copy-status' role='status' aria-live='polite'></p>
+      <a class='rss-source' href='{{ "/feed.xml" | relative_url }}' rel='alternate' type='application/rss+xml'>打开 RSS 源 <span aria-hidden='true'>{% include arrow.html %}</span></a>
+    </div>
+    <p class='rss-address-hint' id='rss-address-hint'>请订阅上方以 <code>/feed.xml</code> 结尾的地址。本页 <code>/rss/</code> 是订阅说明页；若阅读器无法自动识别，请复制上方地址重新添加。</p>
+  </div>
+</section>
+
+<section class='rss-updates' aria-labelledby='rss-updates-title'>
+  <header class='rss-updates-heading'><h2 id='rss-updates-title'>最近更新</h2></header>
+  <ol class='rss-list'>
+    {% assign rss_count = 0 %}
+    {% for post in site.posts %}
+    {% if post.draft or post.date > site.time %}{% continue %}{% endif %}
+    <li>
+      <a class='rss-post{% if post.cover_image %} rss-post--illustrated{% endif %}' href='{{ post.url | relative_url | escape }}'>
+        {% include cover_art.html post=post class='rss-post-art' %}
+        <div class='rss-post-copy'>
+          <h3>{{ post.title | escape }}</h3>
+          {% if post.summary %}<p>{{ post.summary | strip_html | escape }}</p>{% endif %}
+          <time datetime='{{ post.date | date: "%Y-%m" }}'>{{ post.date | date: '%Y-%m' }}</time>
+        </div>
+        <span class='rss-post-arrow' aria-hidden='true'>{% include arrow.html %}</span>
+      </a>
+    </li>
+    {% assign rss_count = rss_count | plus: 1 %}{% if rss_count == 20 %}{% break %}{% endif %}
+    {% endfor %}
+  </ol>
+</section>
+<script data-cfasync='false' src='{{ "/assets/js/rss.js" | relative_url }}?v={{ site.time | date: "%s" }}' defer></script>
