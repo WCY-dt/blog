@@ -1,62 +1,31 @@
 (function () {
   'use strict';
 
-  async function writeClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-      try {
-        await navigator.clipboard.writeText(text);
-        return;
-      } catch (_) { /* Try the legacy copy path when clipboard access is denied. */ }
-    }
-    const focused = document.activeElement;
-    const selection = window.getSelection();
-    const ranges = Array.from({ length: selection.rangeCount }, (_, i) => selection.getRangeAt(i).cloneRange());
-    const input = document.createElement('textarea');
-    input.value = text;
-    input.style.cssText = 'position:fixed;left:0;top:0;opacity:0;pointer-events:none';
-    document.body.append(input);
-    try {
-      input.focus({ preventScroll: true });
-      input.select();
-      if (!document.execCommand('copy')) throw new Error('Clipboard unavailable');
-    } finally {
-      input.remove();
-      focused?.focus({ preventScroll: true });
-      selection.removeAllRanges();
-      ranges.forEach((range) => selection.addRange(range));
-    }
-  }
-
-  function copyButton(markdown) {
+  function copyButton(markdown, options = {}) {
+    const action = options.label || '复制 Markdown';
+    const visible = options.caption || '复制';
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'markdown-copy-button';
-    button.title = '复制 Markdown';
-    button.setAttribute('aria-label', button.title);
     const icon = document.createElement('span');
     icon.className = 'material-symbols-outlined';
     icon.setAttribute('aria-hidden', 'true');
     icon.textContent = 'content_copy';
+    const caption = document.createElement('span');
+    caption.className = 'tool-label';
+    caption.textContent = visible;
     button.append(icon);
-    let timer;
-    button.addEventListener('click', async (event) => {
+    if (!options.iconOnly) button.append(caption);
+    window.articleTools.label(button, action);
+    button.addEventListener('click', async event => {
       event.preventDefault();
       event.stopPropagation();
-      clearTimeout(timer);
       try {
-        await writeClipboard(markdown);
-        icon.textContent = 'check';
-        button.title = '已复制 Markdown';
+        await window.articleTools.copy(markdown);
+        window.articleTools.feedback(button, '已复制', 'success', action, visible);
       } catch (_) {
-        icon.textContent = 'error_outline';
-        button.title = '复制失败，请重试';
+        window.articleTools.feedback(button, '复制失败', 'error', action, visible);
       }
-      button.setAttribute('aria-label', button.title);
-      timer = setTimeout(() => {
-        icon.textContent = 'content_copy';
-        button.title = '复制 Markdown';
-        button.setAttribute('aria-label', button.title);
-      }, 2000);
     });
     return button;
   }

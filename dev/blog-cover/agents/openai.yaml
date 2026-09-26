@@ -1,0 +1,4 @@
+interface:
+  display_name: "博客封面图"
+  short_description: "用印象派主体与浅色几何背景绘制方形博客封面，统一系列并丰富配色"
+  default_prompt: "使用 $blog-cover，为指定博客文章制作印象派主体与浅色几何背景的正方形封面，同系列共用同一张图。"

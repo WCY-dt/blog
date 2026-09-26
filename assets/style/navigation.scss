@@ -1,0 +1,32 @@
+---
+---
+@use 'covers';
+
+/* The feature arrow is the single directional mark throughout the interface. */
+.site-arrow { display:inline-block; width:24px; height:24px; flex-shrink:0; vertical-align:middle; overflow:visible; }
+.site-arrow--right { rotate:45deg; }
+.site-arrow--down { rotate:135deg; }
+.site-arrow--left { rotate:225deg; }
+.site-arrow--up { rotate:-45deg; }
+:is(.chapter-arrow,.post-card-arrow,.suggest__item-arrow) .site-arrow { width:24px; height:24px; }
+.all-articles-arrow .site-arrow { width:48px; height:48px; }
+.archive-back-icon .site-arrow { width:32px; height:32px; }
+.search-hint .site-arrow { width:16px; height:16px; }
+.series-footer__direction .site-arrow { width:20px; height:20px; }
+.post__content .reversefootnote .site-arrow { width:18px; height:18px; }
+/* Every toolbar uses one optical box, independent of legacy icon-font metrics. */
+.post__content :is(.code-block-buttons,.table-buttons,.code-runner__controls,.result-controls,.iframe-controls) button:not(:has(.tool-label)):not(.code-runner__run-btn) { padding:0; }
+.post__content button .material-symbols-outlined { display:inline-flex; align-items:center; justify-content:center; flex:0 0 20px; width:20px; height:20px; padding:0; font-size:20px!important; line-height:1!important; vertical-align:middle; }
+.post__content button :is(.tool-icon,.site-arrow), .post__content .table-reset-width svg { display:block; width:20px; height:20px; flex-shrink:0; }
+.post__content button .tool-icon :is(path,rect,circle), .post__content .table-reset-width svg path { vector-effect:non-scaling-stroke; stroke-width:1.6px; }
+.post__content button:is([data-state='success'],[data-state='error']) .material-symbols-outlined { font-size:0!important; }
+.post__content :is(.markdown-copy-button,.mermaid-copy-button):is([data-state='success'],[data-state='error']) .tool-icon { display:none; }
+.header-tools .search-trigger { padding:0; width:44px; min-width:44px; }
+@media (max-width:600px) {
+ .header-wrapper { position:relative; top:auto; min-height:0; }
+ .header__title-wrapper { min-height:64px; box-sizing:border-box; padding:14px 0; }
+ .header__menu-item { padding:10px 6px; }
+ html { scroll-padding-top:20px; }
+ .post__content :is(h2,h3,h4),.tag-group,.archive-year-heading,.series-directory-group,#articles { scroll-margin-top:0; }
+}
+@media (prefers-reduced-motion:reduce) { .site-arrow { transition:none; } }

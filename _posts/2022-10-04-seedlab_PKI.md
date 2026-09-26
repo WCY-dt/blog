@@ -4,7 +4,7 @@ title:      "PKI"
 date:       2022-10-04 00:00:00 +0800
 categories: 实验
 tags:       seedlab pki
-summary:    "本文为 SEED Labs 2.0 - PKI Lab 的实验记录，介绍了公钥基础设施 (PKI) 的工作原理、如何保护 Web 以及如何击败中间人攻击。"
+summary:    "《SEEDLabs》第 10 篇：浏览器信任的 CA 如果出了问题，会怎样？在实验环境中自建证书体系，再让伪造的网站通过验证，观察信任根失守的后果。"
 series:     SEEDLabs
 series_index: 10
 ---

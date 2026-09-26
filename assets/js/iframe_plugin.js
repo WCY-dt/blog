@@ -3,7 +3,8 @@
 function refreshIframe(iframeId) {
   const iframe = document.getElementById(iframeId);
   if (iframe) {
-    iframe.src = iframe.src;
+    const button = iframe.closest('.iframe-container').querySelector('.iframe-refresh-btn');
+    window.articleTools.reloadFrame(iframe, button, '重新加载演示', () => { iframe.src = iframe.src; });
   }
 }
 
@@ -19,13 +20,14 @@ function toggleIframeFullscreen(iframeId) {
   if (isFullscreen) {
     // Exit fullscreen
     container.classList.remove('fullscreen');
-    document.body.style.overflow = '';
+    document.body.style.overflow = container.dataset.previousOverflow || '';
 
     // Update button icon
     const btn = container.querySelector('.iframe-fullscreen-btn .material-symbols-outlined');
     if (btn) {
       btn.textContent = 'open_in_full';
-      btn.parentElement.title = 'Fullscreen';
+      window.articleTools.label(btn.parentElement, '全屏显示演示');
+      btn.parentElement.setAttribute('aria-pressed', 'false');
     }
 
     // Remove escape key listener
@@ -33,23 +35,26 @@ function toggleIframeFullscreen(iframeId) {
   } else {
     // Enter fullscreen
     container.classList.add('fullscreen');
+    container.dataset.previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     // Update button icon
     const btn = container.querySelector('.iframe-fullscreen-btn .material-symbols-outlined');
     if (btn) {
       btn.textContent = 'close_fullscreen';
-      btn.parentElement.title = 'Exit Fullscreen';
+      window.articleTools.label(btn.parentElement, '退出全屏 · Esc');
+      btn.parentElement.setAttribute('aria-pressed', 'true');
     }
 
     // Add escape key listener
     window.iframeEscapeHandler = function(e) {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && !document.querySelector('dialog[open]')) {
         toggleIframeFullscreen(iframeId);
       }
     };
     document.addEventListener('keydown', window.iframeEscapeHandler);
   }
+  container.querySelector('.iframe-fullscreen-btn')?.focus({ preventScroll: true });
 }
 
 // Handle page visibility change to exit fullscreen when tab becomes hidden
@@ -65,20 +70,6 @@ document.addEventListener('visibilitychange', function() {
   }
 });
 
-// Exit fullscreen when clicking outside the iframe container
-document.addEventListener('click', function(e) {
-  const fullscreenContainer = document.querySelector('.iframe-container.fullscreen');
-  if (fullscreenContainer && !fullscreenContainer.contains(e.target)) {
-    const iframe = fullscreenContainer.querySelector('iframe');
-    if (iframe) {
-      toggleIframeFullscreen(iframe.id);
-    }
-  }
-});
-
-// Prevent clicks inside fullscreen container from bubbling up
-document.addEventListener('click', function(e) {
-  if (e.target.closest('.iframe-container.fullscreen')) {
-    e.stopPropagation();
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.iframe-controls button[title]').forEach(button => window.articleTools.label(button, button.title));
 });

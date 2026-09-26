@@ -4,7 +4,7 @@ title:      "Snort 和 Scapy"
 date:       2022-04-01 00:00:00 +0800
 categories: 安全
 tags:       snort scapy python
-summary:    "本文将简单描述如何使用 scapy 来测试 snort 规则。"
+summary:    "配置 Snort 并编写检测规则，再用 Scapy 构造和发送报文，验证规则能否触发告警。"
 ---
 
 本文将简单描述如何使用 scapy 来测试 snort 规则。

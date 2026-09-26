@@ -1,5 +1,5 @@
 html[data-theme="light"] {
-  --mermaid-background: #fcfcfc;
+  --mermaid-background: transparent;
   --mermaid-surface: #ffffff;
   --mermaid-group: #f4f4f5;
   --mermaid-border: #bfc1c5;
@@ -13,7 +13,7 @@ html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
-  --mermaid-background: #050505;
+  --mermaid-background: transparent;
   --mermaid-surface: #1c1c1f;
   --mermaid-group: #111113;
   --mermaid-border: #4c4c52;
@@ -82,7 +82,7 @@ html[data-theme="dark"] {
 
   &[aria-roledescription="sankey"] .node-labels text {
     fill: var(--mermaid-text);
-    stroke: var(--mermaid-background);
+    stroke: var(--mermaid-surface);
     stroke-width: 2px;
     stroke-linejoin: round;
     paint-order: stroke;
@@ -140,7 +140,7 @@ html[data-theme="dark"] svg[aria-roledescription="sankey"] .link {
   .material-symbols-outlined { font-size: 1rem; }
   &:hover, &:focus-visible {
     background: var(--primary-color);
-    color: var(--primary-extra-light-color);
+    color: var(--on-primary-color);
   }
 }
 

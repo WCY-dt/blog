@@ -1,5 +1,47 @@
 ---
 layout: default
 ---
-{% assign posts = site.posts %}
-{% include pagination.html layout='home' %}
+{% assign public_count = 0 %}
+{% for post in site.posts %}{% unless post.draft and jekyll.environment == 'production' %}{% assign public_count = public_count | plus: 1 %}{% endunless %}{% endfor %}
+{% assign featured_post = nil %}
+{% for post in site.posts %}
+  {% if post.draft and jekyll.environment == 'production' %}{% continue %}{% endif %}
+  {% if post.archived %}{% continue %}{% endif %}
+  {% assign featured_post = post %}{% break %}
+{% endfor %}
+<section class='page-cover home-cover' id='articles'>
+  <div class='home-masthead'>
+    <h1 aria-label='文章'><span>文</span><span>章</span></h1>
+    <p>技术文章、学习笔记<br>与生活随笔。</p>
+    <a class='home-browse' href='{{ "/articles/" | relative_url }}'><span>全部文章</span>{% include arrow.html direction='right' %}<small>{{ public_count }} 篇文章</small></a>
+  </div>
+  {% if featured_post %}{% include home_feature.html post=featured_post %}{% endif %}
+</section>
+<div class='home-content'>
+  <aside class='home-index' aria-label='文章索引'>
+    <div class='index-heading'><h2>分类</h2></div>
+    <div class='index-categories'>
+      {% assign categories = site.categories | sort %}
+      {% for category in categories %}
+        {% assign count = 0 %}
+        {% for post in category.last %}{% unless post.draft and jekyll.environment == 'production' %}{% assign count = count | plus: 1 %}{% endunless %}{% endfor %}
+        {% if count > 0 %}<a href='{{ "/category/" | relative_url }}{{ category.first | slugify }}/'>{{ category.first }}<span>{{ count }}</span></a>{% endif %}
+      {% endfor %}
+    </div>
+    <a class='index-tags' href='{{ "/tag/" | relative_url }}'>标签索引 <span aria-hidden='true'>{% include arrow.html %}</span></a>
+  </aside>
+  <section class='home-posts' aria-labelledby='posts-title'>
+    <div class='section-heading'><h2 id='posts-title'>最近文章</h2><nav class='home-mobile-index' aria-label='文章索引'><a href='{{ "/category/" | relative_url }}'>分类</a><a href='{{ "/tag/" | relative_url }}'>标签</a></nav></div>
+    <div class='journal-list'>
+      {% assign recent_count = 0 %}
+      {% for post in site.posts %}
+        {% if post.draft and jekyll.environment == 'production' %}{% continue %}{% endif %}
+        {% if post.archived or post.url == featured_post.url %}{% continue %}{% endif %}
+        {% include post_card.html post=post %}
+        {% assign recent_count = recent_count | plus: 1 %}{% if recent_count == 3 %}{% break %}{% endif %}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+<a class='all-articles-entry' href='{{ "/articles/" | relative_url }}'><span>全部文章</span><span class='all-articles-count'>{{ public_count }} 篇文章的完整索引</span><span class='all-articles-arrow' aria-hidden='true'>{% include arrow.html %}</span></a>
+{% include home_series.html %}

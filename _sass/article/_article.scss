@@ -141,7 +141,7 @@
       margin: -.5em -.5em 0;
       padding: .5em;
       background-color: var(--primary-color);
-      color: var(--white-color);
+      color: var(--on-primary-color);
       cursor: pointer;
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -307,7 +307,7 @@
 
       &:has(.language-mermaid) {
         border: none;
-        background-color: var(--white-color);
+        background-color: transparent;
         border-radius: 0rem;
         -webkit-user-select: none;
         user-select: none;
@@ -386,7 +386,7 @@
         display: table-header-group;
         width: 100%;
         background-color: var(--primary-color);
-        color: var(--white-color);
+        color: var(--on-primary-color);
       }
 
       tbody {
@@ -478,7 +478,7 @@
     }
 
     &:has(.language-mermaid) {
-      background-color: var(--white-color);
+      background-color: transparent;
       border-radius: 0;
       -webkit-user-select: none;
       user-select: none;

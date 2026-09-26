@@ -4,7 +4,7 @@ title:      "Return-to-libc Attack and ROP"
 date:       2020-07-01 00:00:00 +0800
 categories: 实验
 tags:       seedlab return-to-libc
-summary:    "本文为 SEED Labs 2.0 - Return-to-libc Attack Lab 的实验记录，介绍了如何利用返回到 libc 函数的方式进行缓冲区溢出攻击，并使用 ROP 技术绕过现代操作系统的安全防护措施。"
+summary:    "《SEEDLabs》第 2 篇：栈上的代码不能执行，溢出攻击就结束了吗？在实验中把返回地址指向已有代码，理解返回 libc 与 ROP 的复用思路。"
 series:     SEEDLabs
 series_index: 2
 ---

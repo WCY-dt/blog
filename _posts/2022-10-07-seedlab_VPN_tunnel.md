@@ -4,7 +4,7 @@ title:      "VPN Tunneling"
 date:       2022-10-07 00:00:00 +0800
 categories: 实验
 tags:       seedlab vpn
-summary:    "本文为 SEED Labs 2.0 - VPN Tunneling Lab 的实验记录，介绍了虚拟专用网络 (VPN) 的基本原理和实现方法。通过配置 TUN/TAP 虚拟接口、IP 隧道和路由，实现了一个简单的 VPN 隧道。"
+summary:    "《SEEDLabs》第 13 篇：一个发往私网的 IP 包，怎样穿过另一个网络？搭建可双向转发的隧道，观察虚拟网卡如何把数据包交给用户程序。"
 series:     SEEDLabs
 series_index: 13
 ---

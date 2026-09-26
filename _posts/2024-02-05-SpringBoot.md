@@ -4,7 +4,7 @@ title:      "Spring Boot"
 date:       2024-02-05 00:00:00 +0800
 categories: 编程
 tags:       java spring
-summary:    "这是 Spring 系列的第五篇，介绍了 Spring Boot，并结合源码详细讲解了 Spring Boot 的实现原理。"
+summary:    "《深入 Spring 源码》第 5 篇：一个启动类为何能带起整个应用？追踪 Spring Boot 源码，看框架怎样按条件补齐配置，把繁琐的启动工作接过去。"
 series:     深入 Spring 源码
 series_index: 5
 ---

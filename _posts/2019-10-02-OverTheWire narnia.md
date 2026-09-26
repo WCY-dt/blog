@@ -4,7 +4,7 @@ title:      "Narnia"
 date:       2019-10-02 00:00:00 +0800
 categories: 安全
 tags:       game
-summary:    "本文为 Narnia 题解。"
+summary:    "《OverTheWire》第 3 篇：分析 Narnia 首关的 C 程序，用缓冲区溢出覆盖变量，观察栈布局与小端字节序。"
 series:     OverTheWire
 series_index: 3
 archived:   true

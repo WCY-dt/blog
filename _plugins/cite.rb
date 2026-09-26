@@ -182,7 +182,7 @@ module Jekyll
             <span class="cite__info-domain">#{domain}</span>
           </div>
           <a href="#{url}" class="cite__link no-select" target="_blank" rel="noopener noreferrer">
-            <span class="cite__link-icon material-symbols-outlined">open_in_new</span>
+            <svg class="site-arrow" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M10 38 38 10M10 10h28v28" stroke="currentColor" stroke-width="2.5"/></svg>
           </a>
         </div>
 

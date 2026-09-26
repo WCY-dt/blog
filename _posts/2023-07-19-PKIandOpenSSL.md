@@ -4,7 +4,7 @@ title:  "PKI 和 OpenSSL——原理与应用"
 date:   2023-07-19 00:00:00 +0800
 categories: 密码
 tags: pki openssl
-summary: "本文讨论了 PKI 和 OpenSSL 的相关内容，包括中间人攻击、公钥证书、CA 的作用以及如何使用 OpenSSL 创建和管理证书。"
+summary: "公钥也可能被人掉包，加密后的消息未必发给了正确的人。亲手用 OpenSSL 签发和验证证书，看信任如何沿证书链传递。"
 comments: true
 mathjax: true
 copyrights: 原创

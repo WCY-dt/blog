@@ -1,0 +1,1 @@
+{% if include.post.cover_image %}<span class='cover-art {{ include.class }}'><img src='{{ include.post.cover_image | relative_url | escape }}' alt='{{ include.alt | default: "" | escape }}' width='1254' height='1254' loading='{{ include.loading | default: "lazy" }}' decoding='async'{% if include.priority %} fetchpriority='high'{% endif %}></span>{% endif %}

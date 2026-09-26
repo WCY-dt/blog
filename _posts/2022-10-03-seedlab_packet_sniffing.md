@@ -4,7 +4,7 @@ title:      "Packet Sniffing and Spoofing"
 date:       2022-10-03 00:00:00 +0800
 categories: 实验
 tags:       seedlab network
-summary:    "本文为 SEED Labs 2.0 - Packet Sniffing and Spoofing Lab 的实验记录，介绍了如何使用 Scapy 进行数据包嗅探和欺骗。"
+summary:    "《SEEDLabs》第 9 篇：收到 ping 的回应，就说明目标真的在线吗？用 Scapy 捕获请求并伪造响应，观察报文内容与真实来源的差别。"
 series:     SEEDLabs
 series_index: 9
 ---

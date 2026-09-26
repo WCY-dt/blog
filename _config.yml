@@ -40,6 +40,7 @@ translation:
 
 ############# Theme Settings #############
 color_theme: light # light or dark
+featured_series: 深入 Redis 源码
 
 # icons are from https://fonts.google.com/icons. If you want to modify it,
 # you may need to replace assets/font/Material_Symbols_Outlined.woff2 with

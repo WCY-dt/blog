@@ -1,8 +1,18 @@
 {% if page.comments != false and site.giscus %}
-  <div id='comment-wrapper' class='no-select no-print sector-wrapper comment-wrapper'>
-    <h1 class='sector__title comment__title'>Comments</h1>
+  <section id='comment-wrapper' class='no-print sector-wrapper comment-wrapper' aria-labelledby='comment-title'
+    data-theme-light='{{ "/assets/style/giscus_light.css" | relative_url }}?v={{ site.time | date: "%s" }}'
+    data-theme-dark='{{ "/assets/style/giscus_dark.css" | relative_url }}?v={{ site.time | date: "%s" }}'>
+    <h2 id='comment-title' class='sector__title comment__title'>评论</h2>
     {%- if jekyll.environment == 'production' or site.dev_mode -%}
+      <div class='comment-status' role='status' aria-live='polite'>
+        <span class='comment-status-text'>评论将在此处加载。</span>
+        <button type='button' class='component-retry' hidden>重新加载评论</button>
+        <a class='comment-fallback' href='https://github.com/{{ site.giscus.data-repo }}/discussions' target='_blank' rel='noopener noreferrer' hidden>前往 GitHub 讨论区</a>
+      </div>
+      <div class='giscus'></div>
+      <template id='comment-config'>
       <script
+        data-giscus-loader
         src='https://giscus.app/client.js'
         data-repo='{{ site.giscus.data-repo }}'
         data-repo-id='{{ site.giscus.data-repo-id }}'
@@ -10,47 +20,21 @@
         data-category-id='{{ site.giscus.data-category-id }}'
         data-mapping='title'
         data-strict='0'
-        data-reactions-enabled='1'
+        data-reactions-enabled='0'
         data-emit-metadata='0'
         data-input-position='top'
-        data-theme='{{ site.url }}/assets/style/giscus_light.css'
-        data-lang='en'
-        data-loading='lazy'
+        data-lang='{{ site.lang | default: "zh-CN" }}'
+        data-loading='eager'
         crossorigin='anonymous'
         async
       ></script>
+      </template>
+      <script defer src='{{ "/assets/js/comments.js" | relative_url }}'></script>
+      <noscript><p class='comment__content--draft'>启用 JavaScript 后可查看评论，也可<a href='https://github.com/{{ site.giscus.data-repo }}/discussions'>前往 GitHub 讨论区</a>。</p></noscript>
     {%- else -%}
       <div class='no-select sector__content--draft comment__content--draft'>
-        Comments are unavailable on development
+        本地预览暂不加载评论。
       </div>
     {%- endif -%}
-  </div>
-  <script>
-    const setCommentTheme = (currentTheme) => {
-      const commentScript = document.querySelector('#comment-wrapper script');
-      const siteUrl = '{{ site.url }}';
-
-      if (commentScript) {
-        commentScript.setAttribute(
-          'data-theme',
-          siteUrl + '/assets/style/giscus_' + currentTheme + '.css'
-        );
-      }
-
-      const isGiscusFrameLoading = document.querySelector(
-        '.giscus-frame--loading'
-      );
-      if (isGiscusFrameLoading == null) {
-        const giscusFrame = document.querySelector('.giscus-frame');
-        if (giscusFrame) {
-          try {
-            window.location.reload();
-            return;
-          } catch (e) {
-            console.warn('Failed to reload page for Giscus theme change:', e);
-          }
-        }
-      }
-    };
-  </script>
+  </section>
 {% endif %}

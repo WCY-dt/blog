@@ -2,96 +2,62 @@
 layout: default
 ---
 {% assign is_essay = false %}
-{% if page.categories contains '随笔' or page.style == 'essay' %}
-  {% assign is_essay = true %}
-{% endif %}
+{% if page.categories contains '随笔' or page.style == 'essay' %}{% assign is_essay = true %}{% endif %}
 {% if page.draft and jekyll.environment == 'production' %}
-  <script>
-    window.location.replace('{{ site.url }}/404.html');
-  </script>
+  <script>window.location.replace('{{ "/404.html" | relative_url }}');</script>
 {% endif %}
-<div
-  id='post-wrapper'
-  class='post-wrapper{% if is_essay %} post-wrapper--essay{% endif %}'
->
-  <hgroup class='post__info'>
-    <h1 class='post__info-title'>
-      {% if page.series %}
-        <div class='post__info-title-series'>
-          {{ page.series }} | ({{ page.series_index }})
-        </div>
+{% capture article_toc %}{% include toc.html html=content h_min=2 h_max=4 class='sidebar__toc-content' item_class='sidebar__toc-item' submenu_class='sidebar__toc-submenu' anchor_class='sidebar__toc-anchor' %}{% endcapture %}
+{% assign has_toc = false %}{% if article_toc contains '<a ' %}{% assign has_toc = true %}{% endif %}
+{% assign title_parts = page.title | split: '——' %}{% assign title_length = page.title | size %}
+<div id='post-wrapper' class='post-wrapper{% if is_essay %} post-wrapper--essay{% endif %}{% unless has_toc %} post-wrapper--without-toc{% endunless %}{% if title_parts.size == 1 and title_length <= 12 %} post-wrapper--short-title{% endif %}'>
+  <header class='page-cover post-cover{% if page.cover_image %} post-cover--illustrated{% endif %}'>
+    <div class='post-context'>{% include archive_back.html %}</div>
+    <div class='cover-heading'>
+      {% if page.series %}<p class='post__info-title-series'>{{ page.series }} · 第 {{ page.series_index }} 篇</p>{% endif %}
+      <h1 class='post__info-title' aria-label='{{ page.title | escape }}'>{% if title_parts.size == 2 %}<span>{{ title_parts[0] }}</span><span class='post-title-subtitle'>{{ title_parts[1] }}</span>{% else %}{{ page.title }}{% endif %}</h1>
+      <div class='post__info-detail'>
+        <a class='post-published' href='{{ "/year/" | relative_url }}{{ page.date | date: "%Y" }}/'><time datetime='{{ page.date | date: "%Y-%m" }}'>{{ page.date | date: '%Y-%m' }}</time></a>
+        {% for category in page.categories %}<a class='post-category' href='{{ "/category/" | relative_url }}{{ category | slugify }}/'>{{ category }}</a>{% endfor %}
+        {% for tag in page.tags %}{% unless page.categories contains tag %}<a href='{{ "/tag/" | relative_url }}{{ tag | slugify }}/'># {{ tag }}</a>{% endunless %}{% endfor %}
+      </div>
+      {% if page.summary %}<p class='post__info-summary'>{{ page.summary }}</p>{% endif %}
+      {% if page.draft and jekyll.environment != 'production' %}<p class='post-notice'>草稿 · 发布后不公开显示</p>{% endif %}
+      {% if page.archived %}<p class='post-notice'>归档文章 · 部分信息可能已过时</p>{% endif %}
+    </div>
+    {% assign cover_alt = page.title | append: ' · 封面' %}
+    {% include cover_art.html post=page class='post-heading-art' alt=cover_alt loading='eager' priority=true %}
+  </header>
+  <div class='article-layout'>
+    {% if has_toc %}
+    <aside class='article-index no-print'>
+      <nav id='sidebar__toc-wrapper' class='desktop-toc' aria-label='文章目录'>
+        <h2>本篇目录</h2>
+        {{ article_toc }}
+      </nav>
+    </aside>
+    {% endif %}
+    <div class='article-body'>
+      {% if has_toc or page.series %}<div class='article-reading-tools'>
+      {% if has_toc %}
+      <details id='sidebar__toc-wrapper-mobile' class='article-toc no-print'>
+        <summary>本篇目录 {% include arrow.html direction='down' %}</summary>
+        {{ article_toc }}
+      </details>
       {% endif %}
-      <div class='post__info-title-text'>
-        {{ page.title }}
-        {%- if page.draft and jekyll.environment != 'production' -%}
-          <span class='post__info-title-icon material-symbols-outlined no-select'> stylus_note </span>
-        {%- endif -%}
-      </div>
-    </h1>
-    {%- if page.draft and jekyll.environment != 'production' -%}
-      <div class='post__info-draft no-select'>
-        Draft will redirect to 404 page on production
-      </div>
-    {%- endif -%}
-    {%- if page.archived -%}
-      <div class='post__info-archived no-select'>
-        This post is archived and may has outdated information.
-      </div>
-    {%- endif -%}
-    <div class='post__info-detail no-select no-print'>
-      <div class='post__info-detail-date'>
-        <a
-          href='{{ '/year/' | relative_url }}{{ page.date | date: "%Y" }}/'
-          class='post__info-detail-link'
-        >
-          <span class='material-symbols-outlined'> calendar_month </span>
-          {{- page.date | date: site.theme_config.date_format -}}
-        </a>
-      </div>
-      <div class='post__info-detail-categories'>
-        {%- if page.categories -%}
-          {%- for category in page.categories -%}
-            <a
-              href='{{ '/category/' | relative_url }}{{ category | slugify }}/'
-              class='post__info-detail-link'
-            >
-              <span class='material-symbols-outlined'> archive </span>
-              {{ category -}}
-            </a>
-          {%- endfor -%}
-        {%- endif -%}
-      </div>
-      <div class='post__info-detail-tags'>
-        {%- if page.tags -%}
-          {%- for tag in page.tags -%}
-            <a
-              href='{{ '/tag/' | relative_url }}{{ tag | slugify }}/'
-              class='post__info-detail-link'
-            >
-              <span class='material-symbols-outlined'> tag </span>
-              {{ tag }}
-            </a>
-          {%- endfor -%}
-        {%- endif -%}
+      {% if page.series %}{% include series_head.html %}{% endif %}
+      </div>{% endif %}
+      <article id='post__content' class='post__content'>{{ content }}</article>
+      <div class='post__footer post-ending'>
+        <div class='post-reading-continuation{% if page.series %} post-reading-continuation--series{% endif %}'>
+        {% if page.series %}{% include series_foot.html %}{% endif %}
+        {% include suggest.html %}
+        </div>
+        {% include comment.html %}
+        <div class='post-signoff'>
+        {% include share.html %}
+        {% include copyright.html %}
+        </div>
       </div>
     </div>
-    {%- if is_essay and page.summary -%}
-      <p class='post__info-summary'>{{ page.summary }}</p>
-    {%- endif -%}
-    {%- if page.series -%}
-      {% include series_head.html %}
-    {%- endif -%}
-  </hgroup>
-  <article id='post__content' class='post__content'>
-    {{ content }}
-  </article>
-  <div class='post__footer'>
-    {% include copyright.html %}
-    {%- if page.series -%}
-      {% include series_foot.html %}
-    {%- endif -%}
-    {% include suggest.html %}
-    {% include comment.html %}
-    {% include share.html %}
   </div>
 </div>

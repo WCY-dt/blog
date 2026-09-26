@@ -77,10 +77,10 @@ module Jekyll
             </div>
           </div>
           <div class="code-runner__content">
-            <div class="code-runner__editor-section">
+            <div class="code-runner__editor-section"><div class="component-pane-label">代码 <span>可编辑</span></div>
               <textarea class="code-runner__editor" name="code" spellcheck="false">#{content}</textarea>
             </div>
-            <div class="code-runner__output-section">
+            <div class="code-runner__output-section"><div class="component-pane-label">输出</div>
               <div class="code-runner__output"></div>
             </div>
           </div>
@@ -148,10 +148,10 @@ module Jekyll
             </div>
           </div>
           <div class="code-runner__content">
-            <div class="code-runner__editor-section">
+            <div class="code-runner__editor-section"><div class="component-pane-label">代码 <span>可编辑</span></div>
               <textarea class="code-runner__editor" name="code" spellcheck="false">#{content}</textarea>
             </div>
-            <div class="code-runner__output-section">
+            <div class="code-runner__output-section"><div class="component-pane-label">输出</div>
               <div class="code-runner__output"></div>
             </div>
           </div>

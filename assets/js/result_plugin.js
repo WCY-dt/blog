@@ -3,49 +3,80 @@
  * Handles fullscreen, refresh, and tab switching
  */
 
-// Tab switching
+// Each source block is a keyboard-operable tab set; controls describe their action.
 document.addEventListener('DOMContentLoaded', () => {
-  // Handle tab clicks
-  document.querySelectorAll('.result-tab').forEach(button => {
-    button.addEventListener('click', function() {
-      const tabName = this.getAttribute('data-tab');
-      const tabsContainer = this.closest('.result-tabs');
-
-      // Remove active class from all tabs and contents
-      tabsContainer.querySelectorAll('.result-tab').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      tabsContainer.querySelectorAll('.result-tab-content').forEach(content => {
-        content.classList.remove('active');
-      });
-
-      // Add active class to clicked tab and corresponding content
-      this.classList.add('active');
-      tabsContainer.querySelector(`.result-tab-content[data-tab-content="${tabName}"]`).classList.add('active');
-    });
-  });
-
-  // Handle initial hidden state - hide toggle buttons for the opposite panel
   document.querySelectorAll('.result').forEach(preview => {
-    const sourcePanel = preview.querySelector('.result__source');
-    const previewPanel = preview.querySelector('.result__preview');
-    const sourceToggleBtns = sourcePanel.querySelectorAll('.result-toggle-btn');
-    const previewToggleBtns = previewPanel.querySelectorAll('.result-toggle-btn');
-
-    if (sourcePanel.classList.contains('hidden')) {
-      // If source is hidden initially, hide preview's toggle buttons
-      previewToggleBtns.forEach(btn => btn.style.display = 'none');
+    const tabs = [...preview.querySelectorAll('.result-tab')];
+    const tablist = preview.querySelector('.result-tab-buttons__tabs');
+    tablist?.setAttribute('role', 'tablist');
+    tablist?.setAttribute('aria-label', '示例源码');
+    function select(button) {
+      tabs.forEach(tab => {
+        const active = tab === button;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+        const panel = preview.querySelector(`[data-tab-content="${tab.dataset.tab}"]`);
+        panel.classList.toggle('active', active);
+        panel.hidden = !active;
+      });
     }
-
-    if (previewPanel.classList.contains('hidden')) {
-      // If preview is hidden initially, hide source's toggle buttons
-      sourceToggleBtns.forEach(btn => btn.style.display = 'none');
-    }
+    tabs.forEach((tab, index) => {
+      const panel = preview.querySelector(`[data-tab-content="${tab.dataset.tab}"]`);
+      tab.id = `${preview.id}-tab-${index}`;
+      panel.id = `${preview.id}-panel-${index}`;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', panel.id);
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', tab.id);
+      panel.tabIndex = 0;
+      tab.addEventListener('click', () => select(tab));
+      tab.addEventListener('keydown', event => {
+        let next;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = tabs.length - 1;
+        if (next === undefined) return;
+        event.preventDefault();
+        select(tabs[next]);
+        tabs[next].focus();
+      });
+    });
+    if (tabs.length) select(tabs.find(tab => tab.classList.contains('active')) || tabs[0]);
+    preview.querySelectorAll('button[title]').forEach(button => window.articleTools.label(button, button.title));
+    preview.querySelectorAll('.result-restore-btn').forEach(button => {
+      const caption = document.createElement('span');
+      caption.className = 'tool-label';
+      caption.textContent = button.getAttribute('aria-label');
+      button.append(caption);
+      // Its action is already written out; repeating it in a tooltip adds noise.
+      button.removeAttribute('data-tooltip');
+    });
+    syncResultPanels(preview);
   });
-
-  // Handle responsive icon changes
   updateRestoreButtonIcons();
 });
+
+function syncResultPanels(preview) {
+  const source = preview.querySelector('.result__source');
+  const output = preview.querySelector('.result__preview');
+  for (const [type, panel, other] of [['source', source, output], ['preview', output, source]]) {
+    const hidden = panel.classList.contains('hidden');
+    panel.id = `${preview.id}-${type}`;
+    panel.setAttribute('aria-hidden', String(hidden));
+    panel.inert = hidden;
+    const restore = preview.querySelector(`.result-restore-btn--${type}`);
+    restore.style.display = hidden ? 'flex' : 'none';
+    restore.setAttribute('aria-controls', panel.id);
+    restore.setAttribute('aria-expanded', String(!hidden));
+    panel.querySelectorAll('.result-toggle-btn').forEach(button => {
+      button.style.display = other.classList.contains('hidden') ? 'none' : '';
+      button.setAttribute('aria-controls', panel.id);
+      button.setAttribute('aria-expanded', String(!hidden));
+    });
+  }
+}
 
 // Update restore button icons based on screen size
 function updateRestoreButtonIcons() {
@@ -63,12 +94,12 @@ function updateRestoreButtonIcons() {
       // On large screens, use the layout-specific icons
       if (isSmallScreen) {
         const verticalIcon = btn.getAttribute('data-icon-vertical');
-        if (verticalIcon) icon.textContent = verticalIcon;
+        if (verticalIcon) icon.innerHTML = window.articleTools.arrow(verticalIcon.replace('keyboard_arrow_', ''));
       } else {
         const layoutIcon = layout === 'vertical'
           ? btn.getAttribute('data-icon-vertical')
           : btn.getAttribute('data-icon-horizontal');
-        if (layoutIcon) icon.textContent = layoutIcon;
+        if (layoutIcon) icon.innerHTML = window.articleTools.arrow(layoutIcon.replace('keyboard_arrow_', ''));
       }
     });
   });
@@ -85,10 +116,8 @@ function refreshResult(previewId) {
   const iframe = preview.querySelector('.result__iframe');
   if (iframe) {
     const src = iframe.getAttribute('srcdoc');
-    iframe.setAttribute('srcdoc', '');
-    setTimeout(() => {
-      iframe.setAttribute('srcdoc', src);
-    }, 10);
+    const button = preview.querySelector('.result-refresh-btn');
+    window.articleTools.reloadFrame(iframe, button, '重新加载预览', () => iframe.setAttribute('srcdoc', src));
   }
 }
 
@@ -105,10 +134,17 @@ function toggleResultFullscreen(previewId) {
   if (wrapper.classList.contains('fullscreen')) {
     wrapper.classList.remove('fullscreen');
     if (btn) btn.textContent = 'open_in_full';
+    document.body.style.overflow = wrapper.dataset.previousOverflow || '';
   } else {
+    wrapper.dataset.previousOverflow = document.body.style.overflow;
     wrapper.classList.add('fullscreen');
+    document.body.style.overflow = 'hidden';
     if (btn) btn.textContent = 'close_fullscreen';
   }
+  const button = wrapper.querySelector('.result-fullscreen-btn');
+  window.articleTools.label(button, wrapper.classList.contains('fullscreen') ? '退出全屏 · Esc' : '全屏显示预览');
+  button?.setAttribute('aria-pressed', String(wrapper.classList.contains('fullscreen')));
+  button?.focus({ preventScroll: true });
 }
 
 // Toggle code or preview panel visibility
@@ -181,11 +217,15 @@ function toggleResultPanel(previewId, panelType) {
       sourceToggleBtns.forEach(btn => btn.style.display = 'none');
     }
   }
+  syncResultPanels(preview);
+  const panel = panelType === 'source' ? sourcePanel : previewPanel;
+  const focus = panel.classList.contains('hidden') ? (panelType === 'source' ? restoreBtnSource : restoreBtnPreview) : panel.querySelector('[role="tab"][aria-selected="true"]') || panel.querySelector('button');
+  focus?.focus({ preventScroll: true });
 }
 
 // Handle ESC key to exit fullscreen
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
+  if (e.key === 'Escape' && !document.querySelector('dialog[open]')) {
     const fullscreenPreview = document.querySelector('.result-wrapper.fullscreen');
     if (fullscreenPreview) {
       const previewId = fullscreenPreview.querySelector('.result').id;

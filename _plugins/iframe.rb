@@ -81,10 +81,10 @@ module Jekyll
           <div class="iframe-header no-select">
             <span class="iframe-title">#{title}</span>
             <div class="iframe-controls">
-              <button class="iframe-refresh-btn" onclick="refreshIframe('#{iframe_id}')" title="Refresh">
+              <button class="iframe-refresh-btn" onclick="refreshIframe('#{iframe_id}')" title="重新加载演示">
                 <span class="material-symbols-outlined">refresh</span>
               </button>
-              <button class="iframe-fullscreen-btn" onclick="toggleIframeFullscreen('#{iframe_id}')" title="Fullscreen">
+              <button class="iframe-fullscreen-btn" onclick="toggleIframeFullscreen('#{iframe_id}')" title="全屏显示演示">
                 <span class="material-symbols-outlined">open_in_full</span>
               </button>
             </div>

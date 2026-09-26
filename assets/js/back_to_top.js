@@ -1,9 +1,11 @@
-const backToTopButton = document.querySelector("#sidebar__top-btn")
-
-backToTopButton.addEventListener("click", () => {
-  // Smoothly scroll the window to the top of the page
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  })
+const backToTopButton = document.querySelector('#back-to-top')
+function updateBackToTop() {
+  backToTopButton.hidden = window.scrollY < 500
+}
+window.addEventListener('scroll', updateBackToTop, { passive: true })
+updateBackToTop()
+backToTopButton.addEventListener('click', () => {
+  // A control that disappears after scrolling must not strand keyboard focus.
+  document.querySelector('.header__title-wrapper')?.focus({ preventScroll: true })
+  window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
 })

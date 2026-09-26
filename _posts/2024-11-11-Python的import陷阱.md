@@ -4,7 +4,7 @@ title:      "Python 的 import 陷阱"
 date:       2024-11-11 17:00:00 +0800
 categories: 编程
 tags:       python
-summary:    "本文介绍了 Python 中 import 语句的工作原理，包括绝对路径和相对路径导入、包范围陷阱和 __init__.py 陷阱。通过理解这些概念，可以避免在导入模块时遇到的问题。"
+summary:    "《Python 指北》第 2 篇：同一份 Python 代码，换个启动方式就导入失败了？用具体例子说明模块所在目录与包身份为什么不是一回事。"
 series:     Python 指北
 series_index: 2
 ---

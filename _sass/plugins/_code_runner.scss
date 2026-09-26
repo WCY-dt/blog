@@ -69,7 +69,7 @@
   padding: .5rem;
   border-radius: 0 .5rem 0 0;
   background-color: var(--primary-color);
-  color: var(--white-color);
+  color: var(--on-primary-color);
 
   @media (hover: hover) {
     &:hover {
@@ -150,7 +150,7 @@
   }
 
   &:has(.code-runner__status-text--error) {
-    color: var(--white-color);
+    color: var(--on-primary-color);
     background-color: var(--primary-color);
   }
 }

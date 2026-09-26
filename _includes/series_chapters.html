@@ -1,0 +1,4 @@
+{% assign catalogue_posts = include.posts | sort: 'series_index' %}
+<ol class='series-chapters' {% if include.label %}aria-label='{{ include.label }}篇章目录'{% endif %}>
+ {% for chapter in catalogue_posts %}<li><a href='{{ chapter.url | relative_url }}'><span class='chapter-number'>{{ chapter.series_index }}</span><span class='chapter-title'>{{ chapter.title }}</span><span class='chapter-arrow' aria-hidden='true'>{% include arrow.html direction='right' %}</span></a></li>{% endfor %}
+</ol>

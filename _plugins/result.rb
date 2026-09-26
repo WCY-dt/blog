@@ -8,7 +8,7 @@ module Jekyll
       # Parse parameters: [height=400px] [split=50] [title="My Demo"] [layout=horizontal|vertical] [hide=code|preview]
       @height = '400px'
       @split_ratio = '50' # percentage for left/top panel
-      @title = 'Result'
+      @title = '运行结果'
       @layout = 'horizontal' # default to horizontal (left-right)
       @hide = nil # default: show both panels, can be 'code' or 'preview'
 
@@ -149,7 +149,7 @@ module Jekyll
       <<~HTML
         <div class="result-wrapper" data-height="#{@height}">
           <div class="result #{layout_class}" id="#{id}" data-layout="#{@layout}" style="height: #{@height}; flex-direction: #{flex_direction};">
-            <button class="result-restore-btn result-restore-btn--source no-select" onclick="toggleResultPanel('#{id}', 'source')" title="Show Code Panel" style="#{restore_source_display}" data-icon-horizontal="keyboard_arrow_right" data-icon-vertical="keyboard_arrow_down">
+            <button class="result-restore-btn result-restore-btn--source no-select" onclick="toggleResultPanel('#{id}', 'source')" title="显示源码" style="#{restore_source_display}" data-icon-horizontal="keyboard_arrow_right" data-icon-vertical="keyboard_arrow_down">
               <span class="material-symbols-outlined">#{@layout == 'vertical' ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</span>
             </button>
             <div class="result__source#{source_hidden}" style="flex: #{left_flex};">
@@ -160,13 +160,13 @@ module Jekyll
               <div class="result__preview-header no-select">
                 <span class="result__preview-title">#{@title}</span>
                 <div class="result-controls">
-                  <button class="result-toggle-btn" onclick="toggleResultPanel('#{id}', 'preview')" title="Toggle Preview Panel">
+                  <button class="result-toggle-btn" onclick="toggleResultPanel('#{id}', 'preview')" title="收起预览">
                     <span class="material-symbols-outlined">visibility_off</span>
                   </button>
-                  <button class="result-refresh-btn" onclick="refreshResult('#{id}')" title="Refresh">
+                  <button class="result-refresh-btn" onclick="refreshResult('#{id}')" title="重新加载预览">
                     <span class="material-symbols-outlined">refresh</span>
                   </button>
-                  <button class="result-fullscreen-btn" onclick="toggleResultFullscreen('#{id}')" title="Fullscreen">
+                  <button class="result-fullscreen-btn" onclick="toggleResultFullscreen('#{id}')" title="全屏显示预览">
                     <span class="material-symbols-outlined">open_in_full</span>
                   </button>
                 </div>
@@ -180,7 +180,7 @@ module Jekyll
                 loading="lazy">
               </iframe>
             </div>
-            <button class="result-restore-btn result-restore-btn--preview no-select" onclick="toggleResultPanel('#{id}', 'preview')" title="Show Preview Panel" style="#{restore_preview_display}" data-icon-horizontal="keyboard_arrow_left" data-icon-vertical="keyboard_arrow_up">
+            <button class="result-restore-btn result-restore-btn--preview no-select" onclick="toggleResultPanel('#{id}', 'preview')" title="显示预览" style="#{restore_preview_display}" data-icon-horizontal="keyboard_arrow_left" data-icon-vertical="keyboard_arrow_up">
               <span class="material-symbols-outlined">#{@layout == 'vertical' ? 'keyboard_arrow_up' : 'keyboard_arrow_left'}</span>
             </button>
           </div>
@@ -223,7 +223,7 @@ module Jekyll
               #{tab_buttons}
             </div>
             <div class="result-controls">
-              <button class="result-toggle-btn" onclick="toggleResultPanel('#{preview_id}', 'source')" title="Toggle Code Panel">
+              <button class="result-toggle-btn" onclick="toggleResultPanel('#{preview_id}', 'source')" title="收起源码">
                 <span class="material-symbols-outlined">visibility_off</span>
               </button>
             </div>
@@ -275,13 +275,13 @@ module Jekyll
       restore_preview_display = @hide == 'preview' ? 'display: flex;' : 'display: none;'
 
       # Determine output panel title based on type
-      output_panel_title = output_type == 'image' ? 'Toggle Image Panel' : 'Toggle Output Panel'
-      restore_panel_title = output_type == 'image' ? 'Show Image Panel' : 'Show Output Panel'
+      output_panel_title = output_type == 'image' ? '收起图片' : '收起输出'
+      restore_panel_title = output_type == 'image' ? '显示图片' : '显示输出'
 
       <<~HTML
         <div class="result-wrapper" data-height="#{@height}">
           <div class="result #{layout_class}" id="#{id}" data-layout="#{@layout}" style="height: #{@height}; flex-direction: #{flex_direction};">
-            <button class="result-restore-btn result-restore-btn--source no-select" onclick="toggleResultPanel('#{id}', 'source')" title="Show Code Panel" style="#{restore_source_display}" data-icon-horizontal="keyboard_arrow_right" data-icon-vertical="keyboard_arrow_down">
+            <button class="result-restore-btn result-restore-btn--source no-select" onclick="toggleResultPanel('#{id}', 'source')" title="显示源码" style="#{restore_source_display}" data-icon-horizontal="keyboard_arrow_right" data-icon-vertical="keyboard_arrow_down">
               <span class="material-symbols-outlined">#{@layout == 'vertical' ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</span>
             </button>
             <div class="result__source#{source_hidden}" style="flex: #{left_flex};">
@@ -295,7 +295,7 @@ module Jekyll
                   <button class="result-toggle-btn" onclick="toggleResultPanel('#{id}', 'preview')" title="#{output_panel_title}">
                     <span class="material-symbols-outlined">visibility_off</span>
                   </button>
-                  <button class="result-fullscreen-btn" onclick="toggleResultFullscreen('#{id}')" title="Fullscreen">
+                  <button class="result-fullscreen-btn" onclick="toggleResultFullscreen('#{id}')" title="全屏显示预览">
                     <span class="material-symbols-outlined">open_in_full</span>
                   </button>
                 </div>
@@ -404,7 +404,7 @@ module Jekyll
               #{tab_buttons}
             </div>
             <div class="result-controls">
-              <button class="result-toggle-btn" onclick="toggleResultPanel('#{preview_id}', 'source')" title="Toggle Code Panel">
+              <button class="result-toggle-btn" onclick="toggleResultPanel('#{preview_id}', 'source')" title="收起源码">
                 <span class="material-symbols-outlined">visibility_off</span>
               </button>
             </div>

@@ -1,146 +1,55 @@
-(function () {
+(() => {
   'use strict';
-
-  // Function to toggle fullscreen mode for a code block
+  const { label, feedback, copy } = window.articleTools;
+  const previousOverflow = new WeakMap();
   window.toggleCodeFullscreen = function (codeId) {
     const wrapper = document.getElementById('wrapper-' + codeId);
-    const fullscreenBtn = document.getElementById('fullscreen-btn-' + codeId);
-
-    if (!wrapper || !fullscreenBtn) {
-      return;
-    }
-
-    const icon = fullscreenBtn.querySelector('.material-symbols-outlined');
-
-    if (wrapper.classList.contains('fullscreen')) {
-      // Exit fullscreen mode
-      wrapper.classList.remove('fullscreen');
-      icon.textContent = 'open_in_full';
-      fullscreenBtn.title = 'Toggle Fullscreen';
-      document.body.style.overflow = '';
-    } else {
-      // Enter fullscreen mode
-      wrapper.classList.add('fullscreen');
-      icon.textContent = 'close_fullscreen';
-      fullscreenBtn.title = 'Exit Fullscreen';
-      document.body.style.overflow = 'hidden';
-    }
+    const button = document.getElementById('fullscreen-btn-' + codeId);
+    if (!wrapper || !button) return;
+    const active = !wrapper.classList.contains('fullscreen');
+    if (active) previousOverflow.set(wrapper, document.body.style.overflow);
+    wrapper.classList.toggle('fullscreen', active);
+    document.body.style.overflow = active ? 'hidden' : previousOverflow.get(wrapper) || '';
+    button.querySelector('.material-symbols-outlined').textContent = active ? 'close_fullscreen' : 'open_in_full';
+    label(button, active ? '退出全屏 · Esc' : '全屏显示代码');
+    button.setAttribute('aria-pressed', String(active));
+    button.focus({ preventScroll: true });
   };
-
-  // Add event listener for the ESC key to exit fullscreen mode
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      const fullscreenWrapper = document.querySelector('.code-block-wrapper.fullscreen');
-      if (fullscreenWrapper) {
-        const codeId = fullscreenWrapper.id.replace('wrapper-', '');
-        toggleCodeFullscreen(codeId);
-      }
-    }
-  });
-
-  // Function to copy code content to the clipboard
-  window.copyCode = function (codeId) {
-    const codeElement = document.getElementById(codeId);
+  window.copyCode = async function (codeId) {
+    const code = document.getElementById(codeId);
     const button = document.getElementById('copy-btn-' + codeId);
-
-    if (!codeElement || !button) {
-      return;
-    }
-
-    const copyIcon = button.querySelector('.copy-icon');
-    const checkIcon = button.querySelector('.check-icon');
-
+    if (!code || !button) return;
     try {
-      const codeText = codeElement.textContent || codeElement.innerText;
-
-      if (navigator.clipboard && window.isSecureContext) {
-        // Use the Clipboard API to copy text
-        navigator.clipboard.writeText(codeText).then(function () {
-          showSuccessState(copyIcon, checkIcon);
-        }).catch(function (err) {
-          console.error('Failed to copy text:', err);
-          fallbackCopyTextToClipboard(codeText, copyIcon, checkIcon);
-        });
-      } else {
-        // Fallback method for copying text
-        fallbackCopyTextToClipboard(codeText, copyIcon, checkIcon);
-      }
-    } catch (err) {
-      console.error('Error copying code:', err);
+      await copy(code.textContent);
+      feedback(button, '已复制', 'success', '复制代码');
+    } catch (_) {
+      feedback(button, '复制失败', 'error', '复制代码');
     }
   };
-
-  // Function to show success state after copying
-  function showSuccessState(copyIcon, checkIcon) {
-    copyIcon.style.display = 'none';
-    checkIcon.style.display = 'inline-block';
-
-    setTimeout(function () {
-      checkIcon.style.display = 'none';
-      copyIcon.style.display = 'inline-block';
-    }, 2000);
-  }
-
-  // Fallback method to copy text using a temporary textarea
-  function fallbackCopyTextToClipboard(text, copyIcon, checkIcon) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-
-    textArea.style.top = '0';
-    textArea.style.left = '0';
-    textArea.style.position = 'fixed';
-    textArea.style.opacity = '0';
-
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-
-    try {
-      navigator.clipboard.writeText(text).then(function () {
-        showSuccessState(copyIcon, checkIcon);
-      }).catch(function (err) {
-        console.error('Failed to copy text:', err);
-      });
-    } catch (err) {
-      console.error('Failed to copy text using fallback method:', err);
-    }
-
-    document.body.removeChild(textArea);
-  }
-
-  // Add event listeners after the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', function () {
-    // Add event listeners to all copy buttons
-    document.querySelectorAll('.code-copy-button').forEach(function (button) {
-      const codeId = button.id.replace('copy-btn-', '');
-      button.addEventListener('click', function () {
-        copyCode(codeId);
-      });
+  document.addEventListener('keydown', event => {
+    const wrapper = document.querySelector('.code-block-wrapper.fullscreen');
+    if (event.key === 'Escape' && wrapper && !document.querySelector('dialog[open]')) window.toggleCodeFullscreen(wrapper.id.replace('wrapper-', ''));
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.code-copy-button').forEach(button => {
+      label(button, '复制代码');
+      button.addEventListener('click', () => window.copyCode(button.id.replace('copy-btn-', '')));
     });
-
-    // Add event listeners to all toggle white space buttons
-    document.querySelectorAll('.code-white-space-button').forEach(function (button) {
-      const codeId = button.id.replace('whitespace-btn-', '');
-      button.addEventListener('click', function () {
-        const codeElement = document.getElementById(codeId);
-        if (codeElement) {
-          if (codeElement.classList.contains('word-wrap-enabled')) {
-            button.title = 'Enable Word Wrap';
-          } else {
-            button.title = 'Disable Word Wrap';
-          }
-          button.classList.toggle('active');
-          codeElement.classList.toggle('word-wrap-enabled');
-        }
-      });
+    document.querySelectorAll('.code-white-space-button').forEach(button => {
+      const code = document.getElementById(button.id.replace('whitespace-btn-', ''));
+      const sync = () => {
+        const active = code.classList.contains('word-wrap-enabled');
+        label(button, active ? '关闭自动换行' : '自动换行');
+        button.setAttribute('aria-pressed', String(active));
+        button.classList.toggle('active', active);
+      };
+      sync();
+      button.addEventListener('click', () => { code.classList.toggle('word-wrap-enabled'); sync(); });
     });
-
-    // Add event listeners to all fullscreen buttons
-    document.querySelectorAll('.code-fullscreen-button').forEach(function (button) {
-      const codeId = button.id.replace('fullscreen-btn-', '');
-      button.addEventListener('click', function () {
-        toggleCodeFullscreen(codeId);
-      });
+    document.querySelectorAll('.code-fullscreen-button').forEach(button => {
+      label(button, '全屏显示代码');
+      button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('click', () => window.toggleCodeFullscreen(button.id.replace('fullscreen-btn-', '')));
     });
   });
 })();

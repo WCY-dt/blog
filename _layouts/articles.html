@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<header class='archive__title'>
+ <p class='archive__title-type'>文章索引</p>
+ <h1 class='archive__title-text'>全部文章</h1>
+ {% include archive_back.html %}
+</header>
+<div class='complete-archive'>
+ <nav class='archive-year-index' aria-label='按年份浏览文章'>
+  <h2>按年份</h2>
+  {% assign years = site.posts | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+  {% for year in years %}
+   {% assign year_count = 0 %}{% for post in year.items %}{% unless post.archived %}{% unless post.draft and jekyll.environment == 'production' %}{% assign year_count = year_count | plus: 1 %}{% endunless %}{% endunless %}{% endfor %}
+   {% if year_count > 0 %}<a href='#articles-{{ year.name }}'><span>{{ year.name }}</span><span>{{ year_count }} 篇</span></a>{% endif %}
+  {% endfor %}
+  {% assign past_count = 0 %}{% for post in site.posts %}{% if post.archived %}{% unless post.draft and jekyll.environment == 'production' %}{% assign past_count = past_count | plus: 1 %}{% endunless %}{% endif %}{% endfor %}
+  {% if past_count > 0 %}<a class='archive-past-entry' href='#archived-articles'><span>过往归档</span><span>{{ past_count }} 篇</span></a>{% endif %}
+ </nav>
+ <div class='complete-archive-list'>
+ {% assign posts = site.posts %}
+ {% include pagination.html layout='archive' year_anchors=true %}
+ </div>
+</div>

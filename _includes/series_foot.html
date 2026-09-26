@@ -1,7 +1,7 @@
 {% if jekyll.environment == 'production' %}
   {% assign sorted_posts = site.posts
     | where: 'series', page.series
-    | where: 'draft', false
+    | where_exp: 'post', 'post.draft != true'
     | sort: 'series_index'
   %}
 {% else %}
@@ -19,7 +19,7 @@
 {% assign total_posts = sorted_posts.size | minus: 1 %}
 {% if total_posts > 0 %}
   <div class='no-select no-print sector-wrapper series-footer-wrapper'>
-    <h1 class='sector__title series-footer__title'>Series {{ page.series }}</h1>
+    <h2 class='sector__title series-footer__title'>{{ page.series }} · 系列文章</h2>
     <div class='series-footer__switcher'>
       {% if current_index > 0 %}
         {% assign previous_index = current_index | minus: 1 %}
@@ -27,8 +27,8 @@
           href='{{ sorted_posts[previous_index].url | relative_url }}'
           class='series-footer__switcher-button series-footer__switcher-button--previous'
         >
-          <span class='series-footer__switcher-button-icon material-symbols-outlined'> arrow_back </span>
-          {{ sorted_posts[previous_index].title }}
+          <span class='series-footer__direction'>{% include arrow.html direction='left' %} 上一篇 <span>第 {{ sorted_posts[previous_index].series_index }} 篇</span></span>
+          <span>{{ sorted_posts[previous_index].title }}</span>
         </a>
       {% endif %}
       {% assign next_index = current_index | plus: 1 %}
@@ -37,8 +37,8 @@
           href='{{ sorted_posts[next_index].url | relative_url }}'
           class='series-footer__switcher-button series-footer__switcher-button--next'
         >
-          {{ sorted_posts[next_index].title }}
-          <span class='series-footer__switcher-button-icon material-symbols-outlined'> arrow_forward </span>
+          <span class='series-footer__direction'><span>第 {{ sorted_posts[next_index].series_index }} 篇</span> 下一篇 {% include arrow.html direction='right' %}</span>
+          <span>{{ sorted_posts[next_index].title }}</span>
         </a>
       {% endif %}
     </div>

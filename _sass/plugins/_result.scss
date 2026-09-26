@@ -8,7 +8,7 @@
 
 .result {
   display: flex;
-  background-color: var(--primary-extra-light-color);
+  background-color: var(--on-primary-color);
   position: relative;
 }
 
@@ -27,6 +27,7 @@
   @media (hover: hover) {
     &:hover {
       background: var(--primary-color);
+      color: var(--on-primary-color);
     }
   }
 
@@ -135,7 +136,7 @@
   @media (hover: hover) {
     &:hover {
       background-color: var(--primary-color) !important;
-      color: var(--primary-extra-light-color) !important;
+      color: var(--on-primary-color) !important;
     }
   }
 
@@ -160,11 +161,11 @@
   @media (hover: hover) {
     &:hover {
       background-color: var(--primary-color) !important;
-      color: var(--primary-extra-light-color) !important;
+      color: var(--on-primary-color) !important;
     }
   }
 
-  .active {
+  &.active {
     color: var(--primary-color);
     background: var(--primary-semi-light-color);
   }
@@ -218,7 +219,7 @@
   }
 }
 
-.code-block-wrapper {
+.result .code-block-wrapper {
   height: 100%;
 }
 
@@ -280,7 +281,7 @@
 .result__preview-title {
   font-size: .875rem;
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--black-color);
   line-height: 1;
 }
 

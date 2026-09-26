@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     notes.setAttribute('aria-label', '脚注');
   });
   const references = article?.querySelectorAll('a.footnote[href^="#"]');
+  article?.querySelectorAll('a.reversefootnote').forEach(link => {
+    const repeat = link.querySelector('sup')?.textContent || '';
+    link.setAttribute('aria-label', `返回脚注引用${repeat}`);
+    link.innerHTML = window.articleTools.arrow('up') + (repeat ? `<sup>${repeat}</sup>` : '');
+  });
   if (!references?.length) return;
 
   const preview = document.createElement('aside');
@@ -17,9 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
   preview.innerHTML = `
     <div class="footnote-preview__header">
       <span id="footnote-preview-title"></span>
+      <button type="button" class="footnote-preview__close" aria-label="关闭脚注预览">×</button>
     </div>
     <div class="footnote-preview__content" tabindex="0"></div>
-    <a class="footnote-preview__source">查看文末脚注 ↗</a>
+    <a class="footnote-preview__source">查看文末脚注 ${window.articleTools.arrow()}</a>
   `;
   // Mount outside the article wrapper, whose overflow would clip the preview.
   document.body.appendChild(preview);
@@ -133,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   preview.addEventListener('pointerenter', () => clearTimeout(closeTimer));
+  preview.querySelector('.footnote-preview__close').addEventListener('click', () => hide(true));
   preview.addEventListener('pointerleave', scheduleHide);
   preview.addEventListener('focusin', () => clearTimeout(closeTimer));
   preview.addEventListener('focusout', scheduleHide);

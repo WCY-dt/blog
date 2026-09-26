@@ -4,7 +4,7 @@ title:      "Crypton"
 date:       2019-10-02 00:00:00 +0800
 categories: 安全
 tags:       game
-summary:    "本文为 Crypton 题解。"
+summary:    "《OverTheWire》第 2 篇：不知道密钥，还能读出密文吗？跟着 Krypton 关卡，利用字符频率与重复模式寻找古典密码留下的线索。"
 series:     OverTheWire
 series_index: 2
 archived:   true

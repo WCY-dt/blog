@@ -55,7 +55,7 @@ layout:     post
 title:      "原神游玩指南"
 date:       2000-01-01 00:00:00 +0800
 categories: 游戏 // 只能有一个分类
-tags:       开放世界 RPG 原神 // 可以有多个标签，用空格分隔
+tags:       open-world RPG genshin-impact // 可以有多个标签，用空格分隔
 summary:    "本文为原神游玩指南，介绍了游戏的基本玩法、角色培养、资源获取等内容，帮助新手玩家快速上手原神。" // 文章摘要，显示在主页
 comments:   false // 可省略，默认为 true。如果设置为 true，文章会显示评论区；否则不显示
 copyrights: original // 可省略，默认为 original。如果设置为 original，文末会显示版权声明；否则不显示

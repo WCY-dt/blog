@@ -1,0 +1,15 @@
+{% assign feature_title = include.post.title | split: '——' %}
+{% assign feature_main = include.post.title %}{% if feature_title.size == 2 %}{% assign feature_main = feature_title[0] %}{% endif %}
+{% assign feature_length = feature_main | size %}
+<a class='home-feature{% if include.post.cover_image %} home-feature--illustrated{% endif %}{% if feature_length <= 4 %} home-feature--compact{% endif %}{% if feature_length == 1 %} home-feature--single{% endif %} pagination__item-wrapper pagination__item-wrapper--first' href='{{ include.post.url | relative_url }}' aria-label='阅读：{{ include.post.title | escape }}'>
+  <div class='feature-meta'><span class='feature-label'>最新文章</span><span>{{ include.post.categories | join: ' · ' }}</span>{% if include.post.draft %}<span>草稿</span>{% endif %}</div>
+  <div class='feature-copy'>
+    {% if include.post.series %}<p class='feature-series'>{{ include.post.series }} · {{ include.post.series_index }}</p>{% endif %}
+    <h2>{% if feature_title.size == 2 %}{{ feature_title[0] }}{% else %}{{ include.post.title }}{% endif %}</h2>
+    {% if feature_title.size == 2 %}<span class='feature-subtitle'>{{ feature_title[1] }}</span>{% endif %}
+  </div>
+  {% if include.post.summary %}<p class='feature-summary'>{{ include.post.summary | strip_html | escape }}</p>{% endif %}
+  <div class='feature-foot'><time datetime='{{ include.post.date | date: "%Y-%m" }}'>{{ include.post.date | date: '%Y-%m' }}</time></div>
+  {% include cover_art.html post=include.post class='feature-art' loading='eager' priority=true %}
+  <div class='feature-reading-band'><span class='feature-read-label'>阅读全文</span><span class='feature-action' aria-hidden='true'>{% include arrow.html %}</span></div>
+</a>

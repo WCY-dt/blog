@@ -1,0 +1,24 @@
+{% assign catalogue_posts = site.posts %}
+{% if jekyll.environment == 'production' %}{% assign catalogue_posts = catalogue_posts | where_exp: 'post', 'post.draft != true' %}{% endif %}
+{% assign active_series_names = catalogue_posts | where_exp: 'post', 'post.archived != true' | map: 'series' | uniq %}
+{% assign series_groups = catalogue_posts | where_exp: 'post', 'post.series' | group_by: 'series' | where_exp: 'group', 'active_series_names contains group.name' | sort: 'name' %}
+{% assign primary_series_name = site.featured_series | default: '深入 Redis 源码' %}
+{% assign primary_series = series_groups | where: 'name', primary_series_name | first %}
+{% unless primary_series %}{% assign primary_series = series_groups.first %}{% endunless %}
+{% if primary_series %}
+<section class='home-series' aria-labelledby='series-title'>
+ <header class='home-series-heading'><h2 id='series-title'>系列<br>阅读</h2><a href='{{ "/series/" | relative_url }}'>全部 {{ series_groups.size }} 个系列 <span aria-hidden='true'>{% include arrow.html %}</span></a></header>
+ <div class='home-series-content'>
+  <section class='series-feature' aria-labelledby='featured-series-title'>
+   <div class='series-feature-heading{% if primary_series.items.first.cover_image %} series-feature-heading--illustrated{% endif %}'><h3 id='featured-series-title'>{{ primary_series.name }}</h3><span>{{ primary_series.items.size }} 篇</span>{% include cover_art.html post=primary_series.items.first class='series-feature-art' %}</div>
+   {% include series_chapters.html posts=primary_series.items label=primary_series.name %}
+  </section>
+  {% if series_groups.size > 1 %}<section class='series-related' aria-labelledby='other-series-title'>
+   <h3 id='other-series-title'>其他系列</h3>
+   <div class='series-other'>
+    {% for group in series_groups %}{% unless group.name == primary_series.name %}<a href='{{ "/series/" | relative_url }}#{{ group.name | slugify }}' aria-label='查看{{ group.name }}目录，共{{ group.items.size }}篇'><span class='series-other-name'>{{ group.name }}</span><span class='series-other-detail'><span>{{ group.items.size }} 篇</span><span class='series-other-action'>查看目录 <span aria-hidden='true'>{% include arrow.html direction='right' %}</span></span></span></a>{% endunless %}{% endfor %}
+   </div>
+  </section>{% endif %}
+ </div>
+</section>
+{% endif %}

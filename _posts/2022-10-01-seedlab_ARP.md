@@ -4,7 +4,7 @@ title:      "ARP Cache Poisoning"
 date:       2022-10-01 00:00:00 +0800
 categories: 实验
 tags:       seedlab arp
-summary:    "本文为 SEED Labs 2.0 - ARP Cache Poisoning Attack Lab 的实验记录，介绍了如何利用 ARP 缓存中毒实现中间人攻击 (MITM)。"
+summary:    "《SEEDLabs》第 7 篇：通过伪造 ARP 报文污染缓存，在实验网络中截获并修改 Telnet 与 Netcat 的通信。"
 series:     SEEDLabs
 series_index: 7
 ---

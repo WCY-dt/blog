@@ -1,8 +1,9 @@
 <div class='no-select no-print sector-wrapper share-wrapper'>
   {%- if page.layout == 'post' and site.share -%}
-    <h1 class='sector__title share__title'>Share This Post</h1>
+    <h2 class='sector__title share__title'>分享文章</h2>
+    <ul class='sector__content share__content'>
+      <li class='share__item'><button type='button' class='share__item-link share-copy-link' data-copy-link='{{ page.url | absolute_url }}' aria-label='复制文章链接' data-tooltip='复制文章链接'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' aria-hidden='true'><path d='m9 15 6-6M8 16l-1 1a4.2 4.2 0 0 1-6-6l4-4a4.2 4.2 0 0 1 6 0m2 10a4.2 4.2 0 0 0 6 0l4-4a4.2 4.2 0 0 0-6-6l-1 1' transform='translate(1 0) scale(.9)'/></svg><span class='tool-label'>复制链接</span></button></li>
     {%- if jekyll.environment == 'production' or site.dev_mode -%}
-      <ul class='sector__content share__content'>
         {% if site.share contains 'hackernews' %}
           <li class='share__item'>
             <a
@@ -11,7 +12,7 @@
               target='_blank'
               rel='noopener'
             >
-              <i class='share__item-link-icon fa-brands fa-hacker-news'></i>
+              <i class='share__item-link-icon fa-brands fa-hacker-news' aria-hidden='true'></i><span>Hacker News</span>
             </a>
           </li>
         {% endif %}
@@ -23,7 +24,7 @@
               target='_blank'
               rel='noopener'
             >
-              <i class='share__item-link-icon fa-brands fa-x-twitter'></i>
+              <i class='share__item-link-icon fa-brands fa-x-twitter' aria-hidden='true'></i><span>X</span>
             </a>
           </li>
         {% endif %}
@@ -35,7 +36,7 @@
               target='_blank'
               rel='noopener'
             >
-              <i class='share__item-link-icon fa-brands fa-facebook'></i>
+              <i class='share__item-link-icon fa-brands fa-facebook' aria-hidden='true'></i><span>Facebook</span>
             </a>
           </li>
         {% endif %}
@@ -47,7 +48,7 @@
               target='_blank'
               rel='noopener'
             >
-              <i class='share__item-link-icon fa-brands fa-reddit'></i>
+              <i class='share__item-link-icon fa-brands fa-reddit' aria-hidden='true'></i><span>Reddit</span>
             </a>
           </li>
         {% endif %}
@@ -59,7 +60,7 @@
               target='_blank'
               rel='noopener'
             >
-              <i class='share__item-link-icon fa-brands fa-telegram'></i>
+              <i class='share__item-link-icon fa-brands fa-telegram' aria-hidden='true'></i><span>Telegram</span>
             </a>
           </li>
         {% endif %}
@@ -71,15 +72,13 @@
               target='_blank'
               rel='noopener'
             >
-              <i class='share__item-link-icon fa-brands fa-weibo'></i>
+              <i class='share__item-link-icon fa-brands fa-weibo' aria-hidden='true'></i><span>微博</span>
             </a>
           </li>
         {% endif %}
-      </ul>
     {%- else -%}
-      <div class='no-select sector__content--draft share__content--draft'>
-        Share buttons are unavailable on development
-      </div>
+      <li class='share-local-note'>平台分享在发布后启用。</li>
     {%- endif -%}
+    </ul>
   {%- endif -%}
 </div>

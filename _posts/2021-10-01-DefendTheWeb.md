@@ -4,7 +4,7 @@ title:      "DefendTheWeb"
 date:       2021-10-01 00:00:00 +0800
 categories: 安全
 tags:       game
-summary:    "本文介绍了 DefendTheWeb 的部分通关方法。"
+summary:    "页面上看不见的密码，可能正躺在源码里。记录 DefendTheWeb 的部分解题过程，练习检查浏览器实际收到了什么、又信任了什么。"
 archived:   true
 ---
 

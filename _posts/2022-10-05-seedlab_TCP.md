@@ -4,7 +4,7 @@ title:      "TCP Attacks"
 date:       2022-10-05 00:00:00 +0800
 categories: 实验
 tags:       seedlab tcp
-summary:    "本文为 SEED Labs 2.0 - TCP Attacks Lab 的实验记录，介绍了 TCP 协议中的多种攻击方式，包括 SYN 泛洪攻击、RST 攻击和会话劫持攻击，并结合 Python 和 C 语言实现了这些攻击。"
+summary:    "《SEEDLabs》第 11 篇：在实验网络中复现 SYN 泛洪、RST 注入与会话劫持，观察 TCP 状态和 SYN Cookie 的作用。"
 series:     SEEDLabs
 series_index: 11
 ---

@@ -1,6 +1,8 @@
 /* Code Block Styles */
 .code-block-wrapper {
   position: relative;
+  min-width: 0;
+  max-width: 100%;
   overflow: visible;
 
   .code-block-buttons {
@@ -18,17 +20,10 @@
     line-height: 1.2rem;
     font-size: .8rem;
     color: var(--primary-little-light-color);
-    background-color: var(--primary-extra-light-color);
+    background-color: var(--on-primary-color);
     border-radius: .25rem;
     margin: 0;
     padding: 0;
-    transition: color .25s ease-in-out;
-
-    @media (hover: hover) {
-      &:hover {
-        color: var(--primary-color);
-      }
-    }
   }
 
   .code-copy-button,
@@ -57,13 +52,12 @@
     @media (hover: hover) {
       &:hover {
         background: var(--primary-color);
-        color: var(--primary-extra-light-color);
+        color: var(--on-primary-color);
         box-shadow: var(--normal-shadow);
       }
     }
 
     .material-symbols-outlined {
-      font-size: 1rem !important;
       transition: all .25s ease;
     }
   }
@@ -78,7 +72,8 @@
     }
   }
 
-  &:hover .code-block-buttons {
+  &:hover .code-block-buttons,
+  &:focus-within .code-block-buttons {
     opacity: 1;
   }
 
@@ -88,25 +83,33 @@
     left: 0;
     width: 100vw !important;
     height: 100vh !important;
+    height: 100dvh !important;
     z-index: 9999;
     border-radius: 0;
     margin: 0;
     background: var(--primary-extra-light-color);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     pre {
       flex: 1;
+      min-height: 0;
       margin: 0 !important;
       border-radius: 0;
-      height: 100% !important;
+      height: auto !important;
       overflow: auto;
     }
 
     .code-block-buttons {
+      flex-shrink: 0;
       opacity: 1;
     }
   }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .code-block-wrapper .code-block-buttons { opacity: 1; }
 }
 
 main .code-block-wrapper .code-block-buttons {

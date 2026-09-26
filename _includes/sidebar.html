@@ -1,107 +1,14 @@
-<div class='no-select no-print sidebar-wrapper'>
-  <!-- toc (desktop only, fixed position) -->
-  {% if page.layout == 'post' %}
-    <div id='sidebar__toc-wrapper' class='sidebar__toc-wrapper sidebar__toc-wrapper--desktop sidebar__item-wrapper'>
-      <span id='sidebar__toc-btn' class='sidebar__toc-btn sidebar__item-btn material-symbols-outlined'>
-        toc
-      </span>
-      {% include toc.html html=content h_min=2 h_max=4 class='sidebar__toc-content' item_class='sidebar__toc-item' submenu_class='sidebar__toc-submenu' anchor_class='sidebar__toc-anchor' %}
-    </div>
-  {% endif %}
+<button type='button' id='back-to-top' class='back-to-top no-print' aria-label='返回顶部' title='返回顶部' hidden><span aria-hidden='true'>{% include arrow.html direction='up' %}</span></button>
+<dialog id='search-dialog' class='search-dialog no-print' aria-labelledby='search-title'>
+  <div class='search-dialog-heading'><h2 id='search-title'>搜索文章</h2><button type='button' class='search-close' aria-label='关闭搜索'><span aria-hidden='true'>×</span></button></div>
+  <div class='search-field'><svg class='search-field-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' aria-hidden='true'><circle cx='10.5' cy='10.5' r='6.5'/><path d='m15.5 15.5 5 5'/></svg><input type='search' id='search-input' placeholder='搜索文章、关键词…' aria-label='搜索文章、关键词' autocomplete='off' spellcheck='false'><kbd>ESC</kbd></div>
+  <p id='search-status' class='search-status' role='status'>输入关键词，搜索文章标题、标签与正文。</p>
+  <ul id='search-results' class='search-results'></ul>
+  <div class='search-hint'><span>{% include arrow.html direction='up' %} {% include arrow.html direction='down' %} 选择 · Enter 打开 · Esc 关闭</span></div>
+</dialog>
+<script src='{{ "/assets/js/theme.js" | relative_url }}'></script>
+<script src='{{ "/assets/js/search.js" | relative_url }}'></script>
+<script src='{{ "/assets/js/back_to_top.js" | relative_url }}'></script>
 
-  <!-- main sidebar buttons container -->
-  <div id='sidebar__main-container' class='sidebar__main-container'>
-    <!-- back to top -->
-    <div id='sidebar__top-wrapper' class='sidebar__top-wrapper sidebar__item-wrapper'>
-      <span id='sidebar__top-btn' class='sidebar__top-btn sidebar__item-btn material-symbols-outlined'>
-        vertical_align_top
-      </span>
-      <script src='{{ '/assets/js/back_to_top.js' | relative_url }}'></script>
-    </div>
 
-    <!-- collapsible items container -->
-    <div id='sidebar__collapsible-container' class='sidebar__collapsible-container'>
-      <!-- menu -->
-      <div id='sidebar__menu-wrapper' class='sidebar__menu-wrapper sidebar__item-wrapper'>
-        <span id='sidebar__menu-btn' class='sidebar__menu-btn sidebar__item-btn material-symbols-outlined'>featured_play_list</span>
-        <menu id='sidebar__menu-content' class='sidebar__menu-content'>
-          {% for item in site.navy %}
-            {% assign is_active = false %}
-            {% if page.layout == item.title or page.type == item.title %}
-              {% assign is_active = true %}
-            {% elsif page.layout == 'post' and item.title == 'post' %}
-              {% assign is_active = true %}
-            {% elsif page.layout == 'home' and item.title == 'post' %}
-              {% assign is_active = true %}
-            {% endif %}
-            <a
-              href='{{ item.url | relative_url }}'
-              class='sidebar__menu-item {% if is_active %}sidebar__menu-item--active{% endif %}'
-            >
-              <span class='sidebar__menu-item-icon material-symbols-outlined'>
-                {{ item.icon }}
-              </span>
-              <p class='sidebar__menu-item-title'>{{ item.title }}</p>
-            </a>
-          {% endfor %}
-        </menu>
-      </div>
-      <script src='{{ '/assets/js/menu.js' | relative_url }}'></script>
-
-      <!-- theme switcher -->
-      <div class='sidebar__theme-wrapper sidebar__item-wrapper'>
-        <span id='sidebar__theme-btn' class='sidebar__theme-btn sidebar__item-btn material-symbols-outlined'>dark_mode</span>
-        <script src='{{ '/assets/js/theme.js' | relative_url }}'></script>
-      </div>
-
-      <!-- toc (mobile only, duplicated for positioning) -->
-      {% if page.layout == 'post' %}
-        <div id='sidebar__toc-wrapper-mobile' class='sidebar__toc-wrapper sidebar__toc-wrapper--mobile sidebar__item-wrapper'>
-          <span id='sidebar__toc-btn-mobile' class='sidebar__toc-btn sidebar__item-btn material-symbols-outlined'>
-            toc
-          </span>
-          {% include toc.html html=content h_min=2 h_max=4 class='sidebar__toc-content' item_class='sidebar__toc-item' submenu_class='sidebar__toc-submenu' anchor_class='sidebar__toc-anchor' %}
-        </div>
-      {% endif %}
-
-      <!-- translation -->
-      {% if site.translation %}
-        <div id='sidebar__translate-wrapper' class='sidebar__translate-wrapper sidebar__item-wrapper'>
-          <a id='sidebar__translate-btn' class='sidebar__translate-btn sidebar__item-btn material-symbols-outlined'
-            href='{{ site.translation.link }}' alt='Translate to {{ site.translation.lang }}'>
-            translate
-          </a>
-        </div>
-      {% endif %}
-
-      <!-- search -->
-      <div id='sidebar__search-wrapper' class='sidebar__search-wrapper sidebar__item-wrapper'>
-        <input
-          name='search'
-          id='sidebar__search-input'
-          placeholder='Search something'
-          spellcheck='false'
-          class='sidebar__search-input'
-        >
-        <span id='sidebar__search-btn' class='sidebar__search-btn sidebar__item-btn material-symbols-outlined'>
-          manage_search
-        </span>
-        <div class='sidebar__search-result'>
-          <ul id='sidebar__search-list' class='sidebar__search-list'></ul>
-        </div>
-      </div>
-      <script src='{{ '/assets/js/search.js' | relative_url }}'></script>
-    </div>
-
-    <!-- main toggle button -->
-    <div id='sidebar__toggle-wrapper' class='sidebar__toggle-wrapper sidebar__item-wrapper'>
-      <span id='sidebar__toggle-btn' class='sidebar__toggle-btn sidebar__item-btn material-symbols-outlined'>
-        apps
-      </span>
-    </div>
-  </div>
-  <script src='{{ '/assets/js/sidebar.js' | relative_url }}'></script>
-  {% if page.layout == 'post' %}
-    <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
-  {% endif %}
-</div>
+{% if page.layout == 'post' %}<script src='{{ "/assets/js/toc.js" | relative_url }}'></script>{% endif %}

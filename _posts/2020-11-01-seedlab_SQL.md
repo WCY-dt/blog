@@ -4,7 +4,7 @@ title:      "SQL injection"
 date:       2020-11-01 00:00:00 +0800
 categories: 实验
 tags:       seedlab sql
-summary:    "本文为 SEED Labs 2.0 - SQL Injection Attack Lab 的实验记录，介绍了如何使用 Docker 和 MySQL 进行 SQL 注入攻击及其防御。"
+summary:    "《SEEDLabs》第 5 篇：在实验应用中复现登录绕过与数据篡改，再用预处理语句验证 SQL 注入的防御方式。"
 series:     SEEDLabs
 series_index: 5
 ---

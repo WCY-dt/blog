@@ -2,22 +2,9 @@
 function tocActiveFor(wrapper) {
   if (!wrapper) return;
 
-  // Hide TOC if the footer is visible
-  const footerWrapper = document.querySelector('#footer-wrapper');
-  if (footerWrapper) {
-    const footerWrapperTop = footerWrapper.getBoundingClientRect().top + window.scrollY;
-    const halfViewportHeight = window.innerHeight / 2;
-    if (footerWrapperTop <= window.scrollY + halfViewportHeight) {
-      wrapper.style.display = 'none';
-      return;
-    } else {
-      wrapper.style.display = '';
-    }
-  }
-
   // Get all TOC anchors and header links
   const tocAnchors = wrapper.querySelectorAll('.sidebar__toc-anchor');
-  const headerLinks = document.querySelectorAll('h2, h3, h4');
+  const headerLinks = document.querySelectorAll('#post__content h2, #post__content h3, #post__content h4');
   if (headerLinks.length === 0) {
     wrapper.style.display = 'none';
     return;
@@ -36,7 +23,8 @@ function tocActiveFor(wrapper) {
 
   // Update the active state of TOC anchors
   tocAnchors.forEach(item => item.classList.remove('sidebar__toc-anchor--active'));
-  const currentActiveAnchor = tocAnchors[currentActiveIdx];
+  const currentId = headerLinks[currentActiveIdx].id;
+  const currentActiveAnchor = Array.from(tocAnchors).find(anchor => decodeURIComponent(anchor.hash.slice(1)) === currentId);
   if (currentActiveAnchor) {
     currentActiveAnchor.classList.add('sidebar__toc-anchor--active');
 
@@ -61,7 +49,15 @@ function tocActiveFor(wrapper) {
     }
 
     // Scroll the active anchor into view
-    currentActiveAnchor.scrollIntoView({ behavior: 'smooth' });
+    // Scroll only the TOC pane; scrollIntoView also moves the reading viewport.
+    const pane = wrapper.querySelector('.sidebar__toc-content');
+    if (pane && pane.clientHeight > 0) {
+      const anchorRect = currentActiveAnchor.getBoundingClientRect();
+      const paneRect = pane.getBoundingClientRect();
+      if (anchorRect.top < paneRect.top || anchorRect.bottom > paneRect.bottom) {
+        pane.scrollTop += anchorRect.top - paneRect.top - pane.clientHeight / 2;
+      }
+    }
   }
 }
 
@@ -79,26 +75,41 @@ tocActive();
 // Handle anchor clicks in the TOC (desktop & mobile)
 function handleAnchorClick(e) {
   e.preventDefault();
-  const href = this.getAttribute('href').replace(/#(\d)/g, '#§$1');
-  const target = document.querySelector(decodeURIComponent(href));
+  const href = this.getAttribute('href');
+  const target = document.getElementById(decodeURIComponent(href.slice(1)));
   if (!target) {
     console.error('Target not found:', href);
     return;
   }
 
+  const disclosure = this.closest('details.article-toc');
+  if (disclosure) disclosure.open = false;
+  history.pushState(null, '', href);
+  target.setAttribute('tabindex', '-1');
+  target.focus({ preventScroll: true });
+
   // Scroll to the target header smoothly
   const scrollToTarget = () => {
     const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-    window.scroll({ top: targetPosition - window.innerHeight / 3, behavior: 'smooth' });
+    const header = document.querySelector('.header-wrapper');
+    const floatingHeader = header && ['sticky', 'fixed'].includes(getComputedStyle(header).position);
+    window.scroll({ top: targetPosition - (floatingHeader ? header.offsetHeight : 0) - 24, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   };
 
   // Handle images loading before the target header
   const imagesBeforeTarget = Array.from(document.querySelectorAll('img')).filter(img =>
     img.getBoundingClientRect().top + window.scrollY < target.getBoundingClientRect().top + window.scrollY
   );
-  imagesBeforeTarget.forEach(img => img.addEventListener('load', scrollToTarget));
+  imagesBeforeTarget.forEach(img => img.addEventListener('load', scrollToTarget, { once: true }));
   scrollToTarget();
-  setTimeout(() => imagesBeforeTarget.forEach(img => img.removeEventListener('load', scrollToTarget)), 10000);
+  // Late images may move the destination, but must not pull a reader back after
+  // they have deliberately started scrolling or interacting elsewhere.
+  const cancel = () => {
+    imagesBeforeTarget.forEach(img => img.removeEventListener('load', scrollToTarget));
+    ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(event => window.removeEventListener(event, cancel));
+  };
+  ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(event => window.addEventListener(event, cancel, { once: true, passive: true }));
+  setTimeout(cancel, 10000);
 }
 
 // Add click event listeners to TOC anchors
@@ -108,22 +119,3 @@ function addTocAnchorListeners(wrapper) {
 }
 addTocAnchorListeners(document.querySelector('#sidebar__toc-wrapper'));
 addTocAnchorListeners(document.querySelector('#sidebar__toc-wrapper-mobile'));
-
-// Toggle TOC visibility (desktop & mobile)
-function toggleToc(event) {
-  const button = event.target;
-  const wrapper = button.closest('.sidebar__toc-wrapper');
-  if (!wrapper) return;
-  const tocContent = wrapper.querySelector('.sidebar__toc-content');
-  if (!tocContent) return;
-
-  // Toggle the display state of the TOC content
-  const isTocVisible = tocContent.style.display === 'flex';
-  tocContent.style.display = isTocVisible ? 'none' : 'flex';
-  button.innerHTML = isTocVisible ? 'toc' : 'close';
-  button.classList.toggle('sidebar__toc-btn--active', !isTocVisible);
-}
-
-// Add event listeners to TOC toggle buttons
-document.querySelector('#sidebar__toc-btn')?.addEventListener('click', toggleToc);
-document.querySelector('#sidebar__toc-btn-mobile')?.addEventListener('click', toggleToc);

@@ -201,7 +201,7 @@ module Jekyll
           <div class="code-block-buttons no-select">
             <p class="code-language-label">#{language_display}</p>
             <button class="code-fullscreen-button" id="fullscreen-btn-#{code_id}"
-                    title="Toggle Fullscreen" type="button">
+                    title="全屏显示代码" type="button">
               <span class="material-symbols-outlined no-select">open_in_full</span>
             </button>
             <!--<button class="code-line-numbers-button" id="line-numbers-btn-#{code_id}"
@@ -209,16 +209,16 @@ module Jekyll
               <span class="material-symbols-outlined no-select">format_list_numbered</span>
             </button> -->
             <button class="code-white-space-button" id="whitespace-btn-#{code_id}"
-                    title="Enable Word Wrap" type="button">
+                    title="自动换行" type="button">
               <span class="material-symbols-outlined no-select">format_paragraph</span>
             </button>
             <button class="code-copy-button" id="copy-btn-#{code_id}"
-                    title="Copy Code" type="button">
-              <span class="copy-icon material-symbols-outlined no-select">content_copy</span>
+                    title="复制代码" type="button">
+              <span aria-hidden="true" class="copy-icon material-symbols-outlined no-select">content_copy</span><span class="tool-label">复制</span>
               <span class="check-icon material-symbols-outlined no-select" style="display: none;">check</span>
             </button>
           </div>
-          <pre class="#{pre_classes}"><code id="#{code_id}">#{code_content}</code></pre>
+          <pre class="#{pre_classes}" tabindex="0" aria-label="#{language_display} 代码"><code id="#{code_id}">#{code_content}</code></pre>
         </div>
       </div>
     </div>
@@ -238,7 +238,7 @@ module Jekyll
           <div class="code-block-buttons no-select">
             <p class="code-language-label">#{language_display}</p>
             <button class="code-fullscreen-button" id="fullscreen-btn-#{code_id}"
-                    title="Toggle Fullscreen" type="button">
+                    title="全屏显示代码" type="button">
               <span class="material-symbols-outlined no-select">open_in_full</span>
             </button>
             <!--  <button class="code-line-numbers-button" id="line-numbers-btn-#{code_id}"
@@ -246,16 +246,16 @@ module Jekyll
               <span class="material-symbols-outlined no-select">format_list_numbered</span>
             </button> -->
             <button class="code-white-space-button" id="whitespace-btn-#{code_id}"
-                    title="Enable Word Wrap" type="button">
+                    title="自动换行" type="button">
               <span class="material-symbols-outlined no-select">format_paragraph</span>
             </button>
             <button class="code-copy-button" id="copy-btn-#{code_id}"
-                    title="Copy Code" type="button">
-              <span class="copy-icon material-symbols-outlined no-select">content_copy</span>
+                    title="复制代码" type="button">
+              <span aria-hidden="true" class="copy-icon material-symbols-outlined no-select">content_copy</span><span class="tool-label">复制</span>
               <span class="check-icon material-symbols-outlined no-select" style="display: none;">check</span>
             </button>
           </div>
-          <pre class="highlight"><code id="#{code_id}" class="language-#{language_key}">#{code_content}</code></pre>
+          <pre class="highlight" tabindex="0" aria-label="#{language_display} 代码"><code id="#{code_id}" class="language-#{language_key}">#{code_content}</code></pre>
         </div>
       </div>
     </div>

@@ -3,5 +3,10 @@ layout: default
 ---
 <div class='not-found-wrapper no-select'>
   <h1 class='not-found__title'>404</h1>
-  <p class='not-found__message'>Ooops! Nothing found here.</p>
+  <h2 class='not-found__heading'>没有找到这一页</h2>
+  <p class='not-found__message'>地址可能已经变更。你可以回到文章索引，或搜索想读的内容。</p>
+  <div class='not-found-actions'>
+    {% include archive_back.html %}
+    <button type='button' class='text-action' data-open-search aria-haspopup='dialog' aria-controls='search-dialog'>搜索文章 <span aria-hidden='true'>{% include arrow.html direction='right' %}</span></button>
+  </div>
 </div>

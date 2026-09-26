@@ -22,13 +22,13 @@ def wrap_table_with_controls(table_html)
 
   # Return the HTML structure with the table wrapped in a container
   <<~HTML
-    <div class="table-wrapper" id="wrapper-#{table_id}" onmouseenter="showTableButtons('#{table_id}')" onmouseleave="hideTableButtons('#{table_id}')">
-      <div class="table-buttons no-select">
-        <button class="table-fullscreen-button" id="fullscreen-btn-#{table_id}" onclick="toggleTableFullscreen('#{table_id}')" title="Toggle Fullscreen">
+    <div class="table-wrapper" id="wrapper-#{table_id}">
+      <div class="table-buttons no-select" role="group" aria-label="表格工具">
+        <button class="table-fullscreen-button" id="fullscreen-btn-#{table_id}" onclick="toggleTableFullscreen('#{table_id}')" title="全屏显示表格" aria-label="全屏显示表格" data-tooltip="全屏显示表格">
           <span class="material-symbols-outlined">open_in_full</span>
         </button>
       </div>
-      #{table_html}
+      <div class="table-scroll" tabindex="0" role="region" aria-label="表格">#{table_html}</div>
     </div>
   HTML
 end

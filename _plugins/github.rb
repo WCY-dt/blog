@@ -333,7 +333,7 @@ module Jekyll
             <br>
             <span class="github-issue__info-meta">in <a href="https://github.com/#{repo_name}" class="github-issue__info-meta-link">#{repo_name}</a> · <a href="#{url}" class="github-issue__info-meta-link">#{issue_number}</a></span>
           </div>
-          <a href="#{url}" class="github-issue__link no-select"><span class="github-issue__link-icon material-symbols-outlined">open_in_new</span></a>
+          <a href="#{url}" class="github-issue__link no-select"><svg class="site-arrow" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M10 38 38 10M10 10h28v28" stroke="currentColor" stroke-width="2.5"/></svg></a>
         </div>
 
         <div class="github-issue__content" markdown="1">

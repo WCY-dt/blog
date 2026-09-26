@@ -1,0 +1,3 @@
+{% assign back_url = '/articles/' %}{% assign back_label = '全部文章' %}
+{% if page.layout == 'articles' %}{% assign back_url = '/' %}{% assign back_label = '首页' %}{% endif %}
+<a class='archive-back' href='{{ back_url | relative_url }}'><span class='archive-back-icon' aria-hidden='true'>{% include arrow.html direction='left' %}</span><span class='archive-back-label'>{{ back_label }}</span></a>

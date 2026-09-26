@@ -1,25 +1,21 @@
-<a class='header__title-wrapper' href='{{ site.url }}'>
-  <span>{{ site.author.name }}'s</span>
-  <span>blog</span>
+<a class='header__title-wrapper' href='{{ "/" | relative_url }}' aria-label='Ch3nyang 的博客首页'>
+  {% include brand-mark.svg %}
 </a>
-<menu class='header__menu-wrapper'>
+<nav class='header__menu-wrapper' aria-label='主导航'>
   {% for item in site.navy %}
     {% assign is_active = false %}
-    {% if page.layout == item.title or page.type == item.title %}
-      {% assign is_active = true %}
-    {% elsif page.layout == 'post' and item.title == 'post' %}
-      {% assign is_active = true %}
-    {% elsif page.layout == 'home' and item.title == 'post' %}
-      {% assign is_active = true %}
-    {% endif %}
-    <a
-      href='{{ item.url | relative_url }}'
-      class='header__menu-item {% if is_active %}header__menu-item--active{% endif %}'
-    >
-      <span class='header__menu-item-icon material-symbols-outlined'>
-        {{ item.icon }}
-      </span>
-      <p class="header__menu-item-title">{{ item.title }}</p>
+    {% if page.layout == item.title or page.type == item.title %}{% assign is_active = true %}
+    {% elsif page.layout == 'home' and item.title == 'post' %}{% assign is_active = true %}{% endif %}
+    {% if page.layout == 'articles' and item.title == 'post' %}{% assign is_active = true %}{% endif %}
+    {% if item.title == 'post' %}{% if page.layout == 'category' %}{% assign is_active = true %}{% elsif page.layout == 'archive' and page.type != 'tag' %}{% assign is_active = true %}{% endif %}{% endif %}
+    {% assign nav_url = item.url %}{% if item.title == 'post' %}{% assign nav_url = '/articles/' %}{% endif %}
+    <a href='{{ nav_url | relative_url }}' class='header__menu-item {% if is_active %}header__menu-item--active{% endif %}' {% if is_active %}aria-current='page'{% endif %}>
+      <span class='header__menu-item-title'>{% case item.title %}{% when 'post' %}文章{% when 'about' %}关于{% when 'tag' %}标签{% when 'github' %}GitHub{% when 'rss' %}RSS{% else %}{{ item.title }}{% endcase %}</span>
     </a>
+    {% if item.title == 'post' %}<a href='{{ "/series/" | relative_url }}' class='header__menu-item{% if page.layout == "series" %} header__menu-item--active{% endif %}' {% if page.layout == 'series' %}aria-current='page'{% endif %}><span class='header__menu-item-title'>系列</span></a>{% endif %}
   {% endfor %}
-</menu>
+</nav>
+<div class='header-tools' aria-label='阅读工具'>
+  <button type='button' id='search-open' class='header-tool search-trigger' aria-label='搜索文章' aria-haspopup='dialog' aria-controls='search-dialog'><svg class='header-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' aria-hidden='true'><circle cx='10.5' cy='10.5' r='6.5'/><path d='m15.5 15.5 5 5'/></svg></button>
+  <button type='button' id='theme-toggle' class='header-tool' aria-label='切换深色主题' title='切换深色主题'><svg class='header-icon theme-moon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' aria-hidden='true'><path d='M20.5 14.4A8.8 8.8 0 0 1 9.6 3.5 8.9 8.9 0 1 0 20.5 14.4Z'/></svg><svg class='header-icon theme-sun' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' aria-hidden='true'><circle cx='12' cy='12' r='4'/><path d='M12 1v3m0 16v3M1 12h3m16 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1m0-15.6-2.1 2.1M6.3 17.7l-2.1 2.1'/></svg></button>
+</div>

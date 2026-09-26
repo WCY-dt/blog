@@ -90,14 +90,14 @@ module Jekyll
 
       # Generate the HTML for the image grid
       grid_html = <<~HTML
-        <div class="image-grid #{@css_class}" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+        <div class="image-grid #{@css_class}" style="--image-columns: #{[@cols, 1].max};">
       HTML
 
       # Add each image to the grid
       images.each do |img|
         grid_html += <<~HTML
-          <figure class="image-grid__item" style="flex: 0 0 calc((100% - #{(@cols - 1)}rem) / #{@cols}); display: flex; flex-direction: column; align-items: center;">
-            <img src="#{img[:url]}" alt="#{img[:alt]}" class="image-grid__image" style="max-width: 100%; height: auto;" />
+          <figure class="image-grid__item">
+            <img src="#{img[:url]}" alt="#{img[:alt]}" class="image-grid__image" />
             #{img[:caption] ? "<figcaption class=\"image-grid__caption\">#{img[:caption]}</figcaption>" : ""}
           </figure>
         HTML

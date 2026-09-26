@@ -4,7 +4,7 @@ title:      "部署一个 Docker Registry"
 date:       2024-12-15 22:00:00 +0800
 categories: 分布式
 tags:       docker registry mirror
-summary:    "Docker Hub 被墙后，使用 Docker 成了一件麻烦事。我实在受不了，只好自行搭建了一个 Docker Registry 来作为镜像仓库。这个 Registry 支持了 Docker Hub 的镜像拉取、私有镜像存储、用户认证等功能。"
+summary:    "Docker Hub 连不上，拉镜像成了部署的阻碍。搭一个能缓存公共镜像、存放私有镜像的仓库，把这条下载路径掌握在自己手里。"
 ---
 
 Docker Hub 被墙后，使用 Docker 成了一件麻烦事。我实在受不了，只好自行搭建了一个 Docker Registry 来作为镜像仓库。这个 Registry 支持了 Docker Hub 的镜像拉取、私有镜像存储、用户认证等功能。

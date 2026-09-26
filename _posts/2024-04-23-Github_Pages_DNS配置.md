@@ -4,7 +4,7 @@ title:      "Github Pages DNS 配置"
 date:       2024-04-23 00:00:00 +0800
 categories: 网络
 tags:       dns github
-summary:    "本文介绍了如何将自定义域名配置到 GitHub Pages 上，包括主域和子域的配置方法。"
+summary:    "用 Cloudflare 为 GitHub Pages 配置自定义域名，让主域、www 和博客子域分别指向对应站点。"
 ---
 
 我的 GitHub 用户名是 `wcy-dt`，域名是 [ch3nyang.top](https://ch3nyang.top)，使用 cloudflare 进行 DNS 解析。我希望

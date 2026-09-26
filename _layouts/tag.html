@@ -1,35 +1,40 @@
 ---
 layout: default
 ---
-<hgroup class='no-select no-print archive__title tag__title'>
-  <h1 class='archive__title-text tag__title-text'>Tag</h1>
-</hgroup>
-
-<div class='tag-wrapper'>
-  {% assign sorted_tags = site.tags | sort %}
-  {% for tag in sorted_tags %}
-    <a
-      class='no-select no-print tag__item'
-      href='{{ tag | first | slugify }}'
-    >
-      <span class='tag__item-title'>
-        {{ tag | first }}
-      </span>
-      <div class='tag__item-info'>{{ tag | last | size }}</div>
-    </a>
+<header class='no-select no-print archive__title tag__title'>
+  <h1 class='archive__title-text tag__title-text'>标签</h1>
+  {% include archive_back.html %}
+</header>
+{% assign visible_tag_count = 0 %}
+{% assign visible_letters = '' | split: '' %}
+{% assign sorted_tags = site.tags | sort %}
+{% assign alphabet = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,其他' | split: ',' %}
+{% capture tag_groups_markup %}
+  {% for letter in alphabet %}
+    {% capture grouped_tags %}
+      {% for tag in sorted_tags %}
+        {% assign tag_letter = tag.first | slice: 0, 1 | upcase %}
+        {% unless 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' contains tag_letter %}{% assign tag_letter = '其他' %}{% endunless %}
+        {% if tag_letter == letter %}
+          {% assign tag_posts = tag.last %}
+          {% if jekyll.environment == 'production' %}{% assign tag_posts = tag_posts | where_exp: 'post', 'post.draft != true' %}{% endif %}
+          {% if tag_posts.size == 0 %}{% continue %}{% endif %}
+          {% assign visible_tag_count = visible_tag_count | plus: 1 %}
+          <a class='tag__item' href='{{ "/tag/" | relative_url }}{{ tag.first | slugify }}/'><span class='tag__item-title'>{{ tag.first }}</span><span class='tag__item-info'>{{ tag_posts.size }} <span>篇</span></span></a>
+        {% endif %}
+      {% endfor %}
+    {% endcapture %}
+    {% assign grouped_tags = grouped_tags | strip %}
+    {% if grouped_tags != empty %}
+      {% assign visible_letters = visible_letters | push: letter %}
+      <section id='tag-group-{{ letter | downcase | slugify }}' class='tag-group{% if letter == "其他" %} tag-group--other{% endif %}' aria-label='{% if letter == "其他" %}其他标签{% else %}{{ letter }} 开头的标签{% endif %}'><h2 class='tag-group-title'>{{ letter }}</h2><div class='tag-wrapper'>{{ grouped_tags }}</div></section>
+    {% endif %}
   {% endfor %}
-</div>
-
-<p class='no-select no-print pagination__count'>
-  {%- assign tags_count = 0 -%}
-  {%- for tag in site.tags -%}
-    {%- assign tags_count = tags_count | plus: 1 -%}
-  {%- endfor -%}
-  {%- if tags_count == 0 -%}
-    - no tag -
-  {%- elsif tags_count == 1 -%}
-    - find 1 tag -
-  {%- else -%}
-    - find {{ tags_count }} tags -
-  {%- endif -%}
-</p>
+{% endcapture %}
+{% if visible_tag_count > 0 %}
+<nav class='tag-jump-index' aria-label='标签字母索引'>{% for letter in visible_letters %}<a href='#tag-group-{{ letter | downcase | slugify }}'>{{ letter }}</a>{% endfor %}</nav>
+<div class='tag-index'>{{ tag_groups_markup }}</div>
+<p class='no-select no-print pagination__count'>共 {{ visible_tag_count }} 个标签</p>
+{% else %}
+<p class='catalogue-empty'>暂时没有标签。<a href='{{ "/articles/" | relative_url }}'>浏览全部文章 <span aria-hidden='true'>{% include arrow.html direction='right' %}</span></a></p>
+{% endif %}

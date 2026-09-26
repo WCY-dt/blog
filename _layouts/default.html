@@ -82,12 +82,12 @@ layout: compress
     <link
       rel='icon'
       type='image/svg+xml'
-      href='{{ site.url }}/assets/img/favicon.svg'
+      href='{{ "/assets/img/favicon.svg" | relative_url }}'
     >
     <link
       rel='apple-touch-icon'
       sizes='180x180'
-      href='{{ site.url }}/assets/img/apple-touch-icon.png'
+      href='{{ "/assets/img/apple-touch-icon.png" | relative_url }}'
     >
 
     <!-- meta -->
@@ -184,40 +184,24 @@ layout: compress
       >
     {%- endif -%}
 
-    <!-- Giscus 样式表 -->
-    {%- if page.layout == 'post' -%}
-      {%- if jekyll.environment == 'production' or site.dev_mode -%}
-        <link
-          rel='preload'
-          href='{{ '/assets/style/giscus_light.css' | relative_url }}'
-          as='style'
-          onload="this.onload=null;this.rel='stylesheet'"
-        >
-        <link
-          rel='preload'
-          href='{{ '/assets/style/giscus_dark.css' | relative_url }}'
-          as='style'
-          onload="this.onload=null;this.rel='stylesheet'"
-        >
-        <noscript>
-          <link
-            rel='stylesheet'
-            href='{{ '/assets/style/giscus_light.css' | relative_url }}'
-          >
-          <link
-            rel='stylesheet'
-            href='{{ '/assets/style/giscus_dark.css' | relative_url }}'
-          >
-        </noscript>
-      {%- endif -%}
-    {%- endif -%}
+    <link rel='stylesheet' href='{{ "/assets/style/bauhaus.css" | relative_url }}'>
+    {% if page.layout == 'post' %}<link rel='stylesheet' href='{{ "/assets/style/components.css" | relative_url }}'>{% endif %}
+    <link rel='stylesheet' href='{{ "/assets/style/navigation.css" | relative_url }}'>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('blog-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme;
+      } catch (e) { /* Storage can be unavailable in private browsing. */ }
+    </script>
+
   </head>
 
-  <body color_theme='{{ site.theme_config.color_theme | default: 'light' }}'>
+  <body data-layout='{{ page.layout }}'>
+    <a class='skip-link' href='#main-content'>跳至正文</a>
     <header class='no-select no-print header-wrapper'>
       {%- include header.html -%}
     </header>
-    <main class='main-wrapper'>
+    <main id='main-content' class='main-wrapper' tabindex='-1'>
       {{ content }}
     </main>
     <footer id='footer-wrapper' class='no-select no-print footer-wrapper'>
@@ -228,6 +212,7 @@ layout: compress
 
     {%- if page.layout == 'post' -%}
       <!-- 图像放大展示 -->
+      <script src='{{ '/assets/js/article_tools.js' | relative_url }}'></script>
       <script src='{{ '/assets/js/lightbox.js' | relative_url }}'></script>
 
       <!-- 代码块增强插件 -->
@@ -288,5 +273,6 @@ layout: compress
       ></script>
       <script defer src='{{ '/assets/js/mermaid.js' | relative_url }}'></script>
     {%- endif -%}
+    {% if page.layout == 'post' %}<script defer src='{{ "/assets/js/interface_icons.js" | relative_url }}'></script>{% endif %}
   </body>
 </html>

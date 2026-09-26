@@ -14,7 +14,7 @@
   .table-fullscreen-button,
   .markdown-copy-button {
     background: var(--primary-semi-dark-color);
-    color: var(--primary-light-color);
+    color: var(--on-primary-color);
     border: none;
     border-radius: .25rem;
     padding: .2rem;
@@ -36,7 +36,6 @@
     }
 
     .material-symbols-outlined {
-      font-size: 1rem !important;
       transition: all .25s ease;
     }
   }

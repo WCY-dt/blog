@@ -4,7 +4,7 @@ title:      "Bandit"
 date:       2019-10-01 00:00:00 +0800
 categories: 安全
 tags:       game
-summary:    "本文为 Bandit 题解。"
+summary:    "《OverTheWire》第 1 篇：下一关的密码藏在服务器里，手边只有命令行。跟着 Bandit 逐关寻找线索，练习组合 Linux 工具解决具体问题。"
 series:     OverTheWire
 series_index: 1
 archived:   true

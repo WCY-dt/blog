@@ -18,29 +18,71 @@ class CodeRunner {
 
     this.originalLanguage = this.currentLanguage;
     this.originalCode = this.editor.value;
+    this.drafts = new Map([[this.currentLanguage, this.originalCode]]);
+    this.preparationRevision = 0;
 
     this.init();
   }
 
   async init() {
     this.languageSelect.value = this.currentLanguage;
+    this.languageLocked = this.languageSelect.disabled;
+    this.languageSelect.setAttribute('aria-label', '代码语言');
+    this.editor.setAttribute('aria-label', '可运行代码');
+    this.status.setAttribute('role', 'status');
+    this.status.setAttribute('aria-live', 'polite');
+    this.retryBtn = document.createElement('button');
+    this.retryBtn.type = 'button';
+    this.retryBtn.className = 'component-retry';
+    this.retryBtn.textContent = '重新准备';
+    this.retryBtn.hidden = true;
+    this.retryBtn.addEventListener('click', async () => {
+      if (await this.prepareLanguage()) this.runBtn.focus({ preventScroll: true });
+    });
+    this.status.parentElement.append(this.retryBtn);
+    window.articleTools.label(this.refreshBtn, '恢复初始代码');
+    this.runBtn.setAttribute('aria-label', '运行代码');
+    const runIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    runIcon.setAttribute('class', 'runner-play-icon');
+    runIcon.setAttribute('viewBox', '0 0 16 16');
+    runIcon.setAttribute('width', '14');
+    runIcon.setAttribute('height', '14');
+    runIcon.setAttribute('aria-hidden', 'true');
+    const runTriangle = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    runTriangle.setAttribute('d', 'M4 2 14 8 4 14Z');
+    runTriangle.setAttribute('fill', 'currentColor');
+    runIcon.append(runTriangle);
+    const runLabel = document.createElement('span');
+    runLabel.textContent = '运行';
+    this.runLabel = runLabel;
+    this.runBtn.replaceChildren(runIcon, runLabel);
+    window.articleTools.label(this.fullscreenBtn, '全屏显示代码运行器');
     this.languageSelect.addEventListener('change', async (e) => await this.switchLanguage(e.target.value));
-    await this.initializeLanguage(this.currentLanguage);
     this.runBtn.addEventListener('click', async () => await this.runCode());
     this.refreshBtn.addEventListener('click', async () => await this.refresh());
     this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+    await this.clearOutput();
   }
 
   async runCode() {
+    if (this.running || this.runBtn.disabled) return;
     this.output.textContent = '';
 
     const code = this.editor.value;
     if (!code.trim()) {
-      this.setStatus('No code to run', true);
+      this.setStatus('请先输入代码', true);
       return;
     }
 
-    this.setStatus('Running...', true);
+    this.running = true;
+    this.container.dataset.runnerState = 'running';
+    delete this.container.dataset.runnerError;
+    if (this.runLabel) this.runLabel.textContent = '运行中…';
+    this.runBtn.disabled = true;
+    this.refreshBtn.disabled = true;
+    this.languageSelect.disabled = true;
+    this.container.setAttribute('aria-busy', 'true');
+    this.setStatus('正在运行…');
 
     try {
       let result;
@@ -52,48 +94,54 @@ class CodeRunner {
         result = await this.runWandboxCode(code, this.currentLanguage);
       }
       this.output.textContent = result;
-      this.setStatus('Ready to run');
+      this.setStatus('运行完成');
+      this.container.dataset.runnerState = 'ready';
     } catch (error) {
       this.output.textContent = `Error: ${error.message}`;
-      this.setStatus('Error occurred', true);
+      this.setStatus('运行失败', true);
+      this.container.dataset.runnerState = 'error';
+      this.container.dataset.runnerError = 'runtime';
+    } finally {
+      this.running = false;
+      if (this.runLabel) this.runLabel.textContent = '运行';
+      this.runBtn.disabled = false;
+      this.refreshBtn.disabled = false;
+      this.languageSelect.disabled = this.languageLocked;
+      this.container.removeAttribute('aria-busy');
     }
   }
 
   async runPythonCode(code) {
     try {
       if (!this.pyodide) {
-        this.setStatus('Failed to load Pyodide', true);
-        throw new Error('Pyodide not loaded');
+        throw new Error('Python 尚未准备就绪');
       }
 
       await this.pyodide.runPythonAsync('import sys\nfrom io import StringIO\nold_stdout = sys.stdout\nsys.stdout = captured_output = StringIO()');
 
-      await this.pyodide.runPythonAsync(code);
+      let result;
+      try {
+        await this.pyodide.runPythonAsync(code);
+        result = await this.pyodide.runPythonAsync('captured_output.getvalue()');
+      } finally {
+        await this.pyodide.runPythonAsync('sys.stdout = old_stdout');
+      }
 
-      const result = await this.pyodide.runPythonAsync('captured_output.getvalue()');
-      await this.pyodide.runPythonAsync('sys.stdout = old_stdout');
-
-      return result || 'Code executed successfully';
+      return result || '运行成功（无输出）';
     } catch (error) {
       throw new Error('Python Error: ' + error.message);
     }
   }
 
   async runJavaScriptCode(code) {
+    let result = '';
+    const capturedConsole = Object.create(console);
+    capturedConsole.log = (...args) => { result += args.join(' ') + '\n'; };
     try {
-      let result = '';
-      const originalConsoleLog = console.log;
-      console.log = (...args) => {
-        result += args.join(' ') + '\n';
-      };
-
-      eval(code);
-
-      console.log = originalConsoleLog;
-
-      return result || 'Code executed successfully';
+      // Keep each editor's logging local, including asynchronous evaluations.
+      await (function(console) { return eval(code); })(capturedConsole);
+      return result || '运行成功（无输出）';
     } catch (error) {
-      console.log = originalConsoleLog;
       throw new Error('JavaScript Error: ' + error.message);
     }
   }
@@ -144,31 +192,65 @@ class CodeRunner {
 
   async initializePyodide() {
     if (this.pyodide) return;
-    this.setStatus('Loading Pyodide...', true);
-
-    try {
-      this.pyodide = await loadPyodide({
-        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.29.0/full/'
-      });
-      this.setStatus('Ready to run');
-    } catch (error) {
-      console.error('Failed to load Pyodide:', error);
-      this.setStatus('Failed to load Pyodide', true);
+    // Reuse an in-flight load when a reader switches away and back.
+    if (!this.pyodideLoading) {
+      this.pyodideLoading = (async () => {
+        if (CodeRunner.pyodideFactoryFailed) await CodeRunner.restorePyodideFactory();
+        try {
+          this.pyodide = await loadPyodide({
+            indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.29.0/full/'
+          });
+        } catch (error) {
+          if (typeof globalThis._createPyodideModule !== 'function') CodeRunner.pyodideFactoryFailed = true;
+          throw error;
+        }
+      })();
     }
+    try { await this.pyodideLoading; }
+    finally { this.pyodideLoading = null; }
+  }
+
+  static async restorePyodideFactory() {
+    if (typeof globalThis._createPyodideModule === 'function') return;
+    // The bundled 0.29 loader imports this file only when its global factory is
+    // absent. A failed import stays in the browser's module map. The same
+    // official file also supports classic scripts and publishes that factory,
+    // letting the unchanged loader retry without reloading the reader's page.
+    if (!CodeRunner.pyodideFactoryLoading) {
+      CodeRunner.pyodideFactoryLoading = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.asm.js';
+        script.async = true;
+        script.crossOrigin = 'anonymous';
+        const finish = error => {
+          clearTimeout(timer);
+          script.onload = null;
+          script.onerror = null;
+          script.remove();
+          if (error) reject(error);
+          else resolve();
+        };
+        const timer = setTimeout(() => finish(new Error('Python 加载超时')), 30000);
+        script.onload = () => finish(typeof globalThis._createPyodideModule === 'function' ? null : new Error('Python 运行模块未能初始化'));
+        script.onerror = () => finish(new Error('Python 运行模块加载失败'));
+        document.head.append(script);
+      });
+    }
+    try { await CodeRunner.pyodideFactoryLoading; }
+    finally { CodeRunner.pyodideFactoryLoading = null; }
   }
 
   async initializeWandboxCompilers() {
     if (this.compilersList.length > 0) return;
-    this.setStatus('Loading compilers...', true);
-
-    try {
+    if (!this.compilersLoading) this.compilersLoading = (async () => {
       const response = await fetch('https://wandbox.org/api/list.json');
-      this.compilersList = await response.json();
-      this.setStatus('Ready to run');
-    } catch (error) {
-      console.error('Failed to fetch compilers:', error);
-      this.setStatus('Failed to load compilers', true);
-    }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const catalogue = await response.json();
+      if (!Array.isArray(catalogue) || !catalogue.length) throw new Error('编译器列表为空');
+      this.compilersList = catalogue;
+    })();
+    try { await this.compilersLoading; }
+    finally { this.compilersLoading = null; }
   }
 
   selectCompiler(language) {
@@ -193,7 +275,10 @@ class CodeRunner {
         return (languageConfig.keywords.every(kw => c.name.toLowerCase().includes(kw)) &&
         (languageConfig.excludes || []).every(ex => !c.name.toLowerCase().includes(ex)));
       });
-      if (matching.length === 0) this.compilers[lang] = null;
+      if (matching.length === 0) {
+        this.compilers[lang] = null;
+        continue;
+      }
 
       // Helper function to parse and compare versions
       function compareVersions(a, b) {
@@ -229,27 +314,68 @@ class CodeRunner {
       }
     }
 
-    return { name: this.compilers[language] };
+    return this.compilers[language] ? { name: this.compilers[language] } : null;
   }
 
   async switchLanguage(language) {
+    if (this.running || language === this.currentLanguage) return;
+    this.drafts.set(this.currentLanguage, this.editor.value);
     this.currentLanguage = language;
-    this.editor.value = '';
+    this.editor.value = this.drafts.get(language) || '';
     await this.clearOutput();
   }
 
   async clearOutput() {
     this.output.textContent = '';
-    this.setStatus('Ready to run');
-    await this.initializeLanguage(this.currentLanguage);
+    return this.prepareLanguage();
+  }
+
+  async prepareLanguage() {
+    if (this.running) return false;
+    const revision = ++this.preparationRevision;
+    const language = this.currentLanguage;
+    this.container.dataset.runnerState = 'preparing';
+    delete this.container.dataset.runnerError;
+    this.container.setAttribute('aria-busy', 'true');
+    this.setStatus(language === 'python' ? '正在准备 Python…' : language === 'javascript' ? '正在准备…' : '正在准备编译器…');
+    this.runBtn.disabled = true;
+    this.retryBtn.disabled = true;
+    try {
+      await this.initializeLanguage(language);
+      if (revision !== this.preparationRevision) return false;
+      if (!['javascript', 'python'].includes(language) && !this.selectCompiler(language)) {
+        this.compilersList = [];
+        throw new Error('当前服务没有此语言的编译器');
+      }
+      this.container.dataset.runnerState = 'ready';
+      this.retryBtn.hidden = true;
+      this.runBtn.disabled = false;
+      this.setStatus('准备就绪');
+      return true;
+    } catch (error) {
+      if (revision !== this.preparationRevision) return false;
+      console.warn('运行环境准备失败:', error);
+      this.container.dataset.runnerState = 'error';
+      this.container.dataset.runnerError = 'preparation';
+      this.retryBtn.hidden = false;
+      this.setStatus(`${language === 'python' ? 'Python' : '编译器'} 准备失败，可重新准备；代码已保留`, true);
+      return false;
+    } finally {
+      if (revision === this.preparationRevision) {
+        this.retryBtn.disabled = false;
+        this.container.removeAttribute('aria-busy');
+      }
+    }
   }
 
   async refresh() {
+    if (this.running) return;
+    this.drafts.set(this.currentLanguage, this.editor.value);
     this.editor.value = this.originalCode;
     this.currentLanguage = this.originalLanguage;
+    this.drafts.set(this.originalLanguage, this.originalCode);
     this.languageSelect.value = this.originalLanguage;
-    this.clearOutput();
-    await this.initializeLanguage(this.currentLanguage);
+    await this.clearOutput();
   }
 
   setStatus(text, isErr = false) {
@@ -259,11 +385,13 @@ class CodeRunner {
 
   toggleFullscreen() {
     const isFullscreen = this.container.classList.contains('fullscreen');
+    window.articleTools.label(this.fullscreenBtn, isFullscreen ? '全屏显示代码运行器' : '退出全屏 · Esc');
+    this.fullscreenBtn.setAttribute('aria-pressed', String(!isFullscreen));
 
     if (isFullscreen) {
       // Exit fullscreen
       this.container.classList.remove('fullscreen');
-      document.body.style.overflow = '';
+      document.body.style.overflow = this.previousOverflow || '';
 
       // Update button icon
       const icon = this.fullscreenBtn.querySelector('.material-symbols-outlined');
@@ -276,6 +404,7 @@ class CodeRunner {
     } else {
       // Enter fullscreen
       this.container.classList.add('fullscreen');
+      this.previousOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
 
       // Update button icon
@@ -286,12 +415,13 @@ class CodeRunner {
 
       // Add escape key listener
       this.escapeHandler = (e) => {
-        if (e.key === 'Escape') {
+        if (e.key === 'Escape' && !document.querySelector('dialog[open]')) {
           this.toggleFullscreen();
         }
       };
       document.addEventListener('keydown', this.escapeHandler);
     }
+    this.fullscreenBtn.focus({ preventScroll: true });
   }
 }
 

@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<header class='archive__title'>
+ <p class='archive__title-type'>按篇章顺序阅读</p>
+ <h1 class='archive__title-text'>系列文章</h1>
+ {% include archive_back.html %}
+</header>
+{% assign catalogue_posts = site.posts %}
+{% if jekyll.environment == 'production' %}{% assign catalogue_posts = catalogue_posts | where_exp: 'post', 'post.draft != true' %}{% endif %}
+{% assign active_series_names = catalogue_posts | where_exp: 'post', 'post.archived != true' | map: 'series' | uniq %}
+{% assign series_groups = catalogue_posts | where_exp: 'post', 'post.series' | group_by: 'series' | where_exp: 'group', 'active_series_names contains group.name' | sort: 'name' %}
+<div class='series-directory'>
+ {% for group in series_groups %}<section class='series-directory-group' id='{{ group.name | slugify }}'>
+  <header{% if group.items.first.cover_image %} class='series-directory-heading--illustrated'{% endif %}><h2>{{ group.name }}</h2><p>{{ group.items.size }} 篇</p>{% assign series_cover_alt = group.name | append: ' · 系列封面' %}{% include cover_art.html post=group.items.first class='series-directory-art' alt=series_cover_alt %}</header>
+  {% include series_chapters.html posts=group.items %}
+ </section>{% endfor %}
+</div>
+{% if series_groups.size == 0 %}<p class='catalogue-empty'>暂时没有系列文章。<a href='{{ "/articles/" | relative_url }}'>浏览全部文章 <span aria-hidden='true'>{% include arrow.html direction='right' %}</span></a></p>{% endif %}

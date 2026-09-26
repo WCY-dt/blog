@@ -1,8 +1,19 @@
-<p class="footer__copyright">
-  © {{ site.time | date: '%Y' }}
-  <a href='{{ site.author.link }}' class="footer__copyright-link">{{ site.author.name }}</a>. All rights
-  reserved.
-  {% if site.powered_by %}
-    Powered by <a href='https://github.com/WCY-dt/tangerine' class="footer__copyright-link">Tangerine</a>.
-  {% endif %}
-</p>
+<div class='footer-identity'>
+  <a class='footer-author' href='{{ "/" | relative_url }}' aria-label='Ch3nyang 的博客首页'>{% include brand-mark.svg %}</a>
+  <p>技术文章、学习笔记与生活随笔。</p>
+  <p class='footer__copyright'>© 2019-{{ site.time | date: '%Y' }} {{ site.author.name }}<br>原创文章采用 <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' rel='license'>CC BY-NC-SA 4.0</a> 许可。</p>
+</div>
+<nav class='footer-links' aria-label='页尾文章导航'>
+  <h2>阅读</h2>
+  <a href='{{ "/articles/" | relative_url }}'>全部文章</a>
+  <a href='{{ "/category/" | relative_url }}'>文章分类</a>
+  <a href='{{ "/tag/" | relative_url }}'>标签索引</a>
+  <a href='{{ "/series/" | relative_url }}'>系列目录</a>
+</nav>
+<nav class='footer-links' aria-label='订阅与联系'>
+  <h2>订阅与联系</h2>
+  <a href='{{ "/feed.xml" | relative_url }}'>RSS 订阅</a>
+  {% if site.author.link %}<a href='{{ site.author.link }}'>GitHub</a>{% endif %}
+  {% if site.author.email %}<a href='mailto:{{ site.author.email }}'>邮件联系</a>{% endif %}
+</nav>
+{% if site.powered_by %}<p class='footer__credit'>主题基于 <a href='https://github.com/WCY-dt/tangerine'>Tangerine</a></p>{% endif %}
