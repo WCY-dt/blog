@@ -10,6 +10,10 @@
   </div>
   {% if include.post.summary %}<p class='feature-summary'>{{ include.post.summary | strip_html | escape }}</p>{% endif %}
   <div class='feature-foot'><time datetime='{{ include.post.date | date: "%Y-%m" }}'>{{ include.post.date | date: '%Y-%m' }}</time></div>
-  {% include cover_art.html post=include.post class='feature-art' loading='eager' priority=true %}
+  {% if include.post.cover_image %}
+  <span class='feature-art feature-cover-stage' data-cover-tilt>
+    {% include cover_art.html post=include.post class='feature-cover-surface' loading='eager' priority=true %}
+  </span>
+  {% endif %}
   <div class='feature-reading-band'><span class='feature-read-label'>阅读全文</span><span class='feature-action' aria-hidden='true'>{% include arrow.html %}</span></div>
 </a>

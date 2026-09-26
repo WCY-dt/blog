@@ -1,0 +1,11 @@
+// The square stays on the page grid; viewport pointer motion moves only its contents.
+.feature-cover-stage { display:block; position:relative; min-width:0; aspect-ratio:1; overflow:hidden; }
+.feature-cover-surface { position:relative; }
+@media (hover:hover) and (pointer:fine) and (min-width:601px) and (prefers-reduced-motion:no-preference) {
+  .feature-cover-stage.is-tilt-ready { perspective:1000px; }
+  .is-tilt-ready .feature-cover-surface { pointer-events:none; }
+  .is-tilt-ready .feature-cover-surface img { position:relative; backface-visibility:hidden; }
+}
+@media print {
+  .feature-cover-surface { transform:none !important; }
+}
