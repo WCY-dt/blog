@@ -102,8 +102,13 @@
     }
     wrapper.querySelector('[data-giscus-loader]')?.remove();
     const script = document.createElement('script');
+    script.setAttribute('data-cfasync', 'false');
     for (const { name, value } of config.content.querySelector('script').attributes) {
-      script.setAttribute(name, value);
+      // CDN optimizers may rewrite an inert template's type. Copy only config,
+      // never their execution markers or synthetic script type.
+      if ((name.startsWith('data-') && !name.startsWith('data-cf')) || ['src', 'crossorigin', 'async', 'referrerpolicy'].includes(name)) {
+        script.setAttribute(name, value);
+      }
     }
     // Set the theme before the asynchronous client can construct its iframe.
     script.setAttribute('data-theme', themeUrl());

@@ -12,6 +12,7 @@
       <div class='giscus'></div>
       <template id='comment-config'>
       <script
+        data-cfasync='false'
         data-giscus-loader
         src='https://giscus.app/client.js'
         data-repo='{{ site.giscus.data-repo }}'
@@ -29,7 +30,7 @@
         async
       ></script>
       </template>
-      <script defer src='{{ "/assets/js/comments.js" | relative_url }}'></script>
+      <script data-cfasync='false' defer src='{{ "/assets/js/comments.js" | relative_url }}?v={{ site.time | date: "%s" }}'></script>
       <noscript><p class='comment__content--draft'>启用 JavaScript 后可查看评论，也可<a href='https://github.com/{{ site.giscus.data-repo }}/discussions'>前往 GitHub 讨论区</a>。</p></noscript>
     {%- else -%}
       <div class='no-select sector__content--draft comment__content--draft'>

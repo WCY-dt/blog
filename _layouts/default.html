@@ -187,7 +187,7 @@ layout: compress
     <link rel='stylesheet' href='{{ "/assets/style/bauhaus.css" | relative_url }}'>
     {% if page.layout == 'post' %}<link rel='stylesheet' href='{{ "/assets/style/components.css" | relative_url }}'>{% endif %}
     <link rel='stylesheet' href='{{ "/assets/style/navigation.css" | relative_url }}'>
-    <script>
+    <script data-cfasync='false'>
       try {
         const savedTheme = localStorage.getItem('blog-theme');
         if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme;
