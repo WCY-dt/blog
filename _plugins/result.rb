@@ -327,7 +327,7 @@ module Jekyll
       escaped_output = CGI.escapeHTML(content.strip)
 
       <<~HTML
-        <pre class="result__output" style="margin: 0; padding: 16px; overflow: auto; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; white-space: pre-wrap; word-wrap: break-word;">#{escaped_output}</pre>
+        <pre class="result__output" style="margin: 0; padding: 16px; overflow: auto; font-family: var(--mono-font); white-space: pre-wrap; word-wrap: break-word;">#{escaped_output}</pre>
       HTML
     end
 

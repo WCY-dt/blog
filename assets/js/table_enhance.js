@@ -134,7 +134,8 @@
         }
 
         handle.addEventListener('pointerdown', (event) => {
-          if (event.button !== 0) return;
+          // Finger gestures belong to the scrollport, not a narrow resize seam.
+          if (event.button !== 0 || event.pointerType === 'touch') return;
           event.preventDefault();
           prepare();
           handle.focus({ preventScroll: true });

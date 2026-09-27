@@ -94,7 +94,7 @@
 .code-runner__output {
   flex: 1;
   padding: .5rem;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: var(--mono-font);
   font-size: 1rem;
   line-height: 1.2;
 }

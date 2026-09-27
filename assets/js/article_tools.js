@@ -164,7 +164,9 @@
       fullscreen.querySelector('button:not([disabled])')?.focus();
       return;
     }
-    show(event.target.closest('[data-tooltip]'));
+    // Touch also focuses buttons; only keyboard focus needs a floating hint.
+    if (event.target.matches(':focus-visible')) show(event.target.closest('[data-tooltip]'));
+    else hide();
   });
   document.addEventListener('focusout', hide);
   document.addEventListener('click', hide);

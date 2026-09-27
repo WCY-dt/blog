@@ -1,0 +1,10 @@
+// Local fonts only. Latin and CJK resolve independently within each stack.
+// Apple: Helvetica / PingFang; Windows: Arial / YaHei; Linux: Liberation / Noto.
+$sans: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif;
+$mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, 'Sarasa Mono SC', 'Noto Sans Mono CJK SC', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', monospace;
+
+@mixin tokens {
+  --ui-font: #{$sans};
+  --text-font: #{$sans};
+  --mono-font: #{$mono};
+}

@@ -169,7 +169,7 @@
     ul, ol { padding-left: 1.5em; }
     img, svg { max-width: 100%; }
     pre { overflow-x: auto; }
-    code { font-family: 'Courier New', 'Microsoft YaHei', monospace; }
+    code { font-family: var(--mono-font); }
   }
 
   a {

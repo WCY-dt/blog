@@ -13,7 +13,9 @@
     close.textContent = '×';
     const hint = document.createElement('p');
     hint.className = 'lightbox-hint';
-    hint.textContent = '滚轮或双指缩放 · 拖动查看 · Esc 关闭';
+    hint.textContent = matchMedia('(hover:none), (pointer:coarse)').matches
+      ? '双指缩放 · 拖动查看'
+      : '滚轮或双指缩放 · 拖动查看 · Esc 关闭';
     const toolbar = document.createElement('div');
     toolbar.className = 'lightbox-tools';
     toolbar.setAttribute('role', 'group');

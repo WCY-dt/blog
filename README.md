@@ -22,7 +22,7 @@
 |        | 草稿系统 | 版权声明 | 文章总结 | 代码运行插件 |
 |        | 随笔模板 | 文章推荐 | 全屏显示 | 文件结构插件 |
 |        |         |          |       | 自动导入插件 |
-|        |         |          |       | 独立网页文章插件 |
+|        |         |          |       | 独立网页插件 |
 
 ## 本地开发
 
@@ -47,6 +47,8 @@ jekyll serve
 绝大多数设置都在 [`_config.yml`](./_config.yml) 文件中，你可以根据自己的需求进行修改。
 
 ### 文章编辑
+
+AI 撰写或修改文章前，请先阅读根目录的 [AGENTS.md](./AGENTS.md)。其中包含文风、大纲与逐段生成流程、插图约定、元数据和插件语法。
 
 博客文章存放在 [`_posts`](./_posts) 文件夹中，命名格式为 `YYYY-MM-DD-title.md`。博客文章的文件头应该包含以下信息：
 
@@ -91,7 +93,15 @@ clean_image.ps1    # 清除未使用的图片
 
 长文阅读位置只保存在当前浏览器，最多保留 30 篇、30 天。再次进入文章时可选择继续阅读或忽略；读到正文末尾会清除该篇记录。
 
-详见 [插件测试](./_test/2000-01-02-插件测试.md)。
+详见 [插件测试](./_test/2000-01-02-plugin%20test.md)。
+
+### 字体与触屏
+
+文字字体统一在 [`_sass/_typography.scss`](./_sass/_typography.scss) 配置，不下载额外字体。英文优先 Helvetica Neue / Helvetica，其次 Arial、Liberation Sans；中文按本机可用字体选择苹方、微软雅黑、Noto Sans CJK SC。代码优先 SFMono-Regular / Consolas / Liberation Mono / Menlo，中文优先已有的更纱黑体、Noto 等宽字族，再回退到正文中文字体。正文、工具、脚注、评论、Mermaid 和 RSS 共用这些配置，独立演示内作者自定义的字体不受影响。
+
+字体存在与否及中文字宽取决于操作系统，使用本机字体不能保证各系统字形完全一致。回退策略依据 [MDN 字体匹配说明](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-family)，平台字体参考 [Apple 字体列表](https://developer.apple.com/fonts/system-fonts/) 与 [Windows 11 字体列表](https://learn.microsoft.com/en-us/typography/fonts/windows_11_font_list)。
+
+触屏样式集中在 [`_sass/_touch.scss`](./_sass/_touch.scss)，按输入能力匹配，包括带鼠标的触屏笔记本。独立操作区至少 44px；表格和图表工具常显并在内部预留空间，正文行内链接维持自然排版。主触屏设备不显示鼠标专用提示、列宽拖动手柄或鼠标位移动效；代码、图片和表格仍可通过明确按钮操作。
 
 ### RSS 订阅
 

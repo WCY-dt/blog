@@ -207,7 +207,7 @@
     code {
       font-size: .875rem;
       line-height: 1.6;
-      font-family: 'Consolas', 'Monaco', 'Courier New', 'Menlo', monospace;
+      font-family: var(--mono-font);
       display: block;
       background: transparent;
       white-space: pre;
@@ -336,7 +336,7 @@
   height: 100%;
   overflow: auto;
   padding: 1rem;
-  font-family: 'Consolas', 'Monaco', 'Courier New', 'Menlo', monospace;
+  font-family: var(--mono-font);
   font-size: .875rem;
   line-height: 1.6;
   color: white;

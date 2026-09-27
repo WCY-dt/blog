@@ -112,7 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
     reference.addEventListener('pointerenter', event => {
       if (event.pointerType === 'mouse') show(reference, note);
     });
-    reference.addEventListener('pointerleave', scheduleHide);
+    reference.addEventListener('pointerleave', event => {
+      if (event.pointerType === 'mouse') scheduleHide();
+    });
     reference.addEventListener('pointerdown', event => { pointerType = event.pointerType; });
     reference.addEventListener('focus', () => {
       if (!restoringFocus && reference.matches(':focus-visible')) show(reference, note);
@@ -140,7 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   preview.addEventListener('pointerenter', () => clearTimeout(closeTimer));
   preview.querySelector('.footnote-preview__close').addEventListener('click', () => hide(true));
-  preview.addEventListener('pointerleave', scheduleHide);
+  preview.addEventListener('pointerleave', event => {
+    if (event.pointerType === 'mouse') scheduleHide();
+  });
   preview.addEventListener('focusin', () => clearTimeout(closeTimer));
   preview.addEventListener('focusout', scheduleHide);
   source.addEventListener('click', () => hide(true));

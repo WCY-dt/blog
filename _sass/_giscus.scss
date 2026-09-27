@@ -1,7 +1,8 @@
+@use 'typography';
 /* Giscus' iframe uses its own document: map Primer tokens to the blog palette. */
 html {
-  --font-family-sans: Arial, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif;
-  --font-family-monospace: Consolas, 'SFMono-Regular', monospace;
+  --font-family-sans: #{typography.$sans};
+  --font-family-monospace: #{typography.$mono};
   --color-fg-default: var(--ink);
   --color-fg-muted: var(--muted);
   --color-fg-subtle: var(--muted);
@@ -216,7 +217,13 @@ body { margin:0; }
   #__next .gsc-main .markdown .ClipboardButton { width:40px; height:40px; min-height:40px; }
   #__next .gsc-main .gsc-comment-box-tabs > div:first-child button { padding-inline:14px; }
 }
-@media (hover:none) { #__next .gsc-main .markdown .ClipboardButton { opacity:1; animation:none; } }
+@media (hover:none), (any-pointer:coarse) {
+  #__next .gsc-main :is(.gsc-comment-edited,.gsc-reply-edited) { min-width:44px; min-height:44px; }
+  #__next .gsc-main :is(.btn,.gsc-toolbar-item,.gsc-comment-box-tabs button,.gsc-reply-box > button,.gsc-social-reaction-summary-item,.gsc-reactions-button,.gsc-emoji-button,.markdown summary) { min-height:44px; }
+  #__next .gsc-main :is(.gsc-toolbar-item,.gsc-social-reaction-summary-item,.gsc-reactions-button) { min-width:44px; height:44px; }
+  #__next .gsc-main .markdown .ClipboardButton { width:44px; height:44px; min-height:44px; opacity:1; animation:none; }
+  #__next .gsc-main .markdown div:has(> .zeroclipboard-container) > pre { padding-top:56px; }
+}
 @media (prefers-reduced-motion:reduce) { #__next .gsc-main * { transition:none!important; animation:none!important; } }
 @media (forced-colors:active) { #__next .gsc-main :is(.btn,.gsc-social-reaction-summary-item,.gsc-comment-box,.gsc-reactions-popover) { border-color:ButtonText; } }
 

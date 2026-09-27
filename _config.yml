@@ -108,6 +108,7 @@ webrick:
 exclude:
   - LICENSE.txt
   - README.md
+  - AGENTS.md
   - dev/
   - _test/
   - scripts/

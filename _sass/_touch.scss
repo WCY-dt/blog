@@ -1,0 +1,117 @@
+/* Touch keeps actions visible and makes room for fingers without enlarging icons. */
+@media (hover:none), (any-pointer:coarse) {
+  .header-tool, .search-close, .back-to-top, .footnote-preview__close {
+    min-width:44px;
+    width:44px;
+    min-height:44px;
+    height:44px;
+    flex-shrink:0;
+  }
+  .header__menu-item, .footer-author, .footer-links a, .home-browse,
+  .home-mobile-index a, .home-index a, .home-series-heading > a,
+  .series-feature-heading > a, .tag__item, .category__item,
+  .archive-year-index a, .article-toc summary, .series-header__all,
+  .series-header__list-title, .component-retry, .search-retry,
+  .footnote-preview__source { min-height:44px; }
+  .tag-jump-index a { min-width:44px; min-height:44px; }
+  .post__info-detail a, .series-header__list-title {
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+  }
+  .series-header__row { align-items:center; padding-block:4px; }
+  .footer-links { column-gap:20px; }
+  .sidebar__toc-content { gap:0; }
+  .sidebar__toc-anchor,
+  .desktop-toc .sidebar__toc-content > .sidebar__toc-item > .sidebar__toc-anchor {
+    display:flex;
+    align-items:center;
+    min-height:44px;
+    padding-block:8px;
+    box-sizing:border-box;
+  }
+  .sidebar__toc-submenu { padding-top:0; }
+
+  .post__content :is(.code-block-buttons,.file-structure__header,.iframe-header,.code-runner__header,.result-tab-buttons,.result__preview-header) {
+    min-height:54px;
+  }
+  .post__content .code-block-buttons,
+  .post__content :is(.result-tab-buttons,.result__preview-header) { height:54px; }
+  .post__content .code-block-buttons { padding:5px 4px; gap:0; }
+  .post__content :is(.code-block-buttons,.table-buttons,.file-structure__header,.code-runner__controls,.result-controls) button,
+  .post__content .iframe-container .iframe-header .iframe-controls :is(.iframe-refresh-btn,.iframe-fullscreen-btn),
+  .post__content :is(.result-tab-toggle,.file-structure__toggle,.cite__link,.github-issue__link) {
+    min-width:44px;
+    width:44px;
+    min-height:44px;
+    height:44px;
+  }
+  .post__content button:has(.tool-label),
+  .post__content .code-runner__controls .code-runner__run-btn { width:auto; }
+  .post__content .code-language-label { min-width:0; overflow:hidden; text-overflow:ellipsis; }
+  .post__content .result-tab { min-width:44px; min-height:44px; }
+  .post__content .result-tab-contents { height:calc(100% - 54px); }
+  .post__content .code-runner__language-selector select { min-height:44px; height:54px; }
+  .post__content .iframe-container.fullscreen iframe { height:calc(100dvh - 54px)!important; }
+  .post__content .file-structure__tree-content,
+  .post__content .result .result-restore-btn { min-height:44px; }
+  .post__content .result--vertical .result-restore-btn { height:44px; }
+  .post__content :is(.github-code-btn__btn,.github-link) { min-height:44px; }
+  .post__content details > summary { min-height:44px; box-sizing:border-box; }
+  .post__content .footnotes a.reversefootnote { min-width:44px; min-height:44px; line-height:44px; }
+  .lightbox-tool { min-width:44px; height:44px; }
+
+  /* Reserve space inside every header cell: horizontal scrolling must never
+     slide header text underneath the fixed upper-right controls. */
+  .post__content .table-wrapper .table-buttons {
+    top:4px;
+    right:4px;
+    min-height:44px;
+    opacity:1;
+    pointer-events:auto;
+  }
+  .post__content .table-wrapper:not(.fullscreen) table thead tr:first-child > * { padding-top:56px; }
+  .post__content .table-wrapper table thead tr:first-child > :last-child { padding-right:16px; }
+  .post__content .table-wrapper:not(:has(thead)):not(.fullscreen) { padding-top:52px; }
+  .post__content .table-wrapper:not(:has(thead)) .table-buttons { background:var(--white-color); color:var(--black-color); }
+  .post__content .table-wrapper.fullscreen .table-buttons { top:8px; right:12px; }
+  // Hybrid laptops retain mouse resizing, while a finger still scrolls naturally.
+  .post__content .table-column-resizer { touch-action:pan-x pan-y; }
+
+  /* Keep diagrams transparent; the copy action gets its own clear hit area. */
+  .post__content pre:has(.language-mermaid),
+  .post__content blockquote pre:has(.language-mermaid) { padding-top:48px; }
+  .post__content pre:has(.language-mermaid) > .mermaid-copy-button {
+    top:0;
+    right:0;
+    width:44px;
+    height:44px;
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  @media (max-width:600px) {
+    .header__title-wrapper { min-width:0; padding-right:8px; }
+    .header__title-wrapper .brand-wordmark { width:min(184px,100%); min-width:0; }
+    .header-tools { flex-shrink:0; }
+    .post__content .code-block-buttons .tool-label { display:none; }
+    .post__content .code-block-buttons button:has(.tool-label) { width:44px; padding:0; }
+  }
+  @media (max-width:768px) {
+    .post__content .result .result-restore-btn { height:44px!important; }
+  }
+}
+
+/* Keep keyboard hints and mouse affordances on a laptop with a touch display. */
+@media (hover:none), (pointer:coarse) {
+  .search-field kbd, .search-hint { display:none; }
+  .post__content .table-column-resizer { display:none; }
+  .home-feature:is(:hover,:focus-visible) .feature-action svg,
+  .pagination__item-wrapper:is(:hover,:focus-visible) .post-card-arrow,
+  .series-chapters a:is(:hover,:focus-visible) .chapter-arrow,
+  .series-other a:is(:hover,:focus-visible) .series-other-action > span,
+  .all-articles-entry:is(:hover,:focus-visible) .all-articles-arrow,
+  .archive-back:is(:hover,:focus-visible) .archive-back-icon,
+  .suggest__item-link:is(:hover,:focus-visible) .suggest__item-arrow { transform:none; }
+  .home-gallery-work:hover:not(:focus-visible) { outline:none; }
+}

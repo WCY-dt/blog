@@ -41,7 +41,7 @@
 }
 
 .file-structure__tree {
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: var(--mono-font);
   display: flex;
   align-items: center;
   padding: .5rem;

@@ -9,6 +9,7 @@
 @use 'sidebar';
 @use 'not_found';
 @use 'series_directory';
+@use 'typography';
 
 @font-face {
   font-family: 'Material Symbols Outlined';
@@ -35,9 +36,7 @@
 :root {
   /* Foreground on solid orange stays white in both colour schemes. */
   --on-primary-color: #fff;
-  --ui-font: 'Arial', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif;
-  --text-font: 'Arial', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif;
-  --mono-font: 'Consolas', 'Courier New', monospace;
+  @include typography.tokens;
   --normal-shadow: none;
   --border-color: var(--line-color);
   font: 16px var(--text-font);
