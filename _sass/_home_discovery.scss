@@ -1,4 +1,4 @@
-/* Only the complete artwork is visible; each image still names its destination. */
+/* Non-linked original cover artwork, shared by every page's footer. */
 .home-gallery { margin:32px 0 0; }
 .home-gallery-rows { display:grid; gap:12px; min-width:0; }
 .home-gallery-track { position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:112px; align-items:start; gap:12px; min-width:0; overflow-x:auto; overscroll-behavior-inline:contain; scroll-padding-inline:4px; scrollbar-color:var(--gray-color) transparent; padding:4px; margin:-4px; }
@@ -6,7 +6,6 @@
 .home-gallery-work { display:block; min-width:0; color:var(--black-color); text-decoration:none; scroll-snap-align:start; }
 .home-gallery-art { position:relative; }
 .home-gallery-art noscript img { position:absolute; inset:0; }
-.home-gallery-work:is(:hover,:focus-visible) { outline:2px solid var(--accent-text); outline-offset:2px; }
 .home-gallery-track:focus-visible { outline:2px solid var(--accent-text); outline-offset:4px; }
 .home-gallery--enhanced .home-gallery-track { scrollbar-width:none; scroll-behavior:auto; scroll-snap-type:none; overflow-anchor:none; cursor:grab; }
 .home-gallery--enhanced .home-gallery-track::-webkit-scrollbar { display:none; }
@@ -29,7 +28,7 @@
 }
 @media (max-width:600px) {
   .home-gallery { margin-top:28px; }
-  .home-gallery-track { grid-auto-columns:clamp(76px,24vw,100px); gap:10px; }
+  .home-gallery-track { grid-auto-columns:clamp(72px,21vw,84px); gap:10px; }
   .archive-year-index .archive-experiment-entry { width:100%; margin-bottom:8px; }
 }
 @media print {

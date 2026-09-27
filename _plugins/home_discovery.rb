@@ -1,6 +1,6 @@
 require 'set'
 
-# Build discovery entry points from the same published documents as home.
+# Tag experiments and collect original cover artwork for the site-wide footer.
 module HomeDiscovery
   def self.experiment?(post)
     return false if post.data['experiment'] == false
@@ -22,7 +22,7 @@ module HomeDiscovery
 
   def self.build(posts, now: Time.now, production: true)
     visible = posts.reject do |post|
-      post.data['archived'] || (production && post.data['draft']) || post.date > now
+      (production && post.data['draft']) || post.date > now
     end.sort_by { |post| [-post.date.to_i, post.url] }
 
     seen_covers = Set.new

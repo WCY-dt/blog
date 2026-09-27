@@ -1,9 +1,10 @@
-// The original links remain the accessible gallery; a small edge buffer makes each row loop.
+// Original artwork remains accessible; a small edge buffer makes each row loop.
 (() => {
   const gallery = document.querySelector('.home-gallery')
   if (!gallery) return
   const tracks = [...gallery.querySelectorAll('.home-gallery-track')]
-  const toggle = gallery.querySelector('.home-gallery-toggle')
+  const toggle = gallery.closest('footer')?.querySelector('.home-gallery-toggle')
+    || gallery.querySelector('.home-gallery-toggle')
   if (!toggle || !tracks.length) return
   if (!('IntersectionObserver' in window)) {
     // Keep a usable native gallery in older browsers without starting an unbounded eager queue.
@@ -35,7 +36,6 @@
     const clone = source.cloneNode(true)
     clone.dataset.galleryClone = ''
     clone.setAttribute('aria-hidden', 'true')
-    clone.tabIndex = -1
     clone.removeAttribute('id')
     clone.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'))
     clone.querySelectorAll('img').forEach(img => {
@@ -48,9 +48,9 @@
 
   const rows = tracks.map((track, index) => {
     const originals = [...track.querySelectorAll('.home-gallery-work')]
-    originals.forEach(link => link.querySelectorAll('img').forEach(img => { img.draggable = false }))
+    originals.forEach(work => work.querySelectorAll('img').forEach(img => { img.draggable = false }))
     return { track, index, originals, origin: 0, period: 0, step: 112, position: 0, expected: 0,
-      enabled: false, hovered: false, focused: false, held: false, suppressClick: false,
+      enabled: false, hovered: false, focused: false, held: false,
       visibleImages: new Set(), retainedImages: new Set(), sourceImages: new Map(),
       imagesObserved: false, observerGeneration: 0, imageObserver: null, viewObserver: null, retentionObserver: null }
   })
@@ -179,9 +179,6 @@
 
   function normalize(row) {
     if (!row.enabled) return
-    // Do not move an original keyboard-focused link out of its visible location.
-    const focusedLink = document.activeElement?.closest('.home-gallery-work')
-    if (focusedLink && row.originals.includes(focusedLink)) return
     const next = loopPosition(row, row.position)
     const correction = next - row.position
     if (Math.abs(correction) < 0.01) return
@@ -212,8 +209,8 @@
       const bufferSize = Math.min(row.originals.length, Math.ceil(row.track.clientWidth / step) + 1)
       const before = document.createDocumentFragment()
       const after = document.createDocumentFragment()
-      row.originals.slice(-bufferSize).forEach(link => before.append(makeClone(link)))
-      row.originals.slice(0, bufferSize).forEach(link => after.append(makeClone(link)))
+      row.originals.slice(-bufferSize).forEach(work => before.append(makeClone(work)))
+      row.originals.slice(0, bufferSize).forEach(work => after.append(makeClone(work)))
       row.track.prepend(before)
       row.track.append(after)
       row.period = period
@@ -312,7 +309,7 @@
       if (!drag.moved && Math.abs(distance) < 5) return
       if (!drag.moved) {
         drag.moved = true
-        // Mouse-down focuses links. A real drag must not leave that focus blocking the loop.
+        // A real drag must not leave track focus blocking the loop.
         if (track.contains(document.activeElement)) document.activeElement.blur()
         row.focused = false
         track.setPointerCapture(event.pointerId)
@@ -322,12 +319,6 @@
       write(row, drag.startScroll - distance)
       normalize(row)
     })
-    track.addEventListener('click', event => {
-      if (!row.suppressClick) return
-      row.suppressClick = false
-      event.preventDefault()
-      event.stopImmediatePropagation()
-    }, true)
     track.addEventListener('lostpointercapture', finishPointer)
   })
 
@@ -337,10 +328,6 @@
     if (drag && drag.pointerId === event.pointerId) {
       const current = drag
       drag = null
-      if (current.moved) {
-        current.row.suppressClick = true
-        window.setTimeout(() => { current.row.suppressClick = false }, 400)
-      }
       if (current.row.track.hasPointerCapture(event.pointerId)) current.row.track.releasePointerCapture(event.pointerId)
     }
     gallery.classList.remove('home-gallery--dragging')

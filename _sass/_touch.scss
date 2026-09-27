@@ -113,5 +113,4 @@
   .all-articles-entry:is(:hover,:focus-visible) .all-articles-arrow,
   .archive-back:is(:hover,:focus-visible) .archive-back-icon,
   .suggest__item-link:is(:hover,:focus-visible) .suggest__item-arrow { transform:none; }
-  .home-gallery-work:hover:not(:focus-visible) { outline:none; }
 }

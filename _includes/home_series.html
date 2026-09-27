@@ -6,11 +6,12 @@
 {% endif %}
 {% if primary_series %}
 <section class='home-series' aria-labelledby='series-title'>
- <header class='home-series-heading'><h2 id='series-title'>系列<br>阅读</h2><a href='{{ "/series/" | relative_url }}'>全部 {{ series_groups.size }} 个系列 <span aria-hidden='true'>{% include arrow.html %}</span></a></header>
+ <header class='home-series-heading'><h2 id='series-title'>系列阅读</h2><a href='{{ "/series/" | relative_url }}'>全部 {{ series_groups.size }} 个系列 <span aria-hidden='true'>{% include arrow.html %}</span></a></header>
  <div class='home-series-content'>
-  <section class='series-feature' aria-labelledby='featured-series-title'>
-   <div class='series-feature-heading{% if primary_series.items.first.cover_image %} series-feature-heading--illustrated{% endif %}'><h3 id='featured-series-title'>{{ primary_series.name }}</h3><span>{{ primary_series.items.size }} 篇</span>{% include cover_art.html post=primary_series.items.first class='series-feature-art' %}</div>
-   {% include series_chapters.html posts=primary_series.items label=primary_series.name %}
+  <section class='series-feature{% if primary_series.items.first.cover_image %} series-feature--covered{% endif %}' aria-labelledby='featured-series-title'>
+   {% include cover_art.html post=primary_series.items.first class='home-series-art' %}
+    <div class='series-feature-heading'><h3 id='featured-series-title'><a href='{{ "/series/" | relative_url }}#{{ primary_series.name | slugify }}'>{{ primary_series.name }}</a></h3><span>{{ primary_series.items.size }} 篇文章</span></div>
+    {% include series_chapters.html posts=primary_series.items label=primary_series.name %}
   </section>
   {% if series_groups.size > 1 %}<section class='series-related' aria-labelledby='other-series-title'>
    <h3 id='other-series-title'>其他系列</h3>

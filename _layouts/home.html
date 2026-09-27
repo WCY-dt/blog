@@ -19,9 +19,10 @@ layout: default
     {% include home_feature.html post=featured_post %}
   {% endif %}
 </section>
-<div class='home-content'>
+<section class='home-content' aria-labelledby='posts-title'>
+
   <aside class='home-index' aria-label='文章索引'>
-    <div class='index-heading'><h2>分类</h2></div>
+    <div class='index-heading'><h3>分类</h3></div>
     <div class='index-categories'>
       {% assign categories = site.categories | sort %}
       {% for category in categories %}
@@ -32,8 +33,9 @@ layout: default
     </div>
     <a class='index-tags' href='{{ "/tag/" | relative_url }}'>标签索引 <span aria-hidden='true'>{% include arrow.html %}</span></a>
   </aside>
-  <section class='home-posts' aria-labelledby='posts-title'>
+  <div class='home-posts'>
     <div class='section-heading'><h2 id='posts-title'>最近文章</h2><nav class='home-mobile-index' aria-label='文章索引'><a href='{{ "/category/" | relative_url }}'>分类</a><a href='{{ "/tag/" | relative_url }}'>标签</a></nav></div>
+
     <div class='journal-list'>
       {% for recent_group in home_post_groups offset:1 limit:3 %}
         {% if recent_group.size > 1 %}
@@ -43,9 +45,9 @@ layout: default
         {% endif %}
       {% endfor %}
     </div>
-  </section>
-</div>
-<a class='all-articles-entry' href='{{ "/articles/" | relative_url }}'><span>全部文章</span><span class='all-articles-count'>{{ public_count }} 篇文章的完整索引</span><span class='all-articles-arrow' aria-hidden='true'>{% include arrow.html %}</span></a>
+    <a class='all-articles-entry' href='{{ "/articles/" | relative_url }}'><span>全部文章</span><span class='all-articles-count'>{{ public_count }} 篇文章的完整索引</span><span class='all-articles-arrow' aria-hidden='true'>{% include arrow.html %}</span></a>
+  </div>
+</section>
+
 {% include home_series.html %}
-{% include home_gallery.html %}
 <script data-cfasync='false' src='{{ "/assets/js/cover_tilt.js" | relative_url }}?v={{ site.time | date: "%s" }}' defer></script>

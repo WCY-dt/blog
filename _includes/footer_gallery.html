@@ -1,0 +1,24 @@
+{% assign footer_gallery = site.data.home_discovery.gallery %}
+{% if footer_gallery.size > 0 %}
+<section class='home-gallery' aria-label='封面画廊'>
+  <div class='home-gallery-rows'>
+    {% for row in (0..1) %}
+    <div class='home-gallery-track' id='home-gallery-row-{{ row }}' role='group' aria-label='第 {{ row | plus: 1 }} 排封面，可横向浏览' tabindex='0'>
+      {% for item in footer_gallery %}
+      {% assign gallery_row = forloop.index0 | modulo: 2 %}
+      {% if gallery_row == row %}
+      {% assign gallery_post = item.post %}
+      <div class='home-gallery-work'>
+        <span class='cover-art home-gallery-art'>
+          <img data-gallery-src='{{ gallery_post.cover_image | relative_url | escape }}' alt='{{ gallery_post.series | default: gallery_post.title | escape }}封面' width='1254' height='1254' loading='lazy' decoding='async' fetchpriority='low'>
+          <noscript><img src='{{ gallery_post.cover_image | relative_url | escape }}' alt='{{ gallery_post.series | default: gallery_post.title | escape }}封面' width='1254' height='1254' loading='lazy' decoding='async' fetchpriority='low'></noscript>
+        </span>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  <script data-cfasync='false' src='{{ "/assets/js/home_gallery.js" | relative_url }}?v={{ site.time | date: "%s" }}' defer></script>
+</section>
+{% endif %}

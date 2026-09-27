@@ -1,8 +1,17 @@
-<div class='footer-identity'>
-  <a class='footer-author' href='{{ "/" | relative_url }}' aria-label='Ch3nyang 的博客首页'>{% include brand-mark.svg %}</a>
-  <p>技术文章、学习笔记与生活随笔。</p>
-  <p class='footer__copyright'>© 2019-{{ site.time | date: '%Y' }} {{ site.author.name }}<br>原创文章采用 <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' rel='license'>CC BY-NC-SA 4.0</a> 许可。</p>
-</div>
+<header class='footer-heading'>
+  <div class='footer-identity'>
+    <a class='footer-author' href='{{ "/" | relative_url }}' aria-label='Ch3nyang 的博客首页'>{% include brand-mark.svg %}</a>
+    <p>技术文章、学习笔记与生活随笔。</p>
+  </div>
+  {% if site.data.home_discovery.gallery.size > 0 %}
+  <button class='home-gallery-toggle' type='button' aria-label='封面自动滚动' aria-pressed='false' aria-controls='home-gallery-row-0 home-gallery-row-1' hidden>
+    <svg class='home-gallery-pause-icon' viewBox='0 0 24 24' fill='none' aria-hidden='true' focusable='false'><path d='M8 5v14M16 5v14' stroke='currentColor' stroke-width='2'/></svg>
+    <svg class='home-gallery-play-icon' viewBox='0 0 24 24' fill='none' aria-hidden='true' focusable='false'><path d='m8 5 11 7-11 7V5Z' stroke='currentColor' stroke-width='1.5' stroke-linejoin='round'/></svg>
+    <span class='home-gallery-pause-label' aria-hidden='true'>暂停</span><span class='home-gallery-play-label' aria-hidden='true'>播放</span>
+  </button>
+  {% endif %}
+</header>
+{% include footer_gallery.html %}
 <nav class='footer-links' aria-label='页尾文章导航'>
   <h2>阅读</h2>
   <a href='{{ "/articles/" | relative_url }}'>全部文章</a>
@@ -16,4 +25,7 @@
   {% if site.author.link %}<a href='{{ site.author.link }}'>GitHub</a>{% endif %}
   {% if site.author.email %}<a href='mailto:{{ site.author.email }}'>邮件联系</a>{% endif %}
 </nav>
-{% if site.powered_by %}<p class='footer__credit'>主题基于 <a href='https://github.com/WCY-dt/tangerine'>Tangerine</a></p>{% endif %}
+<div class='footer-legal'>
+  <p class='footer__copyright'>© 2019-{{ site.time | date: '%Y' }} {{ site.author.name }}<br>原创文章采用 <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' rel='license'>CC BY-NC-SA 4.0</a> 许可。</p>
+  {% if site.powered_by %}<p class='footer__credit'>主题基于 <a href='https://github.com/WCY-dt/tangerine'>Tangerine</a></p>{% endif %}
+</div>
