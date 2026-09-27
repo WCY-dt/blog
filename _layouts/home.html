@@ -3,19 +3,21 @@ layout: default
 ---
 {% assign public_count = 0 %}
 {% for post in site.posts %}{% unless post.draft and jekyll.environment == 'production' %}{% assign public_count = public_count | plus: 1 %}{% endunless %}{% endfor %}
-{% assign featured_post = nil %}
-{% for post in site.posts %}
-  {% if post.draft and jekyll.environment == 'production' %}{% continue %}{% endif %}
-  {% if post.archived %}{% continue %}{% endif %}
-  {% assign featured_post = post %}{% break %}
-{% endfor %}
+{% assign home_production = false %}{% if jekyll.environment == 'production' %}{% assign home_production = true %}{% endif %}
+{% assign home_post_groups = site.posts | home_post_groups: home_production %}
+{% assign featured_posts = home_post_groups.first %}
+{% assign featured_post = featured_posts.first %}
 <section class='page-cover home-cover' id='articles'>
   <div class='home-masthead'>
     <h1 aria-label='文章'><span>文</span><span>章</span></h1>
     <p>技术文章、学习笔记<br>与生活随笔。</p>
     <a class='home-browse' href='{{ "/articles/" | relative_url }}'><span>全部文章</span>{% include arrow.html direction='right' %}<small>{{ public_count }} 篇文章</small></a>
   </div>
-  {% if featured_post %}{% include home_feature.html post=featured_post %}{% endif %}
+  {% if featured_posts.size > 1 %}
+    {% include home_feature_group.html posts=featured_posts post=featured_post %}
+  {% elsif featured_post %}
+    {% include home_feature.html post=featured_post %}
+  {% endif %}
 </section>
 <div class='home-content'>
   <aside class='home-index' aria-label='文章索引'>
@@ -33,12 +35,12 @@ layout: default
   <section class='home-posts' aria-labelledby='posts-title'>
     <div class='section-heading'><h2 id='posts-title'>最近文章</h2><nav class='home-mobile-index' aria-label='文章索引'><a href='{{ "/category/" | relative_url }}'>分类</a><a href='{{ "/tag/" | relative_url }}'>标签</a></nav></div>
     <div class='journal-list'>
-      {% assign recent_count = 0 %}
-      {% for post in site.posts %}
-        {% if post.draft and jekyll.environment == 'production' %}{% continue %}{% endif %}
-        {% if post.archived or post.url == featured_post.url %}{% continue %}{% endif %}
-        {% include post_card.html post=post %}
-        {% assign recent_count = recent_count | plus: 1 %}{% if recent_count == 3 %}{% break %}{% endif %}
+      {% for recent_group in home_post_groups offset:1 limit:3 %}
+        {% if recent_group.size > 1 %}
+          {% include home_recent_group.html posts=recent_group index=forloop.index %}
+        {% else %}
+          {% include post_card.html post=recent_group.first %}
+        {% endif %}
       {% endfor %}
     </div>
   </section>

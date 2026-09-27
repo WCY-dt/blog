@@ -40,6 +40,7 @@ translation:
 
 ############# Theme Settings #############
 color_theme: light # light or dark
+# 首页「系列阅读」详细展示的系列；留空或名称无效时使用最近更新的系列
 featured_series: 深入 Redis 源码
 
 # icons are from https://fonts.google.com/icons. If you want to modify it,

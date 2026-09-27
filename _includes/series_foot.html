@@ -1,46 +1,43 @@
-{% if jekyll.environment == 'production' %}
-  {% assign sorted_posts = site.posts
-    | where: 'series', page.series
-    | where_exp: 'post', 'post.draft != true'
-    | sort: 'series_index'
-  %}
-{% else %}
-  {% assign sorted_posts = site.posts
-    | where: 'series', page.series
-    | sort: 'series_index'
-  %}
-{% endif %}
-{% assign current_index = 0 %}
-{% for post in sorted_posts %}
-  {% if post.url == page.url %}
-    {% assign current_index = forloop.index0 %}
-  {% endif %}
-{% endfor %}
-{% assign total_posts = sorted_posts.size | minus: 1 %}
-{% if total_posts > 0 %}
-  <div class='no-select no-print sector-wrapper series-footer-wrapper'>
-    <h2 class='sector__title series-footer__title'>{{ page.series }} · 系列文章</h2>
-    <div class='series-footer__switcher'>
-      {% if current_index > 0 %}
-        {% assign previous_index = current_index | minus: 1 %}
-        <a
-          href='{{ sorted_posts[previous_index].url | relative_url }}'
-          class='series-footer__switcher-button series-footer__switcher-button--previous'
-        >
-          <span class='series-footer__direction'>{% include arrow.html direction='left' %} 上一篇 <span>第 {{ sorted_posts[previous_index].series_index }} 篇</span></span>
-          <span>{{ sorted_posts[previous_index].title }}</span>
-        </a>
-      {% endif %}
-      {% assign next_index = current_index | plus: 1 %}
-      {% if current_index < total_posts %}
-        <a
-          href='{{ sorted_posts[next_index].url | relative_url }}'
-          class='series-footer__switcher-button series-footer__switcher-button--next'
-        >
-          <span class='series-footer__direction'><span>第 {{ sorted_posts[next_index].series_index }} 篇</span> 下一篇 {% include arrow.html direction='right' %}</span>
-          <span>{{ sorted_posts[next_index].title }}</span>
-        </a>
-      {% endif %}
-    </div>
-  </div>
+{% assign series_posts = site.posts | where: 'series', page.series | sort: 'series_index' %}
+{% if jekyll.environment == 'production' %}{% assign series_posts = series_posts | where_exp: 'post', 'post.draft != true' %}{% endif %}
+{% assign series_position = nil %}
+{% for post in series_posts %}{% if post.url == page.url %}{% assign series_position = forloop.index0 %}{% endif %}{% endfor %}
+{% if series_position != nil and series_posts.size > 1 %}
+{% assign series_last = series_posts.size | minus: 1 %}
+<section class='series-reading no-print' aria-labelledby='series-reading-title'>
+  <header class='series-reading__heading'>
+    {% include cover_art.html post=page class='series-reading__cover' %}
+    <div class='series-reading__identity'><h2 id='series-reading-title'>{{ page.series | escape }}</h2><p class='series-reading__position'>第 {{ page.series_index }} 篇 · 共 {{ series_posts.size }} 篇</p></div>
+
+  </header>
+  <nav class='series-reading__neighbors' aria-label='系列上一篇与下一篇'>
+    {% if series_position > 0 %}
+    {% assign previous_position = series_position | minus: 1 %}{% assign previous_post = series_posts[previous_position] %}
+    <a class='series-reading__card series-reading__card--previous' href='{{ previous_post.url | relative_url }}' rel='prev'>
+      <span class='series-reading__direction'>上一篇<span>第 {{ previous_post.series_index }} 篇</span></span>
+      <span class='series-reading__name'>{{ previous_post.title | escape }}</span>
+      <span class='series-reading__arrow'>{% include arrow.html direction='left' %}</span>
+    </a>
+    {% endif %}
+    {% if series_position < series_last %}
+    {% assign next_position = series_position | plus: 1 %}{% assign next_post = series_posts[next_position] %}
+    <a class='series-reading__card series-reading__card--next' href='{{ next_post.url | relative_url }}' rel='next'>
+      <span class='series-reading__direction'>下一篇<span>第 {{ next_post.series_index }} 篇</span></span>
+      <span class='series-reading__name'>{{ next_post.title | escape }}</span>
+      <span class='series-reading__arrow'>{% include arrow.html direction='right' %}</span>
+    </a>
+    {% endif %}
+  </nav>
+
+  <details class='series-reading__contents'>
+    <summary><span class='series-reading__expand'>查看全部 {{ series_posts.size }} 篇</span><span class='series-reading__collapse'>收起系列目录</span><span class='series-reading__toggle'>{% include arrow.html direction='down' %}</span></summary>
+    <nav aria-label='{{ page.series | escape }}完整目录'>
+      <ol class='series-reading__list'>
+        {% for post in series_posts %}
+        <li><a href='{{ post.url | relative_url }}'{% if post.url == page.url %} aria-current='page'{% endif %}><span class='series-reading__index'>{{ post.series_index }}</span><span>{{ post.title | escape }}{% if post.draft %}<small>草稿</small>{% endif %}</span>{% if post.url == page.url %}<span class='series-reading__current'>本篇</span>{% endif %}</a></li>
+        {% endfor %}
+      </ol>
+    </nav>
+  </details>
+</section>
 {% endif %}

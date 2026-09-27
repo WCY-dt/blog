@@ -1,10 +1,9 @@
-{% assign catalogue_posts = site.posts %}
-{% if jekyll.environment == 'production' %}{% assign catalogue_posts = catalogue_posts | where_exp: 'post', 'post.draft != true' %}{% endif %}
-{% assign active_series_names = catalogue_posts | where_exp: 'post', 'post.archived != true' | map: 'series' | uniq %}
-{% assign series_groups = catalogue_posts | where_exp: 'post', 'post.series' | group_by: 'series' | where_exp: 'group', 'active_series_names contains group.name' | sort: 'name' %}
-{% assign primary_series_name = site.featured_series | default: '深入 Redis 源码' %}
-{% assign primary_series = series_groups | where: 'name', primary_series_name | first %}
-{% unless primary_series %}{% assign primary_series = series_groups.first %}{% endunless %}
+{% include series_catalog.html %}
+{% assign primary_series = series_groups.first %}
+{% if site.featured_series %}
+  {% assign configured_series = series_groups | where: 'name', site.featured_series | first %}
+  {% if configured_series %}{% assign primary_series = configured_series %}{% endif %}
+{% endif %}
 {% if primary_series %}
 <section class='home-series' aria-labelledby='series-title'>
  <header class='home-series-heading'><h2 id='series-title'>系列<br>阅读</h2><a href='{{ "/series/" | relative_url }}'>全部 {{ series_groups.size }} 个系列 <span aria-hidden='true'>{% include arrow.html %}</span></a></header>

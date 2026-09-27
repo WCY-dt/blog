@@ -9,11 +9,16 @@
 .post__content :is(.cite__title,.github-issue__info-title,.file-structure__title,.iframe-title,.result__preview-title) { color: var(--black-color); font: 600 14px/1.5 var(--text-font); }
 .post__content :is(.cite__link,.github-issue__link) { display: grid; place-items: center; width: 36px; min-height: 36px; flex-shrink: 0; }
 .post__content :is(.cite__info,.github-issue__info) { min-width: 0; overflow-wrap: anywhere; }
-.post__content :is(.github-code-btn__btn,.github-link) { min-height: 40px; max-width: 100%; border-radius: 0; border: 1px solid var(--line-color); background: transparent; padding: 8px 12px; gap: 10px; color: var(--black-color)!important; }
+.post__content .github-code-btn__btn { min-height: 40px; max-width: 100%; border-radius: 0; border: 1px solid var(--line-color); background: transparent; padding: 8px 12px; gap: 10px; color: var(--black-color)!important; }
 .post__content .github-code-btn-wrapper { margin: 20px 0; }
 .post__content .github-code-btn__file-path { font-size: 13px; }
 .post__content .github-code-btn__line-number { font-size: 11px; color: var(--gray-color); }
-.post__content .github-link { white-space: normal; }
+/* Inline references fit inside the text line, including on touch screens. */
+.post__content .github-link { display:inline-flex; align-items:center; height:1.5em; min-height:0; max-width:calc(100% - .5em); margin:0 .25em; padding:0 .35em; gap:.3em; border:1px solid var(--line-color); border-radius:0; background:transparent; color:var(--black-color)!important; font:500 .875em/1 var(--text-font); vertical-align:-.2em; white-space:nowrap; transition:background-color .16s ease,color .16s ease; }
+.post__content .github-link__avatar-wrapper { display:inline-flex; align-items:center; width:1em; height:1em; margin:0; flex:0 0 1em; }
+.post__content .github-link .github-link__avatar { width:1em; height:1em; max-width:none; margin:0; padding:0; object-fit:contain; flex:0 0 1em; }
+.post__content .github-link__name { min-width:0; max-width:none; font:inherit; overflow:hidden; text-overflow:ellipsis; }
+.post__content .github-link:focus-visible { outline:2px solid var(--accent-text); outline-offset:2px; }
 .post__content :is(.github-code-btn__btn,.github-link):hover { background: var(--primary-light-color)!important; color: var(--accent-text)!important; }
 /* Code tools occupy their own row; its content owns a separate scrollport. */
 .post__content .code-block-wrapper { margin:24px 0; }
@@ -143,8 +148,6 @@ html[data-theme] { --mermaid-background: transparent; --mermaid-surface: var(--w
 .post__content .code-runner__run-btn .material-symbols-outlined { font-size:18px; }
 .post__content .code-runner__output:empty::before { content:'运行后显示输出'; color:#a6a69d; font:12px/1.6 var(--text-font); }
 .runner-play-icon { display:block; width:14px; height:14px; fill:currentColor; flex-shrink:0; }
-.series-footer-wrapper .sector__title { margin-top:40px; }
-.series-footer__switcher { margin-top:0; }
 
 /* Utility controls expose the primary action; secondary actions share a portal tooltip. */
 .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }

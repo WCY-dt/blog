@@ -1,0 +1,24 @@
+{% assign recent_first = include.posts.first %}
+{% assign recent_series_anchor = recent_first.series | slugify %}
+{% assign recent_series_href = '/series/' | relative_url | append: '#' | append: recent_series_anchor %}
+{% assign recent_chapters = include.posts | slice: 0, 3 | sort: 'series_index' %}
+<article class='recent-series-card{% if recent_first.cover_image %} recent-series-card--illustrated{% endif %}' aria-labelledby='recent-series-{{ include.index }}'>
+  <div class='recent-series-card__heading'>
+    <div class='post-card-meta'><span>{{ recent_first.categories | join: ' · ' | escape }}</span><span>{{ include.posts.size }} 篇系列更新</span></div>
+    <h3 id='recent-series-{{ include.index }}'><a href='{{ recent_series_href }}'>{{ recent_first.series | escape }}</a></h3>
+  </div>
+  {% if recent_first.cover_image %}
+  <a class='recent-series-card__art' href='{{ recent_series_href }}' tabindex='-1' aria-hidden='true'>{% include cover_art.html post=recent_first %}</a>
+  {% endif %}
+  <div class='recent-series-card__chapters'>
+    {% include home_feature_chapters.html posts=recent_chapters show_experiments=true %}
+    {% if include.posts.size > 3 %}
+    {% assign recent_earlier = include.posts | slice: 3, include.posts.size | sort: 'series_index' %}
+    <details class='recent-series-card__earlier'>
+      <summary>更早的 {{ recent_earlier.size }} 篇<span aria-hidden='true'>{% include arrow.html direction='down' %}</span></summary>
+      {% include home_feature_chapters.html posts=recent_earlier show_experiments=true %}
+    </details>
+    {% endif %}
+  </div>
+  <div class='recent-series-card__foot'><a href='{{ recent_series_href }}'>查看系列 {% include arrow.html direction='right' %}</a><time datetime='{{ recent_first.date | date: "%Y-%m" }}'>{{ recent_first.date | date: '%Y-%m' }}</time></div>
+</article>

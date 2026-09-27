@@ -1,6 +1,8 @@
 ---
 ---
 @use 'home';
+@use 'home_feature_group';
+@use 'home_recent_group';
 @use 'home_discovery';
 @use 'cover_tilt';
 @use 'rss';
@@ -132,8 +134,6 @@
 .post__footer.post-ending { margin-top:56px; border-top:3px solid var(--black-color); }
 .post-ending .post-reading-continuation { padding-top:32px; }
 .post-ending .post-reading-continuation > .sector-wrapper { margin-top:0; }
-.post-ending .post-reading-continuation > .series-footer-wrapper { margin-bottom:32px; }
-.post-ending .post-reading-continuation .series-footer__switcher-button { min-height:0; padding:18px 0; }
 .post-ending .post-reading-continuation .suggest__content { display:block; }
 .post-ending .post-reading-continuation .suggest__item-link { flex-direction:row; align-items:center; gap:24px; padding:16px 0; font-size:16px; }
 .post-ending .post-reading-continuation .suggest__item-arrow { align-self:center; flex-shrink:0; }

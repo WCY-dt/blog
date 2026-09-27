@@ -1,0 +1,28 @@
+{% assign series_title = include.post.series | split: '——' %}
+{% assign series_href = '/series/' | relative_url | append: '#' %}
+{% assign series_anchor = include.post.series | slugify %}
+{% assign series_href = series_href | append: series_anchor %}
+{% assign newest_chapters = include.posts | slice: 0, 3 | sort: 'series_index' %}
+<section class='home-series-feature{% unless include.post.cover_image %} home-series-feature--text{% endunless %}' aria-labelledby='latest-series-title'>
+  <div class='feature-meta'><span class='feature-label'>最新文章</span><span>{{ include.posts.size }} 篇系列更新</span></div>
+  <h2 id='latest-series-title'><a href='{{ series_href }}'>{{ series_title[0] | escape }}{% if series_title.size > 1 %}<span class='home-series-feature__subtitle'>{{ series_title | slice: 1, 10 | join: '——' | escape }}</span>{% endif %}</a></h2>
+  <div class='home-series-feature__chapters'>
+    {% include home_feature_chapters.html posts=newest_chapters %}
+    {% if include.posts.size > 3 %}
+    {% assign earlier_chapters = include.posts | slice: 3, include.posts.size | sort: 'series_index' %}
+    <details class='home-series-feature__earlier'>
+      <summary>更早的 {{ earlier_chapters.size }} 篇<span aria-hidden='true'>{% include arrow.html direction='down' %}</span></summary>
+      {% include home_feature_chapters.html posts=earlier_chapters %}
+    </details>
+    {% endif %}
+  </div>
+  <time class='home-series-feature__date' datetime='{{ include.post.date | date: "%Y-%m" }}'>{{ include.post.date | date: '%Y-%m' }}</time>
+  <div class='home-series-feature__visual'>
+    {% if include.post.cover_image %}
+    <a class='home-series-feature__art feature-cover-stage' href='{{ series_href }}' tabindex='-1' aria-hidden='true' data-cover-tilt>
+      {% include cover_art.html post=include.post class='feature-cover-surface' loading='eager' priority=true %}
+    </a>
+    {% endif %}
+    <a class='home-series-feature__all' href='{{ series_href }}'><span>查看系列</span>{% include arrow.html %}</a>
+  </div>
+</section>

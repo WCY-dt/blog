@@ -1,0 +1,61 @@
+/* One cover, several entry points. Chapter rows keep their own natural height. */
+.home-series-feature {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 44%;
+  grid-template-rows:auto auto 1fr auto;
+  gap:0 32px;
+  min-width:0;
+  border-bottom:2px solid var(--black-color);
+
+  > .feature-meta { grid-column:1; grid-row:1; padding-top:22px; flex-wrap:wrap; gap:8px 14px; }
+  > h2 { grid-column:1; grid-row:2; margin:24px 0 28px; font:750 clamp(34px,4.1vw,52px)/1.22 var(--ui-font); letter-spacing:-1.5px; overflow-wrap:anywhere; text-wrap:pretty; }
+  > h2 a { color:var(--black-color); text-decoration:none; }
+  &__subtitle { display:block; margin-top:14px; font:400 21px/1.5 var(--text-font); letter-spacing:0; }
+  &__visual { grid-column:2; grid-row:1/5; align-self:start; min-width:0; }
+  &__art { width:100%; }
+  &__chapters { grid-column:1; grid-row:3; min-width:0; padding-bottom:12px; }
+  &__date { grid-column:1; grid-row:4; align-self:center; padding:22px 0; color:var(--gray-color); font:11px var(--mono-font); }
+  &__all { grid-column:2; grid-row:4; display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:68px; padding:16px 24px; background:var(--primary-color); color:var(--on-primary-color); text-decoration:none; font:600 13px/1.5 var(--text-font); }
+  &__all svg { width:36px; height:36px; }
+  &__all:is(:hover,:focus-visible) { background:var(--primary-semi-dark-color); }
+  &__earlier summary { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:44px; padding:10px 0; list-style:none; cursor:pointer; color:var(--gray-color); font:12px/1.6 var(--text-font); }
+  &__earlier summary::-webkit-details-marker { display:none; }
+  &__earlier summary svg { width:18px; height:18px; }
+  &__earlier[open] summary svg { transform:rotate(180deg); }
+}
+.home-feature-chapters {
+  list-style:none; padding:0; margin:0;
+  li { border-top:1px solid var(--line-color); }
+  a { display:grid; grid-template-columns:28px minmax(0,1fr) 20px; align-items:center; gap:12px; min-height:64px; padding:14px 0; color:var(--black-color); text-decoration:none; }
+  &__number { align-self:start; padding-top:4px; color:var(--accent-text); font:12px/1.6 var(--mono-font); }
+  .visually-hidden { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  &__title { font:600 18px/1.6 var(--text-font); overflow-wrap:anywhere; }
+  &__title small { margin-left:8px; font:11px var(--text-font); color:var(--gray-color); }
+  &__arrow { color:var(--gray-color); line-height:0; }
+  &__arrow .site-arrow { width:20px; height:20px; }
+  a:is(:hover,:focus-visible) { color:var(--accent-text); }
+  a:is(:hover,:focus-visible) .home-feature-chapters__arrow { color:var(--accent-text); }
+}
+.home-series-feature--text { grid-template-columns:minmax(0,1fr) auto; }
+.home-series-feature--text > :is(.feature-meta,h2,.home-series-feature__chapters) { grid-column:1/-1; }
+.home-series-feature--text .home-series-feature__visual { grid-column:2; grid-row:4; }
+@media (max-width:900px) {
+  .home-series-feature { padding-top:20px; border-top:2px solid var(--black-color); border-bottom:0; gap:0 24px; }
+  .home-series-feature > .feature-meta { padding-top:0; }
+  .home-series-feature > h2 { font-size:36px; margin:18px 0 24px; }
+}
+@media (max-width:600px) {
+  .home-series-feature { grid-template-columns:minmax(0,1fr) 88px; grid-template-rows:auto auto auto auto; column-gap:20px; }
+  .home-series-feature > .feature-meta { grid-column:1/-1; margin-bottom:18px; }
+  .home-series-feature > h2 { grid-column:1; grid-row:2; margin:0 0 24px; font-size:28px; line-height:1.3; letter-spacing:-.7px; }
+  .home-series-feature__subtitle { margin-top:10px; font-size:17px; }
+  .home-series-feature__art { grid-column:2; grid-row:2; }
+  .home-series-feature__visual { display:contents; }
+  .home-series-feature__chapters { grid-column:1/-1; grid-row:3; padding-bottom:0; }
+  .home-series-feature__date { display:none; }
+  .home-series-feature__all { grid-column:1/-1; grid-row:4; min-height:52px; padding:12px 18px; margin-top:12px; }
+  .home-series-feature__all svg { width:28px; height:28px; }
+  .home-feature-chapters a { grid-template-columns:24px minmax(0,1fr) 20px; gap:12px; min-height:64px; }
+  .home-feature-chapters__title { font-size:17px; }
+  .home-series-feature--text > h2 { grid-column:1/-1; }
+}

@@ -1,0 +1,36 @@
+.recent-series-card {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:0 28px;
+  padding:32px 0;
+  border-bottom:1px solid var(--line-color);
+  min-width:0;
+  &--illustrated { grid-template-columns:minmax(0,1fr) 144px; }
+  &__heading { grid-column:1; grid-row:1; min-width:0; }
+  h3 { margin:9px 0 20px; font:650 clamp(22px,2vw,27px)/1.55 var(--text-font); letter-spacing:-.4px; overflow-wrap:anywhere; text-wrap:pretty; }
+  h3 a { color:var(--black-color); text-decoration:none; }
+  &__art { grid-column:2; grid-row:1/3; align-self:start; display:block; }
+  &__chapters { grid-column:1; grid-row:2; min-width:0; }
+  .home-feature-chapters a { grid-template-columns:24px minmax(0,1fr) 20px; min-height:52px; padding:12px 0; }
+  .home-feature-chapters__title { font-size:16px; font-weight:500; }
+  .home-feature-chapters__number { padding-top:2px; }
+  .post-card-experiment { vertical-align:middle; }
+  &__foot { grid-column:1/-1; grid-row:3; display:flex; align-items:center; justify-content:space-between; gap:20px; padding-top:8px; }
+  &__foot a { display:inline-flex; align-items:center; gap:12px; min-height:44px; color:var(--accent-text); text-decoration:none; font:12px/1.5 var(--text-font); }
+  &__foot .site-arrow { width:20px; height:20px; }
+  &__foot time { color:var(--gray-color); font:11px var(--mono-font); }
+  &__earlier summary { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:44px; padding:10px 0; list-style:none; cursor:pointer; color:var(--gray-color); font:12px/1.6 var(--text-font); }
+  &__earlier summary::-webkit-details-marker { display:none; }
+  &__earlier summary svg { width:18px; height:18px; }
+  &__earlier[open] summary svg { transform:rotate(180deg); }
+  h3 a:is(:hover,:focus-visible), &__foot a:is(:hover,:focus-visible) { color:var(--accent-text); text-decoration:underline; text-underline-offset:4px; }
+}
+@media (max-width:900px) {
+  .recent-series-card { padding:24px 0; column-gap:20px; }
+  .recent-series-card--illustrated { grid-template-columns:minmax(0,1fr) 80px; }
+  .recent-series-card h3 { margin:7px 0 18px; font-size:20px; line-height:1.45; letter-spacing:0; }
+  .recent-series-card__heading { padding-bottom:6px; }
+  .recent-series-card__art { grid-row:1; width:80px; margin-top:3px; margin-bottom:18px; }
+  .recent-series-card__chapters { grid-column:1/-1; }
+  .recent-series-card__foot time { display:none; }
+}

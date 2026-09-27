@@ -1,0 +1,5 @@
+{% assign catalogue_posts = site.posts | sort: 'date' | reverse %}
+{% if jekyll.environment == 'production' %}{% assign catalogue_posts = catalogue_posts | where_exp: 'post', 'post.draft != true' %}{% endif %}
+{% assign active_series_names = catalogue_posts | where_exp: 'post', 'post.archived != true' | map: 'series' | uniq %}
+{% comment %}Grouping preserves first appearance, so the newest post determines each series' position.{% endcomment %}
+{% assign series_groups = catalogue_posts | where_exp: 'post', 'post.series' | group_by: 'series' | where_exp: 'group', 'active_series_names contains group.name' %}

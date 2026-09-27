@@ -1,0 +1,9 @@
+<ol class='home-feature-chapters'>
+  {% for chapter in include.posts %}
+  <li><a href='{{ chapter.url | relative_url }}'>
+    <span class='home-feature-chapters__number'>{% if chapter.series_index %}<span class='visually-hidden'>第 </span>{{ chapter.series_index }}<span class='visually-hidden'> 篇：</span>{% else %}<span aria-hidden='true'>·</span>{% endif %}</span>
+    <span class='home-feature-chapters__title'>{{ chapter.title | escape }}{% if include.show_experiments and chapter.has_experiment %} <span class='post-card-experiment'>实验</span>{% endif %}{% if chapter.draft %}<small>草稿</small>{% endif %}</span>
+    <span class='home-feature-chapters__arrow' aria-hidden='true'>{% include arrow.html direction='right' %}</span>
+  </a></li>
+  {% endfor %}
+</ol>
